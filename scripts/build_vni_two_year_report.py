@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import gzip
 import json
 import sys
 from pathlib import Path
@@ -203,8 +204,12 @@ def build(config_path):
     docs_data.mkdir(parents=True, exist_ok=True)
     units.to_csv(docs_data / "vni_2y_generator_rankings.csv", index=False)
     unit_season.to_csv(docs_data / "vni_2y_generator_seasonal_rankings.csv", index=False)
-    factors.sort_values(["GENCONID", "version_key", "DUID"]).to_csv(
-        docs_data / "vni_2y_unit_equation_factors.csv.gz", index=False, compression="gzip")
+    factors_path = docs_data / "vni_2y_unit_equation_factors.csv.gz"
+    # Fix the gzip timestamp so repeated report builds produce the same
+    # snapshot hash and do not create needless repository churn.
+    with gzip.GzipFile(filename=str(factors_path), mode="wb", mtime=0) as handle:
+        factors.sort_values(["GENCONID", "version_key", "DUID"]).to_csv(
+            handle, index=False, lineterminator="\n")
     equations.to_csv(docs_data / "vni_2y_constraint_equations.csv", index=False)
     seasonal.to_csv(docs_data / "vni_2y_seasonal_summary.csv", index=False)
     diurnal.to_csv(docs_data / "vni_2y_diurnal_summary.csv", index=False)
@@ -297,11 +302,15 @@ Spring’s median flow was {spring.flow_median_mw:,.1f} MW, with a {spring.south
 
 The full machine-readable seasonal summaries are [network state](data/vni_2y_seasonal_summary.csv), [constraint populations](data/vni_2y_constraint_population_by_season.csv), and [generator influence by season and direction](data/vni_2y_generator_seasonal_rankings.csv).
 
+The HTML report adds a seasonal generator-pressure heatmap for the twelve highest two-year contributors. It makes it easy to distinguish persistent units such as MURRAY from units whose exposure is concentrated in one season.
+
 ## Diurnal behaviour
 
 The [48-bin diurnal table](data/vni_2y_diurnal_summary.csv) contains mean, median, P05 and P95 flow; median and P05 directional limits; directional-flow shares; reversal counts; and forced-direction interval counts for every half-hour of the day across the two-year sample. This preserves the morning ramp, solar-hours transfer pattern, evening ramp and overnight regime without adding 48 raw dummy variables to a forecast.
 
 For modelling, compress the diurnal shape into clock sine/cosine, season × clock interactions, and a small set of learned training-only profiles or principal components. Retain explicit ramp-window flags only when cross-validation shows they improve event forecasts.
+
+The HTML report also shows reversal and forced-export/import rates by half-hour. These event-rate curves are useful for identifying ramp windows and directional-regime risk before adding any high-cardinality clock features.
 
 ## Generator influence
 
@@ -379,12 +388,31 @@ python -m unittest discover -s tests -v
         fig_season.add_bar(name=label, x=seasonal.season, y=seasonal[column])
     fig_season.update_layout(barmode="group")
     style_plotly(fig_season, "Two complete seasonal cycles of VNI state", height=480)
+    season_order = [s for s in ["Summer", "Autumn", "Winter", "Spring"] if s in unit_season["season"].unique()]
+    top_heat = (unit_season.groupby(["DUID", "season"], as_index=False)["total_abs_impact"]
+                .sum().pivot(index="DUID", columns="season", values="total_abs_impact").fillna(0))
+    heat_names = top.DUID.head(12).tolist()
+    top_heat = top_heat.reindex(index=heat_names, columns=season_order).fillna(0)
+    fig_heat = go.Figure(go.Heatmap(z=top_heat.to_numpy(), x=season_order, y=top_heat.index.tolist(),
+                                    colorscale="Blues", colorbar={"title": "MW-impact"},
+                                    hovertemplate="%{y} · %{x}<br>Absolute impact: %{z:,.0f}<extra></extra>"))
+    style_plotly(fig_heat, "Top generator pressure by season", height=520)
     fig_day = go.Figure()
     fig_day.add_scatter(x=diurnal.time_of_day, y=diurnal.flow_median_mw, name="Median flow", mode="lines")
     fig_day.add_scatter(x=diurnal.time_of_day, y=diurnal.export_limit_median_mw, name="Median export limit", mode="lines")
     fig_day.add_scatter(x=diurnal.time_of_day, y=-diurnal.import_limit_median_mw, name="Signed import limit", mode="lines")
     fig_day.update_xaxes(dtick=4)
     style_plotly(fig_day, "Diurnal VNI flow and directional limits", height=480)
+    fig_events = go.Figure()
+    for column, label in [("flow_reversals", "Reversals"),
+                          ("forced_export_intervals", "Forced export"),
+                          ("forced_import_intervals", "Forced import")]:
+        fig_events.add_scatter(x=diurnal.time_of_day,
+                               y=diurnal[column] / diurnal.intervals.replace(0, np.nan),
+                               name=label, mode="lines")
+    fig_events.update_xaxes(dtick=4)
+    fig_events.update_yaxes(tickformat=".1%")
+    style_plotly(fig_events, "Diurnal event regime rates", height=420)
 
     rendered = markdown.markdown(report, extensions=["tables", "fenced_code"])
     rendered = rendered.replace('href="data/', 'href="../data/')
@@ -406,10 +434,16 @@ python -m unittest discover -s tests -v
             ]) + '</div></section>'
             + '<section id="seasonal"><div class="section-kicker">SEASONAL STATE</div><figure><figcaption>Flow and median directional capability</figcaption><div class="chart-scroll">'
             + fig_season.to_html(full_html=False, include_plotlyjs=False, config={"responsive": True, "displaylogo": False})
-            + '</div><p class="figure-note">Signed positive flow is VIC→NSW; import capability is shown as a positive directional magnitude.</p></figure></section>'
+            + '</div><p class="figure-note">Signed positive flow is VIC→NSW; import capability is shown as a positive directional magnitude.</p></figure>'
+            + '<figure><figcaption>Seasonal generator-pressure concentration</figcaption><div class="chart-scroll">'
+            + fig_heat.to_html(full_html=False, include_plotlyjs=False, config={"responsive": True, "displaylogo": False})
+            + '</div><p class="figure-note">Top-12 units are selected by two-year absolute impact; colour shows seasonal mechanical exposure.</p></figure></section>'
             + '<section id="diurnal"><div class="section-kicker">DIURNAL STATE</div><figure><figcaption>Half-hour profiles across two years</figcaption><div class="chart-scroll">'
             + fig_day.to_html(full_html=False, include_plotlyjs=False, config={"responsive": True, "displaylogo": False})
-            + '</div><p class="figure-note">Import limit is plotted on the signed-flow axis as a negative value.</p></figure></section>'
+            + '</div><p class="figure-note">Import limit is plotted on the signed-flow axis as a negative value.</p></figure>'
+            + '<figure><figcaption>Half-hour event regime rates</figcaption><div class="chart-scroll">'
+            + fig_events.to_html(full_html=False, include_plotlyjs=False, config={"responsive": True, "displaylogo": False})
+            + '</div><p class="figure-note">Rates are event counts divided by the available two-year observations in each half-hour bin.</p></figure></section>'
             + '<section id="generators"><div class="section-kicker">GENERATOR PRESSURE</div><figure><figcaption>Persistence-weighted mechanical exposure</figcaption><div class="chart-scroll">'
             + fig_units.to_html(full_html=False, include_plotlyjs=False, config={"responsive": True, "displaylogo": False})
             + '</div><p class="figure-note">Colour records the number of study months in which the unit contributes.</p></figure></section>'
@@ -425,6 +459,13 @@ python -m unittest discover -s tests -v
     manifest = {"config": str(Path(config_path).resolve().relative_to(ROOT)),
                 "config_sha256": hashlib.sha256(Path(config_path).read_bytes()).hexdigest(),
                 "inputs": {name: hashlib.sha256((docs_data / name).read_bytes()).hexdigest() for name in inputs},
+                "visualizations": [
+                    {"id": "seasonal_state", "source": "vni_2y_seasonal_summary.csv", "description": "Seasonal median flow and directional limits"},
+                    {"id": "seasonal_generator_heatmap", "source": "vni_2y_generator_seasonal_rankings.csv", "description": "Top-12 generator absolute pressure by season"},
+                    {"id": "diurnal_state", "source": "vni_2y_diurnal_summary.csv", "description": "48-bin median flow and directional limits"},
+                    {"id": "diurnal_event_rates", "source": "vni_2y_diurnal_summary.csv", "description": "Reversal and forced-direction rates by half-hour"},
+                    {"id": "generator_pressure", "source": "vni_2y_generator_rankings.csv", "description": "Persistence-weighted generator exposure"},
+                ],
                 "theme_version": VERSION, "offline": True,
                 "command": "python scripts/build_vni_two_year_report.py --config configs/constraint_vni_2y.json"}
     (ROOT / "docs" / "html" / "vni_two_year_constraint_manifest.json").write_text(

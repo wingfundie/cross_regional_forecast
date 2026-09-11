@@ -1,10 +1,10 @@
 {
   "config": "configs\\constraint_vni_2y.json",
-  "config_sha256": "1e2dad87314f75888f53204cbe5581b810d460b3a0cd620ed05477293227c5ee",
+  "config_sha256": "ec3ee02f1ab3d138e260e20a37151af52cea64fa76555d4f3f1921ffdfd2bf2f",
   "inputs": {
     "vni_2y_generator_rankings.csv": "bb325b3187812f19ff18f514aa36c807a15de23b3407b1f5403a0c63bed87fc3",
     "vni_2y_generator_seasonal_rankings.csv": "b3623e0dded539557ca8e1b934f819e3e245f851e85c4a317dded042b89ee860",
-    "vni_2y_unit_equation_factors.csv.gz": "82536034b050d1fc88f915bb010d5d599744b88c5a58e4c5782ec05cbfb27007",
+    "vni_2y_unit_equation_factors.csv.gz": "0967323d1082b00ee2e14b42577584ace023e58baa193b986c2b8e091c22b72e",
     "vni_2y_constraint_equations.csv": "4f6160d28f0e34719f6fdd8f961ac077a3fc8b4c4f7032c48201d47412f49f31",
     "vni_2y_seasonal_summary.csv": "d3e8b0c22f3195987343eaf2092617d0f4f67aaa12ab7872f2ee796536337fdc",
     "vni_2y_diurnal_summary.csv": "b35ee9a8c306dac52dcf71d83d6a79b712867d99d4f69e288855cca9245db9da",
@@ -12,6 +12,33 @@
     "vni_2y_feature_dictionary.csv": "bc19a7419eae5fac04c4afaaa4483ce18e1f2a64e4f9f7987328646c3bbcf5fb",
     "vni_2y_source_manifest.json": "9a4be8ce6b544554fbadd2fa6f78d2b5a4d9e8ede15354eb4f8dc1fab069da9f"
   },
+  "visualizations": [
+    {
+      "id": "seasonal_state",
+      "source": "vni_2y_seasonal_summary.csv",
+      "description": "Seasonal median flow and directional limits"
+    },
+    {
+      "id": "seasonal_generator_heatmap",
+      "source": "vni_2y_generator_seasonal_rankings.csv",
+      "description": "Top-12 generator absolute pressure by season"
+    },
+    {
+      "id": "diurnal_state",
+      "source": "vni_2y_diurnal_summary.csv",
+      "description": "48-bin median flow and directional limits"
+    },
+    {
+      "id": "diurnal_event_rates",
+      "source": "vni_2y_diurnal_summary.csv",
+      "description": "Reversal and forced-direction rates by half-hour"
+    },
+    {
+      "id": "generator_pressure",
+      "source": "vni_2y_generator_rankings.csv",
+      "description": "Persistence-weighted generator exposure"
+    }
+  ],
   "theme_version": "1.0",
   "offline": true,
   "command": "python scripts/build_vni_two_year_report.py --config configs/constraint_vni_2y.json"
