@@ -7,7 +7,7 @@ h1,h2,h3{line-height:1.25;scroll-margin-top:20px}article h1{font-size:32px}h2{ma
 .table-wrap{overflow-x:auto;margin:24px 0}table{border-collapse:collapse;width:100%;font-size:14px;min-width:650px}th,td{text-align:left;vertical-align:top;border:1px solid #dce2ed;padding:11px}th{background:#eaf0f9}tr:nth-child(even){background:#f8faff}
 pre{background:#edf1f7;padding:16px;overflow:auto;border-radius:6px}code{font-size:.9em}blockquote{border-left:4px solid #5980b5;margin-left:0;padding-left:18px}.source{font-size:13px;color:#63718a}.top{font-size:13px}
 @media print{body{background:white}header{padding:20px}nav{display:none}main,article{padding:0;border:0}article{break-before:page}.table-wrap{overflow:visible}table{min-width:0;font-size:10px}a{color:inherit}}
-</style></head><body><header id="top"><span>NEM · INTERCONNECTOR FORECASTING</span><h1>INTERFLOW<br>Research handbook</h1><p>Methods, evidence and next experiments for six interconnectors. Historical data ends 1 September 2026 (interval-ending NEM time). The completed backtest uses realised future inputs and does not establish operational forecast accuracy.</p><nav><a href="#charts">Backtest charts</a><a href="#overview">Overview</a><a href="#results">Executed results</a><a href="#features">Results, data and features</a><a href="#methods">Methods and research</a><a href="#backtest">Backtest protocol</a><a href="#roadmap">Improvement roadmap</a><a href="#constraint-features">Constraint-derived network features</a><a href="#constraint-pilot">Executed VNI constraint-feature pilot</a><a href="#plan">Original build plan</a></nav></header><main><article id="charts"><h1>Backtest charts</h1><p>March–August 2026 test · six links · realised future inputs. Interactive figures use the saved completed-run scores. Hover for values; use the chart toolbar to export an image.</p><h2>01 · Flow forecast improvement versus persistence</h2><div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+</style></head><body><header id="top"><span>NEM · INTERCONNECTOR FORECASTING</span><h1>INTERFLOW<br>Research handbook</h1><p>Methods, evidence and next experiments for six interconnectors. Historical data ends 1 September 2026 (interval-ending NEM time). The completed backtest uses realised future inputs and does not establish operational forecast accuracy.</p><nav><a href="#charts">Backtest charts</a><a href="#overview">Overview</a><a href="#results">Executed results</a><a href="#features">Results, data and features</a><a href="#methods">Methods and research</a><a href="#backtest">Backtest protocol</a><a href="#roadmap">Improvement roadmap</a><a href="#constraint-features">Constraint-derived network features</a><a href="#constraint-pilot">Executed VNI constraint-feature pilot</a><a href="#vni-influence">VNI generator influence study</a><a href="#plan">Original build plan</a></nav></header><main><article id="charts"><h1>Backtest charts</h1><p>March–August 2026 test · six links · realised future inputs. Interactive figures use the saved completed-run scores. Hover for values; use the chart toolbar to export an image.</p><h2>01 · Flow forecast improvement versus persistence</h2><div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
         <script type="text/javascript">/**
 * plotly.js v3.0.1
 * Copyright 2012-2025, Plotly, Inc.
@@ -3904,7 +3904,10 @@ return Plotly;
 <p><a href="#constraint-features">Constraint-derived network features</a>: proposed end-to-end design for compact generator influence, directional constraint pressure, limit switching and forecast-time network-state features, starting with VNI.</p>
 </li>
 <li>
-<p><a href="#constraint-pilot">Executed VNI feasibility pilot</a>: guarded table-level acquisition, implemented reconstruction/features, measured coverage, negative feasibility result and the next data-quality gate. Reproduce it with <code>python run_constraint_pilot.py</code>.</p>
+<p><a href="#constraint-pilot">Executed VNI feasibility pilot</a>: guarded table-level acquisition, exact-version equation reconstruction, compact features and the corrected one-month feasibility result. Reproduce it with <code>python run_constraint_pilot.py</code>.</p>
+</li>
+<li>
+<p><a href="#vni-influence">VNI generator influence study</a>: mechanical sensitivities, distinct contraction/reversal/forced-direction events, generator and constraint rankings, the Tumut 3 case study and a compact production feature recommendation.</p>
 </li>
 <li>
 <p><a href="#features">Results, data and feature engineering</a>: completed results, raw-to-model transformations, publication-aware network state, feature importance and a precise seasonal/diurnal/duck-curve audit.</p>
@@ -5348,8 +5351,8 @@ python run_pipeline.py
 <p>For every experiment record: hypothesis; data source/vintage coverage; allowed information at origin; feature and code versions; split dates; model settings; training budget; primary metric; false-alert constraint; all-connector guardrails; and the decision rule. Compare one data family or method change at a time on identical eligible pairs, then test useful combinations. Report reduced coverage when an extra source shortens the sample. Never compare different date mixes as if they were paired improvements.</p>
 <p>Suggested acceptance policy, to freeze before testing: require paired gains on the chosen primary metric, uncertainty estimates using dependence-aware resampling, no material deterioration in critical link/direction cells, and acceptable runtime/data freshness. Exact allowable false alerts and MW deterioration remain business choices; no unapproved numeric tolerance is invented here. Because missed restrictions matter more, compare recall at a fixed alert burden as well as F2. Publish negative results and compare against persistence and the current frozen model throughout.</p>
 <p>Keep two scoreboards: <strong>conditional research</strong> with declared realised inputs, and <strong>operational simulation</strong> using only demonstrably available forecast vintages. Operational errors may be higher even when the system becomes more credible and useful. Completing that transition is itself an improvement in evaluation validity, not a promise of lower headline MAE.</p><a class="top" href="#top">Back to navigation</a></article><article id="constraint-features"><p class="source">Source: docs/CONSTRAINT_NETWORK_FEATURES.md</p><h1 id="constraint-features-constraint-derived-network-features-for-interconnector-forecasting">Constraint-derived network features for interconnector forecasting</h1>
-<p>Prepared 11 September 2026. <strong>Design proposal: only the limited VNI feasibility pilot described below has been implemented; the full programme has not been backtested or demonstrated to improve forecasts.</strong> All numerical equations involving Tumut 3 below are synthetic illustrations, not verified AEMO equations or coefficients.</p>
-<p>Implementation update: the first dependency-scoped February 2026 VNI feasibility pilot has now been executed. See <a href="#constraint-pilot">the pilot report</a>. Its limited reconstruction coverage and negative matched-sample result do not validate the full proposal.</p>
+<p>Prepared 11 September 2026. <strong>Design proposal with a completed one-month VNI feasibility and generator-influence study; the multi-month programme has not been backtested or demonstrated operationally.</strong> Numerical Tumut 3 examples in the original proposal remain illustrations unless identified as February 2026 study results.</p>
+<p>Implementation update: the corrected dependency-scoped February 2026 VNI pilot now reconstructs 99.99% of directional intervals to numerical precision and improves on persistence in a one-month development comparison. See <a href="#constraint-pilot">the pilot report</a> and <a href="#vni-influence">generator influence study</a>. The result validates the reconstruction path and motivates a frozen multi-month test; it does not validate production forecast performance.</p>
 <p>This document develops the idea of using generators' participation in constraint equations to represent their influence on interconnector (IC) flows and import/export limits with a small feature set. It covers mathematical interpretation, discovery, data requirements, feature construction, forecast-time operation, model integration and validation.</p>
 <p>Related documents: <a href="#features">current features</a>, <a href="#roadmap">improvement roadmap</a>, <a href="#backtest">backtest protocol</a>, <a href="#methods">methods</a>.</p>
 <h2 id="constraint-features-1-objective-and-recommended-approach">1. Objective and recommended approach</h2>
@@ -5953,13 +5956,13 @@ for forecast_origin:
 <li><a href="https://aemo.com.au/-/media/files/stakeholder_consultation/consultations/nem-consultations/2023/constraints-implementation-guidelines/final-constraint-implementation-guidelines-v3.pdf">AEMO Constraint Implementation Guidelines</a>: implementation and thermal feedback construction.</li>
 <li><a href="https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/system-operations/congestion-information-resource">AEMO congestion information resource</a>: entry point for constraint documentation and library information.</li>
 <li><a href="#features">Repository feature inventory</a>, <a href="#backtest">backtest protocol</a> and <a href="#roadmap">improvement roadmap</a>: current implementation and evaluation constraints.</li>
-</ul><a class="top" href="#top">Back to navigation</a></article><article id="constraint-pilot"><p class="source">Source: docs/CONSTRAINT_FEATURE_PILOT.md</p><h1 id="constraint-pilot-vni-constraint-feature-feasibility-pilot">VNI constraint-feature feasibility pilot</h1>
-<p>Executed 11 September 2026. This is a one-month retrospective engineering pilot, not an untouched backtest or an operational forecast result.</p>
+</ul><a class="top" href="#top">Back to navigation</a></article><article id="constraint-pilot"><p class="source">Source: docs/CONSTRAINT_FEATURE_PILOT.md</p><h1 id="constraint-pilot-corrected-vni-constraint-feature-pilot">Corrected VNI constraint-feature pilot</h1>
+<p>Executed 11 September 2026. This is a retrospective February 2026 engineering study. It establishes that the equation reconstruction and compact feature pipeline work on the study month; it is not an untouched backtest or an operational forecast claim.</p>
 <h2 id="constraint-pilot-outcome">Outcome</h2>
-<p>The pilot implemented guarded acquisition, version-aware factor joins, dispatch filtering, equation isolation, compact five-minute and half-hour features, generator discovery, a chronological feasibility comparison and numerical/download-policy tests.</p>
-<p>The result does <strong>not</strong> yet support promoting the features into the main forecast. Complete directional-envelope coverage was about 28–29%, and the small matched-sample model performed substantially worse than persistence. The comparison spans only February 2026 and includes a sharp coverage/regime split, so it is evidence that the present feature/data construction is not ready rather than a reliable estimate of its eventual forecast value.</p>
-<h2 id="constraint-pilot-download-isolation">Download isolation</h2>
-<p>The run used ten explicit table-level archives from February 2026. It did not download an MMS database snapshot or recursively queue an archive listing.</p>
+<p>The corrected build joins every dispatch solution to the exact generic-constraint effective date and version published in <code>DISPATCHCONSTRAINT</code>. It uses the solved left-hand side (<code>LHS</code>) to isolate the VNI conditional bound and maps dispatch units through their actual connection points. This replaces the preliminary build, which used one late standing-data vintage for the month and omitted <code>LHS</code>; all preliminary coverage and model figures are superseded by the results below.</p>
+<p>The corrected envelopes cover 8,063 of 8,064 five-minute intervals in each direction and reproduce the published directional limits to numerical precision. A small chronological feasibility model improved on half-hour persistence during this month, but the sample is too short and was used during development. Its result supports a longer prospective test; it does not establish production forecast improvement.</p>
+<h2 id="constraint-pilot-isolated-data-acquisition">Isolated data acquisition</h2>
+<p>The run downloads only 25 explicit table archives in the allowlist at <code>configs/constraint_vni_pilot.json</code>. It never downloads an MMS database snapshot, walks an archive directory, or queues all tables for a month.</p>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -5969,112 +5972,737 @@ for forecast_origin:
 </thead>
 <tbody>
 <tr>
-<td>Compressed files</td>
-<td style="text-align: right;">257.2 MiB</td>
+<td>Study interval</td>
+<td style="text-align: right;">1–28 February 2026</td>
 </tr>
 <tr>
-<td>Pilot cap</td>
-<td style="text-align: right;">1 GiB</td>
+<td>Explicit files</td>
+<td style="text-align: right;">25</td>
 </tr>
 <tr>
-<td>Large interval products</td>
-<td style="text-align: right;"><code>DISPATCHCONSTRAINT</code>, <code>DISPATCHLOAD</code></td>
+<td>Compressed total</td>
+<td style="text-align: right;">274,524,060 bytes (261.8 MiB)</td>
 </tr>
 <tr>
-<td>Retained constraint rows</td>
-<td style="text-align: right;">165,461 of the 1,010 VNI-linked IDs</td>
+<td>February interval files</td>
+<td style="text-align: right;"><code>DISPATCHCONSTRAINT</code>, <code>DISPATCHLOAD</code> only</td>
+</tr>
+<tr>
+<td>Earlier supplements</td>
+<td style="text-align: right;">15 small factor/version files from five required months</td>
+</tr>
+<tr>
+<td>Retained constraint-solution rows</td>
+<td style="text-align: right;">1,251,774</td>
 </tr>
 <tr>
 <td>Retained dispatch rows</td>
-<td style="text-align: right;">1,651,968 for 207 mapped DUIDs</td>
+<td style="text-align: right;">1,740,672</td>
+</tr>
+<tr>
+<td>Retained DUIDs / connection points</td>
+<td style="text-align: right;">218 / 229</td>
+</tr>
+<tr>
+<td>Manifest cap</td>
+<td style="text-align: right;">1 GiB compressed</td>
+</tr>
+<tr>
+<td>Per-file cap</td>
+<td style="text-align: right;">512 MiB compressed</td>
+</tr>
+<tr>
+<td>Expanded batch cap</td>
+<td style="text-align: right;">20 GiB</td>
+</tr>
+<tr>
+<td>Required free disk</td>
+<td style="text-align: right;">20 GiB</td>
 </tr>
 </tbody>
 </table></div>
-<p>The tracked configuration contains the only permitted URLs. The downloader rejects non-NEMWEB URLs, product/filename mismatches, duplicates, files above 512 MiB and manifests above 1 GiB. It streams downloads, checks compressed and expanded sizes, verifies ZIP integrity, reuses checksum-audited cached files and never converts directory listings into an implicit queue.</p>
-<p>Filtering occurs while the two large tables are parsed. Unrelated dispatch records are not written to the pilot tables. Raw source ZIPs and derived Parquet files remain under ignored <code>data/constraint_pilot/</code> storage.</p>
-<h2 id="constraint-pilot-reconstruction-and-features">Reconstruction and features</h2>
-<p>The implementation converts generator coefficients into target-IC sensitivities, adds other-interconnector LHS contributions and excludes equations with unresolved energy connection points or regional terms. This intentionally conservative completeness rule prevents partial equations from being presented as secure bounds.</p>
-<p>The monthly standing-data archive was generated after the pilot month and contains later <code>LASTCHANGED</code> values. It is therefore suitable for this retrospective mapping exercise but is not treated as proof that the same mapping vintage was available at each February origin.</p>
+<p>The five supplemental vintages are October 2024, March 2025, November 2025, December 2025 and January 2026. They contain only <code>GENCONDATA</code>, <code>SPDCONNECTIONPOINTCONSTRAINT</code> and <code>SPDINTERCONNECTORCONSTRAINT</code>; the pipeline identified these months from versions actually referenced by February dispatch. It did not fetch older <code>DISPATCHLOAD</code> or <code>DISPATCHCONSTRAINT</code> archives.</p>
+<p>The downloader rejects non-NEMWEB hosts, table/filename mismatches, duplicate URLs, files above the cap and manifests above the total cap. It streams downloads, validates ZIP integrity and expanded size, records SHA-256 hashes, reuses audited cached files and filters the two large interval tables during extraction. Source ZIPs and derived data remain under ignored <code>data/constraint_pilot/</code> storage.</p>
+<h2 id="constraint-pilot-reconstruction">Reconstruction</h2>
+<p>For a solved generic constraint</p>
+<pre><code class="language-text">a × VNI_flow + Σ(b_i × dispatch_i) + other_terms ≤ RHS
+</code></pre>
+<p>the current conditional VNI bound is recovered from AEMO's solved values as</p>
+<pre><code class="language-text">bound = VNI_flow + (RHS − LHS) / a
+</code></pre>
+<p>and the local sensitivity of that bound to generator <code>i</code> is</p>
+<pre><code class="language-text">s_i = ∂bound/∂dispatch_i = −b_i / a
+</code></pre>
+<p>Positive <code>a</code> gives an upper VNI bound. Negative <code>a</code> gives a lower signed-flow bound; its reported import capacity is <code>−bound</code>. The exact effective date and version are part of every join key.</p>
 <div class="table-wrap"><table>
 <thead>
 <tr>
-<th>Audit</th>
+<th>Reconstruction audit</th>
 <th style="text-align: right;">Result</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>VNI-linked constraint IDs in the monthly factor set</td>
-<td style="text-align: right;">1,010</td>
-</tr>
-<tr>
-<td>Mapped dispatch units</td>
-<td style="text-align: right;">207</td>
-</tr>
-<tr>
-<td>Unmapped connection points</td>
-<td style="text-align: right;">3</td>
+<td>Five-minute rows</td>
+<td style="text-align: right;">8,064</td>
 </tr>
 <tr>
 <td>Equation-state rows</td>
-<td style="text-align: right;">165,442</td>
+<td style="text-align: right;">1,251,626</td>
 </tr>
 <tr>
-<td>Complete equation rows</td>
-<td style="text-align: right;">17.4%</td>
+<td>Exact target-factor/version match</td>
+<td style="text-align: right;">94.81%</td>
 </tr>
 <tr>
-<td>Upper-envelope five-minute coverage</td>
-<td style="text-align: right;">28.2%</td>
+<td>Generator-pressure completeness</td>
+<td style="text-align: right;">94.74%</td>
 </tr>
 <tr>
-<td>Lower-envelope five-minute coverage</td>
-<td style="text-align: right;">28.9%</td>
+<td>Upper-envelope coverage</td>
+<td style="text-align: right;">99.9876%</td>
 </tr>
 <tr>
-<td>Inconsistent trusted envelopes</td>
-<td style="text-align: right;">0</td>
+<td>Lower-envelope coverage</td>
+<td style="text-align: right;">99.9876%</td>
+</tr>
+<tr>
+<td>Upper limit reconstruction MAE</td>
+<td style="text-align: right;">0.0000046 MW</td>
+</tr>
+<tr>
+<td>Lower capacity reconstruction MAE</td>
+<td style="text-align: right;">0.0000026 MW</td>
+</tr>
+<tr>
+<td>Published export setter agreement</td>
+<td style="text-align: right;">98.83%</td>
+</tr>
+<tr>
+<td>Published import setter agreement</td>
+<td style="text-align: right;">99.89%</td>
+</tr>
+<tr>
+<td>Crossed upper/lower envelopes flagged</td>
+<td style="text-align: right;">48 intervals</td>
 </tr>
 </tbody>
 </table></div>
-<p>The compact output includes signed upper/lower bounds, rooms, switching gaps, tightening and relief, available-relief proxies, pressure changes, leading families, candidate counts, partial-candidate fraction and provenance IDs. Generator persistence produces explicit zero scenario-envelope movement fields.</p>
-<p>Tumut 3 was found in 627 VNI-linked equation IDs in this monthly factor set, with both positive and negative coefficients across regimes. Its February dispatch was zero in most intervals, so a median-movement ranking would incorrectly assign no importance. The implemented discovery score uses mean absolute 30-minute movement and retains its equation-level coefficient evidence.</p>
-<h2 id="constraint-pilot-feasibility-comparison">Feasibility comparison</h2>
-<p>The comparison predicts the next half-hour tight directional limit from a one-interval delayed feature snapshot. It trains on the first two-thirds of the feature-covered time span and tests on the remainder. It is deliberately labelled retrospective and uses a small matched population.</p>
+<p>Fourteen of the 375 observed constraint versions have no direct VNI factor in their exact standing-data vintage. They are excluded from direct bound construction. The envelopes remain complete because other directly linked constraints set the limit in those intervals. Setter agreement below 100% is consistent with ties or near ties among constraints; the reconstructed numeric limits are the stronger validation.</p>
+<h2 id="constraint-pilot-compact-features">Compact features</h2>
+<p>The output uses envelope-level summaries instead of one column per generator or constraint:</p>
+<ul>
+<li>signed conditional upper and lower bounds, current room and the gap to the second constraint;</li>
+<li>leading constraint/version identifiers and broad limit family;</li>
+<li>30-minute generator tightening and relief pressure for each direction;</li>
+<li>ramp- and availability-limited relief capacity;</li>
+<li>candidate counts, missing-pressure share and crossed-envelope flag.</li>
+</ul>
+<p>The separate influence table preserves unit detail for diagnostics and for selecting a small stable generator panel. The proposed production model should use the compact aggregates plus a handful of event-proven units rather than all 185 units.</p>
+<h2 id="constraint-pilot-chronological-feasibility-comparison">Chronological feasibility comparison</h2>
+<p>Features are delayed by one half-hour. The first two-thirds of February train a small gradient-boosting model and the last third tests it against one-step persistence.</p>
 <div class="table-wrap"><table>
 <thead>
 <tr>
 <th>Target</th>
-<th style="text-align: right;">Coverage</th>
+<th style="text-align: right;">Test rows</th>
 <th style="text-align: right;">Persistence MAE</th>
 <th style="text-align: right;">Candidate MAE</th>
-<th style="text-align: right;">Relative change</th>
+<th style="text-align: right;">Improvement</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Export tight limit</td>
-<td style="text-align: right;">29.5%</td>
-<td style="text-align: right;">95.8 MW</td>
-<td style="text-align: right;">178.8 MW</td>
-<td style="text-align: right;">86.6% worse</td>
+<td style="text-align: right;">447</td>
+<td style="text-align: right;">92.52 MW</td>
+<td style="text-align: right;">75.50 MW</td>
+<td style="text-align: right;">17.02 MW (18.40%)</td>
 </tr>
 <tr>
 <td>Import tight limit</td>
-<td style="text-align: right;">29.5%</td>
-<td style="text-align: right;">60.9 MW</td>
-<td style="text-align: right;">121.3 MW</td>
-<td style="text-align: right;">99.0% worse</td>
+<td style="text-align: right;">447</td>
+<td style="text-align: right;">63.16 MW</td>
+<td style="text-align: right;">57.02 MW</td>
+<td style="text-align: right;">6.13 MW (9.71%)</td>
 </tr>
 </tbody>
 </table></div>
-<p>Feature coverage is concentrated on 1–3 February and 24–28 February, so the train/test comparison crosses a marked network-regime change. These results must not be extrapolated to the full historical period or all interconnectors.</p>
-<h2 id="constraint-pilot-reproduction-and-next-gate">Reproduction and next gate</h2>
+<p>This is a feasibility result from one development month. The model, feature design and period were inspected while they were built. A decision about deployment requires multiple chronological months, frozen feature selection, publication-time data controls, regime coverage and a final untouched test.</p>
+<h2 id="constraint-pilot-reproduction">Reproduction</h2>
 <p>Run:</p>
 <pre><code class="language-powershell">python run_constraint_pilot.py
 </code></pre>
-<p>The next defensible step is to improve complete equation coverage without weakening the completeness rule. Audit the three unmapped connection points and determine the missing regional-service quantities. Then create a new explicit, size-audited manifest for a longer chronological sample. Do not start a multi-year <code>DISPATCHLOAD</code> or <code>DISPATCHCONSTRAINT</code> backfill automatically: those two products alone are about 269 MB compressed for this single month and would exceed the pilot guard at scale.</p>
-<p>Only after coverage is adequate should the project run the planned E0–E5 ablations and prospective shadow evaluation.</p><a class="top" href="#top">Back to navigation</a></article><article id="plan"><p class="source">Source: BUILD_PLAN.md</p><h1 id="plan-nem-interconnector-forecast-lab-agreed-build-specification">NEM Interconnector Forecast Lab — agreed build specification</h1>
+<p>The runner validates and reuses the allowlisted cache, extracts only dependency-scoped rows, rebuilds equations and features, evaluates the feasibility model, runs the influence study and executes the focused tests. See <code>docs/VNI_GENERATOR_INFLUENCE_STUDY.md</code> for the generator rankings and event analysis.</p><a class="top" href="#top">Back to navigation</a></article><article id="vni-influence"><p class="source">Source: docs/VNI_GENERATOR_INFLUENCE_STUDY.md</p><h1 id="vni-influence-vni-generator-influence-study">VNI generator influence study</h1>
+<h2 id="vni-influence-research-question-and-answer">Research question and answer</h2>
+<p>This study asks which generators most often and most strongly moved the constraint-derived Victoria–New South Wales Interconnector (VNI) bounds during February 2026, especially when a limit contracted, flow crossed zero, or a directional capacity became negative.</p>
+<p>The evidence supports using two compact representations together:</p>
+<ol>
+<li><strong>Network-state aggregates</strong> for the leading upper and lower constraints: bound, headroom, switch gap, net generator pressure and available relief.</li>
+<li><strong>A small generator panel</strong> chosen from persistent and event-specific influence: CUSF1, MURRAY, DARLSF1, AVLSF1, LIMOSF11, Walla Walla solar units, Upper Tumut and Tumut 3 are the strongest initial candidates from this month. Forced-direction periods additionally elevate Moorabool-area wind and several western Victorian wind farms.</li>
+</ol>
+<p>Tumut 3 is materially important. It ranks 11th of 185 units by persistence-weighted mechanical exposure, 2nd during sharp limit contractions and 10th in forced-direction states. Its average impact is only 44th, showing why a simple average-generation or average-movement screen would miss it.</p>
+<h2 id="vni-influence-scope">Scope</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Item</th>
+<th style="text-align: right;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Study period</td>
+<td style="text-align: right;">1–28 February 2026</td>
+</tr>
+<tr>
+<td>Resolution</td>
+<td style="text-align: right;">5 minutes</td>
+</tr>
+<tr>
+<td>Intervals</td>
+<td style="text-align: right;">8,064</td>
+</tr>
+<tr>
+<td>Generators with valid sensitivities</td>
+<td style="text-align: right;">185</td>
+</tr>
+<tr>
+<td>Constraints that led an envelope</td>
+<td style="text-align: right;">37</td>
+</tr>
+<tr>
+<td>Distinct flow reversals</td>
+<td style="text-align: right;">348</td>
+</tr>
+<tr>
+<td>Upper limit contraction intervals / episodes</td>
+<td style="text-align: right;">403 / 170</td>
+</tr>
+<tr>
+<td>Lower limit contraction intervals / episodes</td>
+<td style="text-align: right;">397 / 138</td>
+</tr>
+<tr>
+<td>Negative export-capacity intervals / onsets</td>
+<td style="text-align: right;">1,670 / 151</td>
+</tr>
+<tr>
+<td>Negative import-capacity intervals / onsets</td>
+<td style="text-align: right;">369 / 33</td>
+</tr>
+</tbody>
+</table></div>
+<p>This is a descriptive dispatch-equation study. It measures mechanical contribution under the constraint that led at each observed interval and association with observed limit and flow movement. It does not identify an independent causal effect: generators co-move, dispatch responds to prices and constraints, and the leading constraint can switch at the same time.</p>
+<h2 id="vni-influence-method">Method</h2>
+<h3 id="vni-influence-exact-constraint-state">Exact constraint state</h3>
+<p>Each <code>DISPATCHCONSTRAINT</code> solution is joined to the exact <code>GENCONID</code>, effective date and version in the interconnector and connection-point factor tables. The bound and unit sensitivity are</p>
+<pre><code class="language-text">bound_t = flow_t + (RHS_t − LHS_t) / a
+sensitivity_i = −b_i / a
+30-minute bound impact_i,t = sensitivity_i × (dispatch_i,t − dispatch_i,t−30m)
+</code></pre>
+<p>For the upper envelope, capacity impact equals bound impact. For the lower signed bound, import-capacity impact is the negative of bound impact. A positive tightening value always means the available capacity in that direction fell.</p>
+<h3 id="vni-influence-event-definitions">Event definitions</h3>
+<ul>
+<li><strong>Sharp contraction:</strong> a 30-minute directional-limit fall at or above the 90th percentile of positive falls. The thresholds are 252.08 MW for export and 169.31 MW for import. Contiguous qualifying intervals form one episode.</li>
+<li><strong>Flow reversal:</strong> one change in the last observed non-zero sign of VNI flow. Zeros are carried forward only for sign-state detection. This prevents a single crossing from being counted in six overlapping 30-minute comparisons.</li>
+<li><strong>Forced direction:</strong> the reported directional capacity is below zero. The study records both all forced intervals and the first interval of each contiguous episode.</li>
+</ul>
+<p>Rankings for contractions, reversals and forced states require at least 20 unit-event contribution rows. This removes rankings based on only a handful of coincidences.</p>
+<h3 id="vni-influence-ranking-measures">Ranking measures</h3>
+<ul>
+<li><strong>Overall rank</strong> sums absolute 30-minute bound impacts over every active leading-constraint state. The unit is MW-observations, an exposure index rather than energy.</li>
+<li><strong>Intensity rank</strong> uses mean absolute impact when active.</li>
+<li><strong>Event ranks</strong> use mean tightening or mean absolute impact within the declared event states.</li>
+<li><strong>Top-contributor intervals</strong> counts intervals in which the unit had the largest non-zero absolute mechanical contribution for that direction.</li>
+<li><strong>Spearman association</strong> checks whether the signed mechanical contribution moved with the published limit or flow. It is supporting evidence, not the ranking basis.</li>
+</ul>
+<h2 id="vni-influence-persistent-mechanical-influence">Persistent mechanical influence</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: right;">Rank</th>
+<th>DUID</th>
+<th style="text-align: right;">Active state rows</th>
+<th style="text-align: right;">Total exposure (MW-observations)</th>
+<th style="text-align: right;">Mean impact</th>
+<th style="text-align: right;">P95 impact</th>
+<th style="text-align: right;">Largest contributor rows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td>CUSF1</td>
+<td style="text-align: right;">3,903</td>
+<td style="text-align: right;">367,031</td>
+<td style="text-align: right;">94.04 MW</td>
+<td style="text-align: right;">367.35 MW</td>
+<td style="text-align: right;">1,029</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td>MURRAY</td>
+<td style="text-align: right;">15,090</td>
+<td style="text-align: right;">352,120</td>
+<td style="text-align: right;">23.33 MW</td>
+<td style="text-align: right;">118.25 MW</td>
+<td style="text-align: right;">3,666</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td>DARLSF1</td>
+<td style="text-align: right;">13,401</td>
+<td style="text-align: right;">279,523</td>
+<td style="text-align: right;">20.86 MW</td>
+<td style="text-align: right;">109.40 MW</td>
+<td style="text-align: right;">997</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td>AVLSF1</td>
+<td style="text-align: right;">3,944</td>
+<td style="text-align: right;">207,250</td>
+<td style="text-align: right;">52.55 MW</td>
+<td style="text-align: right;">222.61 MW</td>
+<td style="text-align: right;">340</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td>LIMOSF11</td>
+<td style="text-align: right;">13,313</td>
+<td style="text-align: right;">190,455</td>
+<td style="text-align: right;">14.31 MW</td>
+<td style="text-align: right;">73.43 MW</td>
+<td style="text-align: right;">605</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td>WLWLSF2</td>
+<td style="text-align: right;">3,941</td>
+<td style="text-align: right;">169,377</td>
+<td style="text-align: right;">42.98 MW</td>
+<td style="text-align: right;">167.71 MW</td>
+<td style="text-align: right;">132</td>
+</tr>
+<tr>
+<td style="text-align: right;">7</td>
+<td>WLWLSF1</td>
+<td style="text-align: right;">3,941</td>
+<td style="text-align: right;">164,602</td>
+<td style="text-align: right;">41.77 MW</td>
+<td style="text-align: right;">166.32 MW</td>
+<td style="text-align: right;">88</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td>UPPTUMUT</td>
+<td style="text-align: right;">8,466</td>
+<td style="text-align: right;">158,585</td>
+<td style="text-align: right;">18.73 MW</td>
+<td style="text-align: right;">98.28 MW</td>
+<td style="text-align: right;">1,593</td>
+</tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td>COLEASF1</td>
+<td style="text-align: right;">13,401</td>
+<td style="text-align: right;">143,791</td>
+<td style="text-align: right;">10.73 MW</td>
+<td style="text-align: right;">52.63 MW</td>
+<td style="text-align: right;">256</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td>SUNRSF1</td>
+<td style="text-align: right;">13,313</td>
+<td style="text-align: right;">124,105</td>
+<td style="text-align: right;">9.32 MW</td>
+<td style="text-align: right;">49.56 MW</td>
+<td style="text-align: right;">144</td>
+</tr>
+<tr>
+<td style="text-align: right;">11</td>
+<td>TUMUT3</td>
+<td style="text-align: right;">8,466</td>
+<td style="text-align: right;">109,268</td>
+<td style="text-align: right;">12.91 MW</td>
+<td style="text-align: right;">50.70 MW</td>
+<td style="text-align: right;">425</td>
+</tr>
+<tr>
+<td style="text-align: right;">12</td>
+<td>GESF1</td>
+<td style="text-align: right;">3,903</td>
+<td style="text-align: right;">106,656</td>
+<td style="text-align: right;">27.33 MW</td>
+<td style="text-align: right;">117.44 MW</td>
+<td style="text-align: right;">145</td>
+</tr>
+</tbody>
+</table></div>
+<p>The table separates persistence from intensity. MURRAY and DARLSF1 accumulate high exposure through frequent participation. CUSF1 and AVLSF1 combine substantial frequency with larger individual movements. Tumut 3 is persistent and event-relevant even though its average interval effect is less exceptional.</p>
+<h2 id="vni-influence-event-results">Event results</h2>
+<h3 id="vni-influence-sharp-limit-contractions">Sharp limit contractions</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: right;">Rank</th>
+<th>DUID</th>
+<th style="text-align: right;">Contribution rows</th>
+<th style="text-align: right;">Mean tightening</th>
+<th style="text-align: right;">Tightening share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td>MORTLK11</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">150.05 MW</td>
+<td style="text-align: right;">36.4%</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td>TUMUT3</td>
+<td style="text-align: right;">363</td>
+<td style="text-align: right;">126.29 MW</td>
+<td style="text-align: right;">30.0%</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td>GPWFEST1</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">116.09 MW</td>
+<td style="text-align: right;">45.5%</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td>GPWFEST2</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">100.68 MW</td>
+<td style="text-align: right;">40.9%</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td>AVLSF1</td>
+<td style="text-align: right;">350</td>
+<td style="text-align: right;">80.96 MW</td>
+<td style="text-align: right;">70.3%</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td>MURRAY</td>
+<td style="text-align: right;">660</td>
+<td style="text-align: right;">66.32 MW</td>
+<td style="text-align: right;">46.1%</td>
+</tr>
+<tr>
+<td style="text-align: right;">7</td>
+<td>UPPTUMUT</td>
+<td style="text-align: right;">363</td>
+<td style="text-align: right;">53.52 MW</td>
+<td style="text-align: right;">49.3%</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td>KESSB1</td>
+<td style="text-align: right;">99</td>
+<td style="text-align: right;">52.22 MW</td>
+<td style="text-align: right;">26.3%</td>
+</tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td>DUNDWF1</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">51.36 MW</td>
+<td style="text-align: right;">50.0%</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td>DARLSF1</td>
+<td style="text-align: right;">643</td>
+<td style="text-align: right;">49.93 MW</td>
+<td style="text-align: right;">58.3%</td>
+</tr>
+</tbody>
+</table></div>
+<p>Tumut 3 has the strongest robust contraction result: its sample is much larger than the 22-row units above and below it. Its positive-share statistic is only 30%, while its mean tightening is 126 MW. The distribution is asymmetric: fewer, much larger tightening movements outweigh more frequent small relief movements. The appropriate feature therefore preserves signed pressure and tail magnitude rather than a binary “Tumut up means VNI down” rule.</p>
+<h3 id="vni-influence-flow-reversals">Flow reversals</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: right;">Rank</th>
+<th>DUID</th>
+<th style="text-align: right;">Contribution rows</th>
+<th style="text-align: right;">Mean absolute impact</th>
+<th style="text-align: right;">Alignment with 30-minute flow move</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td>CUSF1</td>
+<td style="text-align: right;">281</td>
+<td style="text-align: right;">123.46 MW</td>
+<td style="text-align: right;">42.3%</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td>AVLSF1</td>
+<td style="text-align: right;">281</td>
+<td style="text-align: right;">85.04 MW</td>
+<td style="text-align: right;">57.3%</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td>WLWLSF2</td>
+<td style="text-align: right;">281</td>
+<td style="text-align: right;">56.37 MW</td>
+<td style="text-align: right;">51.2%</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td>WLWLSF1</td>
+<td style="text-align: right;">281</td>
+<td style="text-align: right;">54.91 MW</td>
+<td style="text-align: right;">51.6%</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td>DARLSF1</td>
+<td style="text-align: right;">600</td>
+<td style="text-align: right;">42.36 MW</td>
+<td style="text-align: right;">44.8%</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td>HILLSTN1</td>
+<td style="text-align: right;">282</td>
+<td style="text-align: right;">37.98 MW</td>
+<td style="text-align: right;">45.4%</td>
+</tr>
+<tr>
+<td style="text-align: right;">7</td>
+<td>MOORAWF1</td>
+<td style="text-align: right;">88</td>
+<td style="text-align: right;">37.22 MW</td>
+<td style="text-align: right;">53.4%</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td>GESF1</td>
+<td style="text-align: right;">281</td>
+<td style="text-align: right;">35.39 MW</td>
+<td style="text-align: right;">40.6%</td>
+</tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td>BOMENSF1</td>
+<td style="text-align: right;">281</td>
+<td style="text-align: right;">31.28 MW</td>
+<td style="text-align: right;">55.5%</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td>LIMOSF11</td>
+<td style="text-align: right;">587</td>
+<td style="text-align: right;">28.65 MW</td>
+<td style="text-align: right;">39.0%</td>
+</tr>
+</tbody>
+</table></div>
+<p>The alignment rates near 50% show that a generator's constraint-bound contribution alone does not determine actual flow direction. Regional balance, other units, losses, demand and constraint switching matter. These unit signals should condition a flow model through aggregate network state rather than directly dictate a reversal forecast.</p>
+<h3 id="vni-influence-forced-direction-states">Forced-direction states</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: right;">Rank</th>
+<th>DUID</th>
+<th style="text-align: right;">Contribution rows</th>
+<th style="text-align: right;">Mean absolute impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td>MOORAWF1</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;">274.44 MW</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td>BRYB1WF1</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;">192.23 MW</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td>MORTLK11</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">162.61 MW</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td>STOCKYD1</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">162.20 MW</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td>MRTLSWF1</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;">144.82 MW</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td>RYANCWF1</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;">143.89 MW</td>
+</tr>
+<tr>
+<td style="text-align: right;">7</td>
+<td>CRWARP1</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">126.32 MW</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td>BRYB2WF2</td>
+<td style="text-align: right;">85</td>
+<td style="text-align: right;">118.82 MW</td>
+</tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td>CUSF1</td>
+<td style="text-align: right;">1,642</td>
+<td style="text-align: right;">115.95 MW</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td>TUMUT3</td>
+<td style="text-align: right;">506</td>
+<td style="text-align: right;">115.07 MW</td>
+</tr>
+</tbody>
+</table></div>
+<p>Several western Victorian wind units have large conditional impacts in forced states but limited event samples. CUSF1 and Tumut 3 combine large effects with much broader exposure, making them stronger candidates for stable model features.</p>
+<h2 id="vni-influence-constraint-regimes">Constraint regimes</h2>
+<p>The leading lower constraints were <code>N^^V_NIL_1</code> (4,128 intervals) and <code>N^^V_NIL_ARWBBA</code> (2,682). The leading upper constraints were <code>N^^N_NIL_WGLT</code> (2,442), <code>V::N_SMSC_V1</code> (2,205) and <code>V::N_SMSC_O1</code> (1,241). <code>N^^N_NIL_WGLT</code> accounts for 1,448 of the 1,670 negative export-capacity intervals, so regime identity is essential when interpreting generator effects.</p>
+<p>The model should encode the leading constraint through a compact stable representation: hashed or grouped family ID, upper/lower switch gaps, number of near-leading candidates, and aggregate coefficient-weighted generator pressure. A full one-hot column for every constraint version would be sparse and brittle.</p>
+<h2 id="vni-influence-tumut-3-case-study">Tumut 3 case study</h2>
+<p>Tumut 3 appears in 180 exact VNI-linked constraint IDs and 13 constraint versions that led an observed directional envelope during the study. Across its 8,466 active state rows:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Measure</th>
+<th style="text-align: right;">Tumut 3 result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Overall persistence rank</td>
+<td style="text-align: right;">11 / 185</td>
+</tr>
+<tr>
+<td>Mean-intensity rank</td>
+<td style="text-align: right;">44 / 185</td>
+</tr>
+<tr>
+<td>Sharp-contraction rank</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr>
+<td>Forced-state rank</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr>
+<td>Reversal rank</td>
+<td style="text-align: right;">31</td>
+</tr>
+<tr>
+<td>Mean / P95 absolute bound impact</td>
+<td style="text-align: right;">12.91 / 50.70 MW</td>
+</tr>
+<tr>
+<td>Largest-contributor rows</td>
+<td style="text-align: right;">425</td>
+</tr>
+<tr>
+<td>Limit-move Spearman association</td>
+<td style="text-align: right;">0.194</td>
+</tr>
+<tr>
+<td>Flow-move Spearman association</td>
+<td style="text-align: right;">0.117</td>
+</tr>
+</tbody>
+</table></div>
+<p>The low unconditional correlations and high contraction rank are compatible. Tumut 3 matters in specific constraint regimes and tails; aggregating across all intervals dilutes that relationship and sometimes flips its sign. A compact Tumut feature should therefore be <code>s_TUMUT3 × ΔP_TUMUT3</code>, split into upper/lower tightening and relief, plus its ramp-feasible future range under the current leading constraint. Raw Tumut generation alone loses both coefficient sign and topology regime.</p>
+<h2 id="vni-influence-recommended-forecasting-feature-set">Recommended forecasting feature set</h2>
+<p>The initial production candidate can remain below roughly 25 numeric variables:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Feature block</th>
+<th>Suggested variables</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Directional envelopes</td>
+<td>upper bound, lower bound, upper room, lower room</td>
+</tr>
+<tr>
+<td>Switching risk</td>
+<td>upper/lower switch gap, near-leading count</td>
+</tr>
+<tr>
+<td>Aggregate generator pressure</td>
+<td>upper/lower tightening, upper/lower relief, 30-minute pressure change</td>
+</tr>
+<tr>
+<td>Feasible relief</td>
+<td>upper/lower ramp-and-availability-limited relief</td>
+</tr>
+<tr>
+<td>Quality/state</td>
+<td>pressure completeness, crossed-envelope flag, compact constraint-family encoding</td>
+</tr>
+<tr>
+<td>Selected units</td>
+<td>signed coefficient-weighted pressure for 4–8 stable units, beginning with Tumut 3, Upper Tumut, Murray, CUSF1 and Darling solar; freeze selection on training data</td>
+</tr>
+</tbody>
+</table></div>
+<p>For horizons beyond the latest dispatch interval, replace realised <code>ΔP</code> with a dispatch or availability scenario. Produce a base, upward-ramp and downward-ramp pressure path. The resulting envelope range can enter the limit model directly and can gate the flow model when a direction approaches zero.</p>
+<h2 id="vni-influence-testing-path">Testing path</h2>
+<ol>
+<li>Build three to six additional non-contiguous months chosen for seasonal and outage-regime coverage. Generate a manifest from observed required versions and download only each month’s two interval tables plus missing small standing-data vintages.</li>
+<li>Freeze unit selection using training months. Require persistence across months and event samples, not a high score in one month.</li>
+<li>Run ablations: baseline; envelope only; aggregate pressure; selected units; flexibility; full compact set.</li>
+<li>Use expanding chronological folds and compare against persistence and the existing flow/limit model. Report MAE, tail MAE, sign accuracy, reversal precision/recall, negative-limit onset detection and calibration.</li>
+<li>Audit publication times and recompute every feature from data available at each origin. The current retrospective <code>LHS</code> reconstruction validates the topology and labels; future features must use lagged state plus forecast/scenario dispatch.</li>
+<li>Hold out the last period once. Do not use it to choose units, thresholds, models or hyperparameters.</li>
+</ol>
+<h2 id="vni-influence-limitations">Limitations</h2>
+<ul>
+<li>February 2026 is one month and may over-represent its particular outages and constraint invocations.</li>
+<li>Coefficient-based impact is a local mechanical decomposition under the observed leading equation. It does not simulate redispatch, constraint switching or AC power flow after a counterfactual generator change.</li>
+<li>Thirty-minute dispatch changes overlap across adjacent five-minute rows. Overall exposure is an index of repeated observed state, not MWh or an additive physical quantity.</li>
+<li>Event ranks describe conditional magnitude and require at least 20 contribution rows, but some still have limited independent episodes.</li>
+<li>Flow response is endogenous to regional balance and dispatch. Low unit-flow correlations should not be interpreted as evidence that the equation coefficients are wrong.</li>
+<li>The one-month forecast comparison was used during development and must be confirmed prospectively.</li>
+</ul>
+<h2 id="vni-influence-reproducible-outputs">Reproducible outputs</h2>
+<p><code>python run_constraint_pilot.py</code> produces the ignored local artifacts below:</p>
+<ul>
+<li><code>constraint_features_5min.parquet</code> and <code>constraint_features_30min.parquet</code>;</li>
+<li><code>unit_sensitivities.parquet</code> and <code>unit_movements.parquet</code>;</li>
+<li><code>generator_influence.csv</code> and <code>constraint_influence.csv</code>;</li>
+<li><code>influence_events.parquet</code>, <code>feature_audit.json</code>, <code>influence_summary.json</code> and <code>pilot_scores.json</code>.</li>
+</ul>
+<p>The tracked code, configuration and documentation are sufficient to reproduce the study without committing source data or derived interval records to Git.</p><a class="top" href="#top">Back to navigation</a></article><article id="plan"><p class="source">Source: BUILD_PLAN.md</p><h1 id="plan-nem-interconnector-forecast-lab-agreed-build-specification">NEM Interconnector Forecast Lab — agreed build specification</h1>
 <h2 id="plan-objective-and-approved-scope">Objective and approved scope</h2>
 <p>Build and run a reproducible three-year conditional backtest and local interactive trading-desk dashboard for every NEM interconnector present in the data. Predict signed dispatch flow, average directional import/export limits, and tightest five-minute directional limits within each half-hour. Refresh forecast origins every 30 minutes; support leads of 30 minutes to seven days. Include P10/P50/P90 where estimable and restriction probabilities. A restriction is a <strong>50% reduction</strong> below a training-only seasonal directional reference. Missing restrictions matters more than false alerts.</p>
 <p>Future realised regional demand, wind, solar and weather are explicitly approved inputs for the conditional experiment. Future prices, realised constraint results and interconnector flows are excluded from features. Prices are historical context, not a causal attribution or price forecast. Forecast-input/live operation is a later layer; this deliverable includes a user-input scenario runner.</p>

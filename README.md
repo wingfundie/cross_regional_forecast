@@ -22,7 +22,9 @@ Five interactive charts cover flow improvement versus persistence, import/export
 
 - [Constraint-derived network features](docs/CONSTRAINT_NETWORK_FEATURES.md): proposed end-to-end design for compact generator influence, directional constraint pressure, limit switching and forecast-time network-state features, starting with VNI.
 
-- [Executed VNI feasibility pilot](docs/CONSTRAINT_FEATURE_PILOT.md): guarded table-level acquisition, implemented reconstruction/features, measured coverage, negative feasibility result and the next data-quality gate. Reproduce it with `python run_constraint_pilot.py`.
+- [Executed VNI feasibility pilot](docs/CONSTRAINT_FEATURE_PILOT.md): guarded table-level acquisition, exact-version equation reconstruction, compact features and the corrected one-month feasibility result. Reproduce it with `python run_constraint_pilot.py`.
+
+- [VNI generator influence study](docs/VNI_GENERATOR_INFLUENCE_STUDY.md): mechanical sensitivities, distinct contraction/reversal/forced-direction events, generator and constraint rankings, the Tumut 3 case study and a compact production feature recommendation.
 
 - [Results, data and feature engineering](docs/RESULTS_DATA_AND_FEATURES.md): completed results, raw-to-model transformations, publication-aware network state, feature importance and a precise seasonal/diurnal/duck-curve audit.
 - [Methods and research](docs/METHODS_AND_RESEARCH.md): literature reviewed, industry definitions, data transformations, model features/settings, restriction probabilities and limitations.

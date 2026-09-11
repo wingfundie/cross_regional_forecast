@@ -5,9 +5,11 @@ import zipfile
 from pathlib import Path
 
 import numpy as np
+import pandas as pd
 
-from nemic.constraint_features import canonical_bound, canonicalise_inequality, envelope
+from nemic.constraint_features import bound_from_solution, canonical_bound, canonicalise_inequality, envelope
 from nemic.constraint_ingest import load_config, validate_expanded_total
+from nemic.vni_influence_study import _episode_onset
 
 
 class ConstraintFeatureMath(unittest.TestCase):
@@ -35,6 +37,16 @@ class ConstraintFeatureMath(unittest.TestCase):
                            {"direction": "lower", "bound": -400}])
         self.assertEqual(result["conditional_lower"], -400)
         self.assertEqual(result["lower_switch_gap"], 0)
+
+    def test_published_lhs_isolates_current_conditional_bound(self):
+        # LHS = 1*flow + other terms = 700. RHS 900 leaves 200 MW room.
+        self.assertEqual(bound_from_solution(500, 900, 700, 1), 700)
+        # A negative IC factor converts the same slack into a lower bound.
+        self.assertEqual(bound_from_solution(-100, 900, 700, -2), -200)
+
+    def test_contiguous_event_is_counted_once(self):
+        mask = pd.Series([False, True, True, False, True, False])
+        self.assertEqual(_episode_onset(mask).tolist(), [False, True, False, False, True, False])
 
 
 class DownloadPolicy(unittest.TestCase):

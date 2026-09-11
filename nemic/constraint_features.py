@@ -35,6 +35,11 @@ def canonicalise_inequality(kind, rhs, factors):
     return "<=", multiplier * float(rhs), {k: multiplier * float(v) for k, v in factors.items()}
 
 
+def bound_from_solution(flow, rhs, lhs, ic_factor):
+    """Isolate the target IC using AEMO's published solved LHS."""
+    return np.asarray(flow) + (np.asarray(rhs) - np.asarray(lhs)) / np.asarray(ic_factor)
+
+
 def envelope(bounds):
     frame = pd.DataFrame(bounds)
     upper = np.sort(frame.loc[frame.direction.eq("upper"), "bound"].dropna().to_numpy())
@@ -88,94 +93,112 @@ def _matrix(frame, row, column, value, rows, columns):
 def build(config_path=CONFIG):
     config = load_config(config_path)
     start, end = pd.Timestamp(config["start"]), pd.Timestamp(config["end"])
-    dependencies = json.loads((PILOT / "dependency_ids.json").read_text())
-    constraints, units = dependencies["constraints"], dependencies["duids"]
-
-    ic = _latest_version(pd.read_parquet(TABLES / "SPDINTERCONNECTORCONSTRAINT.parquet"), end)
-    ic = _num(ic, ["FACTOR"])
-    ic = ic[ic.GENCONID.isin(constraints)]
-    target = ic[ic.INTERCONNECTORID.eq(config["interconnector"])].copy()
-    target = target.sort_values(["GENCONID", "EFFECTIVEDATE", "VERSIONNO"]).drop_duplicates("GENCONID", keep="last")
-    constraints = sorted(set(target.GENCONID))
-
-    cp = _latest_version(pd.read_parquet(TABLES / "SPDCONNECTIONPOINTCONSTRAINT.parquet"), end)
-    cp = _num(cp, ["FACTOR"])
-    cp = cp[cp.GENCONID.isin(constraints) & cp.BIDTYPE.fillna("ENERGY").eq("ENERGY")]
-    resolved = pd.read_parquet(TABLES / "VNI_ENERGY_TERMS.parquet")
-    resolved = _num(resolved, ["FACTOR"])
-    resolved = _latest_version(resolved, end)
-    resolved = resolved[resolved.GENCONID.isin(constraints)]
-
-    dispatch = _physical(pd.read_parquet(TABLES / "DISPATCHLOAD.parquet"), "DUID")
-    dispatch = dispatch[(dispatch.time >= start) & (dispatch.time <= end)]
-    _num(dispatch, ["TOTALCLEARED", "AVAILABILITY", "RAMPUPRATE", "RAMPDOWNRATE"])
     times = pd.date_range(start.ceil("5min"), end.floor("5min"), freq="5min")
-    units = sorted(set(units) & set(dispatch.DUID))
-    cleared = dispatch.pivot(index="time", columns="DUID", values="TOTALCLEARED").reindex(index=times, columns=units)
-    availability = dispatch.pivot(index="time", columns="DUID", values="AVAILABILITY").reindex(index=times, columns=units)
-    ramp_up = dispatch.pivot(index="time", columns="DUID", values="RAMPUPRATE").reindex(index=times, columns=units)
-    ramp_down = dispatch.pivot(index="time", columns="DUID", values="RAMPDOWNRATE").reindex(index=times, columns=units)
 
-    b = _matrix(resolved.dropna(subset=["DUID"]), "GENCONID", "DUID", "FACTOR", constraints, units)
-    a = target.set_index("GENCONID").reindex(constraints).FACTOR.to_numpy(dtype="float64")
+    solution = _physical(pd.read_parquet(TABLES / "DISPATCHCONSTRAINT.parquet"), "CONSTRAINTID")
+    solution = solution[solution.time.between(start, end)].copy()
+    _num(solution, ["RHS", "LHS", "MARGINALVALUE", "VIOLATIONDEGREE", "GENCONID_VERSIONNO"])
+    solution["EFFECTIVEDATE"] = pd.to_datetime(solution.GENCONID_EFFECTIVEDATE, errors="coerce")
+    solution["VERSIONNO"] = solution.GENCONID_VERSIONNO
+
+    ic_factors = pd.read_parquet(TABLES / "SPDINTERCONNECTORCONSTRAINT.parquet")
+    _num(ic_factors, ["FACTOR", "VERSIONNO"])
+    ic_factors["EFFECTIVEDATE"] = pd.to_datetime(ic_factors.EFFECTIVEDATE, errors="coerce")
+    target = (ic_factors[ic_factors.INTERCONNECTORID.eq(config["interconnector"])]
+              [["GENCONID", "EFFECTIVEDATE", "VERSIONNO", "FACTOR"]]
+              .drop_duplicates().rename(columns={"GENCONID": "CONSTRAINTID", "FACTOR": "ic_factor"}))
+    solution = solution.merge(target, on=["CONSTRAINTID", "EFFECTIVEDATE", "VERSIONNO"], how="left")
+    solution["version_key"] = (solution.CONSTRAINTID.astype(str) + "|" +
+        solution.EFFECTIVEDATE.dt.strftime("%Y-%m-%d %H:%M:%S") + "|" + solution.VERSIONNO.astype(str))
+
+    observed = pd.read_parquet(PROCESSED / "ic_5min.parquet")
+    observed = observed[observed.INTERCONNECTORID.eq(config["interconnector"])].set_index("time")
+    solution["flow"] = solution.time.map(observed.flow)
+    solution["bound"] = bound_from_solution(solution.flow, solution.RHS, solution.LHS, solution.ic_factor)
+    solution["direction"] = np.where(solution.ic_factor > 0, "upper", "lower")
+    solution["complete"] = (solution[["flow", "RHS", "LHS", "ic_factor"]].notna().all(axis=1)
+                            & solution.ic_factor.abs().gt(1e-8))
+
+    versions = (solution[["version_key", "CONSTRAINTID", "EFFECTIVEDATE", "VERSIONNO", "ic_factor"]]
+                .dropna(subset=["version_key", "ic_factor"]).drop_duplicates("version_key")
+                .sort_values("version_key").reset_index(drop=True))
+    version_keys = versions.version_key.tolist()
+    units_frame = _physical(pd.read_parquet(TABLES / "DISPATCHLOAD.parquet"), "DUID")
+    units_frame = units_frame[units_frame.time.between(start, end)].copy()
+    _num(units_frame, ["TOTALCLEARED", "AVAILABILITY", "RAMPUPRATE", "RAMPDOWNRATE"])
+    units = sorted(units_frame.DUID.unique())
+    cleared = units_frame.pivot(index="time", columns="DUID", values="TOTALCLEARED").reindex(index=times, columns=units)
+    availability = units_frame.pivot(index="time", columns="DUID", values="AVAILABILITY").reindex(index=times, columns=units)
+    ramp_up = units_frame.pivot(index="time", columns="DUID", values="RAMPUPRATE").reindex(index=times, columns=units)
+    ramp_down = units_frame.pivot(index="time", columns="DUID", values="RAMPDOWNRATE").reindex(index=times, columns=units)
+
+    # A dispatch unit is structurally zero before its first published row in the
+    # study month; missing values inside its observed span remain missing.
+    for unit in units:
+        valid = cleared[unit].notna()
+        if valid.any():
+            first, last = valid[valid].index[0], valid[valid].index[-1]
+            outside = (cleared.index < first) | (cleared.index > last)
+            for frame in [cleared, availability, ramp_up, ramp_down]:
+                frame.loc[outside, unit] = 0.0
+
+    cp_factors = pd.read_parquet(TABLES / "SPDCONNECTIONPOINTCONSTRAINT.parquet")
+    _num(cp_factors, ["FACTOR", "VERSIONNO"])
+    cp_factors["EFFECTIVEDATE"] = pd.to_datetime(cp_factors.EFFECTIVEDATE, errors="coerce")
+    cp_factors = cp_factors[cp_factors.BIDTYPE.fillna("ENERGY").eq("ENERGY")]
+    cp_factors = cp_factors.merge(
+        units_frame[["DUID", "CONNECTIONPOINTID"]].drop_duplicates(), on="CONNECTIONPOINTID", how="left")
+    cp_factors["version_key"] = (cp_factors.GENCONID.astype(str) + "|" +
+        cp_factors.EFFECTIVEDATE.dt.strftime("%Y-%m-%d %H:%M:%S") + "|" + cp_factors.VERSIONNO.astype(str))
+    terms = cp_factors[cp_factors.version_key.isin(version_keys) & cp_factors.DUID.isin(units)].copy()
+    unit_sensitivity = (terms.groupby(["version_key", "GENCONID", "DUID"], as_index=False).FACTOR.sum()
+                        .merge(versions[["version_key", "ic_factor"]], on="version_key", how="left"))
+    unit_sensitivity["sensitivity"] = -unit_sensitivity.FACTOR / unit_sensitivity.ic_factor
+    unit_sensitivity.to_parquet(PILOT / "unit_sensitivities.parquet", index=False, compression="zstd")
+    movements = units_frame[["time", "DUID", "CONNECTIONPOINTID", "TOTALCLEARED"]].copy()
+    movements = movements.sort_values(["DUID", "time"])
+    movements["delta_30m"] = movements.groupby("DUID").TOTALCLEARED.diff(6)
+    movements.to_parquet(PILOT / "unit_movements.parquet", index=False, compression="zstd")
+    b = _matrix(terms, "version_key", "DUID", "FACTOR", version_keys, units)
+    a = versions.set_index("version_key").reindex(version_keys).ic_factor.to_numpy(dtype="float64")
     sensitivity = -b / a[:, None]
     p = cleared.to_numpy(dtype="float64")
     delta = cleared.diff(6).to_numpy(dtype="float64")
-    p_zero = np.nan_to_num(p)
     delta_zero = np.nan_to_num(delta)
-    gen_lhs = p_zero @ b.T
     bound_move = delta_zero @ sensitivity.T
     pos, neg = np.maximum(delta_zero, 0), np.maximum(-delta_zero, 0)
     upper_tight = pos @ np.maximum(-sensitivity, 0).T + neg @ np.maximum(sensitivity, 0).T
     upper_relief = pos @ np.maximum(sensitivity, 0).T + neg @ np.maximum(-sensitivity, 0).T
     lower_tight, lower_relief = upper_relief, upper_tight
+    missing_pressure = np.isnan(delta).astype("int16") @ (b != 0).T.astype("int16")
 
     up = np.minimum(np.maximum(availability.to_numpy() - p, 0),
                     np.maximum(ramp_up.to_numpy(), 0) * 30)
     down = np.minimum(np.maximum(p, 0), np.maximum(ramp_down.to_numpy(), 0) * 30)
-    up, down = np.nan_to_num(up), np.nan_to_num(down)
-    upper_flex = up @ np.maximum(sensitivity, 0).T + down @ np.maximum(-sensitivity, 0).T
-    lower_flex = up @ np.maximum(-sensitivity, 0).T + down @ np.maximum(sensitivity, 0).T
+    upper_flex = np.nan_to_num(up) @ np.maximum(sensitivity, 0).T + np.nan_to_num(down) @ np.maximum(-sensitivity, 0).T
+    lower_flex = np.nan_to_num(up) @ np.maximum(-sensitivity, 0).T + np.nan_to_num(down) @ np.maximum(sensitivity, 0).T
 
-    other_ic = ic[~ic.INTERCONNECTORID.eq(config["interconnector"]) & ic.GENCONID.isin(constraints)]
-    ic_flow = pd.read_parquet(PROCESSED / "ic_5min.parquet")
-    ic_flow = ic_flow.pivot(index="time", columns="INTERCONNECTORID", values="flow").reindex(times)
-    other_ids = sorted(set(other_ic.INTERCONNECTORID) & set(ic_flow.columns))
-    ic_b = _matrix(other_ic, "GENCONID", "INTERCONNECTORID", "FACTOR", constraints, other_ids)
-    other_lhs = np.nan_to_num(ic_flow.reindex(columns=other_ids).to_numpy()) @ ic_b.T
-
-    region = _latest_version(pd.read_parquet(TABLES / "SPDREGIONCONSTRAINT.parquet"), end)
-    region = region[region.GENCONID.isin(constraints)]
-    has_region = set(region.GENCONID)
-    unmapped = set(resolved.loc[resolved.DUID.isna(), "GENCONID"])
-    static_complete = np.array([c not in has_region and c not in unmapped for c in constraints])
-    missing_units = np.isnan(p).astype("int16") @ (b != 0).T.astype("int16")
-    missing_ics = np.isnan(ic_flow.reindex(columns=other_ids).to_numpy()).astype("int16") @ (ic_b != 0).T.astype("int16")
-
-    solution = _physical(pd.read_parquet(TABLES / "DISPATCHCONSTRAINT.parquet"), "CONSTRAINTID")
-    solution = solution[(solution.time >= start) & (solution.time <= end) & solution.CONSTRAINTID.isin(constraints)]
-    _num(solution, ["RHS", "MARGINALVALUE", "VIOLATIONDEGREE"])
     ti = pd.Series(np.arange(len(times)), index=times)
-    ci = pd.Series(np.arange(len(constraints)), index=constraints)
+    vi = pd.Series(np.arange(len(version_keys)), index=version_keys)
     solution["ti"] = solution.time.map(ti)
-    solution["ci"] = solution.CONSTRAINTID.map(ci)
-    solution = solution.dropna(subset=["ti", "ci", "RHS"])
-    row_t = solution.ti.astype(int).to_numpy()
-    row_c = solution.ci.astype(int).to_numpy()
-    lhs = gen_lhs[row_t, row_c] + other_lhs[row_t, row_c]
-    solution["bound"] = (solution.RHS.to_numpy() - lhs) / a[row_c]
-    solution["direction"] = np.where(a[row_c] > 0, "upper", "lower")
-    solution["complete"] = static_complete[row_c] & (missing_units[row_t, row_c] == 0) & (missing_ics[row_t, row_c] == 0)
-    solution["bound_move"] = bound_move[row_t, row_c]
-    solution["upper_tightening"] = upper_tight[row_t, row_c]
-    solution["upper_relief"] = upper_relief[row_t, row_c]
-    solution["lower_tightening"] = lower_tight[row_t, row_c]
-    solution["lower_relief"] = lower_relief[row_t, row_c]
-    solution["upper_flex"] = upper_flex[row_t, row_c]
-    solution["lower_flex"] = lower_flex[row_t, row_c]
+    solution["vi"] = solution.version_key.map(vi)
+    eligible = solution.ti.notna() & solution.vi.notna()
+    row_t = solution.loc[eligible, "ti"].astype(int).to_numpy()
+    row_v = solution.loc[eligible, "vi"].astype(int).to_numpy()
+    for name, matrix in [("bound_move", bound_move), ("upper_tightening", upper_tight),
+                         ("upper_relief", upper_relief), ("lower_tightening", lower_tight),
+                         ("lower_relief", lower_relief), ("upper_flex", upper_flex),
+                         ("lower_flex", lower_flex)]:
+        solution.loc[eligible, name] = matrix[row_t, row_v]
+    solution["pressure_complete"] = False
+    solution.loc[eligible, "pressure_complete"] = missing_pressure[row_t, row_v] == 0
+
     meta = pd.read_parquet(TABLES / "GENCONDATA.parquet")
-    meta = meta.sort_values(["GENCONID", "EFFECTIVEDATE", "VERSIONNO"]).drop_duplicates("GENCONID", keep="last")
-    solution = solution.merge(meta[["GENCONID", "LIMITTYPE", "DESCRIPTION"]], left_on="CONSTRAINTID", right_on="GENCONID", how="left")
+    _num(meta, ["VERSIONNO"])
+    meta["EFFECTIVEDATE"] = pd.to_datetime(meta.EFFECTIVEDATE, errors="coerce")
+    meta = meta[["GENCONID", "EFFECTIVEDATE", "VERSIONNO", "LIMITTYPE", "DESCRIPTION"]].drop_duplicates()
+    solution = solution.merge(meta, left_on=["CONSTRAINTID", "EFFECTIVEDATE", "VERSIONNO"],
+                              right_on=["GENCONID", "EFFECTIVEDATE", "VERSIONNO"], how="left")
     solution.to_parquet(PILOT / "equation_state.parquet", index=False, compression="zstd")
 
     flow = pd.read_parquet(PROCESSED / "ic_5min.parquet")
@@ -194,10 +217,10 @@ def build(config_path=CONFIG):
             "conditional_lower": lo0.bound if lo0 is not None else np.nan,
             "upper_room": up0.bound - f if up0 is not None else np.nan,
             "lower_room": f - lo0.bound if lo0 is not None else np.nan,
-            "upper_gen_tightening": up0.upper_tightening if up0 is not None else np.nan,
-            "upper_gen_relief": up0.upper_relief if up0 is not None else np.nan,
-            "lower_gen_tightening": lo0.lower_tightening if lo0 is not None else np.nan,
-            "lower_gen_relief": lo0.lower_relief if lo0 is not None else np.nan,
+            "upper_gen_tightening": up0.upper_tightening if up0 is not None and up0.pressure_complete else np.nan,
+            "upper_gen_relief": up0.upper_relief if up0 is not None and up0.pressure_complete else np.nan,
+            "lower_gen_tightening": lo0.lower_tightening if lo0 is not None and lo0.pressure_complete else np.nan,
+            "lower_gen_relief": lo0.lower_relief if lo0 is not None and lo0.pressure_complete else np.nan,
             "upper_switch_gap": upper.iloc[1].bound - up0.bound if len(upper) > 1 else np.nan,
             "lower_switch_gap": lo0.bound - lower.iloc[1].bound if len(lower) > 1 else np.nan,
             "upper_family": up0.LIMITTYPE if up0 is not None else "UNKNOWN",
@@ -206,9 +229,12 @@ def build(config_path=CONFIG):
             "lower_available_relief": lo0.lower_flex if lo0 is not None else np.nan,
             "upper_candidate_count": len(upper), "lower_candidate_count": len(lower),
             "partial_candidate_fraction": 1 - len(trusted) / max(len(group), 1),
+            "pressure_complete_fraction": float(group.pressure_complete.mean()),
             "envelope_inconsistent": bool(up0 is not None and lo0 is not None and lo0.bound > up0.bound),
             "upper_constraint": up0.CONSTRAINTID if up0 is not None else None,
             "lower_constraint": lo0.CONSTRAINTID if lo0 is not None else None,
+            "upper_version_key": up0.version_key if up0 is not None else None,
+            "lower_version_key": lo0.version_key if lo0 is not None else None,
         })
     features = pd.DataFrame(rows).set_index("time").reindex(times)
     features["upper_pressure_change"] = (features.upper_gen_tightening - features.upper_gen_relief).diff(6)
@@ -222,16 +248,30 @@ def build(config_path=CONFIG):
     f30.reset_index().to_parquet(PILOT / "constraint_features_30min.parquet", index=False, compression="zstd")
 
     movement = np.nanmean(np.abs(delta), axis=0)
-    scores = np.nansum(np.abs(sensitivity) * movement[None, :], axis=0)
+    active_frequency = np.array([(solution.version_key.eq(key)).sum() for key in version_keys], dtype="float64")
+    scores = np.nansum(np.abs(sensitivity) * active_frequency[:, None], axis=0) * movement
     discovery = pd.DataFrame({"DUID": units, "typical_30min_movement": movement, "influence_score": scores})
     discovery.sort_values("influence_score", ascending=False).to_csv(PILOT / "generator_discovery.csv", index=False)
+    observed_audit = observed.reindex(features.index)
+    upper_valid = features.conditional_upper.notna() & observed_audit.export.notna()
+    lower_valid = features.conditional_lower.notna() & observed_audit["import"].notna()
     audit = {"five_minute_rows": len(features), "equation_state_rows": len(solution),
              "trusted_equation_fraction": float(solution.complete.mean()),
+             "exact_version_match_fraction": float(solution.ic_factor.notna().mean()),
+             "pressure_complete_fraction": float(solution.pressure_complete.mean()),
              "upper_coverage": float(features.conditional_upper.notna().mean()),
              "lower_coverage": float(features.conditional_lower.notna().mean()),
+             "upper_reconstruction_mae_mw": float((features.loc[upper_valid, "conditional_upper"] -
+                                                     observed_audit.loc[upper_valid, "export"]).abs().mean()),
+             "lower_reconstruction_mae_mw": float((-features.loc[lower_valid, "conditional_lower"] -
+                                                     observed_audit.loc[lower_valid, "import"]).abs().mean()),
+             "upper_setter_match_fraction": float((features.loc[upper_valid, "upper_constraint"] ==
+                                                     observed_audit.loc[upper_valid, "EXPORTGENCONID"]).mean()),
+             "lower_setter_match_fraction": float((features.loc[lower_valid, "lower_constraint"] ==
+                                                     observed_audit.loc[lower_valid, "IMPORTGENCONID"]).mean()),
              "inconsistent_envelopes": int(features.envelope_inconsistent.eq(True).sum()),
              "tumut3_present": "TUMUT3" in units,
-             "tumut3_constraint_count": int(resolved[resolved.DUID.eq("TUMUT3")].GENCONID.nunique())}
+             "tumut3_constraint_count": int(unit_sensitivity[unit_sensitivity.DUID.eq("TUMUT3")].GENCONID.nunique())}
     dump(PILOT / "feature_audit.json", audit)
     return f30, audit
 

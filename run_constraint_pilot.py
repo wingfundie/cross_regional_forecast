@@ -7,6 +7,7 @@ ROOT = Path(__file__).resolve().parent
 STEPS = [
     ["-m", "nemic.constraint_ingest", "all"],
     ["-m", "nemic.constraint_features"],
+    ["-m", "nemic.vni_influence_study"],
     ["-m", "unittest", "tests.test_constraint_features", "-v"],
 ]
 

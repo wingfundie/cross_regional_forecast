@@ -1,17 +1,18 @@
 {
   "inputs_sha256": {
-    "README.md": "6ff0b3e5c447ebd33b55effb226b9f5304fa6b147a0b3988ab2c46156b311bc3",
+    "README.md": "3ca5a553a4da066c3702af4dfb93b7ad083ced92c8d34b43e4be18f99e562454",
     "BACKTEST_REPORT.md": "9bc46e93214b75bbe40efd51df91528b21ebdca4a1eabe1651dbd248b56b67c8",
     "docs/RESULTS_DATA_AND_FEATURES.md": "9b6c7ffffa760d4b0a52d35558e952c48f1234e8675fad802e697d431b24f4fc",
     "docs/METHODS_AND_RESEARCH.md": "8719904b38d46c79044f697bebb64ebab51a740bcdaf43e68d86ae50ffbac48c",
     "docs/BACKTEST_PROTOCOL.md": "1b550aaa81f6f39b027301276a2efe7ca74775d75891d98971930d3eeedf9654",
     "docs/IMPROVEMENT_ROADMAP.md": "e2051f597b088fcf395e099dfc35c7b2306799423e36c045a1e2b80f60bc7ddf",
-    "docs/CONSTRAINT_NETWORK_FEATURES.md": "733c863898322b946107b6774fe3f56e9c2f512b9236c7163aeea74c744b0a5e",
-    "docs/CONSTRAINT_FEATURE_PILOT.md": "8bbf6f48392fcff7d4a16467db793c9b935fb4d2234cc7a4c2af1a2a69001452",
+    "docs/CONSTRAINT_NETWORK_FEATURES.md": "c0ccfa83d879429e6e2b82458e79ad31b85580d50e885c73baf25c163779ee2d",
+    "docs/CONSTRAINT_FEATURE_PILOT.md": "b0aa654ae50c1b0640b307dc0fbb2155baa42bdc8e2e6f1b8ffedda03650aecc",
+    "docs/VNI_GENERATOR_INFLUENCE_STUDY.md": "3c225691ac2a10a363e1980d1de700b37828b0d63335355ac33cf96b706e6139",
     "BUILD_PLAN.md": "4475f428ce7f765b630f3911de1c4f3c6615193c6e33cbb7e840e84017bf7bf6",
     "docs/chart_data.json": "ec2882e63ddd2ecfd94c3e93979c8ad7ed795ac32cf09a374127911fb2ab827a"
   },
-  "generator_sha256": "5125bec8bec4fc306d971a68a05e1ae6dfbb08c3f237bebb884191bd5afec001",
+  "generator_sha256": "489c5f8cf116b5dfae11f008881f42be27a76d55d5178aa1eaa55b16b1d56062",
   "markdown_version": "3.10.3",
   "command": "python scripts/build_docs_html.py",
   "offline": true

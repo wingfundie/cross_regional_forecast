@@ -12,7 +12,7 @@ from urllib.parse import unquote, urlparse
 
 import pandas as pd
 
-from .common import DATA, ROOT, dump, session
+from .common import DATA, PROCESSED, ROOT, dump, session
 
 CONFIG = ROOT / "configs" / "constraint_vni_pilot.json"
 PILOT = DATA / "constraint_pilot"
@@ -34,7 +34,7 @@ def load_config(path=CONFIG):
             raise ValueError("Only explicit NEMWEB HTTPS URLs are allowed")
         if f"#{entry['table']}#" not in name or not name.lower().endswith(".zip"):
             raise ValueError(f"URL is not the declared table archive: {name}")
-        if entry["table"] not in allowed_tables or entry["phase"] not in {"static", "interval"}:
+        if entry["table"] not in allowed_tables or entry["phase"] not in {"static", "supplement", "interval"}:
             raise ValueError(f"Invalid manifest entry: {entry}")
     total = sum(int(x["expected_bytes"]) for x in files)
     if total > int(config["limits"]["pilot_compressed_bytes"]):
@@ -138,16 +138,19 @@ def _table_rows(path, table, keep=None, value_filter=None):
 
 
 def extract_static(config):
-    outputs = {}
+    outputs, frames = {}, {}
     for entry in config["files"]:
-        if entry["phase"] != "static":
+        if entry["phase"] not in {"static", "supplement"}:
             continue
         path = download_entry(entry, config["limits"])
         frame = _table_rows(path, entry["table"])
-        out = TABLES / f"{entry['table']}.parquet"
+        frames.setdefault(entry["table"], []).append(frame)
+    for table, parts in frames.items():
+        frame = pd.concat(parts, ignore_index=True).drop_duplicates()
+        out = TABLES / f"{table}.parquet"
         out.parent.mkdir(parents=True, exist_ok=True)
         frame.to_parquet(out, index=False, compression="zstd")
-        outputs[entry["table"]] = {"rows": len(frame), "columns": list(frame)}
+        outputs[table] = {"rows": len(frame), "columns": list(frame)}
     dump(PILOT / "static_extraction.json", outputs)
     return outputs
 
@@ -158,7 +161,14 @@ def discover_dependencies(config):
     unit_terms = pd.read_parquet(TABLES / "SPDCONNECTIONPOINTCONSTRAINT.parquet")
     details = pd.read_parquet(TABLES / "DUDETAILSUMMARY.parquet")
     ic_terms = ic_terms[ic_terms["INTERCONNECTORID"].eq(interconnector)].copy()
-    constraint_ids = sorted(ic_terms["GENCONID"].dropna().unique())
+    constraint_ids = set(ic_terms["GENCONID"].dropna().unique())
+    observed = pd.read_parquet(PROCESSED / "ic_5min.parquet")
+    observed = observed[
+        observed.INTERCONNECTORID.eq(interconnector)
+        & observed.time.between(pd.Timestamp(config["start"]), pd.Timestamp(config["end"]))
+    ]
+    setters = set(observed.EXPORTGENCONID.dropna()) | set(observed.IMPORTGENCONID.dropna())
+    constraint_ids = sorted(constraint_ids | setters)
     unit_terms = unit_terms[
         unit_terms["GENCONID"].isin(constraint_ids)
         & unit_terms["BIDTYPE"].fillna("ENERGY").eq("ENERGY")
@@ -179,6 +189,8 @@ def discover_dependencies(config):
     audit = {
         "interconnector": interconnector,
         "constraint_count": len(constraint_ids),
+        "observed_setter_count": len(setters),
+        "setters_missing_from_base_factor_archive": sorted(setters - set(ic_terms.GENCONID)),
         "energy_connection_point_count": int(unit_terms.CONNECTIONPOINTID.nunique()),
         "mapped_duid_count": len(duids),
         "mapping_rows_changed_after_pilot_end": int((active.LASTCHANGED > end).sum()),
@@ -190,15 +202,17 @@ def discover_dependencies(config):
     dump(PILOT / "dependency_audit.json", audit)
     resolved.to_parquet(TABLES / "VNI_ENERGY_TERMS.parquet", index=False, compression="zstd")
     dump(PILOT / "dependency_ids.json", {"constraints": constraint_ids, "duids": duids})
-    return constraint_ids, duids
+    connection_points = sorted(unit_terms["CONNECTIONPOINTID"].dropna().unique())
+    return constraint_ids, duids, connection_points
 
 
-def extract_interval(config):
-    constraint_ids, duids = discover_dependencies(config)
+def extract_interval(config, only=None):
+    constraint_ids, duids, connection_points = discover_dependencies(config)
     outputs = {}
     keep = {
-        "DISPATCHCONSTRAINT": ["SETTLEMENTDATE", "RUNNO", "CONSTRAINTID", "RHS", "MARGINALVALUE",
-                               "VIOLATIONDEGREE", "INTERVENTION", "LASTCHANGED"],
+        "DISPATCHCONSTRAINT": ["SETTLEMENTDATE", "RUNNO", "CONSTRAINTID", "RHS", "LHS",
+                               "MARGINALVALUE", "VIOLATIONDEGREE", "INTERVENTION", "LASTCHANGED",
+                               "GENCONID_EFFECTIVEDATE", "GENCONID_VERSIONNO"],
         "DISPATCHLOAD": ["SETTLEMENTDATE", "RUNNO", "DUID", "CONNECTIONPOINTID", "DISPATCHMODE", "AGCSTATUS", "INITIALMW",
                          "TOTALCLEARED", "RAMPDOWNRATE", "RAMPUPRATE", "AVAILABILITY",
                          "INTERVENTION", "LASTCHANGED"],
@@ -208,19 +222,23 @@ def extract_interval(config):
             continue
         path = download_entry(entry, config["limits"])
         table = entry["table"]
+        if only and table not in set(only):
+            continue
         if table == "DISPATCHCONSTRAINT":
             wanted = set(constraint_ids)
             predicate = lambda row: row.get("CONSTRAINTID", row.get("GENCONID")) in wanted
         elif table == "DISPATCHLOAD":
             wanted = set(duids)
-            predicate = lambda row: row.get("DUID") in wanted
+            wanted_points = set(connection_points)
+            predicate = lambda row: row.get("DUID") in wanted or row.get("CONNECTIONPOINTID") in wanted_points
         else:
             raise ValueError(f"No scoped filter for interval table {table}")
         frame = _table_rows(path, table, keep=keep[table], value_filter=predicate)
         out = TABLES / f"{table}.parquet"
         frame.to_parquet(out, index=False, compression="zstd")
         outputs[table] = {"rows": len(frame), "columns": list(frame),
-                          "filter_values": len(wanted)}
+                          "filter_values": len(wanted),
+                          "connection_point_filter_values": len(connection_points) if table == "DISPATCHLOAD" else 0}
     dump(PILOT / "interval_extraction.json", outputs)
     return outputs
 
@@ -246,7 +264,7 @@ def validate_expanded_total(paths, limit):
 def run(phase="static", config_path=CONFIG):
     config = load_config(config_path)
     audit_manifest(config)
-    selected = [x for x in config["files"] if phase == "all" or x["phase"] == "static"]
+    selected = [x for x in config["files"] if phase == "all" or x["phase"] in {"static", "supplement"}]
     paths = [download_entry(x, config["limits"]) for x in selected] if phase != "audit" else []
     if paths:
         validate_expanded_total(paths, config["limits"]["batch_decompressed_bytes"])
