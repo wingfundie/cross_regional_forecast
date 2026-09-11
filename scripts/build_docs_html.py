@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PAGES = [
     ('overview', 'README.md', 'Overview'),
     ('results', 'BACKTEST_REPORT.md', 'Executed results'),
+    ('features', 'docs/RESULTS_DATA_AND_FEATURES.md', 'Results, data and features'),
     ('methods', 'docs/METHODS_AND_RESEARCH.md', 'Methods and research'),
     ('backtest', 'docs/BACKTEST_PROTOCOL.md', 'Backtest protocol'),
     ('roadmap', 'docs/IMPROVEMENT_ROADMAP.md', 'Improvement roadmap'),

@@ -2,6 +2,8 @@
 
 This document describes the implemented INTERFLOW experiment, audited against the source and saved results on 11 September 2026. Read it with the [backtest protocol](BACKTEST_PROTOCOL.md) and [executed results](../BACKTEST_REPORT.md). The [build plan](../BUILD_PLAN.md) records the agreed scope; where a proposal differs from execution, this document and the executable implementation describe the run.
 
+The companion [results, data and feature-engineering guide](RESULTS_DATA_AND_FEATURES.md) gives a field-level network-state description and audits diurnal, annual, duck-curve and ramp handling.
+
 ## 1. Question and interpretation
 
 Can public regional demand, renewable generation, temperature/weather and recently observed network conditions predict AEMO's reported interconnector limits and dispatch flows at half-hour resolution, from 30 minutes to seven days ahead?

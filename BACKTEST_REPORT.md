@@ -1,6 +1,6 @@
 # INTERFLOW — NEM interconnector conditional backtest
 
-Executed 2026-09-11 00:28 UTC. Local dashboard: http://127.0.0.1:8050
+Executed 2026-09-11 01:21 UTC. Local dashboard: http://127.0.0.1:8050
 
 ## What was completed
 
@@ -81,6 +81,8 @@ This comparison is deliberately asymmetric: AEMO used forecast inputs, while our
 ## Design and leakage controls
 
 See the [improvement roadmap](docs/IMPROVEMENT_ROADMAP.md) for prioritised additional data and untested modelling proposals, with evaluation requirements.
+
+See [Results, data and feature engineering](docs/RESULTS_DATA_AND_FEATURES.md) for the complete feature inventory, network-state construction and audit of diurnal, seasonal, duck-curve and ramp handling.
 
 For the full research rationale, model specifications and data definitions, see [Methods and research](docs/METHODS_AND_RESEARCH.md). For exact split boundaries, metrics, benchmark alignment and reproduction steps, see [Backtest protocol](docs/BACKTEST_PROTOCOL.md).
 

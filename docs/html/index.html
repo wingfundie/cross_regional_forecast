@@ -7,7 +7,7 @@ h1,h2,h3{line-height:1.25;scroll-margin-top:20px}article h1{font-size:32px}h2{ma
 .table-wrap{overflow-x:auto;margin:24px 0}table{border-collapse:collapse;width:100%;font-size:14px;min-width:650px}th,td{text-align:left;vertical-align:top;border:1px solid #dce2ed;padding:11px}th{background:#eaf0f9}tr:nth-child(even){background:#f8faff}
 pre{background:#edf1f7;padding:16px;overflow:auto;border-radius:6px}code{font-size:.9em}blockquote{border-left:4px solid #5980b5;margin-left:0;padding-left:18px}.source{font-size:13px;color:#63718a}.top{font-size:13px}
 @media print{body{background:white}header{padding:20px}nav{display:none}main,article{padding:0;border:0}article{break-before:page}.table-wrap{overflow:visible}table{min-width:0;font-size:10px}a{color:inherit}}
-</style></head><body><header id="top"><span>NEM · INTERCONNECTOR FORECASTING</span><h1>INTERFLOW<br>Research handbook</h1><p>Methods, evidence and next experiments for six interconnectors. Historical data ends 1 September 2026 (interval-ending NEM time). The completed backtest uses realised future inputs and does not establish operational forecast accuracy.</p><nav><a href="#charts">Backtest charts</a><a href="#overview">Overview</a><a href="#results">Executed results</a><a href="#methods">Methods and research</a><a href="#backtest">Backtest protocol</a><a href="#roadmap">Improvement roadmap</a><a href="#plan">Original build plan</a></nav></header><main><article id="charts"><h1>Backtest charts</h1><p>March–August 2026 test · six links · realised future inputs. Interactive figures use the saved completed-run scores. Hover for values; use the chart toolbar to export an image.</p><h2>01 · Flow forecast improvement versus persistence</h2><div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+</style></head><body><header id="top"><span>NEM · INTERCONNECTOR FORECASTING</span><h1>INTERFLOW<br>Research handbook</h1><p>Methods, evidence and next experiments for six interconnectors. Historical data ends 1 September 2026 (interval-ending NEM time). The completed backtest uses realised future inputs and does not establish operational forecast accuracy.</p><nav><a href="#charts">Backtest charts</a><a href="#overview">Overview</a><a href="#results">Executed results</a><a href="#features">Results, data and features</a><a href="#methods">Methods and research</a><a href="#backtest">Backtest protocol</a><a href="#roadmap">Improvement roadmap</a><a href="#plan">Original build plan</a></nav></header><main><article id="charts"><h1>Backtest charts</h1><p>March–August 2026 test · six links · realised future inputs. Interactive figures use the saved completed-run scores. Hover for values; use the chart toolbar to export an image.</p><h2>01 · Flow forecast improvement versus persistence</h2><div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
         <script type="text/javascript">/**
 * plotly.js v3.0.1
 * Copyright 2012-2025, Plotly, Inc.
@@ -3901,8 +3901,9 @@ return Plotly;
 <p><a href="#roadmap">Improvement roadmap</a>: prioritised extra data, candidate methods, source/access caveats and experiments to establish improvement.</p>
 </li>
 <li>
-<p><a href="#methods">Methods and research</a>: literature reviewed, industry definitions, data transformations, model features/settings, restriction probabilities and limitations.</p>
+<p><a href="#features">Results, data and feature engineering</a>: completed results, raw-to-model transformations, publication-aware network state, feature importance and a precise seasonal/diurnal/duck-curve audit.</p>
 </li>
+<li><a href="#methods">Methods and research</a>: literature reviewed, industry definitions, data transformations, model features/settings, restriction probabilities and limitations.</li>
 <li><a href="#backtest">Backtest protocol</a>: exact split boundaries, training/validation/test steps, publication controls, metrics, bootstrap, AEMO comparison, reproduction and cache caveats.</li>
 <li><a href="#results">Executed results</a>: measured performance and completion evidence.</li>
 </ul>
@@ -3920,7 +3921,7 @@ return Plotly;
 <li>The server binds only to <code>127.0.0.1:8050</code>; stopping that Python process stops the dashboard.</li>
 </ul>
 <p>HTTPS verification stays enabled. On Windows, <code>nemic/common.py</code> builds a local CA bundle from the operating system's trusted public certificates if necessary. The bundle is not committed.</p><a class="top" href="#top">Back to navigation</a></article><article id="results"><p class="source">Source: BACKTEST_REPORT.md</p><h1 id="results-interflow-nem-interconnector-conditional-backtest">INTERFLOW — NEM interconnector conditional backtest</h1>
-<p>Executed 2026-09-11 00:28 UTC. Local dashboard: http://127.0.0.1:8050</p>
+<p>Executed 2026-09-11 01:21 UTC. Local dashboard: http://127.0.0.1:8050</p>
 <h2 id="results-what-was-completed">What was completed</h2>
 <ul>
 <li>September 2023 through August 2026: 36 complete months, all six historical NEM interconnectors.</li>
@@ -4305,6 +4306,7 @@ return Plotly;
 <p>This comparison is deliberately asymmetric: AEMO used forecast inputs, while our experiment is supplied with realised future demand, renewables and weather. It measures conditional explanatory skill, <strong>not operational superiority over AEMO</strong>. Standard predispatch does not provide a comparable seven-day series throughout this sample, and has no target equivalent to the tightest five-minute limit within a half-hour.</p>
 <h2 id="results-design-and-leakage-controls">Design and leakage controls</h2>
 <p>See the <a href="#roadmap">improvement roadmap</a> for prioritised additional data and untested modelling proposals, with evaluation requirements.</p>
+<p>See <a href="#features">Results, data and feature engineering</a> for the complete feature inventory, network-state construction and audit of diurnal, seasonal, duck-curve and ramp handling.</p>
 <p>For the full research rationale, model specifications and data definitions, see <a href="#methods">Methods and research</a>. For exact split boundaries, metrics, benchmark alignment and reproduction steps, see <a href="#backtest">Backtest protocol</a>.</p>
 <ol>
 <li><strong>Train:</strong> September 2023–August 2025. Fit models, scales, categorical encodings and seasonal references exclusively here.</li>
@@ -4352,8 +4354,338 @@ return Plotly;
 <li><a href="https://otexts.com/fpp3/tscv.html">Forecasting: Principles and Practice, rolling origins</a>: chronological multi-step evaluation.</li>
 <li><a href="https://open-meteo.com/en/docs/historical-weather-api">Open-Meteo historical weather</a>: reanalysis data and native temporal definitions.</li>
 <li><a href="https://www.tradingview.com/support/solutions/43000746975-tradingview-layouts-a-quick-guide/">TradingView layouts</a> and <a href="https://professional.bloomberg.com/products/bloomberg-terminal/">Bloomberg Launchpad</a>: chart-first layout and compact linked monitors, adapted to the local dark dashboard skill without copied branding.</li>
-</ul><a class="top" href="#top">Back to navigation</a></article><article id="methods"><p class="source">Source: docs/METHODS_AND_RESEARCH.md</p><h1 id="methods-methods-and-research">Methods and research</h1>
+</ul><a class="top" href="#top">Back to navigation</a></article><article id="features"><p class="source">Source: docs/RESULTS_DATA_AND_FEATURES.md</p><h1 id="features-results-data-and-feature-engineering">Results, data and feature engineering</h1>
+<p>This document describes the experiment that was actually completed. It was audited against the implementation and saved outputs on 11 September 2026. It focuses on what the results mean, how raw data became modelling inputs, how network state was represented, and which seasonal and ramp features were or were not present.</p>
+<p>Read it with the <a href="#backtest">backtest protocol</a>, <a href="#methods">research and model specification</a>, <a href="#roadmap">improvement roadmap</a>, and <a href="#results">generated results report</a>.</p>
+<h2 id="features-1-result-scope">1. Result scope</h2>
+<p>The model forecasts six historically observed NEM interconnectors: QNI, Directlink, VNI, Heywood, Murraylink and Basslink. It produces five half-hour targets for each link: signed average dispatch flow, average export and reverse-direction import limits, and the tightest five-minute export and import limits occurring within each half-hour.</p>
+<p>The test ran from March through August 2026. Every half-hour was used as a forecast origin, with all available leads from 30 minutes through seven days. The final origins have progressively fewer valid leads because observations end at 1 September 2026. The completed audit contains 17,467,632 connector/origin/lead pairs and 87,338,160 target forecasts.</p>
+<p>The principal experiment is conditional on future realised regional demand, renewable generation and ERA5 weather. Its scores answer: “How well can limits and flows be estimated when the future fundamental path is supplied?” They do not represent the accuracy of a live system that must forecast those inputs. Future realised limits, flows, constraint setters, prices and thermal availability were excluded.</p>
+<h2 id="features-2-main-results-already-obtained">2. Main results already obtained</h2>
+<p>The system selected a method separately for 6 connectors × 5 targets × 4 lead bands, creating 120 decisions. The selected, residual-adjusted forecast beat persistence on final-test MAE in 92 of those 120 cells.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Target</th>
+<th style="text-align: right;">Weighted persistence MAE</th>
+<th style="text-align: right;">Weighted selected P50 MAE</th>
+<th style="text-align: right;">Approximate reduction</th>
+<th style="text-align: right;">Cells beating persistence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Flow</td>
+<td style="text-align: right;">248.9 MW</td>
+<td style="text-align: right;">147.9 MW</td>
+<td style="text-align: right;">40.6%</td>
+<td style="text-align: right;">20/24</td>
+</tr>
+<tr>
+<td>Average export limit</td>
+<td style="text-align: right;">209.4 MW</td>
+<td style="text-align: right;">158.7 MW</td>
+<td style="text-align: right;">24.2%</td>
+<td style="text-align: right;">16/24</td>
+</tr>
+<tr>
+<td>Average import limit</td>
+<td style="text-align: right;">194.0 MW</td>
+<td style="text-align: right;">151.9 MW</td>
+<td style="text-align: right;">21.7%</td>
+<td style="text-align: right;">20/24</td>
+</tr>
+<tr>
+<td>Tight export limit</td>
+<td style="text-align: right;">222.4 MW</td>
+<td style="text-align: right;">163.5 MW</td>
+<td style="text-align: right;">26.5%</td>
+<td style="text-align: right;">15/24</td>
+</tr>
+<tr>
+<td>Tight import limit</td>
+<td style="text-align: right;">202.9 MW</td>
+<td style="text-align: right;">155.8 MW</td>
+<td style="text-align: right;">23.2%</td>
+<td style="text-align: right;">21/24</td>
+</tr>
+</tbody>
+</table></div>
+<p>These pooled MAEs weight every available forecast pair. They are descriptive summaries, not substitutes for per-connector and per-horizon results. A MW error has different operational significance on links of different sizes. Exact cell scores, counts, RMSE and bias are in <code>results/scores.csv</code> and the report/dashboard.</p>
+<p>Validation selected the network model in 46 cells, persistence in 25, fundamentals in 25, weather in 15, renewable availability in 6 and the weekly seasonal baseline in 3. By target:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Target</th>
+<th style="text-align: right;">Network</th>
+<th style="text-align: right;">Persistence</th>
+<th style="text-align: right;">Fundamentals</th>
+<th style="text-align: right;">Weather</th>
+<th style="text-align: right;">Availability</th>
+<th style="text-align: right;">Weekly seasonal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Flow</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Export</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Import</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Tight export</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Tight import</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table></div>
+<p>This pattern matters. Regional fundamentals were frequently sufficient for flow, while the network-enhanced model was selected much more often for import and tight-import limits. A single method should not be called “the best model” for the entire system.</p>
+<p>Nominal P10–P90 intervals achieved 72.3% weighted coverage, below their 80% target. They should be treated as under-calibrated empirical intervals. Restriction recall was often high, but precision varied materially; the report contains the connector/direction results. Counts are repeated forecast-origin/lead pairs rather than unique restriction episodes.</p>
+<h2 id="features-3-raw-data-and-target-construction">3. Raw data and target construction</h2>
+<p>The source window is <code>(2023-09-01 00:00, 2026-09-01 00:00]</code> in fixed UTC+10 NEM market time. It contains 1,893,888 five-minute interconnector rows, 52,608 interval-ending half-hours and 315,648 connector/half-hour target rows. Every target half-hour has six distinct five-minute observations.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>NEMWEB table</th>
+<th>Main fields used</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DISPATCHINTERCONNECTORRES</code></td>
+<td><code>MWFLOW</code>, metered flow, export/import limits, setter IDs, locally-constrained flags, intervention, violation degree and <code>LASTCHANGED</code></td>
+<td>Flow/limit targets and delayed network state</td>
+</tr>
+<tr>
+<td><code>DISPATCHREGIONSUM</code></td>
+<td>Total demand, cleared wind/solar, wind/solar UIGF, available generation/load and dispatchable load</td>
+<td>Regional fundamentals and origin availability</td>
+</tr>
+<tr>
+<td><code>ROOFTOP_PV_ACTUAL</code></td>
+<td>Regional power, type and change time</td>
+<td>Separate rooftop PV feature</td>
+</tr>
+<tr>
+<td><code>DISPATCHPRICE</code></td>
+<td>Regional RRP from pricing run</td>
+<td>Descriptive price context only</td>
+</tr>
+<tr>
+<td>Original predispatch archives</td>
+<td>Issue time, delivery time, interconnector flow and limits</td>
+<td>Matched AEMO benchmark</td>
+</tr>
+</tbody>
+</table></div>
+<p>Duplicate physical records were sorted by interval, identifier, intervention run, run number and last-changed time. Intervention run 1 was preferred where it existed; otherwise run 0 supplied the physical outcome. Price context used pricing run 0.</p>
+<p>Raw <code>MWFLOW</code> is the signed forecast target. Export is raw <code>EXPORTLIMIT</code>. Directional import is <strong>minus raw <code>IMPORTLIMIT</code></strong> so it is expressed in the reverse direction. Negative limits were preserved because they can represent forced-flow states; taking an absolute value would change their meaning.</p>
+<p>For each half-hour, flow and directional limits are the arithmetic mean of six five-minute outcomes. Tight limits are the minimum of the same six directional values. The import-tight calculation is equivalent to minus the maximum raw signed <code>IMPORTLIMIT</code>. Tight export and tight import can come from different five-minute intervals and do not define a jointly feasible physical envelope.</p>
+<h2 id="features-4-regional-and-weather-feature-engineering">4. Regional and weather feature engineering</h2>
+<p>Five-minute regional quantities were averaged into complete half-hours. For each of NSW, Queensland, South Australia, Tasmania and Victoria, the candidate delivery-time fundamentals were total demand, semi-scheduled cleared wind and solar, rooftop PV, and residual demand = total demand − cleared wind − cleared solar. In the availability ablation, UIGF wind/solar replaced cleared wind/solar and residual demand was recalculated.</p>
+<p><code>TOTALDEMAND</code> already reflects behind-the-meter generation, so rooftop PV was retained separately and was not subtracted a second time. Residual demand is a useful balance proxy, but not a complete system net-load measure: it does not enumerate all nonscheduled renewables, storage behaviour, bids, losses or unit-level thermal dispatch.</p>
+<p>Hourly ERA5 weather came from 15 representative locations—three in each NEM region—chosen as demand, corridor and renewable-area proxies. Each site supplied temperature at 2 m, wind speed at 100 m, shortwave radiation, cloud cover and relative humidity, adding 75 features. Temperature, wind, cloud and humidity were interpolated to half-hours. The preceding-hour mean radiation value was assigned to both contained half-hours to preserve its source meaning.</p>
+<p>The sites are a sparse proxy rather than a transmission thermal model. No conductor temperature, dynamic line rating, high-resolution topology or weather-weighted asset exposure was used. Thirty-four rooftop cells remained missing; LightGBM handled them as missing. Other model drivers and all targets were complete.</p>
+<h2 id="features-5-how-network-state-was-captured">5. How network state was captured</h2>
+<p>The network model represents the most recently observable dispatch regime while keeping future network outcomes out of its inputs. Its 141 columns were:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Feature group</th>
+<th style="text-align: right;">Count</th>
+<th>Timing and meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Delivery-time fundamentals, calendar and weather</td>
+<td style="text-align: right;">106</td>
+<td>Realised future demand, renewables and weather plus time features</td>
+</tr>
+<tr>
+<td>Connector identity</td>
+<td style="text-align: right;">1</td>
+<td>Categorical identifier pooling all six links</td>
+</tr>
+<tr>
+<td>Forecast lead</td>
+<td style="text-align: right;">2</td>
+<td>Half-hour lead and <code>log(1 + lead)</code></td>
+</tr>
+<tr>
+<td>Target history</td>
+<td style="text-align: right;">15</td>
+<td>All five targets at lags 1, 48 and 336 half-hours</td>
+</tr>
+<tr>
+<td>Current-link dispatch regime</td>
+<td style="text-align: right;">6</td>
+<td>Export/import locally-constrained flags, intervention, violation degree, and encoded export/import setter IDs</td>
+</tr>
+<tr>
+<td>Regional available generation</td>
+<td style="text-align: right;">5</td>
+<td>One delayed origin value per region</td>
+</tr>
+<tr>
+<td>NEM interconnector flow state</td>
+<td style="text-align: right;">6</td>
+<td>One delayed origin flow for each connector</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align: right;"><strong>141</strong></td>
+<td>Direct lead-conditioned model input</td>
+</tr>
+</tbody>
+</table></div>
+<p>The lag choices are the latest half-hour, the same time one day earlier and the same time one week earlier. They apply to flow, export, import, tight export and tight import. Simultaneous flows on all six links allow the trees to learn broad cross-link patterns; five regional available-generation values provide a coarse supply-state indicator.</p>
+<p>For the forecasted connector, the preceding-half-hour snapshot contains whether export/import was locally constrained, intervention status, maximum constraint violation degree, and latest export/import generic-constraint setter identifiers. Setter values were encoded from training only; unseen or missing setters become <code>-1</code>. These IDs are useful regime labels, but they do not parse the constraint equation, RHS drivers, contingency, outage or physical cause.</p>
+<p>Every origin observation has a nominal 30-minute delay. The implementation also checks <code>LASTCHANGED</code>: if an archived dispatch record was published after the forecast origin, the affected feature is missing. Other-link flows are censored link by link. Regional available generation is conservatively censored when any connector publication check is late at that origin, serving as a common-dispatch-publication proxy. The audit handled a late 13:30 interval on 5 September 2024 changed at 14:10:07 and unavailable to a 14:00 origin.</p>
+<p>Persistence normally uses origin minus one half-hour and falls back one more interval when that record is late. At the seven-day endpoint, weekly persistence uses two weeks earlier because the immediately previous weekly slot would be the not-yet-observable issue interval.</p>
+<p>This observed-state design can learn persistence of a binding regime, forced-flow condition, availability shift or correlated NEM flow pattern. It does <strong>not</strong> contain future outage schedules, future constraint-set activation, generic-equation/RHS forecasts, unit-level availability paths, topology, dynamic ratings or a power-flow solution. Unexpected topology changes are consequently a major risk.</p>
+<h2 id="features-6-what-feature-importance-says">6. What feature importance says</h2>
+<p>Gain importance from the pooled network regressors consistently placed connector identity, setter IDs, recent target lags and regional residual demand near the top:</p>
+<ul>
+<li>Flow: connector, export setter, one-step flow lag, Victoria/South Australia residual demand, import setter, Queensland residual demand, South Australia wind and annual sine/cosine.</li>
+<li>Export and tight export: export setter, one-step export lag, connector, Victoria residual demand, import setter, one-step tight-export lag and South Australia residual demand.</li>
+<li>Import and tight import: connector, one-step import/tight-import lags, export/import setters, trend, Victoria wind and residual demand. Lag-48 tight import also appears among leading tight-import features.</li>
+</ul>
+<p>This supports the hypothesis that current constraint regime and recent limits matter. It does not establish causality. Gain can be split among correlated variables and belongs to the pooled network model even where validation selected another method. Magnitudes should not be compared across separately fitted target models without normalisation.</p>
+<h2 id="features-7-seasonal-diurnal-and-duck-curve-audit">7. Seasonal, diurnal and duck-curve audit</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Behaviour</th>
+<th>Implemented?</th>
+<th>Exact representation</th>
+<th>Assessment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Time of day / diurnal shape</td>
+<td>Yes, broadly</td>
+<td>Sine/cosine of fractional hour with a 24-hour period</td>
+<td>Smooth circular clock representation avoids a midnight discontinuity. Trees can interact it with region, demand, solar and weather. It does not encode separate learned 48-bin shapes.</td>
+</tr>
+<tr>
+<td>Day of week</td>
+<td>Yes</td>
+<td>Integer weekday 0–6</td>
+<td>Allows weekday differences, although treated as numeric rather than categorical/cyclic. No holiday feature was included.</td>
+</tr>
+<tr>
+<td>Annual seasonality</td>
+<td>Yes, smoothly</td>
+<td>Sine/cosine of day-of-year divided by 365.25</td>
+<td>Represents one annual cycle. It cannot alone express sharp seasonal boundaries or separate daily shapes by month.</td>
+</tr>
+<tr>
+<td>Summer/autumn/winter/spring</td>
+<td>Partly</td>
+<td>Four seasons used for training-only restriction references and reporting slices</td>
+<td>Season was not a separate model input. The independent test mainly covers autumn/winter, so full-year robustness was not established.</td>
+</tr>
+<tr>
+<td>Weekly behaviour</td>
+<td>Yes</td>
+<td>Same half-hour one week earlier and a 336-half-hour network lag</td>
+<td>Strong explicit weekly history. Weekly baseline was selected in only 3/120 validation cells.</td>
+</tr>
+<tr>
+<td>Duck curve / solar-shaped net demand</td>
+<td>Implicitly</td>
+<td>Delivery demand, cleared solar, rooftop PV, residual demand, radiation and clock</td>
+<td>Trees can learn low-midday and higher-evening balance conditions. There is no named duck-curve feature, sunset alignment, trough depth or evening-ramp feature.</td>
+</tr>
+<tr>
+<td>Renewable ramps</td>
+<td><strong>No explicit ramps</strong></td>
+<td>Delivery levels plus target history</td>
+<td>Wind/solar Δ30m, Δ1h, forecast ramps and spatial ramp coherence were not calculated.</td>
+</tr>
+<tr>
+<td>Demand/residual-demand ramps</td>
+<td><strong>No explicit ramps</strong></td>
+<td>Delivery levels only</td>
+<td>The model sees future level and clock position, but not slope, acceleration, daily trough or evening peak gradient.</td>
+</tr>
+<tr>
+<td>Sunrise/sunset and daylight length</td>
+<td>No</td>
+<td>Radiation/solar provide indirect information</td>
+<td>No solar elevation, sunrise-relative time, daylight duration or regional solar clock.</td>
+</tr>
+<tr>
+<td>Temperature-load nonlinearity</td>
+<td>Implicit</td>
+<td>Delivery demand and temperatures</td>
+<td>Trees can learn nonlinear splits, but no cooling/heating degree or thermal-accumulation features were engineered.</td>
+</tr>
+<tr>
+<td>Seasonal ramp interactions</td>
+<td>No explicit terms</td>
+<td>Possible implicit tree interactions</td>
+<td>No winter/summer × hour, season × ramp or daylight interaction was constructed.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The model has legitimate basic seasonality, but not a comprehensive power-system shape library. Its strongest duck-curve information comes from supplying realised delivery demand/solar. This makes the conditional experiment easier than an operational seven-day forecast in which levels and ramps must first be forecast.</p>
+<h2 id="features-8-recommended-feature-additions">8. Recommended feature additions</h2>
+<p>The next version should test explicit shape features in controlled ablations:</p>
+<ol>
+<li>Renewable ramps: 30-minute, 1-hour, 3-hour and 6-hour changes in regional wind, solar and UIGF; cross-region sums, dispersion and ramp flags.</li>
+<li>Residual-demand shape: change, acceleration, rolling minimum/maximum, distance from the daily trough, expected evening peak, and ramp to/from delivery.</li>
+<li>Solar geometry: solar elevation, daylight flag, minutes from sunrise/sunset and daylight length at representative coordinates.</li>
+<li>Seasonal interactions: month/meteorological season, hour × season, weekend/holiday indicators and training-only region-specific diurnal profiles.</li>
+<li>Weather stress: cooling/heating degrees, temperature extremes, recent temperature history and corridor weather differences.</li>
+<li>Network regime dynamics: time since setter/state change, trailing constrained fraction, limit/flow ramp and volatility, trailing directional minima and duration below threshold.</li>
+</ol>
+<p>For origin <code>o</code> and delivery <code>v</code>, future-input ramps may use only values available in the declared forecast path up to <code>v</code>; historical-state ramps must end before <code>o</code> at the publication-aware cutoff. In the realised-input research track, future ramps remain realised and must be labelled accordingly. An operational track must derive them from archived issue-time forecast vintages.</p>
+<p>Assess each addition on identical pairs by connector, target and horizon. For restrictions, compare event recall at a fixed false-alert burden and add episode warning time and missed MW-hours. March–August 2026 has already been inspected, so it can support exploratory paired comparisons but chosen changes require confirmation on a newly accumulated untouched period.</p>
+<h2 id="features-9-reproducibility-and-interpretation-boundaries">9. Reproducibility and interpretation boundaries</h2>
+<p>Models used LightGBM absolute-error regression with 180 trees, 23 leaves, learning rate 0.055, minimum child samples 120, column fraction 0.9, L2 regularisation 5 and seed 741. Training ended on 1 September 2025. Selection used September–November, residual calibration December–January, alert tuning February, and final evaluation March–August 2026.</p>
+<p>Selected P50 adds the median calibration residual to the raw winner. P10/P90 use empirical residual quantiles within connector, target and lead band. Restriction probability comes from the same residual distribution rather than a dedicated classifier. The intervals are marginal rather than physically coherent multivariate paths.</p>
+<p>The AEMO comparison used 2,876,052 matched original predispatch origin/delivery pairs over 0.5–39 hours. It is asymmetric because AEMO used forecast inputs while this model received realised fundamentals/weather. It cannot support a claim of operational superiority.</p>
+<p>Reported dispatch limits depend on the solved NEM constraint system. Separate predicted limits are not guaranteed simultaneously feasible, and price-spread associations are not causal price impacts. The outputs support restriction awareness and regional-balance research; they do not replace NEMDE, security assessment or network engineering limits.</p><a class="top" href="#top">Back to navigation</a></article><article id="methods"><p class="source">Source: docs/METHODS_AND_RESEARCH.md</p><h1 id="methods-methods-and-research">Methods and research</h1>
 <p>This document describes the implemented INTERFLOW experiment, audited against the source and saved results on 11 September 2026. Read it with the <a href="#backtest">backtest protocol</a> and <a href="#results">executed results</a>. The <a href="#plan">build plan</a> records the agreed scope; where a proposal differs from execution, this document and the executable implementation describe the run.</p>
+<p>The companion <a href="#features">results, data and feature-engineering guide</a> gives a field-level network-state description and audits diurnal, annual, duck-curve and ramp handling.</p>
 <h2 id="methods-1-question-and-interpretation">1. Question and interpretation</h2>
 <p>Can public regional demand, renewable generation, temperature/weather and recently observed network conditions predict AEMO's reported interconnector limits and dispatch flows at half-hour resolution, from 30 minutes to seven days ahead?</p>
 <p>The main experiment supplies <strong>realised future exogenous inputs</strong>. It tests a conditional relationship: given the future demand, renewable generation and weather path, how well can the model estimate limits and flows? It does not measure the accuracy achievable when those paths must themselves be forecast. Realised renewable dispatch can also respond to congestion, so this experiment is not a clean causal model or a guaranteed operational upper bound.</p>

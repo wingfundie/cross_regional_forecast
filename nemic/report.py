@@ -75,6 +75,8 @@ This comparison is deliberately asymmetric: AEMO used forecast inputs, while our
 
 See the [improvement roadmap](docs/IMPROVEMENT_ROADMAP.md) for prioritised additional data and untested modelling proposals, with evaluation requirements.
 
+See [Results, data and feature engineering](docs/RESULTS_DATA_AND_FEATURES.md) for the complete feature inventory, network-state construction and audit of diurnal, seasonal, duck-curve and ramp handling.
+
 For the full research rationale, model specifications and data definitions, see [Methods and research](docs/METHODS_AND_RESEARCH.md). For exact split boundaries, metrics, benchmark alignment and reproduction steps, see [Backtest protocol](docs/BACKTEST_PROTOCOL.md).
 
 1. **Train:** September 2023–August 2025. Fit models, scales, categorical encodings and seasonal references exclusively here.

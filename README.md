@@ -20,6 +20,7 @@ Five interactive charts cover flow improvement versus persistence, import/export
 
 - [Improvement roadmap](docs/IMPROVEMENT_ROADMAP.md): prioritised extra data, candidate methods, source/access caveats and experiments to establish improvement.
 
+- [Results, data and feature engineering](docs/RESULTS_DATA_AND_FEATURES.md): completed results, raw-to-model transformations, publication-aware network state, feature importance and a precise seasonal/diurnal/duck-curve audit.
 - [Methods and research](docs/METHODS_AND_RESEARCH.md): literature reviewed, industry definitions, data transformations, model features/settings, restriction probabilities and limitations.
 - [Backtest protocol](docs/BACKTEST_PROTOCOL.md): exact split boundaries, training/validation/test steps, publication controls, metrics, bootstrap, AEMO comparison, reproduction and cache caveats.
 - [Executed results](BACKTEST_REPORT.md): measured performance and completion evidence.
