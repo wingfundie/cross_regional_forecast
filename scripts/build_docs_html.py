@@ -18,6 +18,7 @@ PAGES = [
     ('backtest', 'docs/BACKTEST_PROTOCOL.md', 'Backtest protocol'),
     ('roadmap', 'docs/IMPROVEMENT_ROADMAP.md', 'Improvement roadmap'),
     ('constraint-features', 'docs/CONSTRAINT_NETWORK_FEATURES.md', 'Constraint-derived network features'),
+    ('constraint-pilot', 'docs/CONSTRAINT_FEATURE_PILOT.md', 'Executed VNI constraint-feature pilot'),
     ('plan', 'BUILD_PLAN.md', 'Original build plan'),
 ]
 CSS = '''

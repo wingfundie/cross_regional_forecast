@@ -1,0 +1,25 @@
+{
+  "experiment_id": "vni_constraint_features_202602",
+  "interconnector": "VIC1-NSW1",
+  "start": "2026-02-01 00:00:00",
+  "end": "2026-02-28 23:59:59",
+  "limits": {
+    "pilot_compressed_bytes": 1073741824,
+    "file_compressed_bytes": 536870912,
+    "batch_decompressed_bytes": 21474836480,
+    "min_free_bytes": 21474836480,
+    "max_concurrency": 2
+  },
+  "files": [
+    {"table": "DUALLOC", "phase": "static", "expected_bytes": 25870, "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2026/MMSDM_2026_02/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23DUALLOC%23FILE01%23202602010000.zip"},
+    {"table": "DUDETAILSUMMARY", "phase": "static", "expected_bytes": 352087, "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2026/MMSDM_2026_02/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23DUDETAILSUMMARY%23FILE01%23202602010000.zip"},
+    {"table": "GENCONDATA", "phase": "static", "expected_bytes": 109364, "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2026/MMSDM_2026_02/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23GENCONDATA%23FILE01%23202602010000.zip"},
+    {"table": "GENCONSET", "phase": "static", "expected_bytes": 29420, "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2026/MMSDM_2026_02/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23GENCONSET%23FILE01%23202602010000.zip"},
+    {"table": "GENCONSETINVOKE", "phase": "static", "expected_bytes": 24617, "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2026/MMSDM_2026_02/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23GENCONSETINVOKE%23FILE01%23202602010000.zip"},
+    {"table": "SPDCONNECTIONPOINTCONSTRAINT", "phase": "static", "expected_bytes": 609079, "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2026/MMSDM_2026_02/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23SPDCONNECTIONPOINTCONSTRAINT%23FILE01%23202602010000.zip"},
+    {"table": "SPDINTERCONNECTORCONSTRAINT", "phase": "static", "expected_bytes": 28070, "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2026/MMSDM_2026_02/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23SPDINTERCONNECTORCONSTRAINT%23FILE01%23202602010000.zip"},
+    {"table": "SPDREGIONCONSTRAINT", "phase": "static", "expected_bytes": 1841, "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2026/MMSDM_2026_02/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23SPDREGIONCONSTRAINT%23FILE01%23202602010000.zip"},
+    {"table": "DISPATCHCONSTRAINT", "phase": "interval", "expected_bytes": 155592627, "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2026/MMSDM_2026_02/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23DISPATCHCONSTRAINT%23FILE01%23202602010000.zip"},
+    {"table": "DISPATCHLOAD", "phase": "interval", "expected_bytes": 112942908, "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2026/MMSDM_2026_02/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23DISPATCHLOAD%23FILE01%23202602010000.zip"}
+  ]
+}

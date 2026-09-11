@@ -22,6 +22,8 @@ Five interactive charts cover flow improvement versus persistence, import/export
 
 - [Constraint-derived network features](docs/CONSTRAINT_NETWORK_FEATURES.md): proposed end-to-end design for compact generator influence, directional constraint pressure, limit switching and forecast-time network-state features, starting with VNI.
 
+- [Executed VNI feasibility pilot](docs/CONSTRAINT_FEATURE_PILOT.md): guarded table-level acquisition, implemented reconstruction/features, measured coverage, negative feasibility result and the next data-quality gate. Reproduce it with `python run_constraint_pilot.py`.
+
 - [Results, data and feature engineering](docs/RESULTS_DATA_AND_FEATURES.md): completed results, raw-to-model transformations, publication-aware network state, feature importance and a precise seasonal/diurnal/duck-curve audit.
 - [Methods and research](docs/METHODS_AND_RESEARCH.md): literature reviewed, industry definitions, data transformations, model features/settings, restriction probabilities and limitations.
 - [Backtest protocol](docs/BACKTEST_PROTOCOL.md): exact split boundaries, training/validation/test steps, publication controls, metrics, bootstrap, AEMO comparison, reproduction and cache caveats.

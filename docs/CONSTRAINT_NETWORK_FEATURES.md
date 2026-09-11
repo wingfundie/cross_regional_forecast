@@ -1,6 +1,8 @@
 # Constraint-derived network features for interconnector forecasting
 
-Prepared 11 September 2026. **Design proposal: not implemented, backtested or demonstrated to improve forecasts.** All numerical equations involving Tumut 3 below are synthetic illustrations, not verified AEMO equations or coefficients.
+Prepared 11 September 2026. **Design proposal: only the limited VNI feasibility pilot described below has been implemented; the full programme has not been backtested or demonstrated to improve forecasts.** All numerical equations involving Tumut 3 below are synthetic illustrations, not verified AEMO equations or coefficients.
+
+Implementation update: the first dependency-scoped February 2026 VNI feasibility pilot has now been executed. See [the pilot report](CONSTRAINT_FEATURE_PILOT.md). Its limited reconstruction coverage and negative matched-sample result do not validate the full proposal.
 
 This document develops the idea of using generators' participation in constraint equations to represent their influence on interconnector (IC) flows and import/export limits with a small feature set. It covers mathematical interpretation, discovery, data requirements, feature construction, forecast-time operation, model integration and validation.
 
