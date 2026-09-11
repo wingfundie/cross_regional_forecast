@@ -136,6 +136,137 @@ The leading lower constraints were `N^^V_NIL_1` (4,128 intervals) and `N^^V_NIL_
 
 The model should encode the leading constraint through a compact stable representation: hashed or grouped family ID, upper/lower switch gaps, number of near-leading candidates, and aggregate coefficient-weighted generator pressure. A full one-hot column for every constraint version would be sparse and brittle.
 
+## Constraint equations and factors researched
+
+The run reconstructed every solved dispatch equation linked to `VIC1-NSW1`, then ranked the equations that set the observed upper or lower VNI envelope. The table below lists the 37 constraint equations that actually led one of those envelopes during February 2026. In the rearranged equation
+
+```text
+a * VNI + sum(b_i * P_i) <= RHS
+s_i = -b_i / a
+```
+
+`a` is the VNI interconnector factor, `b_i` is the unit connection-point factor, and `s_i` is the derived unit sensitivity used for the generator-pressure and impact features. Blank invoked-set entries mean the equation appeared directly as a standing/normal generic constraint in the extracted dispatch solutions, rather than through a February `GENCONSETINVOKE` row.
+
+| Direction | Constraint equation | Leading intervals | Versions | VNI factor a | Type | Contractions | Forced intervals | Invoked set(s) |
+|---|---|---:|---:|---:|---|---:|---:|---|
+| lower | `N^^V_NIL_1` | 4,128 | 1 | -1.000 | Voltage Stability | 141 | 7 |  |
+| lower | `N^^V_NIL_ARWBBA` | 2,682 | 1 | -1.000 | Voltage Stability | 132 | 283 |  |
+| lower | `N^^V_BADP_1` | 813 | 1 | -1.000 | Voltage Stability | 14 | 22 | `I-JNWO_RADIAL`, `N-BABU`, `N-BADP`, `N-CLCWG_X5`, `N-LTWG_X5`, `N-WGWA_X5`, `V-DDWO_X5` |
+| lower | `NRM_NSW1_VIC1` | 191 | 1 | -1.000 | Negative Residue | 59 | 0 |  |
+| lower | `N>>NIL_996_62` | 150 | 1 | -0.291 | Thermal | 27 | 0 |  |
+| lower | `V>>NIL_MLGT_MLGT` | 62 | 1 | -0.159 | Thermal | 22 | 57 |  |
+| lower | `N^^V_MLNK_1` | 26 | 1 | -1.000 | Voltage Stability | 1 | 0 |  |
+| lower | `#R034950_001_RAMP_F` | 8 | 1 | -1.000 | Voltage Stability | 0 | 0 | `#R034950_RAMP` |
+| lower | `N>>NIL_X3_060` | 3 | 1 | -0.171 | Thermal | 1 | 0 |  |
+| upper | `N^^N_NIL_WGLT` | 2,442 | 1 | 0.376 | Voltage Stability | 244 | 1,448 |  |
+| upper | `V::N_SMSC_V1` | 2,205 | 1 | 1.000 | Transient Stability | 63 | 2 |  |
+| upper | `V::N_SMSC_O1` | 1,241 | 1 | 1.000 | Transient Stability | 5 | 0 |  |
+| upper | `V>>N_NIL_65_051` | 501 | 1 | 1.000 | Thermal | 45 | 3 |  |
+| upper | `V>>N_NIL_65_66` | 495 | 1 | 0.799 | Thermal | 3 | 0 |  |
+| upper | `V^^N_NIL_1` | 329 | 1 | 1.000 | Voltage Stability | 0 | 0 |  |
+| upper | `N>>16_8_39` | 167 | 1 | 0.700 | Thermal | 26 | 125 |  |
+| upper | `V^^N_BADP_1` | 163 | 1 | 1.000 | Voltage Stability | 0 | 0 | `I-JNWO_RADIAL`, `N-BABU`, `N-BADP`, `N-CLCWG_X5`, `N-LTWG_X5`, `N-WGWA_X5`, `V-DDWO_X5` |
+| upper | `V::N_SETB_V1` | 89 | 1 | 1.000 | Transient Stability | 0 | 0 |  |
+| upper | `N>>16_8_18` | 80 | 1 | 0.937 | Thermal | 4 | 61 |  |
+| upper | `V::N_HYTR_O1` | 55 | 1 | 1.000 | Transient Stability | 0 | 0 |  |
+| upper | `V::N_HYTR_V1` | 55 | 1 | 1.000 | Transient Stability | 0 | 0 |  |
+| upper | `V>>N_X3_65_66` | 38 | 1 | 0.827 | Thermal | 0 | 0 | `N-BABU` |
+| upper | `V::N_X_EPMB_SD2` | 36 | 1 | 0.574 | Transient Stability | 0 | 15 |  |
+| upper | `N^^N_NIL_1` | 31 | 1 | 0.953 | Voltage Stability | 0 | 1 |  |
+| upper | `V::N_X_EPMB_S12` | 27 | 1 | 1.000 | Transient Stability | 0 | 0 |  |
+| upper | `V::N_SETB_O1` | 20 | 1 | 1.000 | Transient Stability | 0 | 0 |  |
+| upper | `N>>ERTX_13_14` | 19 | 1 | 0.219 | Thermal | 0 | 0 | `N-ER_TX` |
+| upper | `NRM_VIC1_NSW1` | 18 | 1 | 1.000 | Negative Residue | 5 | 0 |  |
+| upper | `V>>NIL_MBDD_MBDD` | 18 | 1 | 0.211 | Thermal | 0 | 0 |  |
+| upper | `N>>ERTX_12_14` | 10 | 1 | 0.669 | Thermal | 0 | 0 | `N-ER_TX` |
+| upper | `#R035037_003_RAMP_F` | 8 | 1 | 0.574 | Transient Stability | 3 | 8 | `#R035037_RAMP` |
+| upper | `#R035037_003_RAMP_V` | 5 | 1 | 0.574 | Transient Stability | 5 | 3 | `#R035037_RAMP` |
+| upper | `N>>NIL_39` | 4 | 1 | 0.911 | Thermal | 0 | 4 |  |
+| upper | `V>>N_NIL_65` | 3 | 1 | 0.825 | Thermal | 0 | 0 |  |
+| upper | `#R034885_012_RAMP_F` | 2 | 1 | 1.000 | Transient Stability | 0 | 0 | `#R034885_RAMP` |
+| upper | `V::N_MLSY_V1` | 1 | 1 | 1.000 | Transient Stability | 0 | 0 |  |
+| upper | `V>>N_NIL_66_65` | 1 | 1 | 0.791 | Thermal | 0 | 0 |  |
+
+The generator table joins the connection-point factor range, the derived sensitivity range, and the measured 30-minute bound-impact ranking. These are the first candidates for a compact VNI generator panel. The signs must still be interpreted by direction and active constraint, so model inputs should preserve signed coefficient-weighted pressure instead of using raw generation alone.
+
+| Rank | DUID | Leading equations | b min | b mean | b max | mean s | max abs s | Exposure MW-obs | Mean abs impact | P95 abs impact | Contraction rank | Forced rank |
+|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 1 | CUSF1 | 12 | 0.218 | 0.662 | 0.998 | -0.849 | 2.160 | 367,031 | 94.038 MW | 367.351 MW | 13 | 9 |
+| 2 | MURRAY | 27 | -0.883 | -0.250 | 0.483 | 0.566 | 1.005 | 352,120 | 23.335 MW | 118.252 MW | 6 | 93 |
+| 3 | DARLSF1 | 25 | -0.502 | 0.327 | 1.000 | -0.532 | 2.660 | 279,523 | 20.858 MW | 109.396 MW | 10 | 27 |
+| 4 | AVLSF1 | 14 | 0.165 | 0.576 | 0.998 | -0.649 | 2.620 | 207,250 | 52.548 MW | 222.611 MW | 5 | 36 |
+| 5 | LIMOSF11 | 25 | -0.502 | 0.376 | 1.000 | -0.320 | 5.848 | 190,455 | 14.306 MW | 73.428 MW | 16 | 41 |
+| 6 | WLWLSF2 | 13 | 0.218 | 0.652 | 0.998 | -0.831 | 2.109 | 169,377 | 42.978 MW | 167.711 MW | 26 | 34 |
+| 7 | WLWLSF1 | 13 | 0.218 | 0.652 | 0.998 | -0.831 | 2.109 | 164,602 | 41.767 MW | 166.319 MW | 28 | 35 |
+| 8 | UPPTUMUT | 13 | -0.598 | 0.089 | 1.000 | -0.644 | 1.049 | 158,585 | 18.732 MW | 98.276 MW | 7 | 37 |
+| 9 | COLEASF1 | 25 | -0.502 | 0.326 | 0.998 | -0.537 | 2.644 | 143,791 | 10.730 MW | 52.632 MW | 19 | 54 |
+| 10 | SUNRSF1 | 25 | -0.502 | 0.376 | 1.000 | -0.320 | 5.848 | 124,105 | 9.322 MW | 49.562 MW | 24 | 58 |
+| 11 | TUMUT3 | 13 | -0.392 | 0.216 | 0.991 | -0.644 | 1.040 | 109,268 | 12.907 MW | 50.700 MW | 2 | 10 |
+| 12 | GESF1 | 12 | -0.877 | 0.572 | 0.998 | -1.166 | 3.014 | 106,656 | 27.327 MW | 117.445 MW | 29 | 43 |
+| 13 | HILLSTN1 | 20 | 0.199 | 0.510 | 1.000 | -0.565 | 2.660 | 101,337 | 17.624 MW | 98.037 MW | 17 | 50 |
+| 14 | STWF1 | 26 | -1.000 | 0.256 | 0.998 | -0.752 | 3.304 | 93,559 | 6.949 MW | 25.250 MW | 117 | 88 |
+| 15 | MUWAWF1 | 15 | -0.432 | -0.194 | 0.867 | 0.608 | 4.566 | 91,957 | 14.180 MW | 45.018 MW | 20 | 19 |
+| 16 | RESS1 | 19 | -0.502 | 0.323 | 1.000 | -0.593 | 2.660 | 87,537 | 7.550 MW | 47.872 MW | 78 | 66 |
+| 17 | RIVNB2 | 19 | -0.502 | 0.323 | 1.000 | -0.593 | 2.660 | 83,841 | 7.231 MW | 32.630 MW | 63 | 59 |
+| 18 | WSTWYSF1 | 15 | 0.216 | 0.590 | 0.998 | -0.699 | 2.497 | 83,827 | 18.910 MW | 84.957 MW | 27 | 57 |
+| 19 | BOMENSF1 | 15 | 0.216 | 0.590 | 0.998 | -0.699 | 2.497 | 82,953 | 18.713 MW | 83.412 MW | 22 | 55 |
+| 20 | MUWAWF2 | 15 | -0.432 | -0.194 | 0.867 | 0.608 | 4.566 | 77,890 | 12.011 MW | 37.821 MW | 21 | 24 |
+
+For the highest-exposure leading equations, plus leading equations where Tumut 3 was active, the table below shows the largest generator terms by sensitivity-weighted exposure. This is the closest compact view of the researched dispatch equations without committing the full extracted MMSDB factor tables.
+
+| Direction | Constraint equation | DUID | Active rows | a VNI | b unit | mean s | max abs s |
+|---|---|---|---:|---:|---:|---:|---:|
+| lower | `N^^V_NIL_1` | BHB1 | 4,128 | -1.000 | -0.715 | -0.715 | 0.715 |
+| lower | `N^^V_NIL_1` | BROKENH1 | 4,128 | -1.000 | -0.715 | -0.715 | 0.715 |
+| lower | `N^^V_NIL_1` | STWF1 | 4,128 | -1.000 | -0.715 | -0.715 | 0.715 |
+| lower | `N^^V_NIL_1` | UPPTUMUT | 4,128 | -1.000 | -0.598 | -0.598 | 0.598 |
+| lower | `N^^V_NIL_1` | URANQ11 | 4,128 | -1.000 | -0.491 | -0.491 | 0.491 |
+| lower | `N^^V_NIL_ARWBBA` | BHB1 | 2,682 | -1.000 | -1.000 | -1.000 | 1.000 |
+| lower | `N^^V_NIL_ARWBBA` | BROKENH1 | 2,682 | -1.000 | -1.000 | -1.000 | 1.000 |
+| lower | `N^^V_NIL_ARWBBA` | STWF1 | 2,682 | -1.000 | -1.000 | -1.000 | 1.000 |
+| lower | `N^^V_NIL_ARWBBA` | ARWF1 | 2,682 | -1.000 | 0.867 | 0.867 | 0.867 |
+| lower | `N^^V_NIL_ARWBBA` | BULGANA1 | 2,682 | -1.000 | 0.867 | 0.867 | 0.867 |
+| lower | `N^^V_BADP_1` | BHB1 | 813 | -1.000 | -0.715 | -0.715 | 0.715 |
+| lower | `N^^V_BADP_1` | BROKENH1 | 813 | -1.000 | -0.715 | -0.715 | 0.715 |
+| lower | `N^^V_BADP_1` | STWF1 | 813 | -1.000 | -0.715 | -0.715 | 0.715 |
+| lower | `N^^V_BADP_1` | UPPTUMUT | 813 | -1.000 | -0.598 | -0.598 | 0.598 |
+| lower | `N^^V_BADP_1` | URANQ11 | 813 | -1.000 | -0.491 | -0.491 | 0.491 |
+| upper | `N^^N_NIL_WGLT` | DARLSF1 | 2,442 | 0.376 | 1.000 | -2.660 | 2.660 |
+| upper | `N^^N_NIL_WGLT` | DPNTB1 | 2,442 | 0.376 | 1.000 | -2.660 | 2.660 |
+| upper | `N^^N_NIL_WGLT` | HILLSTN1 | 2,442 | 0.376 | 1.000 | -2.660 | 2.660 |
+| upper | `N^^N_NIL_WGLT` | RESS1 | 2,442 | 0.376 | 1.000 | -2.660 | 2.660 |
+| upper | `N^^N_NIL_WGLT` | RIVNB2 | 2,442 | 0.376 | 1.000 | -2.660 | 2.660 |
+| upper | `V::N_SMSC_V1` | DARTM1 | 2,205 | 1.000 | -0.896 | 0.896 | 0.896 |
+| upper | `V::N_SMSC_V1` | MCKAY1 | 2,205 | 1.000 | -0.896 | 0.896 | 0.896 |
+| upper | `V::N_SMSC_V1` | WKIEWA1 | 2,205 | 1.000 | -0.896 | 0.896 | 0.896 |
+| upper | `V::N_SMSC_V1` | WKIEWA2 | 2,205 | 1.000 | -0.896 | 0.896 | 0.896 |
+| upper | `V::N_SMSC_V1` | MURRAY | 2,205 | 1.000 | -0.786 | 0.786 | 0.786 |
+| upper | `V::N_SMSC_O1` | DARTM1 | 1,241 | 1.000 | -0.948 | 0.948 | 0.948 |
+| upper | `V::N_SMSC_O1` | MCKAY1 | 1,241 | 1.000 | -0.948 | 0.948 | 0.948 |
+| upper | `V::N_SMSC_O1` | WKIEWA1 | 1,241 | 1.000 | -0.948 | 0.948 | 0.948 |
+| upper | `V::N_SMSC_O1` | WKIEWA2 | 1,241 | 1.000 | -0.948 | 0.948 | 0.948 |
+| upper | `V::N_SMSC_O1` | MURRAY | 1,241 | 1.000 | -0.763 | 0.763 | 0.763 |
+| upper | `V>>N_NIL_65_051` | AVLSF1 | 501 | 1.000 | 0.998 | -0.998 | 0.998 |
+| upper | `V>>N_NIL_65_051` | BHB1 | 501 | 1.000 | 0.998 | -0.998 | 0.998 |
+| upper | `V>>N_NIL_65_051` | BLOWERNG | 501 | 1.000 | 0.998 | -0.998 | 0.998 |
+| upper | `V>>N_NIL_65_051` | BOMENSF1 | 501 | 1.000 | 0.998 | -0.998 | 0.998 |
+| upper | `V>>N_NIL_65_051` | BROKENH1 | 501 | 1.000 | 0.998 | -0.998 | 0.998 |
+| upper | `V>>N_NIL_65_66` | GUTHEGA | 495 | 0.799 | 1.000 | -1.252 | 1.252 |
+| upper | `V>>N_NIL_65_66` | BHB1 | 495 | 0.799 | 0.683 | -0.855 | 0.855 |
+| upper | `V>>N_NIL_65_66` | BROKENH1 | 495 | 0.799 | 0.683 | -0.855 | 0.855 |
+| upper | `V>>N_NIL_65_66` | STWF1 | 495 | 0.799 | 0.683 | -0.855 | 0.855 |
+| upper | `V>>N_NIL_65_66` | LIMBESS1 | 495 | 0.799 | 0.572 | -0.716 | 0.716 |
+| upper | `V^^N_NIL_1` | BHB1 | 329 | 1.000 | 0.563 | -0.563 | 0.563 |
+| upper | `V^^N_NIL_1` | BROKENH1 | 329 | 1.000 | 0.563 | -0.563 | 0.563 |
+| upper | `V^^N_NIL_1` | LIMOSF11 | 329 | 1.000 | 0.563 | -0.563 | 0.563 |
+| upper | `V^^N_NIL_1` | LIMOSF21 | 329 | 1.000 | 0.563 | -0.563 | 0.563 |
+| upper | `V^^N_NIL_1` | STWF1 | 329 | 1.000 | 0.563 | -0.563 | 0.563 |
+| upper | `N^^N_NIL_1` | UPPTUMUT | 31 | 0.953 | 1.000 | -1.049 | 1.049 |
+| upper | `N^^N_NIL_1` | SNOWYP | 31 | 0.953 | -0.991 | 1.040 | 1.040 |
+| upper | `N^^N_NIL_1` | TUMUT3 | 31 | 0.953 | 0.991 | -1.040 | 1.040 |
+| upper | `N^^N_NIL_1` | GUTHEGA | 31 | 0.953 | 0.983 | -1.031 | 1.031 |
+| upper | `N^^N_NIL_1` | BHB1 | 31 | 0.953 | 0.935 | -0.981 | 0.981 |
+
 ## Tumut 3 case study
 
 Tumut 3 appears in 180 exact VNI-linked constraint IDs and 13 constraint versions that led an observed directional envelope during the study. Across its 8,466 active state rows:
