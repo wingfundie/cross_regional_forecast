@@ -1,0 +1,15 @@
+{
+  "inputs_sha256": {
+    "README.md": "3d622a75b71a35a05105bdb756d095967159155fab949a2b46ffb02eeefb9b0c",
+    "BACKTEST_REPORT.md": "020bad7feaf1ec6977ad99234632e7bb43da8e33234ee546aa2e09767e53be91",
+    "docs/METHODS_AND_RESEARCH.md": "5d27f6120b99cc405729bb9c0e39d309511267759aa1c0e7a3e0997a75d699ca",
+    "docs/BACKTEST_PROTOCOL.md": "1b550aaa81f6f39b027301276a2efe7ca74775d75891d98971930d3eeedf9654",
+    "docs/IMPROVEMENT_ROADMAP.md": "de5395aa38402a12569016bd92341e074faf827f65c14a20711b6d85810cd71d",
+    "BUILD_PLAN.md": "4475f428ce7f765b630f3911de1c4f3c6615193c6e33cbb7e840e84017bf7bf6",
+    "docs/chart_data.json": "ec2882e63ddd2ecfd94c3e93979c8ad7ed795ac32cf09a374127911fb2ab827a"
+  },
+  "generator_sha256": "649326df8aad28f90bab046a3341b4bcd6bb91408caf2777b85151e824c6379d",
+  "markdown_version": "3.10.3",
+  "command": "python scripts/build_docs_html.py",
+  "offline": true
+}

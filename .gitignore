@@ -1,0 +1,15 @@
+data/
+models/
+results/predictions/
+results/validation_predictions/
+*.log
+*.pem
+__pycache__/
+.pytest_cache/
+.venv/
+results/
+*.pyc
+.env
+.env.*
+!.env.example
+local_exports/
