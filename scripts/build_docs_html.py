@@ -17,6 +17,7 @@ PAGES = [
     ('methods', 'docs/METHODS_AND_RESEARCH.md', 'Methods and research'),
     ('backtest', 'docs/BACKTEST_PROTOCOL.md', 'Backtest protocol'),
     ('roadmap', 'docs/IMPROVEMENT_ROADMAP.md', 'Improvement roadmap'),
+    ('constraint-features', 'docs/CONSTRAINT_NETWORK_FEATURES.md', 'Constraint-derived network features'),
     ('plan', 'BUILD_PLAN.md', 'Original build plan'),
 ]
 CSS = '''

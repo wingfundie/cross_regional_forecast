@@ -1,15 +1,16 @@
 {
   "inputs_sha256": {
-    "README.md": "f5c15f7e3eece98d79587eb1932e7e7a25433155a7c4701962d04c1e9c83718f",
+    "README.md": "4b477833d1475b32e97e7854d7a0d7343f8e045e98358fd881d8bbd84f7dc58e",
     "BACKTEST_REPORT.md": "9bc46e93214b75bbe40efd51df91528b21ebdca4a1eabe1651dbd248b56b67c8",
     "docs/RESULTS_DATA_AND_FEATURES.md": "9b6c7ffffa760d4b0a52d35558e952c48f1234e8675fad802e697d431b24f4fc",
     "docs/METHODS_AND_RESEARCH.md": "8719904b38d46c79044f697bebb64ebab51a740bcdaf43e68d86ae50ffbac48c",
     "docs/BACKTEST_PROTOCOL.md": "1b550aaa81f6f39b027301276a2efe7ca74775d75891d98971930d3eeedf9654",
-    "docs/IMPROVEMENT_ROADMAP.md": "de5395aa38402a12569016bd92341e074faf827f65c14a20711b6d85810cd71d",
+    "docs/IMPROVEMENT_ROADMAP.md": "194a24d3e89312a5afabf4aadc8d80a9a9603a7a42c0585c0338315607a7d13c",
+    "docs/CONSTRAINT_NETWORK_FEATURES.md": "117164c0cc405d635f60f031c86116b51b30e27335eb0b7f06d8b39d46f48110",
     "BUILD_PLAN.md": "4475f428ce7f765b630f3911de1c4f3c6615193c6e33cbb7e840e84017bf7bf6",
     "docs/chart_data.json": "ec2882e63ddd2ecfd94c3e93979c8ad7ed795ac32cf09a374127911fb2ab827a"
   },
-  "generator_sha256": "059d27fbf2ede6d9643650833af1d6cea6218766d016e3efab97823fdd8be746",
+  "generator_sha256": "74ae3852968180680a9780da50930b3e666969c3a4e83e231cea67d798b60105",
   "markdown_version": "3.10.3",
   "command": "python scripts/build_docs_html.py",
   "offline": true

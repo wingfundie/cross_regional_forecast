@@ -14,6 +14,8 @@ The present 72.3% coverage for nominal 80% intervals motivates better calibratio
 
 ## 2. Extra data to investigate
 
+The [constraint-derived network feature design](CONSTRAINT_NETWORK_FEATURES.md) develops the generator/constraint idea end to end: signed IC-equivalent sensitivities, a compact feature dictionary, near-binding envelopes, setter switching, data/version contracts and a VNI-first experiment plan. It is proposed work, not an implemented enhancement.
+
 The primary scope remains public NEMWEB and Open-Meteo. Listing a candidate source below does **not** establish that a complete three-year, issue-time archive exists. Before building a feature, verify public access, table/version definitions, earliest coverage, cadence, release lag, revisions and join keys. Save issue time, effective time and retrieval time separately.
 
 | Priority / candidate | Proposed features and target benefit | Availability and leakage conditions | First experiment |
