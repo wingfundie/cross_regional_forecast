@@ -22,6 +22,15 @@ CORE_FEATURES = [
 ]
 
 
+def _study_table(config, pilot, name):
+    """Resolve interval tables locally and reusable standing tables centrally."""
+    interval = {"DISPATCHCONSTRAINT", "DISPATCHLOAD"}
+    if name in interval:
+        return pilot / "tables" / f"{name}.parquet"
+    standing = DATA / config.get("standing_tables_dir", f"{config.get('output_dir', 'constraint_pilot')}/tables")
+    return standing / f"{name}.parquet"
+
+
 def canonical_bound(rhs, ic_factor, other_lhs=0.0, relative_tol=1e-8):
     scale = max(abs(float(ic_factor)), abs(float(other_lhs)), 1.0)
     if not np.isfinite(ic_factor) or abs(ic_factor) <= relative_tol * scale:
@@ -92,17 +101,17 @@ def _matrix(frame, row, column, value, rows, columns):
 
 def build(config_path=CONFIG):
     config = load_config(config_path)
-    pilot, _, tables = study_paths(config)
+    pilot, _, _ = study_paths(config)
     start, end = pd.Timestamp(config["start"]), pd.Timestamp(config["end"])
     times = pd.date_range(start.ceil("5min"), end.floor("5min"), freq="5min")
 
-    solution = _physical(pd.read_parquet(tables / "DISPATCHCONSTRAINT.parquet"), "CONSTRAINTID")
+    solution = _physical(pd.read_parquet(_study_table(config, pilot, "DISPATCHCONSTRAINT")), "CONSTRAINTID")
     solution = solution[solution.time.between(start, end)].copy()
     _num(solution, ["RHS", "LHS", "MARGINALVALUE", "VIOLATIONDEGREE", "GENCONID_VERSIONNO"])
     solution["EFFECTIVEDATE"] = pd.to_datetime(solution.GENCONID_EFFECTIVEDATE, errors="coerce")
     solution["VERSIONNO"] = solution.GENCONID_VERSIONNO
 
-    ic_factors = pd.read_parquet(tables / "SPDINTERCONNECTORCONSTRAINT.parquet")
+    ic_factors = pd.read_parquet(_study_table(config, pilot, "SPDINTERCONNECTORCONSTRAINT"))
     _num(ic_factors, ["FACTOR", "VERSIONNO"])
     ic_factors["EFFECTIVEDATE"] = pd.to_datetime(ic_factors.EFFECTIVEDATE, errors="coerce")
     target = (ic_factors[ic_factors.INTERCONNECTORID.eq(config["interconnector"])]
@@ -124,7 +133,7 @@ def build(config_path=CONFIG):
                 .dropna(subset=["version_key", "ic_factor"]).drop_duplicates("version_key")
                 .sort_values("version_key").reset_index(drop=True))
     version_keys = versions.version_key.tolist()
-    units_frame = _physical(pd.read_parquet(tables / "DISPATCHLOAD.parquet"), "DUID")
+    units_frame = _physical(pd.read_parquet(_study_table(config, pilot, "DISPATCHLOAD")), "DUID")
     units_frame = units_frame[units_frame.time.between(start, end)].copy()
     _num(units_frame, ["TOTALCLEARED", "AVAILABILITY", "RAMPUPRATE", "RAMPDOWNRATE"])
     units = sorted(units_frame.DUID.unique())
@@ -143,7 +152,7 @@ def build(config_path=CONFIG):
             for frame in [cleared, availability, ramp_up, ramp_down]:
                 frame.loc[outside, unit] = 0.0
 
-    cp_factors = pd.read_parquet(tables / "SPDCONNECTIONPOINTCONSTRAINT.parquet")
+    cp_factors = pd.read_parquet(_study_table(config, pilot, "SPDCONNECTIONPOINTCONSTRAINT"))
     _num(cp_factors, ["FACTOR", "VERSIONNO"])
     cp_factors["EFFECTIVEDATE"] = pd.to_datetime(cp_factors.EFFECTIVEDATE, errors="coerce")
     cp_factors = cp_factors[cp_factors.BIDTYPE.fillna("ENERGY").eq("ENERGY")]
@@ -194,7 +203,7 @@ def build(config_path=CONFIG):
     solution["pressure_complete"] = False
     solution.loc[eligible, "pressure_complete"] = missing_pressure[row_t, row_v] == 0
 
-    meta = pd.read_parquet(tables / "GENCONDATA.parquet")
+    meta = pd.read_parquet(_study_table(config, pilot, "GENCONDATA"))
     _num(meta, ["VERSIONNO"])
     meta["EFFECTIVEDATE"] = pd.to_datetime(meta.EFFECTIVEDATE, errors="coerce")
     meta = meta[["GENCONID", "EFFECTIVEDATE", "VERSIONNO", "LIMITTYPE", "DESCRIPTION"]].drop_duplicates()

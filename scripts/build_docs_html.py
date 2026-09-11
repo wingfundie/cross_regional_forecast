@@ -20,6 +20,7 @@ PAGES = [
     ('constraint-features', 'docs/CONSTRAINT_NETWORK_FEATURES.md', 'Constraint-derived network features'),
     ('constraint-pilot', 'docs/CONSTRAINT_FEATURE_PILOT.md', 'Executed VNI constraint-feature pilot'),
     ('vni-influence', 'docs/VNI_GENERATOR_INFLUENCE_STUDY.md', 'VNI generator influence study'),
+    ('vni-two-year', 'docs/VNI_TWO_YEAR_CONSTRAINT_STUDY.md', 'VNI two-year constraint study'),
     ('qni-influence', 'docs/QNI_GENERATOR_INFLUENCE_STUDY.md', 'QNI generator influence study'),
     ('plan', 'BUILD_PLAN.md', 'Original build plan'),
 ]
@@ -110,6 +111,10 @@ def build():
                     return f'href="#{prefix}' + (f'-{fragment}' if fragment else '') + '"'
                 if target == destination / 'index.html':
                     return 'href="#top"'
+                # The combined handbook is written under docs/html while
+                # machine-readable snapshots live under docs/data.
+                if base.startswith('data/'):
+                    return f'href="../{html.escape(value, quote=True)}"'
             return match.group(0)
         rendered = re.sub(r'href="([^"]+)"', link, rendered)
         rendered = rendered.replace('<table>', '<div class="table-wrap"><table>').replace('</table>', '</table></div>')

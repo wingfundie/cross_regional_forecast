@@ -79,6 +79,11 @@ def run(config_path=CONFIG):
         np.sign(contributions.limit_change_30m))
     contributions["aligned_with_flow_move"] = np.sign(contributions.bound_impact_mw).eq(
         np.sign(contributions.flow_change_30m))
+    contributions[["time", "direction", "constraint", "version_key", "DUID", "sensitivity",
+                   "delta_30m", "bound_impact_mw", "capacity_impact_mw", "tightening_mw",
+                   "limit_change_30m", "flow_change_30m", "reversal", "forced", "forced_onset",
+                   "contraction", "contraction_onset"]].to_parquet(
+        pilot / "unit_contributions.parquet", index=False, compression="zstd")
     valid = contributions.dropna(subset=["bound_impact_mw"])
     nonzero = valid[valid.abs_impact_mw.gt(1e-9)]
     top = (nonzero.sort_values("abs_impact_mw").groupby(["time", "direction"], as_index=False).tail(1)
