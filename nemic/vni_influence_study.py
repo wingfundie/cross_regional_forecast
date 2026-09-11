@@ -1,12 +1,13 @@
-"""Event-based generator influence study for the corrected VNI pilot."""
+"""Event-based generator influence study for a corrected IC pilot."""
 from __future__ import annotations
 
+import argparse
 import json
 import numpy as np
 import pandas as pd
 
 from .common import PROCESSED, dump
-from .constraint_ingest import PILOT
+from .constraint_ingest import CONFIG, load_config, study_paths
 
 
 def _corr(group, left, right):
@@ -22,12 +23,14 @@ def _episode_onset(mask: pd.Series) -> pd.Series:
     return mask & ~mask.shift(1, fill_value=False)
 
 
-def run():
-    features = pd.read_parquet(PILOT / "constraint_features_5min.parquet")
-    sensitivities = pd.read_parquet(PILOT / "unit_sensitivities.parquet")
-    movement = pd.read_parquet(PILOT / "unit_movements.parquet")
+def run(config_path=CONFIG):
+    config = load_config(config_path)
+    pilot, _, _ = study_paths(config)
+    features = pd.read_parquet(pilot / "constraint_features_5min.parquet")
+    sensitivities = pd.read_parquet(pilot / "unit_sensitivities.parquet")
+    movement = pd.read_parquet(pilot / "unit_movements.parquet")
     observed = pd.read_parquet(PROCESSED / "ic_5min.parquet")
-    observed = observed[observed.INTERCONNECTORID.eq("VIC1-NSW1")].copy()
+    observed = observed[observed.INTERCONNECTORID.eq(config["interconnector"])].copy()
     observed = observed[(observed.time >= features.time.min()) & (observed.time <= features.time.max())]
     observed = observed.set_index("time").reindex(features.time)
 
@@ -61,7 +64,7 @@ def run():
         states.append(state)
     states = pd.concat(states, ignore_index=True)
     events = states[states[["contraction_onset", "reversal", "forced_onset"]].any(axis=1)].copy()
-    events.to_parquet(PILOT / "influence_events.parquet", index=False, compression="zstd")
+    events.to_parquet(pilot / "influence_events.parquet", index=False, compression="zstd")
 
     contributions = states.merge(sensitivities[["version_key", "DUID", "sensitivity"]],
                                  on="version_key", how="inner")
@@ -121,7 +124,7 @@ def run():
         influence.reversal_contribution_rows.ge(20)).rank(ascending=False, method="min")
     influence["forced_rank"] = influence.forced_mean_abs_impact_mw.where(
         influence.forced_contribution_rows.ge(20)).rank(ascending=False, method="min")
-    influence.sort_values("overall_rank").to_csv(PILOT / "generator_influence.csv", index=False)
+    influence.sort_values("overall_rank").to_csv(pilot / "generator_influence.csv", index=False)
 
     constraint = (states.groupby(["direction", "constraint"], dropna=False)
                   .agg(leading_intervals=("time", "size"), contraction_intervals=("contraction", "sum"),
@@ -129,7 +132,7 @@ def run():
                        reversal_events=("reversal", "sum"), forced_intervals=("forced", "sum"),
                        min_limit=("limit", "min"), mean_bound=("bound", "mean"))
                   .reset_index().sort_values("leading_intervals", ascending=False))
-    constraint.to_csv(PILOT / "constraint_influence.csv", index=False)
+    constraint.to_csv(pilot / "constraint_influence.csv", index=False)
 
     summary = {
         "study_start": str(features.time.min()), "study_end": str(features.time.max()),
@@ -147,12 +150,17 @@ def run():
         "lower_forced_intervals": int(states.loc[states.direction.eq("lower"), "forced"].sum()),
         "upper_forced_onsets": int(states.loc[states.direction.eq("upper"), "forced_onset"].sum()),
         "lower_forced_onsets": int(states.loc[states.direction.eq("lower"), "forced_onset"].sum()),
-        "tumut3": influence[influence.DUID.eq("TUMUT3")].to_dict("records"),
+        "interconnector": config["interconnector"],
+        "highlight_units": {duid: influence[influence.DUID.eq(duid)].to_dict("records")
+                            for duid in config.get("highlight_duids", [])},
     }
-    dump(PILOT / "influence_summary.json", summary)
+    dump(pilot / "influence_summary.json", summary)
     print(json.dumps(summary, indent=2))
     return influence, constraint, summary
 
 
 if __name__ == "__main__":
-    run()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--config", default=str(CONFIG))
+    args = parser.parse_args()
+    run(args.config)

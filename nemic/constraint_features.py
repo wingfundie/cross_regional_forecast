@@ -1,4 +1,4 @@
-"""Reconstruct compact constraint-derived features for the guarded VNI pilot."""
+"""Reconstruct compact constraint-derived features for a guarded IC study."""
 from __future__ import annotations
 
 import argparse
@@ -11,7 +11,7 @@ from sklearn.ensemble import HistGradientBoostingRegressor
 from sklearn.impute import SimpleImputer
 
 from .common import DATA, PROCESSED, dump
-from .constraint_ingest import CONFIG, PILOT, TABLES, load_config
+from .constraint_ingest import CONFIG, load_config, study_paths
 
 CORE_FEATURES = [
     "conditional_upper", "conditional_lower", "upper_room", "lower_room",
@@ -92,16 +92,17 @@ def _matrix(frame, row, column, value, rows, columns):
 
 def build(config_path=CONFIG):
     config = load_config(config_path)
+    pilot, _, tables = study_paths(config)
     start, end = pd.Timestamp(config["start"]), pd.Timestamp(config["end"])
     times = pd.date_range(start.ceil("5min"), end.floor("5min"), freq="5min")
 
-    solution = _physical(pd.read_parquet(TABLES / "DISPATCHCONSTRAINT.parquet"), "CONSTRAINTID")
+    solution = _physical(pd.read_parquet(tables / "DISPATCHCONSTRAINT.parquet"), "CONSTRAINTID")
     solution = solution[solution.time.between(start, end)].copy()
     _num(solution, ["RHS", "LHS", "MARGINALVALUE", "VIOLATIONDEGREE", "GENCONID_VERSIONNO"])
     solution["EFFECTIVEDATE"] = pd.to_datetime(solution.GENCONID_EFFECTIVEDATE, errors="coerce")
     solution["VERSIONNO"] = solution.GENCONID_VERSIONNO
 
-    ic_factors = pd.read_parquet(TABLES / "SPDINTERCONNECTORCONSTRAINT.parquet")
+    ic_factors = pd.read_parquet(tables / "SPDINTERCONNECTORCONSTRAINT.parquet")
     _num(ic_factors, ["FACTOR", "VERSIONNO"])
     ic_factors["EFFECTIVEDATE"] = pd.to_datetime(ic_factors.EFFECTIVEDATE, errors="coerce")
     target = (ic_factors[ic_factors.INTERCONNECTORID.eq(config["interconnector"])]
@@ -123,7 +124,7 @@ def build(config_path=CONFIG):
                 .dropna(subset=["version_key", "ic_factor"]).drop_duplicates("version_key")
                 .sort_values("version_key").reset_index(drop=True))
     version_keys = versions.version_key.tolist()
-    units_frame = _physical(pd.read_parquet(TABLES / "DISPATCHLOAD.parquet"), "DUID")
+    units_frame = _physical(pd.read_parquet(tables / "DISPATCHLOAD.parquet"), "DUID")
     units_frame = units_frame[units_frame.time.between(start, end)].copy()
     _num(units_frame, ["TOTALCLEARED", "AVAILABILITY", "RAMPUPRATE", "RAMPDOWNRATE"])
     units = sorted(units_frame.DUID.unique())
@@ -142,7 +143,7 @@ def build(config_path=CONFIG):
             for frame in [cleared, availability, ramp_up, ramp_down]:
                 frame.loc[outside, unit] = 0.0
 
-    cp_factors = pd.read_parquet(TABLES / "SPDCONNECTIONPOINTCONSTRAINT.parquet")
+    cp_factors = pd.read_parquet(tables / "SPDCONNECTIONPOINTCONSTRAINT.parquet")
     _num(cp_factors, ["FACTOR", "VERSIONNO"])
     cp_factors["EFFECTIVEDATE"] = pd.to_datetime(cp_factors.EFFECTIVEDATE, errors="coerce")
     cp_factors = cp_factors[cp_factors.BIDTYPE.fillna("ENERGY").eq("ENERGY")]
@@ -154,11 +155,11 @@ def build(config_path=CONFIG):
     unit_sensitivity = (terms.groupby(["version_key", "GENCONID", "DUID"], as_index=False).FACTOR.sum()
                         .merge(versions[["version_key", "ic_factor"]], on="version_key", how="left"))
     unit_sensitivity["sensitivity"] = -unit_sensitivity.FACTOR / unit_sensitivity.ic_factor
-    unit_sensitivity.to_parquet(PILOT / "unit_sensitivities.parquet", index=False, compression="zstd")
+    unit_sensitivity.to_parquet(pilot / "unit_sensitivities.parquet", index=False, compression="zstd")
     movements = units_frame[["time", "DUID", "CONNECTIONPOINTID", "TOTALCLEARED"]].copy()
     movements = movements.sort_values(["DUID", "time"])
     movements["delta_30m"] = movements.groupby("DUID").TOTALCLEARED.diff(6)
-    movements.to_parquet(PILOT / "unit_movements.parquet", index=False, compression="zstd")
+    movements.to_parquet(pilot / "unit_movements.parquet", index=False, compression="zstd")
     b = _matrix(terms, "version_key", "DUID", "FACTOR", version_keys, units)
     a = versions.set_index("version_key").reindex(version_keys).ic_factor.to_numpy(dtype="float64")
     sensitivity = -b / a[:, None]
@@ -193,13 +194,13 @@ def build(config_path=CONFIG):
     solution["pressure_complete"] = False
     solution.loc[eligible, "pressure_complete"] = missing_pressure[row_t, row_v] == 0
 
-    meta = pd.read_parquet(TABLES / "GENCONDATA.parquet")
+    meta = pd.read_parquet(tables / "GENCONDATA.parquet")
     _num(meta, ["VERSIONNO"])
     meta["EFFECTIVEDATE"] = pd.to_datetime(meta.EFFECTIVEDATE, errors="coerce")
     meta = meta[["GENCONID", "EFFECTIVEDATE", "VERSIONNO", "LIMITTYPE", "DESCRIPTION"]].drop_duplicates()
     solution = solution.merge(meta, left_on=["CONSTRAINTID", "EFFECTIVEDATE", "VERSIONNO"],
                               right_on=["GENCONID", "EFFECTIVEDATE", "VERSIONNO"], how="left")
-    solution.to_parquet(PILOT / "equation_state.parquet", index=False, compression="zstd")
+    solution.to_parquet(pilot / "equation_state.parquet", index=False, compression="zstd")
 
     flow = pd.read_parquet(PROCESSED / "ic_5min.parquet")
     flow = flow[flow.INTERCONNECTORID.eq(config["interconnector"])].set_index("time").flow
@@ -242,16 +243,16 @@ def build(config_path=CONFIG):
     features["upper_envelope_move_persistence"] = 0.0
     features["lower_envelope_move_persistence"] = 0.0
     features.index.name = "time"
-    features.reset_index().to_parquet(PILOT / "constraint_features_5min.parquet", index=False, compression="zstd")
+    features.reset_index().to_parquet(pilot / "constraint_features_5min.parquet", index=False, compression="zstd")
     native = features.reset_index()
     f30 = native[native.time.dt.minute.isin([0, 30])].set_index("time")
-    f30.reset_index().to_parquet(PILOT / "constraint_features_30min.parquet", index=False, compression="zstd")
+    f30.reset_index().to_parquet(pilot / "constraint_features_30min.parquet", index=False, compression="zstd")
 
     movement = np.nanmean(np.abs(delta), axis=0)
     active_frequency = np.array([(solution.version_key.eq(key)).sum() for key in version_keys], dtype="float64")
     scores = np.nansum(np.abs(sensitivity) * active_frequency[:, None], axis=0) * movement
     discovery = pd.DataFrame({"DUID": units, "typical_30min_movement": movement, "influence_score": scores})
-    discovery.sort_values("influence_score", ascending=False).to_csv(PILOT / "generator_discovery.csv", index=False)
+    discovery.sort_values("influence_score", ascending=False).to_csv(pilot / "generator_discovery.csv", index=False)
     observed_audit = observed.reindex(features.index)
     upper_valid = features.conditional_upper.notna() & observed_audit.export.notna()
     lower_valid = features.conditional_lower.notna() & observed_audit["import"].notna()
@@ -270,19 +271,22 @@ def build(config_path=CONFIG):
              "lower_setter_match_fraction": float((features.loc[lower_valid, "lower_constraint"] ==
                                                      observed_audit.loc[lower_valid, "IMPORTGENCONID"]).mean()),
              "inconsistent_envelopes": int(features.envelope_inconsistent.eq(True).sum()),
-             "tumut3_present": "TUMUT3" in units,
-             "tumut3_constraint_count": int(unit_sensitivity[unit_sensitivity.DUID.eq("TUMUT3")].GENCONID.nunique())}
-    dump(PILOT / "feature_audit.json", audit)
+             "highlight_units": {duid: {
+                 "present": duid in units,
+                 "constraint_count": int(unit_sensitivity[unit_sensitivity.DUID.eq(duid)].GENCONID.nunique())
+             } for duid in config.get("highlight_duids", [])}}
+    dump(pilot / "feature_audit.json", audit)
     return f30, audit
 
 
 def evaluate(config_path=CONFIG):
     config = load_config(config_path)
-    if not (PILOT / "constraint_features_30min.parquet").exists():
+    pilot, _, _ = study_paths(config)
+    if not (pilot / "constraint_features_30min.parquet").exists():
         build(config_path)
-    features = pd.read_parquet(PILOT / "constraint_features_30min.parquet").set_index("time")
+    features = pd.read_parquet(pilot / "constraint_features_30min.parquet").set_index("time")
     target = pd.read_parquet(PROCESSED / "targets.parquet")
-    target = target[target.ic.eq("VIC1-NSW1")].set_index("time")
+    target = target[target.ic.eq(config["interconnector"])].set_index("time")
     target = target.loc[pd.Timestamp(config["start"]):pd.Timestamp(config["end"])]
     rows, predictions = [], []
     for name in ["export_tight", "import_tight"]:
@@ -318,8 +322,9 @@ def evaluate(config_path=CONFIG):
                                          "baseline": baseline, "candidate": candidate}))
     report = {"design": "retrospective one-month feasibility pilot; not untouched or operational",
               "targets": rows}
-    dump(PILOT / "pilot_scores.json", report)
-    pd.concat(predictions).to_parquet(PILOT / "pilot_predictions.parquet", index=False)
+    dump(pilot / "pilot_scores.json", report)
+    if predictions:
+        pd.concat(predictions).to_parquet(pilot / "pilot_predictions.parquet", index=False)
     return report
 
 

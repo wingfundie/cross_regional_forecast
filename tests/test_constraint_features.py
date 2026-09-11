@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 
 from nemic.constraint_features import bound_from_solution, canonical_bound, canonicalise_inequality, envelope
-from nemic.constraint_ingest import load_config, validate_expanded_total
+from nemic.constraint_ingest import load_config, study_paths, validate_expanded_total
 from nemic.vni_influence_study import _episode_onset
 
 
@@ -50,6 +50,24 @@ class ConstraintFeatureMath(unittest.TestCase):
 
 
 class DownloadPolicy(unittest.TestCase):
+    def test_extended_config_inherits_allowlist_and_isolates_output(self):
+        base = {
+            "experiment_id": "base", "interconnector": "VIC1-NSW1",
+            "limits": {"pilot_compressed_bytes": 100},
+            "files": [{"table": "GENCONDATA", "phase": "static", "expected_bytes": 10,
+                       "url": "https://nemweb.com.au/x/PUBLIC_ARCHIVE%23GENCONDATA%23FILE01%23202602010000.zip"}],
+        }
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            (root / "base.json").write_text(json.dumps(base), encoding="utf-8")
+            (root / "child.json").write_text(json.dumps({
+                "extends": "base.json", "experiment_id": "qni", "interconnector": "NSW1-QLD1",
+                "output_dir": "constraint_qni_test"}), encoding="utf-8")
+            config = load_config(root / "child.json")
+            self.assertEqual(config["files"], base["files"])
+            self.assertEqual(config["interconnector"], "NSW1-QLD1")
+            self.assertEqual(study_paths(config)[0].name, "constraint_qni_test")
+
     def test_rejects_non_nemweb_or_wrong_table_url(self):
         config = {
             "limits": {"pilot_compressed_bytes": 100},

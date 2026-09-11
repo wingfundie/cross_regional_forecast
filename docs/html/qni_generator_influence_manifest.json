@@ -1,0 +1,15 @@
+{
+  "config": "configs\\constraint_qni_pilot.json",
+  "config_sha256": "bbececc2e683748ec55df56cdd550634d3be2a9d7a49cd8bd6fdeea8080464da",
+  "inputs": {
+    "feature_audit.json": "064b24f771a4c3b001b9924664fef4cb59c0ff87aed6a70a266ba909eb1b343b",
+    "pilot_scores.json": "26b03c00fa1ab7a0e6e6a7fdc1db99e7e0dfa86b82f8eeb1613c8b842248524c",
+    "influence_summary.json": "906bc20529779b2cd54cc68a7ee8702a4b782d6af2658c24f58de278f7080fff",
+    "generator_influence.csv": "99092cb822ac7d34a3d62478bda7e86927ac3a432145b557c03fc81f85d2aebd",
+    "constraint_influence.csv": "02bcc855557b1520575b67d4d1982d028ca9792338792f8f51d3dd982784b58b",
+    "download_audit.json": "4a7e09109c8a7c664fbd333bc1d3492b70ad1eff73c0816b8508690fbeda6384"
+  },
+  "theme_version": "1.0",
+  "command": "python scripts/build_constraint_study_report.py --config configs\\constraint_qni_pilot.json",
+  "offline": true
+}

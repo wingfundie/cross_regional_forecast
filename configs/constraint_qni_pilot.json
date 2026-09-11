@@ -1,0 +1,15 @@
+{
+  "extends": "constraint_vni_pilot.json",
+  "experiment_id": "qni_constraint_features_202602_rerun",
+  "interconnector": "NSW1-QLD1",
+  "output_dir": "constraint_qni_202602",
+  "raw_cache_dir": "constraint_pilot/raw",
+  "highlight_duids": [],
+  "limits": {
+    "pilot_compressed_bytes": 2147483648,
+    "file_compressed_bytes": 536870912,
+    "batch_decompressed_bytes": 21474836480,
+    "min_free_bytes": 21474836480,
+    "max_concurrency": 2
+  }
+}

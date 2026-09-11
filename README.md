@@ -26,6 +26,8 @@ Five interactive charts cover flow improvement versus persistence, import/export
 
 - [VNI generator influence study](docs/VNI_GENERATOR_INFLUENCE_STUDY.md): mechanical sensitivities, distinct contraction/reversal/forced-direction events, generator and constraint rankings, the Tumut 3 case study and a compact production feature recommendation.
 
+- [QNI generator influence study](docs/QNI_GENERATOR_INFLUENCE_STUDY.md): rerun for `NSW1-QLD1` with all leading equations, invoked constraint sets, unit factors, event rankings, compact-feature results and a standalone offline HTML report. Reproduce it with `python run_constraint_pilot.py --config configs/constraint_qni_pilot.json`.
+
 - [Results, data and feature engineering](docs/RESULTS_DATA_AND_FEATURES.md): completed results, raw-to-model transformations, publication-aware network state, feature importance and a precise seasonal/diurnal/duck-curve audit.
 - [Methods and research](docs/METHODS_AND_RESEARCH.md): literature reviewed, industry definitions, data transformations, model features/settings, restriction probabilities and limitations.
 - [Backtest protocol](docs/BACKTEST_PROTOCOL.md): exact split boundaries, training/validation/test steps, publication controls, metrics, bootstrap, AEMO comparison, reproduction and cache caveats.

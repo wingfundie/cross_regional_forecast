@@ -1,6 +1,6 @@
 {
   "inputs_sha256": {
-    "README.md": "485789532d7a3f68bd54cb31e51e7c0c646749a5f429ceac263991d252e735e2",
+    "README.md": "a9a82b432777b45bbd4deadb2416adfa7362ac77e9c2e723b431538f25d647aa",
     "BACKTEST_REPORT.md": "9bc46e93214b75bbe40efd51df91528b21ebdca4a1eabe1651dbd248b56b67c8",
     "docs/RESULTS_DATA_AND_FEATURES.md": "9b6c7ffffa760d4b0a52d35558e952c48f1234e8675fad802e697d431b24f4fc",
     "docs/METHODS_AND_RESEARCH.md": "8719904b38d46c79044f697bebb64ebab51a740bcdaf43e68d86ae50ffbac48c",
@@ -9,10 +9,11 @@
     "docs/CONSTRAINT_NETWORK_FEATURES.md": "93cd5cf9b7626951ed0a99334b43ae7491846541ef65bf31bb278260bcb3b092",
     "docs/CONSTRAINT_FEATURE_PILOT.md": "891fe875fb8a1d0e3c2f9b06799066e43bef7f78c9053e56a7a0547e3e387858",
     "docs/VNI_GENERATOR_INFLUENCE_STUDY.md": "67e25b5464f63cb24e114bd1b38e90bee099e323856ee9f39d79d4ae6c9d7c74",
+    "docs/QNI_GENERATOR_INFLUENCE_STUDY.md": "129ba943b32bc92197a684e0edda69ccca9212125ce74a5d94bd0ecf61332103",
     "BUILD_PLAN.md": "4475f428ce7f765b630f3911de1c4f3c6615193c6e33cbb7e840e84017bf7bf6",
     "docs/chart_data.json": "ec2882e63ddd2ecfd94c3e93979c8ad7ed795ac32cf09a374127911fb2ab827a"
   },
-  "generator_sha256": "9e64e498c690eee9a2ed6275cfbbabafdd385dfec91f67888dafc222785bc824",
+  "generator_sha256": "345eae11163254e5f47703040ef5dca2a441ef5ddf97952b943f4ff13533dea6",
   "markdown_version": "3.10.3",
   "command": "python scripts/build_docs_html.py",
   "offline": true

@@ -1,4 +1,4 @@
-"""Dependency-scoped AEMO downloads for the VNI constraint-feature pilot."""
+"""Dependency-scoped AEMO downloads for interconnector constraint studies."""
 from __future__ import annotations
 
 import argparse
@@ -20,8 +20,19 @@ RAW = PILOT / "raw"
 TABLES = PILOT / "tables"
 
 
+def study_paths(config):
+    """Return isolated derived-output paths and the shared audited raw cache."""
+    pilot = DATA / config.get("output_dir", "constraint_pilot")
+    raw = DATA / config.get("raw_cache_dir", "constraint_pilot/raw")
+    return pilot, raw, pilot / "tables"
+
+
 def load_config(path=CONFIG):
-    config = json.loads(Path(path).read_text(encoding="utf-8"))
+    path = Path(path)
+    config = json.loads(path.read_text(encoding="utf-8"))
+    if "extends" in config:
+        base = load_config((path.parent / config["extends"]).resolve())
+        config = {**base, **{key: value for key, value in config.items() if key != "extends"}}
     files = config.get("files", [])
     if not files:
         raise ValueError("Download manifest contains no files")
@@ -43,12 +54,13 @@ def load_config(path=CONFIG):
 
 
 def audit_manifest(config):
+    pilot, raw, _ = study_paths(config)
     limits = config["limits"]
     rows = []
     client = session()
     for entry in config["files"]:
         name = unquote(urlparse(entry["url"]).path.rsplit("/", 1)[-1])
-        cached = RAW / name
+        cached = raw / name
         size = cached.stat().st_size if cached.exists() else None
         if size is None:
             response = client.head(entry["url"], timeout=(20, 60), allow_redirects=True)
@@ -63,21 +75,21 @@ def audit_manifest(config):
                      "cached": cached.exists()})
     if sum(x["actual_or_remote_bytes"] for x in rows) > int(limits["pilot_compressed_bytes"]):
         raise ValueError("Audited files exceed pilot compressed-byte cap")
-    free = shutil.disk_usage(PILOT.parent).free
+    free = shutil.disk_usage(pilot.parent).free
     if free < int(limits["min_free_bytes"]):
         raise ValueError("Insufficient free disk space for guarded extraction")
     audit = {"experiment_id": config["experiment_id"], "files": rows,
              "compressed_bytes": sum(x["actual_or_remote_bytes"] for x in rows),
              "cached_bytes": sum(x["actual_or_remote_bytes"] for x in rows if x["cached"]),
              "free_bytes": free, "limits": limits}
-    dump(PILOT / "download_audit.json", audit)
+    dump(pilot / "download_audit.json", audit)
     return audit
 
 
-def download_entry(entry, limits):
+def download_entry(entry, limits, raw=RAW):
     name = unquote(urlparse(entry["url"]).path.rsplit("/", 1)[-1])
-    path = RAW / name
-    RAW.mkdir(parents=True, exist_ok=True)
+    path = raw / name
+    raw.mkdir(parents=True, exist_ok=True)
     if path.exists():
         with zipfile.ZipFile(path) as archive:
             archive.testzip()
@@ -138,28 +150,30 @@ def _table_rows(path, table, keep=None, value_filter=None):
 
 
 def extract_static(config):
+    pilot, raw, tables = study_paths(config)
     outputs, frames = {}, {}
     for entry in config["files"]:
         if entry["phase"] not in {"static", "supplement"}:
             continue
-        path = download_entry(entry, config["limits"])
+        path = download_entry(entry, config["limits"], raw)
         frame = _table_rows(path, entry["table"])
         frames.setdefault(entry["table"], []).append(frame)
     for table, parts in frames.items():
         frame = pd.concat(parts, ignore_index=True).drop_duplicates()
-        out = TABLES / f"{table}.parquet"
+        out = tables / f"{table}.parquet"
         out.parent.mkdir(parents=True, exist_ok=True)
         frame.to_parquet(out, index=False, compression="zstd")
         outputs[table] = {"rows": len(frame), "columns": list(frame)}
-    dump(PILOT / "static_extraction.json", outputs)
+    dump(pilot / "static_extraction.json", outputs)
     return outputs
 
 
 def discover_dependencies(config):
+    pilot, _, tables = study_paths(config)
     interconnector = config["interconnector"]
-    ic_terms = pd.read_parquet(TABLES / "SPDINTERCONNECTORCONSTRAINT.parquet")
-    unit_terms = pd.read_parquet(TABLES / "SPDCONNECTIONPOINTCONSTRAINT.parquet")
-    details = pd.read_parquet(TABLES / "DUDETAILSUMMARY.parquet")
+    ic_terms = pd.read_parquet(tables / "SPDINTERCONNECTORCONSTRAINT.parquet")
+    unit_terms = pd.read_parquet(tables / "SPDCONNECTIONPOINTCONSTRAINT.parquet")
+    details = pd.read_parquet(tables / "DUDETAILSUMMARY.parquet")
     ic_terms = ic_terms[ic_terms["INTERCONNECTORID"].eq(interconnector)].copy()
     constraint_ids = set(ic_terms["GENCONID"].dropna().unique())
     observed = pd.read_parquet(PROCESSED / "ic_5min.parquet")
@@ -195,18 +209,19 @@ def discover_dependencies(config):
         "mapped_duid_count": len(duids),
         "mapping_rows_changed_after_pilot_end": int((active.LASTCHANGED > end).sum()),
         "unmapped_connection_points": sorted(resolved.loc[resolved.DUID.isna(), "CONNECTIONPOINTID"].unique()),
-        "tumut3": resolved[resolved.DUID.eq("TUMUT3")][
+        "selected_unit_examples": resolved[resolved.DUID.isin(config.get("highlight_duids", []))][
             ["GENCONID", "CONNECTIONPOINTID", "FACTOR", "DUID"]
         ].drop_duplicates().to_dict("records"),
     }
-    dump(PILOT / "dependency_audit.json", audit)
-    resolved.to_parquet(TABLES / "VNI_ENERGY_TERMS.parquet", index=False, compression="zstd")
-    dump(PILOT / "dependency_ids.json", {"constraints": constraint_ids, "duids": duids})
+    dump(pilot / "dependency_audit.json", audit)
+    resolved.to_parquet(tables / "ENERGY_TERMS.parquet", index=False, compression="zstd")
+    dump(pilot / "dependency_ids.json", {"constraints": constraint_ids, "duids": duids})
     connection_points = sorted(unit_terms["CONNECTIONPOINTID"].dropna().unique())
     return constraint_ids, duids, connection_points
 
 
 def extract_interval(config, only=None):
+    pilot, raw, tables = study_paths(config)
     constraint_ids, duids, connection_points = discover_dependencies(config)
     outputs = {}
     keep = {
@@ -220,7 +235,7 @@ def extract_interval(config, only=None):
     for entry in config["files"]:
         if entry["phase"] != "interval":
             continue
-        path = download_entry(entry, config["limits"])
+        path = download_entry(entry, config["limits"], raw)
         table = entry["table"]
         if only and table not in set(only):
             continue
@@ -234,12 +249,12 @@ def extract_interval(config, only=None):
         else:
             raise ValueError(f"No scoped filter for interval table {table}")
         frame = _table_rows(path, table, keep=keep[table], value_filter=predicate)
-        out = TABLES / f"{table}.parquet"
+        out = tables / f"{table}.parquet"
         frame.to_parquet(out, index=False, compression="zstd")
         outputs[table] = {"rows": len(frame), "columns": list(frame),
                           "filter_values": len(wanted),
                           "connection_point_filter_values": len(connection_points) if table == "DISPATCHLOAD" else 0}
-    dump(PILOT / "interval_extraction.json", outputs)
+    dump(pilot / "interval_extraction.json", outputs)
     return outputs
 
 
@@ -263,9 +278,10 @@ def validate_expanded_total(paths, limit):
 
 def run(phase="static", config_path=CONFIG):
     config = load_config(config_path)
+    pilot, raw, _ = study_paths(config)
     audit_manifest(config)
     selected = [x for x in config["files"] if phase == "all" or x["phase"] in {"static", "supplement"}]
-    paths = [download_entry(x, config["limits"]) for x in selected] if phase != "audit" else []
+    paths = [download_entry(x, config["limits"], raw) for x in selected] if phase != "audit" else []
     if paths:
         validate_expanded_total(paths, config["limits"]["batch_decompressed_bytes"])
     if phase in {"static", "all"}:
@@ -275,11 +291,11 @@ def run(phase="static", config_path=CONFIG):
     records = []
     for entry in config["files"]:
         name = unquote(urlparse(entry["url"]).path.rsplit("/", 1)[-1])
-        path = RAW / name
+        path = raw / name
         if path.exists():
             records.append({"table": entry["table"], "url": entry["url"],
                             "bytes": path.stat().st_size, "sha256": sha256(path)})
-    dump(PILOT / "manifest.json", records)
+    dump(pilot / "manifest.json", records)
 
 
 if __name__ == "__main__":
