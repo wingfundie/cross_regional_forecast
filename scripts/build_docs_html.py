@@ -22,6 +22,7 @@ PAGES = [
     ('vni-influence', 'docs/VNI_GENERATOR_INFLUENCE_STUDY.md', 'VNI generator influence study'),
     ('vni-two-year', 'docs/VNI_TWO_YEAR_CONSTRAINT_STUDY.md', 'VNI two-year constraint study'),
     ('qni-influence', 'docs/QNI_GENERATOR_INFLUENCE_STUDY.md', 'QNI generator influence study'),
+    ('qni-two-year', 'docs/QNI_TWO_YEAR_CONSTRAINT_STUDY.md', 'QNI two-year constraint study'),
     ('plan', 'BUILD_PLAN.md', 'Original build plan'),
 ]
 CSS = '''

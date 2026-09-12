@@ -1,0 +1,28 @@
+{
+  "experiment_id": "qni_constraint_features_202409_202608",
+  "interconnector": "NSW1-QLD1",
+  "start": "2024-09-01 00:00:00",
+  "end": "2026-08-31 23:55:00",
+  "standing_start": "2024-09-01 00:00:00",
+  "output_dir": "constraint_qni_2y",
+  "standing_tables_dir": "constraint_qni_2y/standing",
+  "raw_cache_dir": "constraint_qni_2y/raw",
+  "highlight_duids": ["TUMUT3", "NEWENSF2", "NEWENSF1"],
+  "static_tables": [
+    "DUDETAILSUMMARY", "GENCONDATA", "GENCONSET", "GENCONSETINVOKE",
+    "SPDCONNECTIONPOINTCONSTRAINT", "SPDINTERCONNECTORCONSTRAINT"
+  ],
+  "interval_tables": ["DISPATCHCONSTRAINT", "DISPATCHLOAD"],
+  "limits": {
+    "pilot_compressed_bytes": 10000000000,
+    "study_disk_bytes": 10000000000,
+    "cleanup_threshold_bytes": 8000000000,
+    "file_compressed_bytes": 600000000,
+    "batch_decompressed_bytes": 3000000000,
+    "min_free_bytes": 20000000000,
+    "max_concurrency": 1
+  },
+  "near_binding_mw": 50.0,
+  "near_setting_mw": 50.0,
+  "retain_interval_archives": false
+}

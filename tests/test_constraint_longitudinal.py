@@ -14,6 +14,14 @@ class LongitudinalConstraintStudyTests(unittest.TestCase):
         self.assertEqual(months_between(config["start"], config["end"])[0].strftime("%Y-%m"), "2024-09")
         self.assertEqual(months_between(config["start"], config["end"])[-1].strftime("%Y-%m"), "2026-08")
 
+    def test_qni_configuration_is_exactly_two_years_and_isolated(self):
+        config = load_study("configs/constraint_qni_2y.json")
+        self.assertEqual(config["interconnector"], "NSW1-QLD1")
+        self.assertEqual(config["standing_start"], config["start"])
+        self.assertEqual(len(months_between(config["start"], config["end"])), 24)
+        self.assertEqual(config["output_dir"], "constraint_qni_2y")
+        self.assertEqual(config["raw_cache_dir"], "constraint_qni_2y/raw")
+
     def test_broader_standing_acquisition_is_rejected(self):
         config = json.loads(Path("configs/constraint_vni_2y.json").read_text(encoding="utf-8"))
         config["standing_start"] = "2022-09-01 00:00:00"

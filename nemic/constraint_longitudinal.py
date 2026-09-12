@@ -29,9 +29,9 @@ def load_study(path=CONFIG):
     if missing:
         raise ValueError(f"Missing study configuration keys: {sorted(missing)}")
     if int(config["limits"]["study_disk_bytes"]) != 10_000_000_000:
-        raise ValueError("The approved VNI study disk budget must be exactly 10 GB")
-    if config["interconnector"] != "VIC1-NSW1":
-        raise ValueError("This initial longitudinal execution is restricted to VNI")
+        raise ValueError("The approved longitudinal study disk budget must be exactly 10 GB")
+    if config["interconnector"] not in {"VIC1-NSW1", "NSW1-QLD1"}:
+        raise ValueError("Longitudinal execution currently supports VNI and QNI")
     if pd.Timestamp(config["standing_start"]) != pd.Timestamp(config["start"]):
         raise ValueError("Standing-data acquisition must use the same two-year start as the study")
     return config

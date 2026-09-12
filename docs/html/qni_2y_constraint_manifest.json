@@ -1,0 +1,45 @@
+{
+  "config": "configs\\constraint_qni_2y.json",
+  "config_sha256": "7d8ee2c160f175d12602e1314302718ad92a5930aed905251b54ad2e7d7a39a6",
+  "inputs": {
+    "qni_2y_generator_rankings.csv": "7935c47124a42fc69af5c997ee2d68887dace7aaaee4cd2e16a68175fa8d67df",
+    "qni_2y_generator_seasonal_rankings.csv": "40426a9748ec173633d215794bee500f076982361549c25079a17c4a44f2021a",
+    "qni_2y_unit_equation_factors.csv.gz": "15d68584880e3c079218a3599abcd099fe2ee101eafca2dd6e60c4b9f0a7ab25",
+    "qni_2y_constraint_equations.csv": "157b73caa20f8e429111eb03626dbc91d732119daef9771d45b792133ca13efc",
+    "qni_2y_seasonal_summary.csv": "1986f2d755e6bdfdbd95bccf185357e90285d7b30cc9fd41e32f8e290875b588",
+    "qni_2y_diurnal_summary.csv": "6d0cf0132940623a83e936e3eb38736ea352490aa3a7170f4068b60c6f7837ea",
+    "qni_2y_constraint_population_by_season.csv": "2e98a5def7dd49bef78133e49f869a0e2d182cb14ed3a66b23da5c878ab83a2f",
+    "qni_2y_feature_dictionary.csv": "bc19a7419eae5fac04c4afaaa4483ce18e1f2a64e4f9f7987328646c3bbcf5fb",
+    "qni_2y_source_manifest.json": "1878dc0b8a885c4c3addbad6ab71d80c4810ca99a702efbc5bc3420dd92b9bee"
+  },
+  "visualizations": [
+    {
+      "id": "seasonal_state",
+      "source": "qni_2y_seasonal_summary.csv",
+      "description": "Seasonal median flow and directional limits"
+    },
+    {
+      "id": "seasonal_generator_heatmap",
+      "source": "qni_2y_generator_seasonal_rankings.csv",
+      "description": "Top-12 generator absolute pressure by season"
+    },
+    {
+      "id": "diurnal_state",
+      "source": "qni_2y_diurnal_summary.csv",
+      "description": "48-bin median flow and directional limits"
+    },
+    {
+      "id": "diurnal_event_rates",
+      "source": "qni_2y_diurnal_summary.csv",
+      "description": "Reversal and forced-direction rates by half-hour"
+    },
+    {
+      "id": "generator_pressure",
+      "source": "qni_2y_generator_rankings.csv",
+      "description": "Persistence-weighted generator exposure"
+    }
+  ],
+  "theme_version": "1.0",
+  "offline": true,
+  "command": "python scripts/build_qni_two_year_report.py"
+}

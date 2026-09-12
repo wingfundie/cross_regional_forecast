@@ -1,4 +1,4 @@
-"""Aggregate the 24-month VNI study and build reproducible Markdown/HTML reports."""
+"""Aggregate a 24-month VNI or QNI study and build reproducible reports."""
 from __future__ import annotations
 
 import argparse
@@ -200,20 +200,29 @@ def aggregate(config_path):
 def build(config_path):
     (config, root, units, unit_season, factors, equations, seasonal, diurnal,
      constraint_season, coverage) = aggregate(config_path)
+    labels = {
+        "VIC1-NSW1": {"code": "vni", "name": "VNI", "flow": "VIC→NSW"},
+        "NSW1-QLD1": {"code": "qni", "name": "QNI", "flow": "NSW→QLD"},
+    }
+    metadata = labels[config["interconnector"]]
+    prefix, name = f"{metadata['code']}_2y", metadata["name"]
+    built_label = pd.Timestamp.now().strftime("%d %b %Y").lstrip("0")
+    def artifact(suffix):
+        return f"{prefix}_{suffix}"
     docs_data = ROOT / "docs" / "data"
     docs_data.mkdir(parents=True, exist_ok=True)
-    units.to_csv(docs_data / "vni_2y_generator_rankings.csv", index=False)
-    unit_season.to_csv(docs_data / "vni_2y_generator_seasonal_rankings.csv", index=False)
-    factors_path = docs_data / "vni_2y_unit_equation_factors.csv.gz"
+    units.to_csv(docs_data / artifact("generator_rankings.csv"), index=False)
+    unit_season.to_csv(docs_data / artifact("generator_seasonal_rankings.csv"), index=False)
+    factors_path = docs_data / artifact("unit_equation_factors.csv.gz")
     # Fix the gzip timestamp so repeated report builds produce the same
     # snapshot hash and do not create needless repository churn.
     with gzip.GzipFile(filename=str(factors_path), mode="wb", mtime=0) as handle:
         factors.sort_values(["GENCONID", "version_key", "DUID"]).to_csv(
             handle, index=False, lineterminator="\n")
-    equations.to_csv(docs_data / "vni_2y_constraint_equations.csv", index=False)
-    seasonal.to_csv(docs_data / "vni_2y_seasonal_summary.csv", index=False)
-    diurnal.to_csv(docs_data / "vni_2y_diurnal_summary.csv", index=False)
-    constraint_season.to_csv(docs_data / "vni_2y_constraint_population_by_season.csv", index=False)
+    equations.to_csv(docs_data / artifact("constraint_equations.csv"), index=False)
+    seasonal.to_csv(docs_data / artifact("seasonal_summary.csv"), index=False)
+    diurnal.to_csv(docs_data / artifact("diurnal_summary.csv"), index=False)
+    constraint_season.to_csv(docs_data / artifact("constraint_population_by_season.csv"), index=False)
     feature_dictionary = pd.DataFrame([
         ("conditional_upper/lower", "MW", "Tightest reconstructed directional envelope", "2"),
         ("upper/lower_room", "MW", "Distance between observed flow and reconstructed envelope", "2"),
@@ -231,9 +240,9 @@ def build(config_path):
         ("selected unit pressure", "MW", "Frozen top-unit sensitivity multiplied by forecast movement", "4–8"),
         ("clock/annual harmonics", "unitless", "Compact diurnal and seasonal phase", "4–8"),
     ], columns=["feature_group", "unit", "definition", "recommended_variable_count"])
-    feature_dictionary.to_csv(docs_data / "vni_2y_feature_dictionary.csv", index=False)
+    feature_dictionary.to_csv(docs_data / artifact("feature_dictionary.csv"), index=False)
     standing_audit = json.loads((root / "standing" / "standing_audit.json").read_text(encoding="utf-8"))
-    (docs_data / "vni_2y_source_manifest.json").write_text(json.dumps(standing_audit, indent=2), encoding="utf-8")
+    (docs_data / artifact("source_manifest.json")).write_text(json.dumps(standing_audit, indent=2), encoding="utf-8")
 
     top = units.head(20).copy()
     top_display = top[["overall_rank", "DUID", "active_months", "equation_versions", "total_abs_impact_mw_observations",
@@ -294,6 +303,8 @@ The broadest generator-pressure candidates by persistence-weighted absolute impa
 
 Both standing and interval acquisition are hard-bounded to the same two years. The run downloads only six small monthly standing tables and two monthly interval tables. Each interval month is dependency-filtered, reduced to compact Parquet outputs, checked, and its large archives are removed before the following month. The [source manifest](data/vni_2y_source_manifest.json) records every available standing archive, byte size and SHA-256 digest; unavailable monthly table archives are listed explicitly.
 
+The dispatch-supplied exact equation version matched {coverage['exact_version_match_fraction']:.2%} of reconstructed rows; remaining rows use the documented time-effective fallback. The upper/lower reconstruction MAE of {coverage['upper_reconstruction_mae_mw']:.2f}/{coverage['lower_reconstruction_mae_mw']:.2f} MW is therefore a material quality diagnostic, and forecast testing should retain the match/fallback flag rather than treating every reconstructed bound as equally certain.
+
 ## Seasonal network state
 
 {md_table(seasonal_display)}
@@ -302,7 +313,7 @@ Spring’s median flow was {spring.flow_median_mw:,.1f} MW, with a {spring.south
 
 The full machine-readable seasonal summaries are [network state](data/vni_2y_seasonal_summary.csv), [constraint populations](data/vni_2y_constraint_population_by_season.csv), and [generator influence by season and direction](data/vni_2y_generator_seasonal_rankings.csv).
 
-The HTML report adds a seasonal generator-pressure heatmap for the twelve highest two-year contributors. It makes it easy to distinguish persistent units such as MURRAY from units whose exposure is concentrated in one season.
+The HTML report adds a seasonal generator-pressure heatmap for the twelve highest two-year contributors. It makes it easy to distinguish persistent units such as {top.iloc[0].DUID} from units whose exposure is concentrated in one season.
 
 ## Diurnal behaviour
 
@@ -374,7 +385,14 @@ python scripts/build_docs_html.py
 python -m unittest discover -s tests -v
 ```
 """
-    markdown_path = ROOT / "docs" / "VNI_TWO_YEAR_CONSTRAINT_STUDY.md"
+    if name != "VNI":
+        report = (report.replace("VIC1-NSW1", config["interconnector"])
+                  .replace("VIC→NSW", metadata["flow"])
+                  .replace("VNI", name)
+                  .replace("vni_2y_", f"{prefix}_")
+                  .replace("configs/constraint_vni_2y.json", "configs/constraint_qni_2y.json")
+                  .replace("build_vni_two_year_report.py", "build_qni_two_year_report.py"))
+    markdown_path = ROOT / "docs" / f"{name}_TWO_YEAR_CONSTRAINT_STUDY.md"
     markdown_path.write_text(report, encoding="utf-8")
 
     fig_units = px.bar(top.head(15).sort_values("total_abs_impact_mw_observations"),
@@ -419,7 +437,7 @@ python -m unittest discover -s tests -v
     rendered = rendered.replace("<table>", '<div class="table-wrap" tabindex="0"><table>').replace("</table>", "</table></div>")
     body = (hero("NEM · TWO-YEAR CONSTRAINT RECONSTRUCTION", "What moves VNI?", "Two full seasonal cycles",
                  "Binding, near-binding, reported-setter and reconstructed-envelope analysis with generator pressure, seasonal structure and diurnal regimes.",
-                 ["Data: Sep 2024–Aug 2026", "Built: 11 Sep 2026", "5-minute resolution", "Offline report"])
+                 ["Data: Sep 2024–Aug 2026", f"Built: {built_label}", "5-minute resolution", "Offline report"])
             + '<nav><a href="#findings">Findings</a><a href="#seasonal">Seasonal</a><a href="#diurnal">Diurnal</a><a href="#generators">Generators</a><a href="#methods">Full report</a></nav>'
             + '<div class="metrics">' + ''.join([
                 metric("Observations", f"{int(seasonal.intervals.sum()):,}", "Two complete years at five-minute resolution"),
@@ -449,26 +467,35 @@ python -m unittest discover -s tests -v
             + '</div><p class="figure-note">Colour records the number of study months in which the unit contributes.</p></figure></section>'
             + '<section id="methods" class="method">' + rendered + '</section>'
             + f'<footer>Generated from locally retained compact outputs. Theme {VERSION}. Rebuild with <code>python scripts/build_vni_two_year_report.py --config configs/constraint_vni_2y.json</code>.</footer>')
-    html_path = ROOT / "docs" / "html" / "vni_two_year_constraint_study.html"
+    if name != "VNI":
+        body = (body.replace("VIC1-NSW1", config["interconnector"])
+                .replace("VIC→NSW", metadata["flow"])
+                .replace("VNI", name)
+                .replace("vni_2y_", f"{prefix}_")
+                .replace("configs/constraint_vni_2y.json", "configs/constraint_qni_2y.json")
+                .replace("build_vni_two_year_report.py", "build_qni_two_year_report.py"))
+    html_path = ROOT / "docs" / "html" / f"{prefix}_constraint_study.html"
     html_path.parent.mkdir(parents=True, exist_ok=True)
-    html_path.write_text(render_page("VNI two-year constraint study", body, plotly=True, accent="blue"), encoding="utf-8")
-    inputs = ["vni_2y_generator_rankings.csv", "vni_2y_generator_seasonal_rankings.csv",
-              "vni_2y_unit_equation_factors.csv.gz", "vni_2y_constraint_equations.csv", "vni_2y_seasonal_summary.csv",
-              "vni_2y_diurnal_summary.csv", "vni_2y_constraint_population_by_season.csv",
-              "vni_2y_feature_dictionary.csv", "vni_2y_source_manifest.json"]
+    html_path.write_text(render_page(f"{name} two-year constraint study", body, plotly=True, accent="blue"), encoding="utf-8")
+    inputs = [artifact("generator_rankings.csv"), artifact("generator_seasonal_rankings.csv"),
+              artifact("unit_equation_factors.csv.gz"), artifact("constraint_equations.csv"),
+              artifact("seasonal_summary.csv"), artifact("diurnal_summary.csv"),
+              artifact("constraint_population_by_season.csv"), artifact("feature_dictionary.csv"),
+              artifact("source_manifest.json")]
     manifest = {"config": str(Path(config_path).resolve().relative_to(ROOT)),
                 "config_sha256": hashlib.sha256(Path(config_path).read_bytes()).hexdigest(),
                 "inputs": {name: hashlib.sha256((docs_data / name).read_bytes()).hexdigest() for name in inputs},
                 "visualizations": [
-                    {"id": "seasonal_state", "source": "vni_2y_seasonal_summary.csv", "description": "Seasonal median flow and directional limits"},
-                    {"id": "seasonal_generator_heatmap", "source": "vni_2y_generator_seasonal_rankings.csv", "description": "Top-12 generator absolute pressure by season"},
-                    {"id": "diurnal_state", "source": "vni_2y_diurnal_summary.csv", "description": "48-bin median flow and directional limits"},
-                    {"id": "diurnal_event_rates", "source": "vni_2y_diurnal_summary.csv", "description": "Reversal and forced-direction rates by half-hour"},
-                    {"id": "generator_pressure", "source": "vni_2y_generator_rankings.csv", "description": "Persistence-weighted generator exposure"},
+                    {"id": "seasonal_state", "source": artifact("seasonal_summary.csv"), "description": "Seasonal median flow and directional limits"},
+                    {"id": "seasonal_generator_heatmap", "source": artifact("generator_seasonal_rankings.csv"), "description": "Top-12 generator absolute pressure by season"},
+                    {"id": "diurnal_state", "source": artifact("diurnal_summary.csv"), "description": "48-bin median flow and directional limits"},
+                    {"id": "diurnal_event_rates", "source": artifact("diurnal_summary.csv"), "description": "Reversal and forced-direction rates by half-hour"},
+                    {"id": "generator_pressure", "source": artifact("generator_rankings.csv"), "description": "Persistence-weighted generator exposure"},
                 ],
                 "theme_version": VERSION, "offline": True,
-                "command": "python scripts/build_vni_two_year_report.py --config configs/constraint_vni_2y.json"}
-    (ROOT / "docs" / "html" / "vni_two_year_constraint_manifest.json").write_text(
+                "command": ("python scripts/build_vni_two_year_report.py --config configs/constraint_vni_2y.json"
+                            if name == "VNI" else "python scripts/build_qni_two_year_report.py")}
+    (ROOT / "docs" / "html" / f"{prefix}_constraint_manifest.json").write_text(
         json.dumps(manifest, indent=2), encoding="utf-8")
     print(markdown_path)
     print(html_path)
