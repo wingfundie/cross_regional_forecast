@@ -24,6 +24,8 @@ The broadest generator-pressure candidates by persistence-weighted absolute impa
 
 Both standing and interval acquisition are hard-bounded to the same two years. The run downloads only six small monthly standing tables and two monthly interval tables. Each interval month is dependency-filtered, reduced to compact Parquet outputs, checked, and its large archives are removed before the following month. The [source manifest](data/vni_2y_source_manifest.json) records every available standing archive, byte size and SHA-256 digest; unavailable monthly table archives are listed explicitly.
 
+The dispatch-supplied exact equation version matched 92.06% of reconstructed rows; remaining rows use the documented time-effective fallback. The upper/lower reconstruction MAE of 7.11/22.55 MW is therefore a material quality diagnostic, and forecast testing should retain the match/fallback flag rather than treating every reconstructed bound as equally certain.
+
 ## Seasonal network state
 
 | Season   |   Intervals |   Median flow MW |   Flow P05 | Flow P95   |   Median export limit |   Median import limit | Northward share   | Southward share   |   Reversals |   Forced export |   Forced import | Upper setter match   | Lower setter match   |
@@ -47,32 +49,101 @@ For modelling, compress the diurnal shape into clock sine/cosine, season × cloc
 
 The HTML report also shows reversal and forced-export/import rates by half-hour. These event-rate curves are useful for identifying ramp windows and directional-regime risk before adding any high-cardinality clock features.
 
+## Sharp limit contractions
+
+A sharp contraction is a fall in the reported directional limit over 30 minutes that is at or above the **90th percentile of positive 30-minute falls within the same calendar month and direction**. The threshold is recalculated by month and direction so the study captures locally exceptional moves across different seasonal regimes. `Contraction onset` marks the first five-minute interval of each contiguous contraction episode, preventing a sustained move from being presented as a new event at every interval.
+
+| Direction   |   Episodes |   Median drop MW |   P90 drop MW | Maximum drop MW   |   Episodes ≥250 MW |   Episodes ≥500 MW |   Episodes ≥1,000 MW |   Minimum monthly threshold MW |   Median monthly threshold MW |   Maximum monthly threshold MW |
+|:------------|-----------:|-----------------:|--------------:|:------------------|-------------------:|-------------------:|---------------------:|-------------------------------:|------------------------------:|-------------------------------:|
+| lower       |       3455 |            316.7 |         785.1 | 1,952.6           |               2325 |                902 |                  146 |                          137.1 |                         224.4 |                          470.5 |
+| upper       |       4029 |            349.9 |         661.9 | 2,142.4           |               3791 |                940 |                  100 |                          219.7 |                         259.7 |                          479   |
+
+Across the full study there were **7,484 directional contraction episodes**. The largest observed episode began at **2024-11-17 15:50:00**, when the upper directional limit fell **2,142.4 MW** over 30 minutes and the reconstructed leading constraint was `N::N_MNYS_2`. Very large moves, especially those ending in negative reported limits, should be reviewed as forced-flow or ramp-constraint regimes rather than treated as ordinary capacity changes.
+
+Event timing and drop size come directly from the reported directional-limit series. Generator attribution then uses the reconstructed leading equation and mapped unit sensitivities, so the 92.06% exact-version match rate and fallback flag remain material when interpreting unit ranks.
+
+### Seasonal contraction pattern
+
+| Season   | Direction   |   Episodes |   Median drop MW |   P90 drop MW | Maximum drop MW   |
+|:---------|:------------|-----------:|-----------------:|--------------:|:------------------|
+| Autumn   | lower       |        876 |            264.4 |         599   | 1,560.9           |
+| Autumn   | upper       |       1000 |            291.8 |         497.1 | 1,563.6           |
+| Spring   | lower       |        870 |            459.2 |         982.3 | 1,952.6           |
+| Spring   | upper       |        957 |            481.2 |         790.7 | 2,142.4           |
+| Summer   | lower       |        757 |            413.8 |         905.2 | 1,726.8           |
+| Summer   | upper       |        992 |            410.3 |         693.3 | 1,673.1           |
+| Winter   | lower       |        952 |            257   |         538.5 | 1,484.8           |
+| Winter   | upper       |       1080 |            311.4 |         492.1 | 1,760.4           |
+
+### Generators exposed during contractions
+
+The contraction leaderboard ranks units by the sum of **positive equation-derived tightening pressure only during contraction intervals**. This corrects the earlier report build, which displayed a contraction rank based on tightening across all intervals. Upper-direction leaders were **TUMUT3, LIMOSF11, SUNRSF1, DARLSF1, AVLSF1**; lower-direction leaders were **MURRAY, MUWAWF1, KIAMSF1, LIMOSF11, TUMUT3**.
+
+|   Rank | DUID     |   Contraction rows |   Episode-onset exposures | Positive tightening MW-observations   |   Mean positive tightening MW | Positive tightening share   |
+|-------:|:---------|-------------------:|--------------------------:|:--------------------------------------|------------------------------:|:----------------------------|
+|      1 | TUMUT3   |               9166 |                      2793 | 1,491,382                             |                        162.71 | 37.2%                       |
+|      2 | LIMOSF11 |              18240 |                      6599 | 1,435,836                             |                         78.72 | 47.3%                       |
+|      3 | SUNRSF1  |              18240 |                      6599 | 949,765                               |                         52.07 | 49.2%                       |
+|      4 | MURRAY   |              15871 |                      5995 | 900,971                               |                         56.77 | 36.4%                       |
+|      5 | DARLSF1  |              16649 |                      6010 | 530,759                               |                         31.88 | 47.2%                       |
+|      6 | UPPTUMUT |               9294 |                      2838 | 514,434                               |                         55.35 | 43.0%                       |
+|      7 | KIAMSF1  |               8305 |                      3365 | 500,011                               |                         60.21 | 33.0%                       |
+|      8 | MUWAWF1  |               9303 |                      3724 | 480,883                               |                         51.69 | 39.2%                       |
+|      9 | AVLSF1   |               9084 |                      3462 | 456,063                               |                         50.21 | 52.7%                       |
+|     10 | VBB1     |               3786 |                      1411 | 349,011                               |                         92.18 | 38.8%                       |
+|     11 | COLEASF1 |              16648 |                      6011 | 289,509                               |                         17.39 | 46.1%                       |
+|     12 | MUWAWF2  |               9283 |                      3719 | 286,745                               |                         30.89 | 42.9%                       |
+|     13 | MOORAWF1 |               4224 |                      1568 | 268,843                               |                         63.65 | 51.5%                       |
+|     14 | STWF1    |              18622 |                      6707 | 268,842                               |                         14.44 | 38.5%                       |
+|     15 | KARSF1   |              10074 |                      4206 | 259,010                               |                         25.71 | 35.9%                       |
+
+`Positive tightening share` is the fraction of a unit's contraction-state equation rows in which its 30-minute movement mechanically tightened the active directional bound. A unit can rank highly through a smaller number of very large conditional impacts. For example, TUMUT3 ranks first overall even though its pressure is positive in only 37.2% of its contraction-state rows. This does not mean every unit movement contracts VNI or that the movement independently caused the observed limit change.
+
+The most frequently leading reconstructed constraints at contraction onsets were:
+
+| Direction   | Leading constraint   |   Episodes |   Median drop MW | Maximum drop MW   |
+|:------------|:---------------------|-----------:|-----------------:|:------------------|
+| lower       | I_6F_NS_150          |        715 |            509.4 | 1,679.4           |
+| lower       | N^^V_NIL_1           |        675 |            229.8 | 1,583.8           |
+| lower       | N^^V_NIL_ARWBBA      |        469 |            231.6 | 1,184.9           |
+| lower       | V>>NIL_MLGT_MLGT     |        233 |            333.8 | 1,480.7           |
+| lower       | N^^V_CTMN_1          |        150 |            397.4 | 1,209.1           |
+| lower       | N>>NIL_BU_PST_ML_W   |        121 |            437.6 | 1,383.2           |
+| upper       | N^^N_NIL_WGLT        |        839 |            331.5 | 1,147.3           |
+| upper       | N^^N_NIL_X5_BESH     |        334 |            423.8 | 1,565.6           |
+| upper       | V::N_NIL_V2          |        252 |            283.7 | 592.3             |
+| upper       | N^^N_NIL_X5_BEKG     |        216 |            395.6 | 1,251.4           |
+| upper       | N>>BDBU_970_051      |        215 |            590.8 | 1,351.1           |
+| upper       | V::N_NIL_V1          |        170 |            275.4 | 502.7             |
+
+The full event ledger, adaptive monthly thresholds, constraint episode summary and direction-specific generator rankings are available in [contraction events](data/vni_2y_contraction_events.csv), [monthly thresholds](data/vni_2y_contraction_thresholds_monthly.csv), [contraction constraints](data/vni_2y_contraction_constraints.csv), and [generator contraction rankings](data/vni_2y_generator_contraction_rankings.csv).
+
 ## Generator influence
 
-`Abs impact MW-observations` sums `abs(-b/a × ΔMW)` while a unit appears in an applicable VNI equation. Tightening preserves the direction-specific sign; event ranks count exposure during sharp limit contractions, flow reversals and negative directional limits. `Flow-move rho` is a weighted monthly Spearman association, not causation.
+`Abs impact MW-observations` sums `abs(-b/a × ΔMW)` while a unit appears in an applicable VNI equation. Tightening preserves the direction-specific sign; contraction rank uses positive tightening during sharp-contraction intervals, while reversal and forced ranks count event exposure. `Flow-move rho` is a weighted monthly Spearman association, not causation.
 
 |   Rank | DUID     |   Active months |   Equation versions | Abs impact MW-observations   |   Mean abs impact MW | P95 abs impact MW   | Tightening MW-observations   |   Contraction rank |   Reversal rank |   Forced rank |   Flow-move rho |
 |-------:|:---------|----------------:|--------------------:|:-----------------------------|---------------------:|:--------------------|:-----------------------------|-------------------:|----------------:|--------------:|----------------:|
-|      1 | MURRAY   |              24 |                9031 | 9,396,145                    |               25.997 | 208.290             | 5,109,021                    |                  1 |               7 |            27 |           0.148 |
+|      1 | MURRAY   |              24 |                9031 | 9,396,145                    |               25.997 | 208.290             | 5,109,021                    |                  4 |               7 |            27 |           0.148 |
 |      2 | LIMOSF11 |              24 |               18011 | 6,353,232                    |               19.171 | 359.167             | 3,826,195                    |                  2 |               4 |             4 |           0.184 |
-|      3 | TUMUT3   |              24 |               10759 | 5,290,267                    |               43.909 | 1,132.969           | 3,113,576                    |                  3 |              21 |            37 |           0.131 |
-|      4 | SUNRSF1  |              24 |               18011 | 4,826,413                    |               14.429 | 216.327             | 2,803,860                    |                  4 |               4 |             4 |           0.168 |
-|      5 | UPPTUMUT |              24 |               10850 | 4,699,537                    |               23.38  | 324.925             | 2,491,376                    |                  5 |              20 |            36 |           0.092 |
-|      6 | DARLSF1  |              24 |               15423 | 4,239,370                    |               13.494 | 205.377             | 2,266,126                    |                  6 |               9 |             8 |           0.149 |
-|      7 | STWF1    |              24 |               18275 | 3,415,561                    |                9.436 | 76.881              | 1,655,683                    |                  8 |               1 |             2 |           0.016 |
-|      8 | MUWAWF1  |              24 |                5423 | 3,080,831                    |               22.506 | 373.099             | 1,727,270                    |                  7 |              32 |            41 |           0.091 |
+|      3 | TUMUT3   |              24 |               10759 | 5,290,267                    |               43.909 | 1,132.969           | 3,113,576                    |                  1 |              21 |            37 |           0.131 |
+|      4 | SUNRSF1  |              24 |               18011 | 4,826,413                    |               14.429 | 216.327             | 2,803,860                    |                  3 |               4 |             4 |           0.168 |
+|      5 | UPPTUMUT |              24 |               10850 | 4,699,537                    |               23.38  | 324.925             | 2,491,376                    |                  6 |              20 |            36 |           0.092 |
+|      6 | DARLSF1  |              24 |               15423 | 4,239,370                    |               13.494 | 205.377             | 2,266,126                    |                  5 |               9 |             8 |           0.149 |
+|      7 | STWF1    |              24 |               18275 | 3,415,561                    |                9.436 | 76.881              | 1,655,683                    |                 14 |               1 |             2 |           0.016 |
+|      8 | MUWAWF1  |              24 |                5423 | 3,080,831                    |               22.506 | 373.099             | 1,727,270                    |                  8 |              32 |            41 |           0.091 |
 |      9 | AVLSF1   |              24 |               12454 | 2,965,466                    |               30.217 | 430.972             | 1,597,201                    |                  9 |              35 |            19 |           0.148 |
-|     10 | COLEASF1 |              24 |               15352 | 2,462,983                    |                7.902 | 126.350             | 1,275,131                    |                 12 |               8 |             7 |           0.129 |
-|     11 | KIAMSF1  |              24 |                6450 | 2,425,130                    |               56.477 | 694.917             | 1,461,269                    |                 10 |              40 |            50 |          -0.066 |
-|     12 | MUWAWF2  |              24 |                5400 | 2,406,573                    |               17.695 | 198.348             | 1,314,096                    |                 11 |              33 |            43 |           0.077 |
-|     13 | CUSF1    |              14 |                2979 | 2,219,134                    |               45.396 | 425.089             | 1,163,999                    |                 13 |              98 |            40 |           0.039 |
-|     14 | ARWF1    |              24 |                4781 | 2,039,637                    |               15.265 | 243.178             | 1,033,158                    |                 16 |              39 |            46 |           0.066 |
-|     15 | RIVNB2   |              24 |               13492 | 2,013,495                    |               11.522 | 172.872             | 1,060,037                    |                 15 |              16 |            10 |           0.038 |
-|     16 | VBB1     |              24 |                3814 | 1,887,395                    |              123.472 | 2,385.220           | 1,085,289                    |                 14 |              87 |           105 |           0.063 |
-|     17 | HILLSTN1 |              24 |               14787 | 1,817,310                    |               13.013 | 469.321             | 960,612                      |                 17 |              25 |            18 |           0.133 |
-|     18 | WLWLSF1  |              24 |               10378 | 1,657,729                    |               11.012 | 194.564             | 853,487                      |                 19 |              22 |            30 |           0.125 |
-|     19 | WLWLSF2  |              24 |               10378 | 1,624,772                    |               10.729 | 195.837             | 836,766                      |                 20 |              22 |            30 |           0.126 |
-|     20 | MOORAWF1 |              24 |                4084 | 1,624,071                    |               92.658 | 1,684.108           | 934,594                      |                 18 |              78 |            92 |           0.091 |
+|     10 | COLEASF1 |              24 |               15352 | 2,462,983                    |                7.902 | 126.350             | 1,275,131                    |                 11 |               8 |             7 |           0.129 |
+|     11 | KIAMSF1  |              24 |                6450 | 2,425,130                    |               56.477 | 694.917             | 1,461,269                    |                  7 |              40 |            50 |          -0.066 |
+|     12 | MUWAWF2  |              24 |                5400 | 2,406,573                    |               17.695 | 198.348             | 1,314,096                    |                 12 |              33 |            43 |           0.077 |
+|     13 | CUSF1    |              14 |                2979 | 2,219,134                    |               45.396 | 425.089             | 1,163,999                    |                 19 |              98 |            40 |           0.039 |
+|     14 | ARWF1    |              24 |                4781 | 2,039,637                    |               15.265 | 243.178             | 1,033,158                    |                 23 |              39 |            46 |           0.066 |
+|     15 | RIVNB2   |              24 |               13492 | 2,013,495                    |               11.522 | 172.872             | 1,060,037                    |                 30 |              16 |            10 |           0.038 |
+|     16 | VBB1     |              24 |                3814 | 1,887,395                    |              123.472 | 2,385.220           | 1,085,289                    |                 10 |              87 |           105 |           0.063 |
+|     17 | HILLSTN1 |              24 |               14787 | 1,817,310                    |               13.013 | 469.321             | 960,612                      |                 18 |              25 |            18 |           0.133 |
+|     18 | WLWLSF1  |              24 |               10378 | 1,657,729                    |               11.012 | 194.564             | 853,487                      |                 27 |              22 |            30 |           0.125 |
+|     19 | WLWLSF2  |              24 |               10378 | 1,624,772                    |               10.729 | 195.837             | 836,766                      |                 29 |              22 |            30 |           0.126 |
+|     20 | MOORAWF1 |              24 |                4084 | 1,624,071                    |               92.658 | 1,684.108           | 934,594                      |                 13 |              78 |            92 |           0.091 |
 
 The complete ranking, factor extrema, equation-version coverage and event measures are in [vni_2y_generator_rankings.csv](data/vni_2y_generator_rankings.csv). The compressed [unit-by-equation factor file](data/vni_2y_unit_equation_factors.csv.gz) preserves every distinct exact-version `b` coefficient, VNI `a` coefficient and derived `-b/a` sensitivity. Seasonal ranks should be used to decide which unit-specific pressure terms are stable enough to keep. Units that rank highly in only one season should be pooled into constraint-family or regional pressure features until an untouched period confirms persistence.
 

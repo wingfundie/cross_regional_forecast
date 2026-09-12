@@ -3,6 +3,7 @@ conditional_upper/lower,MW,Tightest reconstructed directional envelope,2
 upper/lower_room,MW,Distance between observed flow and reconstructed envelope,2
 upper/lower_switch_gap,MW,Gap between leading and runner-up equation,2
 upper/lower_gen_tightening,MW,Sum of signed unit movements that contract capacity,2
+upper/lower_sharp_contraction_risk,rate/MW,Recent episode rate and magnitude of 30-minute directional-limit contractions,4
 upper/lower_gen_relief,MW,Sum of signed unit movements that expand capacity,2
 upper/lower_pressure_change,MW,Thirty-minute change in aggregate equation pressure,2
 upper/lower_available_relief,MW,Ramp and availability limited local relief proxy,2

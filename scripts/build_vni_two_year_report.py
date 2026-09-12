@@ -481,7 +481,7 @@ The contraction leaderboard ranks units by the sum of **positive equation-derive
 
 {md_table(contraction_top_display)}
 
-`Positive tightening share` is the fraction of a unit's contraction-state equation rows in which its 30-minute movement mechanically tightened the active directional bound. A unit can rank highly through a smaller number of very large conditional impacts. For example, TUMUT3 is a major lower-direction contraction exposure, but that does not mean every Tumut 3 movement contracts QNI or that its movement independently caused the observed limit change.
+`Positive tightening share` is the fraction of a unit's contraction-state equation rows in which its 30-minute movement mechanically tightened the active directional bound. A unit can rank highly through a smaller number of very large conditional impacts. For example, {contraction_top.iloc[0].DUID} ranks first overall even though its pressure is positive in only {contraction_top.iloc[0].contraction_positive_share:.1%} of its contraction-state rows. This does not mean every unit movement contracts VNI or that the movement independently caused the observed limit change.
 
 The most frequently leading reconstructed constraints at contraction onsets were:
 
