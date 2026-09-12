@@ -49,32 +49,101 @@ For modelling, compress the diurnal shape into clock sine/cosine, season × cloc
 
 The HTML report also shows reversal and forced-export/import rates by half-hour. These event-rate curves are useful for identifying ramp windows and directional-regime risk before adding any high-cardinality clock features.
 
+## Sharp limit contractions
+
+A sharp contraction is a fall in the reported directional limit over 30 minutes that is at or above the **90th percentile of positive 30-minute falls within the same calendar month and direction**. The threshold is recalculated by month and direction so the study captures locally exceptional moves across different seasonal regimes. `Contraction onset` marks the first five-minute interval of each contiguous contraction episode, preventing a sustained move from being presented as a new event at every interval.
+
+| Direction   |   Episodes |   Median drop MW |   P90 drop MW | Maximum drop MW   |   Episodes ≥250 MW |   Episodes ≥500 MW |   Episodes ≥1,000 MW |   Minimum monthly threshold MW |   Median monthly threshold MW |   Maximum monthly threshold MW |
+|:------------|-----------:|-----------------:|--------------:|:------------------|-------------------:|-------------------:|---------------------:|-------------------------------:|------------------------------:|-------------------------------:|
+| lower       |       4300 |            173   |         285.6 | 1,378.2           |                643 |                 88 |                    7 |                           96.3 |                         134.9 |                          184.9 |
+| upper       |       3122 |            167.6 |         391.5 | 1,762.9           |                621 |                219 |                   43 |                           72.6 |                         125.5 |                          174.8 |
+
+Across the full study there were **7,422 directional contraction episodes**. The largest observed episode began at **2025-09-29 09:30:00**, when the upper directional limit fell **1,762.9 MW** over 30 minutes and the reconstructed leading constraint was `#R033913_002_RAMP_V`. Very large moves, especially those ending in negative reported limits, should be reviewed as forced-flow or ramp-constraint regimes rather than treated as ordinary capacity changes.
+
+Event timing and drop size come directly from the reported directional-limit series. Generator attribution then uses the reconstructed leading equation and mapped unit sensitivities, so the 65.32% exact-version match rate and fallback flag remain material when interpreting unit ranks.
+
+### Seasonal contraction pattern
+
+| Season   | Direction   |   Episodes |   Median drop MW |   P90 drop MW | Maximum drop MW   |
+|:---------|:------------|-----------:|-----------------:|--------------:|:------------------|
+| Autumn   | lower       |       1164 |            169.2 |         264.8 | 924.9             |
+| Autumn   | upper       |        797 |            116   |         248.5 | 1,415.6           |
+| Spring   | lower       |       1087 |            174.8 |         335.9 | 1,293.1           |
+| Spring   | upper       |        769 |            164.9 |         516.6 | 1,762.9           |
+| Summer   | lower       |        928 |            200.7 |         330.7 | 1,236.4           |
+| Summer   | upper       |        740 |            177.8 |         314.2 | 1,465.7           |
+| Winter   | lower       |       1121 |            141.7 |         222.5 | 1,378.2           |
+| Winter   | upper       |        816 |            191.3 |         428.8 | 1,659.6           |
+
+### Generators exposed during contractions
+
+The contraction leaderboard ranks units by the sum of **positive equation-derived tightening pressure only during contraction intervals**. This corrects the earlier report build, which displayed a contraction rank based on tightening across all intervals. Upper-direction leaders were **LDBESS1, STAN-2, NEWENSF1, NEWENSF2, STAN-1**; lower-direction leaders were **TUMUT3, NEWENSF2, NEWENSF1, UPPTUMUT, METZSF1**.
+
+|   Rank | DUID     |   Contraction rows |   Episode-onset exposures | Positive tightening MW-observations   |   Mean positive tightening MW | Positive tightening share   |
+|-------:|:---------|-------------------:|--------------------------:|:--------------------------------------|------------------------------:|:----------------------------|
+|      1 | TUMUT3   |               3716 |                      1163 | 627,933                               |                        168.98 | 26.3%                       |
+|      2 | NEWENSF2 |              13143 |                      4731 | 489,568                               |                         37.25 | 69.8%                       |
+|      3 | NEWENSF1 |              13143 |                      4731 | 487,139                               |                         37.06 | 69.7%                       |
+|      4 | METZSF1  |              13906 |                      4957 | 205,487                               |                         14.78 | 58.4%                       |
+|      5 | UPPTUMUT |               3716 |                      1163 | 193,079                               |                         51.96 | 31.3%                       |
+|      6 | LDBESS1  |               2540 |                       823 | 189,408                               |                         74.57 | 19.8%                       |
+|      7 | STAN-2   |               2109 |                       756 | 183,766                               |                         87.13 | 38.3%                       |
+|      8 | STAN-1   |               2109 |                       756 | 168,336                               |                         79.82 | 39.1%                       |
+|      9 | STAN-4   |               2109 |                       756 | 162,594                               |                         77.1  | 36.3%                       |
+|     10 | STAN-3   |               2109 |                       756 | 141,087                               |                         66.9  | 36.0%                       |
+|     11 | CPP_3    |               2149 |                       771 | 139,986                               |                         65.14 | 31.4%                       |
+|     12 | GNNDHSF1 |              11265 |                      3918 | 124,471                               |                         11.05 | 51.0%                       |
+|     13 | ALDGASF1 |               1305 |                       464 | 120,717                               |                         92.5  | 37.4%                       |
+|     14 | BW01     |               6658 |                      2108 | 117,926                               |                         17.71 | 54.2%                       |
+|     15 | KPP_1    |               3217 |                      1080 | 117,397                               |                         36.49 | 33.4%                       |
+
+`Positive tightening share` is the fraction of a unit's contraction-state equation rows in which its 30-minute movement mechanically tightened the active directional bound. A unit can rank highly through a smaller number of very large conditional impacts. For example, TUMUT3 is a major lower-direction contraction exposure, but that does not mean every Tumut 3 movement contracts QNI or that its movement independently caused the observed limit change.
+
+The most frequently leading reconstructed constraints at contraction onsets were:
+
+| Direction   | Leading constraint   |   Episodes |   Median drop MW | Maximum drop MW   |
+|:------------|:---------------------|-----------:|-----------------:|:------------------|
+| lower       | N>>NIL_964_84_S      |       1098 |            176.4 | 672.5             |
+| lower       | N>>NIL_85_86_S       |        531 |            180.5 | 1,057.7           |
+| lower       | QN+RAISE_NIL         |        480 |            139.1 | 822.7             |
+| lower       | N>>NIL_964_88_S      |        398 |            144   | 474.2             |
+| lower       | N>>NIL_86_85_S       |        299 |            148.7 | 423.5             |
+| lower       | Q:N_760              |        281 |            188.9 | 441.0             |
+| upper       | N>>NIL_33_34         |       1525 |            160.3 | 1,253.0           |
+| upper       | N^^Q_NIL_KPP_1       |        154 |            150.1 | 391.8             |
+| upper       | N>>NIL_86_85_N       |        149 |            114.7 | 670.4             |
+| upper       | Q>>NIL_BCCP_RGLC     |        130 |            506.8 | 1,659.6           |
+| upper       | Q>>TRSP_BKSP_MESP    |        127 |            206.3 | 405.9             |
+| upper       | NQ_950_DYN_TEST      |         81 |            124.7 | 252.7             |
+
+The full event ledger, adaptive monthly thresholds, constraint episode summary and direction-specific generator rankings are available in [contraction events](data/qni_2y_contraction_events.csv), [monthly thresholds](data/qni_2y_contraction_thresholds_monthly.csv), [contraction constraints](data/qni_2y_contraction_constraints.csv), and [generator contraction rankings](data/qni_2y_generator_contraction_rankings.csv).
+
 ## Generator influence
 
-`Abs impact MW-observations` sums `abs(-b/a × ΔMW)` while a unit appears in an applicable QNI equation. Tightening preserves the direction-specific sign; event ranks count exposure during sharp limit contractions, flow reversals and negative directional limits. `Flow-move rho` is a weighted monthly Spearman association, not causation.
+`Abs impact MW-observations` sums `abs(-b/a × ΔMW)` while a unit appears in an applicable QNI equation. Tightening preserves the direction-specific sign; contraction rank uses positive tightening during sharp-contraction intervals, while reversal and forced ranks count event exposure. `Flow-move rho` is a weighted monthly Spearman association, not causation.
 
 |   Rank | DUID     |   Active months |   Equation versions | Abs impact MW-observations   |   Mean abs impact MW | P95 abs impact MW   | Tightening MW-observations   |   Contraction rank |   Reversal rank |   Forced rank |   Flow-move rho |
 |-------:|:---------|----------------:|--------------------:|:-----------------------------|---------------------:|:--------------------|:-----------------------------|-------------------:|----------------:|--------------:|----------------:|
-|      1 | NEWENSF2 |              24 |                5083 | 3,610,167                    |               15.778 | 109.828             | 1,949,683                    |                  1 |               6 |             6 |           0.075 |
-|      2 | NEWENSF1 |              24 |                5083 | 3,503,826                    |               15.238 | 102.543             | 1,897,102                    |                  2 |               6 |             6 |           0.074 |
-|      3 | SAPHWF1  |              24 |               10819 | 3,331,645                    |               11.42  | 64.598              | 1,606,821                    |                  3 |               1 |             1 |           0.063 |
-|      4 | WRWF1    |              24 |                6049 | 2,147,247                    |                7.756 | 58.347              | 1,054,020                    |                  6 |               2 |             2 |           0.049 |
-|      5 | METZSF1  |              24 |                6053 | 2,139,708                    |                8.32  | 98.086              | 1,131,077                    |                  5 |               2 |             2 |           0.013 |
-|      6 | TUMUT3   |              22 |                3635 | 2,040,814                    |              292.471 | 13,514.088          | 1,461,186                    |                  4 |              73 |            72 |           0.005 |
-|      7 | BW01     |              24 |                4269 | 1,269,843                    |               16.284 | 114.592             | 693,659                      |                  7 |              10 |            10 |          -0.03  |
-|      8 | GNNDHSF1 |              24 |                5861 | 1,193,379                    |                7.07  | 69.506              | 670,650                      |                  8 |               8 |             5 |           0.01  |
-|      9 | BW03     |              24 |                4096 | 1,064,965                    |               18.039 | 154.096             | 595,579                      |                  9 |              12 |            12 |          -0.03  |
-|     10 | BW04     |              24 |                4096 | 1,009,649                    |               14.209 | 169.058             | 546,154                      |                 11 |              12 |            12 |          -0.048 |
-|     11 | BW02     |              24 |                4269 | 869,569                      |               12.786 | 112.268             | 494,404                      |                 12 |              10 |            10 |          -0.016 |
-|     12 | UPPTUMUT |              22 |                3635 | 832,019                      |              133.065 | 2,821.663           | 557,505                      |                 10 |              73 |            72 |           0.012 |
-|     13 | WELNSF1  |              24 |                3920 | 762,861                      |               33.004 | 701.855             | 324,003                      |                 23 |              14 |            12 |          -0.015 |
-|     14 | MOREESF1 |              24 |                5642 | 701,367                      |                2.991 | 22.832              | 387,994                      |                 17 |               5 |             8 |          -0.01  |
-|     15 | MP1      |              24 |                3851 | 670,636                      |               29.662 | 328.044             | 398,750                      |                 15 |              34 |            25 |          -0     |
-|     16 | ER02     |              24 |                3012 | 670,338                      |                6.801 | 79.890              | 333,496                      |                 22 |              25 |            30 |           0.032 |
-|     17 | ER01     |              24 |                3012 | 653,803                      |               10.046 | 189.810             | 323,573                      |                 24 |              25 |            30 |           0.042 |
-|     18 | STAN-2   |              24 |                1550 | 642,269                      |               98.543 | 774.741             | 419,482                      |                 13 |             141 |           130 |           0.063 |
-|     19 | CPP_3    |              24 |                2047 | 621,961                      |               59.184 | 693.984             | 366,080                      |                 18 |             131 |            98 |           0.056 |
-|     20 | KPP_1    |              24 |                2605 | 595,789                      |               11.985 | 237.683             | 312,275                      |                 25 |              92 |            87 |           0.031 |
+|      1 | NEWENSF2 |              24 |                5083 | 3,610,167                    |               15.778 | 109.828             | 1,949,683                    |                  2 |               6 |             6 |           0.075 |
+|      2 | NEWENSF1 |              24 |                5083 | 3,503,826                    |               15.238 | 102.543             | 1,897,102                    |                  3 |               6 |             6 |           0.074 |
+|      3 | SAPHWF1  |              24 |               10819 | 3,331,645                    |               11.42  | 64.598              | 1,606,821                    |                 17 |               1 |             1 |           0.063 |
+|      4 | WRWF1    |              24 |                6049 | 2,147,247                    |                7.756 | 58.347              | 1,054,020                    |                 28 |               2 |             2 |           0.049 |
+|      5 | METZSF1  |              24 |                6053 | 2,139,708                    |                8.32  | 98.086              | 1,131,077                    |                  4 |               2 |             2 |           0.013 |
+|      6 | TUMUT3   |              22 |                3635 | 2,040,814                    |              292.471 | 13,514.088          | 1,461,186                    |                  1 |              73 |            72 |           0.005 |
+|      7 | BW01     |              24 |                4269 | 1,269,843                    |               16.284 | 114.592             | 693,659                      |                 14 |              10 |            10 |          -0.03  |
+|      8 | GNNDHSF1 |              24 |                5861 | 1,193,379                    |                7.07  | 69.506              | 670,650                      |                 12 |               8 |             5 |           0.01  |
+|      9 | BW03     |              24 |                4096 | 1,064,965                    |               18.039 | 154.096             | 595,579                      |                 18 |              12 |            12 |          -0.03  |
+|     10 | BW04     |              24 |                4096 | 1,009,649                    |               14.209 | 169.058             | 546,154                      |                 24 |              12 |            12 |          -0.048 |
+|     11 | BW02     |              24 |                4269 | 869,569                      |               12.786 | 112.268             | 494,404                      |                 21 |              10 |            10 |          -0.016 |
+|     12 | UPPTUMUT |              22 |                3635 | 832,019                      |              133.065 | 2,821.663           | 557,505                      |                  5 |              73 |            72 |           0.012 |
+|     13 | WELNSF1  |              24 |                3920 | 762,861                      |               33.004 | 701.855             | 324,003                      |                 52 |              14 |            12 |          -0.015 |
+|     14 | MOREESF1 |              24 |                5642 | 701,367                      |                2.991 | 22.832              | 387,994                      |                 35 |               5 |             8 |          -0.01  |
+|     15 | MP1      |              24 |                3851 | 670,636                      |               29.662 | 328.044             | 398,750                      |                 29 |              34 |            25 |          -0     |
+|     16 | ER02     |              24 |                3012 | 670,338                      |                6.801 | 79.890              | 333,496                      |                133 |              25 |            30 |           0.032 |
+|     17 | ER01     |              24 |                3012 | 653,803                      |               10.046 | 189.810             | 323,573                      |                132 |              25 |            30 |           0.042 |
+|     18 | STAN-2   |              24 |                1550 | 642,269                      |               98.543 | 774.741             | 419,482                      |                  7 |             141 |           130 |           0.063 |
+|     19 | CPP_3    |              24 |                2047 | 621,961                      |               59.184 | 693.984             | 366,080                      |                 11 |             131 |            98 |           0.056 |
+|     20 | KPP_1    |              24 |                2605 | 595,789                      |               11.985 | 237.683             | 312,275                      |                 15 |              92 |            87 |           0.031 |
 
 The complete ranking, factor extrema, equation-version coverage and event measures are in [qni_2y_generator_rankings.csv](data/qni_2y_generator_rankings.csv). The compressed [unit-by-equation factor file](data/qni_2y_unit_equation_factors.csv.gz) preserves every distinct exact-version `b` coefficient, QNI `a` coefficient and derived `-b/a` sensitivity. Seasonal ranks should be used to decide which unit-specific pressure terms are stable enough to keep. Units that rank highly in only one season should be pooled into constraint-family or regional pressure features until an untouched period confirms persistence.
 

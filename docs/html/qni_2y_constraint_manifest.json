@@ -1,16 +1,20 @@
 {
   "config": "configs\\constraint_qni_2y.json",
-  "config_sha256": "7d8ee2c160f175d12602e1314302718ad92a5930aed905251b54ad2e7d7a39a6",
+  "config_sha256": "c47f17945119c51ed495b11c70567449059425ba56b4186cab43657ffbd632a5",
   "inputs": {
-    "qni_2y_generator_rankings.csv": "7935c47124a42fc69af5c997ee2d68887dace7aaaee4cd2e16a68175fa8d67df",
-    "qni_2y_generator_seasonal_rankings.csv": "40426a9748ec173633d215794bee500f076982361549c25079a17c4a44f2021a",
+    "qni_2y_generator_rankings.csv": "384588fa9402b3993313092aeb7a5c6f4c5fbf60f1d63a591a5ae0f6c35c4bae",
+    "qni_2y_generator_seasonal_rankings.csv": "f4f6a04d1a306a18e21baafd25a1de4b82c1c60451676ba145863e81f843e9a4",
     "qni_2y_unit_equation_factors.csv.gz": "15d68584880e3c079218a3599abcd099fe2ee101eafca2dd6e60c4b9f0a7ab25",
     "qni_2y_constraint_equations.csv": "157b73caa20f8e429111eb03626dbc91d732119daef9771d45b792133ca13efc",
     "qni_2y_seasonal_summary.csv": "1986f2d755e6bdfdbd95bccf185357e90285d7b30cc9fd41e32f8e290875b588",
     "qni_2y_diurnal_summary.csv": "6d0cf0132940623a83e936e3eb38736ea352490aa3a7170f4068b60c6f7837ea",
     "qni_2y_constraint_population_by_season.csv": "2e98a5def7dd49bef78133e49f869a0e2d182cb14ed3a66b23da5c878ab83a2f",
-    "qni_2y_feature_dictionary.csv": "bc19a7419eae5fac04c4afaaa4483ce18e1f2a64e4f9f7987328646c3bbcf5fb",
-    "qni_2y_source_manifest.json": "1878dc0b8a885c4c3addbad6ab71d80c4810ca99a702efbc5bc3420dd92b9bee"
+    "qni_2y_feature_dictionary.csv": "25e87abc0c2dfef020defdc710a6c69caa19302bae06dae9346a5ea87067c68a",
+    "qni_2y_source_manifest.json": "1878dc0b8a885c4c3addbad6ab71d80c4810ca99a702efbc5bc3420dd92b9bee",
+    "qni_2y_contraction_events.csv": "0decf13f001185d103df6a337fb8e249f21d8740b426cedceaac19e5c87bd034",
+    "qni_2y_contraction_thresholds_monthly.csv": "577e0736db7a6a3e60e5db4cc467863fcda6372c741abb862448cc806a447712",
+    "qni_2y_contraction_constraints.csv": "dd2df2cd1e41297cf11c2d8806a1fa094ffa2decb9c3b908f96f327b2dfd3a97",
+    "qni_2y_generator_contraction_rankings.csv": "8f442caa75bf0b40e10b54387ed7082a8a674cd18b7f1054a6295304961ba10b"
   },
   "visualizations": [
     {
@@ -32,6 +36,16 @@
       "id": "diurnal_event_rates",
       "source": "qni_2y_diurnal_summary.csv",
       "description": "Reversal and forced-direction rates by half-hour"
+    },
+    {
+      "id": "contraction_diurnal",
+      "source": "qni_2y_contraction_events.csv",
+      "description": "Sharp-contraction onset rates by half-hour and direction"
+    },
+    {
+      "id": "contraction_generators",
+      "source": "qni_2y_generator_contraction_rankings.csv",
+      "description": "Generator tightening exposure during sharp contractions"
     },
     {
       "id": "generator_pressure",

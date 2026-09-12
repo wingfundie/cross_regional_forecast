@@ -59,6 +59,7 @@ def aggregate(config_path):
         raise RuntimeError(f"Study is incomplete; missing compact outputs for: {incomplete}")
 
     population, influences, sensitivity, audits = [], [], [], []
+    contraction_events, contraction_thresholds = [], []
     pressure_groups = []
     for period, path in zip(periods, month_dirs):
         label = SEASONS[period.month]
@@ -75,15 +76,36 @@ def aggregate(config_path):
         pressure["abs_impact"] = pressure.bound_impact_mw.abs()
         pressure["tightening_positive"] = pressure.tightening_mw.clip(lower=0)
         pressure["relief_positive"] = -pressure.tightening_mw.clip(upper=0)
+        pressure["contraction_abs_impact"] = pressure.abs_impact.where(pressure.contraction, 0)
+        pressure["contraction_tightening"] = pressure.tightening_positive.where(pressure.contraction, 0)
+        pressure["contraction_relief"] = pressure.relief_positive.where(pressure.contraction, 0)
+        pressure["contraction_positive"] = pressure.contraction & pressure.tightening_mw.gt(0)
         grouped = pressure.groupby(["season", "direction", "DUID"], as_index=False).agg(
             contribution_rows=("time", "size"), total_abs_impact=("abs_impact", "sum"),
             mean_abs_impact=("abs_impact", "mean"), p95_abs_impact=("abs_impact", lambda x: x.quantile(.95)),
             total_tightening=("tightening_positive", "sum"), total_relief=("relief_positive", "sum"),
             contraction_rows=("contraction", "sum"), reversal_rows=("reversal", "sum"),
             forced_rows=("forced", "sum"), contraction_onsets=("contraction_onset", "sum"),
-            forced_onsets=("forced_onset", "sum"))
+            forced_onsets=("forced_onset", "sum"), contraction_abs_impact=("contraction_abs_impact", "sum"),
+            contraction_tightening=("contraction_tightening", "sum"),
+            contraction_relief=("contraction_relief", "sum"),
+            contraction_positive_rows=("contraction_positive", "sum"))
         pressure_groups.append(grouped)
         audits.append(json.loads((path / "feature_audit.json").read_text(encoding="utf-8")))
+        event = pd.read_parquet(path / "influence_events.parquet")
+        event = event[event.contraction_onset].copy()
+        event["month"], event["season"] = str(period), label
+        event["drop_mw"] = -event.limit_change_30m
+        event["half_hour"] = event.time.dt.hour * 2 + (event.time.dt.minute >= 30).astype(int)
+        contraction_events.append(event)
+        influence_summary = json.loads((path / "influence_summary.json").read_text(encoding="utf-8"))
+        for direction in ["upper", "lower"]:
+            contraction_thresholds.append({
+                "month": str(period), "season": label, "direction": direction,
+                "threshold_mw": influence_summary[f"{direction}_contraction_threshold_mw"],
+                "contraction_intervals": influence_summary[f"{direction}_contraction_intervals"],
+                "contraction_episodes": influence_summary[f"{direction}_contraction_episodes"],
+            })
 
     pop = pd.concat(population, ignore_index=True)
     influence = pd.concat(influences, ignore_index=True)
@@ -95,7 +117,10 @@ def aggregate(config_path):
             total_tightening=("total_tightening", "sum"), total_relief=("total_relief", "sum"),
             contraction_rows=("contraction_rows", "sum"), reversal_rows=("reversal_rows", "sum"),
             forced_rows=("forced_rows", "sum"), contraction_onsets=("contraction_onsets", "sum"),
-            forced_onsets=("forced_onsets", "sum"))
+            forced_onsets=("forced_onsets", "sum"), contraction_abs_impact=("contraction_abs_impact", "sum"),
+            contraction_tightening=("contraction_tightening", "sum"),
+            contraction_relief=("contraction_relief", "sum"),
+            contraction_positive_rows=("contraction_positive_rows", "sum"))
 
     unit = unit_season.groupby("DUID", as_index=False).agg(
         contribution_rows=("contribution_rows", "sum"), total_abs_impact_mw_observations=("total_abs_impact", "sum"),
@@ -103,7 +128,11 @@ def aggregate(config_path):
         total_tightening_mw_observations=("total_tightening", "sum"),
         total_relief_mw_observations=("total_relief", "sum"), contraction_contribution_rows=("contraction_rows", "sum"),
         reversal_contribution_rows=("reversal_rows", "sum"), forced_contribution_rows=("forced_rows", "sum"),
-        contraction_onsets=("contraction_onsets", "sum"), forced_onsets=("forced_onsets", "sum"))
+        contraction_onsets=("contraction_onsets", "sum"), forced_onsets=("forced_onsets", "sum"),
+        contraction_abs_impact_mw_observations=("contraction_abs_impact", "sum"),
+        contraction_tightening_mw_observations=("contraction_tightening", "sum"),
+        contraction_relief_mw_observations=("contraction_relief", "sum"),
+        contraction_positive_rows=("contraction_positive_rows", "sum"))
     monthly = influence.groupby("DUID")
     corr = monthly.apply(lambda x: pd.Series({
         "active_months": x.month.nunique(),
@@ -119,7 +148,12 @@ def aggregate(config_path):
         sensitivity_max=("sensitivity", "max"), sensitivity_abs_max=("sensitivity", lambda x: x.abs().max()))
     unit = unit.merge(factor_stats, on="DUID", how="left")
     unit["overall_rank"] = unit.total_abs_impact_mw_observations.rank(method="min", ascending=False).astype(int)
-    unit["contraction_rank"] = unit.total_tightening_mw_observations.rank(method="min", ascending=False).astype(int)
+    unit["contraction_positive_share"] = (unit.contraction_positive_rows
+                                           / unit.contraction_contribution_rows.replace(0, np.nan))
+    unit["contraction_mean_positive_tightening_mw"] = (unit.contraction_tightening_mw_observations
+                                                        / unit.contraction_contribution_rows.replace(0, np.nan))
+    unit["contraction_rank"] = unit.contraction_tightening_mw_observations.rank(
+        method="min", ascending=False).astype(int)
     unit["reversal_rank"] = unit.reversal_contribution_rows.rank(method="min", ascending=False).astype(int)
     unit["forced_rank"] = unit.forced_contribution_rows.rank(method="min", ascending=False).astype(int)
     unit = unit.sort_values("overall_rank")
@@ -194,12 +228,21 @@ def aggregate(config_path):
     coverage = {key: weighted(np.array([a[key] for a in audits]), audit_weights) for key in [
         "upper_coverage", "lower_coverage", "upper_reconstruction_mae_mw",
         "lower_reconstruction_mae_mw", "exact_version_match_fraction"]}
-    return config, root, unit, unit_season, factors, equations, seasonal, diurnal, constraint_season, coverage
+    events = pd.concat(contraction_events, ignore_index=True)
+    thresholds = pd.DataFrame(contraction_thresholds)
+    contraction_constraints = (events.groupby(["direction", "constraint"], dropna=False, as_index=False)
+                               .agg(episodes=("time", "size"), median_drop_mw=("drop_mw", "median"),
+                                    p90_drop_mw=("drop_mw", lambda x: x.quantile(.9)),
+                                    max_drop_mw=("drop_mw", "max"))
+                               .sort_values(["direction", "episodes"], ascending=[True, False]))
+    return (config, root, unit, unit_season, factors, equations, seasonal, diurnal,
+            constraint_season, coverage, events, thresholds, contraction_constraints)
 
 
 def build(config_path):
     (config, root, units, unit_season, factors, equations, seasonal, diurnal,
-     constraint_season, coverage) = aggregate(config_path)
+     constraint_season, coverage, contraction_events, contraction_thresholds,
+     contraction_constraints) = aggregate(config_path)
     labels = {
         "VIC1-NSW1": {"code": "vni", "name": "VNI", "flow": "VIC→NSW"},
         "NSW1-QLD1": {"code": "qni", "name": "QNI", "flow": "NSW→QLD"},
@@ -223,11 +266,45 @@ def build(config_path):
     seasonal.to_csv(docs_data / artifact("seasonal_summary.csv"), index=False)
     diurnal.to_csv(docs_data / artifact("diurnal_summary.csv"), index=False)
     constraint_season.to_csv(docs_data / artifact("constraint_population_by_season.csv"), index=False)
+    event_columns = ["time", "month", "season", "half_hour", "direction", "constraint", "version_key",
+                     "drop_mw", "contraction_threshold_mw", "limit", "flow"]
+    contraction_events[event_columns].to_csv(docs_data / artifact("contraction_events.csv"), index=False)
+    contraction_thresholds.to_csv(docs_data / artifact("contraction_thresholds_monthly.csv"), index=False)
+    contraction_constraints.to_csv(docs_data / artifact("contraction_constraints.csv"), index=False)
+
+    contraction_overall = units[["DUID", "contraction_contribution_rows", "contraction_onsets",
+                                 "contraction_tightening_mw_observations",
+                                 "contraction_relief_mw_observations",
+                                 "contraction_abs_impact_mw_observations",
+                                 "contraction_mean_positive_tightening_mw",
+                                 "contraction_positive_share", "contraction_rank"]].copy()
+    contraction_overall.insert(0, "scope", "overall")
+    contraction_by_direction = (unit_season.groupby(["direction", "DUID"], as_index=False)
+                                .agg(contraction_contribution_rows=("contraction_rows", "sum"),
+                                     contraction_onsets=("contraction_onsets", "sum"),
+                                     contraction_tightening_mw_observations=("contraction_tightening", "sum"),
+                                     contraction_relief_mw_observations=("contraction_relief", "sum"),
+                                     contraction_abs_impact_mw_observations=("contraction_abs_impact", "sum"),
+                                     contraction_positive_rows=("contraction_positive_rows", "sum")))
+    contraction_by_direction["contraction_mean_positive_tightening_mw"] = (
+        contraction_by_direction.contraction_tightening_mw_observations
+        / contraction_by_direction.contraction_contribution_rows.replace(0, np.nan))
+    contraction_by_direction["contraction_positive_share"] = (
+        contraction_by_direction.contraction_positive_rows
+        / contraction_by_direction.contraction_contribution_rows.replace(0, np.nan))
+    contraction_by_direction["contraction_rank"] = (contraction_by_direction.groupby("direction")
+        .contraction_tightening_mw_observations.rank(method="min", ascending=False).astype(int))
+    contraction_by_direction = contraction_by_direction.rename(columns={"direction": "scope"}).drop(
+        columns="contraction_positive_rows")
+    contraction_rankings = pd.concat([contraction_overall, contraction_by_direction], ignore_index=True)
+    contraction_rankings = contraction_rankings.sort_values(["scope", "contraction_rank"])
+    contraction_rankings.to_csv(docs_data / artifact("generator_contraction_rankings.csv"), index=False)
     feature_dictionary = pd.DataFrame([
         ("conditional_upper/lower", "MW", "Tightest reconstructed directional envelope", "2"),
         ("upper/lower_room", "MW", "Distance between observed flow and reconstructed envelope", "2"),
         ("upper/lower_switch_gap", "MW", "Gap between leading and runner-up equation", "2"),
         ("upper/lower_gen_tightening", "MW", "Sum of signed unit movements that contract capacity", "2"),
+        ("upper/lower_sharp_contraction_risk", "rate/MW", "Recent episode rate and magnitude of 30-minute directional-limit contractions", "4"),
         ("upper/lower_gen_relief", "MW", "Sum of signed unit movements that expand capacity", "2"),
         ("upper/lower_pressure_change", "MW", "Thirty-minute change in aggregate equation pressure", "2"),
         ("upper/lower_available_relief", "MW", "Ramp and availability limited local relief proxy", "2"),
@@ -275,8 +352,69 @@ def build(config_path):
     for col in ["Northward share", "Southward share", "Upper setter match", "Lower setter match"]:
         seasonal_display[col] = seasonal_display[col].map(lambda x: f"{x:.1%}")
 
+    contraction_direction = (contraction_events.groupby("direction", as_index=False)
+                             .agg(episodes=("time", "size"), median_drop_mw=("drop_mw", "median"),
+                                  p90_drop_mw=("drop_mw", lambda x: x.quantile(.9)),
+                                  max_drop_mw=("drop_mw", "max")))
+    severity = (contraction_events.groupby("direction").drop_mw.apply(lambda x: pd.Series({
+        "episodes_ge_250_mw": x.ge(250).sum(), "episodes_ge_500_mw": x.ge(500).sum(),
+        "episodes_ge_1000_mw": x.ge(1000).sum()})).unstack().reset_index())
+    threshold_stats = (contraction_thresholds.groupby("direction", as_index=False)
+                       .agg(monthly_threshold_min_mw=("threshold_mw", "min"),
+                            monthly_threshold_median_mw=("threshold_mw", "median"),
+                            monthly_threshold_max_mw=("threshold_mw", "max")))
+    contraction_direction = (contraction_direction.merge(severity, on="direction", how="left")
+                             .merge(threshold_stats, on="direction", how="left"))
+    contraction_direction_display = contraction_direction.copy()
+    contraction_direction_display.columns = ["Direction", "Episodes", "Median drop MW", "P90 drop MW",
+                                               "Maximum drop MW", "Episodes ≥250 MW", "Episodes ≥500 MW",
+                                               "Episodes ≥1,000 MW", "Minimum monthly threshold MW",
+                                               "Median monthly threshold MW", "Maximum monthly threshold MW"]
+    for col in ["Median drop MW", "P90 drop MW", "Maximum drop MW", "Minimum monthly threshold MW",
+                "Median monthly threshold MW", "Maximum monthly threshold MW"]:
+        contraction_direction_display[col] = contraction_direction_display[col].map(lambda x: fmt(x, 1))
+
+    contraction_seasonal = (contraction_events.groupby(["season", "direction"], as_index=False)
+                           .agg(episodes=("time", "size"), median_drop_mw=("drop_mw", "median"),
+                                p90_drop_mw=("drop_mw", lambda x: x.quantile(.9)),
+                                max_drop_mw=("drop_mw", "max")))
+    contraction_seasonal_display = contraction_seasonal.copy()
+    contraction_seasonal_display.columns = ["Season", "Direction", "Episodes", "Median drop MW",
+                                             "P90 drop MW", "Maximum drop MW"]
+    for col in contraction_seasonal_display.columns[3:]:
+        contraction_seasonal_display[col] = contraction_seasonal_display[col].map(lambda x: fmt(x, 1))
+
+    contraction_top = units.sort_values("contraction_rank").head(15).copy()
+    contraction_top_display = contraction_top[["contraction_rank", "DUID", "contraction_contribution_rows",
+                                               "contraction_onsets", "contraction_tightening_mw_observations",
+                                               "contraction_mean_positive_tightening_mw",
+                                               "contraction_positive_share"]].copy()
+    contraction_top_display.columns = ["Rank", "DUID", "Contraction rows", "Episode-onset exposures",
+                                       "Positive tightening MW-observations", "Mean positive tightening MW",
+                                       "Positive tightening share"]
+    contraction_top_display["Positive tightening MW-observations"] = contraction_top_display[
+        "Positive tightening MW-observations"].map(lambda x: fmt(x, 0))
+    contraction_top_display["Mean positive tightening MW"] = contraction_top_display[
+        "Mean positive tightening MW"].map(lambda x: fmt(x, 2))
+    contraction_top_display["Positive tightening share"] = contraction_top_display[
+        "Positive tightening share"].map(lambda x: f"{x:.1%}")
+
+    contraction_constraint_display = (contraction_constraints.groupby("direction", group_keys=False).head(6)
+                                      [["direction", "constraint", "episodes", "median_drop_mw", "max_drop_mw"]]
+                                      .copy())
+    contraction_constraint_display.columns = ["Direction", "Leading constraint", "Episodes",
+                                               "Median drop MW", "Maximum drop MW"]
+    for col in ["Median drop MW", "Maximum drop MW"]:
+        contraction_constraint_display[col] = contraction_constraint_display[col].map(lambda x: fmt(x, 1))
+
+    upper_contraction_names = ", ".join(contraction_rankings[contraction_rankings.scope.eq("upper")]
+                                        .sort_values("contraction_rank").DUID.head(5))
+    lower_contraction_names = ", ".join(contraction_rankings[contraction_rankings.scope.eq("lower")]
+                                        .sort_values("contraction_rank").DUID.head(5))
+
     top_names = ", ".join(top.DUID.head(8))
     spring = seasonal.set_index("season").loc["Spring"]
+    largest_contraction = contraction_events.loc[contraction_events.drop_mw.idxmax()]
     report = f"""# VNI two-year constraint, topology and generator-influence study
 
 ## Result and scope
@@ -323,9 +461,37 @@ For modelling, compress the diurnal shape into clock sine/cosine, season × cloc
 
 The HTML report also shows reversal and forced-export/import rates by half-hour. These event-rate curves are useful for identifying ramp windows and directional-regime risk before adding any high-cardinality clock features.
 
+## Sharp limit contractions
+
+A sharp contraction is a fall in the reported directional limit over 30 minutes that is at or above the **90th percentile of positive 30-minute falls within the same calendar month and direction**. The threshold is recalculated by month and direction so the study captures locally exceptional moves across different seasonal regimes. `Contraction onset` marks the first five-minute interval of each contiguous contraction episode, preventing a sustained move from being presented as a new event at every interval.
+
+{md_table(contraction_direction_display)}
+
+Across the full study there were **{len(contraction_events):,} directional contraction episodes**. The largest observed episode began at **{largest_contraction.time}**, when the {largest_contraction.direction} directional limit fell **{largest_contraction.drop_mw:,.1f} MW** over 30 minutes and the reconstructed leading constraint was `{largest_contraction.constraint}`. Very large moves, especially those ending in negative reported limits, should be reviewed as forced-flow or ramp-constraint regimes rather than treated as ordinary capacity changes.
+
+Event timing and drop size come directly from the reported directional-limit series. Generator attribution then uses the reconstructed leading equation and mapped unit sensitivities, so the {coverage['exact_version_match_fraction']:.2%} exact-version match rate and fallback flag remain material when interpreting unit ranks.
+
+### Seasonal contraction pattern
+
+{md_table(contraction_seasonal_display)}
+
+### Generators exposed during contractions
+
+The contraction leaderboard ranks units by the sum of **positive equation-derived tightening pressure only during contraction intervals**. This corrects the earlier report build, which displayed a contraction rank based on tightening across all intervals. Upper-direction leaders were **{upper_contraction_names}**; lower-direction leaders were **{lower_contraction_names}**.
+
+{md_table(contraction_top_display)}
+
+`Positive tightening share` is the fraction of a unit's contraction-state equation rows in which its 30-minute movement mechanically tightened the active directional bound. A unit can rank highly through a smaller number of very large conditional impacts. For example, TUMUT3 is a major lower-direction contraction exposure, but that does not mean every Tumut 3 movement contracts QNI or that its movement independently caused the observed limit change.
+
+The most frequently leading reconstructed constraints at contraction onsets were:
+
+{md_table(contraction_constraint_display)}
+
+The full event ledger, adaptive monthly thresholds, constraint episode summary and direction-specific generator rankings are available in [contraction events](data/vni_2y_contraction_events.csv), [monthly thresholds](data/vni_2y_contraction_thresholds_monthly.csv), [contraction constraints](data/vni_2y_contraction_constraints.csv), and [generator contraction rankings](data/vni_2y_generator_contraction_rankings.csv).
+
 ## Generator influence
 
-`Abs impact MW-observations` sums `abs(-b/a × ΔMW)` while a unit appears in an applicable VNI equation. Tightening preserves the direction-specific sign; event ranks count exposure during sharp limit contractions, flow reversals and negative directional limits. `Flow-move rho` is a weighted monthly Spearman association, not causation.
+`Abs impact MW-observations` sums `abs(-b/a × ΔMW)` while a unit appears in an applicable VNI equation. Tightening preserves the direction-specific sign; contraction rank uses positive tightening during sharp-contraction intervals, while reversal and forced ranks count event exposure. `Flow-move rho` is a weighted monthly Spearman association, not causation.
 
 {md_table(top_display)}
 
@@ -431,6 +597,26 @@ python -m unittest discover -s tests -v
     fig_events.update_xaxes(dtick=4)
     fig_events.update_yaxes(tickformat=".1%")
     style_plotly(fig_events, "Diurnal event regime rates", height=420)
+    contraction_diurnal = (contraction_events.groupby(["direction", "half_hour"], as_index=False)
+                           .agg(episodes=("time", "size"))
+                           .merge(diurnal[["half_hour", "intervals", "time_of_day"]], on="half_hour", how="left"))
+    contraction_diurnal["episode_rate"] = contraction_diurnal.episodes / contraction_diurnal.intervals
+    fig_contraction_day = go.Figure()
+    for direction, label in [("upper", "Upper / export"), ("lower", "Lower / import")]:
+        x = contraction_diurnal[contraction_diurnal.direction.eq(direction)]
+        fig_contraction_day.add_scatter(x=x.time_of_day, y=x.episode_rate, name=label, mode="lines")
+    fig_contraction_day.update_xaxes(dtick=4)
+    fig_contraction_day.update_yaxes(tickformat=".1%")
+    style_plotly(fig_contraction_day, "Sharp-contraction onset rate by time of day", height=430)
+
+    fig_contraction_units = px.bar(
+        contraction_top.sort_values("contraction_tightening_mw_observations"),
+        x="contraction_tightening_mw_observations", y="DUID", orientation="h",
+        color="contraction_positive_share",
+        labels={"contraction_tightening_mw_observations": "Positive tightening during contractions (MW-observations)",
+                "contraction_positive_share": "Positive share", "DUID": "Generator"})
+    fig_contraction_units.update_coloraxes(colorbar_tickformat=".0%")
+    style_plotly(fig_contraction_units, "Generator tightening during sharp contractions", height=590)
 
     rendered = markdown.markdown(report, extensions=["tables", "fenced_code"])
     rendered = rendered.replace('href="data/', 'href="../data/')
@@ -438,7 +624,7 @@ python -m unittest discover -s tests -v
     body = (hero("NEM · TWO-YEAR CONSTRAINT RECONSTRUCTION", "What moves VNI?", "Two full seasonal cycles",
                  "Binding, near-binding, reported-setter and reconstructed-envelope analysis with generator pressure, seasonal structure and diurnal regimes.",
                  ["Data: Sep 2024–Aug 2026", f"Built: {built_label}", "5-minute resolution", "Offline report"])
-            + '<nav><a href="#findings">Findings</a><a href="#seasonal">Seasonal</a><a href="#diurnal">Diurnal</a><a href="#generators">Generators</a><a href="#methods">Full report</a></nav>'
+            + '<nav><a href="#findings">Findings</a><a href="#seasonal">Seasonal</a><a href="#diurnal">Diurnal</a><a href="#contractions">Contractions</a><a href="#generators">Generators</a><a href="#methods">Full report</a></nav>'
             + '<div class="metrics">' + ''.join([
                 metric("Observations", f"{int(seasonal.intervals.sum()):,}", "Two complete years at five-minute resolution"),
                 metric("Generators", f"{len(units):,}", "DUIDs with valid equation sensitivities"),
@@ -449,6 +635,7 @@ python -m unittest discover -s tests -v
                 finding(1, "Topology changes the sign", "A generator's VNI effect is represented by its exact equation sensitivity −b/a and movement, preserving constraint direction and version."),
                 finding(2, "Season and clock both matter", "Two complete cycles expose recurring seasonal transfer regimes and a 48-bin intraday shape without requiring one model variable per interval."),
                 finding(3, "Keep setter populations separate", "Published binding equations, near-binding candidates, reported setters and reconstructed leaders answer different questions and are all retained."),
+                finding(4, "Sharp contractions are episodic", f"{len(contraction_events):,} upper/lower episode onsets identify the generators and leading equations present during abrupt 30-minute limit reductions."),
             ]) + '</div></section>'
             + '<section id="seasonal"><div class="section-kicker">SEASONAL STATE</div><figure><figcaption>Flow and median directional capability</figcaption><div class="chart-scroll">'
             + fig_season.to_html(full_html=False, include_plotlyjs=False, config={"responsive": True, "displaylogo": False})
@@ -462,6 +649,12 @@ python -m unittest discover -s tests -v
             + '<figure><figcaption>Half-hour event regime rates</figcaption><div class="chart-scroll">'
             + fig_events.to_html(full_html=False, include_plotlyjs=False, config={"responsive": True, "displaylogo": False})
             + '</div><p class="figure-note">Rates are event counts divided by the available two-year observations in each half-hour bin.</p></figure></section>'
+            + '<section id="contractions"><div class="section-kicker">SHARP LIMIT CONTRACTIONS</div><figure><figcaption>When contraction episodes begin</figcaption><div class="chart-scroll">'
+            + fig_contraction_day.to_html(full_html=False, include_plotlyjs=False, config={"responsive": True, "displaylogo": False})
+            + '</div><p class="figure-note">An onset is the first interval in a contiguous episode above the month-and-direction 90th-percentile 30-minute drop threshold.</p></figure>'
+            + '<figure><figcaption>Generator tightening during contraction intervals</figcaption><div class="chart-scroll">'
+            + fig_contraction_units.to_html(full_html=False, include_plotlyjs=False, config={"responsive": True, "displaylogo": False})
+            + '</div><p class="figure-note">Bars sum positive equation-derived tightening only while the reported directional limit is in a sharp-contraction state; colour shows how often the unit pressure is tightening rather than relieving.</p></figure></section>'
             + '<section id="generators"><div class="section-kicker">GENERATOR PRESSURE</div><figure><figcaption>Persistence-weighted mechanical exposure</figcaption><div class="chart-scroll">'
             + fig_units.to_html(full_html=False, include_plotlyjs=False, config={"responsive": True, "displaylogo": False})
             + '</div><p class="figure-note">Colour records the number of study months in which the unit contributes.</p></figure></section>'
@@ -481,7 +674,9 @@ python -m unittest discover -s tests -v
               artifact("unit_equation_factors.csv.gz"), artifact("constraint_equations.csv"),
               artifact("seasonal_summary.csv"), artifact("diurnal_summary.csv"),
               artifact("constraint_population_by_season.csv"), artifact("feature_dictionary.csv"),
-              artifact("source_manifest.json")]
+              artifact("source_manifest.json"), artifact("contraction_events.csv"),
+              artifact("contraction_thresholds_monthly.csv"), artifact("contraction_constraints.csv"),
+              artifact("generator_contraction_rankings.csv")]
     manifest = {"config": str(Path(config_path).resolve().relative_to(ROOT)),
                 "config_sha256": hashlib.sha256(Path(config_path).read_bytes()).hexdigest(),
                 "inputs": {name: hashlib.sha256((docs_data / name).read_bytes()).hexdigest() for name in inputs},
@@ -490,6 +685,8 @@ python -m unittest discover -s tests -v
                     {"id": "seasonal_generator_heatmap", "source": artifact("generator_seasonal_rankings.csv"), "description": "Top-12 generator absolute pressure by season"},
                     {"id": "diurnal_state", "source": artifact("diurnal_summary.csv"), "description": "48-bin median flow and directional limits"},
                     {"id": "diurnal_event_rates", "source": artifact("diurnal_summary.csv"), "description": "Reversal and forced-direction rates by half-hour"},
+                    {"id": "contraction_diurnal", "source": artifact("contraction_events.csv"), "description": "Sharp-contraction onset rates by half-hour and direction"},
+                    {"id": "contraction_generators", "source": artifact("generator_contraction_rankings.csv"), "description": "Generator tightening exposure during sharp contractions"},
                     {"id": "generator_pressure", "source": artifact("generator_rankings.csv"), "description": "Persistence-weighted generator exposure"},
                 ],
                 "theme_version": VERSION, "offline": True,

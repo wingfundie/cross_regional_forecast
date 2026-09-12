@@ -10692,8 +10692,388 @@ python -m unittest discover -s tests -v
 <p>The <a href="../data/qni_2y_diurnal_summary.csv">48-bin diurnal table</a> contains mean, median, P05 and P95 flow; median and P05 directional limits; directional-flow shares; reversal counts; and forced-direction interval counts for every half-hour of the day across the two-year sample. This preserves the morning ramp, solar-hours transfer pattern, evening ramp and overnight regime without adding 48 raw dummy variables to a forecast.</p>
 <p>For modelling, compress the diurnal shape into clock sine/cosine, season × clock interactions, and a small set of learned training-only profiles or principal components. Retain explicit ramp-window flags only when cross-validation shows they improve event forecasts.</p>
 <p>The HTML report also shows reversal and forced-export/import rates by half-hour. These event-rate curves are useful for identifying ramp windows and directional-regime risk before adding any high-cardinality clock features.</p>
+<h2 id="qni-two-year-sharp-limit-contractions">Sharp limit contractions</h2>
+<p>A sharp contraction is a fall in the reported directional limit over 30 minutes that is at or above the <strong>90th percentile of positive 30-minute falls within the same calendar month and direction</strong>. The threshold is recalculated by month and direction so the study captures locally exceptional moves across different seasonal regimes. <code>Contraction onset</code> marks the first five-minute interval of each contiguous contraction episode, preventing a sustained move from being presented as a new event at every interval.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">Direction</th>
+<th style="text-align: right;">Episodes</th>
+<th style="text-align: right;">Median drop MW</th>
+<th style="text-align: right;">P90 drop MW</th>
+<th style="text-align: left;">Maximum drop MW</th>
+<th style="text-align: right;">Episodes ≥250 MW</th>
+<th style="text-align: right;">Episodes ≥500 MW</th>
+<th style="text-align: right;">Episodes ≥1,000 MW</th>
+<th style="text-align: right;">Minimum monthly threshold MW</th>
+<th style="text-align: right;">Median monthly threshold MW</th>
+<th style="text-align: right;">Maximum monthly threshold MW</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">lower</td>
+<td style="text-align: right;">4300</td>
+<td style="text-align: right;">173</td>
+<td style="text-align: right;">285.6</td>
+<td style="text-align: left;">1,378.2</td>
+<td style="text-align: right;">643</td>
+<td style="text-align: right;">88</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">96.3</td>
+<td style="text-align: right;">134.9</td>
+<td style="text-align: right;">184.9</td>
+</tr>
+<tr>
+<td style="text-align: left;">upper</td>
+<td style="text-align: right;">3122</td>
+<td style="text-align: right;">167.6</td>
+<td style="text-align: right;">391.5</td>
+<td style="text-align: left;">1,762.9</td>
+<td style="text-align: right;">621</td>
+<td style="text-align: right;">219</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">72.6</td>
+<td style="text-align: right;">125.5</td>
+<td style="text-align: right;">174.8</td>
+</tr>
+</tbody>
+</table></div>
+<p>Across the full study there were <strong>7,422 directional contraction episodes</strong>. The largest observed episode began at <strong>2025-09-29 09:30:00</strong>, when the upper directional limit fell <strong>1,762.9 MW</strong> over 30 minutes and the reconstructed leading constraint was <code>#R033913_002_RAMP_V</code>. Very large moves, especially those ending in negative reported limits, should be reviewed as forced-flow or ramp-constraint regimes rather than treated as ordinary capacity changes.</p>
+<p>Event timing and drop size come directly from the reported directional-limit series. Generator attribution then uses the reconstructed leading equation and mapped unit sensitivities, so the 65.32% exact-version match rate and fallback flag remain material when interpreting unit ranks.</p>
+<h3 id="qni-two-year-seasonal-contraction-pattern">Seasonal contraction pattern</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">Season</th>
+<th style="text-align: left;">Direction</th>
+<th style="text-align: right;">Episodes</th>
+<th style="text-align: right;">Median drop MW</th>
+<th style="text-align: right;">P90 drop MW</th>
+<th style="text-align: left;">Maximum drop MW</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Autumn</td>
+<td style="text-align: left;">lower</td>
+<td style="text-align: right;">1164</td>
+<td style="text-align: right;">169.2</td>
+<td style="text-align: right;">264.8</td>
+<td style="text-align: left;">924.9</td>
+</tr>
+<tr>
+<td style="text-align: left;">Autumn</td>
+<td style="text-align: left;">upper</td>
+<td style="text-align: right;">797</td>
+<td style="text-align: right;">116</td>
+<td style="text-align: right;">248.5</td>
+<td style="text-align: left;">1,415.6</td>
+</tr>
+<tr>
+<td style="text-align: left;">Spring</td>
+<td style="text-align: left;">lower</td>
+<td style="text-align: right;">1087</td>
+<td style="text-align: right;">174.8</td>
+<td style="text-align: right;">335.9</td>
+<td style="text-align: left;">1,293.1</td>
+</tr>
+<tr>
+<td style="text-align: left;">Spring</td>
+<td style="text-align: left;">upper</td>
+<td style="text-align: right;">769</td>
+<td style="text-align: right;">164.9</td>
+<td style="text-align: right;">516.6</td>
+<td style="text-align: left;">1,762.9</td>
+</tr>
+<tr>
+<td style="text-align: left;">Summer</td>
+<td style="text-align: left;">lower</td>
+<td style="text-align: right;">928</td>
+<td style="text-align: right;">200.7</td>
+<td style="text-align: right;">330.7</td>
+<td style="text-align: left;">1,236.4</td>
+</tr>
+<tr>
+<td style="text-align: left;">Summer</td>
+<td style="text-align: left;">upper</td>
+<td style="text-align: right;">740</td>
+<td style="text-align: right;">177.8</td>
+<td style="text-align: right;">314.2</td>
+<td style="text-align: left;">1,465.7</td>
+</tr>
+<tr>
+<td style="text-align: left;">Winter</td>
+<td style="text-align: left;">lower</td>
+<td style="text-align: right;">1121</td>
+<td style="text-align: right;">141.7</td>
+<td style="text-align: right;">222.5</td>
+<td style="text-align: left;">1,378.2</td>
+</tr>
+<tr>
+<td style="text-align: left;">Winter</td>
+<td style="text-align: left;">upper</td>
+<td style="text-align: right;">816</td>
+<td style="text-align: right;">191.3</td>
+<td style="text-align: right;">428.8</td>
+<td style="text-align: left;">1,659.6</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="qni-two-year-generators-exposed-during-contractions">Generators exposed during contractions</h3>
+<p>The contraction leaderboard ranks units by the sum of <strong>positive equation-derived tightening pressure only during contraction intervals</strong>. This corrects the earlier report build, which displayed a contraction rank based on tightening across all intervals. Upper-direction leaders were <strong>LDBESS1, STAN-2, NEWENSF1, NEWENSF2, STAN-1</strong>; lower-direction leaders were <strong>TUMUT3, NEWENSF2, NEWENSF1, UPPTUMUT, METZSF1</strong>.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: right;">Rank</th>
+<th style="text-align: left;">DUID</th>
+<th style="text-align: right;">Contraction rows</th>
+<th style="text-align: right;">Episode-onset exposures</th>
+<th style="text-align: left;">Positive tightening MW-observations</th>
+<th style="text-align: right;">Mean positive tightening MW</th>
+<th style="text-align: left;">Positive tightening share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TUMUT3</td>
+<td style="text-align: right;">3716</td>
+<td style="text-align: right;">1163</td>
+<td style="text-align: left;">627,933</td>
+<td style="text-align: right;">168.98</td>
+<td style="text-align: left;">26.3%</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">NEWENSF2</td>
+<td style="text-align: right;">13143</td>
+<td style="text-align: right;">4731</td>
+<td style="text-align: left;">489,568</td>
+<td style="text-align: right;">37.25</td>
+<td style="text-align: left;">69.8%</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">NEWENSF1</td>
+<td style="text-align: right;">13143</td>
+<td style="text-align: right;">4731</td>
+<td style="text-align: left;">487,139</td>
+<td style="text-align: right;">37.06</td>
+<td style="text-align: left;">69.7%</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">METZSF1</td>
+<td style="text-align: right;">13906</td>
+<td style="text-align: right;">4957</td>
+<td style="text-align: left;">205,487</td>
+<td style="text-align: right;">14.78</td>
+<td style="text-align: left;">58.4%</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">UPPTUMUT</td>
+<td style="text-align: right;">3716</td>
+<td style="text-align: right;">1163</td>
+<td style="text-align: left;">193,079</td>
+<td style="text-align: right;">51.96</td>
+<td style="text-align: left;">31.3%</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">LDBESS1</td>
+<td style="text-align: right;">2540</td>
+<td style="text-align: right;">823</td>
+<td style="text-align: left;">189,408</td>
+<td style="text-align: right;">74.57</td>
+<td style="text-align: left;">19.8%</td>
+</tr>
+<tr>
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">STAN-2</td>
+<td style="text-align: right;">2109</td>
+<td style="text-align: right;">756</td>
+<td style="text-align: left;">183,766</td>
+<td style="text-align: right;">87.13</td>
+<td style="text-align: left;">38.3%</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">STAN-1</td>
+<td style="text-align: right;">2109</td>
+<td style="text-align: right;">756</td>
+<td style="text-align: left;">168,336</td>
+<td style="text-align: right;">79.82</td>
+<td style="text-align: left;">39.1%</td>
+</tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">STAN-4</td>
+<td style="text-align: right;">2109</td>
+<td style="text-align: right;">756</td>
+<td style="text-align: left;">162,594</td>
+<td style="text-align: right;">77.1</td>
+<td style="text-align: left;">36.3%</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">STAN-3</td>
+<td style="text-align: right;">2109</td>
+<td style="text-align: right;">756</td>
+<td style="text-align: left;">141,087</td>
+<td style="text-align: right;">66.9</td>
+<td style="text-align: left;">36.0%</td>
+</tr>
+<tr>
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">CPP_3</td>
+<td style="text-align: right;">2149</td>
+<td style="text-align: right;">771</td>
+<td style="text-align: left;">139,986</td>
+<td style="text-align: right;">65.14</td>
+<td style="text-align: left;">31.4%</td>
+</tr>
+<tr>
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">GNNDHSF1</td>
+<td style="text-align: right;">11265</td>
+<td style="text-align: right;">3918</td>
+<td style="text-align: left;">124,471</td>
+<td style="text-align: right;">11.05</td>
+<td style="text-align: left;">51.0%</td>
+</tr>
+<tr>
+<td style="text-align: right;">13</td>
+<td style="text-align: left;">ALDGASF1</td>
+<td style="text-align: right;">1305</td>
+<td style="text-align: right;">464</td>
+<td style="text-align: left;">120,717</td>
+<td style="text-align: right;">92.5</td>
+<td style="text-align: left;">37.4%</td>
+</tr>
+<tr>
+<td style="text-align: right;">14</td>
+<td style="text-align: left;">BW01</td>
+<td style="text-align: right;">6658</td>
+<td style="text-align: right;">2108</td>
+<td style="text-align: left;">117,926</td>
+<td style="text-align: right;">17.71</td>
+<td style="text-align: left;">54.2%</td>
+</tr>
+<tr>
+<td style="text-align: right;">15</td>
+<td style="text-align: left;">KPP_1</td>
+<td style="text-align: right;">3217</td>
+<td style="text-align: right;">1080</td>
+<td style="text-align: left;">117,397</td>
+<td style="text-align: right;">36.49</td>
+<td style="text-align: left;">33.4%</td>
+</tr>
+</tbody>
+</table></div>
+<p><code>Positive tightening share</code> is the fraction of a unit's contraction-state equation rows in which its 30-minute movement mechanically tightened the active directional bound. A unit can rank highly through a smaller number of very large conditional impacts. For example, TUMUT3 is a major lower-direction contraction exposure, but that does not mean every Tumut 3 movement contracts QNI or that its movement independently caused the observed limit change.</p>
+<p>The most frequently leading reconstructed constraints at contraction onsets were:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">Direction</th>
+<th style="text-align: left;">Leading constraint</th>
+<th style="text-align: right;">Episodes</th>
+<th style="text-align: right;">Median drop MW</th>
+<th style="text-align: left;">Maximum drop MW</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">lower</td>
+<td style="text-align: left;">N&gt;&gt;NIL_964_84_S</td>
+<td style="text-align: right;">1098</td>
+<td style="text-align: right;">176.4</td>
+<td style="text-align: left;">672.5</td>
+</tr>
+<tr>
+<td style="text-align: left;">lower</td>
+<td style="text-align: left;">N&gt;&gt;NIL_85_86_S</td>
+<td style="text-align: right;">531</td>
+<td style="text-align: right;">180.5</td>
+<td style="text-align: left;">1,057.7</td>
+</tr>
+<tr>
+<td style="text-align: left;">lower</td>
+<td style="text-align: left;">QN+RAISE_NIL</td>
+<td style="text-align: right;">480</td>
+<td style="text-align: right;">139.1</td>
+<td style="text-align: left;">822.7</td>
+</tr>
+<tr>
+<td style="text-align: left;">lower</td>
+<td style="text-align: left;">N&gt;&gt;NIL_964_88_S</td>
+<td style="text-align: right;">398</td>
+<td style="text-align: right;">144</td>
+<td style="text-align: left;">474.2</td>
+</tr>
+<tr>
+<td style="text-align: left;">lower</td>
+<td style="text-align: left;">N&gt;&gt;NIL_86_85_S</td>
+<td style="text-align: right;">299</td>
+<td style="text-align: right;">148.7</td>
+<td style="text-align: left;">423.5</td>
+</tr>
+<tr>
+<td style="text-align: left;">lower</td>
+<td style="text-align: left;">Q:N_760</td>
+<td style="text-align: right;">281</td>
+<td style="text-align: right;">188.9</td>
+<td style="text-align: left;">441.0</td>
+</tr>
+<tr>
+<td style="text-align: left;">upper</td>
+<td style="text-align: left;">N&gt;&gt;NIL_33_34</td>
+<td style="text-align: right;">1525</td>
+<td style="text-align: right;">160.3</td>
+<td style="text-align: left;">1,253.0</td>
+</tr>
+<tr>
+<td style="text-align: left;">upper</td>
+<td style="text-align: left;">N^^Q_NIL_KPP_1</td>
+<td style="text-align: right;">154</td>
+<td style="text-align: right;">150.1</td>
+<td style="text-align: left;">391.8</td>
+</tr>
+<tr>
+<td style="text-align: left;">upper</td>
+<td style="text-align: left;">N&gt;&gt;NIL_86_85_N</td>
+<td style="text-align: right;">149</td>
+<td style="text-align: right;">114.7</td>
+<td style="text-align: left;">670.4</td>
+</tr>
+<tr>
+<td style="text-align: left;">upper</td>
+<td style="text-align: left;">Q&gt;&gt;NIL_BCCP_RGLC</td>
+<td style="text-align: right;">130</td>
+<td style="text-align: right;">506.8</td>
+<td style="text-align: left;">1,659.6</td>
+</tr>
+<tr>
+<td style="text-align: left;">upper</td>
+<td style="text-align: left;">Q&gt;&gt;TRSP_BKSP_MESP</td>
+<td style="text-align: right;">127</td>
+<td style="text-align: right;">206.3</td>
+<td style="text-align: left;">405.9</td>
+</tr>
+<tr>
+<td style="text-align: left;">upper</td>
+<td style="text-align: left;">NQ_950_DYN_TEST</td>
+<td style="text-align: right;">81</td>
+<td style="text-align: right;">124.7</td>
+<td style="text-align: left;">252.7</td>
+</tr>
+</tbody>
+</table></div>
+<p>The full event ledger, adaptive monthly thresholds, constraint episode summary and direction-specific generator rankings are available in <a href="../data/qni_2y_contraction_events.csv">contraction events</a>, <a href="../data/qni_2y_contraction_thresholds_monthly.csv">monthly thresholds</a>, <a href="../data/qni_2y_contraction_constraints.csv">contraction constraints</a>, and <a href="../data/qni_2y_generator_contraction_rankings.csv">generator contraction rankings</a>.</p>
 <h2 id="qni-two-year-generator-influence">Generator influence</h2>
-<p><code>Abs impact MW-observations</code> sums <code>abs(-b/a × ΔMW)</code> while a unit appears in an applicable QNI equation. Tightening preserves the direction-specific sign; event ranks count exposure during sharp limit contractions, flow reversals and negative directional limits. <code>Flow-move rho</code> is a weighted monthly Spearman association, not causation.</p>
+<p><code>Abs impact MW-observations</code> sums <code>abs(-b/a × ΔMW)</code> while a unit appears in an applicable QNI equation. Tightening preserves the direction-specific sign; contraction rank uses positive tightening during sharp-contraction intervals, while reversal and forced ranks count event exposure. <code>Flow-move rho</code> is a weighted monthly Spearman association, not causation.</p>
 <div class="table-wrap"><table>
 <thead>
 <tr>
@@ -10721,7 +11101,7 @@ python -m unittest discover -s tests -v
 <td style="text-align: right;">15.778</td>
 <td style="text-align: left;">109.828</td>
 <td style="text-align: left;">1,949,683</td>
-<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
 <td style="text-align: right;">6</td>
 <td style="text-align: right;">6</td>
 <td style="text-align: right;">0.075</td>
@@ -10735,7 +11115,7 @@ python -m unittest discover -s tests -v
 <td style="text-align: right;">15.238</td>
 <td style="text-align: left;">102.543</td>
 <td style="text-align: left;">1,897,102</td>
-<td style="text-align: right;">2</td>
+<td style="text-align: right;">3</td>
 <td style="text-align: right;">6</td>
 <td style="text-align: right;">6</td>
 <td style="text-align: right;">0.074</td>
@@ -10749,7 +11129,7 @@ python -m unittest discover -s tests -v
 <td style="text-align: right;">11.42</td>
 <td style="text-align: left;">64.598</td>
 <td style="text-align: left;">1,606,821</td>
-<td style="text-align: right;">3</td>
+<td style="text-align: right;">17</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">0.063</td>
@@ -10763,7 +11143,7 @@ python -m unittest discover -s tests -v
 <td style="text-align: right;">7.756</td>
 <td style="text-align: left;">58.347</td>
 <td style="text-align: left;">1,054,020</td>
-<td style="text-align: right;">6</td>
+<td style="text-align: right;">28</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">0.049</td>
@@ -10777,7 +11157,7 @@ python -m unittest discover -s tests -v
 <td style="text-align: right;">8.32</td>
 <td style="text-align: left;">98.086</td>
 <td style="text-align: left;">1,131,077</td>
-<td style="text-align: right;">5</td>
+<td style="text-align: right;">4</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">0.013</td>
@@ -10791,7 +11171,7 @@ python -m unittest discover -s tests -v
 <td style="text-align: right;">292.471</td>
 <td style="text-align: left;">13,514.088</td>
 <td style="text-align: left;">1,461,186</td>
-<td style="text-align: right;">4</td>
+<td style="text-align: right;">1</td>
 <td style="text-align: right;">73</td>
 <td style="text-align: right;">72</td>
 <td style="text-align: right;">0.005</td>
@@ -10805,7 +11185,7 @@ python -m unittest discover -s tests -v
 <td style="text-align: right;">16.284</td>
 <td style="text-align: left;">114.592</td>
 <td style="text-align: left;">693,659</td>
-<td style="text-align: right;">7</td>
+<td style="text-align: right;">14</td>
 <td style="text-align: right;">10</td>
 <td style="text-align: right;">10</td>
 <td style="text-align: right;">-0.03</td>
@@ -10819,7 +11199,7 @@ python -m unittest discover -s tests -v
 <td style="text-align: right;">7.07</td>
 <td style="text-align: left;">69.506</td>
 <td style="text-align: left;">670,650</td>
-<td style="text-align: right;">8</td>
+<td style="text-align: right;">12</td>
 <td style="text-align: right;">8</td>
 <td style="text-align: right;">5</td>
 <td style="text-align: right;">0.01</td>
@@ -10833,7 +11213,7 @@ python -m unittest discover -s tests -v
 <td style="text-align: right;">18.039</td>
 <td style="text-align: left;">154.096</td>
 <td style="text-align: left;">595,579</td>
-<td style="text-align: right;">9</td>
+<td style="text-align: right;">18</td>
 <td style="text-align: right;">12</td>
 <td style="text-align: right;">12</td>
 <td style="text-align: right;">-0.03</td>
@@ -10847,7 +11227,7 @@ python -m unittest discover -s tests -v
 <td style="text-align: right;">14.209</td>
 <td style="text-align: left;">169.058</td>
 <td style="text-align: left;">546,154</td>
-<td style="text-align: right;">11</td>
+<td style="text-align: right;">24</td>
 <td style="text-align: right;">12</td>
 <td style="text-align: right;">12</td>
 <td style="text-align: right;">-0.048</td>
@@ -10861,7 +11241,7 @@ python -m unittest discover -s tests -v
 <td style="text-align: right;">12.786</td>
 <td style="text-align: left;">112.268</td>
 <td style="text-align: left;">494,404</td>
-<td style="text-align: right;">12</td>
+<td style="text-align: right;">21</td>
 <td style="text-align: right;">10</td>
 <td style="text-align: right;">10</td>
 <td style="text-align: right;">-0.016</td>
@@ -10875,7 +11255,7 @@ python -m unittest discover -s tests -v
 <td style="text-align: right;">133.065</td>
 <td style="text-align: left;">2,821.663</td>
 <td style="text-align: left;">557,505</td>
-<td style="text-align: right;">10</td>
+<td style="text-align: right;">5</td>
 <td style="text-align: right;">73</td>
 <td style="text-align: right;">72</td>
 <td style="text-align: right;">0.012</td>
@@ -10889,7 +11269,7 @@ python -m unittest discover -s tests -v
 <td style="text-align: right;">33.004</td>
 <td style="text-align: left;">701.855</td>
 <td style="text-align: left;">324,003</td>
-<td style="text-align: right;">23</td>
+<td style="text-align: right;">52</td>
 <td style="text-align: right;">14</td>
 <td style="text-align: right;">12</td>
 <td style="text-align: right;">-0.015</td>
@@ -10903,7 +11283,7 @@ python -m unittest discover -s tests -v
 <td style="text-align: right;">2.991</td>
 <td style="text-align: left;">22.832</td>
 <td style="text-align: left;">387,994</td>
-<td style="text-align: right;">17</td>
+<td style="text-align: right;">35</td>
 <td style="text-align: right;">5</td>
 <td style="text-align: right;">8</td>
 <td style="text-align: right;">-0.01</td>
@@ -10917,7 +11297,7 @@ python -m unittest discover -s tests -v
 <td style="text-align: right;">29.662</td>
 <td style="text-align: left;">328.044</td>
 <td style="text-align: left;">398,750</td>
-<td style="text-align: right;">15</td>
+<td style="text-align: right;">29</td>
 <td style="text-align: right;">34</td>
 <td style="text-align: right;">25</td>
 <td style="text-align: right;">-0</td>
@@ -10931,7 +11311,7 @@ python -m unittest discover -s tests -v
 <td style="text-align: right;">6.801</td>
 <td style="text-align: left;">79.890</td>
 <td style="text-align: left;">333,496</td>
-<td style="text-align: right;">22</td>
+<td style="text-align: right;">133</td>
 <td style="text-align: right;">25</td>
 <td style="text-align: right;">30</td>
 <td style="text-align: right;">0.032</td>
@@ -10945,7 +11325,7 @@ python -m unittest discover -s tests -v
 <td style="text-align: right;">10.046</td>
 <td style="text-align: left;">189.810</td>
 <td style="text-align: left;">323,573</td>
-<td style="text-align: right;">24</td>
+<td style="text-align: right;">132</td>
 <td style="text-align: right;">25</td>
 <td style="text-align: right;">30</td>
 <td style="text-align: right;">0.042</td>
@@ -10959,7 +11339,7 @@ python -m unittest discover -s tests -v
 <td style="text-align: right;">98.543</td>
 <td style="text-align: left;">774.741</td>
 <td style="text-align: left;">419,482</td>
-<td style="text-align: right;">13</td>
+<td style="text-align: right;">7</td>
 <td style="text-align: right;">141</td>
 <td style="text-align: right;">130</td>
 <td style="text-align: right;">0.063</td>
@@ -10973,7 +11353,7 @@ python -m unittest discover -s tests -v
 <td style="text-align: right;">59.184</td>
 <td style="text-align: left;">693.984</td>
 <td style="text-align: left;">366,080</td>
-<td style="text-align: right;">18</td>
+<td style="text-align: right;">11</td>
 <td style="text-align: right;">131</td>
 <td style="text-align: right;">98</td>
 <td style="text-align: right;">0.056</td>
@@ -10987,7 +11367,7 @@ python -m unittest discover -s tests -v
 <td style="text-align: right;">11.985</td>
 <td style="text-align: left;">237.683</td>
 <td style="text-align: left;">312,275</td>
-<td style="text-align: right;">25</td>
+<td style="text-align: right;">15</td>
 <td style="text-align: right;">92</td>
 <td style="text-align: right;">87</td>
 <td style="text-align: right;">0.031</td>

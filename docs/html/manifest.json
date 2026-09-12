@@ -1,6 +1,6 @@
 {
   "inputs_sha256": {
-    "README.md": "d7d42f8c1a80f681f2f920689da3222c2a9db719c87b84f3595ef59b187c23dd",
+    "README.md": "adab34fa98587bb7f12ac26fe32b68f26e2c93c874c92dd7a3057e5e00467a9d",
     "BACKTEST_REPORT.md": "9bc46e93214b75bbe40efd51df91528b21ebdca4a1eabe1651dbd248b56b67c8",
     "docs/RESULTS_DATA_AND_FEATURES.md": "9b6c7ffffa760d4b0a52d35558e952c48f1234e8675fad802e697d431b24f4fc",
     "docs/METHODS_AND_RESEARCH.md": "8719904b38d46c79044f697bebb64ebab51a740bcdaf43e68d86ae50ffbac48c",
@@ -11,11 +11,11 @@
     "docs/VNI_GENERATOR_INFLUENCE_STUDY.md": "67e25b5464f63cb24e114bd1b38e90bee099e323856ee9f39d79d4ae6c9d7c74",
     "docs/VNI_TWO_YEAR_CONSTRAINT_STUDY.md": "6e91ff6d41a8d00c55cb40eaf023a219f49d37efb48bfe0f51696fb3768da8dd",
     "docs/QNI_GENERATOR_INFLUENCE_STUDY.md": "129ba943b32bc92197a684e0edda69ccca9212125ce74a5d94bd0ecf61332103",
-    "docs/QNI_TWO_YEAR_CONSTRAINT_STUDY.md": "b5621873e50bbecd07035bd57e8044286e082e5d467dac55f6fbe6f3626cd89f",
+    "docs/QNI_TWO_YEAR_CONSTRAINT_STUDY.md": "8c3498fee9d5dbf7f9505c486a9e5c83d2558d1be74bd598ee0da0e430fd50ac",
     "BUILD_PLAN.md": "4475f428ce7f765b630f3911de1c4f3c6615193c6e33cbb7e840e84017bf7bf6",
     "docs/chart_data.json": "ec2882e63ddd2ecfd94c3e93979c8ad7ed795ac32cf09a374127911fb2ab827a"
   },
-  "generator_sha256": "4be09efbdab89853f9d1e3f79c6d44cd8258ade8d1c3a85d4e7c66a0e4149942",
+  "generator_sha256": "b6a2e69718029792a30f51b0bb03168da0e62c054b4d47553df74d8861f09d69",
   "markdown_version": "3.10.3",
   "command": "python scripts/build_docs_html.py",
   "offline": true
