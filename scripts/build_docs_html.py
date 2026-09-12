@@ -21,6 +21,8 @@ PAGES = [
     ('constraint-pilot', 'docs/CONSTRAINT_FEATURE_PILOT.md', 'Executed VNI constraint-feature pilot'),
     ('vni-influence', 'docs/VNI_GENERATOR_INFLUENCE_STUDY.md', 'VNI generator influence study'),
     ('vni-two-year', 'docs/VNI_TWO_YEAR_CONSTRAINT_STUDY.md', 'VNI two-year constraint study'),
+    ('vni-event-atlas', 'docs/VNI_TWO_YEAR_EVENT_ATLAS.md', 'VNI event atlas'),
+    ('event-methodology', 'docs/INTERCONNECTOR_EVENT_ANALYSIS_METHODOLOGY.md', 'Interconnector event methodology'),
     ('qni-influence', 'docs/QNI_GENERATOR_INFLUENCE_STUDY.md', 'QNI generator influence study'),
     ('qni-two-year', 'docs/QNI_TWO_YEAR_CONSTRAINT_STUDY.md', 'QNI two-year constraint study'),
     ('plan', 'BUILD_PLAN.md', 'Original build plan'),
@@ -116,6 +118,8 @@ def build():
                 # machine-readable snapshots live under docs/data.
                 if base.startswith('data/'):
                     return f'href="../{html.escape(value, quote=True)}"'
+                if base.startswith('html/'):
+                    return f'href="{html.escape(value[5:], quote=True)}"'
             return match.group(0)
         rendered = re.sub(r'href="([^"]+)"', link, rendered)
         rendered = rendered.replace('<table>', '<div class="table-wrap"><table>').replace('</table>', '</table></div>')

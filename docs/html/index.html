@@ -7,7 +7,7 @@ h1,h2,h3{line-height:1.25;scroll-margin-top:20px}article h1{font-size:32px}h2{ma
 .table-wrap{overflow-x:auto;margin:24px 0}table{border-collapse:collapse;width:100%;font-size:14px;min-width:650px}th,td{text-align:left;vertical-align:top;border:1px solid #dce2ed;padding:11px}th{background:#eaf0f9}tr:nth-child(even){background:#f8faff}
 pre{background:#edf1f7;padding:16px;overflow:auto;border-radius:6px}code{font-size:.9em}blockquote{border-left:4px solid #5980b5;margin-left:0;padding-left:18px}.source{font-size:13px;color:#63718a}.top{font-size:13px}
 @media print{body{background:white}header{padding:20px}nav{display:none}main,article{padding:0;border:0}article{break-before:page}.table-wrap{overflow:visible}table{min-width:0;font-size:10px}a{color:inherit}}
-</style></head><body><header id="top"><span>NEM · INTERCONNECTOR FORECASTING</span><h1>INTERFLOW<br>Research handbook</h1><p>Methods, evidence and next experiments for six interconnectors. Historical data ends 1 September 2026 (interval-ending NEM time). The completed backtest uses realised future inputs and does not establish operational forecast accuracy.</p><nav><a href="#charts">Backtest charts</a><a href="#overview">Overview</a><a href="#results">Executed results</a><a href="#features">Results, data and features</a><a href="#methods">Methods and research</a><a href="#backtest">Backtest protocol</a><a href="#roadmap">Improvement roadmap</a><a href="#constraint-features">Constraint-derived network features</a><a href="#constraint-pilot">Executed VNI constraint-feature pilot</a><a href="#vni-influence">VNI generator influence study</a><a href="#vni-two-year">VNI two-year constraint study</a><a href="#qni-influence">QNI generator influence study</a><a href="#qni-two-year">QNI two-year constraint study</a><a href="#plan">Original build plan</a></nav></header><main><article id="charts"><h1>Backtest charts</h1><p>March–August 2026 test · six links · realised future inputs. Interactive figures use the saved completed-run scores. Hover for values; use the chart toolbar to export an image.</p><h2>01 · Flow forecast improvement versus persistence</h2><div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+</style></head><body><header id="top"><span>NEM · INTERCONNECTOR FORECASTING</span><h1>INTERFLOW<br>Research handbook</h1><p>Methods, evidence and next experiments for six interconnectors. Historical data ends 1 September 2026 (interval-ending NEM time). The completed backtest uses realised future inputs and does not establish operational forecast accuracy.</p><nav><a href="#charts">Backtest charts</a><a href="#overview">Overview</a><a href="#results">Executed results</a><a href="#features">Results, data and features</a><a href="#methods">Methods and research</a><a href="#backtest">Backtest protocol</a><a href="#roadmap">Improvement roadmap</a><a href="#constraint-features">Constraint-derived network features</a><a href="#constraint-pilot">Executed VNI constraint-feature pilot</a><a href="#vni-influence">VNI generator influence study</a><a href="#vni-two-year">VNI two-year constraint study</a><a href="#vni-event-atlas">VNI event atlas</a><a href="#event-methodology">Interconnector event methodology</a><a href="#qni-influence">QNI generator influence study</a><a href="#qni-two-year">QNI two-year constraint study</a><a href="#plan">Original build plan</a></nav></header><main><article id="charts"><h1>Backtest charts</h1><p>March–August 2026 test · six links · realised future inputs. Interactive figures use the saved completed-run scores. Hover for values; use the chart toolbar to export an image.</p><h2>01 · Flow forecast improvement versus persistence</h2><div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
         <script type="text/javascript">/**
 * plotly.js v3.0.1
 * Copyright 2012-2025, Plotly, Inc.
@@ -9353,7 +9353,2182 @@ unit sensitivity = -b_i / a
 python scripts/build_vni_two_year_report.py --config configs/constraint_vni_2y.json
 python scripts/build_docs_html.py
 python -m unittest discover -s tests -v
-</code></pre><a class="top" href="#top">Back to navigation</a></article><article id="qni-influence"><p class="source">Source: docs/QNI_GENERATOR_INFLUENCE_STUDY.md</p><h1 id="qni-influence-qni-generator-influence-and-constraint-feature-study">QNI generator influence and constraint-feature study</h1>
+</code></pre><a class="top" href="#top">Back to navigation</a></article><article id="vni-event-atlas"><p class="source">Source: docs/VNI_TWO_YEAR_EVENT_ATLAS.md</p><h1 id="vni-event-atlas-vni-two-year-event-atlas">VNI two-year event atlas</h1>
+<p>Period: 2024-09-01 00:00:00 to 2026-08-31 23:55:00, fixed UTC+10. Method version: 1.1-event-atlas-1.</p>
+<h2 id="vni-event-atlas-results">Results</h2>
+<ul>
+<li>7,486 contraction detections; 5,379 grouped incidents.</li>
+<li>91 selected detailed contraction cases, plus 12 price-only cases.</li>
+<li>26 exact MPC region-interval observations; 13 contraction detections with receiving-region MPC in the following hour.</li>
+<li>6,356 matched observational comparisons. Mean paired peak-price-jump difference: $94.97/MWh; day-block bootstrap interval $58.27 to $136.83. This is not causal.</li>
+</ul>
+<p><a href="vni_event_atlas.html">Interactive event atlas</a> · <a href="#event-methodology">Methodology</a></p>
+<h2 id="vni-event-atlas-selected-case-generator-accounting">Selected-case generator accounting</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">DUID</th>
+<th style="text-align: right;">net_mw</th>
+<th style="text-align: right;">tightening_mw</th>
+<th style="text-align: right;">relief_mw</th>
+<th style="text-align: right;">events</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">TUMUT3</td>
+<td style="text-align: right;">31956.3</td>
+<td style="text-align: right;">35037.5</td>
+<td style="text-align: right;">3081.2</td>
+<td style="text-align: right;">61</td>
+</tr>
+<tr>
+<td style="text-align: left;">UPPTUMUT</td>
+<td style="text-align: right;">7708.28</td>
+<td style="text-align: right;">9712.73</td>
+<td style="text-align: right;">2004.44</td>
+<td style="text-align: right;">61</td>
+</tr>
+<tr>
+<td style="text-align: left;">LIMOSF11</td>
+<td style="text-align: right;">3600.55</td>
+<td style="text-align: right;">9211.01</td>
+<td style="text-align: right;">5610.46</td>
+<td style="text-align: right;">85</td>
+</tr>
+<tr>
+<td style="text-align: left;">VBB1</td>
+<td style="text-align: right;">2747.3</td>
+<td style="text-align: right;">6757.8</td>
+<td style="text-align: right;">4010.5</td>
+<td style="text-align: right;">11</td>
+</tr>
+<tr>
+<td style="text-align: left;">SUNRSF1</td>
+<td style="text-align: right;">2235.08</td>
+<td style="text-align: right;">6427.7</td>
+<td style="text-align: right;">4192.62</td>
+<td style="text-align: right;">85</td>
+</tr>
+<tr>
+<td style="text-align: left;">MUWAWF1</td>
+<td style="text-align: right;">1176.46</td>
+<td style="text-align: right;">5392.06</td>
+<td style="text-align: right;">4215.61</td>
+<td style="text-align: right;">39</td>
+</tr>
+<tr>
+<td style="text-align: left;">KIAMSF1</td>
+<td style="text-align: right;">1511.3</td>
+<td style="text-align: right;">5314.68</td>
+<td style="text-align: right;">3803.38</td>
+<td style="text-align: right;">38</td>
+</tr>
+<tr>
+<td style="text-align: left;">DARLSF1</td>
+<td style="text-align: right;">622.954</td>
+<td style="text-align: right;">4599.46</td>
+<td style="text-align: right;">3976.51</td>
+<td style="text-align: right;">78</td>
+</tr>
+<tr>
+<td style="text-align: left;">MERCER01</td>
+<td style="text-align: right;">1409.67</td>
+<td style="text-align: right;">4002.15</td>
+<td style="text-align: right;">2592.48</td>
+<td style="text-align: right;">14</td>
+</tr>
+<tr>
+<td style="text-align: left;">AVLSF1</td>
+<td style="text-align: right;">-490.3</td>
+<td style="text-align: right;">3637.68</td>
+<td style="text-align: right;">4127.98</td>
+<td style="text-align: right;">58</td>
+</tr>
+<tr>
+<td style="text-align: left;">ARWF1</td>
+<td style="text-align: right;">194.698</td>
+<td style="text-align: right;">3591.7</td>
+<td style="text-align: right;">3397.01</td>
+<td style="text-align: right;">37</td>
+</tr>
+<tr>
+<td style="text-align: left;">GPWFEST2</td>
+<td style="text-align: right;">2125.86</td>
+<td style="text-align: right;">3496.34</td>
+<td style="text-align: right;">1370.48</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr>
+<td style="text-align: left;">CUSF1</td>
+<td style="text-align: right;">-679.862</td>
+<td style="text-align: right;">3439.89</td>
+<td style="text-align: right;">4119.75</td>
+<td style="text-align: right;">13</td>
+</tr>
+<tr>
+<td style="text-align: left;">STWF1</td>
+<td style="text-align: right;">683.937</td>
+<td style="text-align: right;">3140.39</td>
+<td style="text-align: right;">2456.45</td>
+<td style="text-align: right;">85</td>
+</tr>
+<tr>
+<td style="text-align: left;">MURRAY</td>
+<td style="text-align: right;">1906.77</td>
+<td style="text-align: right;">3077.97</td>
+<td style="text-align: right;">1171.19</td>
+<td style="text-align: right;">58</td>
+</tr>
+<tr>
+<td style="text-align: left;">GPWFEST1</td>
+<td style="text-align: right;">1896.87</td>
+<td style="text-align: right;">3067.67</td>
+<td style="text-align: right;">1170.8</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr>
+<td style="text-align: left;">NEWENSF1</td>
+<td style="text-align: right;">682.5</td>
+<td style="text-align: right;">2799.59</td>
+<td style="text-align: right;">2117.09</td>
+<td style="text-align: right;">14</td>
+</tr>
+<tr>
+<td style="text-align: left;">NEWENSF2</td>
+<td style="text-align: right;">732.471</td>
+<td style="text-align: right;">2778.57</td>
+<td style="text-align: right;">2046.1</td>
+<td style="text-align: right;">14</td>
+</tr>
+<tr>
+<td style="text-align: left;">KARSF1</td>
+<td style="text-align: right;">-214.259</td>
+<td style="text-align: right;">2764.85</td>
+<td style="text-align: right;">2979.11</td>
+<td style="text-align: right;">45</td>
+</tr>
+<tr>
+<td style="text-align: left;">BANN1</td>
+<td style="text-align: right;">559.656</td>
+<td style="text-align: right;">2688.2</td>
+<td style="text-align: right;">2128.55</td>
+<td style="text-align: right;">38</td>
+</tr>
+</tbody>
+</table></div>
+<p>These totals cover selected fixed-equation segments, not all two-year movements. Gross tightening and relief can offset. Aggregate totals deduplicate shared physical steps; individual cases may overlap. Switching is not attributed to generators in the new equation.</p>
+<h2 id="vni-event-atlas-seasonal-results">Seasonal results</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: right;">season_year</th>
+<th style="text-align: left;">season</th>
+<th style="text-align: left;">direction</th>
+<th style="text-align: right;">events</th>
+<th style="text-align: right;">median_drop_mw</th>
+<th style="text-align: right;">near_mpc_events</th>
+<th style="text-align: right;">mpc_events</th>
+<th style="text-align: right;">valid_hours</th>
+<th style="text-align: right;">events_per_1000h</th>
+<th style="text-align: left;">season_label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">2024</td>
+<td style="text-align: left;">Spring</td>
+<td style="text-align: left;">lower</td>
+<td style="text-align: right;">368</td>
+<td style="text-align: right;">531.12</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2184</td>
+<td style="text-align: right;">168.498</td>
+<td style="text-align: left;">2024 Spring</td>
+</tr>
+<tr>
+<td style="text-align: right;">2024</td>
+<td style="text-align: left;">Spring</td>
+<td style="text-align: left;">upper</td>
+<td style="text-align: right;">444</td>
+<td style="text-align: right;">533.675</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2184</td>
+<td style="text-align: right;">203.297</td>
+<td style="text-align: left;">2024 Spring</td>
+</tr>
+<tr>
+<td style="text-align: right;">2025</td>
+<td style="text-align: left;">Autumn</td>
+<td style="text-align: left;">lower</td>
+<td style="text-align: right;">459</td>
+<td style="text-align: right;">352.315</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2208</td>
+<td style="text-align: right;">207.88</td>
+<td style="text-align: left;">2025 Autumn</td>
+</tr>
+<tr>
+<td style="text-align: right;">2025</td>
+<td style="text-align: left;">Autumn</td>
+<td style="text-align: left;">upper</td>
+<td style="text-align: right;">471</td>
+<td style="text-align: right;">310.412</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2208</td>
+<td style="text-align: right;">213.315</td>
+<td style="text-align: left;">2025 Autumn</td>
+</tr>
+<tr>
+<td style="text-align: right;">2025</td>
+<td style="text-align: left;">Spring</td>
+<td style="text-align: left;">lower</td>
+<td style="text-align: right;">502</td>
+<td style="text-align: right;">385.208</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2184</td>
+<td style="text-align: right;">229.853</td>
+<td style="text-align: left;">2025 Spring</td>
+</tr>
+<tr>
+<td style="text-align: right;">2025</td>
+<td style="text-align: left;">Spring</td>
+<td style="text-align: left;">upper</td>
+<td style="text-align: right;">514</td>
+<td style="text-align: right;">422.662</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2184</td>
+<td style="text-align: right;">235.348</td>
+<td style="text-align: left;">2025 Spring</td>
+</tr>
+<tr>
+<td style="text-align: right;">2025</td>
+<td style="text-align: left;">Summer</td>
+<td style="text-align: left;">lower</td>
+<td style="text-align: right;">307</td>
+<td style="text-align: right;">462.245</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2160</td>
+<td style="text-align: right;">142.13</td>
+<td style="text-align: left;">2025 Summer</td>
+</tr>
+<tr>
+<td style="text-align: right;">2025</td>
+<td style="text-align: left;">Summer</td>
+<td style="text-align: left;">upper</td>
+<td style="text-align: right;">425</td>
+<td style="text-align: right;">511.315</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">2160</td>
+<td style="text-align: right;">196.759</td>
+<td style="text-align: left;">2025 Summer</td>
+</tr>
+<tr>
+<td style="text-align: right;">2025</td>
+<td style="text-align: left;">Winter</td>
+<td style="text-align: left;">lower</td>
+<td style="text-align: right;">479</td>
+<td style="text-align: right;">275.473</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2208</td>
+<td style="text-align: right;">216.938</td>
+<td style="text-align: left;">2025 Winter</td>
+</tr>
+<tr>
+<td style="text-align: right;">2025</td>
+<td style="text-align: left;">Winter</td>
+<td style="text-align: left;">upper</td>
+<td style="text-align: right;">515</td>
+<td style="text-align: right;">323.641</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2208</td>
+<td style="text-align: right;">233.243</td>
+<td style="text-align: left;">2025 Winter</td>
+</tr>
+<tr>
+<td style="text-align: right;">2026</td>
+<td style="text-align: left;">Autumn</td>
+<td style="text-align: left;">lower</td>
+<td style="text-align: right;">417</td>
+<td style="text-align: right;">176.16</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2208</td>
+<td style="text-align: right;">188.859</td>
+<td style="text-align: left;">2026 Autumn</td>
+</tr>
+<tr>
+<td style="text-align: right;">2026</td>
+<td style="text-align: left;">Autumn</td>
+<td style="text-align: left;">upper</td>
+<td style="text-align: right;">529</td>
+<td style="text-align: right;">278.052</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2208</td>
+<td style="text-align: right;">239.583</td>
+<td style="text-align: left;">2026 Autumn</td>
+</tr>
+<tr>
+<td style="text-align: right;">2026</td>
+<td style="text-align: left;">Summer</td>
+<td style="text-align: left;">lower</td>
+<td style="text-align: right;">451</td>
+<td style="text-align: right;">323.297</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2160</td>
+<td style="text-align: right;">208.796</td>
+<td style="text-align: left;">2026 Summer</td>
+</tr>
+<tr>
+<td style="text-align: right;">2026</td>
+<td style="text-align: left;">Summer</td>
+<td style="text-align: left;">upper</td>
+<td style="text-align: right;">567</td>
+<td style="text-align: right;">330.565</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2160</td>
+<td style="text-align: right;">262.5</td>
+<td style="text-align: left;">2026 Summer</td>
+</tr>
+<tr>
+<td style="text-align: right;">2026</td>
+<td style="text-align: left;">Winter</td>
+<td style="text-align: left;">lower</td>
+<td style="text-align: right;">473</td>
+<td style="text-align: right;">244.775</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2208</td>
+<td style="text-align: right;">214.221</td>
+<td style="text-align: left;">2026 Winter</td>
+</tr>
+<tr>
+<td style="text-align: right;">2026</td>
+<td style="text-align: left;">Winter</td>
+<td style="text-align: left;">upper</td>
+<td style="text-align: right;">565</td>
+<td style="text-align: right;">300.472</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2208</td>
+<td style="text-align: right;">255.888</td>
+<td style="text-align: left;">2026 Winter</td>
+</tr>
+</tbody>
+</table></div>
+<p>December is assigned to the following summer year, preserving two complete December-February summers. Autumn and winter also have two complete observations; spring covers September-November 2024 and 2025. Rates use valid hours.</p>
+<h2 id="vni-event-atlas-evidence-and-limitations">Evidence and limitations</h2>
+<p>The population IC and regional-price grids are complete. Raw unit/equation archives were recovered only for selected case and control windows, with checksums, row filters and cleanup records in data/event_vni_2y/source_manifest.jsonl.</p>
+<p>The decomposition preserves aggregate other-LHS movements, switch composites and discrepancies. Full equations may contain an unresolved Z term. No causal dispatch replay, welfare-cost calculation or forecast validation has been performed. Coal status is an initial-MW operating proxy; dated registered capacity is included where recovered, but complete planned/forced outage classifications are unavailable. Temperature is hourly reanalysis, not measured station telemetry. Externally corroborated November 2024 and November 2025 cases cite AEMO's Q4 report in the atlas.</p>
+<h2 id="vni-event-atlas-rebuild">Rebuild</h2>
+<pre><code class="language-text">python -m nemic.event_atlas screen
+python -m nemic.event_atlas match
+python -m nemic.event_atlas recover
+python -m nemic.event_supplement
+python -m nemic.event_atlas coal
+python -m nemic.event_reconstruction
+python scripts/build_event_atlas.py
+</code></pre>
+<p>Rendering uses retained evidence and performs no downloads. The acquisition stage enforces a 10 GB combined base-study/event-study storage guard and a 20 GB free-space reserve.</p>
+<h2 id="vni-event-atlas-detailed-reconstruction-coverage">Detailed reconstruction coverage</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th style="text-align: left;">event_id</th>
+<th style="text-align: right;">exact_step_share</th>
+<th style="text-align: right;">complete_terms_share</th>
+<th style="text-align: right;">observed_tightening_mw</th>
+<th style="text-align: right;">generator_tightening_mw</th>
+<th style="text-align: right;">switch_composite_mw</th>
+<th style="text-align: right;">unresolved_mw</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">VNI-lower-20240904T2110</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1429.66</td>
+<td style="text-align: right;">605.263</td>
+<td style="text-align: right;">447.776</td>
+<td style="text-align: right;">-1e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20241019T0945</td>
+<td style="text-align: right;">0.333333</td>
+<td style="text-align: right;">0.333333</td>
+<td style="text-align: right;">1084.07</td>
+<td style="text-align: right;">55.4866</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1018.03</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20241028T1535</td>
+<td style="text-align: right;">0.833333</td>
+<td style="text-align: right;">0.666667</td>
+<td style="text-align: right;">1583.79</td>
+<td style="text-align: right;">595.082</td>
+<td style="text-align: right;">29.4421</td>
+<td style="text-align: right;">939.368</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20241106T1655</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.714286</td>
+<td style="text-align: right;">1961.25</td>
+<td style="text-align: right;">3.46039</td>
+<td style="text-align: right;">1842.36</td>
+<td style="text-align: right;">7.57862e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20241201T1420</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.833333</td>
+<td style="text-align: right;">1428.1</td>
+<td style="text-align: right;">132.903</td>
+<td style="text-align: right;">1239.19</td>
+<td style="text-align: right;">-1e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20241220T0910</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">422.73</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">422.73</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20250115T1955</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.4</td>
+<td style="text-align: right;">1902.74</td>
+<td style="text-align: right;">191.601</td>
+<td style="text-align: right;">1708.49</td>
+<td style="text-align: right;">9.64234e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20250212T1935</td>
+<td style="text-align: right;">0.966667</td>
+<td style="text-align: right;">0.866667</td>
+<td style="text-align: right;">617.691</td>
+<td style="text-align: right;">109.276</td>
+<td style="text-align: right;">-43.5887</td>
+<td style="text-align: right;">104.106</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20250215T0750</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.833333</td>
+<td style="text-align: right;">1264.74</td>
+<td style="text-align: right;">1925.71</td>
+<td style="text-align: right;">249.973</td>
+<td style="text-align: right;">2.92857e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20250301T1405</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.833333</td>
+<td style="text-align: right;">1760.19</td>
+<td style="text-align: right;">-290.746</td>
+<td style="text-align: right;">150.234</td>
+<td style="text-align: right;">-5e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20250309T0800</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">657.739</td>
+<td style="text-align: right;">2412.03</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">4.72727e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20250421T1335</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.9</td>
+<td style="text-align: right;">1645.38</td>
+<td style="text-align: right;">478.518</td>
+<td style="text-align: right;">102.903</td>
+<td style="text-align: right;">-3e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20250506T0835</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1372.41</td>
+<td style="text-align: right;">311.38</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-7.85714e-06</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20250602T0600</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.863636</td>
+<td style="text-align: right;">365.97</td>
+<td style="text-align: right;">327.97</td>
+<td style="text-align: right;">108.467</td>
+<td style="text-align: right;">-5.68434e-14</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20250606T1815</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">1721.75</td>
+<td style="text-align: right;">308.466</td>
+<td style="text-align: right;">1321.92</td>
+<td style="text-align: right;">4.06406e-06</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20250708T0730</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.142857</td>
+<td style="text-align: right;">1516.08</td>
+<td style="text-align: right;">324.992</td>
+<td style="text-align: right;">644.448</td>
+<td style="text-align: right;">4e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20250827T1210</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.833333</td>
+<td style="text-align: right;">1484.77</td>
+<td style="text-align: right;">28.6847</td>
+<td style="text-align: right;">1434.47</td>
+<td style="text-align: right;">-4.43396e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20250926T2020</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">1113.71</td>
+<td style="text-align: right;">898.566</td>
+<td style="text-align: right;">342.885</td>
+<td style="text-align: right;">-1e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20251006T0425</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1368.39</td>
+<td style="text-align: right;">159.543</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5.67925e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20251104T1715</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.857143</td>
+<td style="text-align: right;">1680.92</td>
+<td style="text-align: right;">-982.322</td>
+<td style="text-align: right;">1564.99</td>
+<td style="text-align: right;">1e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20251107T0655</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.666667</td>
+<td style="text-align: right;">1676.56</td>
+<td style="text-align: right;">-511.937</td>
+<td style="text-align: right;">1531.45</td>
+<td style="text-align: right;">-2e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20251119T2035</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">604.925</td>
+<td style="text-align: right;">611.303</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-1e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20251215T0205</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.583333</td>
+<td style="text-align: right;">1785.7</td>
+<td style="text-align: right;">232.141</td>
+<td style="text-align: right;">696.937</td>
+<td style="text-align: right;">-5e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20260106T1640</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">507.754</td>
+<td style="text-align: right;">521.484</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20260111T0015</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.642857</td>
+<td style="text-align: right;">1201.74</td>
+<td style="text-align: right;">-113.604</td>
+<td style="text-align: right;">1392.05</td>
+<td style="text-align: right;">-1.72727e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20260212T1435</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.75</td>
+<td style="text-align: right;">1230.38</td>
+<td style="text-align: right;">59.3411</td>
+<td style="text-align: right;">1164.48</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20260307T1215</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.857143</td>
+<td style="text-align: right;">1023.15</td>
+<td style="text-align: right;">36.2593</td>
+<td style="text-align: right;">946.784</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20260409T1710</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.625</td>
+<td style="text-align: right;">1684.01</td>
+<td style="text-align: right;">3420.71</td>
+<td style="text-align: right;">694.662</td>
+<td style="text-align: right;">2e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20260425T2315</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">282.141</td>
+<td style="text-align: right;">152.089</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-1.13687e-13</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20260503T0930</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.809524</td>
+<td style="text-align: right;">1686.17</td>
+<td style="text-align: right;">254.372</td>
+<td style="text-align: right;">1202.54</td>
+<td style="text-align: right;">-1e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20260603T1715</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1668.2</td>
+<td style="text-align: right;">1639.74</td>
+<td style="text-align: right;">183.729</td>
+<td style="text-align: right;">3e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20260622T0635</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.866667</td>
+<td style="text-align: right;">727.403</td>
+<td style="text-align: right;">541.895</td>
+<td style="text-align: right;">88.7239</td>
+<td style="text-align: right;">1e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20260714T1510</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.0833333</td>
+<td style="text-align: right;">1656.44</td>
+<td style="text-align: right;">896.23</td>
+<td style="text-align: right;">868.297</td>
+<td style="text-align: right;">-3.28931e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-lower-20260810T1610</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">981.032</td>
+<td style="text-align: right;">899.686</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-2.59119e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20240908T1800</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1517.35</td>
+<td style="text-align: right;">1623.6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2.04081e-07</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20240929T1720</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1681.18</td>
+<td style="text-align: right;">1210.47</td>
+<td style="text-align: right;">1381.99</td>
+<td style="text-align: right;">-1e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20241028T1505</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1497.98</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1497.98</td>
+<td style="text-align: right;">-3.29928e-06</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20241111T1735</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">947.176</td>
+<td style="text-align: right;">956.641</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2.61491e-06</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20241117T1550</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">2351.87</td>
+<td style="text-align: right;">276.163</td>
+<td style="text-align: right;">2151.41</td>
+<td style="text-align: right;">2.14504e-07</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20241121T1750</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.888889</td>
+<td style="text-align: right;">1922.53</td>
+<td style="text-align: right;">1908.3</td>
+<td style="text-align: right;">70.733</td>
+<td style="text-align: right;">5.9204e-06</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20241122T1800</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">987.874</td>
+<td style="text-align: right;">948.909</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-4.18795e-07</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20241123T1740</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.866667</td>
+<td style="text-align: right;">1049.56</td>
+<td style="text-align: right;">1065.02</td>
+<td style="text-align: right;">63.3187</td>
+<td style="text-align: right;">1e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20241127T1450</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">867.725</td>
+<td style="text-align: right;">128.041</td>
+<td style="text-align: right;">775.301</td>
+<td style="text-align: right;">-4.96357e-06</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20241127T1500</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">867.725</td>
+<td style="text-align: right;">128.041</td>
+<td style="text-align: right;">775.301</td>
+<td style="text-align: right;">-4.96357e-06</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20241129T0615</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.307692</td>
+<td style="text-align: right;">2539.2</td>
+<td style="text-align: right;">353.043</td>
+<td style="text-align: right;">2166.92</td>
+<td style="text-align: right;">3.18408e-06</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20241203T1135</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.25</td>
+<td style="text-align: right;">1795.74</td>
+<td style="text-align: right;">386.006</td>
+<td style="text-align: right;">1394.93</td>
+<td style="text-align: right;">6.02145e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20241206T1425</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">1537.91</td>
+<td style="text-align: right;">1516.69</td>
+<td style="text-align: right;">31.6711</td>
+<td style="text-align: right;">-3.9801e-07</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20241208T1805</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1523.29</td>
+<td style="text-align: right;">3128.23</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00010395</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20241213T1315</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.857143</td>
+<td style="text-align: right;">956.398</td>
+<td style="text-align: right;">937.397</td>
+<td style="text-align: right;">29.2246</td>
+<td style="text-align: right;">5e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20250114T1740</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.9</td>
+<td style="text-align: right;">1542.39</td>
+<td style="text-align: right;">1567.8</td>
+<td style="text-align: right;">149.876</td>
+<td style="text-align: right;">9.40896e-07</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20250115T1345</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.111111</td>
+<td style="text-align: right;">1458.95</td>
+<td style="text-align: right;">1500.14</td>
+<td style="text-align: right;">129.363</td>
+<td style="text-align: right;">-1e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20250115T1400</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1447.01</td>
+<td style="text-align: right;">1447.86</td>
+<td style="text-align: right;">141</td>
+<td style="text-align: right;">-6.40583e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20250122T0705</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.947368</td>
+<td style="text-align: right;">1041.32</td>
+<td style="text-align: right;">790.604</td>
+<td style="text-align: right;">139.192</td>
+<td style="text-align: right;">-3.74486e-06</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20250204T1515</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">1673.14</td>
+<td style="text-align: right;">2025.66</td>
+<td style="text-align: right;">-243.127</td>
+<td style="text-align: right;">2.97855e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20250205T1630</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.947368</td>
+<td style="text-align: right;">1526.67</td>
+<td style="text-align: right;">1375.39</td>
+<td style="text-align: right;">-48.2338</td>
+<td style="text-align: right;">-1e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20250205T1645</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1457.74</td>
+<td style="text-align: right;">1520.38</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2.14504e-07</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20250205T1655</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1457.74</td>
+<td style="text-align: right;">1520.38</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2.14504e-07</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20250207T1710</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1653.52</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1653.52</td>
+<td style="text-align: right;">-3.32119e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20250208T1435</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.25</td>
+<td style="text-align: right;">1355.56</td>
+<td style="text-align: right;">51.7933</td>
+<td style="text-align: right;">1361.85</td>
+<td style="text-align: right;">2.84217e-14</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20250210T1205</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.666667</td>
+<td style="text-align: right;">1711.14</td>
+<td style="text-align: right;">440.296</td>
+<td style="text-align: right;">1614.81</td>
+<td style="text-align: right;">-1e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20250306T1535</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">545.669</td>
+<td style="text-align: right;">197.291</td>
+<td style="text-align: right;">419.126</td>
+<td style="text-align: right;">-9.8167e-06</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20250315T1620</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.888889</td>
+<td style="text-align: right;">2134.97</td>
+<td style="text-align: right;">2258.13</td>
+<td style="text-align: right;">36.4567</td>
+<td style="text-align: right;">-2.14505e-07</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20250409T1635</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1682.64</td>
+<td style="text-align: right;">1856.97</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">7.58691e-06</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20250409T1650</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1682.64</td>
+<td style="text-align: right;">1856.97</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">7.58691e-06</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20250411T1705</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1656.82</td>
+<td style="text-align: right;">1831.85</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5.97719e-06</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20250513T1615</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1984.16</td>
+<td style="text-align: right;">2170.19</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.65021e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20250528T1630</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1750.88</td>
+<td style="text-align: right;">2318.66</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.4309e-06</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20250615T0635</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.8</td>
+<td style="text-align: right;">1078.61</td>
+<td style="text-align: right;">6.83257</td>
+<td style="text-align: right;">933.963</td>
+<td style="text-align: right;">9.39501e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20250626T2005</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.857143</td>
+<td style="text-align: right;">502.374</td>
+<td style="text-align: right;">-59.7257</td>
+<td style="text-align: right;">448.612</td>
+<td style="text-align: right;">-1.13687e-13</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20250716T1035</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.888889</td>
+<td style="text-align: right;">668.617</td>
+<td style="text-align: right;">472.456</td>
+<td style="text-align: right;">-5.01962</td>
+<td style="text-align: right;">1e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20250728T2235</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.8</td>
+<td style="text-align: right;">1877.76</td>
+<td style="text-align: right;">694.684</td>
+<td style="text-align: right;">191.092</td>
+<td style="text-align: right;">1e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20250829T0625</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.666667</td>
+<td style="text-align: right;">2057.31</td>
+<td style="text-align: right;">1457.17</td>
+<td style="text-align: right;">658.821</td>
+<td style="text-align: right;">1.02041e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20250914T1540</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">1211.73</td>
+<td style="text-align: right;">192.554</td>
+<td style="text-align: right;">1087.27</td>
+<td style="text-align: right;">-1e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20250930T1325</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.666667</td>
+<td style="text-align: right;">1093.36</td>
+<td style="text-align: right;">225.04</td>
+<td style="text-align: right;">1194.48</td>
+<td style="text-align: right;">-1e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20251010T1735</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">1806.38</td>
+<td style="text-align: right;">222.223</td>
+<td style="text-align: right;">1565.32</td>
+<td style="text-align: right;">6.72359e-07</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20251126T1040</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.625</td>
+<td style="text-align: right;">2319.06</td>
+<td style="text-align: right;">2029</td>
+<td style="text-align: right;">108.311</td>
+<td style="text-align: right;">1e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20251126T1420</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.571429</td>
+<td style="text-align: right;">1812.23</td>
+<td style="text-align: right;">1212.83</td>
+<td style="text-align: right;">793.423</td>
+<td style="text-align: right;">6.39501e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20251205T1550</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1479.97</td>
+<td style="text-align: right;">1801.76</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.28571e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20260110T1505</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1073.07</td>
+<td style="text-align: right;">1153.5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20260112T0710</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.9</td>
+<td style="text-align: right;">643.572</td>
+<td style="text-align: right;">58.8749</td>
+<td style="text-align: right;">84.887</td>
+<td style="text-align: right;">-2.13163e-14</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20260205T1340</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.0833333</td>
+<td style="text-align: right;">1693.34</td>
+<td style="text-align: right;">1829</td>
+<td style="text-align: right;">-14.1674</td>
+<td style="text-align: right;">-1.42857e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20260205T1415</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1690.7</td>
+<td style="text-align: right;">1774.36</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.42857e-06</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20260206T1255</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1755.94</td>
+<td style="text-align: right;">1767.1</td>
+<td style="text-align: right;">11.7937</td>
+<td style="text-align: right;">5.71429e-06</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20260304T1555</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.8</td>
+<td style="text-align: right;">1939.45</td>
+<td style="text-align: right;">1818.19</td>
+<td style="text-align: right;">-93.5567</td>
+<td style="text-align: right;">1.83299e-07</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20260406T1055</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">829.72</td>
+<td style="text-align: right;">1429.7</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-1.06581e-14</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20260407T0925</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">376.582</td>
+<td style="text-align: right;">-68.4002</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3.19149e-06</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20260504T0845</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">959.525</td>
+<td style="text-align: right;">1420.35</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">-1.65957e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20260623T0905</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.75</td>
+<td style="text-align: right;">1267.21</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1020.99</td>
+<td style="text-align: right;">1.92369e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20260714T1430</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">805.138</td>
+<td style="text-align: right;">822.406</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1e-05</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20260722T2335</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">710.403</td>
+<td style="text-align: right;">598.224</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI-upper-20260801T1320</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1137.92</td>
+<td style="text-align: right;">291.681</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5.68434e-14</td>
+</tr>
+</tbody>
+</table></div>
+<p>Exact-step coverage measures equation-version matching. Complete-terms coverage only concerns the retained energy factors; other LHS services or terms may remain aggregated. Positive components tighten and negative components relieve the directional bound. These are sums of MW changes across steps, not energy (MWh) or simultaneous capacity.</p>
+<p><a href="../data/vni_event_sources.jsonl">Source and cleanup log</a></p><a class="top" href="#top">Back to navigation</a></article><article id="event-methodology"><p class="source">Source: docs/INTERCONNECTOR_EVENT_ANALYSIS_METHODOLOGY.md</p><h1 id="event-methodology-interconnector-contraction-generator-influence-and-price-event-analysis">Interconnector contraction, generator influence and price-event analysis</h1>
+<p><strong>Version:</strong> 1.1
+<strong>Prepared:</strong> 12 September 2026
+<strong>Status:</strong> Reusable methodology and implementation specification. This document proposes an event-analysis extension; it does not claim that the extension, price attribution or dispatch counterfactuals have already been run.
+<strong>Initial application:</strong> Australian National Electricity Market (NEM), with connector-specific adapters.
+<strong>Default study:</strong> Two explicitly dated years, five-minute resolution, maximum 10 GB of study working storage.</p>
+<h2 id="event-methodology-1-purpose-and-questions">1. Purpose and questions</h2>
+<p>Build a reproducible event atlas that explains rapid changes in interconnector transfer capability, the generator movements and constraint equations associated with them, and their relationship to regional price volatility.</p>
+<p>The methodology must answer:</p>
+<ol>
+<li>When did directional capability contract, by how much, and for how long?</li>
+<li>Which reported limit-setting equations, binding equations and competing restrictions were present before, during and after the event?</li>
+<li>Which generator dispatch changes mechanically tightened or relieved those restrictions?</li>
+<li>How much of the change is consistent with generator movement, RHS movement, other equation terms, or a change in the applicable equation population?</li>
+<li>Did actual flow respond, reverse, or become forced into a direction?</li>
+<li>Did the receiving region experience a price jump, sustained price separation, or a market price cap (MPC) event?</li>
+<li>What distinguishes economically consequential contractions from ordinary ones?</li>
+<li>Which compact, available-in-advance features improve out-of-sample forecasts?</li>
+</ol>
+<p>The analysis has three separate outputs: observed event facts, equation-based mechanical attribution, and evidence about price associations. Stronger causal conclusions require an additional validated counterfactual study.</p>
+<h2 id="event-methodology-2-principles-and-interpretation">2. Principles and interpretation</h2>
+<ul>
+<li>A reported limit, a reconstructed conditional bound and actual flow are different quantities.</li>
+<li>A generator in an equation is not automatically a cause of a contraction. Its movement, coefficient, timing and the equation's relevance must be examined.</li>
+<li>Generators can tighten a limit by ramping up <strong>or down</strong>, depending on coefficient and direction. Pumps, batteries and other controllable loads must be represented correctly.</li>
+<li>A dispatch target is not a measured physical startup. Use “dispatch increased” unless initial MW, metering or other evidence establishes actual operation.</li>
+<li>A leading reconstructed restriction is not automatically a confirmed binding equation.</li>
+<li>Regional prices and dispatch are jointly determined. Temporal ordering helps interpretation but does not remove common causes or establish causality.</li>
+<li>Preserve unknown attribution and reconciliation error. Do not force every contraction into a generator explanation.</li>
+<li>Constraint-derived features describe operational restrictions; they are not a complete reconstruction of physical network topology.</li>
+<li>Missing observations are not zero generation, unconstrained operation or zero price.</li>
+<li>All key assumptions, thresholds, version rules and data exclusions are machine-readable and versioned.</li>
+</ul>
+<h2 id="event-methodology-3-generalization-through-a-connector-adapter">3. Generalization through a connector adapter</h2>
+<p>Keep event detection, attribution, statistical analysis and reporting generic. Isolate market and connector conventions in an adapter.</p>
+<h3 id="event-methodology-31-required-adapter-fields">3.1 Required adapter fields</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Identity</td>
+<td>Market, connector ID, display name and effective dates</td>
+</tr>
+<tr>
+<td>Endpoints</td>
+<td>Region A, Region B and any relevant intermediate or external areas</td>
+</tr>
+<tr>
+<td>Orientation</td>
+<td>Positive signed flow means A to B; source-field transformations documented</td>
+</tr>
+<tr>
+<td>Limits</td>
+<td>Transform reported fields into a signed lower bound and upper bound</td>
+</tr>
+<tr>
+<td>Dispatch granularity</td>
+<td>Interval duration, interval-ending convention, timezone and revision rules</td>
+</tr>
+<tr>
+<td>Constraint model</td>
+<td>Inequality directions, coefficient units, applicable versions, invocation rules and supported term types</td>
+</tr>
+<tr>
+<td>Asset model</td>
+<td>Generator/load IDs, connection points, registration changes and station aggregation</td>
+</tr>
+<tr>
+<td>Price model</td>
+<td>Regional prices, currency, units, effective-dated caps and special pricing regimes</td>
+</tr>
+<tr>
+<td>Connector technology</td>
+<td>AC/HVDC, regulated/market-network arrangements, losses and control or availability restrictions</td>
+</tr>
+<tr>
+<td>Related network</td>
+<td>Other connectors, shared equations and parallel transfer paths needed for interpretation</td>
+</tr>
+<tr>
+<td>Source scope</td>
+<td>Allowed tables, archive families, date filters and dependency selection rules</td>
+</tr>
+</tbody>
+</table></div>
+<p>Never inherit another connector's sign conventions, capacity scale, generator shortlist, applicable equations or reconstruction accuracy without validation. Validate orientation against published definitions and a sample of source records.</p>
+<h3 id="event-methodology-32-canonical-quantities">3.2 Canonical quantities</h3>
+<p>Let signed flow be <code>F</code>, positive from A to B. Normalize the feasible interval to:</p>
+<pre><code class="language-text">lower_bound &lt;= F &lt;= upper_bound
+capacity_A_to_B = upper_bound
+capacity_B_to_A = -lower_bound
+headroom_A_to_B = upper_bound - F
+headroom_B_to_A = F - lower_bound
+</code></pre>
+<p>Directional capacities are signed. Preserve negative values: a negative upper bound requires flow toward A, while a positive lower bound requires flow toward B. Do not take absolute values or clip these observations to zero. Headroom is slack in the signed feasible interval; negative headroom is a diagnostic requiring review, not a value to hide.</p>
+<p>Define the directional price spread as <code>price_receiving_region - price_sending_region</code>, using the direction under study. Keep the signed A/B price spread separately for consistent plotting.</p>
+<p>For parallel connectors, retain individual reported limits. Do not present their simple sum as jointly feasible corridor capability unless a joint model supports it. Link shared incidents and equation dependencies across connectors.</p>
+<p>For controllable links, outages, link availability, control modes, ramping and offer-related limits may explain changes that a generator-coefficient decomposition cannot. Mark unsupported mechanisms explicitly.</p>
+<h2 id="event-methodology-4-study-specification-and-defaults">4. Study specification and defaults</h2>
+<p>Freeze exact start/end timestamps and the interval ownership rule. For a two-year study, use 24 consecutive complete months where available; do not silently extend to four years. Retrieve small boundary buffers for lag calculations and event recovery, but exclude them from the study denominator.</p>
+<p>The following are proposed defaults, not universal physical definitions:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default and purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Observation interval</td>
+<td>5 minutes for the NEM</td>
+</tr>
+<tr>
+<td>Primary contraction horizon</td>
+<td>30 minutes</td>
+</tr>
+<tr>
+<td>Sensitivity horizons</td>
+<td>5, 15 and 60 minutes</td>
+</tr>
+<tr>
+<td>Retrospective threshold</td>
+<td>90th percentile of strictly positive 30-minute capacity falls, separately by connector, direction and year-month</td>
+</tr>
+<tr>
+<td>Absolute severity bins</td>
+<td>250, 500 and 1,000 MW, retained for comparability but supplemented by connector-normalized measures</td>
+</tr>
+<tr>
+<td>Relative severity bins</td>
+<td>10%, 25% and 50% of a declared positive reference capacity</td>
+</tr>
+<tr>
+<td>Initial event window</td>
+<td>120 minutes before and 120 minutes after detection</td>
+</tr>
+<tr>
+<td>Parent-incident grouping</td>
+<td>Same connector/direction episodes separated by at most 30 minutes; test 15 and 60 minutes</td>
+</tr>
+<tr>
+<td>Recovery</td>
+<td>At least 90% of incident capability loss restored for three consecutive valid intervals</td>
+</tr>
+<tr>
+<td>Near-binding / near-setting</td>
+<td>Initially 50 MW in IC-equivalent units where meaningful; also test connector-scaled alternatives</td>
+</tr>
+<tr>
+<td>Near MPC</td>
+<td>At least 90% of the applicable MPC; exact hits recorded separately</td>
+</tr>
+<tr>
+<td>Main price response window</td>
+<td>Detection to +60 minutes; also show -60 to 0 and +60 to +120 minutes</td>
+</tr>
+<tr>
+<td>Storage</td>
+<td>10,000,000,000 bytes peak study working storage; cleanup trigger at 8,000,000,000 bytes</td>
+</tr>
+<tr>
+<td>Minimum free disk</td>
+<td>20,000,000,000 bytes, configurable before execution</td>
+</tr>
+<tr>
+<td>Archive concurrency</td>
+<td>One archive at a time</td>
+</tr>
+</tbody>
+</table></div>
+<p>Specify a minimum threshold reference sample, proposed as 100 positive falls. If insufficient, report the percentile detector as unavailable; any fallback reference must be separately named and flagged. Record the empirical quantile interpolation method and software version.</p>
+<p>Cross-connector comparisons use both absolute MW and relative measures. A 250 MW cutoff alone is unsuitable for smaller links.</p>
+<h2 id="event-methodology-5-data-requirements-and-sufficiency-tiers">5. Data requirements and sufficiency tiers</h2>
+<h3 id="event-methodology-51-minimum-source-inventory">5.1 Minimum source inventory</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Dataset</th>
+<th>Required fields or concepts</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Interconnector results</td>
+<td>Timestamp, flow/target and metered flow where available, directional limits, reported setters, run flags</td>
+<td>Observed event detection</td>
+</tr>
+<tr>
+<td>Regional prices</td>
+<td>Five-minute final price, original/adjusted price where available, intervention and administered/suspended status</td>
+<td>Price-event screening</td>
+</tr>
+<tr>
+<td>Regional conditions</td>
+<td>Demand, renewable output/forecast, available generation and reserve context where available</td>
+<td>Context and matching</td>
+</tr>
+<tr>
+<td>Generator dispatch</td>
+<td>DUID, target MW, initial MW, availability, ramp limits and run identity</td>
+<td>Movement reconstruction</td>
+</tr>
+<tr>
+<td>Constraint solutions</td>
+<td>Equation ID/version, RHS, marginal value, violation and LHS or inputs to reconstruct it</td>
+<td>Binding and attribution</td>
+</tr>
+<tr>
+<td>Equation definitions</td>
+<td>Effective dates, all supported LHS factors, relation type, description and term units</td>
+<td>Sensitivities and reconciliation</td>
+</tr>
+<tr>
+<td>Constraint sets</td>
+<td>Membership and actual invocation/withdrawal history</td>
+<td>Operational applicability</td>
+</tr>
+<tr>
+<td>Asset mappings</td>
+<td>Effective-dated connection-point/DUID mapping, station, region and dispatch type</td>
+<td>Correct attribution</td>
+</tr>
+<tr>
+<td>Price settings</td>
+<td>Effective-dated MPC and applicable administered/suspension settings</td>
+<td>Price classification</td>
+</tr>
+<tr>
+<td>Optional event evidence</td>
+<td>Outages, notices, bids/rebids, link controls, telemetry and forecast vintages</td>
+<td>Mechanism review and stronger inference</td>
+</tr>
+</tbody>
+</table></div>
+<p>For a NEM adapter, start from <code>DISPATCHINTERCONNECTORRES</code>, <code>DISPATCHPRICE</code>, <code>DISPATCHREGIONSUM</code>, <code>DISPATCHLOAD</code>, <code>DISPATCHCONSTRAINT</code>, <code>GENCONDATA</code>, <code>GENCONSET</code>, <code>GENCONSETINVOKE</code>, <code>DUDETAILSUMMARY</code>, <code>SPDINTERCONNECTORCONSTRAINT</code> and <code>SPDCONNECTIONPOINTCONSTRAINT</code>. Add other factor tables or inputs only when needed to represent the selected equations. Confirm actual schemas and field availability for each historical period.</p>
+<p>Applicable dispatch sources are described in <a href="https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/data-nem/market-management-system-mms-data/dispatch">AEMO's dispatch data documentation</a>. The table list above is a proposed extraction scope, not an instruction to download every record in those tables.</p>
+<h3 id="event-methodology-52-evidence-tiers">5.2 Evidence tiers</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Available evidence</th>
+<th>Permitted output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A: screening</td>
+<td>Limits, flows and price history</td>
+<td>Observed event catalogue and price association screening</td>
+</tr>
+<tr>
+<td>B: mechanical overview</td>
+<td>Tier A plus retained sensitivities and generator pressure</td>
+<td>Preliminary movement attribution, with reconstruction caveats</td>
+</tr>
+<tr>
+<td>C: reconstructed case</td>
+<td>Full selected-window dispatch, equation solutions and effective versions</td>
+<td>Binding timeline and reconciled mechanical decomposition</td>
+</tr>
+<tr>
+<td>D: corroborated case</td>
+<td>Tier C plus relevant external operational evidence</td>
+<td>Supported mechanism narrative</td>
+</tr>
+<tr>
+<td>E: counterfactual</td>
+<td>Validated dispatch replay or another defensible causal design</td>
+<td>Conditional causal estimates under documented assumptions</td>
+</tr>
+</tbody>
+</table></div>
+<p>Publish a sufficiency matrix for every event. Price completeness, unit coverage and equation completeness are separate dimensions.</p>
+<p>The existing VNI/QNI compact studies are starting points, not a guarantee of Tier C. Audit local inventories first. Retained pressure files may omit raw dispatch trajectories and full interval equation states following cleanup; recover only the selected windows needed to fill those gaps.</p>
+<h2 id="event-methodology-6-data-normalization-and-quality-audit">6. Data normalization and quality audit</h2>
+<ol>
+<li>Inventory local files, schema versions, dates, hashes, sizes and duplicate archive coverage before downloading anything.</li>
+<li>Normalize timestamps. In the NEM use fixed UTC+10 market time and interval-ending timestamps; optionally display civil time separately with its timezone label.</li>
+<li>Build exact interval grids. Use timestamp-based lag joins, not six-row shifts unless uninterrupted five-minute spacing is established.</li>
+<li>Resolve revisions deterministically using market rules and source provenance. Audit conflicting records; retain the chosen record's run and revision identifiers.</li>
+<li>Distinguish physical dispatch runs from pricing runs. Do not assume intervention flags select the same run for both purposes. Preserve flags and exclude or separately analyze incompatible observations.</li>
+<li>Preserve raw and normalized limits side by side. Validate orientation, forced-direction cases and reported setter mapping.</li>
+<li>Join equation versions and asset mappings as of the applicable interval, including invocations that began before the study/window. Log all fallbacks; unknown versions remain unknown.</li>
+<li>Separate measured MW, initial MW and target MW. Align snapshots to their actual timing.</li>
+<li>Audit five-minute regional price coverage and revision handling. Do not substitute half-hour averages for MPC detection.</li>
+<li>Emit coverage counts by connector, direction, month, season, year, hour, source and event window.</li>
+</ol>
+<p>Do not interpolate through outages in the data to create event detections. Cross-gap event durations and recovery are censored. Missingness and duplicates must be resolved before denominator calculations.</p>
+<h2 id="event-methodology-7-event-detection-and-incident-construction">7. Event detection and incident construction</h2>
+<h3 id="event-methodology-71-primary-contraction-definition">7.1 Primary contraction definition</h3>
+<p>For canonical directional capacity <code>C_d(t)</code> and horizon <code>h</code>:</p>
+<pre><code class="language-text">drop_d,h(t) = C_d(t-h) - C_d(t)
+threshold_ic,d,year-month = Q90({drop_d,30m(t): drop_d,30m(t) &gt; 0})
+sharp(t) = valid_pair(t,t-30m) AND drop_d,30m(t) &gt; 0
+           AND drop_d,30m(t) &gt;= threshold_ic,d,year-month
+</code></pre>
+<p>Ties may make the qualifying share exceed 10% of positive falls. The threshold does not mean 10% of all intervals are events. Save thresholds and reference sample counts.</p>
+<p>Define a detection episode as consecutive valid qualifying intervals. Count its first interval as the detection onset. Stitch month boundaries before episode counting; changing monthly thresholds can change classification at a boundary and must be visible.</p>
+<p>Retrospective year-month thresholds use information from later in that month. They are valid descriptive labels, but must not be treated as available-at-the-time forecast features. For forecasting, freeze training-only thresholds or compute a trailing reference using only observations available at the forecast origin.</p>
+<h3 id="event-methodology-72-event-landmarks">7.2 Event landmarks</h3>
+<p>Store detection onset separately from a retrospective estimate of physical contraction start. A reproducible baseline rule is: choose the latest occurrence of the highest valid directional capacity in the preceding 30 minutes, then identify the first subsequent material decrease. Declare the noise tolerance and flag discontinuous or ambiguous paths. Describe this as an estimated start, not an observed initiating cause.</p>
+<p>Find the trough and recovery in the expanded incident window. Recovery is the first sustained crossing of <code>trough + 0.9 * (baseline - trough)</code> under the configured persistence rule. If no recovery is observed, label right-censored and report observed duration only. Store detection-time drop and baseline-to-trough drop separately.</p>
+<p>Group nearby same-direction episodes into parent incidents without deleting their identities. Transitive grouping can create long incidents; report their duration and constituent count. Opposite-direction and other-connector events receive links rather than being silently collapsed.</p>
+<h3 id="event-methodology-73-additional-event-attributes">7.3 Additional event attributes</h3>
+<ul>
+<li>Absolute capacity drop, percentage of baseline and percentage of a declared reference capacity.</li>
+<li>Baseline-relative percentages only when the baseline is materially positive; otherwise mark undefined.</li>
+<li>Headroom before/after, loss of headroom, and whether the limit became operationally restrictive.</li>
+<li>Flow change, reversal, forced direction, actual versus scheduled flow differences.</li>
+<li>Duration, recovery time, minimum capability and missing-data censoring.</li>
+<li>Equation switch, set invocation, link-availability change and pricing-regime flags.</li>
+<li>Exposure rates per 1,000 valid hours, not just counts.</li>
+</ul>
+<p>Run sensitivity analyses over horizons, percentile cutoffs (for example P85/P90/P95), absolute/relative severity and incident grouping. Keep versions of the event catalogue rather than replacing earlier definitions invisibly.</p>
+<h2 id="event-methodology-8-event-selection-without-outcome-cherry-picking">8. Event selection without outcome cherry-picking</h2>
+<p>Screen the full eligible period cheaply before recovering detailed records.</p>
+<h3 id="event-methodology-81-network-first-selection">8.1 Network-first selection</h3>
+<p>Include severe absolute and relative contractions, large headroom losses, forced-direction events, substantial equation switches and a stratified sample of ordinary events across directions, seasons and years.</p>
+<h3 id="event-methodology-82-price-first-selection">8.2 Price-first selection</h3>
+<p>Detect all exact MPC and near-MPC episodes in either endpoint region, extreme price changes and exceptional directional spreads independently of contraction detection. Search their surrounding windows for preceding, simultaneous or subsequent network events.</p>
+<p>Retain four groups: contraction with price shock; contraction without shock; shock without sharp contraction; and matched periods with neither. “No sharp contraction” does not imply absence of congestion.</p>
+<p>Prioritize detailed recovery for all MPC-linked candidates, severe network events and representative comparison cases. If storage or source availability limits coverage, retain the complete screened catalogue and publish the deep-dive selection rule and unresolved queue. Do not imply all events have detailed reconstruction.</p>
+<p>Freeze ranking and selection rules before interpreting named generators. Record sampling seeds and inclusion probabilities where appropriate. Population estimates use the full screened population or suitable weights, not an unweighted hand-selected gallery.</p>
+<h2 id="event-methodology-9-binding-equations-and-candidate-populations">9. Binding equations and candidate populations</h2>
+<p>For each selected window, retrieve the union of reported setters, applicable direct-IC equations, binding/near-binding candidates and relevant invoked-set dependencies. Include units outside the connector's endpoint regions when those equations reference them.</p>
+<p>Maintain separate indicators for:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Indicator</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reported setter</td>
+<td>Equation named in the published directional-limit record</td>
+</tr>
+<tr>
+<td>Reconstructed leading</td>
+<td>Equation producing the most restrictive supported conditional bound</td>
+</tr>
+<tr>
+<td>Economically binding</td>
+<td>Non-zero marginal value, subject to a declared numerical tolerance</td>
+</tr>
+<tr>
+<td>Geometrically tight</td>
+<td>LHS close to RHS under the declared scaled tolerance</td>
+</tr>
+<tr>
+<td>Violated</td>
+<td>Non-zero violation under its own tolerance</td>
+</tr>
+<tr>
+<td>Near-binding</td>
+<td>Small feasible slack; not equivalent to economically binding</td>
+</tr>
+<tr>
+<td>Near-setting</td>
+<td>Conditional bound near the leading directional bound</td>
+</tr>
+<tr>
+<td>Invoked</td>
+<td>Active operational applicability established from source records</td>
+</tr>
+</tbody>
+</table></div>
+<p>AEMO identifies binding constraints through non-zero marginal values; preserve degeneracy and numerical-tolerance distinctions when comparing this with geometric slack. <a href="https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/system-operations/congestion-information-resource/constraint-faq">AEMO constraint FAQ</a></p>
+<p>Do not duplicate contributions across multiple set memberships of the same equation. For equations with no target-IC coefficient, retain contextual relevance but do not invent a direct MW sensitivity. Very small IC factors require numerical diagnostics; report unstable sensitivities rather than silently clipping them.</p>
+<p>Candidate-set completeness matters: discovery from historical binding records alone can omit restrictions that become relevant in a counterfactual. Mark such a counterfactual partial.</p>
+<h2 id="event-methodology-10-mechanical-attribution">10. Mechanical attribution</h2>
+<h3 id="event-methodology-101-fixed-equation-sensitivity">10.1 Fixed-equation sensitivity</h3>
+<p>Normalize an inequality to:</p>
+<pre><code class="language-text">a * F + sum(b_i * P_i) + Z &lt;= R
+conditional_bound B = (R - sum(b_i * P_i) - Z) / a
+sensitivity_i = -b_i / a
+</code></pre>
+<p>Here <code>R</code> is the RHS; <code>Z</code> contains represented non-generator terms, including other ICs or service quantities where relevant. These terms must retain their correct units. If <code>a &gt; 0</code>, the equation defines an upper bound; if <code>a &lt; 0</code>, it defines a lower bound. Normalize greater-than inequalities first; handle equalities explicitly rather than pretending they are ordinary one-sided restrictions.</p>
+<p>With fixed coefficients:</p>
+<pre><code class="language-text">delta_B_generator_i = -(b_i / a) * delta_P_i
+delta_B_RHS = delta_R / a
+delta_B_other_terms = -delta_Z / a
+delta_B = sum(delta_B_generator_i) + delta_B_RHS + delta_B_other_terms
+</code></pre>
+<p>Convert bound movement into directional capacity movement: <code>delta_C = delta_B</code> for an upper/A-to-B bound and <code>delta_C = -delta_B</code> for a lower/B-to-A bound. Tightening is <code>-delta_C</code>; relief is the opposite sign.</p>
+<p>RHS contribution is not necessarily an independent physical cause: RHS formulations can themselves depend on generation, demand or other system inputs. Without their formulation/input history, call it “RHS movement,” not “network outage effect.” Avoid attributing the same underlying change twice.</p>
+<h3 id="event-methodology-102-generator-contribution-metrics">10.2 Generator contribution metrics</h3>
+<p>For each unit, equation and step, retain starting/ending dispatch, delta MW, factors, sensitivity, signed bound impact, directional tightening/relief, physical-run provenance and applicability.</p>
+<p>Calculate five-minute contributions and telescoping sums within fixed-equation segments. Retain 30-minute impacts as contextual diagnostics. Do not add overlapping rolling 30-minute impacts to estimate one incident's net MW loss. Existing MW-observation totals measure accumulated exposure and are neither MWh nor an event's unique contraction magnitude.</p>
+<p>Provide separate unit-level and station-level summaries, with effective-dated mappings. Distinguish generating and consuming modes, particularly for batteries and pumping loads.</p>
+<h3 id="event-methodology-103-equation-switches-and-coefficient-changes">10.3 Equation switches and coefficient changes</h3>
+<p>Split the event whenever the relevant equation, version or supported term structure changes. Within a segment, use the fixed-equation identity. Across a switch, use a declared bridge, for example:</p>
+<pre><code class="language-text">B_new(x1) - B_old(x0)
+  = [B_new(x1) - B_old(x1)] + [B_old(x1) - B_old(x0)]
+</code></pre>
+<p>The second bracket measures movement under the old formulation; the first measures changing formulations at the final input state. This is an accounting convention, not a unique causal allocation. Inputs <code>x</code> include the necessary dynamic RHS information. If an old equation's final-state RHS cannot be evaluated, leave the bridge unresolved.</p>
+<p>Where both bridges are computable, show sensitivity to using old-state versus new-state ordering. Activation/deactivation, unavailable terms, and version changes are explicitly visible in the bridge.</p>
+<p>For a supported candidate set, the upper envelope is the minimum upper bound and the lower envelope the maximum lower bound. Recompute that envelope when testing generator scenarios; changing one generator can cause a different equation to become leading.</p>
+<h3 id="event-methodology-104-reconciliation-and-confidence">10.4 Reconciliation and confidence</h3>
+<p>Use this accounting chain:</p>
+<pre><code class="language-text">observed directional-capacity change
+  = reconstructed conditional-envelope change
+    + change in observed-minus-reconstructed discrepancy
+
+reconstructed change
+  = generator terms + RHS terms + other represented terms
+    + switch/version bridge + unresolved components
+</code></pre>
+<p>Never label the entire discrepancy as topology, outage or a generator effect. Show net MW, gross tightening and gross relief separately. Gross tightening may exceed net observed contraction when relief offsets it.</p>
+<p>Assign an evidence grade using source completeness, exact-version coverage, applicability, price coverage and event-specific reconstruction error. Publish the underlying values. Proposed high-confidence tolerance is <code>max(10 MW, 5% of observed event loss)</code> for the absolute event residual, subject to validation for each adapter; it is not a guaranteed accuracy claim.</p>
+<h2 id="event-methodology-11-mechanism-review-and-language">11. Mechanism review and language</h2>
+<p>Classify units as mechanically tightening, mechanically relieving, responsive, or unresolved. A unit can take different roles in different portions of one event.</p>
+<p>Classify event mechanisms as generator-dominant, RHS-dominant, equation-switch-dominant, link-control/availability, mixed, or unresolved. Define dominance thresholds in configuration, apply them only after adequate reconciliation, and retain the full decomposition. A provisional majority-of-gross-tightening rule can be reported as descriptive, not causal.</p>
+<p>Build a timestamped evidence sequence: availability/outage or notice; dispatch movement; equation invocation/tightening; constraint binding; loss of headroom; flow response; price response. Five-minute timestamps cannot order processes within the same interval; flag simultaneous observations.</p>
+<p>Use “consistent with,” “mechanically contributed under the equation,” and “associated with” according to evidence. Do not infer strategic intent from a rebid, or say a generator caused an MPC event solely from coincident dispatch.</p>
+<h2 id="event-methodology-12-price-event-methodology">12. Price-event methodology</h2>
+<h3 id="event-methodology-121-price-integrity-and-labels">12.1 Price integrity and labels</h3>
+<p>Use interval-level regional prices, retaining adjusted/original price fields and applicable flags. AEMO describes five-minute price records and price adjustments in its <a href="https://www.aemo.com.au/-/media/files/electricity/nem/planning_and_forecasting/solar-and-wind/enablement-of-bid-max-avail-for-semi-scheduled-generators/emms-technical-specification-data-model-v52.pdf?hash=64FD0EEF28D98CA8B97A9256B64A8147&amp;la=en">MMS data-model specification</a>. Validate historical schema changes before implementation.</p>
+<p>Join an effective-dated market settings table; do not hard-code one MPC for a multi-year study. Exact MPC uses a declared rounding tolerance. Near-MPC uses a configurable fraction. Keep administered pricing, suspension, intervention and other price adjustments as separate regimes. Reference settings to official <a href="https://www.aemc.gov.au/">AEMC publications</a>; store the supporting publication URL for each effective period.</p>
+<p>Define price-jump and spread events with both fixed monetary cutoffs and region/time-specific historical percentiles. Publish all selected cutoffs. Include negative price shocks and sending-region price collapses, as well as receiving-region scarcity.</p>
+<h3 id="event-methodology-122-outcomes-per-incident">12.2 Outcomes per incident</h3>
+<ul>
+<li>Peak and minimum endpoint prices; absolute and baseline-relative changes in currency/MWh.</li>
+<li>Exact/near-MPC interval counts and duration, kept separate from other caps.</li>
+<li>Directional price-spread peak, change and duration.</li>
+<li>Price timing relative to detection and estimated contraction start.</li>
+<li>Flow/headroom alignment: was the restriction on the direction that could supply the stressed region?</li>
+<li>Time-integrated price or spread excess as a descriptive exposure measure; label units carefully. It is not total system cost, welfare loss or trading profit.</li>
+<li>Concurrent changes in demand, renewables, available supply, other ICs and applicable pricing regime.</li>
+</ul>
+<p>Do not calculate an “MPC caused by generator” count from association alone. Report mechanically attributed events associated with MPC, including sample sizes and confidence grade.</p>
+<h2 id="event-methodology-13-statistical-analysis-and-comparison-periods">13. Statistical analysis and comparison periods</h2>
+<h3 id="event-methodology-131-matched-event-study">13.1 Matched event study</h3>
+<p>Match contraction events to candidate controls on pre-event season/year, hour, weekday, demand, renewable output, availability, price, flow, directional headroom and known restriction regime. Do not match on post-event outcomes or variables changed by the event. Define control exclusion windows and record all unmatched events.</p>
+<p>Evaluate common support, standardized covariate balance and pre-event trends. Show raw event-time trajectories and matched differences. A price-shock-without-contraction group is an additional diagnostic, not automatically a valid causal control.</p>
+<p>For each horizon, estimate price/spread differences and uncertainty. Cluster resampling by parent incident or shared system day, including cross-connector linked incidents, to avoid treating overlapping intervals as independent. State model assumptions and multiple-comparison handling for broad generator screens.</p>
+<p>MPC outcomes may be rare: report numerators, denominators and uncertainty, avoid stable-looking rankings from a handful of events, and do not interpret no observed MPC as zero underlying risk.</p>
+<h3 id="event-methodology-132-optional-stronger-counterfactuals">13.2 Optional stronger counterfactuals</h3>
+<p>First use conditional equation scenarios: hold selected unit dispatch at baseline, recompute supported bounds and their envelope, and quantify conditional capacity differences. These are diagnostic scenarios, not feasible redispatch or price predictions.</p>
+<p>A price counterfactual requires a validated dispatch model with adequate offers, demand, losses, ramping, availability, relevant energy/FCAS restrictions and intervention treatment. Demonstrate baseline replication before perturbations. Holding one unit fixed requires feasible balancing redispatch. Publish scenario assumptions and unresolved model differences.</p>
+<h2 id="event-methodology-14-seasonal-diurnal-and-cross-connector-assessment">14. Seasonal, diurnal and cross-connector assessment</h2>
+<p>Report each study year separately and pooled. For each direction, show event rates per valid hour, loss magnitude, recovery, forced-flow incidence, generator roles, constraint mechanisms and associated price outcomes.</p>
+<p>For a NEM study, use Southern Hemisphere seasons. Define season-year explicitly, with summer spanning December to February. Two calendar years of data do not necessarily contain two complete summers at the endpoints; mark partial seasons rather than describing them as complete replicas.</p>
+<p>Diurnal charts use market time, with separate weekday/weekend slices where sample sizes permit. Show counts and exposure denominators in every seasonal/hourly comparison.</p>
+<p>Cross-connector comparison requires the same event-definition version, coverage rules and price labels, plus connector-normalized severity. Account for common system incidents and shared constraints. Two years provides repeated seasonal observations, not proof of a stable long-term seasonal law.</p>
+<h2 id="event-methodology-15-compact-forecasting-features-and-evaluation">15. Compact forecasting features and evaluation</h2>
+<p>Use the atlas to select a small direction-specific block rather than adding every DUID to the model:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Feature family</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Capacity state</td>
+<td>Current directional capacity, headroom and lagged contraction</td>
+</tr>
+<tr>
+<td>Generator pressure</td>
+<td>Aggregate recent tightening, relief and net pressure under relevant equations</td>
+</tr>
+<tr>
+<td>Concentration</td>
+<td>Largest contributor share and effective number of contributors</td>
+</tr>
+<tr>
+<td>Switching</td>
+<td>Gap to next candidate, recent setter changes and invoked-family state</td>
+</tr>
+<tr>
+<td>Constraint stress</td>
+<td>Near-binding population and supported slack/marginal-value summaries</td>
+</tr>
+<tr>
+<td>Flexibility</td>
+<td>Available relief from participating units under ramp/availability limits</td>
+</tr>
+<tr>
+<td>Market stress</td>
+<td>Receiving-region supply context and lagged directional price spread</td>
+</tr>
+<tr>
+<td>Quality</td>
+<td>Missing inputs, version match and reconstruction confidence</td>
+</tr>
+</tbody>
+</table></div>
+<p>Begin with approximately 8–12 scalar features per direction plus a small common quality block; choose the final set through ablation. Fit any generator grouping or encoding on training data only.</p>
+<p>For horizon-specific forecasts, retain only fields published by the origin time. Actual future dispatch, RHS, binding status, revised prices and full-month thresholds are unavailable future information. Predict them or use archived forecast vintages; never substitute realized values.</p>
+<p>Use chronological training, validation and untouched test periods. Keep related incidents and overlapping labels from leaking across splits, with a purge based on the maximum forecast label horizon. Evaluate against persistence, seasonal and market-context baselines. Use MAE and event-tail errors for limits/flow; precision-recall, calibration, recall at a declared false-alarm rate and usable lead time for contractions/MPC risk. Report economic outcome metrics separately from claims of tradable returns.</p>
+<h2 id="event-methodology-16-report-architecture-and-graph-specifications">16. Report architecture and graph specifications</h2>
+<p>Produce one market-level index and a consistent connector report, with event detail pages generated from compact evidence bundles.</p>
+<h3 id="event-methodology-161-connector-report-structure">16.1 Connector report structure</h3>
+<ol>
+<li>Executive findings, study dates, coverage, evidence status and key limitations.</li>
+<li>Connector orientation, source definitions and event methodology.</li>
+<li>Population overview: severity, duration, recurrence and prices.</li>
+<li>Searchable event catalogue with stable IDs and evidence grades.</li>
+<li>Representative and consequential event case studies.</li>
+<li>Generator profiles, with tightening and relief separated.</li>
+<li>Constraint/equation/set profiles and switching behavior.</li>
+<li>Seasonal, diurnal and year-to-year analysis.</li>
+<li>Price-event comparisons and statistical uncertainty.</li>
+<li>Forecast-feature implications and held-out validation, when run.</li>
+<li>Data quality, source manifest, exclusions and reproducibility appendix.</li>
+</ol>
+<h3 id="event-methodology-162-population-graphs">16.2 Population graphs</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Graph</th>
+<th>Required display</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Event map</td>
+<td>Capacity loss versus subsequent price/spread response; color mechanism, size duration, click event</td>
+</tr>
+<tr>
+<td>Coverage/calendar view</td>
+<td>Events and missing intervals by date; linked price-event markers</td>
+</tr>
+<tr>
+<td>Severity distribution</td>
+<td>Absolute and normalized loss, duration and recovery; direction filters</td>
+</tr>
+<tr>
+<td>Seasonal/hourly heatmap</td>
+<td>Rates per valid hour, sample sizes and price-linked subsets</td>
+</tr>
+<tr>
+<td>Generator ranking</td>
+<td>Incident frequency, net/gross tightening and relief; sufficient-sample flags</td>
+</tr>
+<tr>
+<td>Constraint ranking</td>
+<td>Binding/setting recurrence, event severity and evidence coverage</td>
+</tr>
+<tr>
+<td>Event-time curves</td>
+<td>Individual trajectories plus median/quantiles and matched uncertainty</td>
+</tr>
+<tr>
+<td>Mechanism comparison</td>
+<td>Reconciled shares and unresolved fraction, including uncertainty/sample sizes</td>
+</tr>
+</tbody>
+</table></div>
+<p>Do not rank generators solely by cumulative rolling MW-observations. Provide incident-level intensity and unique-event exposure alongside persistence measures.</p>
+<h3 id="event-methodology-163-synchronized-event-page">16.3 Synchronized event page</h3>
+<p>All time-series panels share zoom, cursor and markers for estimated start, detection, trough, recovery, switches and price events.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Panel</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Transfer capability</td>
+<td>Signed bounds, dispatch/metered flow where available, reconstructed envelope and headroom</td>
+</tr>
+<tr>
+<td>2. Prices</td>
+<td>Endpoint five-minute prices, directional spread, effective MPC and regime markers</td>
+</tr>
+<tr>
+<td>3. Unit dispatch</td>
+<td>Top tightening/relieving units, levels and deltas; distinguish targets from measurements</td>
+</tr>
+<tr>
+<td>4. Constraint timeline</td>
+<td>Setter identity, binding/near-binding flags, invocation, slack, marginal value and RHS</td>
+</tr>
+<tr>
+<td>5. Attribution</td>
+<td>Signed waterfall from baseline to trough, plus stepwise contributions and residual</td>
+</tr>
+<tr>
+<td>6. System context</td>
+<td>Demand, renewable output, availability and relevant other-IC changes</td>
+</tr>
+</tbody>
+</table></div>
+<p>Below the panels include a timestamped narrative, complete before/after equations, factors and units, dispatch changes by DUID, source-backed external evidence, confidence metrics and limitations.</p>
+<p>Each contribution tooltip identifies equation/version, unit, coefficient, IC coefficient, sensitivity, time horizon and whether the calculation spans a switch. A schematic dependency diagram may connect units to equations to the IC, but must be labeled as equation participation rather than a physical grid map.</p>
+<p>Use consistent direction names, MW and currency units, legible legends, accessible colors and tabular alternatives. Logarithmic price displays must handle negative values explicitly; retain a linear view. Charts must render locally without an active external data service.</p>
+<h3 id="event-methodology-164-illustrative-interpretation">16.4 Illustrative interpretation</h3>
+<p>An example waterfall might read: 400 MW contraction = 180 MW generator tightening - 40 MW relief + 200 MW RHS tightening + 60 MW unresolved. This is an illustration, not an observed result. The generator panel would show the underlying dispatch changes, the constraint panel their applicability, and the price panel any subsequent regional separation. The narrative must not convert this accounting identity into proof that the generators caused a price spike.</p>
+<h2 id="event-methodology-17-storage-scoped-downloads-and-cleanup">17. Storage, scoped downloads and cleanup</h2>
+<h3 id="event-methodology-171-mandatory-download-guard">17.1 Mandatory download guard</h3>
+<p><strong>Never download the entire MMS database or recursively mirror an archive directory.</strong> Every transfer must be tied to a selected table, bounded date range and required connector/equation/unit dependency, or a documented small full-period screening series.</p>
+<ol>
+<li>Reuse validated local data and manifests first.</li>
+<li>Build a download plan listing exact URLs/files, table/date scope, estimated compressed and expanded sizes, justification and expected retained outputs.</li>
+<li>Group selected event and control windows by source archive to extract them in one pass. Avoid downloading the same month once per event.</li>
+<li>Prefer the smallest official source unit available. If the source only provides a whole-table monthly archive, download that bounded archive, stream-filter it and log that source granularity prevented narrower transfer.</li>
+<li>Read only required columns/rows, but include all terms required for selected equations; filtering to endpoint-region generators alone is invalid.</li>
+<li>Process one archive at a time. Check actual bytes during transfer/extraction because size headers and estimates may be absent or wrong.</li>
+<li>Include temporary downloads, extracted files, staging, retained event bundles and report build copies in the 10 GB study budget. Track shared reused datasets separately and always enforce system free-space reserve. Do not evade the ceiling by moving study files outside the accounted directory.</li>
+<li>At the 8 GB trigger, clean only validated disposable study artifacts. If the next operation cannot fit under the hard ceiling, stop it, checkpoint and choose a smaller extraction unit or report the blocking source. Never exceed the cap silently.</li>
+</ol>
+<p>Suggested initial per-file compressed guard is 600 MB and per-batch expanded guard is 3 GB, inherited as conservative operational defaults; these are subordinate to the total peak budget. Track cumulative network bytes separately from retained disk bytes.</p>
+<h3 id="event-methodology-172-durable-event-bundles">17.2 Durable event bundles</h3>
+<p>Persist compact Parquet/JSON evidence: selected unit trajectories; applicable equation factors/solutions; IC and price series; context; event metadata; contribution calculations; quality metrics. Deduplicate shared intervals and equation versions across events and connectors.</p>
+<p>Only delete a raw archive after validating the extracted output, checking required fields/coverage, recording its checksum and download details, and atomically checkpointing success. Preserve enough filtered evidence to regenerate all charts without another download. Record cleanup time, deleted path/bytes and retained derivatives.</p>
+<p>Cleanup is allowlisted and restricted to resolved study-owned paths. Never delete unrelated source data, user files or unvalidated extracts. If the durable result set itself approaches the limit, reduce duplicated storage or predeclared deep-dive scope; do not erase evidence already cited by a report.</p>
+<h2 id="event-methodology-18-output-contracts-and-provenance">18. Output contracts and provenance</h2>
+<p>Use a namespace such as <code>market/connector/study_id/method_version</code>. Suggested deliverables:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Artifact</th>
+<th>Minimum content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>study_config.json</code></td>
+<td>Exact dates, adapter, thresholds, sampling, tolerances, limits and code version</td>
+</tr>
+<tr>
+<td><code>event_catalogue.parquet</code></td>
+<td>Event/incident IDs, landmarks, direction, severity, selection and evidence tier</td>
+</tr>
+<tr>
+<td><code>event_links.parquet</code></td>
+<td>Parent/child, shared system incident and cross-connector relationships</td>
+</tr>
+<tr>
+<td><code>thresholds.parquet</code></td>
+<td>References, sample counts, definitions and temporal availability</td>
+</tr>
+<tr>
+<td><code>event_timeseries.parquet</code></td>
+<td>IC, price, context and source/run identity for selected windows</td>
+</tr>
+<tr>
+<td><code>unit_dispatch.parquet</code></td>
+<td>Observed/target distinctions, units and effective mappings</td>
+</tr>
+<tr>
+<td><code>constraint_states.parquet</code></td>
+<td>Equation versions, factors, applicability, RHS, slack, marginal value and violation</td>
+</tr>
+<tr>
+<td><code>contributions.parquet</code></td>
+<td>Signed step/segment impacts, bridges, residuals and attribution convention</td>
+</tr>
+<tr>
+<td><code>event_outcomes.parquet</code></td>
+<td>Price/flow outcomes, censoring, regime flags and confidence</td>
+</tr>
+<tr>
+<td><code>controls.parquet</code></td>
+<td>Matching rules, balance, control IDs, weights and exclusions</td>
+</tr>
+<tr>
+<td><code>generator_summary.csv</code></td>
+<td>Unique incident counts, intensity, tightening/relief and associated price outcomes</td>
+</tr>
+<tr>
+<td><code>constraint_summary.csv</code></td>
+<td>Binding/setting distinctions, switches and incident statistics</td>
+</tr>
+<tr>
+<td><code>seasonal_diurnal_summary.csv</code></td>
+<td>Counts, exposure denominators and uncertainty</td>
+</tr>
+<tr>
+<td><code>source_manifest.jsonl</code></td>
+<td>Source URLs, hashes, schema, filters, dates, bytes and cleanup lineage</td>
+</tr>
+<tr>
+<td><code>quality_report.json</code></td>
+<td>Coverage, reconciliation, validation results and unresolved queue</td>
+</tr>
+<tr>
+<td><code>report.md</code> / <code>report.html</code></td>
+<td>Reproducible narrative, tables, charts and linked event pages</td>
+</tr>
+</tbody>
+</table></div>
+<p>Generate stable event IDs from connector, direction, detection time and detector version; parent incident IDs include the grouping version. Store methodology version and code commit in every report manifest. Configuration changes produce distinguishable runs.</p>
+<p>Source manifests also record retrieval time, publication/vintage where available, parser version and whether a field would have been available at forecast time. Publish compact evidence and reports according to repository data policy; keep large raw archives and sensitive credentials out of Git.</p>
+<h2 id="event-methodology-19-implementation-stages-and-release-gates">19. Implementation stages and release gates</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Work</th>
+<th>Gate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Configure</td>
+<td>Validate adapter, dates, definitions and storage inventory</td>
+<td>Direction and time conventions verified</td>
+</tr>
+<tr>
+<td>2. Screen</td>
+<td>Normalize full-period IC/price/context data; detect and link events</td>
+<td>Coverage/duplicate audit and stable catalogue</td>
+</tr>
+<tr>
+<td>3. Select</td>
+<td>Freeze deep-dive and control windows</td>
+<td>Transparent selection with all MPC candidates accounted for</td>
+</tr>
+<tr>
+<td>4. Recover</td>
+<td>Extract scoped dispatch/equation records</td>
+<td>Source manifest, storage compliance and complete checkpoints</td>
+</tr>
+<tr>
+<td>5. Reconstruct</td>
+<td>Reconcile fixed equations and switches</td>
+<td>Per-event confidence and unresolved fields visible</td>
+</tr>
+<tr>
+<td>6. Pilot pages</td>
+<td>At least five diverse cases where available: generator, RHS, switch, price-linked and low-price-response</td>
+<td>Manual numerical and visual review passes</td>
+</tr>
+<tr>
+<td>7. Expand</td>
+<td>Generate selected event atlas and statistical comparisons</td>
+<td>Denominators, matching and uncertainty audited</td>
+</tr>
+<tr>
+<td>8. Forecast study</td>
+<td>Build origin-available compact features and held-out tests</td>
+<td>Leakage checks and frozen test evaluation</td>
+</tr>
+<tr>
+<td>9. Publish</td>
+<td>Build reports and compact supporting files</td>
+<td>Reproducible render, link checks and documented limitations</td>
+</tr>
+</tbody>
+</table></div>
+<p>Forecasting and causal replay are separately labeled extensions. An observational atlas can be complete without them, provided it does not claim their findings. Overall completion means the declared scope has passed its gates, not that a storage/time budget was exhausted.</p>
+<h2 id="event-methodology-20-testing-and-acceptance-criteria">20. Testing and acceptance criteria</h2>
+<h3 id="event-methodology-201-numerical-and-data-tests">20.1 Numerical and data tests</h3>
+<ul>
+<li>Direction invariance: reversing the adapter orientation exchanges directional labels and preserves physical conclusions.</li>
+<li>Generator sign cases: positive/negative coefficients, ramp up/down, generating/consuming modes and upper/lower bounds.</li>
+<li>Equation identities: fixed-coefficient contributions reconcile exactly on controlled examples; bridge identities reconcile when all inputs are available.</li>
+<li>Candidate switching: a unit scenario can change the leading equation; incomplete candidate sets are flagged.</li>
+<li>Time boundaries: exact lag joins, missing intervals, month changes, leap day, interval-ending ownership and no unintended daylight-saving shift.</li>
+<li>Event semantics: ties, insufficient reference samples, no positive drops, forced negative capacity, duplicate detections and censored recovery.</li>
+<li>Price semantics: changing MPC, rounding tolerance, adjusted prices, intervention, administered regimes and negative prices.</li>
+<li>Asset/version history: connection-point changes, multiple set memberships and absent versions cannot duplicate or fabricate contributions.</li>
+<li>Non-overlap: stepwise impacts telescope; rolling-window exposures are never labeled event totals.</li>
+<li>Storage failures: oversized/unknown-size transfer, insufficient free disk, interrupted extraction, checksum failure and restart do not exceed limits or delete unvalidated evidence.</li>
+</ul>
+<h3 id="event-methodology-202-statistical-and-report-checks">20.2 Statistical and report checks</h3>
+<ul>
+<li>Event counts reconcile from interval labels through episodes, incidents and report filters.</li>
+<li>Every rate includes a valid exposure denominator; every sampled analysis identifies its selection scope.</li>
+<li>Matched controls use pre-event information, with balance/common-support diagnostics.</li>
+<li>Related events remain grouped for uncertainty and data splits; future data do not enter forecast features.</li>
+<li>Figures agree with source tables for inspected cases; direction, prices, times and units are consistent.</li>
+<li>Full equations and factors appear for reconstructed cases; unknown cases remain visible.</li>
+<li>Event pages render offline, synchronized panels work, labels are readable and links resolve.</li>
+<li>Rebuilding from durable bundles and the recorded configuration reproduces tables/figures within declared numerical tolerances.</li>
+</ul>
+<p>Accept a release only when hard integrity checks pass. Events with incomplete attribution may remain in the observed catalogue but must not enter high-confidence mechanism totals without meeting the declared criteria. Publish observed and reconstructed coverage separately.</p>
+<h2 id="event-methodology-21-repository-integration-and-reuse-checklist">21. Repository integration and reuse checklist</h2>
+<p>Use the existing constraint studies as discovery and screening inputs, preserving their original numerical results and definitions. Link this methodology from future event reports. Implement generic modules for normalization, detection, selection, reconstruction, attribution, price outcomes, matching, features and rendering; connector-specific logic belongs in the adapter/configuration.</p>
+<p>Before using the method on another interconnector, confirm:</p>
+<ol>
+<li>Signed orientation and source-limit meanings.</li>
+<li>Applicable technology, losses and operational controls.</li>
+<li>Exact two-year window and complete/partial season coverage.</li>
+<li>Existing local data, remaining gaps and bounded download plan.</li>
+<li>Equation population, historical versions and all required dependencies.</li>
+<li>Generator/load identity and effective-date mappings.</li>
+<li>Local directional thresholds and normalized severity references.</li>
+<li>Regional prices, effective MPC settings and special pricing regimes.</li>
+<li>Cross-connector incident links and suitable control population.</li>
+<li>Adapter tests, event-level reconciliation, report QA and the 10 GB guard.</li>
+</ol>
+<p>Related repository documents: <a href="#constraint-features">constraint-derived network features</a>, <a href="#backtest">backtest protocol</a>, <a href="#vni-two-year">VNI two-year study</a> and <a href="#qni-two-year">QNI two-year study</a>. This event workflow deliberately retains compact evidence and deletes validated temporary archives; it should not inherit a blanket raw-archive retention rule from an older workflow.</p>
+<h2 id="event-methodology-22-required-interpretation-in-every-published-report">22. Required interpretation in every published report</h2>
+<p>Include a short statement identifying the observation period, event detector version, covered versus missing data, evidence tiers, price regimes, reconstruction error and whether any causal replay or forecasting validation was performed.</p>
+<p>The reader must be able to distinguish: <strong>what happened; what the equations mechanically imply; what remains unexplained; what prices did; and what has actually been validated for prediction or causation.</strong></p>
+<h2 id="event-methodology-23-supporting-market-conditions-context-after-the-core-event-analysis">23. Supporting market conditions: context after the core event analysis</h2>
+<h3 id="event-methodology-231-priority-and-sequence">23.1 Priority and sequence</h3>
+<p>This is a secondary analytical layer. Its purpose is to explain why an identified contraction had a large or small market consequence, and whether the surrounding system was already stressed. It must not displace the primary investigation of the interconnector, generator movements and constraint equations.</p>
+<p>For every event, use this order:</p>
+<ol>
+<li>Establish the observed limit contraction, flow/headroom response and event landmarks.</li>
+<li>Identify the applicable equations, binding status, generator tightening/relief, RHS changes and equation switches; reconcile the result or explicitly record why it remains unresolved.</li>
+<li>Establish the regional price response and its timing, including any MPC or other pricing regime.</li>
+<li>Layer on demand, renewable output, thermal availability, outages and weather to explain the surrounding conditions and possible amplifiers.</li>
+<li>Revisit the interpretation only where this additional evidence supports a specific mechanism; preserve the original observations and document the reason for any revised conclusion.</li>
+</ol>
+<p>Core pages should be deliverable before optional context enrichment is complete. Missing temperatures or outage classifications do not block observed-event reporting; label those fields unavailable. An unresolved equation analysis also remains visible rather than being replaced by a confident weather or demand explanation.</p>
+<p>This sequencing applies to report emphasis and investigation depth. It does not permit omitting confounder checks from a statistical or causal claim. Section 13's matching and interpretation requirements still apply. Likewise, an outage or weather-dependent RHS input needed for equation reconciliation belongs in the core evidence, even though broader outage and weather context is secondary.</p>
+<h3 id="event-methodology-232-conditions-to-collect-where-available">23.2 Conditions to collect, where available</h3>
+<p>Collect conditions for both endpoint regions, with additional regions or sites only where the event's equations or supply dependencies justify them. Report the receiving and sending sides explicitly.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Condition</th>
+<th>Event measurements</th>
+<th>Interpretation and safeguards</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Demand</td>
+<td>Regional MW before/during/after; 5/30/60-minute change; percentile against comparable season/hour; forecast error where archived vintages exist</td>
+<td>Distinguish operational demand, underlying demand and residual demand. Name the definition and avoid adding rooftop PV twice</td>
+</tr>
+<tr>
+<td>Wind and utility solar</td>
+<td>Separate MW, regional share under a declared denominator, ramps, available resource/forecast and actual-versus-forecast differences where supported</td>
+<td>Distinguish weak resource from curtailment; falling dispatch alone does not establish weather-driven loss of supply</td>
+</tr>
+<tr>
+<td>Rooftop solar</td>
+<td>Estimated regional output and change, source cadence and uncertainty</td>
+<td>Keep estimates distinct from dispatchable-unit measurements; align demand accounting before calculating shares or residual demand</td>
+</tr>
+<tr>
+<td>Coal generation</td>
+<td>Output by unit/station/region, online-unit count, changes in output and availability</td>
+<td>Separate generating output, declared availability and registered capacity; MW not dispatched is not necessarily unavailable</td>
+</tr>
+<tr>
+<td>Coal offline/unavailable capacity</td>
+<td>Verified offline status, unavailable MW, derating and reason where supported</td>
+<td>Use dated unit capacities and status evidence; classify unknown status separately rather than calling zero-output units forced outages</td>
+</tr>
+<tr>
+<td>Other dispatchable supply</td>
+<td>Gas/hydro output and availability, battery generation/charging, relevant storage state where available</td>
+<td>Prevent a coal-only explanation of system flexibility; storage state and unit constraints may limit usable response</td>
+</tr>
+<tr>
+<td>Generator outages</td>
+<td>Unit, planned/forced/unknown classification, start/end, MW affected, derating and source</td>
+<td>Distinguish announced, expected and realized timings. Record partial outages and avoid double-counting lost capacity across notices</td>
+</tr>
+<tr>
+<td>Transmission/link outages</td>
+<td>Relevant circuits/assets, invocation links, availability/control changes and effective times</td>
+<td>Identify a direct equation/set connection where possible. A regional outage count alone does not explain a particular IC restriction</td>
+</tr>
+<tr>
+<td>Temperature</td>
+<td>Representative endpoint-region observations and relevant generation/network-site observations where available; anomaly and daily maximum context</td>
+<td>Preserve station location, observation time and quality. One city's temperature is not automatically representative of regional demand or an asset rating</td>
+</tr>
+<tr>
+<td>Other weather</td>
+<td>Wind, irradiance, humidity or other variables only when relevant and available</td>
+<td>Use these to investigate a specified demand, renewable or equipment mechanism; do not expand into an unrestricted weather study</td>
+</tr>
+<tr>
+<td>Supply margin and network support</td>
+<td>Declared available supply, demand, reserve indicators and other-IC flows/headroom</td>
+<td>Label any constructed margin as a proxy. Sum compatible quantities and do not equate nameplate capacity with deliverable reserve</td>
+</tr>
+</tbody>
+</table></div>
+<p>Use existing local regional and weather files first. Candidate supplementary sources include official market dispatch/availability records, published operational notices/outage records and official meteorological station observations. Confirm historical access, definitions and spatial/temporal coverage before promising each field. Use a documented gridded-weather fallback only where appropriate; label it as a different observation product and retain its uncertainty.</p>
+<h3 id="event-methodology-233-coal-capacity-and-outage-accounting">23.3 Coal capacity and outage accounting</h3>
+<p>Maintain an effective-dated unit inventory with fuel, station, region, registered capacity, dispatch type and retirement/commissioning dates. Define an online threshold and persistence rule in configuration. A telemetry-based online classification is an operational proxy unless independently confirmed; store the underlying evidence.</p>
+<p>Report these separately:</p>
+<ul>
+<li>Registered capacity of in-scope coal units, in MW.</li>
+<li>Capacity associated with verified/proxy-online units, clearly labeled as an inventory measure rather than deliverable capacity.</li>
+<li>Capacity associated with verified-offline units, plus a separate unknown-status category.</li>
+<li>Actual or initial-MW output and dispatch targets, with their timing distinguished.</li>
+<li>Declared available MW, explicitly unavailable MW where supported, and known deratings.</li>
+<li>Unused declared availability, such as <code>max(available MW - comparable output MW, 0)</code>, labeled as a headroom proxy rather than ramp-feasible reserve.</li>
+</ul>
+<p>Validate that online, offline and unknown inventory categories reconcile to the same dated registered-capacity population. Do not require dispatch availability to equal registered capacity; investigate differences and use source-consistent units. A unit may be online and derated, or offline but declared available to start. Do not add offline inventory capacity and unavailable MW as if they were disjoint losses.</p>
+<p>Availability reductions inferred from dispatch records should be called availability changes until corroborated. Confirm planned versus forced outage classifications through supporting records when possible. If a trip or derating is a plausible initiating event, move its detailed timing and evidence into the core event narrative.</p>
+<h3 id="event-methodology-234-event-window-comparisons-and-layered-interpretation">23.4 Event-window comparisons and layered interpretation</h3>
+<p>For each supported variable, retain its level at the last valid pre-event observation, its pre-event baseline, its event-window change, and its peak/trough. Use the existing two-hour before/after window first, adding a preceding-day context view only where useful. Align these summaries to both detection time and the estimated contraction start; detection may lag the initiating movement.</p>
+<p>Proposed summary windows are -60 to -5 minutes for baseline, the estimated physical start to trough for the contraction phase, and 0 to +60 minutes after detection for the main price response. Record overlap explicitly. For slow-cadence variables, select observations consistent with these windows rather than inventing five-minute measurements.</p>
+<p>Compare levels with season/hour peers using adequate sample counts. In retrospective descriptive plots, identify the reference period; in forecasts and control matching, use only pre-origin or pre-event information. Distinguish weather forecasts available beforehand from realized weather, and revised outage schedules from the information originally published.</p>
+<p>Use a layered analytical comparison where sample size permits:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Inputs and question</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Core mechanism</td>
+<td>Contraction severity, lost headroom, equation/constraint changes and mechanically attributed generator movement: what changed at the IC?</td>
+</tr>
+<tr>
+<td>Supply-demand context</td>
+<td>Demand, wind/solar, coal and other supply availability, relevant outages: was the region already vulnerable?</td>
+</tr>
+<tr>
+<td>Weather context</td>
+<td>Temperatures and specific resource/asset weather variables: do these explain the supply-demand state or a supported rating mechanism?</td>
+</tr>
+</tbody>
+</table></div>
+<p>Show whether the contextual layers change matched comparisons, out-of-sample explanatory performance or uncertainty. Do not interpret a model coefficient as proof of causality. Demand and availability may mediate weather effects; conditioning on them changes the question being estimated. State that question and avoid counting weather, demand and an RHS change as three independent causes when they describe the same pathway.</p>
+<p>Suggested conclusions are specific: “the contraction reduced import headroom while receiving-region demand was high and verified coal availability was low,” or “the same-sized contraction had little price effect because local supply headroom remained ample.” These are templates; populate them only with measured event evidence. Avoid unsupported claims that high temperature caused a trip or that low renewable dispatch proves low resource availability.</p>
+<h3 id="event-methodology-235-additions-to-the-event-report-and-graphs">23.5 Additions to the event report and graphs</h3>
+<p>Place a <strong>Supporting market conditions</strong> section after the core event narrative, equation evidence, generator attribution and observed price response. Keep its initial view compact, with optional detail expansion. The synchronized system-context panel in Section 16 is the entry point rather than a second dominant report.</p>
+<p>Include:</p>
+<ol>
+<li>A before/during/after conditions table with demand, wind, solar, coal output/availability, verified offline coal capacity, relevant outages and temperature. Every row shows units, source, cadence, completeness and reference percentile where valid.</li>
+<li>A regional demand-and-supply timeline, separating demand, renewable output and dispatchable output. Use an explicit accounting convention; do not imply a stack is balanced if imports, storage, rooftop supply or losses are omitted.</li>
+<li>A coal availability view showing output versus declared availability, with online/offline/unknown inventory in a separate strip. Annotate unit trips/deratings only to the confidence supported by records.</li>
+<li>A relevant-outage timeline linked to named units/assets, constraint sets and notices; shade uncertain start/end times.</li>
+<li>A temperature/context panel for selected representative sites with observed points and anomalies. Do not disguise hourly observations as five-minute measurements or add false precision through interpolation.</li>
+<li>An optional comparative plot of contraction severity and price response colored by demand percentile or supply-availability regime. Show sample sizes and distinguish a selected case gallery from a population relationship.</li>
+</ol>
+<p>End each event's context section with three short statements: conditions supported by observations; how they may amplify or moderate the established event; and missing evidence that limits that interpretation. Keep causal confidence separate from completeness of the context table.</p>
+<h3 id="event-methodology-236-data-storage-and-acceptance-additions">23.6 Data, storage and acceptance additions</h3>
+<p>Extend the durable evidence bundle with <code>market_context.parquet</code>, <code>unit_availability.parquet</code>, <code>outage_evidence.parquet</code> and <code>weather_context.parquet</code> where populated. Record units, location/region, measurement versus forecast/estimate, publication vintage, effective times and source lineage. Add <code>context_status</code> and per-variable coverage to each event's quality record.</p>
+<p>Apply Section 17's existing 10 GB peak ceiling and scoped-download guard. Recover context for selected event/control windows and limited, justified seasonal reference samples; reuse shared regional series. Do not download all historical unit outages, nationwide weather grids or an entire weather/MMS archive for this supporting layer. Batch extraction across nearby events, retain validated compact evidence and delete temporary source files with a cleanup log.</p>
+<p>Additional acceptance checks:</p>
+<ul>
+<li>Demand/renewables definitions and shares use compatible denominators without rooftop double-counting.</li>
+<li>Coal status categories, unit mappings and dated capacities reconcile; unknown status is retained.</li>
+<li>Planned, forced, inferred and unknown outages remain distinguishable; overlapping records do not duplicate lost MW.</li>
+<li>Weather stations/grids, measurement cadence, spatial relevance and missingness are visible.</li>
+<li>Pre-event controls and forecast features exclude post-event information and hindsight revisions.</li>
+<li>Primary event findings remain accessible and correctly qualified even when supporting conditions are unavailable.</li>
+<li>Every contextual mechanism claimed in the narrative has evidence beyond simple temporal coincidence, or is explicitly labeled a hypothesis.</li>
+</ul><a class="top" href="#top">Back to navigation</a></article><article id="qni-influence"><p class="source">Source: docs/QNI_GENERATOR_INFLUENCE_STUDY.md</p><h1 id="qni-influence-qni-generator-influence-and-constraint-feature-study">QNI generator influence and constraint-feature study</h1>
 <h2 id="qni-influence-research-question-and-result">Research question and result</h2>
 <p>This rerun asks which generators most strongly and persistently moved the constraint-derived <code>NSW1-QLD1</code> (QNI) directional bounds during February 2026, including sharp limit contractions, flow reversals and forced-direction limits. It also tests whether 14 compact network-state features improve a one-step persistence benchmark.</p>
 <p>The strongest broad-coverage candidates are <strong>NEWENSF2, NEWENSF1, METZSF1, SAPHWF1, WRWF1, ERB01, GNNDHSF1, BW02, KPP_1, BW04</strong>. The highest exposure ranks also contain episodic units—<strong>TUMUT3, UPPTUMUT, CUSF1, DARLSF1, RYEPARK1, AVLSF1, LIMOSF11, WLWLSF2</strong>—whose large impacts occur across fewer than 1,000 active rows. These should enter a forecast as regime-conditioned signed pressures, not as unconditional raw-generation features.</p>
