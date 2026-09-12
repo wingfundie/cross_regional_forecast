@@ -1,0 +1,65 @@
+{
+  "method_version": "1.1-event-atlas-1",
+  "config": "configs\\event_vni_2y.json",
+  "config_sha256": "3e714ef523d6cb6b2e462ff1b0fc0fa2ecc45dd1d4bd0ddb4f86c6cd652631fc",
+  "report_sha256": "1c7fae2ccdd03f3587e90a6d4f1752e81af37e580e744b0c6eff479186a2ded7",
+  "data_cutoff": "2026-08-31 23:55:00",
+  "build_time_utc": "2026-09-12 15:01:27.673057+00:00",
+  "generator_sha256": "e76384e8f12719f46f449503432692052ce708b000af6ea7fc5da9f45ec8057e",
+  "outputs": [
+    "docs\\html\\qni_event_atlas.html"
+  ],
+  "source_manifest_sha256": "d55e5ef47ece2a67bfbe83cde4e086178f08b37b80044ba4e2d2be43b4e4cc03",
+  "summary": {
+    "period": [
+      "2024-09-01 00:00:00",
+      "2026-08-31 23:55:00"
+    ],
+    "events": 7430,
+    "incidents": 5445,
+    "selected": 92,
+    "exact_mpc_region_intervals": 26,
+    "contractions_with_receiving_region_mpc_next_hour": 5,
+    "near_mpc_price_episodes": 45,
+    "price_only_cases": 13,
+    "matched_events": 5810,
+    "matched_mean_peak_price_jump_difference": 15.665054953528397,
+    "day_bootstrap_95ci": [
+      -26.731668474227284,
+      53.33383952728914
+    ],
+    "top_selected_case_generator": "TUMUT3",
+    "quality": {
+      "method_version": "1.1-event-atlas-1",
+      "start": "2024-09-01 00:00:00",
+      "end": "2026-08-31 23:55:00",
+      "expected_intervals": 210240,
+      "events": 7430,
+      "incidents": 5445,
+      "selected_events": 92,
+      "price_episodes": 45,
+      "price_episodes_without_nearby_contraction": 13,
+      "coverage": {
+        "flow": 210240,
+        "export": 210240,
+        "import": 210240,
+        "NSW1_RRP": 210240,
+        "QLD1_RRP": 210240
+      }
+    },
+    "reconstruction": {
+      "selected_events": 92,
+      "events_reconstructed": 92,
+      "constraint_rows": 733990,
+      "dispatch_rows": 1909664,
+      "contribution_rows": 24836,
+      "exact_version_share": 0.6688292756032098,
+      "maximum_accounting_error_mw": 9.094947017729282e-13,
+      "not_claimed": [
+        "causal price attribution",
+        "full security constrained dispatch replay",
+        "separate identification of every residual LHS term"
+      ]
+    }
+  }
+}

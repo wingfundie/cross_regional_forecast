@@ -1,0 +1,25 @@
+time,direction,_merge
+2024-09-21 06:55:00,lower,left_only
+2024-09-21 07:00:00,lower,right_only
+2024-10-31 11:15:00,upper,left_only
+2024-11-03 06:50:00,lower,left_only
+2024-12-09 10:30:00,lower,left_only
+2025-01-28 18:05:00,lower,left_only
+2025-01-28 18:10:00,lower,right_only
+2025-02-12 16:25:00,upper,left_only
+2025-02-12 16:30:00,upper,right_only
+2025-05-01 00:15:00,upper,left_only
+2025-05-01 00:30:00,upper,right_only
+2025-05-20 14:45:00,upper,right_only
+2025-05-25 11:35:00,lower,left_only
+2025-05-25 11:40:00,lower,right_only
+2025-05-27 10:55:00,upper,right_only
+2025-06-01 00:00:00,lower,left_only
+2025-06-16 14:55:00,upper,left_only
+2025-06-18 06:20:00,lower,right_only
+2025-06-18 06:25:00,lower,left_only
+2025-11-29 09:50:00,lower,left_only
+2026-01-25 14:30:00,upper,left_only
+2026-03-04 16:40:00,lower,left_only
+2026-03-04 17:10:00,upper,left_only
+2026-06-02 18:40:00,upper,left_only

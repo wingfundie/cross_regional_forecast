@@ -95,6 +95,13 @@ def price_regime(flags, suspended):
     return flags.notna() & v.map(lambda x: (x & (1|2|8))==0) & suspended.eq(0)
 
 
+def coal_duids(c):
+    """Return the explicitly scoped coal fleet for the connector study."""
+    if c.get('coal_duids'):
+        return set(c['coal_duids'])
+    return {f'BW0{i}' for i in range(1,5)}|{f'ER0{i}' for i in range(1,5)}|{'MP1','MP2','VP5','VP6'}|{f'LYA{i}' for i in range(1,5)}|{'LOYYB1','LOYYB2'}|{f'YWPS{i}' for i in range(1,5)}
+
+
 def detector(capacity, percentile=.9):
     """Series must be on a complete five-minute grid, with missing data as NaN."""
     drop = capacity.shift(6) - capacity
@@ -152,6 +159,7 @@ def screen(c):
         for field in regs[5:]: ic[f'{region}_{field}']=p[field].reindex(idx)
     save(ic.reset_index(),root/'screen_timeseries.parquet')
     rows=[]; thresholds=[]; labels=[]
+    label = c.get('label', c['interconnector'].split('-')[0].replace('1','').upper())
     for direction,col,receiver,sender in [('upper','export',c['regions'][1],c['regions'][0]),('lower','import',c['regions'][0],c['regions'][1])]:
         d,th,n=detector(ic[col]); eligible=(d.index>=start)&(d.index<=end)
         for month,value in th.items():thresholds.append(dict(month=month,direction=direction,threshold_mw=value,positive_falls=int(n[month])))
@@ -165,7 +173,7 @@ def screen(c):
             before=ic.loc[t-pd.Timedelta(hours=1):t-pd.Timedelta(minutes=5)]
             peak=post[f'{receiver}_RRP'].max(); preprice=before[f'{receiver}_RRP'].median()
             spread=post[f'{receiver}_RRP']-post[f'{sender}_RRP']
-            rows.append(dict(event_id=f"VNI-{direction}-{t:%Y%m%dT%H%M}",time=t,direction=direction,
+            rows.append(dict(event_id=f"{label}-{direction}-{t:%Y%m%dT%H%M}",time=t,direction=direction,
                 receiver=receiver,sender=sender,month=str(t.to_period('M')),hour=t.hour,
                 season=['Summer','Autumn','Winter','Spring'][(t.month%12)//3],year=t.year,
                 baseline_time=bt,baseline_capacity_mw=base,trough_time=trough_t,trough_mw=trough,
@@ -348,7 +356,7 @@ def match_controls(c):
 def recover_coal_registration(c):
     """Small, exact-table monthly snapshots for dated coal capacity; no registry mirror."""
     from .constraint_ingest import _table_rows
-    duids={f'BW0{i}' for i in range(1,5)}|{f'ER0{i}' for i in range(1,5)}|{'MP1','MP2','VP5','VP6'}|{f'LYA{i}' for i in range(1,5)}|{'LOYYB1','LOYYB2'}|{f'YWPS{i}' for i in range(1,5)}
+    duids=coal_duids(c)
     parts=[]
     for month in pd.period_range(pd.Timestamp(c['start']).to_period('M'),pd.Timestamp(c['end']).to_period('M'),freq='M'):
         out=c['root']/'coal_registration'/f'{month}.parquet'

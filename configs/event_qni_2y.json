@@ -1,0 +1,30 @@
+{
+  "label": "QNI",
+  "interconnector": "NSW1-QLD1",
+  "regions": ["NSW1", "QLD1"],
+  "start": "2024-09-01 00:00:00",
+  "end": "2026-08-31 23:55:00",
+  "output_dir": "event_qni_2y",
+  "base_study_dir": "constraint_qni_2y",
+  "standing_dir": "constraint_qni_2y/standing",
+  "disk_cap_bytes": 10000000000,
+  "min_free_bytes": 20000000000,
+  "file_cap_bytes": 600000000,
+  "expanded_cap_bytes": 3000000000,
+  "coal_duids": [
+    "BW01", "BW02", "BW03", "BW04", "ER01", "ER02", "ER03", "ER04",
+    "MP1", "MP2", "VP5", "VP6", "LYA1", "LYA2", "LYA3", "LYA4",
+    "LOYYB1", "LOYYB2", "YWPS1", "YWPS2", "YWPS3", "YWPS4",
+    "CALLNL1", "CALLNL2", "CALLNL3", "CALLNL4", "CALL_A_1", "CALL_A_2",
+    "CALL_A_3", "CALL_A_4", "CALL_B_1", "CALL_B_2", "COLNSNL1", "COLNSV_1",
+    "COLNSV_2", "COLNSV_3", "COLNSV_4", "COLNSV_5", "KPP_1", "MPP_1",
+    "MPP_2", "STAN-1", "STAN-2", "STAN-3", "STAN-4", "TARONG#1",
+    "TARONG#2", "TARONG#3", "TARONG#4", "TNPS1", "SWAN_A_1", "SWAN_A_2",
+    "SWAN_A_3", "SWAN_A_4", "SWAN_A_5", "SWAN_A_6", "SWAN_B_1", "SWAN_B_2",
+    "SWAN_B_3", "SWAN_B_4", "SWAN_C", "SWAN_D", "SWAN_E"
+  ],
+  "aemc_cap_sources": [
+    "https://www.aemc.gov.au/news-centre/media-releases/aemc-updates-market-price-cap-2026-27"
+  ],
+  "scope": "Full five-minute QNI screen; selected mechanical event windows; matched observational controls; secondary market context."
+}
