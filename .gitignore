@@ -13,3 +13,13 @@ results/
 .env.*
 !.env.example
 local_exports/
+
+# Retain only compact, reproducible forecasting research evidence under docs/data.
+!docs/data/
+docs/data/*
+!docs/data/qni_vni_simple_model_research.json
+!docs/data/qni_vni_forecast_research_build.json
+!docs/data/qni_vni_expanded_model_evidence.json
+!docs/data/qni_vni_expanded_search_log.json
+!docs/data/qni_vni_expanded_sources.json
+!docs/data/qni_vni_expanded_research_build.json

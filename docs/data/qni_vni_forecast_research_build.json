@@ -1,0 +1,39 @@
+{
+  "report": "docs/html/qni_vni_forecast_model_improvement.html",
+  "markdown": "docs/QNI_VNI_FORECAST_MODEL_IMPROVEMENT_PLAN.md",
+  "research_access_date": "2026-09-13",
+  "study_cutoff": "2026-08-31 23:55 fixed UTC+10",
+  "status": "research methodology plus exploratory simple-model probe",
+  "rebuild_command": "python scripts/build_forecast_research.py",
+  "probe_command": "python scripts/research_simple_models.py",
+  "render_downloads": [],
+  "markdown_package_version": "3.10.3",
+  "inputs": [
+    {
+      "path": "docs/QNI_VNI_FORECAST_MODEL_IMPROVEMENT_PLAN.md",
+      "sha256": "69d7e04a3692677d0e1ac36c041187017ba711d61413f88d2aeb6f56395ee668",
+      "bytes": 76705
+    },
+    {
+      "path": "docs/data/qni_vni_simple_model_research.json",
+      "sha256": "a845fca9c2215a0dcf2378c03452da70c80cd30eada6a64e6dd09c41a0b141e7",
+      "bytes": 54196
+    },
+    {
+      "path": "scripts/report_theme/report_theme.py",
+      "sha256": "8a49b55a30101a6b7f6e92166b126ce9e2b170eccd9a477738cba95dfadc5aa9",
+      "bytes": 3252
+    },
+    {
+      "path": "scripts/report_theme/report.css",
+      "sha256": "c02b38088e3ccf3cfc916465bfbbdc369f53ae954fdda4f3e887fcba669b027d",
+      "bytes": 4619
+    },
+    {
+      "path": "scripts/build_forecast_research.py",
+      "sha256": "1e5916d8edbf5fc8d22a99977db52bb35768889ab1f6f3e1390dd8ba83ca428c",
+      "bytes": 4805
+    }
+  ],
+  "output_sha256": "cf9e57f5177b85f5337fcd2294f81c04779144f9d7747887caba49b7735f834f"
+}

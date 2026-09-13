@@ -1,0 +1,78 @@
+[
+  {
+    "id": 28,
+    "reference": "INTERFLOW. [Expanded model evidence](data/qni_vni_expanded_model_evidence.json), generated 13 September 2026 by [the expanded research experiment](../scripts/research_expanded_models.py). Local primary evidence: 144 regression scores, 20 event scores, 48 monthly audits, two attribution audits and 100 input hashes. Retrospective development assessment; no new market downloads."
+  },
+  {
+    "id": 29,
+    "reference": "Daniel Hjertholm / Statnett. [Quantifying uncertainty in forecasts – methods and lessons from mFRR flow prediction](https://datascience.statnett.no/2026/03/11/quantifying-uncertainty-in-forecasts-m/), 11 March 2026. Primary transmission-operator article, full article text examined; accessed 13 September 2026. Direct balancing-flow application, not NEM validation."
+  },
+  {
+    "id": 30,
+    "reference": "Yeesian Ng, Sidhant Misra, Line A. Roald and Scott Backhaus. [Statistical Learning For DC Optimal Power Flow](https://arxiv.org/abs/1801.07809), 23 January 2018 preprint. Primary paper examined; accessed 13 September 2026. Affine basis policies and active operating regimes in DC-OPF."
+  },
+  {
+    "id": 31,
+    "reference": "Deepjyoti Deka and Sidhant Misra. [Learning for DC-OPF: Classifying active sets using neural nets](https://arxiv.org/abs/1902.05607), February 2019 preprint. Primary paper examined; accessed 13 September 2026. Optimisation active-set classification, not chronological interconnector forecasting."
+  },
+  {
+    "id": 32,
+    "reference": "Luyao Liu, Feifei Bai, Chenyu Su, Cuiping Ma, Ruifeng Yan, Hailong Li, Qie Sun and Ronald Wennersten. [Forecasting the occurrence of extreme electricity prices using a multivariate logistic regression model](https://research-repository.griffith.edu.au/bitstreams/f003c844-829c-4db6-8257-47538355a229/download), Energy 247, 123417, 2022; DOI 10.1016/j.energy.2022.123417. Primary institutional accepted-manuscript abstract accessed through indexed text on 13 September 2026; direct full-text retrieval failed. Input timing and complete validation design were not independently established."
+  },
+  {
+    "id": 33,
+    "reference": "Schäfer, Hofmann, Abdel-Khalek and Weidlich. [Principal Cross-Border Flow Patterns in the European Electricity Markets](https://arxiv.org/abs/1908.02848), August 2019 preprint. Primary paper examined; accessed 13 September 2026. Descriptive physical-flow PCA; training-only adaptation proposed here."
+  },
+  {
+    "id": 34,
+    "reference": "Worsnop et al. [Generating wind power scenarios for probabilistic ramp event prediction](https://wes.copernicus.org/articles/3/371/2018/wes-3-371-2018.pdf), Wind Energy Science 3, 371–393, 2018. Primary full paper examined; accessed 13 September 2026. Joint scenarios and ramp-event forecasts; results depend on data and forecast setting."
+  },
+  {
+    "id": 35,
+    "reference": "Hui Zou and Trevor Hastie. [Regularization and variable selection via the elastic net](https://web.stanford.edu/~hastie/Papers/elasticnet.pdf), Journal of the Royal Statistical Society Series B 67(2), 301–320, 2005. Author-hosted manuscript (revision August 2004) examined; accessed 13 September 2026."
+  },
+  {
+    "id": 36,
+    "reference": "Xiaoqian Wang, Rob J. Hyndman, Feng Li and Yanfei Kang. [Forecast combinations: an over 50-year review](https://arxiv.org/abs/2205.04216), preprint 2022, International Journal of Forecasting 2023. Primary review examined; accessed 13 September 2026. Simple and estimated combinations; not a specific QNI/VNI ensemble result."
+  },
+  {
+    "id": 37,
+    "reference": "InterpretML contributors. [Explainable Boosting Machine](https://interpret.ml/docs/ebm.html), undated official documentation, accessed 13 September 2026. Full documentation page examined. Describes additive boosted functions and selected interactions; software description, not local performance evidence."
+  },
+  {
+    "id": 38,
+    "reference": "AEMO. [Electricity Data Model 5.3](https://tech-specs.docs.public.aemo.com.au/Content/TSP_EMMSDM53_April2024/Electricity_Data_Model_5.3.htm), April 2024, PD7DAY table definitions; and [Loading data from non-data-model tables](https://di-help.docs.public.aemo.com.au/Content/Data_Subscription/Loading_data_from_non-data_model_tables.htm), undated public documentation. Primary indexed table/field excerpts accessed 13 September 2026; some direct retrievals failed. Historical report availability still requires audit."
+  },
+  {
+    "id": 39,
+    "reference": "AEMO. [Market notice CHG0106323, change to Extended Pre-Dispatch report to extend to seven-day period](https://www.aemo.com.au/Market-Notices?MarketNoticeList=15&fromdate=&marketNoticeFacets=VOLL%2CPOWER+SYSTEM+EVENTS%2CMPDI%2CMARKET+SYSTEMS%2CLOR1+ACTUAL%2CLOR3+ACTUAL&marketNoticeQuery=&todate=), October 2025, stated change window 23–24 October 2025. Primary indexed notice text accessed 13 September 2026. Notice-list URL is mutable; search by change number if the visible page advances."
+  },
+  {
+    "id": 40,
+    "reference": "AEMO. [Pre-dispatch market data](https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/data-nem/market-management-system-mms-data/pre-dispatch), undated public information page, accessed 13 September 2026. Primary description examined, including SNOWYP/Tumut 3 pump reporting and forecast horizons."
+  },
+  {
+    "id": 41,
+    "reference": "AEMO. [SO_OP_3704 – Predispatch](https://www.aemo.com.au/-/media/files/electricity/nem/security_and_reliability/power_system_ops/procedures/so_op_3704-predispatch.pdf), final version 19, effective 1 April 2026. Primary current procedure examined; accessed 13 September 2026. Earlier superseded draft excluded."
+  },
+  {
+    "id": 42,
+    "reference": "Dominik Janzing, Lenon Minorics and Patrick Bloebaum. [Feature relevance quantification in explainable AI: A causal problem](https://proceedings.mlr.press/v108/janzing20a.html), AISTATS, PMLR 108:2907–2916, 2020. Primary proceedings abstract examined; accessed 13 September 2026. Used only for the observational/interventional interpretation distinction."
+  },
+  {
+    "id": 43,
+    "reference": "AEMO. [Constraint Formulation Guidelines](https://www.aemo.com.au/-/media/files/electricity/nem/security_and_reliability/congestion-information/2025/constraint-formulation-guidelines.pdf), effective 2 December 2025, especially section 2.6.1 and change history; [final consultation page](https://www.aemo.com.au/consultations/current-and-closed-consultations/isf-consultation-of-constraint-formulation-guidelines), 30 October 2025. Primary final document and page examined; accessed 13 September 2026. Changes minimum LHS factor threshold from 0.07 to 0.15."
+  },
+  {
+    "id": 44,
+    "reference": "Yaniv Romano, Evan Patterson and Emmanuel J. Candès. [Conformalized Quantile Regression](https://arxiv.org/abs/1905.03222), May 2019 preprint. Primary abstract examined in this pass; accessed 13 September 2026. Candidate heteroscedastic calibration method; no claim that its finite-sample assumptions hold automatically in this application."
+  },
+  {
+    "id": 45,
+    "reference": "Vitor Cerqueira, Luis Torgo and Igor Mozetič. [Evaluating time series forecasting models: An empirical study on performance estimation methods](https://arxiv.org/abs/1905.11744), 2019 preprint, published 2020. Primary paper examined; accessed 13 September 2026. Empirical distinction between stationary and real nonstationary evaluation settings."
+  },
+  {
+    "id": 46,
+    "reference": "Hansika Hewamalage, Klaus Ackermann and Christoph Bergmeir. [Forecast evaluation for data scientists: common pitfalls and best practices](https://link.springer.com/article/10.1007/s10618-022-00894-5), published online 2 December 2022, Data Mining and Knowledge Discovery 37:788–832, 2023. Primary full paper examined; accessed 13 September 2026."
+  }
+]

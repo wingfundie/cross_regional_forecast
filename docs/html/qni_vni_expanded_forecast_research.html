@@ -1,0 +1,4039 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="data:,"><meta name="report-theme" content="editorial-html-report/1.0"><title>From constraint studies to better QNI and VNI forecasts</title><style>:root{--ink:#282b30;--muted:#636870;--blue:#4c94df;--teal:#268a87;--accent:#7658c9;--line:#dfe3eb;--panel:#ececf3}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;border-top:5px solid var(--blue);background:#f5f6f9;color:var(--ink);font:16px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+main{max-width:1344px;margin:auto;padding:50px 32px 70px}.eyebrow,.section-kicker{font-size:12px;letter-spacing:.14em;font-weight:750;color:#3977b7}.section-kicker{margin-bottom:10px}
+h1{font-size:clamp(38px,5vw,65px);line-height:1.08;letter-spacing:-.045em;margin:17px 0 22px}h1 span{color:var(--accent)}.dek{font-size:20px;max-width:1080px;color:var(--muted);margin-bottom:26px}.tags{display:flex;gap:9px;flex-wrap:wrap}.tags span{font-size:12px;border:1px solid var(--line);background:white;border-radius:20px;padding:6px 12px}
+nav{display:flex;flex-wrap:wrap;gap:21px;margin:22px 0 30px;padding:18px 0;border-bottom:1px solid var(--line);font-size:14px}a{color:#276bae;text-decoration:none}a:hover{text-decoration:underline}a:focus-visible,summary:focus-visible,select:focus-visible,.table-wrap:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.metric{background:white;border:1px solid var(--line);border-radius:10px;padding:21px;min-width:0}.metric span,.metric small{display:block;color:var(--muted);font-size:12px}.metric strong{font-size:30px;line-height:1.25;letter-spacing:-.035em;display:block;margin:5px 0;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.callout{background:#eaf3f5;border-left:4px solid var(--teal);padding:19px 23px;margin:25px 0;font-size:15px}.scope-note{background:#fff8e8;border-left-color:#c29330}
+section,.section{margin-top:52px;scroll-margin-top:20px}h2{font-size:29px;line-height:1.25;letter-spacing:-.025em;margin:38px 0 16px}h3{font-size:19px;line-height:1.3;margin:25px 0 13px}
+.findings{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.finding{background:white;border:1px solid var(--line);border-radius:10px;padding:23px;min-width:0}.finding h3{margin-top:11px}.finding p{margin:0;font-size:14px;color:var(--muted)}.index{font-size:12px;font-weight:750;color:var(--teal)}
+.table-wrap{overflow-x:auto;background:white;border:1px solid var(--line);border-radius:10px;max-width:100%;overscroll-behavior-x:contain;margin:16px 0}table{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap}th,td{padding:12px 14px;text-align:right;border-bottom:1px solid #edf0f4;vertical-align:top}th:first-child,td:first-child{text-align:left}td:first-child{font-weight:600}thead{background:var(--panel);font-size:12px;color:#4f545b}tbody tr:nth-child(even){background:#fafbfc}tbody tr:hover{background:#f0f6fc}
+.small,.note,.meta{font-size:13px;color:var(--muted)}figure{margin:26px 0 8px;background:white;border:1px solid var(--line);border-radius:10px;overflow:hidden}figcaption{display:flex;justify-content:space-between;gap:16px;padding:13px 18px;border-bottom:1px solid #edf0f4;color:var(--muted);font-size:12px;font-weight:650}.figure-links{display:flex;gap:20px;flex-shrink:0}figure img{display:block;width:100%;height:auto}.figure-note{padding:0 18px 13px;margin:0;color:var(--muted);font-size:12px}.chart-scroll{overflow-x:auto}.chart-scroll .plotly-graph-div{min-width:680px;border-top:2px solid var(--blue)}
+.method,details{padding:27px;background:white;border:1px solid var(--line);border-radius:10px}details{margin-top:24px}summary{cursor:pointer;font-weight:650}li{margin:12px 0}.sources{font-size:14px}.sources a{overflow-wrap:anywhere}footer{margin-top:45px;padding-top:22px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}code{background:#f0f2f7;padding:2px 5px;border-radius:3px;font-size:12px;overflow-wrap:anywhere}
+@media(max-width:900px){main{padding:32px 20px 55px}.metrics{grid-template-columns:repeat(2,1fr)}.findings{grid-template-columns:1fr}.dek{font-size:18px}section,.section{margin-top:40px}nav{gap:14px}}
+@media(max-width:520px){main{padding:28px 15px 45px}.metrics{gap:10px}.metric{padding:15px}.metric strong{font-size:24px}.metric small{font-size:11px}h2{font-size:25px}figcaption{padding:11px 12px;align-items:flex-start}.figure-links{gap:12px}.method,details{padding:20px}.callout{padding:17px 18px}}
+@media print{body{background:white}nav,figcaption a{display:none}main{max-width:none;padding:15px}figure,.metrics,.finding{break-inside:avoid}h2{break-after:avoid}.chart-scroll{overflow:visible}.chart-scroll .plotly-graph-div{min-width:0}}
+
+:root{--accent:#4c94df}body{background:#fff;color:#202327}main{max-width:1180px;padding:40px 28px 80px}
+h1{font-size:clamp(32px,4vw,52px);line-height:1.12;letter-spacing:-.025em}h2{margin-top:48px;border-top:1px solid #ddd;padding-top:16px;font-size:26px}h3{margin-top:30px;font-size:20px}
+p,li{line-height:1.7}a{color:#285f8e;overflow-wrap:anywhere}nav{background:#f7f7f7;padding:16px;margin:24px 0}nav ul{columns:2}nav li{break-inside:avoid;font-size:14px}
+.table-scroll{overflow-x:auto;margin:24px 0;border:1px solid #ddd}table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:10px;border-bottom:1px solid #ddd;text-align:left;vertical-align:top}th{background:#f0f1f3}tr:nth-child(even){background:#fafafa}
+pre{overflow-x:auto;background:#f6f6f6;padding:18px;border:1px solid #ddd;font-size:13px}.footnote{font-size:13px}.footnote li{margin:12px 0}summary{cursor:pointer}
+@media(max-width:650px){main{padding:20px 14px}nav ul{columns:1}table{min-width:620px}}@media print{nav{display:none}main{padding:0}.table-scroll{overflow:visible}table{font-size:8px;min-width:0}h2{break-after:avoid}}</style></head><body><main><h1 id="from-constraint-studies-to-better-qni-and-vni-forecasts">From constraint studies to better QNI and VNI forecasts</h1><p><a href="../QNI_VNI_EXPANDED_FORECAST_RESEARCH.md">Markdown edition</a> · <a href="../data/qni_vni_expanded_model_evidence.json">Numerical evidence and input hashes</a></p><nav aria-label="Contents"><details open><summary>Contents</summary><div class="toc">
+<ul>
+<li><a href="#1-decision-and-scope">1. Decision and scope</a></li>
+<li><a href="#2-research-design-and-evidence-hierarchy">2. Research design and evidence hierarchy</a></li>
+<li><a href="#3-what-the-existing-model-does-and-does-not-establish">3. What the existing model does and does not establish</a></li>
+<li><a href="#4-integrating-the-users-studies">4. Integrating the user's studies</a></li>
+<li><a href="#5-the-mathematical-representation">5. The mathematical representation</a></li>
+<li><a href="#6-compact-feature-dictionary">6. Compact feature dictionary</a></li>
+<li><a href="#7-forecasting-generator-pressure">7. Forecasting generator pressure</a></li>
+<li><a href="#8-data-contracts-and-historical-availability">8. Data contracts and historical availability</a></li>
+<li><a href="#9-model-portfolio-from-simple-to-boosting">9. Model portfolio, from simple to boosting</a></li>
+<li><a href="#10-new-numerical-experiments-and-results">10. New numerical experiments and results</a></li>
+<li><a href="#11-event-forecasting-price-volatility-and-explanations">11. Event forecasting, price volatility and explanations</a></li>
+<li><a href="#12-market-seasonal-and-diurnal-context">12. Market, seasonal and diurnal context</a></li>
+<li><a href="#13-probabilistic-forecasts-and-joint-scenarios">13. Probabilistic forecasts and joint scenarios</a></li>
+<li><a href="#14-validation-that-can-support-a-deployment-decision">14. Validation that can support a deployment decision</a></li>
+<li><a href="#15-repository-implementation-and-storage-plan">15. Repository implementation and storage plan</a></li>
+<li><a href="#16-tests-diagnostics-and-report-structure">16. Tests, diagnostics and report structure</a></li>
+<li><a href="#17-prioritised-delivery-sequence-and-unresolved-questions">17. Prioritised delivery sequence and unresolved questions</a></li>
+<li><a href="#18-complete-numerical-appendix">18. Complete numerical appendix</a></li>
+<li><a href="#sources">Sources</a></li>
+</ul>
+</div>
+</details></nav>
+<p>Expanded research and implementation methodology · 13 September 2026 · Study population: 1 September 2024–31 August 2026 · NEM timestamps use fixed UTC+10</p>
+<h2 id="1-decision-and-scope">1. Decision and scope</h2>
+<p>The recommended approach is a compact, quality-aware network-state layer feeding several forecast tasks: signed flow, directional capacity, contraction probability, setter-switch probability and forced-direction probability. Begin with persistence, AEMO forecast correction, regularised linear regression and calibrated logistic regression. Retain shallow boosting as a serious challenger, particularly for VNI at short horizons. Select models separately by task and horizon; the evidence does not support one universal winner.</p>
+<p>This conclusion combines the repository's two-year QNI/VNI studies and event atlases, the existing forecasting implementation, an earlier simple-model experiment, a new expanded numerical experiment, and a wider review of operational interconnector forecasting, optimisation, electricity forecasting, ramp prediction, uncertainty and evaluation. The priority is balanced flow accuracy and useful contraction/direction warnings. Market and weather context should follow the network-mechanism layer, while forecast-time availability governs every layer.</p>
+<p>The expanded experiment produced <strong>144 regression score rows, 20 event-probability score rows, 48 monthly feature audits and two selected-case attribution audits</strong>. It read 100 existing local inputs with approximately 121.88 MB of file sizes in total; this is a file inventory, not peak memory. No new market-data files were downloaded. Full settings, input hashes and results accompany this report.<sup id="fnref:28"><a class="footnote-ref" href="#fn:28">28</a></sup></p>
+<p>There are promising findings and substantive qualifications:</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Finding</th>
+<th>Consequence for implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VNI 30-minute flow MAE falls from 155.45 MW with persistence to 142.73 MW with the full shallow L1 boosting model</td>
+<td>Test shallow boosting alongside simple models for this task</td>
+</tr>
+<tr>
+<td>Only 1.21 MW of that improvement is the increment over the same boosting model without the topology block</td>
+<td>Do not attribute the entire 12.72 MW gain to generator features</td>
+</tr>
+<tr>
+<td>At 24 hours, VNI base ridge achieves 332.05 MW versus 341.99 MW for full boosting</td>
+<td>More features and more flexibility can hurt; horizon-specific selection matters</td>
+</tr>
+<tr>
+<td>QNI import-contraction probability has Brier score 0.1949 with full logistic regression versus 0.2053 with full boosting</td>
+<td>Preserve a simple classification pathway</td>
+</tr>
+<tr>
+<td>QNI's 92 selected cases have median complete-generator-term share 0 and only 31 cases with all steps exactly version matched</td>
+<td>Separate statistical predictors from trustworthy generator explanations</td>
+</tr>
+<tr>
+<td>AEMO changed its minimum LHS factor threshold within the study period</td>
+<td>Treat equation representation as a changing measurement system</td>
+</tr>
+</tbody>
+</table></div>
+<p>These are development findings, not demonstrated live forecast improvements. The March–August 2026 evaluation period has already been examined in earlier work. Some retained topology fields use solved dispatch or availability information whose historical public release has not been established. The new experiment includes no realised future fundamentals, but a 30-minute lag alone does not prove public availability. No production model was replaced.</p>
+<h2 id="2-research-design-and-evidence-hierarchy">2. Research design and evidence hierarchy</h2>
+<p>This is an expanded integrative review, not a claim that every publication or proprietary industry model has been examined. Search scope was deliberately widened beyond interconnector flow to congestion and active constraints, generator movement, electricity price extremes, wind ramps, correlated spatial flows, statistical learning, additive models, boosting, calibration and temporal validation. The accompanying <a href="../QNI_VNI_EXPANDED_RESEARCH_LOG.md">research log</a> records exact query batches, access limitations and screening decisions.</p>
+<p>Evidence is used in four distinct ways. Repository results establish what happened in this dataset. Primary AEMO documents establish market definitions and data contracts. Direct interconnector research offers modelling precedents. Adjacent academic work informs methods without supplying a transferable QNI/VNI uplift percentage. Papers on simulated optimal power flow and planning surrogates are not treated as operational forecast validations.</p>
+<p>The literature supports testing an ordered model portfolio rather than choosing complexity by fashion:</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Evidence</th>
+<th>Retained lesson</th>
+<th>Transfer limitation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Paretkar's intertie ARIMA thesis</td>
+<td>Direct intertie forecasting has a statistical time-series precedent</td>
+<td>Historical daily Pacific Northwest setting differs from five-minute NEM events<sup id="fnref:14"><a class="footnote-ref" href="#fn:14">14</a></sup></td>
+</tr>
+<tr>
+<td>Lago et al., electricity-price review and benchmark</td>
+<td>A regularised autoregressive benchmark is an essential comparator</td>
+<td>Price forecasts do not establish flow performance<sup id="fnref:15"><a class="footnote-ref" href="#fn:15">15</a></sup></td>
+</tr>
+<tr>
+<td>Gaillard et al., GEFCom additive models</td>
+<td>Structured nonlinear and quantile models can be strong without unrestricted interactions</td>
+<td>Publisher abstract/introductory material accessed; not a complete reproduction<sup id="fnref:16"><a class="footnote-ref" href="#fn:16">16</a></sup></td>
+</tr>
+<tr>
+<td>Statnett, operational mFRR flow forecasting</td>
+<td>Flow uncertainty depends on capacity and market state; compare point and uncertainty methods</td>
+<td>HVDC balancing flows and ATC differ from NEM AC dispatch limits<sup id="fnref2:29"><a class="footnote-ref" href="#fn:29">29</a></sup></td>
+</tr>
+<tr>
+<td>Ng et al.; Deka and Misra, active-set OPF learning</td>
+<td>Small sets of operating regimes motivate piecewise or regime-conditioned models</td>
+<td>Optimisation/control experiments, not public-input NEM forecasting<sup id="fnref2:30"><a class="footnote-ref" href="#fn:30">30</a></sup><sup id="fnref2:31"><a class="footnote-ref" href="#fn:31">31</a></sup></td>
+</tr>
+<tr>
+<td>Liu et al., NEM extreme-price occurrence</td>
+<td>Logistic regression is a credible simple event-probability baseline</td>
+<td>Accepted-manuscript abstract accessed; operational input timing not independently verified<sup id="fnref2:32"><a class="footnote-ref" href="#fn:32">32</a></sup></td>
+</tr>
+<tr>
+<td>Schäfer et al., European physical-flow patterns</td>
+<td>Cross-border flows can share low-dimensional structure</td>
+<td>Descriptive PCA can miss rare constraint mechanisms<sup id="fnref2:33"><a class="footnote-ref" href="#fn:33">33</a></sup></td>
+</tr>
+<tr>
+<td>Worsnop et al., wind-ramp scenarios</td>
+<td>Joint trajectories matter for events defined across time</td>
+<td>Wind-ramp results do not prove interconnector-contraction skill<sup id="fnref2:34"><a class="footnote-ref" href="#fn:34">34</a></sup></td>
+</tr>
+<tr>
+<td>General tabular benchmark and European flow surrogate</td>
+<td>Tree ensembles and neural surrogates deserve consideration where justified</td>
+<td>Neither establishes that neural models beat this repo's engineered simple models<sup id="fnref2:18"><a class="footnote-ref" href="#fn:18">18</a></sup><sup id="fnref2:19"><a class="footnote-ref" href="#fn:19">19</a></sup></td>
+</tr>
+</tbody>
+</table></div>
+<p>Statnett's 2026 account is unusually relevant industry evidence. For its mFRR flow problem, plain split conformal achieved 80% coverage with interval score 300; normalised conformal scored 269 at 78% coverage, while quantile boosting scored 218 at 80% coverage. The useful lesson is conditional uncertainty and empirical comparison, not a promise of those scores here. Its known ATC bounds cannot simply be substituted for NEM's dispatch-dependent reported limits.<sup id="fnref:29"><a class="footnote-ref" href="#fn:29">29</a></sup></p>
+<p>The broader evidence also provides counterweights. Elastic net is useful when predictors are correlated, rather than treating unstable individual coefficients as reliable rankings. Forecast-combination research motivates testing a simple blend before estimating elaborate ensemble weights. An explainable boosting machine is an additive boosted model: “simple” and “boosting” are not mutually exclusive categories.<sup id="fnref:35"><a class="footnote-ref" href="#fn:35">35</a></sup><sup id="fnref:36"><a class="footnote-ref" href="#fn:36">36</a></sup><sup id="fnref:37"><a class="footnote-ref" href="#fn:37">37</a></sup></p>
+<p>NESO's congestion-forecasting programme also identifies the practical importance of available network and forecast information. It supplies an industry problem framing, not a measured QNI/VNI uplift. The implementation proposed here therefore treats source access and reconstruction quality as model-design inputs rather than postponing them until deployment.<sup id="fnref:17"><a class="footnote-ref" href="#fn:17">17</a></sup></p>
+<h2 id="3-what-the-existing-model-does-and-does-not-establish">3. What the existing model does and does not establish</h2>
+<p>The current implementation pools six interconnectors and fits direct LightGBM forecasts for five targets across 30 minutes to seven days. It uses flow and capacity history, cross-regional information, calendar terms and demand, renewable and weather inputs. The saved historical run is conditional on realised future fundamentals for part of its design. That experiment is valuable as a conditional benchmark, but it is not the same task as forecasting with only information actually available at issue time.<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup><sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup><sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup></p>
+<p>The saved backtest reports gains over persistence in 92 of 120 selected cells, an equal-cell comparison rather than a portfolio-weighted gain. Its residual-based nominal 80% interval coverage is approximately 72.3%. The existing restriction detector also differs from sharp contraction: a low level relative to a seasonal reference is not necessarily a sudden fall. VNI import restriction recall of approximately 89.9% accompanies precision of only 21.1%, so alert usefulness must be measured explicitly rather than inferred from recall alone.<sup id="fnref2:3"><a class="footnote-ref" href="#fn:3">3</a></sup><sup id="fnref:24"><a class="footnote-ref" href="#fn:24">24</a></sup></p>
+<p>The original AEMO comparison uses approximately 2.88 million matched pairs out to 39 hours. It does not establish like-for-like seven-day performance. AEMO's PD7DAY products deserve a separate, issue-vintage audit for the longer horizon: public documentation identifies constraint and interconnector solutions, and a market notice describes extending the prior five-day report to seven days in October 2025. Do not assume homogeneous seven-day forecast coverage for the whole two-year study.<sup id="fnref:38"><a class="footnote-ref" href="#fn:38">38</a></sup><sup id="fnref:39"><a class="footnote-ref" href="#fn:39">39</a></sup></p>
+<p>The target contract must distinguish dispatch <code>MWFLOW</code> from metered physical flow. Keep the current dispatch target for a controlled comparison, and evaluate a separate metered-flow target only with its own timing, losses and measurement definition. Never silently switch targets while reporting uplift.<sup id="fnref2:2"><a class="footnote-ref" href="#fn:2">2</a></sup></p>
+<h2 id="4-integrating-the-users-studies">4. Integrating the user's studies</h2>
+<p>Both studies cover 210,240 five-minute intervals: two complete September–August cycles. That gives two observations of each annual season, not many independent seasonal regimes. The event atlases screen the full period and retain selected detailed cases; the selected cases are diagnostic material, not an unbiased training sample.<sup id="fnref:5"><a class="footnote-ref" href="#fn:5">5</a></sup><sup id="fnref:6"><a class="footnote-ref" href="#fn:6">6</a></sup><sup id="fnref:7"><a class="footnote-ref" href="#fn:7">7</a></sup><sup id="fnref:8"><a class="footnote-ref" href="#fn:8">8</a></sup></p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Existing study output</th>
+<th style="text-align: right;">VNI</th>
+<th style="text-align: right;">QNI</th>
+<th>Forecasting implication</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DUIDs identified in the broad study</td>
+<td style="text-align: right;">232</td>
+<td style="text-align: right;">238</td>
+<td>Too many to add blindly as individual predictors</td>
+</tr>
+<tr>
+<td>Equation versions examined</td>
+<td style="text-align: right;">20,827</td>
+<td style="text-align: right;">15,010</td>
+<td>Version identity matters; constraint ID alone is insufficient</td>
+</tr>
+<tr>
+<td>Sharp-contraction detections</td>
+<td style="text-align: right;">7,486</td>
+<td style="text-align: right;">7,430</td>
+<td>Interval/event definitions must be retained</td>
+</tr>
+<tr>
+<td>Grouped incidents</td>
+<td style="text-align: right;">5,379</td>
+<td style="text-align: right;">5,445</td>
+<td>Incidents are the preferred operational warning unit</td>
+</tr>
+<tr>
+<td>Detailed selected cases</td>
+<td style="text-align: right;">91</td>
+<td style="text-align: right;">92</td>
+<td>Suitable for mechanism audits, not event-frequency estimation</td>
+</tr>
+<tr>
+<td>Contractions followed by MPC in the next hour</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">5</td>
+<td>Too few for an ambitious standalone MPC classifier</td>
+</tr>
+<tr>
+<td>Matched descriptive price-jump estimate</td>
+<td style="text-align: right;">$94.98/MWh</td>
+<td style="text-align: right;">$15.67/MWh</td>
+<td>VNI association is clearer; neither is a causal effect</td>
+</tr>
+<tr>
+<td>Reported 95% interval for that price-jump estimate</td>
+<td style="text-align: right;">$58.27–136.83/MWh</td>
+<td style="text-align: right;">−$26.73–53.33/MWh</td>
+<td>QNI estimate is compatible with no positive association</td>
+</tr>
+</tbody>
+</table></div>
+<p>The broad VNI exposure list includes MURRAY, LIMOSF11, TUMUT3, SUNRSF1, UPPTUMUT, DARLSF1, STWF1 and MUWAWF1. QNI's list includes NEWENSF2, NEWENSF1, SAPHWF1, WRWF1, METZSF1, TUMUT3, BW01 and GNNDHSF1. These are hypotheses for grouping and monitoring. A large exposure score does not mean a generator causes every contraction, nor that its future movement is predictable.<sup id="fnref2:5"><a class="footnote-ref" href="#fn:5">5</a></sup><sup id="fnref2:6"><a class="footnote-ref" href="#fn:6">6</a></sup></p>
+<p>The selected-case accounting gives TUMUT3 approximately 35,037.5 MW of summed tightening contributions in VNI and 12,233.8 MW in QNI. Corresponding UPPTUMUT sums are 9,712.73 and 3,132.48; LIMOSF11 contributes 9,211.01 in VNI, while STAN2 and STAN1 contribute 4,679.85 and 4,044.73 in QNI. These are sums of stepwise MW accounting quantities across selected windows. They are not MWh, an individual event's capacity loss, population causal shares or a trading rule.<sup id="fnref2:7"><a class="footnote-ref" href="#fn:7">7</a></sup><sup id="fnref2:8"><a class="footnote-ref" href="#fn:8">8</a></sup></p>
+<p>The new audit is more diagnostic than merely repeating those rankings:</p>
+<!-- ATTRIBUTION_TABLE -->
+
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>ic</th>
+<th>cases</th>
+<th>exact_share_median</th>
+<th>cases_all_exact</th>
+<th>cases_no_exact</th>
+<th>complete_terms_share_median</th>
+<th>cases_with_switch_component</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VNI</td>
+<td>91</td>
+<td>1.0000</td>
+<td>87</td>
+<td>1</td>
+<td>0.8000</td>
+<td>62</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>92</td>
+<td>0.6667</td>
+<td>31</td>
+<td>20</td>
+<td>0.0000</td>
+<td>24</td>
+</tr>
+</tbody>
+</table></div>
+<!-- END_ATTRIBUTION_TABLE -->
+
+<p>A version-matched step can still have incomplete terms. A numerical residual that closes an accounting identity does not prove all physical drivers were observed. Consequently, each event explanation should show observed capacity movement, same-equation generator contribution, RHS movement, other observed terms, a switch component, unresolved movement and provenance. Never relabel unresolved movement as generation.</p>
+<p>The monthly feature-pipeline audit is also distinct from the broad study's reconstruction summary. It measures the features actually supplied to these experiments, with their own eligibility and matching rules. QNI's median monthly upper/lower reconstruction MAEs are about 364.69/199.71 MW, compared with approximately 0/1.63 MW for VNI; some VNI months are much worse than those medians. High candidate coverage can coexist with a poor chosen equation.<sup id="fnref2:28"><a class="footnote-ref" href="#fn:28">28</a></sup></p>
+<!-- QUALITY_TABLE -->
+
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>ic</th>
+<th>exact_version_match_fraction</th>
+<th>upper_reconstruction_mae_mw</th>
+<th>lower_reconstruction_mae_mw</th>
+<th>upper_setter_match_fraction</th>
+<th>lower_setter_match_fraction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>QNI</td>
+<td>0.6809</td>
+<td>364.6893</td>
+<td>199.7144</td>
+<td>0.2146</td>
+<td>0.2964</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>0.9366</td>
+<td>0.0000</td>
+<td>1.6300</td>
+<td>0.9747</td>
+<td>0.9851</td>
+</tr>
+</tbody>
+</table></div>
+<!-- END_QUALITY_TABLE -->
+
+<h2 id="5-the-mathematical-representation">5. The mathematical representation</h2>
+<p>For a versioned equation involving interconnector signed flow F, generator quantities P and remaining terms Z, write:</p>
+<pre><code class="language-text">a_c F + sum_g(b_cg P_g) + Z_c &lt;= R_c
+B_c = (R_c - sum_g(b_cg P_g) - Z_c) / a_c
+s_cg = -b_cg / a_c
+</code></pre>
+<p>For positive a, B is an upper candidate bound; for negative a the inequality reverses and B is a lower candidate bound. Canonicalise greater-than equations first. Treat equality constraints, ineligible equations and zero IC factors separately. Candidate bounds are conditional on the other quantities; the envelope is not a complete independent network transfer capability. Reported limit-setter rules and other dispatch restrictions must be respected.<sup id="fnref:9"><a class="footnote-ref" href="#fn:9">9</a></sup><sup id="fnref:10"><a class="footnote-ref" href="#fn:10">10</a></sup></p>
+<p>Within a fixed equation with fixed coefficients:</p>
+<pre><code class="language-text">Delta B_c = sum_g(s_cg Delta P_g) + Delta R_c/a_c - Delta Z_c/a_c
+</code></pre>
+<p>A generator's ramp can tighten one direction while relieving another. Use directional capacity C_plus = U and C_minus = -L, where U and L are signed upper and lower bounds. Define generator tightening as minus its contribution to directional capacity. For the upper direction this is -s times Delta P; for the lower direction it is +s times Delta P. Negative directional capacities must remain negative because they can encode forced direction. Do not clip them to zero during feature creation.</p>
+<p>The sign convention in this repository is positive VNI flow from Victoria to NSW and positive QNI flow from NSW to Queensland. Confirm it at the adapter boundary and display both origin and destination regions. “Export” without a named origin is ambiguous.<sup id="fnref3:2"><a class="footnote-ref" href="#fn:2">2</a></sup></p>
+<h3 id="candidate-competition-and-switching">Candidate competition and switching</h3>
+<p>For upper candidates, the smallest eligible B sets the candidate envelope; the second-smallest is the nearest competitor. Lower candidates use the largest and second-largest. Keep each candidate's identity, version, evidence quality and distance to the winner. Near-binding equations matter because they can become setters after relatively small changes, but a constraint's native LHS slack is not interchangeable with IC-equivalent MW headroom.</p>
+<p>A compact switching feature can be derived directly. If two candidate bounds have different sensitivities to a generator's movement:</p>
+<pre><code class="language-text">B_1 + s_1 Delta P = B_2 + s_2 Delta P
+required Delta P to tie = (B_2 - B_1)/(s_1 - s_2)
+</code></pre>
+<p>For an illustrative upper-envelope example, B1=500 MW, B2=540 MW, s1=−0.2 and s2=−0.6 give a 100 MW increase before the candidates tie at 480 MW. This is a constructed example, not a measured Tumut coefficient. Restrict the stress calculation to plausible ramp direction, unit capability and a declared fixed-RHS assumption. Mark tiny denominators or unavailable capability as missing. The feature is a proximity-to-switch measure, not a forecast that the generator will move.</p>
+<p>A related forced-direction stress is the movement required to drive a selected bound through zero, Delta P=−B/s. Once other equations switch, the original single-equation result may cease to apply. Report the calculation's validity domain rather than presenting a universal sensitivity.</p>
+<h3 id="why-a-small-regime-model-is-plausible">Why a small regime model is plausible</h3>
+<p>DC optimal-power-flow research shows how a fixed active basis supports an affine response, with different bases covering different operating regions. Active-set classification offers a related decomposition into identifying the regime and predicting within it.<sup id="fnref:30"><a class="footnote-ref" href="#fn:30">30</a></sup><sup id="fnref:31"><a class="footnote-ref" href="#fn:31">31</a></sup> The proposed application is an inference: small observed-regime linear experts may capture useful conditional behaviour without a large generic model. NEM co-optimisation, nonlinear security formulations, changing RHS inputs and missing data prevent treating this theory as an exact NEM forecasting solution.</p>
+<h2 id="6-compact-feature-dictionary">6. Compact feature dictionary</h2>
+<p>Begin with a core network block of roughly 16–24 numeric features per interconnector, plus explicit missingness/quality indicators. The exact count should be chosen through ablation. Keep a richer evidence table for explanations without forcing every field into the model. The following is a proposed production design; only the smaller retained block described in Section 10 has been tested here.</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Family</th>
+<th>Proposed representation</th>
+<th style="text-align: right;">Typical dimensions</th>
+<th>Why it belongs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Directional state</td>
+<td>Upper/lower capacity, signed room to flow, recent capacity change</td>
+<td style="text-align: right;">4–6, excluding duplicates already in base model</td>
+<td>Describes current position and movement</td>
+</tr>
+<tr>
+<td>Competition</td>
+<td>Upper/lower runner-up gaps; number of eligible near candidates</td>
+<td style="text-align: right;">4</td>
+<td>Encodes sensitivity to switching</td>
+</tr>
+<tr>
+<td>Generator pressure</td>
+<td>Gross tightening and gross relief in each direction</td>
+<td style="text-align: right;">4</td>
+<td>Retains opposing contributions hidden by net sums</td>
+</tr>
+<tr>
+<td>Forecast pressure</td>
+<td>Signed expected pressure in each direction</td>
+<td style="text-align: right;">2</td>
+<td>Connects mechanism to future movement</td>
+</tr>
+<tr>
+<td>Ramp feasibility</td>
+<td>Achievable tightening/relief, or required-ramp-to-switch ratios</td>
+<td style="text-align: right;">2–4</td>
+<td>Distinguishes exposure from plausible movement</td>
+</tr>
+<tr>
+<td>Persistence/regime</td>
+<td>Setter age, recent switches, small family category</td>
+<td style="text-align: right;">2–4</td>
+<td>Represents stable versus changing operating conditions</td>
+</tr>
+<tr>
+<td>Quality</td>
+<td>Exact-version share, complete-term share, reconstruction discrepancy, source age</td>
+<td style="text-align: right;">4</td>
+<td>Prevents unsupported precision</td>
+</tr>
+</tbody>
+</table></div>
+<p>Do not simply total the dimension column: several state fields duplicate existing flow/capacity lags, and alternative feasibility summaries should compete rather than all being included. Reserve separate feature budgets for later additions and publish the final raw and expanded column counts.</p>
+<p>For each candidate equation, compute positive tightening contributions T_cg and positive relief contributions R_cg. Aggregate with training-specified candidate weights that decline with IC-equivalent distance to the envelope. Normalise weights to sum to one within direction so duplicated candidates cannot mechanically inflate the score. Alternatively retain the current setter and nearest competitor as two separate summaries. Compare these formulations: a sum across every binding equation can double-count essentially the same restriction.</p>
+<p>An influence ranking for feature selection should combine exposure frequency, absolute normalised sensitivity, plausible movement, proximity to setting and out-of-sample predictability of movement. Rank by direction and family. Distinguish four lists: frequent exposure, large historical accounting contribution, high prospective pressure and verified incremental forecast value. They answer different questions.</p>
+<h3 id="generator-grouping-and-joint-qnivni-structure">Generator grouping and joint QNI/VNI structure</h3>
+<p>Use signed sensitivity vectors across equation families and directions to define groups. Geographic or fuel groups may be useful priors, but shared coal/hydro labels do not guarantee shared network effects. Keep tightening and relieving groups separate. Fit groups only on the training period, freeze them during evaluation and provide an unknown/new-unit path.</p>
+<p>A generator can have a four-component exposure vector: VNI upper, VNI lower, QNI upper and QNI lower. Shared NSW pressure can then be represented with a few physical groups or a training-only low-rank projection. European cross-border-flow PCA provides descriptive evidence for shared structure; it does not establish that the highest-variance factors preserve rare contractions.<sup id="fnref:33"><a class="footnote-ref" href="#fn:33">33</a></sup> Validate compression on event recall and direction errors, not only explained variance.</p>
+<p>Avoid adding both dozens of individual units and all their group sums without regularisation. Preserve TUMUT3 and other selected units as explanation drill-downs even when the forecast uses a group sum. For a newly appearing unit, use its known coefficient vector and fuel/region fallback rather than assigning the entire population a new unconstrained feature.</p>
+<p>The appropriate graph, if one is useful, is a generator–constraint–interconnector incidence graph. Constraint coefficients are not automatically physical bus-to-line PTDFs, and that graph does not require a graph neural network. Sparse matrix multiplication already implements the core pressure aggregation.</p>
+<h2 id="7-forecasting-generator-pressure">7. Forecasting generator pressure</h2>
+<p>Historical contribution is insufficient: a unit must move in a forecastable way to add predictive value. Build increasingly informed movement forecasts and compare the resulting pressure, keeping the same downstream model where possible.</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Movement model</th>
+<th>Inputs allowed at issue time</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No movement</td>
+<td>Last eligible unit state</td>
+<td>Essential mechanism baseline</td>
+</tr>
+<tr>
+<td>Bounded ramp persistence</td>
+<td>Recent public SCADA ramps, capacity and ramp bounds when available</td>
+<td>Short-horizon baseline; clips to plausible movement rather than extrapolating indefinitely</td>
+</tr>
+<tr>
+<td>Group ARX or ridge</td>
+<td>Lagged group generation, forecast net demand and public availability information</td>
+<td>Parsimonious group movement forecast</td>
+</tr>
+<tr>
+<td>Weather-linked renewable model</td>
+<td>Issue-specific wind/irradiance forecasts and observed generation</td>
+<td>Future VRE pressure; uncertainty must propagate</td>
+</tr>
+<tr>
+<td>AEMO dispatch/region guidance</td>
+<td>Only legally accessible, timestamped forecasts for the applicable horizon</td>
+<td>Useful where historical public availability can be verified</td>
+</tr>
+<tr>
+<td>Small boosted group model</td>
+<td>Same eligible inputs plus validated interactions</td>
+<td>Challenger when ramp errors remain nonlinear</td>
+</tr>
+</tbody>
+</table></div>
+<p>Use out-of-fold movement predictions when training the flow model. Feeding fitted movement estimates into the training sample and genuine forecasts at inference creates a mismatch. Benchmark an oracle movement track separately to estimate the maximum value of better generator forecasts without claiming that value is presently achievable.</p>
+<p>Tumut requires explicit treatment of pumping and generation identities. AEMO's predispatch information calls out SNOWYP/Tumut 3 pumps and special reporting behaviour; a generator-only extraction can miss the load side.<sup id="fnref:40"><a class="footnote-ref" href="#fn:40">40</a></sup> The adapter must retain DUID identity, direction of consumption/injection, effective registration dates and bidirectional-unit conventions. Do not infer pumping from a missing generation observation.</p>
+<p>FCAS terms, other interconnector flows and regional terms also affect equations. Start with a transparent energy-term model and label omissions. Expand only when the required terms and release times can be reconstructed. A fitted RHS forecast may absorb missing generation effects; it should not be labelled an independent physical explanation for those effects.</p>
+<h2 id="8-data-contracts-and-historical-availability">8. Data contracts and historical availability</h2>
+<p>Every predictor row needs a forecast origin, delivery interval, source issue/run time, first observed publication time, effective/version time, retrieval time and transformation version. These timestamps answer different questions. <code>LASTCHANGED</code> is not universal proof of public publication. Effective date determines equation applicability; first publication determines whether the forecaster could know it.</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Data layer</th>
+<th>Minimum useful content</th>
+<th>Availability rule</th>
+<th>Fallback</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Interconnector state</td>
+<td>Signed flow, directional limits, setters, intervention/run fields</td>
+<td>Latest public record received before origin</td>
+<td>Persistence with age flag</td>
+</tr>
+<tr>
+<td>Equation definition</td>
+<td>IC, connection-point and regional factors; type; version; effective dates; set membership</td>
+<td>Version applicable at delivery and known by issue time</td>
+<td>Unknown family or no mechanical estimate</td>
+</tr>
+<tr>
+<td>Constraint solution</td>
+<td>RHS, LHS, marginal value, violation and run/interval</td>
+<td>Dispatch observations or an admissible predispatch vintage</td>
+<td>Statistical state model</td>
+</tr>
+<tr>
+<td>Generator observation</td>
+<td>SCADA and identity mapping</td>
+<td>Use source-specific release, not another feed's delay</td>
+<td>Missing observation, never silent zero</td>
+</tr>
+<tr>
+<td>Solved unit target/availability</td>
+<td>Cleared generation, capability, FCAS where needed</td>
+<td>Historical public/participant access must be established per field</td>
+<td>Exclude from strict public track</td>
+</tr>
+<tr>
+<td>Future demand/VRE</td>
+<td>Forecasts with preserved run time and horizon</td>
+<td>Latest eligible issue, never final realised value</td>
+<td>Seasonal or persistence forecast</td>
+</tr>
+<tr>
+<td>Outages and capacity</td>
+<td>Known schedules, expected return, current online evidence</td>
+<td>Version known at issue; actual outage is a later outcome</td>
+<td>Explicit unknown status</td>
+</tr>
+<tr>
+<td>Weather</td>
+<td>Temperature, wind, irradiance, uncertainty and issue time</td>
+<td>Individual historical forecast run where available</td>
+<td>Restricted-horizon or statistical fallback</td>
+</tr>
+<tr>
+<td>Price and scarcity</td>
+<td>Observed lagged prices; eligible price/reserve forecasts</td>
+<td>Realised future price is a label/context only</td>
+<td>Separate price-risk model</td>
+</tr>
+</tbody>
+</table></div>
+<p>AEMO's public SCADA definition and unit-solution visibility distinctions require field-level treatment; solved dispatch targets are not interchangeable with start-of-interval measurements.<sup id="fnref:11"><a class="footnote-ref" href="#fn:11">11</a></sup><sup id="fnref:12"><a class="footnote-ref" href="#fn:12">12</a></sup> The current predispatch procedure is version 19, effective 1 April 2026; archive the applicable procedure and schema version when reviewing earlier periods.<sup id="fnref:41"><a class="footnote-ref" href="#fn:41">41</a></sup></p>
+<p>PD7DAY is a potentially valuable expansion beyond the original benchmark horizon. First enumerate report types and schema transitions, sample the minimum necessary files, then measure available issue/delivery coverage. The documented public tables include run timestamps and constraint solutions; the non-data-model loading guide also shows interconnector solution fields. Publication and archive coverage must be demonstrated rather than inferred from current documentation.<sup id="fnref2:38"><a class="footnote-ref" href="#fn:38">38</a></sup><sup id="fnref2:39"><a class="footnote-ref" href="#fn:39">39</a></sup></p>
+<p>Historical weather observations, reanalysis and stitched forecast series are useful for explanation but cannot substitute uncritically for the individual forecasts available at issue time. Open-Meteo explicitly distinguishes historical forecast products and individual runs, with model-dependent coverage.<sup id="fnref:13"><a class="footnote-ref" href="#fn:13">13</a></sup> Begin with a small set of load-weighted regional temperature summaries and renewable-relevant zones instead of a dense national grid.</p>
+<h2 id="9-model-portfolio-from-simple-to-boosting">9. Model portfolio, from simple to boosting</h2>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Candidate</th>
+<th>Appropriate use</th>
+<th>Main failure mode</th>
+<th>Advancement test</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Persistence, daily/weekly seasonal naive</td>
+<td>All tasks as reference; recent state often strong</td>
+<td>Misses changing regimes</td>
+<td>Always retain scores and operational fallback</td>
+</tr>
+<tr>
+<td>1</td>
+<td>AEMO forecast plus rolling bias correction</td>
+<td>Flow/limits where eligible issue vintages exist</td>
+<td>Inherited forecast errors and unavailable horizon</td>
+<td>Beat raw AEMO on identical issue/target pairs</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Ridge/elastic-net ARX residual model</td>
+<td>Compact lags, pressures and forecast innovations</td>
+<td>Misses switching interactions; unstable extrapolation</td>
+<td>Stable seasonal gain over Stage 0/1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Penalised logistic regression</td>
+<td>Contractions, direction and switch probabilities</td>
+<td>Calibration drift, omitted thresholds</td>
+<td>Better Brier/AP and incident warnings at fixed burden</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Low-degree GAM or selected hinge terms</td>
+<td>Smooth weather/calendar effects and explicit thresholds</td>
+<td>Excess basis expansion with weak signal</td>
+<td>Beat linear model with same input vintages</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Small regime-conditioned linear experts</td>
+<td>Within-regime flow or capacity response</td>
+<td>Wrong regime assignment; tiny training groups</td>
+<td>Improvement persists for new and rare regimes</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Quantile linear/GAM or conditional residual bins</td>
+<td>Asymmetric uncertainty and tail warnings</td>
+<td>Sparse tails, quantile crossing</td>
+<td>Better proper score at acceptable coverage</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Additive boosting/EBM</td>
+<td>Nonlinear main effects with a few inspectable interactions</td>
+<td>Flexible functions still overfit and need calibration</td>
+<td>Outperform simpler additive specification</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Shallow LightGBM, L1/L2/quantile/classification</td>
+<td>Interactions between pressure, headroom and economic state</td>
+<td>Spurious thresholds, extrapolation and source dependence</td>
+<td>Robust gain on matched public-input tests</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Blends of simple and boosted forecasts</td>
+<td>Complementary errors</td>
+<td>Weight estimation noise</td>
+<td>Beat best component after weight selection is frozen</td>
+</tr>
+<tr>
+<td>Deferred</td>
+<td>Sequence neural models, GNNs, OPF surrogates</td>
+<td>Large verified datasets or specific residual failure</td>
+<td>Complexity before information quality</td>
+<td>Demonstrable need beyond the above portfolio</td>
+</tr>
+</tbody>
+</table></div>
+<p>Ridge should normally be the first linear model when pressure components are correlated. Elastic net adds controlled sparsity and grouped retention, but its selected coefficient is a predictive parameter rather than a physical sensitivity.<sup id="fnref2:35"><a class="footnote-ref" href="#fn:35">35</a></sup> Use horizon-specific residual targets, such as actual flow minus persistence or an eligible AEMO forecast. Direct models avoid accumulating recursive errors, while a pooled lead-time model can reduce estimator count; compare both under equal information.</p>
+<p>The earlier local spline experiment was usually worse than its base model. That is evidence against the particular broad spline expansion, not against all GAMs. Use a few predeclared terms—room, pressure, net demand, hour—before adding interactions. Explainable boosting machines offer another additive option, but should be counted as boosted models in the complexity audit.<sup id="fnref:23"><a class="footnote-ref" href="#fn:23">23</a></sup><sup id="fnref2:37"><a class="footnote-ref" href="#fn:37">37</a></sup></p>
+<p>For regimes, prefer observable families such as stable upper setter, stable lower setter, near switch, uncertain equation state and forced direction. Fit a pooled ridge with a few interactions before separate experts. If separate experts are used, shrink small groups toward the pooled forecast, predict regime probabilities using eligible inputs and mix their predictions. Never assign the future observed setter at prediction time.</p>
+<p>LightGBM is already present in the repository, so the practical question is where to retain it and how to improve its information. Compare L1, L2 and quantile objectives rather than attributing a loss-function benefit entirely to architecture. Constrain leaf count and depth, use large leaf support, tune on chronological validation and log all tried configurations. Avoid universal monotonic constraints on a generator: its network effect changes with direction and equation family.<sup id="fnref:20"><a class="footnote-ref" href="#fn:20">20</a></sup></p>
+<p>The tabular benchmark supports trees as a credible alternative to deep learning, while the European interconnector surrogate addresses simulated planning flows. Neither requires a neural upgrade here.<sup id="fnref:18"><a class="footnote-ref" href="#fn:18">18</a></sup><sup id="fnref:19"><a class="footnote-ref" href="#fn:19">19</a></sup> Temporal Fusion Transformers remain an optional later experiment if a large archive of genuinely available multi-horizon covariates exposes a sequence-specific deficiency.<sup id="fnref:21"><a class="footnote-ref" href="#fn:21">21</a></sup></p>
+<h2 id="10-new-numerical-experiments-and-results">10. New numerical experiments and results</h2>
+<p>The new experiment is a bounded comparison on retained data, not a replacement for the full seven-day production backtest. It tests flow and both directional tight-capacity targets at 30 minutes, three hours and 24 hours for QNI and VNI. It also tests probability of a new sharp contraction in the next hour.<sup id="fnref3:28"><a class="footnote-ref" href="#fn:28">28</a></sup></p>
+<h3 id="regression-design">Regression design</h3>
+<p>The base has 17 raw predictors: three target series with lags of 1, 48 and 336 half-hour steps, three recent changes and five calendar terms. The state block adds eight features: two rooms, two switch gaps, two candidate counts, partial-candidate share and pressure-completeness share. The pressure block adds eight: gross tightening/relief in both directions, two pressure-change fields and two available-relief summaries. Full means 33 raw predictors before missingness indicators.</p>
+<p>The retained topology is sampled from native five-minute states at minutes 00 and 30, then shifted one half-hour. It is not a half-hour average. The existing pressure-change columns are changes in the pressure series, not simply the underlying generator ramp; preserve that distinction when reimplementing. Two constant envelope-persistence fields included in the earlier probe are excluded from this experiment. The two probes therefore do not have identical full feature sets.<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup><sup id="fnref2:23"><a class="footnote-ref" href="#fn:23">23</a></sup><sup id="fnref4:28"><a class="footnote-ref" href="#fn:28">28</a></sup></p>
+<p>Train on origins from 8 September 2024 whose deliveries precede 1 September 2025. Select hyperparameters using September–November 2025, keeping deliveries inside that partition. Evaluate March–August 2026, with delivery no later than 31 August 23:30. Models are not refitted through the calibration months. All observations use the origin-minus-30-minute anchor; a nominal 30-minute lead therefore predicts an outcome 60 minutes after that anchor.</p>
+<p>Ridge uses training-only 0.1/99.9-percentile clipping, mean imputation with missing indicators, standardisation and alpha selected from 10/100/1000. Boosting uses 150 trees, learning rate 0.04, minimum child support 150, L2 leaf regularisation 10 and 7/15 leaves selected by validation MAE. It retains native missing values without clipping. Consequently, comparisons across architectures also compare preprocessing pipelines. Within-family base/full ablations are more controlled. L1 versus L2 boosting provides a separate loss comparison; the experiment does not isolate every source of gain.</p>
+<!-- REGRESSION_SUMMARY -->
+
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>ic</th>
+<th>horizon_minutes</th>
+<th>boost_l1_base</th>
+<th>boost_l1_full</th>
+<th>boost_l2_full</th>
+<th>persistence</th>
+<th>ridge_base</th>
+<th>ridge_full</th>
+<th>ridge_pressure</th>
+<th>ridge_state</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>QNI</td>
+<td>30</td>
+<td>113.2686</td>
+<td>112.2667</td>
+<td>113.6160</td>
+<td>115.2887</td>
+<td>117.4117</td>
+<td>116.7886</td>
+<td>117.4399</td>
+<td>116.6482</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>180</td>
+<td>212.1230</td>
+<td>210.5661</td>
+<td>214.7486</td>
+<td>211.8380</td>
+<td>219.0993</td>
+<td>219.8993</td>
+<td>219.2390</td>
+<td>220.5401</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>1440</td>
+<td>249.8766</td>
+<td>247.3361</td>
+<td>249.5930</td>
+<td>271.5475</td>
+<td>247.6914</td>
+<td>246.4789</td>
+<td>247.7435</td>
+<td>246.7317</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>30</td>
+<td>143.9491</td>
+<td>142.7349</td>
+<td>144.3364</td>
+<td>155.4543</td>
+<td>156.4172</td>
+<td>154.8913</td>
+<td>155.3504</td>
+<td>156.0741</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>180</td>
+<td>253.7697</td>
+<td>253.9124</td>
+<td>257.1998</td>
+<td>317.5577</td>
+<td>277.0724</td>
+<td>278.7179</td>
+<td>276.1986</td>
+<td>280.7570</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>1440</td>
+<td>340.0298</td>
+<td>341.9872</td>
+<td>356.0472</td>
+<td>377.3347</td>
+<td>332.0478</td>
+<td>341.3433</td>
+<td>332.3201</td>
+<td>340.3967</td>
+</tr>
+</tbody>
+</table></div>
+<!-- END_REGRESSION_SUMMARY -->
+
+<p>Full L1 boosting improves over its own base in <strong>12/18</strong> target–IC–horizon cells and beats persistence in <strong>15/18</strong>. Full ridge improves over base ridge in <strong>10/18</strong>. Counts weight cells equally and are not an overall percentage improvement. The full block includes network state and quality as well as generator pressure, so these gains cannot all be assigned to generators.</p>
+<p>VNI's 30-minute full-boost flow improvement over its own base is 1.21 MW, with an exploratory seven-day block-bootstrap interval of 0.63–1.87 MW. QNI's corresponding increment is 1.00 MW, interval 0.42–1.61 MW. At three hours, the topology increment is −0.14 MW for VNI and +1.56 MW for QNI, with intervals crossing zero in both cases. At 24 hours, base ridge is the best listed VNI flow model, while full ridge narrowly beats the other listed QNI flow models.</p>
+<p>The confidence intervals use 300 non-circular seven-day origin-block resamples with seed 741. They are exploratory paired uncertainty estimates, not multiple-comparison-corrected significance claims. Repeated use of the evaluation period and upstream retrospective data issues remain even when an interval excludes zero.</p>
+<h3 id="contraction-probability-design">Contraction-probability design</h3>
+<p>The repository's event detector and general event methodology provide the retrospective reference definition; the prospective experiment below deliberately freezes its thresholds using training data.<sup id="fnref:22"><a class="footnote-ref" href="#fn:22">22</a></sup></p>
+<p>For this prospective-label experiment, define a positive 30-minute directional-capacity fall at each five-minute interval. Fit a month-of-year 90th percentile of positive falls using only the first study year, then freeze those 12 thresholds. A sharp interval requires a positive fall at least as large as its frozen monthly threshold. An onset occurs when the sharp indicator changes from false to true. Require a complete seven-observation window for the fall and complete future observations for the prediction label.</p>
+<p>The target is any new onset in the next 60 minutes after each half-hour forecast origin. These windows overlap. The original atlas's historical detector and the new training-frozen detector serve different purposes; counts are not directly interchangeable. The monthly thresholds are included in the evidence file. For example, VNI upper March is approximately 257.53 MW and upper December 451.57 MW. A single fixed “sharp = 100 MW” rule was not used.</p>
+<p>Logistic base/full models select C from 0.01/0.1/1 using validation log loss. Shallow boosted base/full classifiers use the same small leaf grid as regression. Sigmoid calibration is fit during December 2025–January 2026; alert cutoffs are selected from February negative-origin probabilities at the 95th percentile, using a strict greater-than comparison. This targets at most 5% false-positive rate on that tuning sample, not a guaranteed future rate.</p>
+<!-- EVENT_TABLE -->
+
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>ic</th>
+<th>direction</th>
+<th>model</th>
+<th>brier</th>
+<th>average_precision</th>
+<th>recall</th>
+<th>precision</th>
+<th>false_positive_rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VNI</td>
+<td>export</td>
+<td>climatology</td>
+<td>0.1414</td>
+<td>0.1704</td>
+<td>0.0000</td>
+<td>0.0000</td>
+<td>0.0000</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export</td>
+<td>logistic_base</td>
+<td>0.1372</td>
+<td>0.3015</td>
+<td>0.2086</td>
+<td>0.3046</td>
+<td>0.0979</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export</td>
+<td>boost_base</td>
+<td>0.1303</td>
+<td>0.3750</td>
+<td>0.2266</td>
+<td>0.4541</td>
+<td>0.0560</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export</td>
+<td>logistic_full</td>
+<td>0.1331</td>
+<td>0.3611</td>
+<td>0.1814</td>
+<td>0.4604</td>
+<td>0.0437</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export</td>
+<td>boost_full</td>
+<td>0.1311</td>
+<td>0.3789</td>
+<td>0.1615</td>
+<td>0.4812</td>
+<td>0.0358</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import</td>
+<td>climatology</td>
+<td>0.0892</td>
+<td>0.0960</td>
+<td>0.0000</td>
+<td>0.0000</td>
+<td>0.0000</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import</td>
+<td>logistic_base</td>
+<td>0.0892</td>
+<td>0.2232</td>
+<td>0.4198</td>
+<td>0.1898</td>
+<td>0.1904</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import</td>
+<td>boost_base</td>
+<td>0.0860</td>
+<td>0.2674</td>
+<td>0.2913</td>
+<td>0.2869</td>
+<td>0.0769</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import</td>
+<td>logistic_full</td>
+<td>0.0858</td>
+<td>0.2468</td>
+<td>0.3031</td>
+<td>0.2286</td>
+<td>0.1086</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import</td>
+<td>boost_full</td>
+<td>0.0835</td>
+<td>0.2873</td>
+<td>0.3007</td>
+<td>0.3418</td>
+<td>0.0615</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export</td>
+<td>climatology</td>
+<td>0.1089</td>
+<td>0.1242</td>
+<td>0.0000</td>
+<td>0.0000</td>
+<td>0.0000</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export</td>
+<td>logistic_base</td>
+<td>0.1101</td>
+<td>0.1884</td>
+<td>0.2343</td>
+<td>0.2030</td>
+<td>0.1305</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export</td>
+<td>boost_base</td>
+<td>0.1027</td>
+<td>0.2915</td>
+<td>0.3355</td>
+<td>0.3361</td>
+<td>0.0940</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export</td>
+<td>logistic_full</td>
+<td>0.1059</td>
+<td>0.2192</td>
+<td>0.1522</td>
+<td>0.2485</td>
+<td>0.0653</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export</td>
+<td>boost_full</td>
+<td>0.1060</td>
+<td>0.3072</td>
+<td>0.3920</td>
+<td>0.3375</td>
+<td>0.1091</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import</td>
+<td>climatology</td>
+<td>0.2232</td>
+<td>0.2973</td>
+<td>0.0000</td>
+<td>0.0000</td>
+<td>0.0000</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import</td>
+<td>logistic_base</td>
+<td>0.1971</td>
+<td>0.4570</td>
+<td>0.3375</td>
+<td>0.5160</td>
+<td>0.1339</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import</td>
+<td>boost_base</td>
+<td>0.2059</td>
+<td>0.4390</td>
+<td>0.1371</td>
+<td>0.5121</td>
+<td>0.0553</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import</td>
+<td>logistic_full</td>
+<td>0.1949</td>
+<td>0.4727</td>
+<td>0.3341</td>
+<td>0.5147</td>
+<td>0.1333</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import</td>
+<td>boost_full</td>
+<td>0.2053</td>
+<td>0.4551</td>
+<td>0.1147</td>
+<td>0.5172</td>
+<td>0.0453</td>
+</tr>
+</tbody>
+</table></div>
+<!-- END_EVENT_TABLE -->
+
+<p>Full logistic improves Brier score over its own base in all four IC/direction tasks. Full boosting improves over its own base in only two. For QNI import, logistic full has Brier 0.1949 and average precision 0.4727, versus boosting full at 0.2053 and 0.4551. For VNI export, boosting base has slightly better Brier than boosting full despite the latter's slightly better ranking score. Probability calibration and ranking are different objectives.</p>
+<p>Alert cutoffs do not transfer perfectly. QNI import full logistic has evaluation false-positive rate about 13.33%, far above the February target, while full boosting is about 4.53%. Their recalls are approximately 33.41% and 11.47%, respectively. It would be misleading to declare either an operational winner without comparing deduplicated incidents at a common acceptable alert burden. Recalibration and explicit burden constraints are therefore implementation requirements, not decorative metrics.</p>
+<p>The new classifier experiment predicts positive origin windows, not independently matched incidents. It does not measure event lead time, one-warning-per-incident recall, MPC prediction skill or generator-level causal attribution. These are specified as next-stage tests. No event-score confidence interval was computed in this run; rare-event and overlapping-window uncertainty must remain visible.</p>
+<h2 id="11-event-forecasting-price-volatility-and-explanations">11. Event forecasting, price volatility and explanations</h2>
+<p>Use separate target families rather than letting a single regression carry all warning objectives: capacity level, contraction onset, contraction severity, setter switch, actual flow reversal and a bound forcing direction. A flow reversal can occur for economic reasons without a limit contraction; a contraction can occur while flow remains far from the affected bound. Predict and evaluate these distinctions explicitly.</p>
+<p>For operational incident scoring, freeze the threshold and incident-merging rules before evaluation. Match an alarm only to the next eligible incident in a declared lead window, credit each incident once, suppress repeated alarms for a documented refractory period and report late detections separately. Measure recall, precision, false alarms per day, median and lower-decile advance lead, severity-weighted misses and time spent under warning. Retain origin-level Brier/log loss/AP for probability assessment; do not confuse them with incident metrics.</p>
+<p>Price impact should be a second layer. Model price-spread or extreme-price risk conditional on network state, predicted contraction, available reserves and market conditions, with a control model omitting contraction features. Separate: contraction without volatility, volatility without contraction, contraction followed by volatility and common-cause events such as regional scarcity. Exact MPC uses the applicable historical cap schedule, not today's cap imposed on both years.</p>
+<p>The NEM logistic-price paper makes a simple event model credible, but the accessible abstract does not settle historical availability of all its predictors or its exact temporal split.<sup id="fnref:32"><a class="footnote-ref" href="#fn:32">32</a></sup> The local atlas has only 13 VNI and five QNI contraction-to-MPC observations. Start with a broader predeclared high-price or large-spread threshold and use exact MPC cases as audited case studies. Keep price-only controls; avoid oversampling rare cases before the time split or presenting balanced-sample probabilities as market frequencies.</p>
+<p>An event explanation should contain three explicitly labelled layers. <strong>Observed mechanism accounting</strong> shows versioned equations and measured terms. <strong>Forecast contribution</strong> shows how the model's prediction changes when a feature group is removed or replaced with its admissible baseline. <strong>Counterfactual hypothesis</strong> describes a plausible unit or RHS change under stated fixed conditions. SHAP or a coefficient plot does not by itself prove what a generator physically caused; the causal-interpretation literature makes the observational/interventional distinction explicit.<sup id="fnref:42"><a class="footnote-ref" href="#fn:42">42</a></sup></p>
+<p>For switch events, keep a composite switch contribution unless a consistent old/new-equation decomposition has been justified. Report attribution sensitivity to decomposition order where applicable. Include unmatched versions and incomplete FCAS/other terms in the uncertainty panel, rather than excluding the most difficult events silently.</p>
+<h2 id="12-market-seasonal-and-diurnal-context">12. Market, seasonal and diurnal context</h2>
+<p>The first feature tests should use network state and pressure. Then add market conditions in controlled layers, so their incremental contribution and confounding role are visible.</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Context layer</th>
+<th>Compact representation</th>
+<th>Interpretation guard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Demand</td>
+<td>Regional forecast demand, net demand, ramp and percentile relative to training season/hour</td>
+<td>Do not subtract rooftop solar twice from a demand definition that already excludes it</td>
+</tr>
+<tr>
+<td>Renewables</td>
+<td>Forecast wind, utility solar and rooftop solar shares; expected ramp; uncertainty</td>
+<td>Actual output is retrospective context unless already observed</td>
+</tr>
+<tr>
+<td>Coal</td>
+<td>Publicly supported online capacity, observed online count, forecast availability, time since start/stop</td>
+<td>Zero generation does not prove an outage; unit maximum is not assured available capacity</td>
+</tr>
+<tr>
+<td>Hydro/storage</td>
+<td>Observed generation/pumping, available public capability, mode transition</td>
+<td>Reservoir/state-of-charge knowledge may be incomplete</td>
+</tr>
+<tr>
+<td>Transmission outages</td>
+<td>Known schedule, active equation-family proxy, time to planned return</td>
+<td>Actual future outage status is not an admissible issue-time predictor</td>
+</tr>
+<tr>
+<td>Weather</td>
+<td>Load-weighted temperature, hot/cold departure, regional wind/irradiance forecast summaries</td>
+<td>Weather is context and a forecast driver, not automatic proof of a network cause</td>
+</tr>
+<tr>
+<td>Economic conditions</td>
+<td>Lagged regional spread, forecast reserve margin, admissible AEMO price forecast</td>
+<td>Future realised price cannot explain a prediction made earlier</td>
+</tr>
+</tbody>
+</table></div>
+<p>Seasonal reporting should show each of the eight season-years separately, then an explicitly labelled pooled seasonal summary. Use occurrence rates per eligible hour, not only event counts. For diurnal comparisons show NEM half-hour or hourly bins, separating weekdays/weekends only when support permits. Keep denominator coverage alongside each heatmap or table, because a missing-source pattern can look like a seasonal network effect.</p>
+<p>Two years allow descriptive seasonal comparison, but only two winters do not establish a stable winter law. The new model experiment evaluates autumn and winter 2026 only; a full two-year input window is not a full two-year out-of-sample model evaluation. Use expanding-window development folds for additional seasons where training support permits, and reserve future data for the final operational assessment.</p>
+<p>A specific within-study structural break is now documented: AEMO's December 2025 formulation guideline changes the minimum LHS factor threshold from 0.07 to 0.15 and describes normalisation and moving remaining small terms to the RHS.<sup id="fnref:43"><a class="footnote-ref" href="#fn:43">43</a></sup> This can change an observed LHS exposure list without removing a generator's physical relevance. Audit feature distributions, family matching and RHS residuals across the effective date. The research has not established that this change caused the QNI reconstruction errors.</p>
+<p>Project EnergyConnect adds another reason to version network configuration. AEMO's current FAQ discusses planned October/November 2026 operational and settlement changes and distinguishes loop equations from reported limit setters.<sup id="fnref:27"><a class="footnote-ref" href="#fn:27">27</a></sup> Follow actual implementation notices rather than hardcoding a future date or retaining a six-interconnector assumption indefinitely.</p>
+<h2 id="13-probabilistic-forecasts-and-joint-scenarios">13. Probabilistic forecasts and joint scenarios</h2>
+<p>Improve uncertainty alongside the point forecast. Begin with residual distributions stratified by direction, headroom and a small quality/regime grouping, pooling sparse bins. Compare linear quantile regression, a small quantile GAM and quantile boosting. Report 50/80/95% coverage, interval width and proper interval or weighted interval score; a very wide interval can achieve coverage while being unhelpful.<sup id="fnref:25"><a class="footnote-ref" href="#fn:25">25</a></sup></p>
+<p>Conformalised quantile regression is a candidate calibration layer, not a guarantee that arbitrary nonstationary NEM data will have exact conditional coverage. Time-series conformal methods address dependence under their own assumptions. Evaluate calibration by season, near-bound state, switch status and missingness, with calibration data strictly preceding scored outcomes.<sup id="fnref:44"><a class="footnote-ref" href="#fn:44">44</a></sup><sup id="fnref:26"><a class="footnote-ref" href="#fn:26">26</a></sup></p>
+<p>Preserve signed distributions near zero and allow skew. Do not force normality or clip flow forecasts to realised future limits. Even predicted reported bounds may be conditional and inconsistent; start with a diagnostic consistency penalty and publish raw versus adjusted scores. Use hard physical projection only when the feasible set and its information timing are defensible.</p>
+<p>Contractions are path events. Independent draws from five-minute marginal quantiles destroy temporal dependence and can produce implausible switching frequency. Start with whole residual-block resampling conditioned on broad regime, retaining correlated QNI/VNI residuals and consistent demand/VRE scenarios. Wind-ramp scenario research supports the need for temporal structure, while also finding method performance depends on the available forecast information.<sup id="fnref:34"><a class="footnote-ref" href="#fn:34">34</a></sup></p>
+<p>A two-component blend of simple and boosted forecasts is worth testing after their individual evaluation. Select a fixed or slowly varying weight on validation, then freeze it; avoid tuning weights on reported test events. For probabilistic forecasts, averaging quantiles is not the same as mixing predictive distributions. Compare the actual combined distribution using the same proper score.<sup id="fnref2:36"><a class="footnote-ref" href="#fn:36">36</a></sup></p>
+<h2 id="14-validation-that-can-support-a-deployment-decision">14. Validation that can support a deployment decision</h2>
+<p>Create three separate data tracks: <strong>strict public issue-time inputs</strong>, <strong>retrospective mechanism reconstruction</strong>, and <strong>oracle future fundamentals</strong>. The first estimates implementable performance; the second investigates how equations behaved; the third bounds the value of better upstream forecasts. Their rows, labels and claims must never be blended into one headline score.</p>
+<p>Temporal evaluation literature supports realistic chronological assessment and warns about flawed preprocessing and benchmark design; some stationary settings admit other resampling methods, but this network's changing equations and overlapping events make chronological replay the appropriate default.<sup id="fnref:45"><a class="footnote-ref" href="#fn:45">45</a></sup><sup id="fnref:46"><a class="footnote-ref" href="#fn:46">46</a></sup></p>
+<p>Use an experiment ladder that isolates information value:</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Experiment</th>
+<th>What changes</th>
+<th>Question answered</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>E0</td>
+<td>Eligible persistence and seasonal references</td>
+<td>What is the minimum useful benchmark?</td>
+</tr>
+<tr>
+<td>E1</td>
+<td>Same rows plus AEMO forecast and bias correction</td>
+<td>How much can a simple official-forecast correction achieve?</td>
+</tr>
+<tr>
+<td>E2</td>
+<td>Add current state/competition/quality only</td>
+<td>Does state help without generator pressure?</td>
+</tr>
+<tr>
+<td>E3</td>
+<td>Add observed pressure only</td>
+<td>Does generator history add beyond state?</td>
+</tr>
+<tr>
+<td>E4</td>
+<td>Add out-of-fold forecast pressure</td>
+<td>Is future movement predictability valuable?</td>
+</tr>
+<tr>
+<td>E5</td>
+<td>Add regime interactions or small experts</td>
+<td>Does setter switching explain residual errors?</td>
+</tr>
+<tr>
+<td>E6</td>
+<td>Add market and forecast-weather layers one at a time</td>
+<td>What is their incremental value?</td>
+</tr>
+<tr>
+<td>E7</td>
+<td>Compare matched ridge/GAM/boost pipelines and losses</td>
+<td>Is model complexity justified?</td>
+</tr>
+<tr>
+<td>E8</td>
+<td>Add calibration and joint scenarios</td>
+<td>Are warning probabilities and paths reliable?</td>
+</tr>
+<tr>
+<td>E9</td>
+<td>Prospective shadow replay</td>
+<td>Does the benefit survive real publication delays?</td>
+</tr>
+</tbody>
+</table></div>
+<p>For each fold, fit scalers, thresholds, groupings, imputers, candidate weighting parameters, feature selection and model settings inside its training/validation windows. Purge training labels that extend into a later split. Event-calibration and alert-tuning windows must also be disjoint and mature. Report the row intersection used for each model comparison and separately report performance on all rows where each model operates.</p>
+<p>Use flow/capacity MAE, RMSE, bias and large-error quantiles, plus sign accuracy outside a predeclared near-zero band. For events use both proper probability scores and incident metrics. For forced direction, report upper-negative and lower-positive cases separately and audit inconsistent envelopes. Use seasonal, diurnal, family, quality and contraction-severity slices with sample counts. Avoid MAPE near zero and when signed values change direction.</p>
+<p>Use paired day/week blocks for model-error uncertainty and whole incidents for event bootstrap. Check sensitivity to block length. Predeclare the primary outcomes and apply an appropriate multiplicity policy for confirmatory comparisons; label exploratory slices accordingly. The current March–August results remain development evidence even if hyperparameters were selected earlier, because the period has already informed research decisions.</p>
+<p>The recommended balanced acceptance contract is provisional: seek at least 5% flow-MAE improvement without material deterioration in contraction warnings, or a material incident-warning gain with no more than 2% flow-MAE deterioration. Define “material warning gain” in advance—for example, a specified recall improvement at the same false alarms per day and minimum lead time. These are engineering targets, not literature-derived universal thresholds. Require calibration, availability and runtime gates as well as accuracy.</p>
+<p>Do not wait two more years to start shadow forecasts, but do not call a short shadow run a completed seasonal validation. Start now with timestamped predictions and progressively accumulate unseen conditions.</p>
+<h2 id="15-repository-implementation-and-storage-plan">15. Repository implementation and storage plan</h2>
+<p>Keep the existing model reproducible. Add the new feature adapter, eligibility checks and experiment registry behind explicit configuration. The existing <a href="../../nemic/constraint_features.py">constraint feature module</a>, <a href="../../nemic/model.py">model module</a>, <a href="../../nemic/prepare.py">preparation module</a> and <a href="../../nemic/event_atlas.py">event atlas module</a> provide the integration points. New module names below are proposed, not implemented production functionality.</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Deliverable</th>
+<th>Proposed location or interface</th>
+<th>Completion evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>As-of source contract</td>
+<td><code>nemic/source_vintages.py</code></td>
+<td>Per-field release audit and replay checks</td>
+</tr>
+<tr>
+<td>IC adapter</td>
+<td>Configuration for identity, signs, region mapping and target definitions</td>
+<td>Same mechanics pass for QNI/VNI without duplicated logic</td>
+</tr>
+<tr>
+<td>Compact feature builder</td>
+<td>Extend existing constraint feature module with versioned blocks</td>
+<td>Algebra and timing checks; feature manifest</td>
+</tr>
+<tr>
+<td>Forecast pressure</td>
+<td><code>nemic/pressure_forecast.py</code></td>
+<td>Out-of-fold group movement predictions and uncertainty</td>
+</tr>
+<tr>
+<td>Model registry</td>
+<td>Configured persistence/ridge/logistic/GAM/boost factories</td>
+<td>Identical row/feature eligibility for comparisons</td>
+</tr>
+<tr>
+<td>Event scorer</td>
+<td>Extend event atlas interfaces with prospective onset and incident matching</td>
+<td>Deterministic matching and alert-burden report</td>
+</tr>
+<tr>
+<td>Replay runner</td>
+<td>Issue-time snapshots and matured targets</td>
+<td>Immutable prediction logs and no future reads</td>
+</tr>
+<tr>
+<td>Research/report build</td>
+<td>Compact score and quality artifacts</td>
+<td>Markdown and offline HTML from the same evidence</td>
+</tr>
+</tbody>
+</table></div>
+<p>The <strong>10 GB limit is a combined working-data budget</strong>, including retained research data allocated to the run, downloads in progress, compressed archives, extraction scratch, parsed partitions and prediction outputs. It is not a per-file allowance. Reserve an additional minimum free-disk floor, proposed at 20 GB, and stop acquisition before either guard is breached. Existing unrelated files must not be deleted to meet the budget.</p>
+<p>Before any acquisition, inventory existing partitions and hashes. Specify an allowlist of tables, months, fields, ICs and necessary DUID/constraint joins. An archive may contain a full month; estimate compressed and expanded size before downloading it. If a minimal required archive cannot fit, stream supported records or stop with a concrete capacity requirement. Never fall back to downloading all MMSDM tables.</p>
+<p>Process one bounded month or source batch at a time: reserve space, download to a dedicated scratch directory, verify checksum/schema, extract only necessary members, filter/chunk immediately, write an atomic compact partition, validate coverage and then delete that batch's raw scratch. Log source URL, expected and actual bytes, hash, retrieval time, selected members/filters, output hash and deletion completion. Retain provenance and compact results after raw deletion. Redownload is keyed to missing or failed partitions, not repeated automatically.</p>
+<p>Before deleting or moving anything, resolve the target path and ensure it lies within that dedicated scratch directory. A failed validation should quarantine only the relevant small evidence or record enough metadata to reproduce it; it should not trigger a second unrestricted acquisition. Restart from a per-month status ledger with states such as planned, downloaded, filtered, validated and cleaned.</p>
+<p>Keep high-volume input snapshots and per-origin predictions outside Git. Commit code, methodology, compact aggregate metrics and provenance manifests. Do not retain every model candidate binary. Keep the selected model and necessary rollback predecessor, and prune only artifacts explicitly owned by the run. Estimate output growth as origin count × horizons × targets × model count before choosing to save all predictions; use partitioned compressed columns and retain only selected candidates after scoring.</p>
+<h2 id="16-tests-diagnostics-and-report-structure">16. Tests, diagnostics and report structure</h2>
+<p>Test the mechanics that could reverse the interpretation: positive/negative IC factor, inequality reversal, upper/lower directional signs, zero factor, near-zero denominator, negative capacity, equation switch and scaling invariance. Multiplying the full equation by a positive constant must leave B and normalised sensitivity unchanged. Exact-version joins must exclude future definitions and distinguish missing coefficients from true zero coefficients.</p>
+<p>Test time boundaries with deliberately late publications, corrections, duplicate runs and missing observations. Assert every feature's availability is no later than forecast issue. A future actual deliberately introduced into a fixture should be rejected. Verify target delivery and event look-ahead cannot cross training/calibration boundaries. Fit transformations on training only and check their hashes remain unchanged when evaluation outcomes are altered.</p>
+<p>For event scoring, test onset versus persistent sharp state, two incidents inside one horizon, repeated alarms for one incident, missing five-minute observations, midnight/month thresholds and MPC schedule changes. Confirm that incident and origin-window counts are reported separately. For model integration, verify fallback predictions exist when topology fails and that a source-age warning does not expose an unexplained zero as a physical measurement.</p>
+<p>The final operational report should have a top-level skill and data-quality overview, seasonal/diurnal performance, mechanism groups, warning performance and a searchable event atlas. Each detailed event should align: flow and directional limits; forecast issued before onset; uncertainty band; equation identity and switch timeline; generator ramps and signed pressure; RHS/other/unresolved accounting; regional price/spread; and a secondary market-context panel. Display the selected issue time and data vintage prominently.</p>
+<p>Recommended visuals for the implementation stage are an IC-by-horizon model-skill heatmap, a state-versus-pressure ablation plot, reliability and precision–recall plots, incident recall versus false alarms/day, eight season-year panels, diurnal occurrence rates with eligible-hour denominators, a candidate-gap/pressure phase plot, and version-quality timelines around formulation changes. This research edition provides numerical tables, including all regression and event scores, rather than claiming those full operational plots have been generated.</p>
+<h2 id="17-prioritised-delivery-sequence-and-unresolved-questions">17. Prioritised delivery sequence and unresolved questions</h2>
+<p><strong>First, repair the evidence boundary.</strong> Audit QNI candidate eligibility, setter matching, version joins, omitted terms and the worst monthly discrepancies. Confirm whether each proposed feature is public at issue time. Retain useful QNI statistical state forecasts while disabling unsupported precise mechanical explanations. VNI also needs month-level quality checks despite stronger median reconstruction.</p>
+<p><strong>Second, build the compact baseline portfolio.</strong> Persistence, eligible AEMO correction, ridge and logistic should share one source contract. Introduce state and pressure separately. Match preprocessing and loss where feasible before attributing differences to architecture. Use the new shallow-boost results to prioritise VNI near-term experiments, while keeping ridge and logistic strong candidates elsewhere.</p>
+<p><strong>Third, add forecast movement and switching.</strong> Implement a small group movement model, candidate competition and one regime-interaction model. Demonstrate that future-pressure predictions add beyond current state. Then add demand, renewables, availability and weather as separate ablations. Fit source-specific uncertainty rather than assuming forecast inputs are exact.</p>
+<p><strong>Fourth, finish operational event evaluation and shadow delivery.</strong> Calibrate, deduplicate alarms, measure lead time and burden, and issue timestamped forecasts before observing outcomes. Introduce a price-risk layer only after contraction forecasts work acceptably. A full causal dispatch replay, unseen multi-season validation and reliable seven-day unit-level public inputs remain separate investigations.</p>
+<p>The central unresolved issues are the cause of QNI reconstruction failures, complete historical public availability of unit/FCAS and outage inputs, availability of consistent PD7DAY vintages across schema changes, and whether the modest pressure gains persist with those strict inputs. The strongest current conclusion is that the studies supply useful <strong>feature structure and event hypotheses</strong>, while model selection must remain task-specific and empirically tested.</p>
+<h2 id="18-complete-numerical-appendix">18. Complete numerical appendix</h2>
+<p>All numbers below come from the expanded experiment, using its fixed partitions and retrospective limitations. Autumn and winter refer to forecast-origin season in March–August 2026. They are not eight-season model results. The machine-readable evidence also contains settings, exact detector thresholds, paired uncertainty estimates and all input hashes.<sup id="fnref5:28"><a class="footnote-ref" href="#fn:28">28</a></sup></p>
+<h3 id="all-regression-scores">All regression scores</h3>
+<!-- ALL_REGRESSION -->
+
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>ic</th>
+<th>target</th>
+<th>horizon_minutes</th>
+<th>model</th>
+<th>n</th>
+<th>mae_mw</th>
+<th>rmse_mw</th>
+<th>bias_mw</th>
+<th>autumn_mae_mw</th>
+<th>winter_mae_mw</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VNI</td>
+<td>flow</td>
+<td>30</td>
+<td>persistence</td>
+<td>8831</td>
+<td>155.4543</td>
+<td>225.7835</td>
+<td>-0.0513</td>
+<td>154.6743</td>
+<td>156.2345</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>flow</td>
+<td>30</td>
+<td>ridge_base</td>
+<td>8831</td>
+<td>156.4172</td>
+<td>209.1968</td>
+<td>0.9845</td>
+<td>156.5007</td>
+<td>156.3337</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>flow</td>
+<td>30</td>
+<td>ridge_state</td>
+<td>8831</td>
+<td>156.0741</td>
+<td>208.2712</td>
+<td>14.8595</td>
+<td>155.5691</td>
+<td>156.5793</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>flow</td>
+<td>30</td>
+<td>ridge_pressure</td>
+<td>8831</td>
+<td>155.3504</td>
+<td>207.8997</td>
+<td>1.4320</td>
+<td>155.3756</td>
+<td>155.3252</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>flow</td>
+<td>30</td>
+<td>ridge_full</td>
+<td>8831</td>
+<td>154.8913</td>
+<td>207.2029</td>
+<td>18.4312</td>
+<td>153.3416</td>
+<td>156.4414</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>flow</td>
+<td>30</td>
+<td>boost_l1_base</td>
+<td>8831</td>
+<td>143.9491</td>
+<td>201.4633</td>
+<td>-11.6384</td>
+<td>138.8502</td>
+<td>149.0493</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>flow</td>
+<td>30</td>
+<td>boost_l1_full</td>
+<td>8831</td>
+<td>142.7349</td>
+<td>200.1496</td>
+<td>-12.8319</td>
+<td>137.7497</td>
+<td>147.7212</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>flow</td>
+<td>30</td>
+<td>boost_l2_full</td>
+<td>8831</td>
+<td>144.3364</td>
+<td>199.7523</td>
+<td>-15.5952</td>
+<td>138.8085</td>
+<td>149.8656</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export_tight</td>
+<td>30</td>
+<td>persistence</td>
+<td>8831</td>
+<td>150.6695</td>
+<td>237.4092</td>
+<td>0.0071</td>
+<td>144.9239</td>
+<td>156.4164</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export_tight</td>
+<td>30</td>
+<td>ridge_base</td>
+<td>8831</td>
+<td>152.9035</td>
+<td>212.3886</td>
+<td>8.7115</td>
+<td>148.3663</td>
+<td>157.4418</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export_tight</td>
+<td>30</td>
+<td>ridge_state</td>
+<td>8831</td>
+<td>154.0095</td>
+<td>213.1215</td>
+<td>13.7286</td>
+<td>149.8116</td>
+<td>158.2085</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export_tight</td>
+<td>30</td>
+<td>ridge_pressure</td>
+<td>8831</td>
+<td>150.2494</td>
+<td>209.0998</td>
+<td>9.5291</td>
+<td>145.3311</td>
+<td>155.1689</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export_tight</td>
+<td>30</td>
+<td>ridge_full</td>
+<td>8831</td>
+<td>152.1367</td>
+<td>210.7762</td>
+<td>15.9662</td>
+<td>147.5674</td>
+<td>156.7069</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export_tight</td>
+<td>30</td>
+<td>boost_l1_base</td>
+<td>8831</td>
+<td>133.4303</td>
+<td>199.6624</td>
+<td>6.5741</td>
+<td>123.2147</td>
+<td>143.6481</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export_tight</td>
+<td>30</td>
+<td>boost_l1_full</td>
+<td>8831</td>
+<td>130.4804</td>
+<td>195.3094</td>
+<td>12.4529</td>
+<td>120.7384</td>
+<td>140.2245</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export_tight</td>
+<td>30</td>
+<td>boost_l2_full</td>
+<td>8831</td>
+<td>134.7369</td>
+<td>196.5372</td>
+<td>0.5229</td>
+<td>125.5664</td>
+<td>143.9094</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import_tight</td>
+<td>30</td>
+<td>persistence</td>
+<td>8831</td>
+<td>114.1010</td>
+<td>204.8323</td>
+<td>0.0070</td>
+<td>100.8246</td>
+<td>127.3803</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import_tight</td>
+<td>30</td>
+<td>ridge_base</td>
+<td>8831</td>
+<td>132.5464</td>
+<td>201.0022</td>
+<td>-21.0667</td>
+<td>119.8026</td>
+<td>145.2931</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import_tight</td>
+<td>30</td>
+<td>ridge_state</td>
+<td>8831</td>
+<td>133.0398</td>
+<td>199.6780</td>
+<td>-30.6919</td>
+<td>119.6971</td>
+<td>146.3855</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import_tight</td>
+<td>30</td>
+<td>ridge_pressure</td>
+<td>8831</td>
+<td>133.7833</td>
+<td>199.7733</td>
+<td>-23.6459</td>
+<td>121.9428</td>
+<td>145.6264</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import_tight</td>
+<td>30</td>
+<td>ridge_full</td>
+<td>8831</td>
+<td>134.0661</td>
+<td>198.7016</td>
+<td>-34.1801</td>
+<td>120.6182</td>
+<td>147.5169</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import_tight</td>
+<td>30</td>
+<td>boost_l1_base</td>
+<td>8831</td>
+<td>109.5657</td>
+<td>191.6259</td>
+<td>0.3169</td>
+<td>94.0390</td>
+<td>125.0960</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import_tight</td>
+<td>30</td>
+<td>boost_l1_full</td>
+<td>8831</td>
+<td>106.5268</td>
+<td>187.4831</td>
+<td>-2.9920</td>
+<td>92.3583</td>
+<td>120.6986</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import_tight</td>
+<td>30</td>
+<td>boost_l2_full</td>
+<td>8831</td>
+<td>119.9630</td>
+<td>190.4981</td>
+<td>-28.4767</td>
+<td>107.7596</td>
+<td>132.1692</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>flow</td>
+<td>180</td>
+<td>persistence</td>
+<td>8826</td>
+<td>317.5577</td>
+<td>431.0281</td>
+<td>-0.0424</td>
+<td>334.0335</td>
+<td>301.0594</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>flow</td>
+<td>180</td>
+<td>ridge_base</td>
+<td>8826</td>
+<td>277.0724</td>
+<td>341.1462</td>
+<td>-12.4000</td>
+<td>285.1817</td>
+<td>268.9520</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>flow</td>
+<td>180</td>
+<td>ridge_state</td>
+<td>8826</td>
+<td>280.7570</td>
+<td>346.0384</td>
+<td>-41.0182</td>
+<td>290.4306</td>
+<td>271.0702</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>flow</td>
+<td>180</td>
+<td>ridge_pressure</td>
+<td>8826</td>
+<td>276.1986</td>
+<td>340.5368</td>
+<td>-12.7799</td>
+<td>285.3144</td>
+<td>267.0703</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>flow</td>
+<td>180</td>
+<td>ridge_full</td>
+<td>8826</td>
+<td>278.7179</td>
+<td>344.0435</td>
+<td>-34.1083</td>
+<td>288.4137</td>
+<td>269.0088</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>flow</td>
+<td>180</td>
+<td>boost_l1_base</td>
+<td>8826</td>
+<td>253.7697</td>
+<td>329.3373</td>
+<td>-25.5152</td>
+<td>256.9514</td>
+<td>250.5837</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>flow</td>
+<td>180</td>
+<td>boost_l1_full</td>
+<td>8826</td>
+<td>253.9124</td>
+<td>329.2883</td>
+<td>-20.3970</td>
+<td>255.7670</td>
+<td>252.0552</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>flow</td>
+<td>180</td>
+<td>boost_l2_full</td>
+<td>8826</td>
+<td>257.1998</td>
+<td>331.2614</td>
+<td>-31.4256</td>
+<td>257.9008</td>
+<td>256.4978</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export_tight</td>
+<td>180</td>
+<td>persistence</td>
+<td>8826</td>
+<td>351.1355</td>
+<td>492.8219</td>
+<td>-0.3421</td>
+<td>352.3370</td>
+<td>349.9324</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export_tight</td>
+<td>180</td>
+<td>ridge_base</td>
+<td>8826</td>
+<td>271.7169</td>
+<td>344.4055</td>
+<td>13.3164</td>
+<td>274.0260</td>
+<td>269.4047</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export_tight</td>
+<td>180</td>
+<td>ridge_state</td>
+<td>8826</td>
+<td>276.5161</td>
+<td>348.8328</td>
+<td>16.9898</td>
+<td>275.3083</td>
+<td>277.7255</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export_tight</td>
+<td>180</td>
+<td>ridge_pressure</td>
+<td>8826</td>
+<td>273.5680</td>
+<td>345.4062</td>
+<td>17.9551</td>
+<td>274.0861</td>
+<td>273.0492</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export_tight</td>
+<td>180</td>
+<td>ridge_full</td>
+<td>8826</td>
+<td>276.6299</td>
+<td>349.0065</td>
+<td>17.3777</td>
+<td>275.4792</td>
+<td>277.7820</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export_tight</td>
+<td>180</td>
+<td>boost_l1_base</td>
+<td>8826</td>
+<td>246.8880</td>
+<td>329.3969</td>
+<td>38.5283</td>
+<td>233.0956</td>
+<td>260.6991</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export_tight</td>
+<td>180</td>
+<td>boost_l1_full</td>
+<td>8826</td>
+<td>250.0354</td>
+<td>333.5252</td>
+<td>59.9893</td>
+<td>239.0347</td>
+<td>261.0511</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export_tight</td>
+<td>180</td>
+<td>boost_l2_full</td>
+<td>8826</td>
+<td>254.6767</td>
+<td>337.2582</td>
+<td>26.0918</td>
+<td>247.9291</td>
+<td>261.4335</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import_tight</td>
+<td>180</td>
+<td>persistence</td>
+<td>8826</td>
+<td>233.2976</td>
+<td>351.5904</td>
+<td>0.2278</td>
+<td>204.1692</td>
+<td>262.4656</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import_tight</td>
+<td>180</td>
+<td>ridge_base</td>
+<td>8826</td>
+<td>215.8341</td>
+<td>293.9872</td>
+<td>-48.3774</td>
+<td>194.9782</td>
+<td>236.7184</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import_tight</td>
+<td>180</td>
+<td>ridge_state</td>
+<td>8826</td>
+<td>225.3537</td>
+<td>298.3344</td>
+<td>-76.8832</td>
+<td>201.2427</td>
+<td>249.4974</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import_tight</td>
+<td>180</td>
+<td>ridge_pressure</td>
+<td>8826</td>
+<td>217.0437</td>
+<td>295.5661</td>
+<td>-51.0881</td>
+<td>196.1764</td>
+<td>237.9394</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import_tight</td>
+<td>180</td>
+<td>ridge_full</td>
+<td>8826</td>
+<td>230.0650</td>
+<td>302.5473</td>
+<td>-87.7381</td>
+<td>206.3425</td>
+<td>253.8199</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import_tight</td>
+<td>180</td>
+<td>boost_l1_base</td>
+<td>8826</td>
+<td>200.8672</td>
+<td>289.9526</td>
+<td>-7.8642</td>
+<td>168.7252</td>
+<td>233.0530</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import_tight</td>
+<td>180</td>
+<td>boost_l1_full</td>
+<td>8826</td>
+<td>201.2949</td>
+<td>288.6396</td>
+<td>-27.5359</td>
+<td>172.4606</td>
+<td>230.1685</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import_tight</td>
+<td>180</td>
+<td>boost_l2_full</td>
+<td>8826</td>
+<td>222.0981</td>
+<td>299.4319</td>
+<td>-77.0107</td>
+<td>200.6751</td>
+<td>243.5502</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>flow</td>
+<td>1440</td>
+<td>persistence</td>
+<td>8784</td>
+<td>377.3347</td>
+<td>489.9916</td>
+<td>3.8533</td>
+<td>372.5968</td>
+<td>382.1246</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>flow</td>
+<td>1440</td>
+<td>ridge_base</td>
+<td>8784</td>
+<td>332.0478</td>
+<td>405.2785</td>
+<td>-19.9082</td>
+<td>321.6327</td>
+<td>342.5773</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>flow</td>
+<td>1440</td>
+<td>ridge_state</td>
+<td>8784</td>
+<td>340.3967</td>
+<td>415.8874</td>
+<td>-44.9615</td>
+<td>331.5923</td>
+<td>349.2978</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>flow</td>
+<td>1440</td>
+<td>ridge_pressure</td>
+<td>8784</td>
+<td>332.3201</td>
+<td>406.0287</td>
+<td>-18.3027</td>
+<td>321.1806</td>
+<td>343.5819</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>flow</td>
+<td>1440</td>
+<td>ridge_full</td>
+<td>8784</td>
+<td>341.3433</td>
+<td>417.5028</td>
+<td>-49.2370</td>
+<td>331.9634</td>
+<td>350.8264</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>flow</td>
+<td>1440</td>
+<td>boost_l1_base</td>
+<td>8784</td>
+<td>340.0298</td>
+<td>419.3290</td>
+<td>-29.7475</td>
+<td>326.7294</td>
+<td>353.4764</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>flow</td>
+<td>1440</td>
+<td>boost_l1_full</td>
+<td>8784</td>
+<td>341.9872</td>
+<td>426.4691</td>
+<td>-92.9265</td>
+<td>332.7951</td>
+<td>351.2804</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>flow</td>
+<td>1440</td>
+<td>boost_l2_full</td>
+<td>8784</td>
+<td>356.0472</td>
+<td>436.6515</td>
+<td>-121.9191</td>
+<td>337.8636</td>
+<td>374.4305</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export_tight</td>
+<td>1440</td>
+<td>persistence</td>
+<td>8784</td>
+<td>281.1089</td>
+<td>381.1926</td>
+<td>0.8224</td>
+<td>261.2161</td>
+<td>301.2204</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export_tight</td>
+<td>1440</td>
+<td>ridge_base</td>
+<td>8784</td>
+<td>249.2648</td>
+<td>321.9317</td>
+<td>16.5826</td>
+<td>238.3707</td>
+<td>260.2786</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export_tight</td>
+<td>1440</td>
+<td>ridge_state</td>
+<td>8784</td>
+<td>255.0623</td>
+<td>326.6830</td>
+<td>16.0280</td>
+<td>247.8179</td>
+<td>262.3864</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export_tight</td>
+<td>1440</td>
+<td>ridge_pressure</td>
+<td>8784</td>
+<td>249.3352</td>
+<td>321.8705</td>
+<td>16.0774</td>
+<td>238.5257</td>
+<td>260.2635</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export_tight</td>
+<td>1440</td>
+<td>ridge_full</td>
+<td>8784</td>
+<td>255.6470</td>
+<td>327.1143</td>
+<td>12.2019</td>
+<td>248.6728</td>
+<td>262.6978</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export_tight</td>
+<td>1440</td>
+<td>boost_l1_base</td>
+<td>8784</td>
+<td>257.7983</td>
+<td>337.8393</td>
+<td>59.9466</td>
+<td>245.6292</td>
+<td>270.1011</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export_tight</td>
+<td>1440</td>
+<td>boost_l1_full</td>
+<td>8784</td>
+<td>265.6266</td>
+<td>349.2831</td>
+<td>86.7372</td>
+<td>264.3834</td>
+<td>266.8835</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export_tight</td>
+<td>1440</td>
+<td>boost_l2_full</td>
+<td>8784</td>
+<td>264.6405</td>
+<td>343.7408</td>
+<td>53.0629</td>
+<td>262.2734</td>
+<td>267.0336</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import_tight</td>
+<td>1440</td>
+<td>persistence</td>
+<td>8784</td>
+<td>244.3027</td>
+<td>358.9214</td>
+<td>0.1017</td>
+<td>208.9941</td>
+<td>279.9993</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import_tight</td>
+<td>1440</td>
+<td>ridge_base</td>
+<td>8784</td>
+<td>218.7551</td>
+<td>297.3329</td>
+<td>-50.6680</td>
+<td>200.9177</td>
+<td>236.7884</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import_tight</td>
+<td>1440</td>
+<td>ridge_state</td>
+<td>8784</td>
+<td>217.8406</td>
+<td>298.3836</td>
+<td>-42.4311</td>
+<td>192.4263</td>
+<td>243.5342</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import_tight</td>
+<td>1440</td>
+<td>ridge_pressure</td>
+<td>8784</td>
+<td>218.9039</td>
+<td>299.3079</td>
+<td>-49.2004</td>
+<td>200.2305</td>
+<td>237.7825</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import_tight</td>
+<td>1440</td>
+<td>ridge_full</td>
+<td>8784</td>
+<td>216.5694</td>
+<td>299.0942</td>
+<td>-35.2784</td>
+<td>190.5987</td>
+<td>242.8255</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import_tight</td>
+<td>1440</td>
+<td>boost_l1_base</td>
+<td>8784</td>
+<td>208.8322</td>
+<td>296.2532</td>
+<td>-4.4548</td>
+<td>183.7660</td>
+<td>234.1738</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import_tight</td>
+<td>1440</td>
+<td>boost_l1_full</td>
+<td>8784</td>
+<td>207.0468</td>
+<td>295.1078</td>
+<td>-0.8414</td>
+<td>182.3260</td>
+<td>232.0393</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import_tight</td>
+<td>1440</td>
+<td>boost_l2_full</td>
+<td>8784</td>
+<td>220.7533</td>
+<td>302.1130</td>
+<td>-48.8505</td>
+<td>194.0983</td>
+<td>247.7012</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>flow</td>
+<td>30</td>
+<td>persistence</td>
+<td>8831</td>
+<td>115.2887</td>
+<td>167.0135</td>
+<td>0.2080</td>
+<td>108.5274</td>
+<td>122.0515</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>flow</td>
+<td>30</td>
+<td>ridge_base</td>
+<td>8831</td>
+<td>117.4117</td>
+<td>162.2504</td>
+<td>10.3128</td>
+<td>111.9315</td>
+<td>122.8931</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>flow</td>
+<td>30</td>
+<td>ridge_state</td>
+<td>8831</td>
+<td>116.6482</td>
+<td>161.1668</td>
+<td>0.8678</td>
+<td>111.1104</td>
+<td>122.1872</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>flow</td>
+<td>30</td>
+<td>ridge_pressure</td>
+<td>8831</td>
+<td>117.4399</td>
+<td>162.3029</td>
+<td>9.5560</td>
+<td>111.9080</td>
+<td>122.9732</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>flow</td>
+<td>30</td>
+<td>ridge_full</td>
+<td>8831</td>
+<td>116.7886</td>
+<td>161.2695</td>
+<td>-0.6606</td>
+<td>111.1960</td>
+<td>122.3825</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>flow</td>
+<td>30</td>
+<td>boost_l1_base</td>
+<td>8831</td>
+<td>113.2686</td>
+<td>158.1143</td>
+<td>6.5374</td>
+<td>106.9966</td>
+<td>119.5419</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>flow</td>
+<td>30</td>
+<td>boost_l1_full</td>
+<td>8831</td>
+<td>112.2667</td>
+<td>156.8579</td>
+<td>4.7424</td>
+<td>106.4660</td>
+<td>118.0687</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>flow</td>
+<td>30</td>
+<td>boost_l2_full</td>
+<td>8831</td>
+<td>113.6160</td>
+<td>155.9866</td>
+<td>2.1341</td>
+<td>107.3795</td>
+<td>119.8539</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export_tight</td>
+<td>30</td>
+<td>persistence</td>
+<td>8831</td>
+<td>62.7511</td>
+<td>124.9644</td>
+<td>-0.0165</td>
+<td>50.2682</td>
+<td>75.2368</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export_tight</td>
+<td>30</td>
+<td>ridge_base</td>
+<td>8831</td>
+<td>79.1992</td>
+<td>124.8601</td>
+<td>15.8279</td>
+<td>75.3241</td>
+<td>83.0751</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export_tight</td>
+<td>30</td>
+<td>ridge_state</td>
+<td>8831</td>
+<td>72.7139</td>
+<td>121.0437</td>
+<td>13.3263</td>
+<td>65.2898</td>
+<td>80.1397</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export_tight</td>
+<td>30</td>
+<td>ridge_pressure</td>
+<td>8831</td>
+<td>76.2286</td>
+<td>123.1332</td>
+<td>11.3316</td>
+<td>71.1276</td>
+<td>81.3307</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export_tight</td>
+<td>30</td>
+<td>ridge_full</td>
+<td>8831</td>
+<td>70.8761</td>
+<td>120.1281</td>
+<td>9.1836</td>
+<td>62.6746</td>
+<td>79.0795</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export_tight</td>
+<td>30</td>
+<td>boost_l1_base</td>
+<td>8831</td>
+<td>62.5222</td>
+<td>118.4614</td>
+<td>12.3852</td>
+<td>53.2464</td>
+<td>71.8002</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export_tight</td>
+<td>30</td>
+<td>boost_l1_full</td>
+<td>8831</td>
+<td>60.2340</td>
+<td>118.2855</td>
+<td>9.9823</td>
+<td>50.1504</td>
+<td>70.3199</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export_tight</td>
+<td>30</td>
+<td>boost_l2_full</td>
+<td>8831</td>
+<td>67.3405</td>
+<td>116.7294</td>
+<td>5.9870</td>
+<td>61.1647</td>
+<td>73.5177</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import_tight</td>
+<td>30</td>
+<td>persistence</td>
+<td>8831</td>
+<td>68.0066</td>
+<td>116.0884</td>
+<td>-0.0338</td>
+<td>75.8878</td>
+<td>60.1236</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import_tight</td>
+<td>30</td>
+<td>ridge_base</td>
+<td>8831</td>
+<td>76.6890</td>
+<td>114.8202</td>
+<td>14.2026</td>
+<td>87.4731</td>
+<td>65.9024</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import_tight</td>
+<td>30</td>
+<td>ridge_state</td>
+<td>8831</td>
+<td>73.2124</td>
+<td>110.1988</td>
+<td>-0.5981</td>
+<td>82.6639</td>
+<td>63.7588</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import_tight</td>
+<td>30</td>
+<td>ridge_pressure</td>
+<td>8831</td>
+<td>75.2331</td>
+<td>113.4659</td>
+<td>11.4954</td>
+<td>85.6644</td>
+<td>64.7995</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import_tight</td>
+<td>30</td>
+<td>ridge_full</td>
+<td>8831</td>
+<td>72.5896</td>
+<td>109.7384</td>
+<td>-1.5270</td>
+<td>82.0674</td>
+<td>63.1096</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import_tight</td>
+<td>30</td>
+<td>boost_l1_base</td>
+<td>8831</td>
+<td>67.2820</td>
+<td>111.0200</td>
+<td>6.9943</td>
+<td>76.3016</td>
+<td>58.2603</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import_tight</td>
+<td>30</td>
+<td>boost_l1_full</td>
+<td>8831</td>
+<td>65.7739</td>
+<td>110.1693</td>
+<td>2.2489</td>
+<td>74.3023</td>
+<td>57.2436</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import_tight</td>
+<td>30</td>
+<td>boost_l2_full</td>
+<td>8831</td>
+<td>87.9965</td>
+<td>131.7850</td>
+<td>18.1244</td>
+<td>103.6709</td>
+<td>72.3185</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>flow</td>
+<td>180</td>
+<td>persistence</td>
+<td>8826</td>
+<td>211.8380</td>
+<td>290.7721</td>
+<td>0.7689</td>
+<td>199.5601</td>
+<td>224.1326</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>flow</td>
+<td>180</td>
+<td>ridge_base</td>
+<td>8826</td>
+<td>219.0993</td>
+<td>277.7489</td>
+<td>52.9254</td>
+<td>211.7574</td>
+<td>226.4512</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>flow</td>
+<td>180</td>
+<td>ridge_state</td>
+<td>8826</td>
+<td>220.5401</td>
+<td>279.0170</td>
+<td>62.1876</td>
+<td>214.5178</td>
+<td>226.5706</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>flow</td>
+<td>180</td>
+<td>ridge_pressure</td>
+<td>8826</td>
+<td>219.2390</td>
+<td>278.0598</td>
+<td>50.2393</td>
+<td>211.9472</td>
+<td>226.5408</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>flow</td>
+<td>180</td>
+<td>ridge_full</td>
+<td>8826</td>
+<td>219.8993</td>
+<td>278.5323</td>
+<td>56.6357</td>
+<td>214.1026</td>
+<td>225.7040</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>flow</td>
+<td>180</td>
+<td>boost_l1_base</td>
+<td>8826</td>
+<td>212.1230</td>
+<td>277.1336</td>
+<td>25.0163</td>
+<td>195.0600</td>
+<td>229.2093</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>flow</td>
+<td>180</td>
+<td>boost_l1_full</td>
+<td>8826</td>
+<td>210.5661</td>
+<td>273.3029</td>
+<td>26.7814</td>
+<td>197.7037</td>
+<td>223.4459</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>flow</td>
+<td>180</td>
+<td>boost_l2_full</td>
+<td>8826</td>
+<td>214.7486</td>
+<td>274.6439</td>
+<td>49.1396</td>
+<td>204.6857</td>
+<td>224.8252</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export_tight</td>
+<td>180</td>
+<td>persistence</td>
+<td>8826</td>
+<td>133.2221</td>
+<td>217.8516</td>
+<td>-0.0574</td>
+<td>115.2582</td>
+<td>151.2105</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export_tight</td>
+<td>180</td>
+<td>ridge_base</td>
+<td>8826</td>
+<td>158.7250</td>
+<td>209.7944</td>
+<td>39.3353</td>
+<td>158.7622</td>
+<td>158.6877</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export_tight</td>
+<td>180</td>
+<td>ridge_state</td>
+<td>8826</td>
+<td>148.5466</td>
+<td>202.1579</td>
+<td>36.5579</td>
+<td>143.7886</td>
+<td>153.3110</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export_tight</td>
+<td>180</td>
+<td>ridge_pressure</td>
+<td>8826</td>
+<td>152.7197</td>
+<td>205.8531</td>
+<td>29.8170</td>
+<td>149.4644</td>
+<td>155.9793</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export_tight</td>
+<td>180</td>
+<td>ridge_full</td>
+<td>8826</td>
+<td>146.0693</td>
+<td>200.7717</td>
+<td>29.9711</td>
+<td>139.5009</td>
+<td>152.6466</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export_tight</td>
+<td>180</td>
+<td>boost_l1_base</td>
+<td>8826</td>
+<td>145.4319</td>
+<td>204.1523</td>
+<td>69.1276</td>
+<td>147.6724</td>
+<td>143.1884</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export_tight</td>
+<td>180</td>
+<td>boost_l1_full</td>
+<td>8826</td>
+<td>139.6678</td>
+<td>202.6150</td>
+<td>63.3478</td>
+<td>138.9787</td>
+<td>140.3577</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export_tight</td>
+<td>180</td>
+<td>boost_l2_full</td>
+<td>8826</td>
+<td>155.6200</td>
+<td>207.7388</td>
+<td>46.1460</td>
+<td>156.6769</td>
+<td>154.5616</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import_tight</td>
+<td>180</td>
+<td>persistence</td>
+<td>8826</td>
+<td>132.9465</td>
+<td>201.2179</td>
+<td>-0.1185</td>
+<td>148.4234</td>
+<td>117.4486</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import_tight</td>
+<td>180</td>
+<td>ridge_base</td>
+<td>8826</td>
+<td>148.7343</td>
+<td>198.8612</td>
+<td>54.6800</td>
+<td>176.6759</td>
+<td>120.7548</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import_tight</td>
+<td>180</td>
+<td>ridge_state</td>
+<td>8826</td>
+<td>146.2597</td>
+<td>196.4929</td>
+<td>62.7804</td>
+<td>172.3831</td>
+<td>120.1008</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import_tight</td>
+<td>180</td>
+<td>ridge_pressure</td>
+<td>8826</td>
+<td>143.7537</td>
+<td>193.1846</td>
+<td>45.7684</td>
+<td>170.1447</td>
+<td>117.3268</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import_tight</td>
+<td>180</td>
+<td>ridge_full</td>
+<td>8826</td>
+<td>143.9191</td>
+<td>193.8726</td>
+<td>59.2461</td>
+<td>169.1035</td>
+<td>118.7005</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import_tight</td>
+<td>180</td>
+<td>boost_l1_base</td>
+<td>8826</td>
+<td>153.9396</td>
+<td>224.3318</td>
+<td>82.9659</td>
+<td>193.3912</td>
+<td>114.4344</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import_tight</td>
+<td>180</td>
+<td>boost_l1_full</td>
+<td>8826</td>
+<td>133.8758</td>
+<td>195.3569</td>
+<td>54.2646</td>
+<td>165.0579</td>
+<td>102.6512</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import_tight</td>
+<td>180</td>
+<td>boost_l2_full</td>
+<td>8826</td>
+<td>159.6218</td>
+<td>241.1689</td>
+<td>70.2421</td>
+<td>200.3482</td>
+<td>118.8401</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>flow</td>
+<td>1440</td>
+<td>persistence</td>
+<td>8784</td>
+<td>271.5475</td>
+<td>364.3705</td>
+<td>3.6092</td>
+<td>269.4043</td>
+<td>273.7142</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>flow</td>
+<td>1440</td>
+<td>ridge_base</td>
+<td>8784</td>
+<td>247.6914</td>
+<td>315.6057</td>
+<td>26.0925</td>
+<td>242.1381</td>
+<td>253.3057</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>flow</td>
+<td>1440</td>
+<td>ridge_state</td>
+<td>8784</td>
+<td>246.7317</td>
+<td>315.0424</td>
+<td>20.4462</td>
+<td>243.3557</td>
+<td>250.1449</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>flow</td>
+<td>1440</td>
+<td>ridge_pressure</td>
+<td>8784</td>
+<td>247.7435</td>
+<td>315.7974</td>
+<td>24.6843</td>
+<td>242.0525</td>
+<td>253.4970</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>flow</td>
+<td>1440</td>
+<td>ridge_full</td>
+<td>8784</td>
+<td>246.4789</td>
+<td>315.1135</td>
+<td>15.5912</td>
+<td>242.9466</td>
+<td>250.0501</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>flow</td>
+<td>1440</td>
+<td>boost_l1_base</td>
+<td>8784</td>
+<td>249.8766</td>
+<td>320.6256</td>
+<td>5.6556</td>
+<td>247.2111</td>
+<td>252.5713</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>flow</td>
+<td>1440</td>
+<td>boost_l1_full</td>
+<td>8784</td>
+<td>247.3361</td>
+<td>319.3993</td>
+<td>-4.2774</td>
+<td>247.0799</td>
+<td>247.5951</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>flow</td>
+<td>1440</td>
+<td>boost_l2_full</td>
+<td>8784</td>
+<td>249.5930</td>
+<td>316.8574</td>
+<td>9.8129</td>
+<td>248.0780</td>
+<td>251.1247</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export_tight</td>
+<td>1440</td>
+<td>persistence</td>
+<td>8784</td>
+<td>173.6716</td>
+<td>274.3471</td>
+<td>0.2825</td>
+<td>176.5990</td>
+<td>170.7120</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export_tight</td>
+<td>1440</td>
+<td>ridge_base</td>
+<td>8784</td>
+<td>197.9389</td>
+<td>254.0960</td>
+<td>50.9611</td>
+<td>220.1955</td>
+<td>175.4377</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export_tight</td>
+<td>1440</td>
+<td>ridge_state</td>
+<td>8784</td>
+<td>191.8361</td>
+<td>250.8463</td>
+<td>56.7646</td>
+<td>214.0400</td>
+<td>169.3881</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export_tight</td>
+<td>1440</td>
+<td>ridge_pressure</td>
+<td>8784</td>
+<td>190.4376</td>
+<td>249.0280</td>
+<td>41.6696</td>
+<td>209.2452</td>
+<td>171.4234</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export_tight</td>
+<td>1440</td>
+<td>ridge_full</td>
+<td>8784</td>
+<td>188.5858</td>
+<td>247.8292</td>
+<td>45.5087</td>
+<td>208.0275</td>
+<td>168.9305</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export_tight</td>
+<td>1440</td>
+<td>boost_l1_base</td>
+<td>8784</td>
+<td>184.6712</td>
+<td>254.7723</td>
+<td>69.6407</td>
+<td>207.4952</td>
+<td>161.5964</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export_tight</td>
+<td>1440</td>
+<td>boost_l1_full</td>
+<td>8784</td>
+<td>184.9431</td>
+<td>254.1294</td>
+<td>75.8856</td>
+<td>208.4264</td>
+<td>161.2018</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export_tight</td>
+<td>1440</td>
+<td>boost_l2_full</td>
+<td>8784</td>
+<td>209.3881</td>
+<td>266.4220</td>
+<td>86.4217</td>
+<td>238.9574</td>
+<td>179.4938</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import_tight</td>
+<td>1440</td>
+<td>persistence</td>
+<td>8784</td>
+<td>187.7241</td>
+<td>290.4422</td>
+<td>-0.9755</td>
+<td>229.7917</td>
+<td>145.1943</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import_tight</td>
+<td>1440</td>
+<td>ridge_base</td>
+<td>8784</td>
+<td>192.3097</td>
+<td>274.1957</td>
+<td>69.0842</td>
+<td>237.8857</td>
+<td>146.2328</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import_tight</td>
+<td>1440</td>
+<td>ridge_state</td>
+<td>8784</td>
+<td>193.5418</td>
+<td>276.4301</td>
+<td>80.8541</td>
+<td>241.8209</td>
+<td>144.7321</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import_tight</td>
+<td>1440</td>
+<td>ridge_pressure</td>
+<td>8784</td>
+<td>190.7507</td>
+<td>272.6659</td>
+<td>64.8360</td>
+<td>235.5538</td>
+<td>145.4553</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import_tight</td>
+<td>1440</td>
+<td>ridge_full</td>
+<td>8784</td>
+<td>192.9404</td>
+<td>276.3490</td>
+<td>82.3062</td>
+<td>240.7460</td>
+<td>144.6095</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import_tight</td>
+<td>1440</td>
+<td>boost_l1_base</td>
+<td>8784</td>
+<td>188.4752</td>
+<td>277.4840</td>
+<td>72.0399</td>
+<td>233.6359</td>
+<td>142.8182</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import_tight</td>
+<td>1440</td>
+<td>boost_l1_full</td>
+<td>8784</td>
+<td>186.1093</td>
+<td>275.6570</td>
+<td>63.6367</td>
+<td>230.1719</td>
+<td>141.5624</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import_tight</td>
+<td>1440</td>
+<td>boost_l2_full</td>
+<td>8784</td>
+<td>232.4421</td>
+<td>321.6546</td>
+<td>133.1902</td>
+<td>296.1510</td>
+<td>168.0331</td>
+</tr>
+</tbody>
+</table></div>
+<!-- END_ALL_REGRESSION -->
+
+<h3 id="all-event-probability-scores">All event probability scores</h3>
+<!-- ALL_EVENTS -->
+
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>ic</th>
+<th>direction</th>
+<th>model</th>
+<th>n</th>
+<th>positives</th>
+<th>base_rate</th>
+<th>brier</th>
+<th>log_loss</th>
+<th>average_precision</th>
+<th>threshold</th>
+<th>tp</th>
+<th>fp</th>
+<th>fn</th>
+<th>recall</th>
+<th>precision</th>
+<th>false_positive_rate</th>
+<th>false_positive_origins_per_day</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VNI</td>
+<td>export</td>
+<td>climatology</td>
+<td>8830</td>
+<td>1505</td>
+<td>0.1704</td>
+<td>0.1414</td>
+<td>0.4568</td>
+<td>0.1704</td>
+<td>0.1636</td>
+<td>0</td>
+<td>0</td>
+<td>1505</td>
+<td>0.0000</td>
+<td>0.0000</td>
+<td>0.0000</td>
+<td>0.0000</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export</td>
+<td>logistic_base</td>
+<td>8830</td>
+<td>1505</td>
+<td>0.1704</td>
+<td>0.1372</td>
+<td>0.4419</td>
+<td>0.3015</td>
+<td>0.1879</td>
+<td>314</td>
+<td>717</td>
+<td>1191</td>
+<td>0.2086</td>
+<td>0.3046</td>
+<td>0.0979</td>
+<td>3.8967</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export</td>
+<td>boost_base</td>
+<td>8830</td>
+<td>1505</td>
+<td>0.1704</td>
+<td>0.1303</td>
+<td>0.4190</td>
+<td>0.3750</td>
+<td>0.2451</td>
+<td>341</td>
+<td>410</td>
+<td>1164</td>
+<td>0.2266</td>
+<td>0.4541</td>
+<td>0.0560</td>
+<td>2.2283</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export</td>
+<td>logistic_full</td>
+<td>8830</td>
+<td>1505</td>
+<td>0.1704</td>
+<td>0.1331</td>
+<td>0.4303</td>
+<td>0.3611</td>
+<td>0.2308</td>
+<td>273</td>
+<td>320</td>
+<td>1232</td>
+<td>0.1814</td>
+<td>0.4604</td>
+<td>0.0437</td>
+<td>1.7391</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>export</td>
+<td>boost_full</td>
+<td>8830</td>
+<td>1505</td>
+<td>0.1704</td>
+<td>0.1311</td>
+<td>0.4235</td>
+<td>0.3789</td>
+<td>0.2641</td>
+<td>243</td>
+<td>262</td>
+<td>1262</td>
+<td>0.1615</td>
+<td>0.4812</td>
+<td>0.0358</td>
+<td>1.4239</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import</td>
+<td>climatology</td>
+<td>8830</td>
+<td>848</td>
+<td>0.0960</td>
+<td>0.0892</td>
+<td>0.3269</td>
+<td>0.0960</td>
+<td>0.1447</td>
+<td>0</td>
+<td>0</td>
+<td>848</td>
+<td>0.0000</td>
+<td>0.0000</td>
+<td>0.0000</td>
+<td>0.0000</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import</td>
+<td>logistic_base</td>
+<td>8830</td>
+<td>848</td>
+<td>0.0960</td>
+<td>0.0892</td>
+<td>0.3226</td>
+<td>0.2232</td>
+<td>0.2462</td>
+<td>356</td>
+<td>1520</td>
+<td>492</td>
+<td>0.4198</td>
+<td>0.1898</td>
+<td>0.1904</td>
+<td>8.2609</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import</td>
+<td>boost_base</td>
+<td>8830</td>
+<td>848</td>
+<td>0.0960</td>
+<td>0.0860</td>
+<td>0.3085</td>
+<td>0.2674</td>
+<td>0.3113</td>
+<td>247</td>
+<td>614</td>
+<td>601</td>
+<td>0.2913</td>
+<td>0.2869</td>
+<td>0.0769</td>
+<td>3.3370</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import</td>
+<td>logistic_full</td>
+<td>8830</td>
+<td>848</td>
+<td>0.0960</td>
+<td>0.0858</td>
+<td>0.3106</td>
+<td>0.2468</td>
+<td>0.2675</td>
+<td>257</td>
+<td>867</td>
+<td>591</td>
+<td>0.3031</td>
+<td>0.2286</td>
+<td>0.1086</td>
+<td>4.7120</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>import</td>
+<td>boost_full</td>
+<td>8830</td>
+<td>848</td>
+<td>0.0960</td>
+<td>0.0835</td>
+<td>0.2956</td>
+<td>0.2873</td>
+<td>0.3554</td>
+<td>255</td>
+<td>491</td>
+<td>593</td>
+<td>0.3007</td>
+<td>0.3418</td>
+<td>0.0615</td>
+<td>2.6685</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export</td>
+<td>climatology</td>
+<td>8830</td>
+<td>1097</td>
+<td>0.1242</td>
+<td>0.1089</td>
+<td>0.3756</td>
+<td>0.1242</td>
+<td>0.1330</td>
+<td>0</td>
+<td>0</td>
+<td>1097</td>
+<td>0.0000</td>
+<td>0.0000</td>
+<td>0.0000</td>
+<td>0.0000</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export</td>
+<td>logistic_base</td>
+<td>8830</td>
+<td>1097</td>
+<td>0.1242</td>
+<td>0.1101</td>
+<td>0.3699</td>
+<td>0.1884</td>
+<td>0.2972</td>
+<td>257</td>
+<td>1009</td>
+<td>840</td>
+<td>0.2343</td>
+<td>0.2030</td>
+<td>0.1305</td>
+<td>5.4837</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export</td>
+<td>boost_base</td>
+<td>8830</td>
+<td>1097</td>
+<td>0.1242</td>
+<td>0.1027</td>
+<td>0.3538</td>
+<td>0.2915</td>
+<td>0.3463</td>
+<td>368</td>
+<td>727</td>
+<td>729</td>
+<td>0.3355</td>
+<td>0.3361</td>
+<td>0.0940</td>
+<td>3.9511</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export</td>
+<td>logistic_full</td>
+<td>8830</td>
+<td>1097</td>
+<td>0.1242</td>
+<td>0.1059</td>
+<td>0.3599</td>
+<td>0.2192</td>
+<td>0.3082</td>
+<td>167</td>
+<td>505</td>
+<td>930</td>
+<td>0.1522</td>
+<td>0.2485</td>
+<td>0.0653</td>
+<td>2.7446</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>export</td>
+<td>boost_full</td>
+<td>8830</td>
+<td>1097</td>
+<td>0.1242</td>
+<td>0.1060</td>
+<td>0.3583</td>
+<td>0.3072</td>
+<td>0.3575</td>
+<td>430</td>
+<td>844</td>
+<td>667</td>
+<td>0.3920</td>
+<td>0.3375</td>
+<td>0.1091</td>
+<td>4.5870</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import</td>
+<td>climatology</td>
+<td>8830</td>
+<td>2625</td>
+<td>0.2973</td>
+<td>0.2232</td>
+<td>0.6510</td>
+<td>0.2973</td>
+<td>0.1778</td>
+<td>0</td>
+<td>0</td>
+<td>2625</td>
+<td>0.0000</td>
+<td>0.0000</td>
+<td>0.0000</td>
+<td>0.0000</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import</td>
+<td>logistic_base</td>
+<td>8830</td>
+<td>2625</td>
+<td>0.2973</td>
+<td>0.1971</td>
+<td>0.5851</td>
+<td>0.4570</td>
+<td>0.3416</td>
+<td>886</td>
+<td>831</td>
+<td>1739</td>
+<td>0.3375</td>
+<td>0.5160</td>
+<td>0.1339</td>
+<td>4.5163</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import</td>
+<td>boost_base</td>
+<td>8830</td>
+<td>2625</td>
+<td>0.2973</td>
+<td>0.2059</td>
+<td>0.6302</td>
+<td>0.4390</td>
+<td>0.3923</td>
+<td>360</td>
+<td>343</td>
+<td>2265</td>
+<td>0.1371</td>
+<td>0.5121</td>
+<td>0.0553</td>
+<td>1.8641</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import</td>
+<td>logistic_full</td>
+<td>8830</td>
+<td>2625</td>
+<td>0.2973</td>
+<td>0.1949</td>
+<td>0.5777</td>
+<td>0.4727</td>
+<td>0.3456</td>
+<td>877</td>
+<td>827</td>
+<td>1748</td>
+<td>0.3341</td>
+<td>0.5147</td>
+<td>0.1333</td>
+<td>4.4946</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>import</td>
+<td>boost_full</td>
+<td>8830</td>
+<td>2625</td>
+<td>0.2973</td>
+<td>0.2053</td>
+<td>0.6189</td>
+<td>0.4551</td>
+<td>0.4340</td>
+<td>301</td>
+<td>281</td>
+<td>2324</td>
+<td>0.1147</td>
+<td>0.5172</td>
+<td>0.0453</td>
+<td>1.5272</td>
+</tr>
+</tbody>
+</table></div>
+<!-- END_ALL_EVENTS -->
+
+<h3 id="all-monthly-feature-audits">All monthly feature audits</h3>
+<!-- ALL_QUALITY -->
+
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>ic</th>
+<th>month</th>
+<th>five_minute_rows</th>
+<th>exact_version_match_fraction</th>
+<th>upper_coverage</th>
+<th>lower_coverage</th>
+<th>upper_reconstruction_mae_mw</th>
+<th>lower_reconstruction_mae_mw</th>
+<th>upper_setter_match_fraction</th>
+<th>lower_setter_match_fraction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VNI</td>
+<td>2024-09</td>
+<td>8640</td>
+<td>0.8454</td>
+<td>0.9469</td>
+<td>0.8775</td>
+<td>167.7148</td>
+<td>10.3326</td>
+<td>0.8556</td>
+<td>0.9624</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>2024-10</td>
+<td>8928</td>
+<td>0.9505</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>0.0000</td>
+<td>94.2450</td>
+<td>0.9517</td>
+<td>0.8702</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>2024-11</td>
+<td>8640</td>
+<td>0.9486</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>0.0096</td>
+<td>124.8088</td>
+<td>0.9170</td>
+<td>0.8492</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>2024-12</td>
+<td>8928</td>
+<td>0.9529</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>0.0000</td>
+<td>99.0346</td>
+<td>0.9331</td>
+<td>0.8555</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>2025-01</td>
+<td>8928</td>
+<td>0.9480</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>0.0000</td>
+<td>75.0571</td>
+<td>0.9123</td>
+<td>0.8936</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>2025-02</td>
+<td>8064</td>
+<td>0.9408</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>1.5490</td>
+<td>35.5056</td>
+<td>0.9056</td>
+<td>0.9257</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>2025-03</td>
+<td>8928</td>
+<td>0.9437</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>0.0000</td>
+<td>20.8556</td>
+<td>0.9556</td>
+<td>0.9647</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>2025-04</td>
+<td>8640</td>
+<td>0.9414</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>0.1354</td>
+<td>17.8876</td>
+<td>0.9538</td>
+<td>0.9703</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>2025-05</td>
+<td>8928</td>
+<td>0.9350</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>0.0000</td>
+<td>20.5938</td>
+<td>0.9715</td>
+<td>0.9611</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>2025-06</td>
+<td>8640</td>
+<td>0.9367</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>0.9439</td>
+<td>0.1311</td>
+<td>0.8494</td>
+<td>0.9946</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>2025-07</td>
+<td>8928</td>
+<td>0.9431</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>1.8315</td>
+<td>0.3684</td>
+<td>0.8640</td>
+<td>0.9929</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>2025-08</td>
+<td>8928</td>
+<td>0.9366</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>0.7659</td>
+<td>2.8916</td>
+<td>0.9168</td>
+<td>0.9861</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>2025-09</td>
+<td>8640</td>
+<td>0.9382</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>0.0000</td>
+<td>0.0212</td>
+<td>0.9848</td>
+<td>0.9914</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>2025-10</td>
+<td>8928</td>
+<td>0.9387</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>0.0000</td>
+<td>28.4557</td>
+<td>0.9803</td>
+<td>0.9635</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>2025-11</td>
+<td>8640</td>
+<td>0.9446</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>0.0000</td>
+<td>9.4537</td>
+<td>0.9809</td>
+<td>0.9841</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>2025-12</td>
+<td>8928</td>
+<td>0.9001</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>0.0000</td>
+<td>0.0307</td>
+<td>0.9873</td>
+<td>0.9950</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>2026-01</td>
+<td>8928</td>
+<td>0.8932</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>0.0000</td>
+<td>0.0171</td>
+<td>0.9887</td>
+<td>0.9952</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>2026-02</td>
+<td>8064</td>
+<td>0.8939</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>0.0000</td>
+<td>0.0000</td>
+<td>0.9883</td>
+<td>0.9989</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>2026-03</td>
+<td>8928</td>
+<td>0.8901</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>0.0000</td>
+<td>0.0000</td>
+<td>0.9880</td>
+<td>0.9992</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>2026-04</td>
+<td>8640</td>
+<td>0.8926</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>0.0000</td>
+<td>0.0000</td>
+<td>0.9900</td>
+<td>0.9970</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>2026-05</td>
+<td>8928</td>
+<td>0.8782</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>0.0000</td>
+<td>0.0000</td>
+<td>0.9867</td>
+<td>0.9998</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>2026-06</td>
+<td>8640</td>
+<td>0.8821</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>0.0000</td>
+<td>0.0000</td>
+<td>0.9830</td>
+<td>0.9954</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>2026-07</td>
+<td>8928</td>
+<td>0.9038</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>0.0000</td>
+<td>0.0000</td>
+<td>0.9816</td>
+<td>0.9934</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td>2026-08</td>
+<td>8928</td>
+<td>0.9153</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>0.0000</td>
+<td>0.0000</td>
+<td>0.9778</td>
+<td>0.8414</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>2024-09</td>
+<td>8640</td>
+<td>0.3498</td>
+<td>0.9411</td>
+<td>0.9426</td>
+<td>732.6370</td>
+<td>477.7453</td>
+<td>0.0049</td>
+<td>0.2154</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>2024-10</td>
+<td>8928</td>
+<td>0.3399</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>902.6803</td>
+<td>910.5964</td>
+<td>0.0081</td>
+<td>0.1323</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>2024-11</td>
+<td>8640</td>
+<td>0.5040</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>559.7120</td>
+<td>520.7206</td>
+<td>0.1850</td>
+<td>0.1795</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>2024-12</td>
+<td>8928</td>
+<td>0.6392</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>301.4803</td>
+<td>220.8253</td>
+<td>0.3137</td>
+<td>0.4123</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>2025-01</td>
+<td>8928</td>
+<td>0.6410</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>473.8342</td>
+<td>219.4888</td>
+<td>0.0783</td>
+<td>0.3150</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>2025-02</td>
+<td>8064</td>
+<td>0.7060</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>362.3464</td>
+<td>145.3115</td>
+<td>0.2115</td>
+<td>0.3991</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>2025-03</td>
+<td>8928</td>
+<td>0.6890</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>359.5248</td>
+<td>214.6600</td>
+<td>0.1824</td>
+<td>0.2180</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>2025-04</td>
+<td>8640</td>
+<td>0.7212</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>565.3472</td>
+<td>95.1345</td>
+<td>0.0171</td>
+<td>0.3236</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>2025-05</td>
+<td>8928</td>
+<td>0.7112</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>797.8768</td>
+<td>130.2202</td>
+<td>0.0742</td>
+<td>0.2672</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>2025-06</td>
+<td>8640</td>
+<td>0.7280</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>191.3071</td>
+<td>55.9618</td>
+<td>0.4418</td>
+<td>0.4418</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>2025-07</td>
+<td>8928</td>
+<td>0.7408</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>272.3948</td>
+<td>102.9147</td>
+<td>0.2845</td>
+<td>0.2901</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>2025-08</td>
+<td>8928</td>
+<td>0.7385</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>260.0689</td>
+<td>74.4199</td>
+<td>0.3842</td>
+<td>0.5197</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>2025-09</td>
+<td>8640</td>
+<td>0.5823</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>761.4277</td>
+<td>432.9377</td>
+<td>0.1016</td>
+<td>0.2416</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>2025-10</td>
+<td>8928</td>
+<td>0.5827</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>511.9869</td>
+<td>511.9831</td>
+<td>0.1118</td>
+<td>0.1921</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>2025-11</td>
+<td>8640</td>
+<td>0.6727</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>270.2982</td>
+<td>276.6127</td>
+<td>0.3195</td>
+<td>0.2930</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>2025-12</td>
+<td>8928</td>
+<td>0.7130</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>153.8013</td>
+<td>46.7613</td>
+<td>0.2178</td>
+<td>0.6015</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>2026-01</td>
+<td>8928</td>
+<td>0.7573</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>52.0630</td>
+<td>76.5651</td>
+<td>0.3797</td>
+<td>0.4865</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>2026-02</td>
+<td>8064</td>
+<td>0.7683</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>33.6920</td>
+<td>68.4152</td>
+<td>0.4764</td>
+<td>0.4700</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>2026-03</td>
+<td>8928</td>
+<td>0.6142</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>454.3968</td>
+<td>184.7687</td>
+<td>0.2287</td>
+<td>0.2250</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>2026-04</td>
+<td>8640</td>
+<td>0.6211</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>407.8432</td>
+<td>232.8310</td>
+<td>0.1904</td>
+<td>0.2639</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>2026-05</td>
+<td>8928</td>
+<td>0.6611</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>339.4036</td>
+<td>259.9537</td>
+<td>0.1697</td>
+<td>0.2648</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>2026-06</td>
+<td>8640</td>
+<td>0.6515</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>367.0323</td>
+<td>121.9529</td>
+<td>0.2596</td>
+<td>0.2999</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>2026-07</td>
+<td>8928</td>
+<td>0.7792</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>572.1263</td>
+<td>506.8830</td>
+<td>0.3085</td>
+<td>0.4444</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td>2026-08</td>
+<td>8928</td>
+<td>0.7679</td>
+<td>0.9999</td>
+<td>0.9999</td>
+<td>128.0182</td>
+<td>65.5150</td>
+<td>0.2729</td>
+<td>0.4805</td>
+</tr>
+</tbody>
+</table></div>
+<!-- END_ALL_QUALITY -->
+
+<h2 id="sources">Sources</h2>
+<p>Source access date is 13 September 2026 unless stated otherwise. Numbered references distinguish repository evidence, primary market documents, academic papers and operator accounts. Access level is recorded where full text was unavailable. Search-engine crawl dates are not treated as publication dates. The earlier report is preserved as <a href="../QNI_VNI_FORECAST_MODEL_IMPROVEMENT_PLAN.md">the first research edition</a>; its untrained-boosting statement applies to that earlier experiment, not this expanded run.</p>
+<!-- SOURCES -->
+
+<!-- END_SOURCES -->
+
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>INTERFLOW repository. <a href="../../nemic/model.py">Current model implementation</a>, <code>Design</code>, <code>features</code>, training and estimator functions. Source revision <code>820450d</code>, inspected 13 September 2026. Local primary implementation evidence.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>INTERFLOW repository. <a href="../../nemic/prepare.py">Preparation implementation</a> and <a href="../../nemic/common.py">connector definitions</a>. Source revision <code>820450d</code>; signs, aggregation, demand definition and run handling. Local primary implementation evidence.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:2" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>INTERFLOW. <a href="../../BACKTEST_REPORT.md">Executed conditional backtest</a>, executed 11 September 2026, results and AEMO comparison. Local saved experiment; no claim of independent reproduction of its entire training run in this research.&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p>INTERFLOW. <a href="../../nemic/constraint_features.py">Constraint feature implementation</a> and <a href="../CONSTRAINT_FEATURE_PILOT.md">corrected VNI feasibility pilot</a>, 11 September 2026. Local prototype and one-month development evidence.&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:5">
+<p>INTERFLOW. <a href="../VNI_TWO_YEAR_CONSTRAINT_STUDY.md">VNI two-year constraint study</a>, September 2024–August 2026 population. Local saved report and linked aggregate evidence, inspected 13 September 2026.&#160;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 5 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:5" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:6">
+<p>INTERFLOW. <a href="../QNI_TWO_YEAR_CONSTRAINT_STUDY.md">QNI two-year constraint study</a>, September 2024–August 2026 population. Local saved report and linked aggregate evidence, inspected 13 September 2026.&#160;<a class="footnote-backref" href="#fnref:6" title="Jump back to footnote 6 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:6" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:7">
+<p>INTERFLOW. <a href="../VNI_TWO_YEAR_EVENT_ATLAS.md">VNI two-year event atlas</a>, method <code>1.1-event-atlas-1</code>, September 2024–August 2026. Local selected-case accounting and population screening.&#160;<a class="footnote-backref" href="#fnref:7" title="Jump back to footnote 7 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:7" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:8">
+<p>INTERFLOW. <a href="../QNI_TWO_YEAR_EVENT_ATLAS.md">QNI two-year event atlas</a>, method <code>1.1-event-atlas-1</code>, September 2024–August 2026. Local selected-case accounting and population screening.&#160;<a class="footnote-backref" href="#fnref:8" title="Jump back to footnote 8 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:8" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+<li id="fn:9">
+<p>AEMO/NEMMCO. <a href="https://www.aemo.com.au/-/media/files/electricity/nem/security_and_reliability/dispatch/policy_and_process/interconnector-limit-setter-reporting-changes.pdf">Interconnector Limit Setter Reporting Changes—Business Specification</a>, version 1.02, effective 1 July 2005, especially Appendix 1, pp. 13–14. Historical primary definition; current reform changes must be checked separately.&#160;<a class="footnote-backref" href="#fnref:9" title="Jump back to footnote 9 in the text">&#8617;</a></p>
+</li>
+<li id="fn:10">
+<p>AEMO. <a href="https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/system-operations/congestion-information-resource/constraint-faq">Constraint Frequently Asked Questions</a>, undated live page, accessed 13 September 2026. LHS/RHS, feedback, constraint sets and binding definitions.&#160;<a class="footnote-backref" href="#fnref:10" title="Jump back to footnote 10 in the text">&#8617;</a></p>
+</li>
+<li id="fn:11">
+<p>AEMO. <a href="https://visualisations.aemo.com.au/aemo/nemweb/MMSDataModelReport/Electricity/MMS%20Data%20Model%20Report_files/MMS_123.htm">MMS Data Model: DISPATCH_UNIT_SCADA</a>, undated table documentation, accessed 13 September 2026. Public visibility and start-of-interval SCADA definition.&#160;<a class="footnote-backref" href="#fnref:11" title="Jump back to footnote 11 in the text">&#8617;</a></p>
+</li>
+<li id="fn:12">
+<p>AEMO. <a href="https://visualisations.aemo.com.au/aemo/nemweb/MMSDataModelReport/Electricity/MMS%20Data%20Model%20Report_files/MMS_274.htm">MMS Data Model: PREDISPATCHLOAD</a>, undated; <a href="https://di-help.docs.public.aemo.com.au/Content/Data_Model/EMMS_-_Technical_Specification_-_Data_Model_v5.2_-_May_2023.pdf">Data Model v5.2 technical specification</a>, May 2023, section 6.9.2; <a href="https://visualisations.aemo.com.au/aemo/di-help/Content/Data_Model/Electricity_Data_Model_Package_Summary_54.pdf">Electricity Data Model Package Summary v5.4</a>, 7 October 2024, dispatch visibility. Historical specifications support conservative access treatment; current per-feed access remains an implementation audit.&#160;<a class="footnote-backref" href="#fnref:12" title="Jump back to footnote 12 in the text">&#8617;</a></p>
+</li>
+<li id="fn:13">
+<p>Open-Meteo. <a href="https://open-meteo.com/en/docs/historical-forecast-api">Historical Forecast API documentation</a>, live documentation, accessed 13 September 2026. Distinguishes historical weather, stitched forecasts, previous runs and individual runs; model coverage varies.&#160;<a class="footnote-backref" href="#fnref:13" title="Jump back to footnote 13 in the text">&#8617;</a></p>
+</li>
+<li id="fn:14">
+<p>Piyush S. Paretkar. <a href="https://vtechworks.lib.vt.edu/server/api/core/bitstreams/1eeef9f3-ca78-43e5-9f14-00e4fca988fb/content">Short-Term Forecasting of Power Flows over Major Pacific Northwestern Interties: Using Box and Jenkins ARIMA Methodology</a>, Virginia Tech master's thesis, 2008. Direct intertie forecasting precedent; historical non-NEM evidence.&#160;<a class="footnote-backref" href="#fnref:14" title="Jump back to footnote 14 in the text">&#8617;</a></p>
+</li>
+<li id="fn:15">
+<p>Jesus Lago, Grzegorz Marcjasz, Bart De Schutter and Rafał Weron. <a href="https://arxiv.org/html/2008.08004v2">Forecasting day-ahead electricity prices: A review of state-of-the-art algorithms, best practices and an open-access benchmark</a>, preprint revision 21 December 2020; published in Applied Energy, 2021. LEAR and evaluation methodology; adjacent price-forecasting task.&#160;<a class="footnote-backref" href="#fnref:15" title="Jump back to footnote 15 in the text">&#8617;</a></p>
+</li>
+<li id="fn:16">
+<p>Pierre Gaillard, Yannig Goude and Raphaël Nedellec. <a href="https://doi.org/10.1016/j.ijforecast.2015.12.001">Additive models and robust aggregation for GEFCom2014 probabilistic electric load and electricity price forecasting</a>, International Journal of Forecasting 32(3), 1038–1050, 2016. Publisher-indexed abstract reviewed; direct full-text fetch unavailable. Implementation references: scikit-learn <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.SplineTransformer.html">SplineTransformer</a> and <a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Ridge.html">Ridge</a>, live documentation accessed 13 September 2026. Installed versions are recorded in the local probe manifest.&#160;<a class="footnote-backref" href="#fnref:16" title="Jump back to footnote 16 in the text">&#8617;</a></p>
+</li>
+<li id="fn:17">
+<p>National Energy System Operator. <a href="https://www.neso.energy/about/innovation/our-innovation-projects/forecasting-risk-congestion">Forecasting the risk of congestion</a>, undated project page, accessed 13 September 2026. Industry programme scope and data lessons, not a measured QNI/VNI comparison.&#160;<a class="footnote-backref" href="#fnref:17" title="Jump back to footnote 17 in the text">&#8617;</a></p>
+</li>
+<li id="fn:18">
+<p>Leo Grinsztajn, Edouard Oyallon and Gaël Varoquaux. <a href="https://proceedings.neurips.cc/paper_files/paper/2022/hash/0378c7692da36807bdec87ab043cdadc-Abstract-Datasets_and_Benchmarks.html">Why do tree-based models still outperform deep learning on typical tabular data?</a>, NeurIPS Datasets and Benchmarks, 2022. General tabular evidence; not a comparison against this repository's simple engineered model.&#160;<a class="footnote-backref" href="#fnref:18" title="Jump back to footnote 18 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:18" title="Jump back to footnote 18 in the text">&#8617;</a></p>
+</li>
+<li id="fn:19">
+<p>Robert Gaugl, Eloy Insunza, José Portela and Sonja Wogrin. <a href="https://arxiv.org/abs/2606.03475">Surrogate Modeling of Interconnector Flows: A Machine Learning Alternative to Full-Scale Power System Simulations with Application to Cross-Border Electricity Exchange</a>, preprint, 2 June 2026. European simulated planning flows; peer-reviewed status not established by the reviewed record.&#160;<a class="footnote-backref" href="#fnref:19" title="Jump back to footnote 19 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:19" title="Jump back to footnote 19 in the text">&#8617;</a></p>
+</li>
+<li id="fn:20">
+<p>LightGBM contributors. <a href="https://lightgbm.readthedocs.io/en/stable/Parameters.html">Parameters</a>, live 4.7.0 documentation reviewed 13 September 2026. Regression, classification and quantile capabilities; no claim that the live documentation version matches every local experiment.&#160;<a class="footnote-backref" href="#fnref:20" title="Jump back to footnote 20 in the text">&#8617;</a></p>
+</li>
+<li id="fn:21">
+<p>Bryan Lim, Sercan Ö. Arık, Nicolas Loeff and Tomas Pfister. <a href="https://arxiv.org/abs/1912.09363">Temporal Fusion Transformers for Interpretable Multi-horizon Time Series Forecasting</a>, preprint 2019/revised 2020; International Journal of Forecasting, 2021. Later sequence-model option, not local performance evidence.&#160;<a class="footnote-backref" href="#fnref:21" title="Jump back to footnote 21 in the text">&#8617;</a></p>
+</li>
+<li id="fn:22">
+<p>INTERFLOW. <a href="../../nemic/event_atlas.py">Event detector implementation</a>, <code>detector</code>, and <a href="../INTERCONNECTOR_EVENT_ANALYSIS_METHODOLOGY.md">general event-analysis methodology</a>. Source revision <code>820450d</code>, inspected 13 September 2026. Exact retrospective threshold and onset rule.&#160;<a class="footnote-backref" href="#fnref:22" title="Jump back to footnote 22 in the text">&#8617;</a></p>
+</li>
+<li id="fn:23">
+<p>INTERFLOW. <a href="../data/qni_vni_simple_model_research.json">Simple-model research evidence</a>, generated 13 September 2026 by <a href="../../scripts/research_simple_models.py">the bounded research script</a>. Contains all model cells, 49 local input-file hashes, configuration and limitations; no downloads. Local primary exploratory evidence.&#160;<a class="footnote-backref" href="#fnref:23" title="Jump back to footnote 23 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:23" title="Jump back to footnote 23 in the text">&#8617;</a></p>
+</li>
+<li id="fn:24">
+<p>INTERFLOW. <a href="../BACKTEST_PROTOCOL.md">Backtest protocol</a>, documented 11 September 2026. Exact partitions, input availability limitations, lead weighting, bootstrap and AEMO alignment.&#160;<a class="footnote-backref" href="#fnref:24" title="Jump back to footnote 24 in the text">&#8617;</a></p>
+</li>
+<li id="fn:25">
+<p>Johannes Bracher, Evan L. Ray, Tilmann Gneiting and Nicholas G. Reich. <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008618">Evaluating epidemic forecasts in an interval format</a>, PLOS Computational Biology 17(2), 2021. Proper interval scoring methodology; principles applied here to energy forecasts.&#160;<a class="footnote-backref" href="#fnref:25" title="Jump back to footnote 25 in the text">&#8617;</a></p>
+</li>
+<li id="fn:26">
+<p>Chen Xu and Yao Xie. <a href="https://proceedings.mlr.press/v139/xu21h.html">Conformal prediction interval for dynamic time-series</a>, Proceedings of ICML, PMLR 139, 2021. Time-series uncertainty methodology, with assumptions and limits.&#160;<a class="footnote-backref" href="#fnref:26" title="Jump back to footnote 26 in the text">&#8617;</a></p>
+</li>
+<li id="fn:27">
+<p>AEMO. <a href="https://www.aemo.com.au/initiatives/major-programs/nem-reform-program/nem-reform-program-initiatives/project-energyconnect-market-integration-project/frequently-asked-questions">Project EnergyConnect market integration: Frequently asked questions</a>, live page accessed 13 September 2026. Planned October/November 2026 changes and distinction between loop equations and limit setters; dates remain subject to AEMO updates.&#160;<a class="footnote-backref" href="#fnref:27" title="Jump back to footnote 27 in the text">&#8617;</a></p>
+</li>
+<li id="fn:28">
+<p>INTERFLOW. <a href="../data/qni_vni_expanded_model_evidence.json">Expanded model evidence</a>, generated 13 September 2026 by <a href="../../scripts/research_expanded_models.py">the expanded research experiment</a>. Local primary evidence: 144 regression scores, 20 event scores, 48 monthly audits, two attribution audits and 100 input hashes. Retrospective development assessment; no new market downloads.&#160;<a class="footnote-backref" href="#fnref:28" title="Jump back to footnote 28 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:28" title="Jump back to footnote 28 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:28" title="Jump back to footnote 28 in the text">&#8617;</a><a class="footnote-backref" href="#fnref4:28" title="Jump back to footnote 28 in the text">&#8617;</a><a class="footnote-backref" href="#fnref5:28" title="Jump back to footnote 28 in the text">&#8617;</a></p>
+</li>
+<li id="fn:29">
+<p>Daniel Hjertholm / Statnett. <a href="https://datascience.statnett.no/2026/03/11/quantifying-uncertainty-in-forecasts-m/">Quantifying uncertainty in forecasts – methods and lessons from mFRR flow prediction</a>, 11 March 2026. Primary transmission-operator article, full article text examined; accessed 13 September 2026. Direct balancing-flow application, not NEM validation.&#160;<a class="footnote-backref" href="#fnref:29" title="Jump back to footnote 29 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:29" title="Jump back to footnote 29 in the text">&#8617;</a></p>
+</li>
+<li id="fn:30">
+<p>Yeesian Ng, Sidhant Misra, Line A. Roald and Scott Backhaus. <a href="https://arxiv.org/abs/1801.07809">Statistical Learning For DC Optimal Power Flow</a>, 23 January 2018 preprint. Primary paper examined; accessed 13 September 2026. Affine basis policies and active operating regimes in DC-OPF.&#160;<a class="footnote-backref" href="#fnref:30" title="Jump back to footnote 30 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:30" title="Jump back to footnote 30 in the text">&#8617;</a></p>
+</li>
+<li id="fn:31">
+<p>Deepjyoti Deka and Sidhant Misra. <a href="https://arxiv.org/abs/1902.05607">Learning for DC-OPF: Classifying active sets using neural nets</a>, February 2019 preprint. Primary paper examined; accessed 13 September 2026. Optimisation active-set classification, not chronological interconnector forecasting.&#160;<a class="footnote-backref" href="#fnref:31" title="Jump back to footnote 31 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:31" title="Jump back to footnote 31 in the text">&#8617;</a></p>
+</li>
+<li id="fn:32">
+<p>Luyao Liu, Feifei Bai, Chenyu Su, Cuiping Ma, Ruifeng Yan, Hailong Li, Qie Sun and Ronald Wennersten. <a href="https://research-repository.griffith.edu.au/bitstreams/f003c844-829c-4db6-8257-47538355a229/download">Forecasting the occurrence of extreme electricity prices using a multivariate logistic regression model</a>, Energy 247, 123417, 2022; DOI 10.1016/j.energy.2022.123417. Primary institutional accepted-manuscript abstract accessed through indexed text on 13 September 2026; direct full-text retrieval failed. Input timing and complete validation design were not independently established.&#160;<a class="footnote-backref" href="#fnref:32" title="Jump back to footnote 32 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:32" title="Jump back to footnote 32 in the text">&#8617;</a></p>
+</li>
+<li id="fn:33">
+<p>Schäfer, Hofmann, Abdel-Khalek and Weidlich. <a href="https://arxiv.org/abs/1908.02848">Principal Cross-Border Flow Patterns in the European Electricity Markets</a>, August 2019 preprint. Primary paper examined; accessed 13 September 2026. Descriptive physical-flow PCA; training-only adaptation proposed here.&#160;<a class="footnote-backref" href="#fnref:33" title="Jump back to footnote 33 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:33" title="Jump back to footnote 33 in the text">&#8617;</a></p>
+</li>
+<li id="fn:34">
+<p>Worsnop et al. <a href="https://wes.copernicus.org/articles/3/371/2018/wes-3-371-2018.pdf">Generating wind power scenarios for probabilistic ramp event prediction</a>, Wind Energy Science 3, 371–393, 2018. Primary full paper examined; accessed 13 September 2026. Joint scenarios and ramp-event forecasts; results depend on data and forecast setting.&#160;<a class="footnote-backref" href="#fnref:34" title="Jump back to footnote 34 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:34" title="Jump back to footnote 34 in the text">&#8617;</a></p>
+</li>
+<li id="fn:35">
+<p>Hui Zou and Trevor Hastie. <a href="https://web.stanford.edu/~hastie/Papers/elasticnet.pdf">Regularization and variable selection via the elastic net</a>, Journal of the Royal Statistical Society Series B 67(2), 301–320, 2005. Author-hosted manuscript (revision August 2004) examined; accessed 13 September 2026.&#160;<a class="footnote-backref" href="#fnref:35" title="Jump back to footnote 35 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:35" title="Jump back to footnote 35 in the text">&#8617;</a></p>
+</li>
+<li id="fn:36">
+<p>Xiaoqian Wang, Rob J. Hyndman, Feng Li and Yanfei Kang. <a href="https://arxiv.org/abs/2205.04216">Forecast combinations: an over 50-year review</a>, preprint 2022, International Journal of Forecasting 2023. Primary review examined; accessed 13 September 2026. Simple and estimated combinations; not a specific QNI/VNI ensemble result.&#160;<a class="footnote-backref" href="#fnref:36" title="Jump back to footnote 36 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:36" title="Jump back to footnote 36 in the text">&#8617;</a></p>
+</li>
+<li id="fn:37">
+<p>InterpretML contributors. <a href="https://interpret.ml/docs/ebm.html">Explainable Boosting Machine</a>, undated official documentation, accessed 13 September 2026. Full documentation page examined. Describes additive boosted functions and selected interactions; software description, not local performance evidence.&#160;<a class="footnote-backref" href="#fnref:37" title="Jump back to footnote 37 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:37" title="Jump back to footnote 37 in the text">&#8617;</a></p>
+</li>
+<li id="fn:38">
+<p>AEMO. <a href="https://tech-specs.docs.public.aemo.com.au/Content/TSP_EMMSDM53_April2024/Electricity_Data_Model_5.3.htm">Electricity Data Model 5.3</a>, April 2024, PD7DAY table definitions; and <a href="https://di-help.docs.public.aemo.com.au/Content/Data_Subscription/Loading_data_from_non-data_model_tables.htm">Loading data from non-data-model tables</a>, undated public documentation. Primary indexed table/field excerpts accessed 13 September 2026; some direct retrievals failed. Historical report availability still requires audit.&#160;<a class="footnote-backref" href="#fnref:38" title="Jump back to footnote 38 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:38" title="Jump back to footnote 38 in the text">&#8617;</a></p>
+</li>
+<li id="fn:39">
+<p>AEMO. <a href="https://www.aemo.com.au/Market-Notices?MarketNoticeList=15&amp;fromdate=&amp;marketNoticeFacets=VOLL%2CPOWER+SYSTEM+EVENTS%2CMPDI%2CMARKET+SYSTEMS%2CLOR1+ACTUAL%2CLOR3+ACTUAL&amp;marketNoticeQuery=&amp;todate=">Market notice CHG0106323, change to Extended Pre-Dispatch report to extend to seven-day period</a>, October 2025, stated change window 23–24 October 2025. Primary indexed notice text accessed 13 September 2026. Notice-list URL is mutable; search by change number if the visible page advances.&#160;<a class="footnote-backref" href="#fnref:39" title="Jump back to footnote 39 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:39" title="Jump back to footnote 39 in the text">&#8617;</a></p>
+</li>
+<li id="fn:40">
+<p>AEMO. <a href="https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/data-nem/market-management-system-mms-data/pre-dispatch">Pre-dispatch market data</a>, undated public information page, accessed 13 September 2026. Primary description examined, including SNOWYP/Tumut 3 pump reporting and forecast horizons.&#160;<a class="footnote-backref" href="#fnref:40" title="Jump back to footnote 40 in the text">&#8617;</a></p>
+</li>
+<li id="fn:41">
+<p>AEMO. <a href="https://www.aemo.com.au/-/media/files/electricity/nem/security_and_reliability/power_system_ops/procedures/so_op_3704-predispatch.pdf">SO_OP_3704 – Predispatch</a>, final version 19, effective 1 April 2026. Primary current procedure examined; accessed 13 September 2026. Earlier superseded draft excluded.&#160;<a class="footnote-backref" href="#fnref:41" title="Jump back to footnote 41 in the text">&#8617;</a></p>
+</li>
+<li id="fn:42">
+<p>Dominik Janzing, Lenon Minorics and Patrick Bloebaum. <a href="https://proceedings.mlr.press/v108/janzing20a.html">Feature relevance quantification in explainable AI: A causal problem</a>, AISTATS, PMLR 108:2907–2916, 2020. Primary proceedings abstract examined; accessed 13 September 2026. Used only for the observational/interventional interpretation distinction.&#160;<a class="footnote-backref" href="#fnref:42" title="Jump back to footnote 42 in the text">&#8617;</a></p>
+</li>
+<li id="fn:43">
+<p>AEMO. <a href="https://www.aemo.com.au/-/media/files/electricity/nem/security_and_reliability/congestion-information/2025/constraint-formulation-guidelines.pdf">Constraint Formulation Guidelines</a>, effective 2 December 2025, especially section 2.6.1 and change history; <a href="https://www.aemo.com.au/consultations/current-and-closed-consultations/isf-consultation-of-constraint-formulation-guidelines">final consultation page</a>, 30 October 2025. Primary final document and page examined; accessed 13 September 2026. Changes minimum LHS factor threshold from 0.07 to 0.15.&#160;<a class="footnote-backref" href="#fnref:43" title="Jump back to footnote 43 in the text">&#8617;</a></p>
+</li>
+<li id="fn:44">
+<p>Yaniv Romano, Evan Patterson and Emmanuel J. Candès. <a href="https://arxiv.org/abs/1905.03222">Conformalized Quantile Regression</a>, May 2019 preprint. Primary abstract examined in this pass; accessed 13 September 2026. Candidate heteroscedastic calibration method; no claim that its finite-sample assumptions hold automatically in this application.&#160;<a class="footnote-backref" href="#fnref:44" title="Jump back to footnote 44 in the text">&#8617;</a></p>
+</li>
+<li id="fn:45">
+<p>Vitor Cerqueira, Luis Torgo and Igor Mozetič. <a href="https://arxiv.org/abs/1905.11744">Evaluating time series forecasting models: An empirical study on performance estimation methods</a>, 2019 preprint, published 2020. Primary paper examined; accessed 13 September 2026. Empirical distinction between stationary and real nonstationary evaluation settings.&#160;<a class="footnote-backref" href="#fnref:45" title="Jump back to footnote 45 in the text">&#8617;</a></p>
+</li>
+<li id="fn:46">
+<p>Hansika Hewamalage, Klaus Ackermann and Christoph Bergmeir. <a href="https://link.springer.com/article/10.1007/s10618-022-00894-5">Forecast evaluation for data scientists: common pitfalls and best practices</a>, published online 2 December 2022, Data Mining and Knowledge Discovery 37:788–832, 2023. Primary full paper examined; accessed 13 September 2026.&#160;<a class="footnote-backref" href="#fnref:46" title="Jump back to footnote 46 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></main></body></html>

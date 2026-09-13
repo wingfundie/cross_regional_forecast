@@ -1,0 +1,1188 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="data:,"><meta name="report-theme" content="editorial-html-report/1.0"><title>QNI and VNI flow forecasting improvement methodology</title><style>:root{--ink:#282b30;--muted:#636870;--blue:#4c94df;--teal:#268a87;--accent:#7658c9;--line:#dfe3eb;--panel:#ececf3}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;border-top:5px solid var(--blue);background:#f5f6f9;color:var(--ink);font:16px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+main{max-width:1344px;margin:auto;padding:50px 32px 70px}.eyebrow,.section-kicker{font-size:12px;letter-spacing:.14em;font-weight:750;color:#3977b7}.section-kicker{margin-bottom:10px}
+h1{font-size:clamp(38px,5vw,65px);line-height:1.08;letter-spacing:-.045em;margin:17px 0 22px}h1 span{color:var(--accent)}.dek{font-size:20px;max-width:1080px;color:var(--muted);margin-bottom:26px}.tags{display:flex;gap:9px;flex-wrap:wrap}.tags span{font-size:12px;border:1px solid var(--line);background:white;border-radius:20px;padding:6px 12px}
+nav{display:flex;flex-wrap:wrap;gap:21px;margin:22px 0 30px;padding:18px 0;border-bottom:1px solid var(--line);font-size:14px}a{color:#276bae;text-decoration:none}a:hover{text-decoration:underline}a:focus-visible,summary:focus-visible,select:focus-visible,.table-wrap:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.metric{background:white;border:1px solid var(--line);border-radius:10px;padding:21px;min-width:0}.metric span,.metric small{display:block;color:var(--muted);font-size:12px}.metric strong{font-size:30px;line-height:1.25;letter-spacing:-.035em;display:block;margin:5px 0;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.callout{background:#eaf3f5;border-left:4px solid var(--teal);padding:19px 23px;margin:25px 0;font-size:15px}.scope-note{background:#fff8e8;border-left-color:#c29330}
+section,.section{margin-top:52px;scroll-margin-top:20px}h2{font-size:29px;line-height:1.25;letter-spacing:-.025em;margin:38px 0 16px}h3{font-size:19px;line-height:1.3;margin:25px 0 13px}
+.findings{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.finding{background:white;border:1px solid var(--line);border-radius:10px;padding:23px;min-width:0}.finding h3{margin-top:11px}.finding p{margin:0;font-size:14px;color:var(--muted)}.index{font-size:12px;font-weight:750;color:var(--teal)}
+.table-wrap{overflow-x:auto;background:white;border:1px solid var(--line);border-radius:10px;max-width:100%;overscroll-behavior-x:contain;margin:16px 0}table{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap}th,td{padding:12px 14px;text-align:right;border-bottom:1px solid #edf0f4;vertical-align:top}th:first-child,td:first-child{text-align:left}td:first-child{font-weight:600}thead{background:var(--panel);font-size:12px;color:#4f545b}tbody tr:nth-child(even){background:#fafbfc}tbody tr:hover{background:#f0f6fc}
+.small,.note,.meta{font-size:13px;color:var(--muted)}figure{margin:26px 0 8px;background:white;border:1px solid var(--line);border-radius:10px;overflow:hidden}figcaption{display:flex;justify-content:space-between;gap:16px;padding:13px 18px;border-bottom:1px solid #edf0f4;color:var(--muted);font-size:12px;font-weight:650}.figure-links{display:flex;gap:20px;flex-shrink:0}figure img{display:block;width:100%;height:auto}.figure-note{padding:0 18px 13px;margin:0;color:var(--muted);font-size:12px}.chart-scroll{overflow-x:auto}.chart-scroll .plotly-graph-div{min-width:680px;border-top:2px solid var(--blue)}
+.method,details{padding:27px;background:white;border:1px solid var(--line);border-radius:10px}details{margin-top:24px}summary{cursor:pointer;font-weight:650}li{margin:12px 0}.sources{font-size:14px}.sources a{overflow-wrap:anywhere}footer{margin-top:45px;padding-top:22px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}code{background:#f0f2f7;padding:2px 5px;border-radius:3px;font-size:12px;overflow-wrap:anywhere}
+@media(max-width:900px){main{padding:32px 20px 55px}.metrics{grid-template-columns:repeat(2,1fr)}.findings{grid-template-columns:1fr}.dek{font-size:18px}section,.section{margin-top:40px}nav{gap:14px}}
+@media(max-width:520px){main{padding:28px 15px 45px}.metrics{gap:10px}.metric{padding:15px}.metric strong{font-size:24px}.metric small{font-size:11px}h2{font-size:25px}figcaption{padding:11px 12px;align-items:flex-start}.figure-links{gap:12px}.method,details{padding:20px}.callout{padding:17px 18px}}
+@media print{body{background:white}nav,figcaption a{display:none}main{max-width:none;padding:15px}figure,.metrics,.finding{break-inside:avoid}h2{break-after:avoid}.chart-scroll{overflow:visible}.chart-scroll .plotly-graph-div{min-width:0}}
+
+:root{--accent:#4c94df}
+body{background:#fff;color:#202327}main{max-width:1120px;padding:40px 32px 80px}
+h1{font-size:clamp(32px,4vw,52px);line-height:1.12;max-width:1000px;letter-spacing:-.035em}
+h2{font-size:27px;margin-top:52px;padding-top:12px;border-top:1px solid #ddd;scroll-margin-top:16px}
+h3{font-size:20px;margin-top:28px}p,li{line-height:1.7}p{max-width:1000px}
+a{color:#285f8e;overflow-wrap:anywhere}nav{margin:28px 0;background:#f7f7f7;padding:16px 20px}
+nav ul{columns:2;column-gap:32px;padding-left:20px}nav li{break-inside:avoid;margin:4px 0;font-size:14px}
+summary{cursor:pointer;font-weight:650}.downloads{font-size:14px;color:#666}
+.table-scroll{overflow-x:auto;width:100%;margin:22px 0;border:1px solid #ddd}
+table{width:100%;border-collapse:collapse;margin:0;font-size:13px;line-height:1.5}
+th,td{padding:11px 12px;vertical-align:top;border-bottom:1px solid #e5e5e5;text-align:left}
+th{background:#f0f1f3;font-weight:650}tbody tr:nth-child(even){background:#fafafa}
+pre{white-space:pre;overflow-x:auto;background:#f5f5f5;border:1px solid #ddd;padding:16px;font-size:13px}
+code{overflow-wrap:anywhere}pre code{overflow-wrap:normal}.footnote{font-size:13px}.footnote li{margin:14px 0}
+@media(max-width:650px){main{padding:24px 16px 50px}nav ul{columns:1}h2{font-size:23px}table{min-width:640px}}
+@media print{main{max-width:none;padding:0}nav,.downloads{display:none}h1{font-size:30px}
+h2{break-after:avoid}table{font-size:9px;min-width:0}.table-scroll{overflow:visible}a{color:#222}}
+</style></head><body><main><h1 id="qni-and-vni-flow-forecasting-improvement-methodology">QNI and VNI flow forecasting improvement methodology</h1><p class="downloads"><a href="../QNI_VNI_FORECAST_MODEL_IMPROVEMENT_PLAN.md">Markdown edition</a> · <a href="../data/qni_vni_simple_model_research.json">Full numerical evidence and input log</a></p><nav aria-label="Report contents"><details open><summary>Contents</summary><div class="toc">
+<ul>
+<li><a href="#1-recommended-approach">1. Recommended approach</a></li>
+<li><a href="#2-existing-model-and-measured-starting-point">2. Existing model and measured starting point</a></li>
+<li><a href="#3-findings-from-the-studies-and-their-modelling-implications">3. Findings from the studies and their modelling implications</a></li>
+<li><a href="#4-forecast-products-and-sign-conventions">4. Forecast products and sign conventions</a></li>
+<li><a href="#5-constraint-representation">5. Constraint representation</a></li>
+<li><a href="#6-compact-feature-specification">6. Compact feature specification</a></li>
+<li><a href="#7-required-data-and-availability-contract">7. Required data and availability contract</a></li>
+<li><a href="#8-models-simple-first-with-explicit-escalation">8. Models: simple first, with explicit escalation</a></li>
+<li><a href="#9-connecting-generator-forecasts-limits-and-flows">9. Connecting generator forecasts, limits and flows</a></li>
+<li><a href="#10-sharp-contraction-labels-and-warning-evaluation">10. Sharp-contraction labels and warning evaluation</a></li>
+<li><a href="#11-additional-assessment-of-retained-repository-data">11. Additional assessment of retained repository data</a></li>
+<li><a href="#12-evaluation-design-and-leakage-controls">12. Evaluation design and leakage controls</a></li>
+<li><a href="#13-seasonal-diurnal-and-event-diagnostics">13. Seasonal, diurnal and event diagnostics</a></li>
+<li><a href="#14-repository-implementation-plan">14. Repository implementation plan</a></li>
+<li><a href="#15-priorities-decision-gates-and-deployment">15. Priorities, decision gates and deployment</a></li>
+<li><a href="#16-research-evidence-log-and-unresolved-questions">16. Research evidence log and unresolved questions</a></li>
+<li><a href="#sources">Sources</a></li>
+</ul>
+</div>
+</details></nav>
+<h2 id="1-recommended-approach">1. Recommended approach</h2>
+<p>Build a compact, forecast-time representation of constraint pressure and test it first with persistence corrections, regularised linear models and additive spline models. Retain the existing LightGBM forecaster as a benchmark. Forecast directional limits and sharp-contraction risk explicitly, then test whether their <strong>out-of-fold predictions</strong> improve the flow model. Retain regional demand and supply conditions because an interconnector can change flow substantially without approaching a limit.</p>
+<p>The recommended initial scope prioritises 30 minutes to six hours, while preserving the current half-hour to seven-day forecast interface. Begin with VNI, where the two-year reconstruction is more accurate, and develop QNI with stricter quality gating. Use the same feature definitions, time rules, evaluation and reporting across both connectors.</p>
+<p>The studies establish useful candidate mechanisms, not demonstrated operational forecasting improvements. Their most valuable outputs are versioned equation coefficients, directional generator pressure, competing constraints, regime changes and event definitions. Two-year generator rankings should guide hypotheses and engineering diagnostics; they should not become permanent unit weights or be applied retrospectively across every training fold.</p>
+<p>Set a candidate budget of <strong>up to 40 network features</strong>, rather than hundreds of generator columns, and retain only blocks that pass testing. Begin with a 12–20-feature simple model; assess the full specification of 24 directional features, eight quality features and eight generator-group features through ablations. A later market-context block may add eight features. These counts describe additions to the existing design, not the total number of model inputs.</p>
+<p>A new exploratory comparison on the retained data supports this restraint: adding existing topology features improved ridge regression in 13 of 18 connector/target/horizon cells, but beat persistence in only eight. The same addition improved an additive model in only two cells. The first implementation recommendation is therefore a small, quality-gated ridge correction, with persistence retained wherever it wins; details and limitations appear in Section 11.</p>
+<p>Three conditions govern the work:</p>
+<ol>
+<li>Every input must carry evidence of when it became available. Historical data being public today does not establish availability at a historical forecast origin.</li>
+<li>The reported-limit reconstruction and generator contribution calculations must be audited separately. Good accounting closure can coexist with incomplete physical attribution.</li>
+<li>The previously examined September 2024–August 2026 period is development evidence for this new methodology. Future improvement claims require newly frozen evaluation and prospective forecasts.</li>
+</ol>
+<h2 id="2-existing-model-and-measured-starting-point">2. Existing model and measured starting point</h2>
+<p>The repository pools six interconnectors in direct LightGBM regressors, separately fitted for signed dispatch flow, mean export limit, mean directional import limit, and the tightest five-minute export/import limits within each half-hour. It already includes calendar features, regional fundamentals, weather, lagged outcomes, reported setter categories, network flags, regional generation availability and other-interconnector flows. The current network estimator uses 180 trees, 23 leaves and absolute-error loss.<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></p>
+<p>The primary flow target is <code>MWFLOW</code>, averaged over six dispatch intervals. <code>METEREDMWFLOW</code> is retained during preparation but is not the primary forecast target. Operational dispatch-target accuracy and physical metered-flow accuracy should therefore be reported separately if the latter is added.<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup></p>
+<p>The saved backtest supplies realised future demand, wind, solar and weather. It is a conditional experiment. It does not show how accurately the same model would perform with issue-time forecasts of those inputs. The nominal 80% prediction intervals achieved 72.3% aggregate coverage, indicating that uncertainty calibration also needs attention.<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup></p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Saved test metric</th>
+<th style="text-align: right;">QNI</th>
+<th style="text-align: right;">VNI</th>
+<th>Implication for the proposed work</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Flow MAE, 0.5–6 h</td>
+<td style="text-align: right;">206.5 MW</td>
+<td style="text-align: right;">248.7 MW</td>
+<td>Establish matched baseline errors before changing features</td>
+</tr>
+<tr>
+<td>Flow MAE, 6.5–24 h</td>
+<td style="text-align: right;">234.2 MW</td>
+<td style="text-align: right;">271.4 MW</td>
+<td>Forecasted future network state matters beyond persistence</td>
+</tr>
+<tr>
+<td>Export-limit MAE, 0.5–6 h</td>
+<td style="text-align: right;">121.9 MW</td>
+<td style="text-align: right;">231.5 MW</td>
+<td>Evaluate whether contraction features reduce limit errors</td>
+</tr>
+<tr>
+<td>Import-limit MAE, 0.5–6 h</td>
+<td style="text-align: right;">123.9 MW</td>
+<td style="text-align: right;">186.3 MW</td>
+<td>Preserve direction-specific models and diagnostics</td>
+</tr>
+<tr>
+<td>Existing export restriction recall / precision</td>
+<td style="text-align: right;">52.9% / 50.2%</td>
+<td style="text-align: right;">72.2% / 73.1%</td>
+<td>Improve warning quality as well as recall</td>
+</tr>
+<tr>
+<td>Existing import restriction recall / precision</td>
+<td style="text-align: right;">54.5% / 39.4%</td>
+<td style="text-align: right;">89.9% / 21.1%</td>
+<td>VNI import false alerts are a particularly useful diagnostic</td>
+</tr>
+</tbody>
+</table></div>
+<p>These figures are from the saved March–August 2026 experiment. Restriction metrics aggregate forecast-origin/lead pairs across horizons and use the existing low-limit definition; they are not sharp-contraction event scores. Repeated predictions of one physical incident are not independent events.<sup id="fnref2:3"><a class="footnote-ref" href="#fn:3">3</a></sup></p>
+<p>The model currently has setter identity, but not a production integration of versioned generator coefficients, competing equation margins or a contraction-event head. <code>constraint_features.py</code> provides useful prototype calculations, including pressure, relief, candidate counts and switch gaps. Its retrospective feature construction and feasibility testing must be refactored into an issue-time pipeline before use in operational model claims.<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup></p>
+<h2 id="3-findings-from-the-studies-and-their-modelling-implications">3. Findings from the studies and their modelling implications</h2>
+<h3 id="31-different-reconstruction-quality">3.1 Different reconstruction quality</h3>
+<p>Both studies cover 1 September 2024 through 31 August 2026, with 210,240 five-minute observations per connector and two complete seasonal cycles. They distinguish binding equations, equations within 50 MW of binding, reported directional setters and reconstructed envelope leaders.<sup id="fnref:5"><a class="footnote-ref" href="#fn:5">5</a></sup><sup id="fnref:6"><a class="footnote-ref" href="#fn:6">6</a></sup></p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Diagnostic</th>
+<th style="text-align: right;">VNI</th>
+<th style="text-align: right;">QNI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Generator DUIDs with valid sensitivities</td>
+<td style="text-align: right;">232</td>
+<td style="text-align: right;">238</td>
+</tr>
+<tr>
+<td>Equation versions researched</td>
+<td style="text-align: right;">20,827</td>
+<td style="text-align: right;">15,010</td>
+</tr>
+<tr>
+<td>Upper / lower reconstruction coverage</td>
+<td style="text-align: right;">99.77% / 99.49%</td>
+<td style="text-align: right;">99.75% / 99.75%</td>
+</tr>
+<tr>
+<td>Upper / lower reconstruction MAE</td>
+<td style="text-align: right;">7.11 / 22.55 MW</td>
+<td style="text-align: right;">410.58 / 248.90 MW</td>
+</tr>
+<tr>
+<td>Exact dispatch-to-equation version match</td>
+<td style="text-align: right;">92.06%</td>
+<td style="text-align: right;">65.32%</td>
+</tr>
+</tbody>
+</table></div>
+<p>High numerical coverage is insufficient for QNI: a computed bound exists on almost every interval, but its average discrepancy is material. First stratify errors by month, direction, version-match status, equation family, tiny interconnector coefficients, interventions and reported-setter eligibility. Inspect whether errors arise from mapping, candidate selection, missing versions, static limits or mixed run solutions. Do not assume a particular cause before this audit.</p>
+<p>Initially use reported QNI limits as state and outcome quantities. Admit QNI reconstructed pressure features only when their source and equation quality pass the configured gate. Retain the failed population in overall forecast scoring so a quality filter cannot make the results look better simply by excluding difficult intervals.</p>
+<p>VNI offers a more promising starting point, but its aggregate accuracy does not remove the need for event-level checks. Report distributions of reconstruction error, including P95/P99 and the fraction within 1, 5 and 25 MW, rather than relying on mean error alone.</p>
+<h3 id="32-generator-candidates">3.2 Generator candidates</h3>
+<p>The broad persistence-weighted candidate lists differ from the selected-event contribution rankings. VNI's broad leaders include MURRAY, LIMOSF11, TUMUT3, SUNRSF1, UPPTUMUT, DARLSF1, STWF1 and MUWAWF1. QNI's include NEWENSF2, NEWENSF1, SAPHWF1, WRWF1, METZSF1, TUMUT3, BW01 and GNNDHSF1.<sup id="fnref2:5"><a class="footnote-ref" href="#fn:5">5</a></sup><sup id="fnref2:6"><a class="footnote-ref" href="#fn:6">6</a></sup></p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Selected-case gross tightening contribution</th>
+<th style="text-align: right;">VNI</th>
+<th style="text-align: right;">QNI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TUMUT3</td>
+<td style="text-align: right;">35,037.5 MW</td>
+<td style="text-align: right;">12,233.8 MW</td>
+</tr>
+<tr>
+<td>UPPTUMUT</td>
+<td style="text-align: right;">9,712.73 MW</td>
+<td style="text-align: right;">3,132.48 MW</td>
+</tr>
+<tr>
+<td>LIMOSF11</td>
+<td style="text-align: right;">9,211.01 MW</td>
+<td style="text-align: right;">Not shown in the atlas top-20 table</td>
+</tr>
+<tr>
+<td>STAN-2</td>
+<td style="text-align: right;">Not shown in the atlas top-20 table</td>
+<td style="text-align: right;">4,679.85 MW</td>
+</tr>
+<tr>
+<td>STAN-1</td>
+<td style="text-align: right;">Not shown in the atlas top-20 table</td>
+<td style="text-align: right;">4,044.73 MW</td>
+</tr>
+</tbody>
+</table></div>
+<p>These are sums of fixed-equation step contributions across selected cases, not single-event capacity reductions, energy in MWh or counterfactual causal effects. Relief terms can offset tightening. The atlas aggregate deduplicates shared physical steps; individual case windows can overlap. Switching is separately accounted for.<sup id="fnref:7"><a class="footnote-ref" href="#fn:7">7</a></sup><sup id="fnref:8"><a class="footnote-ref" href="#fn:8">8</a></sup></p>
+<p>The practical feature hypothesis is therefore <strong>generator movement multiplied by its current equation-specific sensitivity</strong>, conditioned on proximity to a relevant limit. Tumut 3 should not receive one global rule such as “more output means southward flow.” Its coefficient, eligible equation, competing constraints, other dispatch and RHS state determine the local implication.</p>
+<h3 id="33-event-and-price-evidence">3.3 Event and price evidence</h3>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Atlas population</th>
+<th style="text-align: right;">VNI</th>
+<th style="text-align: right;">QNI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Contraction detections</td>
+<td style="text-align: right;">7,486</td>
+<td style="text-align: right;">7,430</td>
+</tr>
+<tr>
+<td>Grouped incidents</td>
+<td style="text-align: right;">5,379</td>
+<td style="text-align: right;">5,445</td>
+</tr>
+<tr>
+<td>Selected detailed contraction cases</td>
+<td style="text-align: right;">91</td>
+<td style="text-align: right;">92</td>
+</tr>
+<tr>
+<td>Additional price-only cases</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">13</td>
+</tr>
+<tr>
+<td>Contraction detections followed by receiving-region MPC within one hour</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">5</td>
+</tr>
+</tbody>
+</table></div>
+<p>The atlases report a positive matched peak-price-jump association for VNI: $94.97/MWh, with a day-block bootstrap interval of $58.27–136.83/MWh. QNI's estimate is $15.67/MWh, with an interval of −$26.73 to $53.33/MWh. These observational comparisons do not identify a causal price effect. Exact MPC observations are sparse and are counted by region-interval, not necessarily as independent price episodes.<sup id="fnref2:7"><a class="footnote-ref" href="#fn:7">7</a></sup><sup id="fnref2:8"><a class="footnote-ref" href="#fn:8">8</a></sup></p>
+<p>Prioritise limit contractions, direction and flow errors. Use MPC-linked episodes as a separate high-consequence diagnostic. The evidence does not support training the core model only on price-spike cases or promising reliable standalone MPC prediction.</p>
+<p>The atlas detector and longitudinal reports can have slightly different counts because they have separate screening implementations and boundary/grouping rules. Preserve detector version and population identifiers in every new result; do not silently combine their denominators.</p>
+<h2 id="4-forecast-products-and-sign-conventions">4. Forecast products and sign conventions</h2>
+<p>Use the existing positive directions:</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Connector</th>
+<th>Identifier</th>
+<th>Positive flow</th>
+<th>Negative flow</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VNI</td>
+<td><code>VIC1-NSW1</code></td>
+<td>Victoria to NSW</td>
+<td>NSW to Victoria</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td><code>NSW1-QLD1</code></td>
+<td>NSW to Queensland</td>
+<td>Queensland to NSW</td>
+</tr>
+</tbody>
+</table></div>
+<p>Let <code>F</code> be signed flow, <code>U = EXPORTLIMIT</code>, and <code>L = IMPORTLIMIT</code> in the raw signed-flow convention. The repository's directional import quantity is <code>C_lower = -L</code>; the export quantity is <code>C_upper = U</code>. Preserve negative directional quantities. For example, <code>U &lt; 0</code> describes a reported upper bound requiring negative flow; <code>L &gt; 0</code> describes a reported lower bound requiring positive flow. Crossed bounds and violated/intervention solutions require separate flags.<sup id="fnref2:2"><a class="footnote-ref" href="#fn:2">2</a></sup></p>
+<p>Maintain the existing five regression targets for comparability. Add event products with explicit semantics:</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Product</th>
+<th>Definition</th>
+<th>Initial horizons</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sharp-contraction probability</td>
+<td>At least one new onset in a future window, separately for each directional capacity</td>
+<td>Next 30, 60 and 180 minutes</td>
+</tr>
+<tr>
+<td>Contraction severity</td>
+<td>Maximum directional capacity loss from the origin level within the horizon; also report conditional-on-onset severity</td>
+<td>Same windows</td>
+</tr>
+<tr>
+<td>Direction state probability</td>
+<td>Positive, near-zero or negative dispatch flow at delivery</td>
+<td>Existing half-hour leads</td>
+</tr>
+<tr>
+<td>Reversal probability</td>
+<td>First transition to the opposite nonzero sign during the window</td>
+<td>Next 30, 60 and 180 minutes</td>
+</tr>
+<tr>
+<td>Forced-direction probability</td>
+<td>Future reported <code>U &lt; 0</code> or <code>L &gt; 0</code>, with inconsistency separately classified</td>
+<td>Same windows, then longer leads</td>
+</tr>
+</tbody>
+</table></div>
+<p>Use an initial ±25 MW near-zero band and test 10/25/50 MW as development sensitivity settings. This is a proposed noise tolerance, not an established market rule. Require an observable pre-event sign and distinguish a brief crossing from a sustained reversal, initially two consecutive five-minute intervals. Window labels require complete observations; missing outcomes must remain missing rather than becoming negative labels.</p>
+<p>Use five-minute records for event detection even if the model issues every half-hour. Half-hour means can hide a sudden collapse and recovery. A later five-minute issue cycle is a separate freshness experiment, not part of the first feature-architecture comparison.</p>
+<h2 id="5-constraint-representation">5. Constraint representation</h2>
+<h3 id="51-versioned-conditional-sensitivities">5.1 Versioned conditional sensitivities</h3>
+<p>For an eligible constraint normalised to <code>&lt;=</code>, write:</p>
+<pre><code class="language-text">a_ci F_i + sum_g(b_cg P_g) + sum_j(d_cj F_j) + Z_c &lt;= R_c
+</code></pre>
+<p><code>Z_c</code> contains the remaining LHS terms, including relevant regional or unit service quantities. For a nonzero subject-interconnector coefficient:</p>
+<pre><code class="language-text">B_ci = (R_c - sum_g(b_cg P_g) - sum_j(d_cj F_j) - Z_c) / a_ci
+s_cg = -b_cg / a_ci
+</code></pre>
+<p>Positive <code>a_ci</code> supplies an upper candidate; negative <code>a_ci</code> supplies a lower candidate. Normalise <code>&gt;=</code> first. Handle equality constraints explicitly according to their role and the applicable reporting procedure; do not force every equality into a one-sided capacity feature. Include standing limits and relevant reporting eligibility when reproducing reported values. AEMO's published reporting specification explains the substitution of other solved LHS quantities and directional min/max selection.<sup id="fnref:9"><a class="footnote-ref" href="#fn:9">9</a></sup></p>
+<p>Where solved <code>LHS</code>, <code>RHS</code>, flow and exact <code>a_ci</code> are available from one consistent run, calculate the current conditional candidate as:</p>
+<pre><code class="language-text">B_ci = F_i + (R_c - LHS_c) / a_ci
+</code></pre>
+<p>This can recover a current bound without individually observing every LHS term. It does not identify how much of a future change comes from each generator. Treat current-bound reconstruction and term-level pressure completeness as different quality dimensions.<sup id="fnref2:4"><a class="footnote-ref" href="#fn:4">4</a></sup></p>
+<p>The sensitivity is conditional on the equation, other terms and RHS. It is not a bus-level PTDF or an unrestricted total derivative of dispatch. AEMO notes that RHS expressions can contain network state and feedback terms; future RHS can change alongside generation.<sup id="fnref:10"><a class="footnote-ref" href="#fn:10">10</a></sup> Consequently, scenario pressure is a predictive input and a mechanical diagnostic, not a full NEMDE redispatch result.</p>
+<h3 id="52-tightening-and-relief">5.2 Tightening and relief</h3>
+<p>For a generator change <code>delta_P_g</code>, let <code>m_cg = s_cg * delta_P_g</code>, the signed movement of that equation's flow bound. Define:</p>
+<pre><code class="language-text">upper tightening = sum_g max(-m_cg, 0)
+upper relief     = sum_g max( m_cg, 0)
+lower tightening = sum_g max( m_cg, 0)
+lower relief     = sum_g max(-m_cg, 0)
+net tightening   = tightening - relief
+</code></pre>
+<p>Lower tightening is an increase in the signed lower bound, hence a decrease in import-direction capacity. Compute at both five-minute and 30-minute lags. Within an observed fixed-version segment, retain the decomposition into generators, other LHS, RHS, switching and unresolved discrepancy. Never attribute a new setter's full discontinuity to the generators appearing in its equation.</p>
+<p>For illustration only, suppose an upper equation is <code>F + 0.4P &lt;= 900</code>, with all other contributions held fixed. A 100 MW generator increase contributes 40 MW of upper tightening. If the effective RHS simultaneously increases 60 MW, the bound expands by 20 MW overall. This explains why large gross generator tightening can coexist with an expanding limit.</p>
+<p>For a lower equation <code>-F + 0.3P &lt;= 200</code>, a 100 MW increase raises the lower bound by 30 MW, reducing import-direction capacity by 30 MW. Neither example is an observed Tumut 3 equation or an estimated forecast improvement.</p>
+<h3 id="53-candidate-competition">5.3 Candidate competition</h3>
+<p>Use all <strong>currently invoked, eligible, directly linked</strong> candidate equations for the subject connector, including nonbinding candidates. Add future invocations only when a schedule or forecast publication available at the origin identifies them. Retain a small training-derived fallback library for unknown future regimes, explicitly marked uncertain. Do not choose the origin's candidate set using the future realised setter.</p>
+<p>Binding status, reported setter, proximity to the current dispatch point and proximity to the leading bound answer different questions. Retain all four classifications. For upper candidates sorted increasingly, the switch gap is <code>B_2 - B_1</code>; for lower candidates sorted decreasingly it is <code>B_1 - B_2</code>. A small switch gap means the leading equation may change after a modest relative movement, even when flow is well inside the envelope.</p>
+<p>Start with the top three eligible candidates per direction. These are retained as long-form diagnostic rows, not three copies of every model column. Aggregate candidate pressure using weights proportional to <code>q_c * exp(-gap_c / tau)</code>, normalised within direction, where <code>q_c</code> is an origin-known quality score. Tune <code>tau</code> from 25/50/100 MW in development folds. Always retain leader-only features as a simpler ablation and record when no candidate passes.</p>
+<p>This weighted pressure is a model feature; it is not the derivative of the minimum of several equations. Candidate dependence, ties and activation uncertainty require learned or scenario-based treatment.</p>
+<h3 id="54-generator-grouping">5.4 Generator grouping</h3>
+<p>Use a sparse equation–generator–interconnector incidence representation, with signed, versioned coefficients. This is a factor graph describing constraint relationships, not a claim to have complete electrical bus topology.</p>
+<p>For an initial four-group configuration per connector, test:</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>VNI starting groups</th>
+<th>QNI starting groups</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Snowy hydro: TUMUT3, UPPTUMUT, MURRAY</td>
+<td>Snowy hydro: TUMUT3, UPPTUMUT, MURRAY where linked</td>
+</tr>
+<tr>
+<td>Solar units represented by LIMOSF11, SUNRSF1, DARLSF1, AVLSF1</td>
+<td>New England generation represented by NEWENSF1/2, METZSF1, SAPHWF1, WRWF1</td>
+</tr>
+<tr>
+<td>Wind units represented by MUWAWF1, KIAMSF1, STWF1</td>
+<td>Queensland thermal generation represented by STAN-1/2 and related linked units</td>
+</tr>
+<tr>
+<td>Storage and remaining eligible terms, including VBB1 where mapped</td>
+<td>Storage and remaining eligible terms, including LDBESS1 where mapped</td>
+</tr>
+</tbody>
+</table></div>
+<p>These are illustrative study-informed memberships, not verified geographic boundaries or final learned clusters. In each fold, recompute eligible membership and weights from available metadata and training-only exposure. Keep each DUID in one reporting group per connector to avoid double counting. The same DUID can affect both connectors with different signed coefficients.</p>
+<p>An alternative is to cluster units by their signed coefficient vectors across training equations, weighted by training invocation frequency. Compare four interpretable groups with a four-to-eight-dimensional truncated SVD representation fitted only on training data. Prefer the interpretable groups unless compression improves held-out results materially. Preserve individual unit contributions in diagnostic storage even when the model receives only aggregates.</p>
+<h2 id="6-compact-feature-specification">6. Compact feature specification</h2>
+<h3 id="61-directional-block-24-additions">6.1 Directional block: 24 additions</h3>
+<p>Compute the following 12 quantities separately for upper and lower capacity. All observed quantities end at the latest admissible source cutoff; all projected quantities use forecasts issued by the origin. Store physical units and source lineage before standardising for a linear model.</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Feature per direction</th>
+<th>Construction</th>
+<th>Expected use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>room_mw</code></td>
+<td>Upper: <code>U-F</code>; lower: <code>F-L</code>, using reported values initially</td>
+<td>Current exposure to a limit</td>
+</tr>
+<tr>
+<td><code>capacity_change_30m</code></td>
+<td>Latest directional capacity minus its value 30 minutes earlier</td>
+<td>Collapse or recovery momentum</td>
+</tr>
+<tr>
+<td><code>switch_gap_mw</code></td>
+<td>Leading-to-runner-up eligible bound gap</td>
+<td>Setter competition</td>
+</tr>
+<tr>
+<td><code>near_candidate_count</code></td>
+<td>Invoked eligible candidates within 50 MW of the leading bound</td>
+<td>Breadth of nearby restrictions</td>
+</tr>
+<tr>
+<td><code>setter_age_minutes</code></td>
+<td>Time since the latest observed setter/version change</td>
+<td>Persistence of regime</td>
+</tr>
+<tr>
+<td><code>switches_60m</code></td>
+<td>Count of observed setter/version transitions over one hour</td>
+<td>Regime instability</td>
+</tr>
+<tr>
+<td><code>gen_tightening_5m</code></td>
+<td>Quality-weighted candidate gross tightening from generator movement</td>
+<td>Immediate generator pressure</td>
+</tr>
+<tr>
+<td><code>gen_relief_5m</code></td>
+<td>Corresponding gross relief</td>
+<td>Offsetting movement</td>
+</tr>
+<tr>
+<td><code>gen_net_30m</code></td>
+<td>Net generator tightening over 30 minutes</td>
+<td>Sustained pressure</td>
+</tr>
+<tr>
+<td><code>pressure_to_room</code></td>
+<td><code>gen_net_30m / max(abs(room_mw), 25)</code>; preserve room sign separately</td>
+<td>Pressure relative to margin</td>
+</tr>
+<tr>
+<td><code>projected_gen_net_h</code></td>
+<td>Sensitivity-weighted generator/group forecast change to delivery</td>
+<td>Prospective pressure</td>
+</tr>
+<tr>
+<td><code>rhs_capacity_change_30m</code></td>
+<td>Directionally signed <code>delta_R/a</code> on fixed-version segments</td>
+<td>Non-generator movement</td>
+</tr>
+</tbody>
+</table></div>
+<p>The 25 MW ratio floor is a development parameter. A negative room indicates an unusual/violated solution rather than excess available margin. Do not substitute the ratio for raw room or delete negative values. If the RHS is unavailable or its version changed, set that component missing and retain its quality flag. The observed total capacity change still exists.</p>
+<p>Start with the existing reported setter categories and broad family labels. For simple regressions, cap family interactions to a small training-defined vocabulary, pooling rare families into <code>OTHER</code>. Avoid one coefficient per equation ID. The 50 MW candidate threshold is a continuity choice with the studies; compare 25/50/100 MW without reselecting it on evaluation outcomes.</p>
+<h3 id="62-quality-block-eight-additions">6.2 Quality block: eight additions</h3>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Quality feature</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>exact_version_fraction</code></td>
+<td>Fraction of selected candidates joined to the exact referenced version</td>
+</tr>
+<tr>
+<td><code>complete_terms_fraction</code></td>
+<td>Fraction whose required pressure terms are observed</td>
+</tr>
+<tr>
+<td><code>max_source_age_minutes</code></td>
+<td>Oldest required observation age across the feature block</td>
+</tr>
+<tr>
+<td><code>reconstruction_discrepancy_mw</code></td>
+<td>Maximum absolute current reported-versus-reconstructed bound discrepancy across directions</td>
+</tr>
+<tr>
+<td><code>unstable_factor_fraction</code></td>
+<td>Fraction rejected/flagged for numerically unstable subject coefficients</td>
+</tr>
+<tr>
+<td><code>unknown_family_flag</code></td>
+<td>Presence of an unrecognised leading family</td>
+</tr>
+<tr>
+<td><code>future_input_quality</code></td>
+<td>Defined numeric code for observed-only, modelled, archived-forecast or missing future input path</td>
+</tr>
+<tr>
+<td><code>envelope_inconsistent_flag</code></td>
+<td>Reconstructed lower bound exceeds upper bound</td>
+</tr>
+</tbody>
+</table></div>
+<p>Keep richer quality details in the diagnostic table even if only eight values enter the model. Do not calculate an origin's reliability score using future reconstruction performance of that equation. Numerical coefficient cutoffs must be invariant to rescaling of the whole equation: use a relative coefficient ratio and a sensitivity plausibility check, rather than an unexplained absolute <code>a</code> threshold.</p>
+<h3 id="63-generator-group-block-eight-additions">6.3 Generator-group block: eight additions</h3>
+<p>For each of four groups, provide one projected net tightening value per direction. Their sum should reconcile with the corresponding aggregate when using the same complete candidate population. They explain which combination of units drives pressure without requiring each DUID as a model variable.</p>
+<p>The group features are a hypothesis, not a requirement to retain all eight. Test whether they add information beyond total pressure. Ridge is suitable when correlated groups overlap in behaviour; elastic net may remove weak features but can choose arbitrarily among highly correlated units. Group ablation is more reliable than reading one fitted coefficient as proof of individual importance.</p>
+<h3 id="64-optional-market-block-eight-additions">6.4 Optional market block: eight additions</h3>
+<p>After the network-only ablation, add receiving-minus-sending residual-demand forecast, its next-hour ramp, combined wind availability forecast, combined solar availability forecast, receiving-region available coal capacity, known offline coal capacity, a receiving-region temperature stress measure and the latest admissible regional price spread.</p>
+<p>Residual demand must match the repository's demand definition: <code>TOTALDEMAND</code> is already net of embedded rooftop generation; do not subtract rooftop a second time.<sup id="fnref3:2"><a class="footnote-ref" href="#fn:2">2</a></sup> Unconstrained renewable availability and cleared renewable dispatch are different quantities. Future cleared output is partly determined by the congestion being predicted, so it cannot be treated as an externally known driver.</p>
+<p>Zero coal generation alone means “not currently generating,” not “forced outage.” Distinguish registered capacity, offered availability, operating output, planned outage and confirmed forced outage. Leave unavailable outage classifications unknown. Temperature is a supplementary stress proxy unless a specific rating/RHS mechanism and suitable location are known. A weather station or reanalysis grid near a region is not automatically a transmission asset's operating temperature.</p>
+<p>Use the event atlas's demand, renewable, coal and weather context to choose diagnostic slices and hypotheses, then rebuild features under the publication-time contract. Do not attach retrospective event-window maximum demand, realised outage duration or future price extremes to the forecast origin.</p>
+<h2 id="7-required-data-and-availability-contract">7. Required data and availability contract</h2>
+<h3 id="71-data-inventory">7.1 Data inventory</h3>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Existing evidence</th>
+<th>Operational input or new work</th>
+<th>Priority</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Five-minute IC flow, directional limits and setters</td>
+<td>Full population grids retained</td>
+<td>Capture public source issues and revisions; preserve physical/pricing run distinction</td>
+<td>Essential</td>
+</tr>
+<tr>
+<td>Constraint solutions: RHS, LHS, marginal value, violation</td>
+<td>Monthly studies and selected windows</td>
+<td>Audit fields available at each origin and reconstruct invoked eligible candidates</td>
+<td>Essential</td>
+</tr>
+<tr>
+<td>Versioned IC, connection-point and regional coefficients</td>
+<td>Substantial standing extracts retained</td>
+<td>Exact effective/version joins; source publication history; add required regional/FCAS terms</td>
+<td>Essential</td>
+</tr>
+<tr>
+<td>DUID and connection-point metadata</td>
+<td>Standing mapping retained</td>
+<td>Time-effective generation/load/BDU mapping; source versions</td>
+<td>Essential</td>
+</tr>
+<tr>
+<td>Unit SCADA</td>
+<td>Need inventory of complete retained coverage</td>
+<td>Public <code>DISPATCH_UNIT_SCADA</code> provides start-of-dispatch-interval MW; archive its actual arrival times</td>
+<td>Essential for public unit movement</td>
+</tr>
+<tr>
+<td>Unit dispatch targets, availability and ramps</td>
+<td>Retrospective <code>DISPATCHLOAD</code> extracts</td>
+<td>Do not assume whole-market targets are contemporaneously public; use entitled feeds or delayed research labels</td>
+<td>Conditional</td>
+</tr>
+<tr>
+<td>AEMO IC predispatch forecasts</td>
+<td>Original-vintage benchmark already exists for a subset</td>
+<td>Reuse; inventory P5MIN and predispatch issue/delivery coverage and gaps</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Constraint invocation schedules and forecasts</td>
+<td>Some standing invocation records</td>
+<td>Preserve schedules as published, including revisions and cancellations</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Regional demand / renewable forecasts</td>
+<td>Realised series already exist</td>
+<td>Replace realised future drivers with issue-time forecast paths</td>
+<td>High</td>
+</tr>
+<tr>
+<td>Weather forecast runs</td>
+<td>Historical weather retained</td>
+<td>Retrieve only selected locations, variables and issue runs if needed</td>
+<td>Secondary</td>
+</tr>
+<tr>
+<td>Coal capacity, outage schedules, prices</td>
+<td>Selected-case context and regional prices</td>
+<td>Full-timeline, time-effective source audit before modelling</td>
+<td>Secondary</td>
+</tr>
+<tr>
+<td>RHS formula details and telemetry</td>
+<td>Partial equation reconstruction</td>
+<td>Recover only dependencies needed to explain material residual components</td>
+<td>Targeted extension</td>
+</tr>
+</tbody>
+</table></div>
+<p>AEMO identifies <code>DISPATCH_UNIT_SCADA</code> as public start-of-interval telemetry. It should not be equated with the end-of-interval dispatched energy target used in a solved equation.<sup id="fnref:11"><a class="footnote-ref" href="#fn:11">11</a></sup> Whole-market <code>PREDISPATCHLOAD</code> is described as public next day, and the reviewed P5MIN unit specification marks unit solutions private. Archived <code>DISPATCHLOAD</code> also has private/public-next-day treatment. Therefore, the public implementation should start with SCADA-based observed ramps and its own unit/group forecasts; richer participant inputs require a separate entitlement and historical-availability check.<sup id="fnref:12"><a class="footnote-ref" href="#fn:12">12</a></sup></p>
+<p>This changes interpretation: “SCADA pressure” approximates observed physical movement, while “solved-target pressure” explains the dispatch solution. Keep their feature names, training tracks and validation results separate. A fixed 30-minute lag alone cannot turn next-day information into a live input.</p>
+<h3 id="72-four-timestamps">7.2 Four timestamps</h3>
+<p>Every retained observation or forecast must carry:</p>
+<pre><code class="language-text">valid_time        time the physical quantity or forecast applies to
+issue_time        originating report/model run time
+available_at      when this implementation could first consume the value
+retrieved_at      when the archive was collected for research
+</code></pre>
+<p>Also retain the source's revision/<code>LASTCHANGED</code>, effective date, version, source URL/hash and run type. <code>LASTCHANGED</code> is not sufficient evidence of public availability. Forecast-time joins require <code>available_at &lt;= origin</code>; among eligible versions select the latest appropriate issue. Future effective standing data can be used only if it had already been published and was scheduled to apply at delivery.</p>
+<p>Where a historical arrival time is missing, use a clearly documented conservative release policy supported by the source, or exclude that feature from the strict operational track. Keep a separate simulated-latency experiment. Measure actual arrival lag during prospective collection rather than treating an assumed buffer as proven.</p>
+<h3 id="73-forecast-weather-and-horizon-coverage">7.3 Forecast weather and horizon coverage</h3>
+<p>Open-Meteo distinguishes stitched historical forecast series from individual original model runs. The former should not be used as though they preserve every historical issue/horizon. Its current documentation lists ECMWF IFS HRES single-run coverage from March 2024, while other single-run archives generally start later. Verify coverage for each selected model, location and variable and account for run publication delay; model initialisation time is not availability time.<sup id="fnref:13"><a class="footnote-ref" href="#fn:13">13</a></sup></p>
+<p>Reuse AEMO predispatch only within actual source coverage. The repository's historical benchmark matched 0.5–39-hour leads, not a universal seven-day product. Beyond available forecasts, use explicitly modelled demand, renewable and unit/group scenarios. Missing forecasts should trigger a known fallback with wider uncertainty, not forward-filled claims of fresh guidance.<sup id="fnref3:3"><a class="footnote-ref" href="#fn:3">3</a></sup></p>
+<h3 id="74-storage-and-download-guard">7.4 Storage and download guard</h3>
+<p>Reuse the retained study partitions and source manifests first. Keep a <strong>10 GB decimal combined cap</strong> across study/event/new-feature working data, temporary archives, extracted batches and retained forecasts, with at least <strong>20 GB free disk</strong> reserved. Audit existing storage before beginning; the cap is not a statement that all repository data currently fit inside it. Model/result storage also needs a named budget so it cannot grow invisibly outside the data guard.</p>
+<p>Build an explicit manifest of connector, date window, table, required columns, entity dependencies and exact archive URL. Never download an entire MMS database snapshot or recursively enqueue all monthly tables. Large monthly table archives may still contain the full market even when only a few entities are needed; filtering saves retained/expanded storage but does not reduce compressed download size. Check that distinction before each request.</p>
+<p>Process one bounded table/month batch at a time. Reserve compressed plus maximum expanded space before download, stream and hash, filter during extraction, write compact Parquet, validate counts and keys, atomically mark the batch complete, then remove that batch's temporary archive/extraction. Log bytes downloaded, retained and deleted, checksums, row filters, missing files and retry status. Cleanup applies only to verified task-owned temporary paths.</p>
+<p>Keep compact origin features, sparse standing coefficients, labels, summary scores and source provenance. Do not materialise the full generator × constraint × interval × horizon Cartesian product. Partition features by connector/month and forecast vintages by issue month. Retain a limited rolling window of full predictions plus permanent aggregate sufficient statistics and selected event traces. Optional external storage must preserve a manifest and ownership, not become an implicit unlimited download destination.</p>
+<h2 id="8-models-simple-first-with-explicit-escalation">8. Models: simple first, with explicit escalation</h2>
+<h3 id="81-research-synthesis">8.1 Research synthesis</h3>
+<p>The reviewed literature does not establish that boosting is required for QNI/VNI flow forecasting. The closest statistical precedent found is Paretkar's Pacific Northwest intertie work using ARIMA and transfer-function models on public data. It is a 2008 master's thesis in a different system, so it supports a baseline class rather than an Australian performance claim.<sup id="fnref:14"><a class="footnote-ref" href="#fn:14">14</a></sup></p>
+<p>Lago and colleagues provide an open electricity-price benchmark that includes a regularised autoregressive linear model, LEAR, and emphasises strong baselines, adequate test periods and reproducible comparisons. Price forecasting is adjacent to the flow task: borrow the evaluation discipline and regularisation approach, not its estimated accuracy.<sup id="fnref:15"><a class="footnote-ref" href="#fn:15">15</a></sup> Additive/quantile-additive energy forecasting also has published precedent; spline-plus-ridge offers a small-dependency implementation in this repository, although it is not identical to a fully penalised statistical GAM.<sup id="fnref:16"><a class="footnote-ref" href="#fn:16">16</a></sup></p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Evidence</th>
+<th>Relevance to the local findings</th>
+<th>Consequence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Versioned local equations give signed linear contributions within a regime</td>
+<td>TUMUT3 and other units have changing signs/exposure</td>
+<td>Engineer the regime and pressure first; fit a simple correction</td>
+</tr>
+<tr>
+<td>The leading bound changes across equations</td>
+<td>Single global linear effects can miss switching</td>
+<td>Add hinge terms, a few family interactions or additive splines before trees</td>
+</tr>
+<tr>
+<td>NESO's congestion project conditions on known day-ahead schedules and stresses data requirements</td>
+<td>Some useful inputs exist only after a particular information release</td>
+<td>Define the information set before comparing models<sup id="fnref:17"><a class="footnote-ref" href="#fn:17">17</a></sup></td>
+</tr>
+<tr>
+<td>General tabular benchmarks find trees competitive</td>
+<td>Irregular interactions may eventually benefit from trees</td>
+<td>Justifies a challenger, not automatic selection for this task<sup id="fnref2:18"><a class="footnote-ref" href="#fn:18">18</a></sup></td>
+</tr>
+<tr>
+<td>A recent interconnector surrogate paper uses European simulated OPF outcomes</td>
+<td>Physical consistency and future supply mix matter</td>
+<td>Useful conceptual extension, but not evidence of live NEM forecast skill<sup id="fnref2:19"><a class="footnote-ref" href="#fn:19">19</a></sup></td>
+</tr>
+</tbody>
+</table></div>
+<p>The June 2026 interconnector-surrogate preprint evaluates KNN and neural networks on synthetic European flows for reduced planning models. Its claimed simulation speedup is not an improvement in operational QNI/VNI forecast accuracy. It does not compare the proposed public-vintage linear model and cannot justify bypassing simple baselines.<sup id="fnref:19"><a class="footnote-ref" href="#fn:19">19</a></sup></p>
+<h3 id="82-model-ladder">8.2 Model ladder</h3>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Method</th>
+<th>Role and complexity control</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M0</td>
+<td>Persistence, weekly seasonal persistence and admissible AEMO forecast</td>
+<td>Mandatory benchmarks on common timestamps</td>
+</tr>
+<tr>
+<td>M1</td>
+<td>Persistence/AEMO residual correction with ridge; elastic-net alternative</td>
+<td>First implementation; linear, regularised, easily audited</td>
+</tr>
+<tr>
+<td>M2</td>
+<td>Additive spline regression with ridge, plus a small predefined interaction set</td>
+<td>Smooth nonlinear response without a tree ensemble</td>
+</tr>
+<tr>
+<td>M3</td>
+<td>Logistic event/direction models and optional two-regime mixture of simple regressions</td>
+<td>Separate contraction warnings from typical flow; only add mixture if useful</td>
+</tr>
+<tr>
+<td>M4</td>
+<td>Existing LightGBM and a shallow constrained tuning grid</td>
+<td>Challenger only after M1–M3 and quality fixes</td>
+</tr>
+<tr>
+<td>M5</td>
+<td>Sequence or graph models</td>
+<td>Deferred; require demonstrated residual problem, reliable topology/vintages and compute justification</td>
+</tr>
+</tbody>
+</table></div>
+<p>For M1 forecast a change from the latest admissible observation, or a residual from an admissible AEMO forecast:</p>
+<pre><code class="language-text">y_hat(origin, h) = anchor(origin, h)
+                 + intercept(connector, band)
+                 + beta(band)' * x(origin, h)
+</code></pre>
+<p>Start with separate connector and lead-band regressions or a shared regression with connector indicators and a few connector-by-pressure interactions. Include lead and log-lead within bands and check discontinuities at boundaries. Avoid 336 entirely independent regressions initially. Standardise using training-only statistics, impute with training-only values and include missingness indicators. Compare direct level regression with change regression; ridge optimises squared loss, so assess MAE explicitly and consider Huber or median regression if spikes dominate fitting.</p>
+<p>The minimal M1 input set can contain reported room, recent flow/limit changes, net generator pressure in each direction, competing-bound gaps, quality, regional residual-demand forecast difference and calendar harmonics. This 12–20 feature subset precedes the full 40-feature ablation. A model with engineered nonlinear inputs is still linear in its fitted coefficients and can capture more than a regression on raw generator MW.</p>
+<p>For M2 add low-degree splines to room, pressure, switch gap, residual-demand difference and lead. Use four to six knots fitted on training data; log the expanded design-column count and effective complexity. Add only a few predeclared interactions, such as pressure × near-limit flag, pressure × broad constraint family and demand imbalance × directional room. A spline basis expansion is not evidence of a physical threshold.</p>
+<p>For events, start with regularised logistic regression. For direction, use a three-class logistic model or probabilities derived from a calibrated signed-flow distribution. Test a two-part contraction model: onset probability and severity conditional on onset. A rare-event classifier with class weighting must be recalibrated on naturally distributed data before probabilities are interpreted.</p>
+<p>Do not hard-clip all flow forecasts to separately predicted reported limits. The limits depend on a dispatch solution; independently predicted bounds can cross, and marginal forecasts do not define a joint physically feasible dispatch. If a coherence adjustment is tested, evaluate it as a separate transformation with raw and adjusted scores and an explicit failure mode for inconsistent envelopes.</p>
+<h3 id="83-when-boosting-is-justified">8.3 When boosting is justified</h3>
+<p>The justification requires both a plausible mechanism from research and local out-of-time evidence: persistent nonlinear residual interactions, sufficient representative samples, and repeatable improvement over the best simple candidate. A broad tabular result alone is insufficient. Use the existing LightGBM as a fixed reference and later test a limited 7/15/23-leaf grid, regularisation and early stopping on development folds.<sup id="fnref:18"><a class="footnote-ref" href="#fn:18">18</a></sup><sup id="fnref:20"><a class="footnote-ref" href="#fn:20">20</a></sup></p>
+<p>A proposed promotion rule is at least a 5% relative improvement in the primary predeclared error measure, a block uncertainty interval favouring the challenger, and no material deterioration in event warnings, calibration or important seasonal slices. This is a decision threshold to pre-register, not a promised uplift or universal statistical rule. Prefer the simpler model when differences are small or unstable; report inference cost, fit time and feature requirements alongside accuracy.</p>
+<p>Temporal Fusion Transformers distinguish observed-history, known-future and static variables, which is conceptually relevant. They are a later comparator only: the reviewed paper does not establish a benefit on these interconnectors, and two years of highly dependent intervals do not provide millions of independent network regimes.<sup id="fnref:21"><a class="footnote-ref" href="#fn:21">21</a></sup></p>
+<h2 id="9-connecting-generator-forecasts-limits-and-flows">9. Connecting generator forecasts, limits and flows</h2>
+<p>At short horizons, observed generator pressure is useful only insofar as it predicts subsequent movement or regime persistence. Start unit/group forecasting with persistence and capped, decaying ramp extrapolation. Estimate decay on training data; apply admissible capacity/ramp bounds. For hydro and storage, include observed mode and available operational information, but do not invent water budgets, battery state of charge or future bids.</p>
+<p>For six hours onward, use regularised unit/group response models or scenarios conditioned on available demand, renewable and price forecasts. For days two to seven, treat outages, resource availability and economic dispatch uncertainty explicitly. Never extend a five-minute ramp linearly for seven days. Use forecast ensembles or a small set of coherent baseline/tightening/relief scenarios, preserving regional and generator dependencies.</p>
+<p>Fit the directional-limit models first. Produce historical out-of-fold limit medians, interval widths and event probabilities for the flow model; at live issue time use the deployed limit model's outputs. A flow model trained on realised future limits or in-sample fitted limit predictions will overstate this benefit.</p>
+<p>Initially permit six additional downstream model inputs: predicted upper and lower median, their interval widths, and upper/lower contraction probabilities. This is a separate six-feature stacking block, so a flow model with the full network and optional market blocks adds at most 54 inputs: 40 + 8 + 6. It does not change the feature budget of the upstream limit model.</p>
+<p>Test the following paths independently:</p>
+<pre><code class="language-text">Published inputs -&gt; compact state -&gt; simple flow correction
+Published inputs -&gt; compact state -&gt; simple limit/event models
+Out-of-fold limit/event predictions -&gt; simple flow correction
+</code></pre>
+<p>The third path is adopted only if it improves on the first. Limits and actual flows are jointly determined, so a limits-first architecture is a forecasting hypothesis rather than a causal ordering claim. At short horizons with an AEMO forecast, a ridge correction around AEMO may outperform an entirely separate flow model. Compare on identical origin/delivery pairs and use a documented fallback where AEMO forecasts are unavailable.</p>
+<h2 id="10-sharp-contraction-labels-and-warning-evaluation">10. Sharp-contraction labels and warning evaluation</h2>
+<p>The current atlas defines a drop as <code>C(t-30 minutes) - C(t)</code>. A sharp observation is positive, at least the month's 90th percentile of positive drops, and has all seven five-minute observations present. Months with fewer than 100 positive falls receive no threshold. An onset is a transition from not sharp to sharp.<sup id="fnref:22"><a class="footnote-ref" href="#fn:22">22</a></sup></p>
+<p>Because that monthly percentile uses the full realised month, it is appropriate for retrospective screening but not an origin-known live trigger. Preserve those labels for reproducing the atlas. Add a new, separately versioned forecasting label using thresholds fitted only on past training data, with month-of-year pooling or a trailing historical window. Freeze the threshold rule before evaluation and show sensitivity to a training-defined absolute MW floor.</p>
+<p>At origin <code>o</code>, an onset-window target is one when a new onset occurs in <code>(o, o+h]</code>. Label ongoing contractions separately; do not count an alarm after onset as an advance warning. Distinguish this from the continuous severity target <code>max(0, C(o)-min C(t))</code> over the same future window: an event detected by a rolling 30-minute comparison can have begun declining before the forecast origin.</p>
+<p>Collapse adjacent alarms into warning episodes using a fixed cooldown and match them one-to-one to grouped incidents within the permitted lead window. Report incident recall, precision, false alerts per day, median advance warning and lead-time distribution. Also retain interval-level Brier/log loss and precision-recall curves. A useful warning system should improve recall at the same false-alert budget, rather than maximise F2 without regard to an operator's alert burden.</p>
+<p>Keep contraction, low-capacity restriction, reversal, forced direction and price spike as distinct labels. Analyse their intersections after evaluating each product. For MPC-linked diagnostics, use the price cap effective at the event date and the receiving-region definition fixed by the event direction. Sparse MPC episodes should be shown individually with uncertainty, not used to tune a complicated dedicated model.</p>
+<h2 id="11-additional-assessment-of-retained-repository-data">11. Additional assessment of retained repository data</h2>
+<p>A bounded retrospective probe compared persistence, ridge corrections and additive spline corrections using the retained monthly features. It read 48 monthly half-hour feature partitions, covering both connectors, plus the existing target table: approximately 25.13 MB of local source files. It downloaded no market data. The full source paths, byte counts, hashes, settings, environment and 90 score rows are retained in the <a href="../data/qni_vni_simple_model_research.json">research evidence file</a>.<sup id="fnref:23"><a class="footnote-ref" href="#fn:23">23</a></sup></p>
+<p>The base design has 17 inputs: three outcome lags for flow and tight directional limits, recent changes, delivery calendar harmonics and a weekend indicator. The augmented design has 37 raw inputs, adding 20 existing numeric topology columns. These are the existing prototype features, not an implementation of the proposed 40-feature specification. The additive version applies a small quadratic spline basis followed by ridge; its expanded design is larger than the 37 raw inputs.</p>
+<p>All observations are shifted one half-hour. Models train on origins from 8 September 2024 with deliveries through 1 September 2025, choose ridge strength from 10/100/1000 using September 2025–February 2026 validation, and are evaluated on March–August 2026. Leads are 30, 60 and 180 minutes. Preprocessing uses training-only medians, scaling and 0.1/99.9 percentile clipping. There is no future realised demand/weather input and no refit after validation selection.</p>
+<h3 id="111-flow-results">11.1 Flow results</h3>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Connector</th>
+<th style="text-align: right;">Lead</th>
+<th style="text-align: right;">Persistence MAE</th>
+<th style="text-align: right;">Ridge base</th>
+<th style="text-align: right;">Ridge + topology</th>
+<th style="text-align: right;">Additive base</th>
+<th style="text-align: right;">Additive + topology</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VNI</td>
+<td style="text-align: right;">30 min</td>
+<td style="text-align: right;">155.45</td>
+<td style="text-align: right;">156.42</td>
+<td style="text-align: right;">150.69</td>
+<td style="text-align: right;">153.78</td>
+<td style="text-align: right;">156.42</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td style="text-align: right;">60 min</td>
+<td style="text-align: right;">197.08</td>
+<td style="text-align: right;">194.12</td>
+<td style="text-align: right;">191.65</td>
+<td style="text-align: right;">193.02</td>
+<td style="text-align: right;">195.71</td>
+</tr>
+<tr>
+<td>VNI</td>
+<td style="text-align: right;">180 min</td>
+<td style="text-align: right;">317.56</td>
+<td style="text-align: right;">277.07</td>
+<td style="text-align: right;">278.77</td>
+<td style="text-align: right;">278.92</td>
+<td style="text-align: right;">281.65</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td style="text-align: right;">30 min</td>
+<td style="text-align: right;">115.29</td>
+<td style="text-align: right;">117.41</td>
+<td style="text-align: right;">114.89</td>
+<td style="text-align: right;">119.59</td>
+<td style="text-align: right;">116.62</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td style="text-align: right;">60 min</td>
+<td style="text-align: right;">143.57</td>
+<td style="text-align: right;">148.26</td>
+<td style="text-align: right;">146.53</td>
+<td style="text-align: right;">151.83</td>
+<td style="text-align: right;">150.23</td>
+</tr>
+<tr>
+<td>QNI</td>
+<td style="text-align: right;">180 min</td>
+<td style="text-align: right;">211.84</td>
+<td style="text-align: right;">219.10</td>
+<td style="text-align: right;">219.34</td>
+<td style="text-align: right;">225.25</td>
+<td style="text-align: right;">234.26</td>
+</tr>
+</tbody>
+</table></div>
+<p>All errors are MW. These comparisons show modest short-horizon VNI signal in the existing pressure block, limited QNI flow benefit and no automatic benefit from adding flexible response curves. The best evaluation column must not be retrospectively called the chosen production model. The evidence file separately records the regression candidate selected on validation; it excludes persistence from that particular regression-selection list, so deployment selection must explicitly restore all mandatory benchmarks.</p>
+<h3 id="112-limit-results-and-feature-availability">11.2 Limit results and feature availability</h3>
+<p>Across all 18 connector/lead/target cells, topology improved ridge relative to its base version in 13 cells, but ridge with topology beat persistence in only eight. Topology improved the additive version in only two cells. These equal-weight cell counts are descriptive and do not establish statistical significance or commercial value.</p>
+<p>Examples illustrate why the full losses matter. At 30 minutes, VNI tight export MAE fell from 152.90 to 145.68 MW with ridge topology, while its tight import MAE was still 130.05 MW against persistence's 114.10 MW. QNI tight export improved from 79.20 to 73.05 MW with ridge topology, but persistence achieved 62.75 MW. At 180 minutes, QNI additive tight import worsened from 156.13 to 197.60 MW when topology was added.<sup id="fnref2:23"><a class="footnote-ref" href="#fn:23">23</a></sup></p>
+<p>Monthly-average nonmissing pressure shares were about 99.71% upper / 99.43% lower for VNI and 99.69% / 99.69% for QNI. The weakest upper-pressure month was September 2024: 94.65% VNI and 94.10% QNI. These are unweighted averages of monthly half-hour coverage, not exact-version quality rates or a replacement for the five-minute reconstruction diagnostics. Near-complete feature availability does not make the QNI reconstruction accurate.</p>
+<h3 id="113-interpretation-and-limits-of-this-probe">11.3 Interpretation and limits of this probe</h3>
+<p>This is an exploratory test of whether the retained representation contains potentially useful predictive structure. It does not validate operational availability, prove generator causality or measure event-warning skill. The period was already inspected; topology dependencies and standing-version recovery are retrospective; a half-hour lag does not remedy next-day release restrictions. The clipping and squared-loss ridge fit are deliberately simple choices that may suppress or underweight important contractions.</p>
+<p>The appropriate next step is a public-vintage reconstruction and targeted block ablation, not a broader hyperparameter search on this evaluation period. In particular, test room/switching separately from generator pressure, separate exact from fallback versions, and compare SCADA-based pressure with retrospective solved-target pressure. A feature's failure in the aggregate does not disprove its physical relevance; it may be unforecastable, redundant, noisy, mistimed or represented incorrectly.</p>
+<h2 id="12-evaluation-design-and-leakage-controls">12. Evaluation design and leakage controls</h2>
+<h3 id="121-three-evidence-tracks">12.1 Three evidence tracks</h3>
+<p>Maintain separate reports for an operational-input track, a conditional/oracle track and a mechanical scenario track. The first uses only admissible issue-time inputs. The second measures value under perfect or specified future fundamentals and can diagnose input uncertainty. The third decomposes a fixed-equation movement or evaluates a hypothetical dispatch path. Never pool their scores or describe mechanical sensitivities as forecast skill.</p>
+<p>The original model trained on September 2023–August 2025, whereas detailed topology begins September 2024. Compare a retrained baseline and a topology model on identical eligible timestamps. Do not give the baseline an extra training year in the primary feature ablation, or silently zero-fill missing topology in that year. A longer-history baseline is a useful additional benchmark with its different training sample disclosed.<sup id="fnref2:1"><a class="footnote-ref" href="#fn:1">1</a></sup><sup id="fnref:24"><a class="footnote-ref" href="#fn:24">24</a></sup></p>
+<p>The original March–August 2026 test is no longer untouched for feature discovery after the two-year studies and this probe. Retain it as a regression/development assessment. Freeze a final recipe, begin prospective shadow forecasts and evaluate only subsequently matured targets. An initial 8–12-week shadow assessment can validate operation and immediate value; it cannot establish full seasonal performance. A fresh full seasonal cycle requires continued observation.</p>
+<h3 id="122-chronological-folds">12.2 Chronological folds</h3>
+<p>Use expanding or rolling training windows with monthly outer evaluation blocks, after sufficient initial history. For a practical retrospective design, use the first approximately nine months to initialise, reserve subsequent contiguous blocks for inner model selection/calibration, and roll forward monthly. Explicitly label early folds as having incomplete seasonal training coverage. Report results over the second full seasonal cycle where available, without claiming independence from prior exploratory inspection.</p>
+<p>All preprocessing, candidate/group selection, basis knots, coefficient thresholds, event reference thresholds, category encodings, calibrators and ensemble weights are fitted within the corresponding training/inner-validation period. Training target windows and event recovery windows must finish before the next evaluation partition. Purge crossing samples based on the actual maximum label horizon; a nominal random train/test split or unexplained seven-day gap is not enough.</p>
+<p>For stacked models, generate upstream predictions through nested chronological folds and train the downstream flow model only on those predictions. At evaluation, fit upstream models only on eligible historical data. Unknown families and newly commissioned units receive explicit fallbacks, not weights calculated from later exposure.</p>
+<p>Use the repository's fixed UTC+10 NEM clock with no daylight-saving shift. Reconcile the study's inclusive five-minute grid ending 23:55 with the model's interval-ending half-hour convention and <code>(start,end]</code> filtering. A half-hour needs six distinct valid component intervals. Do not synthesise a missing boundary interval or accidentally assign a preceding-day interval to the next season in one report but not another.<sup id="fnref4:2"><a class="footnote-ref" href="#fn:2">2</a></sup><sup id="fnref2:24"><a class="footnote-ref" href="#fn:24">24</a></sup></p>
+<h3 id="123-controlled-experiment-matrix">12.3 Controlled experiment matrix</h3>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Experiment</th>
+<th>Change from matched baseline</th>
+<th>Question answered</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>E0</td>
+<td>Simple observed-state model and fixed existing LightGBM benchmark</td>
+<td>How strong are mandatory comparators on the same data?</td>
+</tr>
+<tr>
+<td>E1</td>
+<td>Reported room, capacity momentum and setter age</td>
+<td>Does richer current state help without generator data?</td>
+</tr>
+<tr>
+<td>E2</td>
+<td>Candidate gaps/counts and switching</td>
+<td>Is competing-equation information valuable?</td>
+</tr>
+<tr>
+<td>E3</td>
+<td>Signed generator tightening/relief</td>
+<td>Does equation-aware pressure add beyond state?</td>
+</tr>
+<tr>
+<td>E4</td>
+<td>Exact-version and completeness gating</td>
+<td>Does reliability explain gains/losses, especially QNI?</td>
+</tr>
+<tr>
+<td>E5</td>
+<td>Group decomposition</td>
+<td>Is unit composition useful beyond net pressure?</td>
+</tr>
+<tr>
+<td>E6</td>
+<td>Predicted generator changes versus persistence</td>
+<td>Can future pressure actually be anticipated?</td>
+</tr>
+<tr>
+<td>E7</td>
+<td>Operational fundamentals and optional market context</td>
+<td>Does demand/supply context improve interior flows?</td>
+</tr>
+<tr>
+<td>E8</td>
+<td>Out-of-fold limit/event stacking or AEMO residual correction</td>
+<td>Do upstream forecasts improve flow accuracy?</td>
+</tr>
+<tr>
+<td>E9</td>
+<td>Additive or limited regime interactions</td>
+<td>Can a small nonlinear extension resolve residual structure?</td>
+</tr>
+<tr>
+<td>E10</td>
+<td>Boosting challenger</td>
+<td>Is additional complexity justified after simpler alternatives?</td>
+</tr>
+</tbody>
+</table></div>
+<p>Run single-block additions and selected removals, not only cumulative additions. Include a negative-control experiment with temporally displaced or shuffled training pressure, using blocks that preserve broad seasonal structure. It should not retain the same claimed gain. Do not use a favourable negative-control result to rescue a feature whose primary comparison fails.</p>
+<h3 id="124-metrics-and-uncertainty">12.4 Metrics and uncertainty</h3>
+<p>For continuous targets report MAE, RMSE, signed bias and error quantiles by connector, target and lead. Avoid MAPE for signed flow and near-zero limits. Report unweighted connector comparisons and explicitly weighted operational objectives separately. Standardising targets for training does not justify hiding errors in physical MW.</p>
+<p>For probabilistic forecasts begin with simple regression residual intervals by connector/lead band, followed by linear/spline quantile regression if conditional uncertainty matters. Compare pinball loss, interval coverage and width together. Weighted interval score penalises both excessive width and observations outside the interval; its use is supported by the forecast-evaluation literature.<sup id="fnref:25"><a class="footnote-ref" href="#fn:25">25</a></sup></p>
+<p>For events report Brier score, log loss, calibration curves, precision-recall, incident recall at fixed false-alert budgets and warning time. For flow direction report balanced class metrics with the near-zero class explicit. Compare contraction severity, time-to-trough and recovery errors without selecting cases based only on model success.</p>
+<p>Use paired errors on the same origin/delivery rows and block resampling to reflect dependence. Start with seven-day origin blocks and sensitivity to longer blocks; report event-cluster uncertainty for incident scores. Multiple forecasts of one event and simultaneous QNI/VNI responses share information. Thousands of origin/lead pairs are not thousands of independent extreme episodes.</p>
+<p>Calibration must use matured residuals only. A rolling recalibrator can adapt to drift, but sparse regimes need pooled fallback. Time-series conformal methods such as EnbPI provide relevant methodology; they do not automatically guarantee exact conditional coverage for arbitrary NEM regime shifts or joint seven-day paths.<sup id="fnref:26"><a class="footnote-ref" href="#fn:26">26</a></sup> Report marginal coverage separately from any path-level guarantee.</p>
+<h2 id="13-seasonal-diurnal-and-event-diagnostics">13. Seasonal, diurnal and event diagnostics</h2>
+<p>Use the two existing seasonal cycles as explicit test strata and mechanism evidence. Compare each season-year separately before pooling. A winter-versus-summer difference may reflect outages, new capacity or equation revisions rather than a recurring seasonal relationship. Fit seasonal normalisations on historical training data only.</p>
+<p>Report hour-of-day and weekday/weekend performance, with special attention to sunrise, evening renewable decline and high residual-demand ramps. Cross-tabulate these with constraint family and generator group. Use shrinkage or pooled estimates when cells are small; do not construct hundreds of independent hour × season × equation regressions.</p>
+<p>For each important event, rebuild an issue-time view showing what was known 180, 60 and 30 minutes before onset. Compare the original atlas's retrospective explanation with the forecast model's inputs and warning. A correct explanation after the event is not evidence of an advance warning.</p>
+<p>The final forecast-assessment HTML should include these views:</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>View</th>
+<th>Contents and interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Error by lead</td>
+<td>Persistence, simple baseline, topology model and optional boosting; paired uncertainty</td>
+</tr>
+<tr>
+<td>Feature ablation matrix</td>
+<td>MW change for every connector/direction/horizon, including losses</td>
+</tr>
+<tr>
+<td>Calibration panel</td>
+<td>Coverage versus width, probability reliability and event base rates</td>
+</tr>
+<tr>
+<td>Seasonal/diurnal matrix</td>
+<td>Error, onset recall and false alarms, with sample counts and separate years</td>
+</tr>
+<tr>
+<td>Event timeline</td>
+<td>Actual flow, reported limits, issue-specific forecasts and contraction markers</td>
+</tr>
+<tr>
+<td>Generator contribution panel</td>
+<td>Gross tightening/relief by group and leading DUIDs; observed versus forecast movement</td>
+</tr>
+<tr>
+<td>Equation timeline</td>
+<td>Setter/version, runner-up gap, invocation changes, RHS/other-LHS/switch components</td>
+</tr>
+<tr>
+<td>Secondary market panel</td>
+<td>Price, demand, renewables, coal availability/status, outage evidence and temperature</td>
+</tr>
+<tr>
+<td>Failure cases</td>
+<td>False alarms, missed onsets, reversals without contractions, and bad-version cases</td>
+</tr>
+</tbody>
+</table></div>
+<p>All event graphs must identify forecast origin, delivery time, data availability and whether a series is an observation, forecast or retrospective decomposition. Include a fixed selection of largest events, randomly sampled incidents, false positives and false negatives. For generator rankings, show both frequency and effect size with exposure denominators; preserve relief and uncertain attribution.</p>
+<p>This methodology report contains study tables and a bounded model probe. The forecast-performance graphs above are specified deliverables of the implementation study, not claims that a new full operational study has already run.</p>
+<h2 id="14-repository-implementation-plan">14. Repository implementation plan</h2>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Work package</th>
+<th>Existing integration point</th>
+<th>Proposed deliverable</th>
+<th>Completion gate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A. Evidence baseline</td>
+<td>Study reports, <code>results/</code>, <code>docs/data/</code></td>
+<td>Frozen input/result manifest and discrepancy audit</td>
+<td>Baseline counts and sign/time conventions reconcile</td>
+</tr>
+<tr>
+<td>B. Source availability</td>
+<td><code>constraint_ingest.py</code>, <code>constraint_longitudinal.py</code>, benchmark downloader</td>
+<td>Source-specific issue/availability registry and scoped acquisition manifest</td>
+<td>No future publication enters an origin</td>
+</tr>
+<tr>
+<td>C. Reliable constraint state</td>
+<td><code>constraint_features.py</code>, standing joins</td>
+<td>Versioned sparse candidate state and quality audit</td>
+<td>Known fixed-equation examples reconcile; failures explicitly flagged</td>
+</tr>
+<tr>
+<td>D. Compact feature interface</td>
+<td><code>prepare.py</code>, <code>model.py::Design</code></td>
+<td>Proposed <code>forecast_state.py</code> and feature schema</td>
+<td>Identical transformation for historical replay and live origins</td>
+</tr>
+<tr>
+<td>E. Simple model family</td>
+<td><code>model.py</code></td>
+<td>Proposed <code>simple_models.py</code>: ridge, additive and logistic models</td>
+<td>Matched chronological baselines and saved coefficients</td>
+</tr>
+<tr>
+<td>F. Event targets</td>
+<td><code>event_atlas.py</code></td>
+<td>Proposed forecast-label module with past-only thresholds</td>
+<td>Onsets, ongoing states, boundaries and missing labels tested</td>
+</tr>
+<tr>
+<td>G. Forecast evaluation</td>
+<td><code>backtest.py</code>, <code>aemo_benchmark.py</code></td>
+<td>Nested folds, ablations, event and probabilistic score tables</td>
+<td>Full losses and common-sample comparisons retained</td>
+</tr>
+<tr>
+<td>H. Reporting</td>
+<td>Existing HTML builders, <code>report.py</code></td>
+<td>Forecast assessment and linked event pages</td>
+<td>Every displayed metric traced to a result table</td>
+</tr>
+<tr>
+<td>I. Operational trial</td>
+<td><code>scenario.py</code>, <code>ui.py</code></td>
+<td>Explicit observed/forecast/scenario inputs and fallback status</td>
+<td>Shadow forecasts generated before outcomes, with immutable logs</td>
+</tr>
+</tbody>
+</table></div>
+<p>Module names marked proposed are design choices, not implemented files. Keep research scripts separate from production model loading. Replace cache-by-file-existence with manifests that include source hashes, feature schema, model settings, split boundaries, package versions and code revision. A stale model must not load after the feature meaning changes.</p>
+<p>Use a shared connector configuration for ID, direction labels, adjoining regions, candidate eligibility, generator groups and known regime changes. Avoid hardcoding VNI names in QNI equations or charts. Preserve an adapter for the current five-target prediction interface and add event outputs under separate fields.</p>
+<h3 id="meaningful-tests">Meaningful tests</h3>
+<p>Test coefficient and direction algebra with synthetic upper/lower/equality cases and whole-equation rescaling. Test generation, scheduled load and bidirectional-unit mapping using dated source records. Check that a missing generator term never silently becomes zero pressure and that an unobserved future unit does not enter the feature dictionary.</p>
+<p>Test origin leakage by changing data strictly after an origin and asserting that its inputs/prediction remain unchanged. Test late publications, revised standing versions, announced future invocations, unknown categories and source-specific release lags. Test train-only group selection and complete separation of future targets from scenario inputs.</p>
+<p>Test six-interval aggregation, midnight/month/season boundaries, negative limits, crossed envelopes, event cooldown, ongoing-event labels, missing target windows and intervention/pricing run separation. For stacked models, assert every training prediction came from a model that did not train on that target window.</p>
+<p>Test the storage guard with oversize headers, streamed bytes exceeding the allowance, insufficient free space, interrupted extraction and restart. Verify a successfully compacted batch can be resumed without redownloading or deleting retained evidence. Run a small end-to-end fixture before any two-year rebuild.</p>
+<h2 id="15-priorities-decision-gates-and-deployment">15. Priorities, decision gates and deployment</h2>
+<p>First finish the provenance and QNI discrepancy audit, then build the public-data state and simple model comparison. Do not wait for complete weather/outage enrichment before testing network state. Conversely, do not infer that an unknown future outage is predictable just because its retrospective constraint set is present in the archive.</p>
+<p>Use sequential gates rather than a fixed promise of completion time:</p>
+<ol>
+<li><strong>Data gate:</strong> usable source availability and version completeness are measured; all failed cases have fallbacks.</li>
+<li><strong>Feature gate:</strong> signed pressure and candidate competition pass algebra, timing and reconstruction checks; selected feature blocks improve matched development tests.</li>
+<li><strong>Model gate:</strong> a simple candidate competes against persistence and admissible AEMO forecasts; event metrics and calibration meet predeclared objectives.</li>
+<li><strong>Complexity gate:</strong> add boosting only when local evidence demonstrates material, stable benefit over the best simple alternative.</li>
+<li><strong>Operational gate:</strong> shadow forecasts run reliably, arrive before outcomes and retain performance after actual input uncertainty and missingness are included.</li>
+</ol>
+<p>A proposed practical acceptance contract is no more than 2% deterioration in overall flow MAE while materially improving the primary contraction-warning objective, or at least 5% flow MAE improvement without material deterioration in warning quality. Choose the primary objective and tolerances before the next evaluation. Sparse seasonal/event slices require uncertainty disclosure rather than automatic pass/fail claims.</p>
+<p>Monitor feature missingness, stale sources, unknown equation families, sensitivity distributions, prediction bias, event base rates and interval coverage. Fall back to the simplest available admissible model when quality fails. Update calibrators only after targets mature and retrain on a documented schedule or drift trigger, with rollback to the previous manifest.</p>
+<p>AEMO's current Project EnergyConnect information targets physical loop operations from 1 October 2026 and settlement arrangements from 1 November 2026, subject to readiness and changes. It also distinguishes loop-flow equations from reported interconnector limit setters.<sup id="fnref:27"><a class="footnote-ref" href="#fn:27">27</a></sup> This makes post-study structural change a specific concern for VNI. Tag actual commissioning/formulation changes as they occur, retain new families and avoid assuming the historical six-connector configuration is permanent.</p>
+<h2 id="16-research-evidence-log-and-unresolved-questions">16. Research evidence log and unresolved questions</h2>
+<p>The evidence base combines repository findings, a reproducible local-data probe, primary market documentation, academic studies and an operator's research programme. Research access was on 13 September 2026. Repository source observations refer to revision <code>820450d010be604f533902a6aba90da6bcbeaccc</code> plus the explicitly identified new research artifacts. This log records scope and decisions; it does not imply a systematic review of every published paper.</p>
+<div class="table-scroll" tabindex="0"><table>
+<thead>
+<tr>
+<th>Research area</th>
+<th>Material examined</th>
+<th>Finding retained</th>
+<th>Limitation or next action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Existing forecasting</td>
+<td>Model, preparation, protocol and executed backtest</td>
+<td>Current model is conditional on actual future drivers; useful benchmark but not live skill</td>
+<td>Rebuild operational-input track</td>
+</tr>
+<tr>
+<td>VNI/QNI mechanisms</td>
+<td>Two-year studies and event atlases</td>
+<td>Signed pressure, switching and group exposure are useful feature hypotheses</td>
+<td>No causal dispatch replay; selected cases are not the training population</td>
+</tr>
+<tr>
+<td>Local model evidence</td>
+<td>48 monthly feature partitions and targets</td>
+<td>Ridge gains are mixed; extra spline flexibility is often harmful</td>
+<td>No publication-vintage proof or independent final holdout</td>
+</tr>
+<tr>
+<td>Market definitions</td>
+<td>AEMO limit reporting and constraint FAQ</td>
+<td>Reported limits depend on a dispatch solution and other terms</td>
+<td>Historical specification must be checked against current changes</td>
+</tr>
+<tr>
+<td>Public availability</td>
+<td>AEMO SCADA, dispatch and predispatch descriptions</td>
+<td>Public SCADA differs from private/next-day unit results</td>
+<td>Confirm per-field historical entitlement and release policy</td>
+</tr>
+<tr>
+<td>Simple statistical models</td>
+<td>Intertie ARIMA thesis; LEAR benchmark; additive forecasting paper</td>
+<td>Strong reason to test parsimonious models first</td>
+<td>Different regions/tasks; no transferable uplift percentage</td>
+</tr>
+<tr>
+<td>Complex models</td>
+<td>Tabular benchmark, TFT, European surrogate preprint</td>
+<td>Plausible later challengers</td>
+<td>No direct evidence requiring boosting or neural models here</td>
+</tr>
+<tr>
+<td>Industry practice</td>
+<td>NESO congestion programme and AEMO changes</td>
+<td>Forecast-time information and network-data quality are central</td>
+<td>GB findings are conceptual, not NEM validation</td>
+</tr>
+<tr>
+<td>Uncertainty</td>
+<td>Proper interval scoring and time-series conformal research</td>
+<td>Assess calibration jointly with sharpness and dependence</td>
+<td>No unconditional guarantee under structural change</td>
+</tr>
+<tr>
+<td>Weather</td>
+<td>Original-run versus stitched historical forecast documentation</td>
+<td>Use issue-specific forecasts for historical replay</td>
+<td>Coverage and release delay need per-model verification</td>
+</tr>
+</tbody>
+</table></div>
+<p>The exact reason for QNI's larger reconstruction errors remains unresolved. So do the operational availability of every desired unit/FCAS field, full historical outage-schedule vintages, and the incremental value of the proposed pressure block under strict public inputs. These are specific implementation investigations, not reasons to assume the mechanisms are absent.</p>
+<p>No new boosting, graph or sequence model has been trained in this research. No bulk market download or production-model replacement occurred. The new numerical probe is limited to retained data and simple models; the full operational methodology remains proposed work.</p>
+<h2 id="sources">Sources</h2>
+<p>Numbered references below provide the source inventory for both the Markdown and HTML editions. Local links identify repository records; ignored data required to rerun the numerical probe remain on the research workstation, with hashes in its evidence file. Web publication dates are taken from the documents when identifiable, not search-engine crawl dates.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>INTERFLOW repository. <a href="../../nemic/model.py">Current model implementation</a>, <code>Design</code>, <code>features</code>, training and estimator functions. Source revision <code>820450d</code>, inspected 13 September 2026. Local primary implementation evidence.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>INTERFLOW repository. <a href="../../nemic/prepare.py">Preparation implementation</a> and <a href="../../nemic/common.py">connector definitions</a>. Source revision <code>820450d</code>; signs, aggregation, demand definition and run handling. Local primary implementation evidence.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:2" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:2" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref4:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>INTERFLOW. <a href="../../BACKTEST_REPORT.md">Executed conditional backtest</a>, executed 11 September 2026, results and AEMO comparison. Local saved experiment; no claim of independent reproduction of its entire training run in this research.&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:3" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p>INTERFLOW. <a href="../../nemic/constraint_features.py">Constraint feature implementation</a> and <a href="../CONSTRAINT_FEATURE_PILOT.md">corrected VNI feasibility pilot</a>, 11 September 2026. Local prototype and one-month development evidence.&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:5">
+<p>INTERFLOW. <a href="../VNI_TWO_YEAR_CONSTRAINT_STUDY.md">VNI two-year constraint study</a>, September 2024–August 2026 population. Local saved report and linked aggregate evidence, inspected 13 September 2026.&#160;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 5 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:5" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:6">
+<p>INTERFLOW. <a href="../QNI_TWO_YEAR_CONSTRAINT_STUDY.md">QNI two-year constraint study</a>, September 2024–August 2026 population. Local saved report and linked aggregate evidence, inspected 13 September 2026.&#160;<a class="footnote-backref" href="#fnref:6" title="Jump back to footnote 6 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:6" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:7">
+<p>INTERFLOW. <a href="../VNI_TWO_YEAR_EVENT_ATLAS.md">VNI two-year event atlas</a>, method <code>1.1-event-atlas-1</code>, September 2024–August 2026. Local selected-case accounting and population screening.&#160;<a class="footnote-backref" href="#fnref:7" title="Jump back to footnote 7 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:7" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:8">
+<p>INTERFLOW. <a href="../QNI_TWO_YEAR_EVENT_ATLAS.md">QNI two-year event atlas</a>, method <code>1.1-event-atlas-1</code>, September 2024–August 2026. Local selected-case accounting and population screening.&#160;<a class="footnote-backref" href="#fnref:8" title="Jump back to footnote 8 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:8" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+<li id="fn:9">
+<p>AEMO/NEMMCO. <a href="https://www.aemo.com.au/-/media/files/electricity/nem/security_and_reliability/dispatch/policy_and_process/interconnector-limit-setter-reporting-changes.pdf">Interconnector Limit Setter Reporting Changes—Business Specification</a>, version 1.02, effective 1 July 2005, especially Appendix 1, pp. 13–14. Historical primary definition; current reform changes must be checked separately.&#160;<a class="footnote-backref" href="#fnref:9" title="Jump back to footnote 9 in the text">&#8617;</a></p>
+</li>
+<li id="fn:10">
+<p>AEMO. <a href="https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/system-operations/congestion-information-resource/constraint-faq">Constraint Frequently Asked Questions</a>, undated live page, accessed 13 September 2026. LHS/RHS, feedback, constraint sets and binding definitions.&#160;<a class="footnote-backref" href="#fnref:10" title="Jump back to footnote 10 in the text">&#8617;</a></p>
+</li>
+<li id="fn:11">
+<p>AEMO. <a href="https://visualisations.aemo.com.au/aemo/nemweb/MMSDataModelReport/Electricity/MMS%20Data%20Model%20Report_files/MMS_123.htm">MMS Data Model: DISPATCH_UNIT_SCADA</a>, undated table documentation, accessed 13 September 2026. Public visibility and start-of-interval SCADA definition.&#160;<a class="footnote-backref" href="#fnref:11" title="Jump back to footnote 11 in the text">&#8617;</a></p>
+</li>
+<li id="fn:12">
+<p>AEMO. <a href="https://visualisations.aemo.com.au/aemo/nemweb/MMSDataModelReport/Electricity/MMS%20Data%20Model%20Report_files/MMS_274.htm">MMS Data Model: PREDISPATCHLOAD</a>, undated; <a href="https://di-help.docs.public.aemo.com.au/Content/Data_Model/EMMS_-_Technical_Specification_-_Data_Model_v5.2_-_May_2023.pdf">Data Model v5.2 technical specification</a>, May 2023, section 6.9.2; <a href="https://visualisations.aemo.com.au/aemo/di-help/Content/Data_Model/Electricity_Data_Model_Package_Summary_54.pdf">Electricity Data Model Package Summary v5.4</a>, 7 October 2024, dispatch visibility. Historical specifications support conservative access treatment; current per-feed access remains an implementation audit.&#160;<a class="footnote-backref" href="#fnref:12" title="Jump back to footnote 12 in the text">&#8617;</a></p>
+</li>
+<li id="fn:13">
+<p>Open-Meteo. <a href="https://open-meteo.com/en/docs/historical-forecast-api">Historical Forecast API documentation</a>, live documentation, accessed 13 September 2026. Distinguishes historical weather, stitched forecasts, previous runs and individual runs; model coverage varies.&#160;<a class="footnote-backref" href="#fnref:13" title="Jump back to footnote 13 in the text">&#8617;</a></p>
+</li>
+<li id="fn:14">
+<p>Piyush S. Paretkar. <a href="https://vtechworks.lib.vt.edu/server/api/core/bitstreams/1eeef9f3-ca78-43e5-9f14-00e4fca988fb/content">Short-Term Forecasting of Power Flows over Major Pacific Northwestern Interties: Using Box and Jenkins ARIMA Methodology</a>, Virginia Tech master's thesis, 2008. Direct intertie forecasting precedent; historical non-NEM evidence.&#160;<a class="footnote-backref" href="#fnref:14" title="Jump back to footnote 14 in the text">&#8617;</a></p>
+</li>
+<li id="fn:15">
+<p>Jesus Lago, Grzegorz Marcjasz, Bart De Schutter and Rafał Weron. <a href="https://arxiv.org/html/2008.08004v2">Forecasting day-ahead electricity prices: A review of state-of-the-art algorithms, best practices and an open-access benchmark</a>, preprint revision 21 December 2020; published in Applied Energy, 2021. LEAR and evaluation methodology; adjacent price-forecasting task.&#160;<a class="footnote-backref" href="#fnref:15" title="Jump back to footnote 15 in the text">&#8617;</a></p>
+</li>
+<li id="fn:16">
+<p>Pierre Gaillard, Yannig Goude and Raphaël Nedellec. <a href="https://doi.org/10.1016/j.ijforecast.2015.12.001">Additive models and robust aggregation for GEFCom2014 probabilistic electric load and electricity price forecasting</a>, International Journal of Forecasting 32(3), 1038–1050, 2016. Publisher-indexed abstract reviewed; direct full-text fetch unavailable. Implementation references: scikit-learn <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.SplineTransformer.html">SplineTransformer</a> and <a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Ridge.html">Ridge</a>, live documentation accessed 13 September 2026. Installed versions are recorded in the local probe manifest.&#160;<a class="footnote-backref" href="#fnref:16" title="Jump back to footnote 16 in the text">&#8617;</a></p>
+</li>
+<li id="fn:17">
+<p>National Energy System Operator. <a href="https://www.neso.energy/about/innovation/our-innovation-projects/forecasting-risk-congestion">Forecasting the risk of congestion</a>, undated project page, accessed 13 September 2026. Industry programme scope and data lessons, not a measured QNI/VNI comparison.&#160;<a class="footnote-backref" href="#fnref:17" title="Jump back to footnote 17 in the text">&#8617;</a></p>
+</li>
+<li id="fn:18">
+<p>Leo Grinsztajn, Edouard Oyallon and Gaël Varoquaux. <a href="https://proceedings.neurips.cc/paper_files/paper/2022/hash/0378c7692da36807bdec87ab043cdadc-Abstract-Datasets_and_Benchmarks.html">Why do tree-based models still outperform deep learning on typical tabular data?</a>, NeurIPS Datasets and Benchmarks, 2022. General tabular evidence; not a comparison against this repository's simple engineered model.&#160;<a class="footnote-backref" href="#fnref:18" title="Jump back to footnote 18 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:18" title="Jump back to footnote 18 in the text">&#8617;</a></p>
+</li>
+<li id="fn:19">
+<p>Robert Gaugl, Eloy Insunza, José Portela and Sonja Wogrin. <a href="https://arxiv.org/abs/2606.03475">Surrogate Modeling of Interconnector Flows: A Machine Learning Alternative to Full-Scale Power System Simulations with Application to Cross-Border Electricity Exchange</a>, preprint, 2 June 2026. European simulated planning flows; peer-reviewed status not established by the reviewed record.&#160;<a class="footnote-backref" href="#fnref:19" title="Jump back to footnote 19 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:19" title="Jump back to footnote 19 in the text">&#8617;</a></p>
+</li>
+<li id="fn:20">
+<p>LightGBM contributors. <a href="https://lightgbm.readthedocs.io/en/stable/Parameters.html">Parameters</a>, live 4.7.0 documentation reviewed 13 September 2026. Regression, classification and quantile capabilities; no claim that the live documentation version matches every local experiment.&#160;<a class="footnote-backref" href="#fnref:20" title="Jump back to footnote 20 in the text">&#8617;</a></p>
+</li>
+<li id="fn:21">
+<p>Bryan Lim, Sercan Ö. Arık, Nicolas Loeff and Tomas Pfister. <a href="https://arxiv.org/abs/1912.09363">Temporal Fusion Transformers for Interpretable Multi-horizon Time Series Forecasting</a>, preprint 2019/revised 2020; International Journal of Forecasting, 2021. Later sequence-model option, not local performance evidence.&#160;<a class="footnote-backref" href="#fnref:21" title="Jump back to footnote 21 in the text">&#8617;</a></p>
+</li>
+<li id="fn:22">
+<p>INTERFLOW. <a href="../../nemic/event_atlas.py">Event detector implementation</a>, <code>detector</code>, and <a href="../INTERCONNECTOR_EVENT_ANALYSIS_METHODOLOGY.md">general event-analysis methodology</a>. Source revision <code>820450d</code>, inspected 13 September 2026. Exact retrospective threshold and onset rule.&#160;<a class="footnote-backref" href="#fnref:22" title="Jump back to footnote 22 in the text">&#8617;</a></p>
+</li>
+<li id="fn:23">
+<p>INTERFLOW. <a href="../data/qni_vni_simple_model_research.json">Simple-model research evidence</a>, generated 13 September 2026 by <a href="../../scripts/research_simple_models.py">the bounded research script</a>. Contains all model cells, 49 local input-file hashes, configuration and limitations; no downloads. Local primary exploratory evidence.&#160;<a class="footnote-backref" href="#fnref:23" title="Jump back to footnote 23 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:23" title="Jump back to footnote 23 in the text">&#8617;</a></p>
+</li>
+<li id="fn:24">
+<p>INTERFLOW. <a href="../BACKTEST_PROTOCOL.md">Backtest protocol</a>, documented 11 September 2026. Exact partitions, input availability limitations, lead weighting, bootstrap and AEMO alignment.&#160;<a class="footnote-backref" href="#fnref:24" title="Jump back to footnote 24 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:24" title="Jump back to footnote 24 in the text">&#8617;</a></p>
+</li>
+<li id="fn:25">
+<p>Johannes Bracher, Evan L. Ray, Tilmann Gneiting and Nicholas G. Reich. <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008618">Evaluating epidemic forecasts in an interval format</a>, PLOS Computational Biology 17(2), 2021. Proper interval scoring methodology; principles applied here to energy forecasts.&#160;<a class="footnote-backref" href="#fnref:25" title="Jump back to footnote 25 in the text">&#8617;</a></p>
+</li>
+<li id="fn:26">
+<p>Chen Xu and Yao Xie. <a href="https://proceedings.mlr.press/v139/xu21h.html">Conformal prediction interval for dynamic time-series</a>, Proceedings of ICML, PMLR 139, 2021. Time-series uncertainty methodology, with assumptions and limits.&#160;<a class="footnote-backref" href="#fnref:26" title="Jump back to footnote 26 in the text">&#8617;</a></p>
+</li>
+<li id="fn:27">
+<p>AEMO. <a href="https://www.aemo.com.au/initiatives/major-programs/nem-reform-program/nem-reform-program-initiatives/project-energyconnect-market-integration-project/frequently-asked-questions">Project EnergyConnect market integration: Frequently asked questions</a>, live page accessed 13 September 2026. Planned October/November 2026 changes and distinction between loop equations and limit setters; dates remain subject to AEMO updates.&#160;<a class="footnote-backref" href="#fnref:27" title="Jump back to footnote 27 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></main></body></html>

@@ -1,0 +1,86 @@
+{
+  "access_date": "2026-09-13",
+  "scope": "Expanded integrative review; not a systematic exhaustive census",
+  "batches": [
+    {
+      "batch": 1,
+      "queries": [
+        "interconnector flow forecasting Australia NEM QNI VNI statistical forecasting congestion machine learning",
+        "cross border electricity flow forecasting econometric ARX gradient boosting interconnector",
+        "transmission congestion forecasting active constraints classification optimal power flow machine learning",
+        "electricity forecasting generalized additive quantile regression boosting benchmark linear"
+      ]
+    },
+    {
+      "batch": 2,
+      "queries": [
+        "\"interconnector\" \"forecasting\" \"regression\" electricity",
+        "\"cross-border\" \"power flow\" forecasting weather",
+        "\"congestion forecasting\" \"electricity\" machine learning",
+        "\"NEM\" \"interconnector\" \"forecast\" model AEMO"
+      ]
+    },
+    {
+      "batch": 3,
+      "queries": [
+        "\"forecasting\" \"interconnector flows\" linear Statnett",
+        "\"Predicting cross-border power flow using weather data\" Kledzik Haker",
+        "\"constraint\" \"forecasting\" \"Tumut\" AEMO",
+        "site.aemo.com.au \"Predispatch\" \"Accuracy\" \"constraints\""
+      ]
+    },
+    {
+      "batch": 4,
+      "queries": [
+        "\"Forecasting the occurrence of extreme electricity prices\" logistic authors",
+        "\"lightgbm\" \"forecast\" \"interconnector\" Statnett",
+        "\"probabilistic\" \"congestion\" \"active set\" optimal power flow Deka",
+        "\"forecasting\" \"ramp events\" \"wind\" probabilistic review"
+      ]
+    },
+    {
+      "batch": 5,
+      "queries": [
+        "\"forecasting\" \"regime switching\" \"electricity\" Weron Janczura",
+        "\"forecast combinations\" \"simple average\" forecasting review Wang Hyndman",
+        "\"evaluating time series forecasting models\" rolling origin Cerqueira Torgo Mozetic",
+        "\"machine learning\" \"congestion\" \"active constraints\" Deka Misra"
+      ]
+    },
+    {
+      "batch": 6,
+      "queries": [
+        "\"Deka\" \"Misra\" \"active\" \"constraints\" learning",
+        "\"Learning for DC-OPF\" \"active\"",
+        "\"Janczura\" \"Weron\" \"regime\" \"2010\"",
+        "\"Liu\" \"Bai\" \"Forecasting the occurrence of extreme electricity prices\""
+      ]
+    },
+    {
+      "batch": 7,
+      "queries": [
+        "\"Forecast combinations\" Wang Hyndman Li Kang arxiv",
+        "\"Explainable Boosting Machine\" Nori 2019 interpretML",
+        "\"Regularization and variable selection via the elastic net\" Zou Hastie pdf",
+        "\"Multivariate adaptive regression splines\" Friedman 1991"
+      ]
+    },
+    {
+      "batch": 8,
+      "queries": [
+        "\"AEMO\" \"seven day\" \"predispatch\" \"PD7DAY\"",
+        "\"AEMO\" \"PREDISPATCH\" \"forecast errors\" \"constraint\"",
+        "\"forecasting\" \"generator dispatch\" \"NEM\" machine learning",
+        "\"SHAP\" \"causal\" \"feature relevance quantification\""
+      ]
+    },
+    {
+      "batch": 9,
+      "queries": [
+        "site.aemo.com.au \"131322\" \"0.15\"",
+        "site.aemo.com.au \"PD7DAY\" forecast",
+        "\"Forecasting the occurrence of extreme electricity prices\" Liu Bai full text"
+      ]
+    }
+  ]
+}

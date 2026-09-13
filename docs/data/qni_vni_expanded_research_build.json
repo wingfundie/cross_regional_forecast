@@ -1,0 +1,73 @@
+{
+  "date": "2026-09-13",
+  "status": "expanded integrative research and exploratory experiments",
+  "inputs": [
+    {
+      "path": "docs/QNI_VNI_EXPANDED_FORECAST_RESEARCH.md",
+      "bytes": 102300,
+      "sha256": "c10f8fa0ac0c1d2bef93b02241724192dbba3b06a67c22af543bc711d9b624ba"
+    },
+    {
+      "path": "docs/QNI_VNI_EXPANDED_RESEARCH_LOG.md",
+      "bytes": 7872,
+      "sha256": "76124429b4c56d2c497774d443f6f774fa4e563c28551021ba0caafb0ac9a529"
+    },
+    {
+      "path": "docs/data/qni_vni_expanded_model_evidence.json",
+      "bytes": 192546,
+      "sha256": "5beeb063affc8feda15440ffff2ef0967c9efbc3c6f690e2f04815317e177c63"
+    },
+    {
+      "path": "docs/data/qni_vni_expanded_search_log.json",
+      "bytes": 3289,
+      "sha256": "b97a820d3fb8fe45b4b13371d93ff09d8ad2abffe07e0512692fdbe47cd38dee"
+    },
+    {
+      "path": "docs/data/qni_vni_expanded_sources.json",
+      "bytes": 7898,
+      "sha256": "2099608ec501c9dd91900c3b436f5affd28a434423fc941cb3c60435ae53a737"
+    },
+    {
+      "path": "scripts/build_expanded_research.py",
+      "bytes": 12534,
+      "sha256": "a40724cc859a3a09da9f7806d4824300a989d1cb5146969756aaca0de25d1031"
+    },
+    {
+      "path": "scripts/research_expanded_models.py",
+      "bytes": 15933,
+      "sha256": "5d9b68f310719ffc22780f20d8cefa6171e0b8f71e496f7497023842a21bb7cc"
+    },
+    {
+      "path": "docs/QNI_VNI_FORECAST_MODEL_IMPROVEMENT_PLAN.md",
+      "bytes": 76705,
+      "sha256": "69d7e04a3692677d0e1ac36c041187017ba711d61413f88d2aeb6f56395ee668"
+    },
+    {
+      "path": "scripts/report_theme/report_theme.py",
+      "bytes": 3252,
+      "sha256": "8a49b55a30101a6b7f6e92166b126ce9e2b170eccd9a477738cba95dfadc5aa9"
+    },
+    {
+      "path": "scripts/report_theme/report.css",
+      "bytes": 4619,
+      "sha256": "c02b38088e3ccf3cfc916465bfbbdc369f53ae954fdda4f3e887fcba669b027d"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "docs/html/qni_vni_expanded_forecast_research.html",
+      "bytes": 155118,
+      "sha256": "16bb2449aced7a5e555843a81f7a4c30f707ce75aa1985e5d4496034bac30a6c"
+    },
+    {
+      "path": "docs/html/qni_vni_expanded_research_log.html",
+      "bytes": 16024,
+      "sha256": "820b39485a5a051d96262c9a03ea97ad553e33777124d2d542ecd7538cf0b9ea"
+    }
+  ],
+  "rebuild": "python scripts/build_expanded_research.py",
+  "experiment": "python scripts/research_expanded_models.py",
+  "market_downloads": [],
+  "visual_preview": "not performed; browser policy blocked prior local report",
+  "markdown_version": "3.10.3"
+}

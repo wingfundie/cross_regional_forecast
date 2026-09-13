@@ -1,0 +1,1788 @@
+{
+  "status": "exploratory retrospective diagnostic, not operational forecast validation",
+  "scope": "VNI and QNI; existing retained half-hour topology only; no future realised fundamentals",
+  "cutoff": "2026-08-31 23:30 fixed UTC+10",
+  "observation_delay_minutes": 30,
+  "training": "origins from 2024-09-08; deliveries through 2025-09-01 00:00",
+  "validation": "origins from 2025-09-01; deliveries through 2026-03-01 00:00",
+  "evaluation": "origins from 2026-03-01; deliveries through 2026-08-31 23:30",
+  "limitations": [
+    "Entire study period has already been inspected.",
+    "Retained topology uses retrospective standing-data dependencies and imperfect equation versions.",
+    "A 30-minute lag does not establish actual public availability of unit targets.",
+    "No publication-vintage reconstruction or source-specific latency audit.",
+    "No future demand/weather inputs: not directly comparable to existing conditional-model scores.",
+    "No event-specific or probabilistic performance test; no statistical significance claim.",
+    "Training-only 0.1/99.9 percentile clipping may suppress important extremes; requires ablation."
+  ],
+  "settings": {
+    "ridge_alpha_grid": [
+      10,
+      100,
+      1000
+    ],
+    "spline_knots": 4,
+    "spline_degree": 2,
+    "selection": "validation MAE, no refit after selection",
+    "targets": [
+      "flow",
+      "export_tight",
+      "import_tight"
+    ]
+  },
+  "scores": [
+    {
+      "ic": "VNI",
+      "horizon_minutes": 30,
+      "target": "flow",
+      "model": "persistence",
+      "mae_mw": 155.45431830955349,
+      "n": 8831
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 30,
+      "target": "flow",
+      "model": "ridge_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 187.93642287754622,
+      "mae_mw": 156.41625864382925,
+      "n": 8831,
+      "raw_features": 17
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 30,
+      "target": "flow",
+      "model": "additive_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 180.17146357082098,
+      "mae_mw": 153.77695811394332,
+      "n": 8831,
+      "raw_features": 17
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 30,
+      "target": "flow",
+      "model": "ridge_topology",
+      "alpha": 10.0,
+      "validation_mae_mw": 178.61913213478786,
+      "mae_mw": 150.68792087515087,
+      "n": 8831,
+      "raw_features": 37
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 30,
+      "target": "flow",
+      "model": "additive_topology",
+      "alpha": 100.0,
+      "validation_mae_mw": 176.0891266918401,
+      "mae_mw": 156.41737457284918,
+      "n": 8831,
+      "raw_features": 37
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 30,
+      "target": "export_tight",
+      "model": "persistence",
+      "mae_mw": 150.6695239406636,
+      "n": 8831
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 30,
+      "target": "export_tight",
+      "model": "ridge_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 174.40194164805007,
+      "mae_mw": 152.9031039113625,
+      "n": 8831,
+      "raw_features": 17
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 30,
+      "target": "export_tight",
+      "model": "additive_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 164.64496915466165,
+      "mae_mw": 144.0232366264855,
+      "n": 8831,
+      "raw_features": 17
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 30,
+      "target": "export_tight",
+      "model": "ridge_topology",
+      "alpha": 100.0,
+      "validation_mae_mw": 165.97026396082697,
+      "mae_mw": 145.67630224764838,
+      "n": 8831,
+      "raw_features": 37
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 30,
+      "target": "export_tight",
+      "model": "additive_topology",
+      "alpha": 100.0,
+      "validation_mae_mw": 180.4173465198589,
+      "mae_mw": 189.28427960912052,
+      "n": 8831,
+      "raw_features": 37
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 30,
+      "target": "import_tight",
+      "model": "persistence",
+      "mae_mw": 114.10096220813045,
+      "n": 8831
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 30,
+      "target": "import_tight",
+      "model": "ridge_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 174.05312929492356,
+      "mae_mw": 132.5459471733455,
+      "n": 8831,
+      "raw_features": 17
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 30,
+      "target": "import_tight",
+      "model": "additive_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 167.14665244061376,
+      "mae_mw": 128.9543125527427,
+      "n": 8831,
+      "raw_features": 17
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 30,
+      "target": "import_tight",
+      "model": "ridge_topology",
+      "alpha": 1000.0,
+      "validation_mae_mw": 169.41519601281956,
+      "mae_mw": 130.05087596970145,
+      "n": 8831,
+      "raw_features": 37
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 30,
+      "target": "import_tight",
+      "model": "additive_topology",
+      "alpha": 1000.0,
+      "validation_mae_mw": 170.5707939628909,
+      "mae_mw": 150.9383327567692,
+      "n": 8831,
+      "raw_features": 37
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 60,
+      "target": "flow",
+      "model": "persistence",
+      "mae_mw": 197.0845183257833,
+      "n": 8830
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 60,
+      "target": "flow",
+      "model": "ridge_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 233.73801663995383,
+      "mae_mw": 194.12325135715545,
+      "n": 8830,
+      "raw_features": 17
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 60,
+      "target": "flow",
+      "model": "additive_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 223.70752557938226,
+      "mae_mw": 193.018323355379,
+      "n": 8830,
+      "raw_features": 17
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 60,
+      "target": "flow",
+      "model": "ridge_topology",
+      "alpha": 10.0,
+      "validation_mae_mw": 226.1190036161773,
+      "mae_mw": 191.65363988628545,
+      "n": 8830,
+      "raw_features": 37
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 60,
+      "target": "flow",
+      "model": "additive_topology",
+      "alpha": 100.0,
+      "validation_mae_mw": 219.25861535342997,
+      "mae_mw": 195.71229034748563,
+      "n": 8830,
+      "raw_features": 37
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 60,
+      "target": "export_tight",
+      "model": "persistence",
+      "mae_mw": 197.98321690713476,
+      "n": 8830
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 60,
+      "target": "export_tight",
+      "model": "ridge_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 214.2917836805219,
+      "mae_mw": 192.5683760129702,
+      "n": 8830,
+      "raw_features": 17
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 60,
+      "target": "export_tight",
+      "model": "additive_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 198.95925424509358,
+      "mae_mw": 182.28501581309814,
+      "n": 8830,
+      "raw_features": 17
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 60,
+      "target": "export_tight",
+      "model": "ridge_topology",
+      "alpha": 100.0,
+      "validation_mae_mw": 207.67976023281452,
+      "mae_mw": 190.54852818940788,
+      "n": 8830,
+      "raw_features": 37
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 60,
+      "target": "export_tight",
+      "model": "additive_topology",
+      "alpha": 1000.0,
+      "validation_mae_mw": 231.56747712171355,
+      "mae_mw": 256.8765864891592,
+      "n": 8830,
+      "raw_features": 37
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 60,
+      "target": "import_tight",
+      "model": "persistence",
+      "mae_mw": 148.05216618686296,
+      "n": 8830
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 60,
+      "target": "import_tight",
+      "model": "ridge_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 201.6246308272312,
+      "mae_mw": 162.85819147790193,
+      "n": 8830,
+      "raw_features": 17
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 60,
+      "target": "import_tight",
+      "model": "additive_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 195.25497287071622,
+      "mae_mw": 161.5311901935804,
+      "n": 8830,
+      "raw_features": 17
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 60,
+      "target": "import_tight",
+      "model": "ridge_topology",
+      "alpha": 1000.0,
+      "validation_mae_mw": 196.56028539214077,
+      "mae_mw": 162.025905292308,
+      "n": 8830,
+      "raw_features": 37
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 60,
+      "target": "import_tight",
+      "model": "additive_topology",
+      "alpha": 1000.0,
+      "validation_mae_mw": 201.64092504620734,
+      "mae_mw": 191.19286661351225,
+      "n": 8830,
+      "raw_features": 37
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 180,
+      "target": "flow",
+      "model": "persistence",
+      "mae_mw": 317.5576689177808,
+      "n": 8826
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 180,
+      "target": "flow",
+      "model": "ridge_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 328.8022585929465,
+      "mae_mw": 277.07169527413663,
+      "n": 8826,
+      "raw_features": 17
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 180,
+      "target": "flow",
+      "model": "additive_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 314.94538309470687,
+      "mae_mw": 278.9215579092546,
+      "n": 8826,
+      "raw_features": 17
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 180,
+      "target": "flow",
+      "model": "ridge_topology",
+      "alpha": 10.0,
+      "validation_mae_mw": 327.3318017933252,
+      "mae_mw": 278.77420047142084,
+      "n": 8826,
+      "raw_features": 37
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 180,
+      "target": "flow",
+      "model": "additive_topology",
+      "alpha": 10.0,
+      "validation_mae_mw": 314.00318379901546,
+      "mae_mw": 281.6513753518962,
+      "n": 8826,
+      "raw_features": 37
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 180,
+      "target": "export_tight",
+      "model": "persistence",
+      "mae_mw": 351.13553259460684,
+      "n": 8826
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 180,
+      "target": "export_tight",
+      "model": "ridge_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 289.10383324755543,
+      "mae_mw": 271.71264179482944,
+      "n": 8826,
+      "raw_features": 17
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 180,
+      "target": "export_tight",
+      "model": "additive_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 267.54744510243984,
+      "mae_mw": 265.2232321766028,
+      "n": 8826,
+      "raw_features": 17
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 180,
+      "target": "export_tight",
+      "model": "ridge_topology",
+      "alpha": 100.0,
+      "validation_mae_mw": 282.0432324752205,
+      "mae_mw": 275.1318742112444,
+      "n": 8826,
+      "raw_features": 37
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 180,
+      "target": "export_tight",
+      "model": "additive_topology",
+      "alpha": 1000.0,
+      "validation_mae_mw": 303.46778818248947,
+      "mae_mw": 354.51017809904664,
+      "n": 8826,
+      "raw_features": 37
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 180,
+      "target": "import_tight",
+      "model": "persistence",
+      "mae_mw": 233.29759607636527,
+      "n": 8826
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 180,
+      "target": "import_tight",
+      "model": "ridge_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 243.3920556696155,
+      "mae_mw": 215.8339157071401,
+      "n": 8826,
+      "raw_features": 17
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 180,
+      "target": "import_tight",
+      "model": "additive_base",
+      "alpha": 100.0,
+      "validation_mae_mw": 241.21898353579488,
+      "mae_mw": 221.31892037543864,
+      "n": 8826,
+      "raw_features": 17
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 180,
+      "target": "import_tight",
+      "model": "ridge_topology",
+      "alpha": 10.0,
+      "validation_mae_mw": 239.30659589776195,
+      "mae_mw": 228.03161300596318,
+      "n": 8826,
+      "raw_features": 37
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 180,
+      "target": "import_tight",
+      "model": "additive_topology",
+      "alpha": 1000.0,
+      "validation_mae_mw": 269.6656196663036,
+      "mae_mw": 295.60465385776945,
+      "n": 8826,
+      "raw_features": 37
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 30,
+      "target": "flow",
+      "model": "persistence",
+      "mae_mw": 115.28865552579927,
+      "n": 8831
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 30,
+      "target": "flow",
+      "model": "ridge_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 139.3184588984934,
+      "mae_mw": 117.40983792729835,
+      "n": 8831,
+      "raw_features": 17
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 30,
+      "target": "flow",
+      "model": "additive_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 139.40080376082952,
+      "mae_mw": 119.5944615476438,
+      "n": 8831,
+      "raw_features": 17
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 30,
+      "target": "flow",
+      "model": "ridge_topology",
+      "alpha": 10.0,
+      "validation_mae_mw": 133.45855638561508,
+      "mae_mw": 114.8893792666083,
+      "n": 8831,
+      "raw_features": 37
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 30,
+      "target": "flow",
+      "model": "additive_topology",
+      "alpha": 10.0,
+      "validation_mae_mw": 135.78948355382607,
+      "mae_mw": 116.6191662601804,
+      "n": 8831,
+      "raw_features": 37
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 30,
+      "target": "export_tight",
+      "model": "persistence",
+      "mae_mw": 62.75107339712376,
+      "n": 8831
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 30,
+      "target": "export_tight",
+      "model": "ridge_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 76.84725692330194,
+      "mae_mw": 79.19695625903483,
+      "n": 8831,
+      "raw_features": 17
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 30,
+      "target": "export_tight",
+      "model": "additive_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 72.39589373539643,
+      "mae_mw": 72.13478784033681,
+      "n": 8831,
+      "raw_features": 17
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 30,
+      "target": "export_tight",
+      "model": "ridge_topology",
+      "alpha": 1000.0,
+      "validation_mae_mw": 75.46379810051802,
+      "mae_mw": 73.04793211513338,
+      "n": 8831,
+      "raw_features": 37
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 30,
+      "target": "export_tight",
+      "model": "additive_topology",
+      "alpha": 1000.0,
+      "validation_mae_mw": 74.00905669188391,
+      "mae_mw": 72.15926899913295,
+      "n": 8831,
+      "raw_features": 37
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 30,
+      "target": "import_tight",
+      "model": "persistence",
+      "mae_mw": 68.00660396897293,
+      "n": 8831
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 30,
+      "target": "import_tight",
+      "model": "ridge_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 91.4485642446932,
+      "mae_mw": 76.68878995015956,
+      "n": 8831,
+      "raw_features": 17
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 30,
+      "target": "import_tight",
+      "model": "additive_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 90.62470575123092,
+      "mae_mw": 77.66331620307002,
+      "n": 8831,
+      "raw_features": 17
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 30,
+      "target": "import_tight",
+      "model": "ridge_topology",
+      "alpha": 1000.0,
+      "validation_mae_mw": 87.80754888828065,
+      "mae_mw": 72.51837253137354,
+      "n": 8831,
+      "raw_features": 37
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 30,
+      "target": "import_tight",
+      "model": "additive_topology",
+      "alpha": 1000.0,
+      "validation_mae_mw": 99.46084765631329,
+      "mae_mw": 85.91306557269884,
+      "n": 8831,
+      "raw_features": 37
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 60,
+      "target": "flow",
+      "model": "persistence",
+      "mae_mw": 143.57132872612303,
+      "n": 8830
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 60,
+      "target": "flow",
+      "model": "ridge_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 175.97782672482,
+      "mae_mw": 148.25717774611422,
+      "n": 8830,
+      "raw_features": 17
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 60,
+      "target": "flow",
+      "model": "additive_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 176.70194571598043,
+      "mae_mw": 151.8312070562148,
+      "n": 8830,
+      "raw_features": 17
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 60,
+      "target": "flow",
+      "model": "ridge_topology",
+      "alpha": 10.0,
+      "validation_mae_mw": 171.76735265141963,
+      "mae_mw": 146.5267388796345,
+      "n": 8830,
+      "raw_features": 37
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 60,
+      "target": "flow",
+      "model": "additive_topology",
+      "alpha": 100.0,
+      "validation_mae_mw": 174.4811764658687,
+      "mae_mw": 150.22697936360856,
+      "n": 8830,
+      "raw_features": 37
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 60,
+      "target": "export_tight",
+      "model": "persistence",
+      "mae_mw": 81.84024200113251,
+      "n": 8830
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 60,
+      "target": "export_tight",
+      "model": "ridge_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 96.0618848743146,
+      "mae_mw": 101.2712342625469,
+      "n": 8830,
+      "raw_features": 17
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 60,
+      "target": "export_tight",
+      "model": "additive_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 90.78689561857654,
+      "mae_mw": 91.64256036565095,
+      "n": 8830,
+      "raw_features": 17
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 60,
+      "target": "export_tight",
+      "model": "ridge_topology",
+      "alpha": 1000.0,
+      "validation_mae_mw": 94.22626712896964,
+      "mae_mw": 92.64108392329652,
+      "n": 8830,
+      "raw_features": 37
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 60,
+      "target": "export_tight",
+      "model": "additive_topology",
+      "alpha": 1000.0,
+      "validation_mae_mw": 92.15352954105425,
+      "mae_mw": 93.67014538481955,
+      "n": 8830,
+      "raw_features": 37
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 60,
+      "target": "import_tight",
+      "model": "persistence",
+      "mae_mw": 84.74181829105324,
+      "n": 8830
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 60,
+      "target": "import_tight",
+      "model": "ridge_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 114.97192109077189,
+      "mae_mw": 96.8943589766479,
+      "n": 8830,
+      "raw_features": 17
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 60,
+      "target": "import_tight",
+      "model": "additive_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 113.06187751738004,
+      "mae_mw": 99.50930133954874,
+      "n": 8830,
+      "raw_features": 17
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 60,
+      "target": "import_tight",
+      "model": "ridge_topology",
+      "alpha": 1000.0,
+      "validation_mae_mw": 110.39033241284316,
+      "mae_mw": 91.56177933133537,
+      "n": 8830,
+      "raw_features": 37
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 60,
+      "target": "import_tight",
+      "model": "additive_topology",
+      "alpha": 1000.0,
+      "validation_mae_mw": 125.3694061501943,
+      "mae_mw": 115.1716185497063,
+      "n": 8830,
+      "raw_features": 37
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 180,
+      "target": "flow",
+      "model": "persistence",
+      "mae_mw": 211.83799030327063,
+      "n": 8826
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 180,
+      "target": "flow",
+      "model": "ridge_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 264.2196533865374,
+      "mae_mw": 219.0951804687531,
+      "n": 8826,
+      "raw_features": 17
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 180,
+      "target": "flow",
+      "model": "additive_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 264.96891461483153,
+      "mae_mw": 225.24868966613153,
+      "n": 8826,
+      "raw_features": 17
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 180,
+      "target": "flow",
+      "model": "ridge_topology",
+      "alpha": 1000.0,
+      "validation_mae_mw": 263.48480351688136,
+      "mae_mw": 219.33949753328088,
+      "n": 8826,
+      "raw_features": 37
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 180,
+      "target": "flow",
+      "model": "additive_topology",
+      "alpha": 1000.0,
+      "validation_mae_mw": 263.4528715321997,
+      "mae_mw": 234.25786433517268,
+      "n": 8826,
+      "raw_features": 37
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 180,
+      "target": "export_tight",
+      "model": "persistence",
+      "mae_mw": 133.22209227056422,
+      "n": 8826
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 180,
+      "target": "export_tight",
+      "model": "ridge_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 136.35285404553107,
+      "mae_mw": 158.72154643360162,
+      "n": 8826,
+      "raw_features": 17
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 180,
+      "target": "export_tight",
+      "model": "additive_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 127.99997573918063,
+      "mae_mw": 141.17722646172098,
+      "n": 8826,
+      "raw_features": 17
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 180,
+      "target": "export_tight",
+      "model": "ridge_topology",
+      "alpha": 1000.0,
+      "validation_mae_mw": 133.9660352722044,
+      "mae_mw": 142.52888023817195,
+      "n": 8826,
+      "raw_features": 37
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 180,
+      "target": "export_tight",
+      "model": "additive_topology",
+      "alpha": 1000.0,
+      "validation_mae_mw": 133.0208730826852,
+      "mae_mw": 150.9106119869505,
+      "n": 8826,
+      "raw_features": 37
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 180,
+      "target": "import_tight",
+      "model": "persistence",
+      "mae_mw": 132.9465317233175,
+      "n": 8826
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 180,
+      "target": "import_tight",
+      "model": "ridge_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 173.34258418610244,
+      "mae_mw": 148.73428352165087,
+      "n": 8826,
+      "raw_features": 17
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 180,
+      "target": "import_tight",
+      "model": "additive_base",
+      "alpha": 1000.0,
+      "validation_mae_mw": 163.34844921196012,
+      "mae_mw": 156.1300926139914,
+      "n": 8826,
+      "raw_features": 17
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 180,
+      "target": "import_tight",
+      "model": "ridge_topology",
+      "alpha": 1000.0,
+      "validation_mae_mw": 167.22919777673533,
+      "mae_mw": 155.22259140899789,
+      "n": 8826,
+      "raw_features": 37
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 180,
+      "target": "import_tight",
+      "model": "additive_topology",
+      "alpha": 1000.0,
+      "validation_mae_mw": 185.52751886266452,
+      "mae_mw": 197.6003083391903,
+      "n": 8826,
+      "raw_features": 37
+    }
+  ],
+  "validation_selected": [
+    {
+      "ic": "VNI",
+      "horizon_minutes": 30,
+      "target": "flow",
+      "model": "additive_topology",
+      "mae_mw": 156.41737457284918
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 30,
+      "target": "export_tight",
+      "model": "additive_base",
+      "mae_mw": 144.0232366264855
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 30,
+      "target": "import_tight",
+      "model": "additive_base",
+      "mae_mw": 128.9543125527427
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 60,
+      "target": "flow",
+      "model": "additive_topology",
+      "mae_mw": 195.71229034748563
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 60,
+      "target": "export_tight",
+      "model": "additive_base",
+      "mae_mw": 182.28501581309814
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 60,
+      "target": "import_tight",
+      "model": "additive_base",
+      "mae_mw": 161.5311901935804
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 180,
+      "target": "flow",
+      "model": "additive_topology",
+      "mae_mw": 281.6513753518962
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 180,
+      "target": "export_tight",
+      "model": "additive_base",
+      "mae_mw": 265.2232321766028
+    },
+    {
+      "ic": "VNI",
+      "horizon_minutes": 180,
+      "target": "import_tight",
+      "model": "ridge_topology",
+      "mae_mw": 228.03161300596318
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 30,
+      "target": "flow",
+      "model": "ridge_topology",
+      "mae_mw": 114.8893792666083
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 30,
+      "target": "export_tight",
+      "model": "additive_base",
+      "mae_mw": 72.13478784033681
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 30,
+      "target": "import_tight",
+      "model": "ridge_topology",
+      "mae_mw": 72.51837253137354
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 60,
+      "target": "flow",
+      "model": "ridge_topology",
+      "mae_mw": 146.5267388796345
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 60,
+      "target": "export_tight",
+      "model": "additive_base",
+      "mae_mw": 91.64256036565095
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 60,
+      "target": "import_tight",
+      "model": "ridge_topology",
+      "mae_mw": 91.56177933133537
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 180,
+      "target": "flow",
+      "model": "additive_topology",
+      "mae_mw": 234.25786433517268
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 180,
+      "target": "export_tight",
+      "model": "additive_base",
+      "mae_mw": 141.17722646172098
+    },
+    {
+      "ic": "QNI",
+      "horizon_minutes": 180,
+      "target": "import_tight",
+      "model": "additive_base",
+      "mae_mw": 156.1300926139914
+    }
+  ],
+  "monthly_coverage": [
+    {
+      "ic": "VNI",
+      "month": "2024-09",
+      "rows": 1440,
+      "upper_nonmissing_fraction": 0.9465277777777777,
+      "lower_nonmissing_fraction": 0.8777777777777778,
+      "upper_pressure_nonmissing_fraction": 0.9465277777777777,
+      "lower_pressure_nonmissing_fraction": 0.8777777777777778
+    },
+    {
+      "ic": "VNI",
+      "month": "2024-10",
+      "rows": 1488,
+      "upper_nonmissing_fraction": 0.9993279569892473,
+      "lower_nonmissing_fraction": 0.9993279569892473,
+      "upper_pressure_nonmissing_fraction": 0.9993279569892473,
+      "lower_pressure_nonmissing_fraction": 0.9993279569892473
+    },
+    {
+      "ic": "VNI",
+      "month": "2024-11",
+      "rows": 1440,
+      "upper_nonmissing_fraction": 0.9993055555555556,
+      "lower_nonmissing_fraction": 0.9993055555555556,
+      "upper_pressure_nonmissing_fraction": 0.9993055555555556,
+      "lower_pressure_nonmissing_fraction": 0.9993055555555556
+    },
+    {
+      "ic": "VNI",
+      "month": "2024-12",
+      "rows": 1488,
+      "upper_nonmissing_fraction": 0.9993279569892473,
+      "lower_nonmissing_fraction": 0.9993279569892473,
+      "upper_pressure_nonmissing_fraction": 0.9993279569892473,
+      "lower_pressure_nonmissing_fraction": 0.9993279569892473
+    },
+    {
+      "ic": "VNI",
+      "month": "2025-01",
+      "rows": 1488,
+      "upper_nonmissing_fraction": 0.9993279569892473,
+      "lower_nonmissing_fraction": 0.9993279569892473,
+      "upper_pressure_nonmissing_fraction": 0.9993279569892473,
+      "lower_pressure_nonmissing_fraction": 0.9993279569892473
+    },
+    {
+      "ic": "VNI",
+      "month": "2025-02",
+      "rows": 1344,
+      "upper_nonmissing_fraction": 0.9992559523809523,
+      "lower_nonmissing_fraction": 0.9992559523809523,
+      "upper_pressure_nonmissing_fraction": 0.9992559523809523,
+      "lower_pressure_nonmissing_fraction": 0.9992559523809523
+    },
+    {
+      "ic": "VNI",
+      "month": "2025-03",
+      "rows": 1488,
+      "upper_nonmissing_fraction": 0.9993279569892473,
+      "lower_nonmissing_fraction": 0.9993279569892473,
+      "upper_pressure_nonmissing_fraction": 0.9993279569892473,
+      "lower_pressure_nonmissing_fraction": 0.9993279569892473
+    },
+    {
+      "ic": "VNI",
+      "month": "2025-04",
+      "rows": 1440,
+      "upper_nonmissing_fraction": 0.9993055555555556,
+      "lower_nonmissing_fraction": 0.9993055555555556,
+      "upper_pressure_nonmissing_fraction": 0.9993055555555556,
+      "lower_pressure_nonmissing_fraction": 0.9993055555555556
+    },
+    {
+      "ic": "VNI",
+      "month": "2025-05",
+      "rows": 1488,
+      "upper_nonmissing_fraction": 0.9993279569892473,
+      "lower_nonmissing_fraction": 0.9993279569892473,
+      "upper_pressure_nonmissing_fraction": 0.9993279569892473,
+      "lower_pressure_nonmissing_fraction": 0.9993279569892473
+    },
+    {
+      "ic": "VNI",
+      "month": "2025-06",
+      "rows": 1440,
+      "upper_nonmissing_fraction": 0.9993055555555556,
+      "lower_nonmissing_fraction": 0.9993055555555556,
+      "upper_pressure_nonmissing_fraction": 0.9993055555555556,
+      "lower_pressure_nonmissing_fraction": 0.9993055555555556
+    },
+    {
+      "ic": "VNI",
+      "month": "2025-07",
+      "rows": 1488,
+      "upper_nonmissing_fraction": 0.9993279569892473,
+      "lower_nonmissing_fraction": 0.9993279569892473,
+      "upper_pressure_nonmissing_fraction": 0.9993279569892473,
+      "lower_pressure_nonmissing_fraction": 0.9993279569892473
+    },
+    {
+      "ic": "VNI",
+      "month": "2025-08",
+      "rows": 1488,
+      "upper_nonmissing_fraction": 0.9993279569892473,
+      "lower_nonmissing_fraction": 0.9993279569892473,
+      "upper_pressure_nonmissing_fraction": 0.9993279569892473,
+      "lower_pressure_nonmissing_fraction": 0.9993279569892473
+    },
+    {
+      "ic": "VNI",
+      "month": "2025-09",
+      "rows": 1440,
+      "upper_nonmissing_fraction": 0.9993055555555556,
+      "lower_nonmissing_fraction": 0.9993055555555556,
+      "upper_pressure_nonmissing_fraction": 0.9993055555555556,
+      "lower_pressure_nonmissing_fraction": 0.9993055555555556
+    },
+    {
+      "ic": "VNI",
+      "month": "2025-10",
+      "rows": 1488,
+      "upper_nonmissing_fraction": 0.9993279569892473,
+      "lower_nonmissing_fraction": 0.9993279569892473,
+      "upper_pressure_nonmissing_fraction": 0.9993279569892473,
+      "lower_pressure_nonmissing_fraction": 0.9993279569892473
+    },
+    {
+      "ic": "VNI",
+      "month": "2025-11",
+      "rows": 1440,
+      "upper_nonmissing_fraction": 0.9993055555555556,
+      "lower_nonmissing_fraction": 0.9993055555555556,
+      "upper_pressure_nonmissing_fraction": 0.9993055555555556,
+      "lower_pressure_nonmissing_fraction": 0.9993055555555556
+    },
+    {
+      "ic": "VNI",
+      "month": "2025-12",
+      "rows": 1488,
+      "upper_nonmissing_fraction": 0.9993279569892473,
+      "lower_nonmissing_fraction": 0.9993279569892473,
+      "upper_pressure_nonmissing_fraction": 0.9993279569892473,
+      "lower_pressure_nonmissing_fraction": 0.9993279569892473
+    },
+    {
+      "ic": "VNI",
+      "month": "2026-01",
+      "rows": 1488,
+      "upper_nonmissing_fraction": 0.9993279569892473,
+      "lower_nonmissing_fraction": 0.9993279569892473,
+      "upper_pressure_nonmissing_fraction": 0.9993279569892473,
+      "lower_pressure_nonmissing_fraction": 0.9993279569892473
+    },
+    {
+      "ic": "VNI",
+      "month": "2026-02",
+      "rows": 1344,
+      "upper_nonmissing_fraction": 0.9992559523809523,
+      "lower_nonmissing_fraction": 0.9992559523809523,
+      "upper_pressure_nonmissing_fraction": 0.9992559523809523,
+      "lower_pressure_nonmissing_fraction": 0.9992559523809523
+    },
+    {
+      "ic": "VNI",
+      "month": "2026-03",
+      "rows": 1488,
+      "upper_nonmissing_fraction": 0.9993279569892473,
+      "lower_nonmissing_fraction": 0.9993279569892473,
+      "upper_pressure_nonmissing_fraction": 0.9993279569892473,
+      "lower_pressure_nonmissing_fraction": 0.9993279569892473
+    },
+    {
+      "ic": "VNI",
+      "month": "2026-04",
+      "rows": 1440,
+      "upper_nonmissing_fraction": 0.9993055555555556,
+      "lower_nonmissing_fraction": 0.9993055555555556,
+      "upper_pressure_nonmissing_fraction": 0.9993055555555556,
+      "lower_pressure_nonmissing_fraction": 0.9993055555555556
+    },
+    {
+      "ic": "VNI",
+      "month": "2026-05",
+      "rows": 1488,
+      "upper_nonmissing_fraction": 0.9993279569892473,
+      "lower_nonmissing_fraction": 0.9993279569892473,
+      "upper_pressure_nonmissing_fraction": 0.9993279569892473,
+      "lower_pressure_nonmissing_fraction": 0.9993279569892473
+    },
+    {
+      "ic": "VNI",
+      "month": "2026-06",
+      "rows": 1440,
+      "upper_nonmissing_fraction": 0.9993055555555556,
+      "lower_nonmissing_fraction": 0.9993055555555556,
+      "upper_pressure_nonmissing_fraction": 0.9993055555555556,
+      "lower_pressure_nonmissing_fraction": 0.9993055555555556
+    },
+    {
+      "ic": "VNI",
+      "month": "2026-07",
+      "rows": 1488,
+      "upper_nonmissing_fraction": 0.9993279569892473,
+      "lower_nonmissing_fraction": 0.9993279569892473,
+      "upper_pressure_nonmissing_fraction": 0.9993279569892473,
+      "lower_pressure_nonmissing_fraction": 0.9993279569892473
+    },
+    {
+      "ic": "VNI",
+      "month": "2026-08",
+      "rows": 1488,
+      "upper_nonmissing_fraction": 0.9993279569892473,
+      "lower_nonmissing_fraction": 0.9993279569892473,
+      "upper_pressure_nonmissing_fraction": 0.9993279569892473,
+      "lower_pressure_nonmissing_fraction": 0.9993279569892473
+    },
+    {
+      "ic": "QNI",
+      "month": "2024-09",
+      "rows": 1440,
+      "upper_nonmissing_fraction": 0.9409722222222222,
+      "lower_nonmissing_fraction": 0.9423611111111111,
+      "upper_pressure_nonmissing_fraction": 0.9409722222222222,
+      "lower_pressure_nonmissing_fraction": 0.9423611111111111
+    },
+    {
+      "ic": "QNI",
+      "month": "2024-10",
+      "rows": 1488,
+      "upper_nonmissing_fraction": 0.9993279569892473,
+      "lower_nonmissing_fraction": 0.9993279569892473,
+      "upper_pressure_nonmissing_fraction": 0.9993279569892473,
+      "lower_pressure_nonmissing_fraction": 0.9993279569892473
+    },
+    {
+      "ic": "QNI",
+      "month": "2024-11",
+      "rows": 1440,
+      "upper_nonmissing_fraction": 0.9993055555555556,
+      "lower_nonmissing_fraction": 0.9993055555555556,
+      "upper_pressure_nonmissing_fraction": 0.9993055555555556,
+      "lower_pressure_nonmissing_fraction": 0.9993055555555556
+    },
+    {
+      "ic": "QNI",
+      "month": "2024-12",
+      "rows": 1488,
+      "upper_nonmissing_fraction": 0.9993279569892473,
+      "lower_nonmissing_fraction": 0.9993279569892473,
+      "upper_pressure_nonmissing_fraction": 0.9993279569892473,
+      "lower_pressure_nonmissing_fraction": 0.9993279569892473
+    },
+    {
+      "ic": "QNI",
+      "month": "2025-01",
+      "rows": 1488,
+      "upper_nonmissing_fraction": 0.9993279569892473,
+      "lower_nonmissing_fraction": 0.9993279569892473,
+      "upper_pressure_nonmissing_fraction": 0.9993279569892473,
+      "lower_pressure_nonmissing_fraction": 0.9993279569892473
+    },
+    {
+      "ic": "QNI",
+      "month": "2025-02",
+      "rows": 1344,
+      "upper_nonmissing_fraction": 0.9992559523809523,
+      "lower_nonmissing_fraction": 0.9992559523809523,
+      "upper_pressure_nonmissing_fraction": 0.9992559523809523,
+      "lower_pressure_nonmissing_fraction": 0.9992559523809523
+    },
+    {
+      "ic": "QNI",
+      "month": "2025-03",
+      "rows": 1488,
+      "upper_nonmissing_fraction": 0.9993279569892473,
+      "lower_nonmissing_fraction": 0.9993279569892473,
+      "upper_pressure_nonmissing_fraction": 0.9993279569892473,
+      "lower_pressure_nonmissing_fraction": 0.9993279569892473
+    },
+    {
+      "ic": "QNI",
+      "month": "2025-04",
+      "rows": 1440,
+      "upper_nonmissing_fraction": 0.9993055555555556,
+      "lower_nonmissing_fraction": 0.9993055555555556,
+      "upper_pressure_nonmissing_fraction": 0.9993055555555556,
+      "lower_pressure_nonmissing_fraction": 0.9993055555555556
+    },
+    {
+      "ic": "QNI",
+      "month": "2025-05",
+      "rows": 1488,
+      "upper_nonmissing_fraction": 0.9993279569892473,
+      "lower_nonmissing_fraction": 0.9993279569892473,
+      "upper_pressure_nonmissing_fraction": 0.9993279569892473,
+      "lower_pressure_nonmissing_fraction": 0.9993279569892473
+    },
+    {
+      "ic": "QNI",
+      "month": "2025-06",
+      "rows": 1440,
+      "upper_nonmissing_fraction": 0.9993055555555556,
+      "lower_nonmissing_fraction": 0.9993055555555556,
+      "upper_pressure_nonmissing_fraction": 0.9993055555555556,
+      "lower_pressure_nonmissing_fraction": 0.9993055555555556
+    },
+    {
+      "ic": "QNI",
+      "month": "2025-07",
+      "rows": 1488,
+      "upper_nonmissing_fraction": 0.9993279569892473,
+      "lower_nonmissing_fraction": 0.9993279569892473,
+      "upper_pressure_nonmissing_fraction": 0.9993279569892473,
+      "lower_pressure_nonmissing_fraction": 0.9993279569892473
+    },
+    {
+      "ic": "QNI",
+      "month": "2025-08",
+      "rows": 1488,
+      "upper_nonmissing_fraction": 0.9993279569892473,
+      "lower_nonmissing_fraction": 0.9993279569892473,
+      "upper_pressure_nonmissing_fraction": 0.9993279569892473,
+      "lower_pressure_nonmissing_fraction": 0.9993279569892473
+    },
+    {
+      "ic": "QNI",
+      "month": "2025-09",
+      "rows": 1440,
+      "upper_nonmissing_fraction": 0.9993055555555556,
+      "lower_nonmissing_fraction": 0.9993055555555556,
+      "upper_pressure_nonmissing_fraction": 0.9993055555555556,
+      "lower_pressure_nonmissing_fraction": 0.9993055555555556
+    },
+    {
+      "ic": "QNI",
+      "month": "2025-10",
+      "rows": 1488,
+      "upper_nonmissing_fraction": 0.9993279569892473,
+      "lower_nonmissing_fraction": 0.9993279569892473,
+      "upper_pressure_nonmissing_fraction": 0.9993279569892473,
+      "lower_pressure_nonmissing_fraction": 0.9993279569892473
+    },
+    {
+      "ic": "QNI",
+      "month": "2025-11",
+      "rows": 1440,
+      "upper_nonmissing_fraction": 0.9993055555555556,
+      "lower_nonmissing_fraction": 0.9993055555555556,
+      "upper_pressure_nonmissing_fraction": 0.9993055555555556,
+      "lower_pressure_nonmissing_fraction": 0.9993055555555556
+    },
+    {
+      "ic": "QNI",
+      "month": "2025-12",
+      "rows": 1488,
+      "upper_nonmissing_fraction": 0.9993279569892473,
+      "lower_nonmissing_fraction": 0.9993279569892473,
+      "upper_pressure_nonmissing_fraction": 0.9993279569892473,
+      "lower_pressure_nonmissing_fraction": 0.9993279569892473
+    },
+    {
+      "ic": "QNI",
+      "month": "2026-01",
+      "rows": 1488,
+      "upper_nonmissing_fraction": 0.9993279569892473,
+      "lower_nonmissing_fraction": 0.9993279569892473,
+      "upper_pressure_nonmissing_fraction": 0.9993279569892473,
+      "lower_pressure_nonmissing_fraction": 0.9993279569892473
+    },
+    {
+      "ic": "QNI",
+      "month": "2026-02",
+      "rows": 1344,
+      "upper_nonmissing_fraction": 0.9992559523809523,
+      "lower_nonmissing_fraction": 0.9992559523809523,
+      "upper_pressure_nonmissing_fraction": 0.9992559523809523,
+      "lower_pressure_nonmissing_fraction": 0.9992559523809523
+    },
+    {
+      "ic": "QNI",
+      "month": "2026-03",
+      "rows": 1488,
+      "upper_nonmissing_fraction": 0.9993279569892473,
+      "lower_nonmissing_fraction": 0.9993279569892473,
+      "upper_pressure_nonmissing_fraction": 0.9993279569892473,
+      "lower_pressure_nonmissing_fraction": 0.9993279569892473
+    },
+    {
+      "ic": "QNI",
+      "month": "2026-04",
+      "rows": 1440,
+      "upper_nonmissing_fraction": 0.9993055555555556,
+      "lower_nonmissing_fraction": 0.9993055555555556,
+      "upper_pressure_nonmissing_fraction": 0.9993055555555556,
+      "lower_pressure_nonmissing_fraction": 0.9993055555555556
+    },
+    {
+      "ic": "QNI",
+      "month": "2026-05",
+      "rows": 1488,
+      "upper_nonmissing_fraction": 0.9993279569892473,
+      "lower_nonmissing_fraction": 0.9993279569892473,
+      "upper_pressure_nonmissing_fraction": 0.9993279569892473,
+      "lower_pressure_nonmissing_fraction": 0.9993279569892473
+    },
+    {
+      "ic": "QNI",
+      "month": "2026-06",
+      "rows": 1440,
+      "upper_nonmissing_fraction": 0.9993055555555556,
+      "lower_nonmissing_fraction": 0.9993055555555556,
+      "upper_pressure_nonmissing_fraction": 0.9993055555555556,
+      "lower_pressure_nonmissing_fraction": 0.9993055555555556
+    },
+    {
+      "ic": "QNI",
+      "month": "2026-07",
+      "rows": 1488,
+      "upper_nonmissing_fraction": 0.9993279569892473,
+      "lower_nonmissing_fraction": 0.9993279569892473,
+      "upper_pressure_nonmissing_fraction": 0.9993279569892473,
+      "lower_pressure_nonmissing_fraction": 0.9993279569892473
+    },
+    {
+      "ic": "QNI",
+      "month": "2026-08",
+      "rows": 1488,
+      "upper_nonmissing_fraction": 0.9993279569892473,
+      "lower_nonmissing_fraction": 0.9993279569892473,
+      "upper_pressure_nonmissing_fraction": 0.9993279569892473,
+      "lower_pressure_nonmissing_fraction": 0.9993279569892473
+    }
+  ],
+  "sources": [
+    {
+      "path": "data/processed/targets.parquet",
+      "bytes": 16074351,
+      "sha256": "01c16959a22b7238ce6059b190a9ba0895671df4a5b913ac384a34bd54dda257"
+    },
+    {
+      "path": "data/constraint_vni_2y/months/2024-09/constraint_features_30min.parquet",
+      "bytes": 179252,
+      "sha256": "e2594e88b69cd566f8369160c0a57c92713c3f56dcdc76df61837cd10faff141"
+    },
+    {
+      "path": "data/constraint_vni_2y/months/2024-10/constraint_features_30min.parquet",
+      "bytes": 199931,
+      "sha256": "b37dbfbd3e93454b4a4da9c514f7e4b07f174436fbc071137cbf659024a09c22"
+    },
+    {
+      "path": "data/constraint_vni_2y/months/2024-11/constraint_features_30min.parquet",
+      "bytes": 198085,
+      "sha256": "68d178e16adfa17aea071d83fd1bc4eab1dbc4b0b3ffe71997bfe3ae9e169e68"
+    },
+    {
+      "path": "data/constraint_vni_2y/months/2024-12/constraint_features_30min.parquet",
+      "bytes": 209134,
+      "sha256": "5723294683eb5785f4c71266fe5831888088de543aeb773c139cc918308dd0ef"
+    },
+    {
+      "path": "data/constraint_vni_2y/months/2025-01/constraint_features_30min.parquet",
+      "bytes": 208441,
+      "sha256": "9fbd80a6e69ca021eac41dfe8c804f6e09931889becb5519541500f49c7b3123"
+    },
+    {
+      "path": "data/constraint_vni_2y/months/2025-02/constraint_features_30min.parquet",
+      "bytes": 187660,
+      "sha256": "6bf08d8dfd36e8dab3645249e51e0be7d66f308e8d290ffbc7b5f5db13232b38"
+    },
+    {
+      "path": "data/constraint_vni_2y/months/2025-03/constraint_features_30min.parquet",
+      "bytes": 208627,
+      "sha256": "a014ecee4e88a2ff82cdd6a1b7bd5251c3527aa277bf8305deda2b232ad8f49f"
+    },
+    {
+      "path": "data/constraint_vni_2y/months/2025-04/constraint_features_30min.parquet",
+      "bytes": 206006,
+      "sha256": "a90123717dbe7f967b1e76ac8afd4f25eabe0291254a630889a803ac88e6a874"
+    },
+    {
+      "path": "data/constraint_vni_2y/months/2025-05/constraint_features_30min.parquet",
+      "bytes": 203090,
+      "sha256": "2edcbd3dcc39fde36a654927b9562446ee288546844afdd628076bf89d3c8f18"
+    },
+    {
+      "path": "data/constraint_vni_2y/months/2025-06/constraint_features_30min.parquet",
+      "bytes": 201150,
+      "sha256": "85391761c32b406226706f6b03edbbd347ddab60728569f3cbc4f0222233cd13"
+    },
+    {
+      "path": "data/constraint_vni_2y/months/2025-07/constraint_features_30min.parquet",
+      "bytes": 205933,
+      "sha256": "f3f14fed00ad218fcdc28695cb2da16e642bc54f23fbbe0c2c0585cc073f3ff1"
+    },
+    {
+      "path": "data/constraint_vni_2y/months/2025-08/constraint_features_30min.parquet",
+      "bytes": 214880,
+      "sha256": "a8ef85023d9bf25c9a50ddb38e931fde94c43347593ec472642a6ae7b5552916"
+    },
+    {
+      "path": "data/constraint_vni_2y/months/2025-09/constraint_features_30min.parquet",
+      "bytes": 196537,
+      "sha256": "dd6beac57fd63c85a9b23a2a36cf32594ff70042e77a2c7c448d04d96b399fc1"
+    },
+    {
+      "path": "data/constraint_vni_2y/months/2025-10/constraint_features_30min.parquet",
+      "bytes": 213311,
+      "sha256": "258bff776b68272f39bdcb6117d6794315f70fe601d5a1f2cda426d23086a16f"
+    },
+    {
+      "path": "data/constraint_vni_2y/months/2025-11/constraint_features_30min.parquet",
+      "bytes": 206585,
+      "sha256": "aac7a38e9f7c7614fd2458de6b3361c7d017dbed60a823b01b81794dae3fa568"
+    },
+    {
+      "path": "data/constraint_vni_2y/months/2025-12/constraint_features_30min.parquet",
+      "bytes": 210090,
+      "sha256": "b6d984e28c3c7c4a858c992968b1b507e34b61677cf2336cf0f0424f97c93df0"
+    },
+    {
+      "path": "data/constraint_vni_2y/months/2026-01/constraint_features_30min.parquet",
+      "bytes": 199771,
+      "sha256": "5823f31c9b5122f32b39c9286ab8ddad5a7dfe4263a5fd3e566d29a10c0c96f5"
+    },
+    {
+      "path": "data/constraint_vni_2y/months/2026-02/constraint_features_30min.parquet",
+      "bytes": 187514,
+      "sha256": "d998b52b14e84b14f6de970fbc5085ce8a9e39c5e3b8c2b21e178b7da98b9626"
+    },
+    {
+      "path": "data/constraint_vni_2y/months/2026-03/constraint_features_30min.parquet",
+      "bytes": 210339,
+      "sha256": "24b5b6bc2beb52fc6d706efafa50e40a12580970d657a3aa1b50e9a50d4b69a7"
+    },
+    {
+      "path": "data/constraint_vni_2y/months/2026-04/constraint_features_30min.parquet",
+      "bytes": 200368,
+      "sha256": "f7af44a1fec39edc9d02dcbde733611437443d81d3ecdd15e7dc1decc7017e3e"
+    },
+    {
+      "path": "data/constraint_vni_2y/months/2026-05/constraint_features_30min.parquet",
+      "bytes": 210766,
+      "sha256": "34f84de7172938abcdf5677153cd4ae729090dd2e30b2a5e4c337c1f23eda889"
+    },
+    {
+      "path": "data/constraint_vni_2y/months/2026-06/constraint_features_30min.parquet",
+      "bytes": 198444,
+      "sha256": "ae4e140b5cbc9fde39c86d64300cdaf936177be21870d1fa5ba4b07561a7fc52"
+    },
+    {
+      "path": "data/constraint_vni_2y/months/2026-07/constraint_features_30min.parquet",
+      "bytes": 209475,
+      "sha256": "7b9e1aad6ebbbf8156246b4219ba65e10a987148141d5c4c4868a256aebe57ff"
+    },
+    {
+      "path": "data/constraint_vni_2y/months/2026-08/constraint_features_30min.parquet",
+      "bytes": 195932,
+      "sha256": "40501eb5ab6e0742b2ab6e240a2a5611270d8200836ead93d4dbc2025c60a307"
+    },
+    {
+      "path": "data/constraint_qni_2y/months/2024-09/constraint_features_30min.parquet",
+      "bytes": 197874,
+      "sha256": "4cd08e39271cc85c03efe7b3e7e52daa363db2659a48c248c67af521311efe8e"
+    },
+    {
+      "path": "data/constraint_qni_2y/months/2024-10/constraint_features_30min.parquet",
+      "bytes": 214523,
+      "sha256": "fe395debc0265314bac34df4746eab62056aea9aae786d86301af9eb504a7c0f"
+    },
+    {
+      "path": "data/constraint_qni_2y/months/2024-11/constraint_features_30min.parquet",
+      "bytes": 208855,
+      "sha256": "30aa45d7d532ad24bc4cc2f795f160de946efdfa981f2b51a8e519c19e3608cb"
+    },
+    {
+      "path": "data/constraint_qni_2y/months/2024-12/constraint_features_30min.parquet",
+      "bytes": 215914,
+      "sha256": "ecf12f172818243952430cb1646f8f6ef1d0cbc04281ce281b7260df296f0294"
+    },
+    {
+      "path": "data/constraint_qni_2y/months/2025-01/constraint_features_30min.parquet",
+      "bytes": 213161,
+      "sha256": "455c3c1c5a029f5b56648974eed812f1e63ac496f72ff5f8ecb20754bbfcbd35"
+    },
+    {
+      "path": "data/constraint_qni_2y/months/2025-02/constraint_features_30min.parquet",
+      "bytes": 193706,
+      "sha256": "d8438db0c65c2188147670fd583e72e4e6ca716efba877aa79018d9fb3f86325"
+    },
+    {
+      "path": "data/constraint_qni_2y/months/2025-03/constraint_features_30min.parquet",
+      "bytes": 211430,
+      "sha256": "1a352293ac0c62ffc2f2b1abbf4aa8d086fae5b79e28611086d3fc684caa4117"
+    },
+    {
+      "path": "data/constraint_qni_2y/months/2025-04/constraint_features_30min.parquet",
+      "bytes": 167664,
+      "sha256": "059c51f5976f18a2a88142443693418be17e12d662e49f649e436f7e9d96175b"
+    },
+    {
+      "path": "data/constraint_qni_2y/months/2025-05/constraint_features_30min.parquet",
+      "bytes": 176020,
+      "sha256": "d4db23092f66088563a9962518e6f41617148a354d99d302bb082711156b613f"
+    },
+    {
+      "path": "data/constraint_qni_2y/months/2025-06/constraint_features_30min.parquet",
+      "bytes": 167035,
+      "sha256": "3acc72508ae62af46a64a73b5310960ce18b16b053dafbd6df0451184a169535"
+    },
+    {
+      "path": "data/constraint_qni_2y/months/2025-07/constraint_features_30min.parquet",
+      "bytes": 175417,
+      "sha256": "99d99292c9823410b7ef4d68da173b51842bf88271e46f333a85bb1f25497353"
+    },
+    {
+      "path": "data/constraint_qni_2y/months/2025-08/constraint_features_30min.parquet",
+      "bytes": 175396,
+      "sha256": "9ffcb412fa389147f890e3f24bdc43ff5d64c77b3fe44ef8a7128797f36d3ea1"
+    },
+    {
+      "path": "data/constraint_qni_2y/months/2025-09/constraint_features_30min.parquet",
+      "bytes": 178089,
+      "sha256": "a73107a142329da0236db0ae556922ce7d51c9660157ca3fe74beb800ecc0a1b"
+    },
+    {
+      "path": "data/constraint_qni_2y/months/2025-10/constraint_features_30min.parquet",
+      "bytes": 153547,
+      "sha256": "9b52fd7dbddfb5674be54b451e9196026d43fc65b7ae306bf3bbffa964148e7f"
+    },
+    {
+      "path": "data/constraint_qni_2y/months/2025-11/constraint_features_30min.parquet",
+      "bytes": 149916,
+      "sha256": "df063ea7c77f6ddf7888bc706f72de46a994dcabae43c0602d310b04f398b3d8"
+    },
+    {
+      "path": "data/constraint_qni_2y/months/2025-12/constraint_features_30min.parquet",
+      "bytes": 167481,
+      "sha256": "8196d9748688f4d5cd61038c002040d8079d5aa8859fcf1394c27df1a06cef3e"
+    },
+    {
+      "path": "data/constraint_qni_2y/months/2026-01/constraint_features_30min.parquet",
+      "bytes": 179430,
+      "sha256": "472456de99a5c3a3336a41c4441a70cc281fb48cd2a1756c44c48a7d02ee7162"
+    },
+    {
+      "path": "data/constraint_qni_2y/months/2026-02/constraint_features_30min.parquet",
+      "bytes": 160539,
+      "sha256": "c183633d170862f455fa3f66150214650e4c52c6065f754ee8fd5cd9f08fbf9d"
+    },
+    {
+      "path": "data/constraint_qni_2y/months/2026-03/constraint_features_30min.parquet",
+      "bytes": 157951,
+      "sha256": "6c6ccfb0e7fa7a12047f26b93ebc3b760d2d3786b5553328179755feba78ae89"
+    },
+    {
+      "path": "data/constraint_qni_2y/months/2026-04/constraint_features_30min.parquet",
+      "bytes": 142318,
+      "sha256": "f6b9ce5137e6e6e28f07f5ea201cb974c5b2651498713c4960303dedd18e9805"
+    },
+    {
+      "path": "data/constraint_qni_2y/months/2026-05/constraint_features_30min.parquet",
+      "bytes": 134919,
+      "sha256": "e2512b109971548cb7c2298a4008c32861719f4ce9f9406e5c4c1c5d31c5b430"
+    },
+    {
+      "path": "data/constraint_qni_2y/months/2026-06/constraint_features_30min.parquet",
+      "bytes": 139950,
+      "sha256": "4ad4d369c3ca75063f61e9b44f870f7792f95ef3e53f5ceb2ca2a857f2b7acac"
+    },
+    {
+      "path": "data/constraint_qni_2y/months/2026-07/constraint_features_30min.parquet",
+      "bytes": 165091,
+      "sha256": "643ae77207d96a77088a8e288243c6d957800b62a69aad2ffdf61c7aa7da406a"
+    },
+    {
+      "path": "data/constraint_qni_2y/months/2026-08/constraint_features_30min.parquet",
+      "bytes": 149262,
+      "sha256": "02614f0fe59f9d439a993de432f1b0e0b9cd2825c3840c262ed095f9cbf89f64"
+    }
+  ],
+  "downloads": [],
+  "environment": {
+    "python": "3.11.9",
+    "sklearn": "1.6.1",
+    "pandas": "2.2.3"
+  },
+  "script_sha256": "edd95d26a31a318c9abc5215fb5979ad11038c0c71201350d4b4d8d29313339a",
+  "runtime_seconds": 69.56199999997625
+}

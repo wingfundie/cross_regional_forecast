@@ -20,6 +20,8 @@ Five interactive charts cover flow improvement versus persistence, import/export
 
 - [Improvement roadmap](docs/IMPROVEMENT_ROADMAP.md): prioritised extra data, candidate methods, source/access caveats and experiments to establish improvement.
 
+- [QNI/VNI forecasting improvement research](docs/QNI_VNI_FORECAST_MODEL_IMPROVEMENT_PLAN.md) · [HTML edition](docs/html/qni_vni_forecast_model_improvement.html): integrates the two-year studies, a retained-data simple-model probe, academic and industry evidence, compact features, operational data requirements and a staged evaluation plan. Rebuild the report with `python scripts/build_forecast_research.py`.
+
 - [Constraint-derived network features](docs/CONSTRAINT_NETWORK_FEATURES.md): proposed end-to-end design for compact generator influence, directional constraint pressure, limit switching and forecast-time network-state features, starting with VNI.
 
 - [Executed VNI feasibility pilot](docs/CONSTRAINT_FEATURE_PILOT.md): guarded table-level acquisition, exact-version equation reconstruction, compact features and the corrected one-month feasibility result. Reproduce it with `python run_constraint_pilot.py`.
@@ -42,6 +44,8 @@ Five interactive charts cover flow improvement versus persistence, import/export
 - [Executed results](BACKTEST_REPORT.md): measured performance and completion evidence.
 
 ## Interpretation
+
+- [Expanded QNI/VNI forecasting research](docs/QNI_VNI_EXPANDED_FORECAST_RESEARCH.md) and [offline HTML report](docs/html/qni_vni_expanded_forecast_research.html): wider academic and industry review integrated with the two-year studies, 144 regression comparisons, 20 contraction-probability comparisons, monthly quality audits, and a compact-feature implementation plan from simple models through boosting. Includes [search and access log](docs/QNI_VNI_EXPANDED_RESEARCH_LOG.md). These remain retrospective development experiments, not live validation.
 
 Future realised demand, renewables and weather are explicitly supplied in the main experiment. Its results are conditional research performance, not the accuracy of a live seven-day forecast. Reported AEMO limits depend on dispatch and do not represent maximum secure physical transfer capability. The 50% flag uses the training-only seasonal median of positive directional limits; zero and negative limits remain meaningful outcomes.
 
