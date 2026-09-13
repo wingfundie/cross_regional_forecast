@@ -140,7 +140,8 @@ def reconstruct(c):
             sub=states[states.CONSTRAINTID.eq(k)&states.time.between(ev.time-pd.Timedelta(hours=2),ev.time+pd.Timedelta(hours=2))]
             for r in sub.drop_duplicates('version_key').itertuples():
                 terms=cp_index.get((r.CONSTRAINTID,r.EFFECTIVEDATE,r.VERSIONNO),pd.DataFrame())
-                expression=f'{r.ic_factor:g} * F_VIC_to_NSW' if pd.notna(r.ic_factor) else 'unknown IC factor * F'
+                flow_symbol='F_'+c['interconnector'].replace('-','_')
+                expression=f'{r.ic_factor:g} * {flow_symbol}' if pd.notna(r.ic_factor) else f'unknown IC factor * {flow_symbol}'
                 if len(terms):expression+=' '+' '.join(f'{x.FACTOR:+g} * P[{x.CONNECTIONPOINTID}]' for x in terms.itertuples())
                 other=factors[(factors.GENCONID==k)&(factors.EFFECTIVEDATE==r.EFFECTIVEDATE)&(factors.VERSIONNO==r.VERSIONNO)&~factors.INTERCONNECTORID.eq(c['interconnector'])]
                 if len(other):expression+=' '+' '.join(f'{x.FACTOR:+g} * F[{x.INTERCONNECTORID}]' for x in other.itertuples())

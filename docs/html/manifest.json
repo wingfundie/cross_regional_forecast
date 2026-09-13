@@ -1,6 +1,6 @@
 {
   "inputs_sha256": {
-    "README.md": "adab34fa98587bb7f12ac26fe32b68f26e2c93c874c92dd7a3057e5e00467a9d",
+    "README.md": "0fe5e69cdd3f1be8d6713d0d97b44d6c5390879048e98a0a40d42b81028d7b54",
     "BACKTEST_REPORT.md": "9bc46e93214b75bbe40efd51df91528b21ebdca4a1eabe1651dbd248b56b67c8",
     "docs/RESULTS_DATA_AND_FEATURES.md": "9b6c7ffffa760d4b0a52d35558e952c48f1234e8675fad802e697d431b24f4fc",
     "docs/METHODS_AND_RESEARCH.md": "8719904b38d46c79044f697bebb64ebab51a740bcdaf43e68d86ae50ffbac48c",
@@ -14,10 +14,12 @@
     "docs/INTERCONNECTOR_EVENT_ANALYSIS_METHODOLOGY.md": "2b5e7d96dad31c240f14ee3c4f4b7b3f5a73c84baa33d47d0f52ed5125337965",
     "docs/QNI_GENERATOR_INFLUENCE_STUDY.md": "129ba943b32bc92197a684e0edda69ccca9212125ce74a5d94bd0ecf61332103",
     "docs/QNI_TWO_YEAR_CONSTRAINT_STUDY.md": "c447b7631414bc5e43e96e0ee15728fbe2a3ecec7d4db84b9dfd57c21ea4d985",
+    "docs/VSA_TWO_YEAR_CONSTRAINT_STUDY.md": "b20f9117a25ee28facb2888c170bf41fd4cef18091ba1a73f2e075d9dbcdd6f0",
+    "docs/VSA_TWO_YEAR_EVENT_ATLAS.md": "2c98a210578e60c445a69e44776035b8aaa4e77f0e7f8dda5de025c919526e96",
     "BUILD_PLAN.md": "4475f428ce7f765b630f3911de1c4f3c6615193c6e33cbb7e840e84017bf7bf6",
     "docs/chart_data.json": "ec2882e63ddd2ecfd94c3e93979c8ad7ed795ac32cf09a374127911fb2ab827a"
   },
-  "generator_sha256": "725b8ccdaf866e2ae02c8d8650517c57292ac9b63560eca668761a96afe94c0b",
+  "generator_sha256": "9b70727fcece23f3ad1f0dfe4d715f1369727076b0802496adae44393bcfcbd6",
   "markdown_version": "3.10.3",
   "command": "python scripts/build_docs_html.py",
   "offline": true

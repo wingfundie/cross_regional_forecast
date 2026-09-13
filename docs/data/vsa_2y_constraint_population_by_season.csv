@@ -1,0 +1,9 @@
+season,direction,applicable_constraint_intervals,binding_constraint_intervals,near_binding_constraint_intervals,near_setting_constraint_intervals,leading_constraint_intervals
+Autumn,lower,3950194,9400,8915,67903,52986
+Autumn,upper,3500561,14398,20891,80930,52986
+Spring,lower,4059528,17434,14217,72861,51704
+Spring,upper,3902852,6856,10616,78238,51704
+Summer,lower,4076425,17405,14202,67348,51834
+Summer,upper,3483255,14427,19164,80859,51834
+Winter,lower,3872899,30920,31493,86314,52986
+Winter,upper,4109057,30996,38435,92076,52986

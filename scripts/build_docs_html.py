@@ -25,6 +25,8 @@ PAGES = [
     ('event-methodology', 'docs/INTERCONNECTOR_EVENT_ANALYSIS_METHODOLOGY.md', 'Interconnector event methodology'),
     ('qni-influence', 'docs/QNI_GENERATOR_INFLUENCE_STUDY.md', 'QNI generator influence study'),
     ('qni-two-year', 'docs/QNI_TWO_YEAR_CONSTRAINT_STUDY.md', 'QNI two-year constraint study'),
+    ('vsa-two-year', 'docs/VSA_TWO_YEAR_CONSTRAINT_STUDY.md', 'V-SA two-year constraint study'),
+    ('vsa-event-atlas', 'docs/VSA_TWO_YEAR_EVENT_ATLAS.md', 'V-SA event atlas'),
     ('plan', 'BUILD_PLAN.md', 'Original build plan'),
 ]
 CSS = '''

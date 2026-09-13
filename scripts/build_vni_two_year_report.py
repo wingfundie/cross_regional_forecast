@@ -246,6 +246,7 @@ def build(config_path):
     labels = {
         "VIC1-NSW1": {"code": "vni", "name": "VNI", "flow": "VIC→NSW"},
         "NSW1-QLD1": {"code": "qni", "name": "QNI", "flow": "NSW→QLD"},
+        "V-SA": {"code": "vsa", "name": "VSA", "flow": "VIC→SA", "positive": "Westward", "negative": "Eastward"},
     }
     metadata = labels[config["interconnector"]]
     prefix, name = f"{metadata['code']}_2y", metadata["name"]
@@ -556,8 +557,13 @@ python -m unittest discover -s tests -v
                   .replace("VIC→NSW", metadata["flow"])
                   .replace("VNI", name)
                   .replace("vni_2y_", f"{prefix}_")
-                  .replace("configs/constraint_vni_2y.json", "configs/constraint_qni_2y.json")
-                  .replace("build_vni_two_year_report.py", "build_qni_two_year_report.py"))
+                  .replace("configs/constraint_vni_2y.json", f"configs/constraint_{metadata['code']}_2y.json")
+                  .replace("build_vni_two_year_report.py", f"build_{metadata['code']}_two_year_report.py"))
+    if config["interconnector"] == "V-SA":
+        report = (report.replace("Northward", metadata["positive"])
+                  .replace("northward", metadata["positive"].lower())
+                  .replace("Southward", metadata["negative"])
+                  .replace("southward", metadata["negative"].lower()))
     markdown_path = ROOT / "docs" / f"{name}_TWO_YEAR_CONSTRAINT_STUDY.md"
     markdown_path.write_text(report, encoding="utf-8")
 
@@ -665,11 +671,17 @@ python -m unittest discover -s tests -v
                 .replace("VIC→NSW", metadata["flow"])
                 .replace("VNI", name)
                 .replace("vni_2y_", f"{prefix}_")
-                .replace("configs/constraint_vni_2y.json", "configs/constraint_qni_2y.json")
-                .replace("build_vni_two_year_report.py", "build_qni_two_year_report.py"))
+                .replace("configs/constraint_vni_2y.json", f"configs/constraint_{metadata['code']}_2y.json")
+                .replace("build_vni_two_year_report.py", f"build_{metadata['code']}_two_year_report.py"))
+    if config["interconnector"] == "V-SA":
+        body = (body.replace("Northward", metadata["positive"])
+                .replace("northward", metadata["positive"].lower())
+                .replace("Southward", metadata["negative"])
+                .replace("southward", metadata["negative"].lower()))
     html_path = ROOT / "docs" / "html" / f"{prefix}_constraint_study.html"
     html_path.parent.mkdir(parents=True, exist_ok=True)
-    html_path.write_text(render_page(f"{name} two-year constraint study", body, plotly=True, accent="blue"), encoding="utf-8")
+    html_document = render_page(f"{name} two-year constraint study", body, plotly=True, accent="blue")
+    html_path.write_text("\n".join(line.rstrip() for line in html_document.splitlines()), encoding="utf-8")
     inputs = [artifact("generator_rankings.csv"), artifact("generator_seasonal_rankings.csv"),
               artifact("unit_equation_factors.csv.gz"), artifact("constraint_equations.csv"),
               artifact("seasonal_summary.csv"), artifact("diurnal_summary.csv"),
@@ -690,8 +702,8 @@ python -m unittest discover -s tests -v
                     {"id": "generator_pressure", "source": artifact("generator_rankings.csv"), "description": "Persistence-weighted generator exposure"},
                 ],
                 "theme_version": VERSION, "offline": True,
-                "command": ("python scripts/build_vni_two_year_report.py --config configs/constraint_vni_2y.json"
-                            if name == "VNI" else "python scripts/build_qni_two_year_report.py")}
+                "command": (f"python scripts/build_{metadata['code']}_two_year_report.py"
+                            if name != "VNI" else "python scripts/build_vni_two_year_report.py --config configs/constraint_vni_2y.json")}
     (ROOT / "docs" / "html" / f"{prefix}_constraint_manifest.json").write_text(
         json.dumps(manifest, indent=2), encoding="utf-8")
     print(markdown_path)

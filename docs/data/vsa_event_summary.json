@@ -1,0 +1,52 @@
+{
+  "period": [
+    "2024-09-01 00:00:00",
+    "2026-08-31 23:55:00"
+  ],
+  "events": 7731,
+  "incidents": 5450,
+  "selected": 77,
+  "exact_mpc_region_intervals": 23,
+  "contractions_with_receiving_region_mpc_next_hour": 2,
+  "near_mpc_price_episodes": 25,
+  "price_only_cases": 9,
+  "matched_events": 6734,
+  "matched_mean_peak_price_jump_difference": 18.292361821354326,
+  "day_bootstrap_95ci": [
+    0.16760706133592246,
+    37.54128509864626
+  ],
+  "top_selected_case_generator": "KESSB1",
+  "quality": {
+    "method_version": "1.1-event-atlas-1",
+    "start": "2024-09-01 00:00:00",
+    "end": "2026-08-31 23:55:00",
+    "expected_intervals": 210240,
+    "events": 7731,
+    "incidents": 5450,
+    "selected_events": 77,
+    "price_episodes": 25,
+    "price_episodes_without_nearby_contraction": 9,
+    "coverage": {
+      "flow": 210240,
+      "export": 210240,
+      "import": 210240,
+      "VIC1_RRP": 210240,
+      "SA1_RRP": 210240
+    }
+  },
+  "reconstruction": {
+    "selected_events": 77,
+    "events_reconstructed": 77,
+    "constraint_rows": 1026072,
+    "dispatch_rows": 1974938,
+    "contribution_rows": 22409,
+    "exact_version_share": 0.7949461636220461,
+    "maximum_accounting_error_mw": 4.547473508864641e-13,
+    "not_claimed": [
+      "causal price attribution",
+      "full security constrained dispatch replay",
+      "separate identification of every residual LHS term"
+    ]
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "config": "configs\\constraint_vsa_2y.json",
+  "config_sha256": "f8a6d50202277dff02644e9fe7001113ddf0fe062dcea6481fc4f6087c10d50e",
+  "inputs": {
+    "vsa_2y_generator_rankings.csv": "0bebd64d7b3f44ee66f15ff0279d841b42c929558e1268b4de44ac5afcd393a4",
+    "vsa_2y_generator_seasonal_rankings.csv": "c65b893730f9e83229d7358870adfb849ea38903a91312f585bac6688d45398d",
+    "vsa_2y_unit_equation_factors.csv.gz": "77580a8dec57be117e379e180e60fd0b91e72e92fbdb806374ba32efd1e92660",
+    "vsa_2y_constraint_equations.csv": "d035d6c393e7d7d69e90228ed7f60ef144f114e6755f40d5fafa36c9ee3f4b55",
+    "vsa_2y_seasonal_summary.csv": "ff79a22d715a20debb314d698eb3b826efe8bbf67080f674973713174fbbe7df",
+    "vsa_2y_diurnal_summary.csv": "28bb284bcaced448cf29bf614591b8de30d1daba6e9c7576f5c6752bdededb7a",
+    "vsa_2y_constraint_population_by_season.csv": "2da60a3703924ec87efc60a27270f56ddfad0df4d48e9e8b0e49465523daec8e",
+    "vsa_2y_feature_dictionary.csv": "25e87abc0c2dfef020defdc710a6c69caa19302bae06dae9346a5ea87067c68a",
+    "vsa_2y_source_manifest.json": "25527fc6fea46f752375c3fc36428cf6d48c211dcf8188588bdaa1b19b3c6a14",
+    "vsa_2y_contraction_events.csv": "a35083f94331d2abfce8c58b0678e57d8f6be66644812b457565cc234b3b7b99",
+    "vsa_2y_contraction_thresholds_monthly.csv": "82ee4755837545e83c3bc6c294df7026f6b7e402ee867019f7373a9bc054ff1c",
+    "vsa_2y_contraction_constraints.csv": "83620262b1221439bc4366277a1bb6e6c52e44b42d890bfb25fb18352611bb65",
+    "vsa_2y_generator_contraction_rankings.csv": "c5794be6d3db8cb3f566937743aee1e5bb83b0546411bb26e37437591e0aa15c"
+  },
+  "visualizations": [
+    {
+      "id": "seasonal_state",
+      "source": "vsa_2y_seasonal_summary.csv",
+      "description": "Seasonal median flow and directional limits"
+    },
+    {
+      "id": "seasonal_generator_heatmap",
+      "source": "vsa_2y_generator_seasonal_rankings.csv",
+      "description": "Top-12 generator absolute pressure by season"
+    },
+    {
+      "id": "diurnal_state",
+      "source": "vsa_2y_diurnal_summary.csv",
+      "description": "48-bin median flow and directional limits"
+    },
+    {
+      "id": "diurnal_event_rates",
+      "source": "vsa_2y_diurnal_summary.csv",
+      "description": "Reversal and forced-direction rates by half-hour"
+    },
+    {
+      "id": "contraction_diurnal",
+      "source": "vsa_2y_contraction_events.csv",
+      "description": "Sharp-contraction onset rates by half-hour and direction"
+    },
+    {
+      "id": "contraction_generators",
+      "source": "vsa_2y_generator_contraction_rankings.csv",
+      "description": "Generator tightening exposure during sharp contractions"
+    },
+    {
+      "id": "generator_pressure",
+      "source": "vsa_2y_generator_rankings.csv",
+      "description": "Persistence-weighted generator exposure"
+    }
+  ],
+  "theme_version": "1.0",
+  "offline": true,
+  "command": "python scripts/build_vsa_two_year_report.py"
+}

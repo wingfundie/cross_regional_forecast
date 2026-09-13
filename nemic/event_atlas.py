@@ -380,7 +380,8 @@ def recover_coal_registration(c):
         save(df,out);parts.append(df)
         log(c,{'kind':'download_extract','table':'DUDETAIL','month':str(month),'url':url,
             'compressed_bytes':written,'source_sha256':digest(path),'retained_rows':len(df),'output':str(out),
-            'retained_sha256':digest(out),'scope':'22 named NSW/VIC coal generation DUIDs; effective-dated capacity only'})
+            'retained_sha256':digest(out),
+            'scope':f"{len(duids)} configured coal generation DUIDs across {','.join(c['regions'])}; effective-dated capacity only"})
         path.unlink();log(c,{'kind':'cleanup','path':str(path),'deleted_bytes':written})
     if parts:
         save(pd.concat(parts,ignore_index=True).drop_duplicates(),c['root']/'coal_registration.parquet')

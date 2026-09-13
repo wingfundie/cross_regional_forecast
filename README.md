@@ -32,6 +32,10 @@ Five interactive charts cover flow improvement versus persistence, import/export
 
 - [QNI two-year constraint study](docs/QNI_TWO_YEAR_CONSTRAINT_STUDY.md): September 2024–August 2026 binding, near-binding, reported-setter and reconstructed-leader populations, full equation/version and factor snapshots, generator influence rankings, seasonal and diurnal analysis, and a standalone offline HTML report. Reproduce it with `python -m nemic.constraint_longitudinal run --config configs/constraint_qni_2y.json`.
 
+- [V-SA two-year constraint study](docs/VSA_TWO_YEAR_CONSTRAINT_STUDY.md): September 2024–August 2026 binding, near-binding, setter, reconstructed-envelope, seasonal, diurnal and generator-influence analysis for the Victoria–South Australia interconnector.
+
+- [V-SA sharp-contraction event atlas](docs/VSA_TWO_YEAR_EVENT_ATLAS.md): two-year contraction screening with selected-event equation reconstruction, generator contributions, prices, market conditions and a standalone interactive HTML explorer.
+
 - [Results, data and feature engineering](docs/RESULTS_DATA_AND_FEATURES.md): completed results, raw-to-model transformations, publication-aware network state, feature importance and a precise seasonal/diurnal/duck-curve audit.
 - [Methods and research](docs/METHODS_AND_RESEARCH.md): literature reviewed, industry definitions, data transformations, model features/settings, restriction probabilities and limitations.
 - [Backtest protocol](docs/BACKTEST_PROTOCOL.md): exact split boundaries, training/validation/test steps, publication controls, metrics, bootstrap, AEMO comparison, reproduction and cache caveats.

@@ -1,0 +1,23 @@
+{
+  "label": "VSA",
+  "interconnector": "V-SA",
+  "regions": ["VIC1", "SA1"],
+  "start": "2024-09-01 00:00:00",
+  "end": "2026-08-31 23:55:00",
+  "output_dir": "event_vsa_2y",
+  "base_study_dir": "constraint_vsa_2y",
+  "standing_dir": "constraint_vsa_2y/standing",
+  "disk_cap_bytes": 10000000000,
+  "min_free_bytes": 20000000000,
+  "file_cap_bytes": 600000000,
+  "expanded_cap_bytes": 3000000000,
+  "random_seed": 741,
+  "coal_duids": [
+    "LYA1", "LYA2", "LYA3", "LYA4", "LOYYB1", "LOYYB2",
+    "YWPS1", "YWPS2", "YWPS3", "YWPS4"
+  ],
+  "aemc_cap_sources": [
+    "https://www.aemc.gov.au/news-centre/media-releases/aemc-updates-market-price-cap-2026-27"
+  ],
+  "scope": "Full five-minute V-SA screen; selected mechanical event windows; matched observational controls; secondary market context."
+}
