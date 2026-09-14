@@ -4,6 +4,7 @@ The completed VNI/QNI campaign contains 130 main jobs (104 numeric and 26 event 
 
 Published results:
 
+- [Research findings with 16 interactive charts](html/vni_qni_forecast_experiment_research.html)
 - [Full Markdown results](forecast_experiment_framework_results.md)
 - [Offline interactive HTML report](html/forecast_experiment_framework.html)
 
