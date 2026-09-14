@@ -1,0 +1,23 @@
+{
+  "report": "docs\\html\\vni_qni_forecast_experiment_research.html",
+  "report_sha256": "1057c58988e20694f8148ed4c2ab4ff4c3f7beafe73a6df974b54d3fe517b405",
+  "snapshot_sha256": "ea227e7469b3a6f9900f9f5c1970e7727ba7263ff78d2775b6fd2c6d1e5d9454",
+  "generator_sha256": "5b7483bbc1ee03fd67d31764cb5e2ea7599ead9eec6f445360122d93f68f5ef0",
+  "theme_sha256": "8a49b55a30101a6b7f6e92166b126ce9e2b170eccd9a477738cba95dfadc5aa9",
+  "css_sha256": "c02b38088e3ccf3cfc916465bfbbdc369f53ae954fdda4f3e887fcba669b027d",
+  "source_fingerprint": "4d23af3a945b561de14d9745789a8db1953d96b7cdc76fe295ae4f5cda4143a3",
+  "chart_count": 16,
+  "rebuild": "python scripts/build_forecast_research_report.py",
+  "packages": {
+    "pandas": "2.2.3",
+    "numpy": "2.2.6",
+    "plotly": "6.2.0"
+  },
+  "visual_review": "Not yet verified; browser URL policy blocked earlier local report previews. No alternate browser route used.",
+  "validation": {
+    "full_suite": "49 passed",
+    "final_analysis_tests": "4 passed",
+    "offline_html": "passed dependencies, links and anchors",
+    "visual_preview": "Not verified: local report URLs blocked by browser policy"
+  }
+}

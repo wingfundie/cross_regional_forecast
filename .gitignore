@@ -23,3 +23,5 @@ docs/data/*
 !docs/data/qni_vni_expanded_search_log.json
 !docs/data/qni_vni_expanded_sources.json
 !docs/data/qni_vni_expanded_research_build.json
+!docs/data/forecast_experiment_research_snapshot.json
+!docs/data/forecast_experiment_research_build.json
