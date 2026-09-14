@@ -1,0 +1,17 @@
+{
+  "report_sha256": "0661484cb6d2053f97953b78ed1f5f00e96e128827e7b8b5cffa21c9707f460d",
+  "snapshot_sha256": "b3c0793d962ac81a16f222cf57e64406a460714f633c031b5dba0304be4e61e9",
+  "generator_sha256": "7be6340c01c5af5409744b9104b1afa95f109dbd140663f3d92ba459d7112d30",
+  "theme_sha256": "8a49b55a30101a6b7f6e92166b126ce9e2b170eccd9a477738cba95dfadc5aa9",
+  "css_sha256": "c02b38088e3ccf3cfc916465bfbbdc369f53ae954fdda4f3e887fcba669b027d",
+  "source_fingerprint": "4d23af3a945b561de14d9745789a8db1953d96b7cdc76fe295ae4f5cda4143a3",
+  "charts": 18,
+  "importance_audits": 128,
+  "max_saved_prediction_reproduction_error_mw": 5.7220458984375e-05,
+  "visual_review": "Not verified: local HTML browser previews have been blocked by browser policy; no alternate route used.",
+  "validation": {
+    "tests": "54 passed",
+    "offline_html": "Passed dependencies, local links and anchors",
+    "visual_preview": "Not verified: local HTML preview blocked by browser policy"
+  }
+}
