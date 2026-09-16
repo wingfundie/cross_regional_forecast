@@ -218,6 +218,10 @@ def _index(rows: list[dict], pages: list[Path]) -> Path:
     body += '<a href="downloads/artifact_catalog.csv">artifact catalogue</a> · '
     body += '<a href="downloads/source_build.json">source build manifest</a> · '
     body += '<a href="report_suite_manifest.json">report-suite manifest</a>.</p></section>'
+    body += '<section><h2>Saved models</h2><div class="callout"><strong>Forecast-ready research bundles.</strong> '
+    body += 'The <a href="../final/catalogue.json">saved-model catalogue</a> indexes all 16 target × lead-band bundles. '
+    body += 'Use the <a href="../../../../docs/VNI_SAVED_MODEL_GUIDE.md">saved-model guide</a> for the hash-verified '
+    body += '<code>forecast-vni</code> command, Python API, input schema and deployment status.</div></section>'
     body += '<section><h2>Where the run artifacts live</h2><div class="table-wrap" tabindex="0"><table><thead><tr>'
     body += '<th>Folder</th><th>Area</th><th>Purpose</th><th>Files</th><th>MB</th></tr></thead><tbody>'
     for row in rows:

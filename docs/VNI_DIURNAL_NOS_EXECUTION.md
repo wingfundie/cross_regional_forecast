@@ -26,6 +26,7 @@ Use the repository Python environment and install `requirements.txt`. Configurat
 | `explain-diurnal` | Grouped permutation and full-predictor SHAP |
 | `explain-nos` | Source-common grouped permutation and exact MW SHAP for every NOS point model |
 | `refit-diurnal` | Final research bundles with exact parameters and reload checks |
+| `forecast-vni` | Hash-verified saved-bundle inference with automatic lead-band routing and calibrated intervals |
 
 Render the complete navigable report suite with `python scripts/build_vni_report_suite.py`. Start at `data/forecast_experiments/vni_diurnal_nos_v2/report/index.html`; the focused pages, full report, downloads and manifests are described in `docs/VNI_MODEL_RUN_GUIDE.md`. The report build reads cached results and does not retrain models. A report generated during execution explicitly displays pending stages; it is not a completed handoff. NOS-aware predictive fitting must not proceed merely because a preliminary exposure table exists: mapping, temporal negative controls and the pre-model analysis gate remain mandatory.
 
