@@ -56,9 +56,11 @@ Sixteen frozen-procedure research bundles were refitted with exact schemas and r
 
 ## Review artifacts
 
-- Comprehensive offline report: `data/forecast_experiments/vni_diurnal_nos_v2/report/vni_diurnal_nos_model_report.html`
-- Focused outage-impact report: `data/forecast_experiments/vni_diurnal_nos_v2/report/nos_outage_impact_analysis.html`
-- Machine-readable model table: `data/forecast_experiments/vni_diurnal_nos_v2/report/model_results.csv`
-- Reproducibility manifest: `data/forecast_experiments/vni_diurnal_nos_v2/report/build.json`
+- Report-suite landing page: `data/forecast_experiments/vni_diurnal_nos_v2/report/index.html`
+- Focused visual reports: `data/forecast_experiments/vni_diurnal_nos_v2/report/pages/`
+- Comprehensive offline report: `data/forecast_experiments/vni_diurnal_nos_v2/report/full_run/vni_diurnal_nos_model_report.html`
+- Focused outage-impact report: `data/forecast_experiments/vni_diurnal_nos_v2/report/full_run/nos_outage_impact_analysis.html`
+- Machine-readable model table and manifests: `data/forecast_experiments/vni_diurnal_nos_v2/report/downloads/`
+- Run and report directory guide: `docs/VNI_MODEL_RUN_GUIDE.md`
 
 The reports contain actual-versus-forecast charts, MAPE-first and MAE-second metric tables, model-by-model results, grouped feature importance, SHAP decompositions, hyperparameter histories, NOS impact evidence, risk results, the model-choice verdict, and the exact trained-bundle parameters.
