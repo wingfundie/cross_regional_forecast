@@ -10,3 +10,7 @@ plotly>=6,<7
 joblib
 psutil
 Markdown>=3.7,<4
+optuna>=4,<5
+shap>=0.48,<1
+scipy>=1.12,<2
+threadpoolctl>=3.3,<4

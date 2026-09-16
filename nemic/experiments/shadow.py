@@ -29,7 +29,7 @@ def record(c, frame, received, source):
             f[col]=pd.to_numeric(f[col],errors='coerce') if col in f else 0
         f=f.sort_values(['SETTLEMENTDATE','INTERVENTION','RUNNO']);r=f.iloc[-1]
         if now_nem-r.SETTLEMENTDATE>pd.Timedelta(minutes=30):raise ValueError('Latest dispatch is more than 30 minutes old')
-        values={'flow':float(r.MWFLOW),'export':float(r.EXPORTLIMIT),'import':float(r.IMPORTLIMIT)}
+        values={'flow':float(r.MWFLOW),'export':float(r.EXPORTLIMIT),'import':-float(r.IMPORTLIMIT)}
         for lead in range(1,337):
             for target,value in values.items():
                 rows.append({'origin':origin,'delivery':origin+pd.Timedelta(minutes=30*lead),'lead':lead,
