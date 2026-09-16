@@ -56,6 +56,7 @@ Sixteen frozen-procedure research bundles were refitted with exact schemas and r
 
 ## Review artifacts
 
+- Git-tracked HTML report centre: `reports/vni_diurnal_nos_v2/index.html`
 - Report-suite landing page: `data/forecast_experiments/vni_diurnal_nos_v2/report/index.html`
 - Focused visual reports: `data/forecast_experiments/vni_diurnal_nos_v2/report/pages/`
 - Comprehensive offline report: `data/forecast_experiments/vni_diurnal_nos_v2/report/full_run/vni_diurnal_nos_model_report.html`

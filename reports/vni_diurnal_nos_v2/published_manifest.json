@@ -1,0 +1,73 @@
+{
+  "study": "vni_diurnal_nos_v2",
+  "source": "validated cached run reports",
+  "rebuild": "python scripts/build_vni_report_suite.py",
+  "publish": "python scripts/publish_vni_reports.py",
+  "files": [
+    {
+      "path": "reports/vni_diurnal_nos_v2/index.html",
+      "bytes": 11537,
+      "sha256": "9a6a946a087076a290d129a0b6dc3dad21fb4f8807e93fac0814e153aa0e6079"
+    },
+    {
+      "path": "reports/vni_diurnal_nos_v2/pages/01_model_performance.html",
+      "bytes": 6381703,
+      "sha256": "d42c90f3fc592e7e7528dd1d1b2e738e2cf318031eae0232c9b0364054815d01"
+    },
+    {
+      "path": "reports/vni_diurnal_nos_v2/pages/02_model_explorer.html",
+      "bytes": 30820858,
+      "sha256": "48f6e9596ac17e2a875d27a625a484791c33a5e0f9c64212655aa3b82ddc39c7"
+    },
+    {
+      "path": "reports/vni_diurnal_nos_v2/pages/03_feature_fundamentals.html",
+      "bytes": 23015,
+      "sha256": "77336a045371943b8aebbc7f2833093efc0d9619c3b77f50bb32253069386b0c"
+    },
+    {
+      "path": "reports/vni_diurnal_nos_v2/pages/04_nos_outages.html",
+      "bytes": 7205545,
+      "sha256": "f99a300e47dce613d4bbc612ff867e72e82dd1bd1c5674c89bd0e2eb431750f2"
+    },
+    {
+      "path": "reports/vni_diurnal_nos_v2/pages/05_risk_and_refinements.html",
+      "bytes": 5896524,
+      "sha256": "13f2d2abbb57f012a8f627376b437713575c7f6873f50376fa9ce27b35e7fc7d"
+    },
+    {
+      "path": "reports/vni_diurnal_nos_v2/pages/06_model_handoff.html",
+      "bytes": 42866,
+      "sha256": "ec33ef0a91d3542c632052e6a127041e30e66ccf96ce0a77757fd9add540d6f6"
+    },
+    {
+      "path": "reports/vni_diurnal_nos_v2/full_run/vni_diurnal_nos_model_report.html",
+      "bytes": 37527412,
+      "sha256": "f91d261f2ad3f38f847da0973fa0792af7bfea9b29b7abdd13f4dbcdac353d39"
+    },
+    {
+      "path": "reports/vni_diurnal_nos_v2/full_run/nos_outage_impact_analysis.html",
+      "bytes": 4709025,
+      "sha256": "ddb3f8bd683918eaaf67eb8f7f6489f0bfb5d52a78b57b2576124c3944ad8f89"
+    },
+    {
+      "path": "reports/vni_diurnal_nos_v2/downloads/model_results.csv",
+      "bytes": 183574,
+      "sha256": "7739ea4b3da1462a73327e30036b6140d9456efc33127ef9998c8a65c1079ab2"
+    },
+    {
+      "path": "reports/vni_diurnal_nos_v2/downloads/artifact_catalog.csv",
+      "bytes": 964,
+      "sha256": "e13424f3a9ecce11821d04c11c33cb7d4a91bd580dea3e996ffc1dca2aa5003c"
+    },
+    {
+      "path": "reports/vni_diurnal_nos_v2/downloads/source_build.json",
+      "bytes": 67703,
+      "sha256": "84d939a333c5507772f73ba65f49de7fcd4f283519f082752c7ef0083e982bfc"
+    },
+    {
+      "path": "reports/vni_diurnal_nos_v2/downloads/nos_impact_build.json",
+      "bytes": 362,
+      "sha256": "0dcc596e8c84077ac6803efa83454506de3efe07924e8e7ba59b2e7814b5abe4"
+    }
+  ]
+}
