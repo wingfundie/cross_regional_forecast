@@ -13,6 +13,7 @@ DESTINATION = ROOT / "reports/vni_diurnal_nos_v2"
 
 FILES = (
     "index.html",
+    "vni_research_paper.html",
     "pages/01_model_performance.html",
     "pages/02_model_explorer.html",
     "pages/03_feature_fundamentals.html",
@@ -25,6 +26,10 @@ FILES = (
     "downloads/artifact_catalog.csv",
     "downloads/source_build.json",
     "downloads/nos_impact_build.json",
+    "downloads/research_performance.csv",
+    "downloads/research_feature_importance.csv",
+    "downloads/research_shap_importance.csv",
+    "downloads/research_paper_build.json",
 )
 
 
@@ -83,7 +88,8 @@ def publish() -> Path:
     (DESTINATION / "published_manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     (DESTINATION / "README.md").write_text(
         "# Published VNI diurnal and NOS reports\n\n"
-        "Open [`index.html`](index.html) for the report centre. The focused pages split model performance, "
+        "Open [`vni_research_paper.html`](vni_research_paper.html) for the full research paper or "
+        "[`index.html`](index.html) for the report centre. The focused pages split model performance, "
         "the model explorer, feature fundamentals, NOS outages, risk/refinements and the trained-model handoff. "
         "`full_run/` contains the complete report and matched NOS impact report.\n\n"
         "These files are rendered from the completed cached run. Rebuild locally with "

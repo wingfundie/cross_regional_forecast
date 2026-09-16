@@ -210,6 +210,8 @@ def _index(rows: list[dict], pages: list[Path]) -> Path:
     body += metric("NOS point verdict", "Challenger", "+0.39% export and −0.63% import versus T6 O0")
     body += "</section>"
     body += '<section><h2>Choose a report</h2><div class="findings">' + "".join(cards) + "</div></section>"
+    body += '<section><h2>Research paper</h2><div class="callout"><strong>Complete written study.</strong> '
+    body += '<a href="vni_research_paper.html">Read the full research paper</a> for the research question, methods, model and feature definitions, comparative results, explainability, NOS findings, selected specification and forward-forecasting guide.</div></section>'
     body += '<section><h2>Complete-run files</h2><div class="callout"><strong>Full report.</strong> '
     body += '<a href="full_run/vni_diurnal_nos_model_report.html">Open the complete model report</a> or '
     body += '<a href="full_run/nos_outage_impact_analysis.html">open the matched NOS impact report</a>. '
