@@ -32,7 +32,7 @@ class Candidate:
             gates=[(z[:,i]<0).astype(float) for i in self.gates]
             return np.column_stack([z]+[z[:,self.smooth]*g[:,None] for g in gates])
         return z
-    def fit(self,x,y,prepared=None):
+    def fit(self,x,y,prepared=None,sample_weight=None):
         if prepared is None:self.transform=Transform().fit(x);z=self.transform.apply(x)
         else:self.transform,z=prepared
         names=list(x.columns)
@@ -49,7 +49,9 @@ class Candidate:
         elif self.family=='elastic':self.model=ElasticNet(alpha=settings['alpha'],l1_ratio=settings['mix'],max_iter=2000,tol=.001)
         else:self.model=Ridge(alpha=settings.get('alpha',100))
         with warnings.catch_warnings(record=True) as caught:
-            warnings.simplefilter('always');self.model.fit(z,y/self.scale)
+            warnings.simplefilter('always')
+            if sample_weight is None:self.model.fit(z,y/self.scale)
+            else:self.model.fit(z,y/self.scale,sample_weight=sample_weight)
         self.warnings=[str(x.message) for x in caught]
         self.columns=len(names);self.expanded_columns=z.shape[1]
         return self

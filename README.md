@@ -14,7 +14,7 @@ Read `BUILD_PLAN.md` for the agreed specification and `BACKTEST_REPORT.md` for e
 
 ## Documentation
 
-- [Diurnal and NOS forecasting research](docs/QNI_VNI_DIURNAL_NOS_RESEARCH.md) and [implementation plan](docs/QNI_VNI_DIURNAL_NOS_IMPLEMENTATION_PLAN.md): verified time-of-day comparisons, outage-vintage feasibility, chronological Optuna optimization, MAPE/MAE reporting, per-model SHAP and trained-model handoff requirements. The proposed experiments have not yet been run. Reproduce the period evidence from retained local predictions with `python scripts/reproduce_diurnal_nos_evidence.py`; generated evidence and source data remain local.
+- [Diurnal and NOS forecasting research](docs/QNI_VNI_DIURNAL_NOS_RESEARCH.md), [implementation plan](docs/QNI_VNI_DIURNAL_NOS_IMPLEMENTATION_PLAN.md) and [VNI execution guide](docs/VNI_DIURNAL_NOS_EXECUTION.md): delivery-period models, NOS vintage replay, data-profiled chronological optimization, MAPE/MAE reporting, model explanations and trained research-bundle handoff. Generated predictions, fitted models and reports remain local and reproducible from the execution guide.
 
 The complete offline [HTML handbook](docs/html/index.html) includes the research, results, backtest protocol and improvement roadmap. Rebuild it with `python scripts/build_docs_html.py`. Open the downloaded file in a browser; GitHub's file view displays HTML source.
 

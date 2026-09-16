@@ -40,7 +40,7 @@ def clean(value):
 def load_config(path=DEFAULT):
     path=Path(path).resolve()
     c=json.loads(path.read_text(encoding='utf-8'))
-    if c.get('schema_version')!=1:raise ValueError('Unsupported experiment schema')
+    if c.get('schema_version') not in (1,2):raise ValueError('Unsupported experiment schema')
     ids=[x['id'] for x in c['connectors']]
     if len(set(ids))!=len(ids):raise ValueError('Duplicate connector')
     if not all(1<=x<=336 for x in c['leads']):raise ValueError('Invalid lead')

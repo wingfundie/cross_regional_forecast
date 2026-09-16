@@ -13,6 +13,7 @@ results/
 .env.*
 !.env.example
 local_exports/
+.codex-remote-attachments/
 
 # Retain only compact, reproducible forecasting research evidence under docs/data.
 !docs/data/

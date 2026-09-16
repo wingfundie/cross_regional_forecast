@@ -1,0 +1,172 @@
+{
+  "schema_version": 2,
+  "campaign": "vni_diurnal_nos_v2",
+  "root": "data/forecast_experiments",
+  "start": "2024-09-08",
+  "end": "2026-09-01",
+  "seed": 741,
+  "connectors": [
+    {
+      "id": "VIC1-NSW1",
+      "name": "VNI",
+      "regions": [
+        "VIC1",
+        "NSW1"
+      ],
+      "study": "constraint_vni_2y",
+      "atlas": "event_vni_2y"
+    }
+  ],
+  "targets": [
+    "export_tight",
+    "import_tight",
+    "export",
+    "import"
+  ],
+  "leads": [
+    1,
+    2,
+    4,
+    8,
+    12,
+    24,
+    48,
+    72,
+    96,
+    144,
+    192,
+    240,
+    288,
+    336
+  ],
+  "bands": [
+    [
+      1,
+      12
+    ],
+    [
+      13,
+      48
+    ],
+    [
+      49,
+      144
+    ],
+    [
+      145,
+      336
+    ]
+  ],
+  "protocols": [
+    "fixed"
+  ],
+  "tracks": [
+    "operational",
+    "retrospective",
+    "oracle"
+  ],
+  "observation_delay_minutes": 30,
+  "limits": {
+    "additional_bytes": 10000000000,
+    "min_free_bytes": 20000000000,
+    "file_bytes": 600000000,
+    "expanded_bytes": 3000000000,
+    "batch_hours": 12,
+    "workers": 2,
+    "threads": 2
+  },
+  "events": {
+    "percentile": 0.9,
+    "minimum_positive": 100,
+    "minimum_lead_minutes": 30,
+    "maximum_lead_minutes": 120,
+    "false_alarms_per_day": 3,
+    "absolute_drops_mw": [
+      100,
+      200,
+      400
+    ],
+    "case_count": 100
+  },
+  "models": {
+    "ridge": [
+      10,
+      100,
+      1000
+    ],
+    "elastic_alpha": [
+      0.01,
+      0.1,
+      1
+    ],
+    "elastic_mix": [
+      0.2,
+      0.8
+    ],
+    "logistic_c": [
+      0.01,
+      0.1,
+      1
+    ],
+    "spline_knots": [
+      4,
+      6
+    ],
+    "spline_alpha": [
+      10,
+      100
+    ],
+    "boost_leaves": [
+      7,
+      15
+    ],
+    "boost_trees": 150,
+    "quantiles": [
+      0.025,
+      0.1,
+      0.25,
+      0.5,
+      0.75,
+      0.9,
+      0.975
+    ]
+  },
+  "promotion": {
+    "flow_improvement": 0.05,
+    "recall_improvement_pp": 10,
+    "max_flow_deterioration": 0.02
+  },
+  "training_sampling": "all configured leads; total weight one per origin",
+  "report_prefix": "forecast_experiments",
+  "selection": {
+    "primary": "mae",
+    "challenger": "dr_nmae",
+    "mape": "assessment_only"
+  },
+  "calendar": {
+    "families": [
+      "T0",
+      "T1",
+      "T2",
+      "T3",
+      "T4",
+      "T5",
+      "T6"
+    ],
+    "boundaries": [
+      0,
+      6,
+      10,
+      16,
+      21,
+      24
+    ]
+  },
+  "outage": {
+    "availability_delay_minutes": 30,
+    "stale_minutes": 90,
+    "min_coverage": 0.8,
+    "min_days": 90,
+    "min_folds": 4
+  }
+}
