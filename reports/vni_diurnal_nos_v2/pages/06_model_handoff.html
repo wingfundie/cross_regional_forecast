@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><link href="data:," rel="icon"/><meta content="editorial-html-report/1.0" name="report-theme"/><title>VNI · Model verdict and handoff</title><style>:root{--ink:#282b30;--muted:#636870;--blue:#4c94df;--teal:#268a87;--accent:#7658c9;--line:#dfe3eb;--panel:#ececf3}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;border-top:5px solid var(--blue);background:#f5f6f9;color:var(--ink);font:16px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+main{max-width:1344px;margin:auto;padding:50px 32px 70px}.eyebrow,.section-kicker{font-size:12px;letter-spacing:.14em;font-weight:750;color:#3977b7}.section-kicker{margin-bottom:10px}
+h1{font-size:clamp(38px,5vw,65px);line-height:1.08;letter-spacing:-.045em;margin:17px 0 22px}h1 span{color:var(--accent)}.dek{font-size:20px;max-width:1080px;color:var(--muted);margin-bottom:26px}.tags{display:flex;gap:9px;flex-wrap:wrap}.tags span{font-size:12px;border:1px solid var(--line);background:white;border-radius:20px;padding:6px 12px}
+nav{display:flex;flex-wrap:wrap;gap:21px;margin:22px 0 30px;padding:18px 0;border-bottom:1px solid var(--line);font-size:14px}a{color:#276bae;text-decoration:none}a:hover{text-decoration:underline}a:focus-visible,summary:focus-visible,select:focus-visible,.table-wrap:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.metric{background:white;border:1px solid var(--line);border-radius:10px;padding:21px;min-width:0}.metric span,.metric small{display:block;color:var(--muted);font-size:12px}.metric strong{font-size:30px;line-height:1.25;letter-spacing:-.035em;display:block;margin:5px 0;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.callout{background:#eaf3f5;border-left:4px solid var(--teal);padding:19px 23px;margin:25px 0;font-size:15px}.scope-note{background:#fff8e8;border-left-color:#c29330}
+section,.section{margin-top:52px;scroll-margin-top:20px}h2{font-size:29px;line-height:1.25;letter-spacing:-.025em;margin:38px 0 16px}h3{font-size:19px;line-height:1.3;margin:25px 0 13px}
+.findings{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.finding{background:white;border:1px solid var(--line);border-radius:10px;padding:23px;min-width:0}.finding h3{margin-top:11px}.finding p{margin:0;font-size:14px;color:var(--muted)}.index{font-size:12px;font-weight:750;color:var(--teal)}
+.table-wrap{overflow-x:auto;background:white;border:1px solid var(--line);border-radius:10px;max-width:100%;overscroll-behavior-x:contain;margin:16px 0}table{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap}th,td{padding:12px 14px;text-align:right;border-bottom:1px solid #edf0f4;vertical-align:top}th:first-child,td:first-child{text-align:left}td:first-child{font-weight:600}thead{background:var(--panel);font-size:12px;color:#4f545b}tbody tr:nth-child(even){background:#fafbfc}tbody tr:hover{background:#f0f6fc}
+.small,.note,.meta{font-size:13px;color:var(--muted)}figure{margin:26px 0 8px;background:white;border:1px solid var(--line);border-radius:10px;overflow:hidden}figcaption{display:flex;justify-content:space-between;gap:16px;padding:13px 18px;border-bottom:1px solid #edf0f4;color:var(--muted);font-size:12px;font-weight:650}.figure-links{display:flex;gap:20px;flex-shrink:0}figure img{display:block;width:100%;height:auto}.figure-note{padding:0 18px 13px;margin:0;color:var(--muted);font-size:12px}.chart-scroll{overflow-x:auto}.chart-scroll .plotly-graph-div{min-width:680px;border-top:2px solid var(--blue)}
+.method,details{padding:27px;background:white;border:1px solid var(--line);border-radius:10px}details{margin-top:24px}summary{cursor:pointer;font-weight:650}pre{max-width:100%;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere}li{margin:12px 0}.sources{font-size:14px}.sources a{overflow-wrap:anywhere}footer{margin-top:45px;padding-top:22px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}code{background:#f0f2f7;padding:2px 5px;border-radius:3px;font-size:12px;overflow-wrap:anywhere}
+@media(max-width:900px){main{padding:32px 20px 55px}.metrics{grid-template-columns:repeat(2,1fr)}.findings{grid-template-columns:1fr}.dek{font-size:18px}section,.section{margin-top:40px}nav{gap:14px}}
+@media(max-width:520px){main{padding:28px 15px 45px}.metrics{gap:10px}.metric{padding:15px}.metric strong{font-size:24px}.metric small{font-size:11px}h2{font-size:25px}figcaption{padding:11px 12px;align-items:flex-start}.figure-links{gap:12px}.method,details{padding:20px}.callout{padding:17px 18px}}
+@media print{body{background:white}nav,figcaption a{display:none}main{max-width:none;padding:15px}figure,.metrics,.finding{break-inside:avoid}h2{break-after:avoid}.chart-scroll{overflow:visible}.chart-scroll .plotly-graph-div{min-width:0}}
+</style></head><body><main><header><div class="eyebrow">VNI forecasting research</div><h1>Completed run<br/><span>Model verdict and handoff</span></h1><p class="dek">Final model choice, statistical tests, exact trained-bundle parameters, reload parity and evidence limits.</p><div class="tags"><span>VIC1–NSW1</span><span>NEM time · UTC+10</span><span>Outcomes through August 2026</span><span>Historical development evidence</span></div></header><nav class="suite-nav"><a href="../index.html">Report home</a> · <a href="../pages/01_model_performance.html">Model performance</a> · <a href="../pages/02_model_explorer.html">Model explorer</a> · <a href="../pages/03_feature_fundamentals.html">Features and fundamentals</a> · <a href="../pages/04_nos_outages.html">NOS outage modelling</a> · <a href="../pages/05_risk_and_refinements.html">Risk and refinements</a> · <a href="../pages/06_model_handoff.html">Model verdict and handoff</a> · <a href="../full_run/vni_diurnal_nos_model_report.html">Full run</a></nav><section id="verdict"><h2>Model-choice verdict</h2><div class="table-wrap" tabindex="0"><table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>target</th>
+<th>band</th>
+<th>selection-frozen routed MAE</th>
+<th>MAPE ≥50 assessment</th>
+<th>persistence MAE</th>
+<th>shared T0 MAE</th>
+<th>skill vs persistence</th>
+<th>incremental skill vs T0</th>
+<th>diurnal verdict</th>
+<th>historical gate</th>
+<th>live status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>export</td>
+<td>0</td>
+<td>202.907</td>
+<td>57.525</td>
+<td>299.541</td>
+<td>266.399</td>
+<td>0.323</td>
+<td>0.238</td>
+<td>specialization improves on T0</td>
+<td>passes 5% vs persistence</td>
+<td>not operationally eligible</td>
+</tr>
+<tr>
+<td>export</td>
+<td>1</td>
+<td>260.463</td>
+<td>69.885</td>
+<td>444.883</td>
+<td>350.731</td>
+<td>0.415</td>
+<td>0.257</td>
+<td>specialization improves on T0</td>
+<td>passes 5% vs persistence</td>
+<td>not operationally eligible</td>
+</tr>
+<tr>
+<td>export</td>
+<td>2</td>
+<td>261.402</td>
+<td>71.661</td>
+<td>414.150</td>
+<td>336.397</td>
+<td>0.369</td>
+<td>0.223</td>
+<td>specialization improves on T0</td>
+<td>passes 5% vs persistence</td>
+<td>not operationally eligible</td>
+</tr>
+<tr>
+<td>export</td>
+<td>3</td>
+<td>258.859</td>
+<td>66.634</td>
+<td>320.568</td>
+<td>282.008</td>
+<td>0.192</td>
+<td>0.082</td>
+<td>specialization improves on T0</td>
+<td>passes 5% vs persistence</td>
+<td>not operationally eligible</td>
+</tr>
+<tr>
+<td>export_tight</td>
+<td>0</td>
+<td>216.763</td>
+<td>62.254</td>
+<td>324.666</td>
+<td>287.791</td>
+<td>0.332</td>
+<td>0.247</td>
+<td>specialization improves on T0</td>
+<td>passes 5% vs persistence</td>
+<td>not operationally eligible</td>
+</tr>
+<tr>
+<td>export_tight</td>
+<td>1</td>
+<td>280.397</td>
+<td>77.014</td>
+<td>483.801</td>
+<td>377.465</td>
+<td>0.420</td>
+<td>0.257</td>
+<td>specialization improves on T0</td>
+<td>passes 5% vs persistence</td>
+<td>not operationally eligible</td>
+</tr>
+<tr>
+<td>export_tight</td>
+<td>2</td>
+<td>284.817</td>
+<td>77.911</td>
+<td>447.188</td>
+<td>360.714</td>
+<td>0.363</td>
+<td>0.210</td>
+<td>specialization improves on T0</td>
+<td>passes 5% vs persistence</td>
+<td>not operationally eligible</td>
+</tr>
+<tr>
+<td>export_tight</td>
+<td>3</td>
+<td>272.339</td>
+<td>72.288</td>
+<td>339.382</td>
+<td>299.541</td>
+<td>0.198</td>
+<td>0.091</td>
+<td>specialization improves on T0</td>
+<td>passes 5% vs persistence</td>
+<td>not operationally eligible</td>
+</tr>
+<tr>
+<td>import</td>
+<td>0</td>
+<td>171.106</td>
+<td>49.236</td>
+<td>208.608</td>
+<td>200.580</td>
+<td>0.180</td>
+<td>0.147</td>
+<td>specialization improves on T0</td>
+<td>passes 5% vs persistence</td>
+<td>not operationally eligible</td>
+</tr>
+<tr>
+<td>import</td>
+<td>1</td>
+<td>219.163</td>
+<td>62.003</td>
+<td>298.576</td>
+<td>277.681</td>
+<td>0.266</td>
+<td>0.211</td>
+<td>specialization improves on T0</td>
+<td>passes 5% vs persistence</td>
+<td>not operationally eligible</td>
+</tr>
+<tr>
+<td>import</td>
+<td>2</td>
+<td>221.796</td>
+<td>63.449</td>
+<td>300.941</td>
+<td>280.852</td>
+<td>0.263</td>
+<td>0.210</td>
+<td>specialization improves on T0</td>
+<td>passes 5% vs persistence</td>
+<td>not operationally eligible</td>
+</tr>
+<tr>
+<td>import</td>
+<td>3</td>
+<td>225.552</td>
+<td>65.097</td>
+<td>282.707</td>
+<td>265.426</td>
+<td>0.202</td>
+<td>0.150</td>
+<td>specialization improves on T0</td>
+<td>passes 5% vs persistence</td>
+<td>not operationally eligible</td>
+</tr>
+<tr>
+<td>import_tight</td>
+<td>0</td>
+<td>192.116</td>
+<td>55.903</td>
+<td>231.832</td>
+<td>223.044</td>
+<td>0.171</td>
+<td>0.139</td>
+<td>specialization improves on T0</td>
+<td>passes 5% vs persistence</td>
+<td>not operationally eligible</td>
+</tr>
+<tr>
+<td>import_tight</td>
+<td>1</td>
+<td>240.240</td>
+<td>69.601</td>
+<td>320.925</td>
+<td>299.661</td>
+<td>0.251</td>
+<td>0.198</td>
+<td>specialization improves on T0</td>
+<td>passes 5% vs persistence</td>
+<td>not operationally eligible</td>
+</tr>
+<tr>
+<td>import_tight</td>
+<td>2</td>
+<td>239.449</td>
+<td>69.686</td>
+<td>325.426</td>
+<td>303.559</td>
+<td>0.264</td>
+<td>0.211</td>
+<td>specialization improves on T0</td>
+<td>passes 5% vs persistence</td>
+<td>not operationally eligible</td>
+</tr>
+<tr>
+<td>import_tight</td>
+<td>3</td>
+<td>241.856</td>
+<td>71.609</td>
+<td>310.256</td>
+<td>290.075</td>
+<td>0.220</td>
+<td>0.166</td>
+<td>specialization improves on T0</td>
+<td>passes 5% vs persistence</td>
+<td>not operationally eligible</td>
+</tr>
+</tbody>
+</table></div><h3>Paired statistical comparisons</h3><pre>{
+  "comparisons": [
+    {
+      "target": "export_tight",
+      "control": "persistence",
+      "improvement_mw": 107.99312627636117,
+      "ci_low": 94.1988159742558,
+      "ci_high": 122.86590249506912,
+      "p_one_sided": 0.0004997501249375312,
+      "block_days": 7,
+      "calendar_days": 365,
+      "holm_p_vni_family": 0.001999000499750125
+    },
+    {
+      "target": "export_tight",
+      "control": "persistence",
+      "improvement_mw": 107.99312627636117,
+      "ci_low": 92.14516496620594,
+      "ci_high": 127.87933547104683,
+      "p_one_sided": 0.0004997501249375312,
+      "block_days": 14,
+      "calendar_days": 365
+    },
+    {
+      "target": "export_tight",
+      "control": "T0_mae",
+      "improvement_mw": 71.11704666050674,
+      "ci_low": 58.45127220635976,
+      "ci_high": 86.21334087244809,
+      "p_one_sided": 0.0004997501249375312,
+      "block_days": 7,
+      "calendar_days": 365,
+      "holm_p_vni_family": 0.001999000499750125
+    },
+    {
+      "target": "export_tight",
+      "control": "T0_mae",
+      "improvement_mw": 71.11704666050674,
+      "ci_low": 54.80021299507122,
+      "ci_high": 92.01635665687962,
+      "p_one_sided": 0.0004997501249375312,
+      "block_days": 14,
+      "calendar_days": 365
+    },
+    {
+      "target": "import_tight",
+      "control": "persistence",
+      "improvement_mw": 39.74347421716458,
+      "ci_low": 33.64552337970294,
+      "ci_high": 46.33035246785646,
+      "p_one_sided": 0.0004997501249375312,
+      "block_days": 7,
+      "calendar_days": 365,
+      "holm_p_vni_family": 0.001999000499750125
+    },
+    {
+      "target": "import_tight",
+      "control": "persistence",
+      "improvement_mw": 39.74347421716458,
+      "ci_low": 31.944757442267797,
+      "ci_high": 47.41733206905372,
+      "p_one_sided": 0.0004997501249375312,
+      "block_days": 14,
+      "calendar_days": 365
+    },
+    {
+      "target": "import_tight",
+      "control": "T0_mae",
+      "improvement_mw": 30.965425503219667,
+      "ci_low": 25.265316337749347,
+      "ci_high": 37.23845130161883,
+      "p_one_sided": 0.0004997501249375312,
+      "block_days": 7,
+      "calendar_days": 365,
+      "holm_p_vni_family": 0.001999000499750125
+    },
+    {
+      "target": "import_tight",
+      "control": "T0_mae",
+      "improvement_mw": 30.965425503219667,
+      "ci_low": 23.614636486688582,
+      "ci_high": 38.15528437805072,
+      "p_one_sided": 0.0004997501249375312,
+      "block_days": 14,
+      "calendar_days": 365
+    }
+  ],
+  "mcs90": [
+    {
+      "target": "export_tight",
+      "level": 0.9,
+      "block_days": 7,
+      "members": [
+        "T6_mae"
+      ],
+      "steps": [
+        {
+          "members": [
+            "persistence",
+            "seasonal_daily",
+            "seasonal_weekly",
+            "T0_mae",
+            "T1_mae",
+            "T2_mae",
+            "T3_mae",
+            "T4_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "seasonal_weekly"
+        },
+        {
+          "members": [
+            "persistence",
+            "seasonal_daily",
+            "T0_mae",
+            "T1_mae",
+            "T2_mae",
+            "T3_mae",
+            "T4_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "persistence"
+        },
+        {
+          "members": [
+            "seasonal_daily",
+            "T0_mae",
+            "T1_mae",
+            "T2_mae",
+            "T3_mae",
+            "T4_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "T4_mae"
+        },
+        {
+          "members": [
+            "seasonal_daily",
+            "T0_mae",
+            "T1_mae",
+            "T2_mae",
+            "T3_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "T0_mae"
+        },
+        {
+          "members": [
+            "seasonal_daily",
+            "T1_mae",
+            "T2_mae",
+            "T3_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "T1_mae"
+        },
+        {
+          "members": [
+            "seasonal_daily",
+            "T2_mae",
+            "T3_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "seasonal_daily"
+        },
+        {
+          "members": [
+            "T2_mae",
+            "T3_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "T2_mae"
+        },
+        {
+          "members": [
+            "T3_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "T3_mae"
+        },
+        {
+          "members": [
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "T5_mae"
+        }
+      ],
+      "calendar_days": 365,
+      "method": "Sequential range statistic with centred moving-block bootstrap; development-only 90% model confidence set."
+    },
+    {
+      "target": "export_tight",
+      "level": 0.9,
+      "block_days": 14,
+      "members": [
+        "T6_mae"
+      ],
+      "steps": [
+        {
+          "members": [
+            "persistence",
+            "seasonal_daily",
+            "seasonal_weekly",
+            "T0_mae",
+            "T1_mae",
+            "T2_mae",
+            "T3_mae",
+            "T4_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "seasonal_weekly"
+        },
+        {
+          "members": [
+            "persistence",
+            "seasonal_daily",
+            "T0_mae",
+            "T1_mae",
+            "T2_mae",
+            "T3_mae",
+            "T4_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "persistence"
+        },
+        {
+          "members": [
+            "seasonal_daily",
+            "T0_mae",
+            "T1_mae",
+            "T2_mae",
+            "T3_mae",
+            "T4_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "T4_mae"
+        },
+        {
+          "members": [
+            "seasonal_daily",
+            "T0_mae",
+            "T1_mae",
+            "T2_mae",
+            "T3_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "T0_mae"
+        },
+        {
+          "members": [
+            "seasonal_daily",
+            "T1_mae",
+            "T2_mae",
+            "T3_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "T1_mae"
+        },
+        {
+          "members": [
+            "seasonal_daily",
+            "T2_mae",
+            "T3_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "seasonal_daily"
+        },
+        {
+          "members": [
+            "T2_mae",
+            "T3_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "T2_mae"
+        },
+        {
+          "members": [
+            "T3_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "T3_mae"
+        },
+        {
+          "members": [
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "T5_mae"
+        }
+      ],
+      "calendar_days": 365,
+      "method": "Sequential range statistic with centred moving-block bootstrap; development-only 90% model confidence set."
+    },
+    {
+      "target": "import_tight",
+      "level": 0.9,
+      "block_days": 7,
+      "members": [
+        "T6_mae"
+      ],
+      "steps": [
+        {
+          "members": [
+            "persistence",
+            "seasonal_daily",
+            "seasonal_weekly",
+            "T0_mae",
+            "T1_mae",
+            "T2_mae",
+            "T3_mae",
+            "T4_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "seasonal_weekly"
+        },
+        {
+          "members": [
+            "persistence",
+            "seasonal_daily",
+            "T0_mae",
+            "T1_mae",
+            "T2_mae",
+            "T3_mae",
+            "T4_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "seasonal_daily"
+        },
+        {
+          "members": [
+            "persistence",
+            "T0_mae",
+            "T1_mae",
+            "T2_mae",
+            "T3_mae",
+            "T4_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "persistence"
+        },
+        {
+          "members": [
+            "T0_mae",
+            "T1_mae",
+            "T2_mae",
+            "T3_mae",
+            "T4_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "T0_mae"
+        },
+        {
+          "members": [
+            "T1_mae",
+            "T2_mae",
+            "T3_mae",
+            "T4_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "T1_mae"
+        },
+        {
+          "members": [
+            "T2_mae",
+            "T3_mae",
+            "T4_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "T4_mae"
+        },
+        {
+          "members": [
+            "T2_mae",
+            "T3_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "T3_mae"
+        },
+        {
+          "members": [
+            "T2_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "T2_mae"
+        },
+        {
+          "members": [
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "T5_mae"
+        }
+      ],
+      "calendar_days": 365,
+      "method": "Sequential range statistic with centred moving-block bootstrap; development-only 90% model confidence set."
+    },
+    {
+      "target": "import_tight",
+      "level": 0.9,
+      "block_days": 14,
+      "members": [
+        "T6_mae"
+      ],
+      "steps": [
+        {
+          "members": [
+            "persistence",
+            "seasonal_daily",
+            "seasonal_weekly",
+            "T0_mae",
+            "T1_mae",
+            "T2_mae",
+            "T3_mae",
+            "T4_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "seasonal_weekly"
+        },
+        {
+          "members": [
+            "persistence",
+            "seasonal_daily",
+            "T0_mae",
+            "T1_mae",
+            "T2_mae",
+            "T3_mae",
+            "T4_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "seasonal_daily"
+        },
+        {
+          "members": [
+            "persistence",
+            "T0_mae",
+            "T1_mae",
+            "T2_mae",
+            "T3_mae",
+            "T4_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "persistence"
+        },
+        {
+          "members": [
+            "T0_mae",
+            "T1_mae",
+            "T2_mae",
+            "T3_mae",
+            "T4_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "T0_mae"
+        },
+        {
+          "members": [
+            "T1_mae",
+            "T2_mae",
+            "T3_mae",
+            "T4_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "T1_mae"
+        },
+        {
+          "members": [
+            "T2_mae",
+            "T3_mae",
+            "T4_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "T4_mae"
+        },
+        {
+          "members": [
+            "T2_mae",
+            "T3_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "T3_mae"
+        },
+        {
+          "members": [
+            "T2_mae",
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "T2_mae"
+        },
+        {
+          "members": [
+            "T5_mae",
+            "T6_mae"
+          ],
+          "p_equal_predictive_ability": 0.0004997501249375312,
+          "removed_if_rejected": "T5_mae"
+        }
+      ],
+      "calendar_days": 365,
+      "method": "Sequential range statistic with centred moving-block bootstrap; development-only 90% model confidence set."
+    }
+  ],
+  "multiplicity": "VNI-only execution: four primary hypotheses (two directions \u00d7 two controls); QNI not silently treated as tested",
+  "claim": "Development-only bootstrap evidence; no independent confirmation",
+  "control_limitations": "T0 is the corrected shared full-feature ridge. Full legacy candidate/blend-policy bridge must be reported separately."
+}</pre><h3>Trained research bundles and parameters</h3><div class="table-wrap" tabindex="0"><table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>target</th>
+<th>band</th>
+<th>winner</th>
+<th>path</th>
+<th>sha256</th>
+<th>selection MAE by candidate</th>
+<th>exact fitted parameters</th>
+<th>schema columns</th>
+<th>reload parity</th>
+<th>operationally eligible</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>export_tight</td>
+<td>0</td>
+<td>T6_mae</td>
+<td>final\band0\export_tight\model.joblib</td>
+<td>7d6637fb2b95114c01b34be317da5ac4435756b40e5ebc99b912dd418ece7544</td>
+<td>{"persistence": 313.58686426767105, "T0_mae": 258.2736327114116, "T6_mae": 199.92326139761943}</td>
+<td>{"T0_mae": {"alpha": 9850.94232785909, "copy_X": true, "fit_intercept": true, "max_iter": null, "positive": false, "random_state": null, "solver": "auto", "tol": 0.0001}, "T6_mae": {"boosting_type": "gbdt", "class_weight": null, "colsample_bytree": 1.0, "importance_type": "split", "learning_rate": 0.042203867755960627, "max_depth": -1, "min_child_samples": 561, "min_child_weight": 0.001, "min_split_gain": 0.0, "n_estimators": 200, "n_jobs": 2, "num_leaves": 42, "objective": "regression_l1", "random_state": 741, "reg_alpha": 0.0, "reg_lambda": 0.0, "subsample": 1.0, "subsample_for_bin": 200000, "subsample_freq": 0, "verbosity": -1, "deterministic": true, "force_col_wise": true}}</td>
+<td>41</td>
+<td>passed</td>
+<td>False</td>
+</tr>
+<tr>
+<td>import_tight</td>
+<td>0</td>
+<td>T6_mae</td>
+<td>final\band0\import_tight\model.joblib</td>
+<td>46c586cbe4995a84d69d32ec792907509e4834c83c1046a65a37dde88fa218c2</td>
+<td>{"persistence": 180.12990437751094, "T0_mae": 174.3215033801944, "T6_mae": 140.61552510398886}</td>
+<td>{"T0_mae": {"alpha": 656253.7016667909, "copy_X": true, "fit_intercept": true, "max_iter": null, "positive": false, "random_state": null, "solver": "auto", "tol": 0.0001}, "T6_mae": {"boosting_type": "gbdt", "class_weight": null, "colsample_bytree": 1.0, "importance_type": "split", "learning_rate": 0.027186304955188655, "max_depth": -1, "min_child_samples": 495, "min_child_weight": 0.001, "min_split_gain": 0.0, "n_estimators": 200, "n_jobs": 2, "num_leaves": 22, "objective": "regression_l1", "random_state": 741, "reg_alpha": 0.0, "reg_lambda": 0.0, "subsample": 1.0, "subsample_for_bin": 200000, "subsample_freq": 0, "verbosity": -1, "deterministic": true, "force_col_wise": true}}</td>
+<td>41</td>
+<td>passed</td>
+<td>False</td>
+</tr>
+<tr>
+<td>export</td>
+<td>0</td>
+<td>T6_mae</td>
+<td>final\band0\export\model.joblib</td>
+<td>f932ac0a67deed28ddf73389cdd6bcb58a7d50acf71b2a91a1637291691d4a28</td>
+<td>{"persistence": 295.2207604905604, "T0_mae": 244.77392097818898, "T6_mae": 187.77575809561452}</td>
+<td>{"T0_mae": {"alpha": 8959.740578835155, "copy_X": true, "fit_intercept": true, "max_iter": null, "positive": false, "random_state": null, "solver": "auto", "tol": 0.0001}, "T6_mae": {"boosting_type": "gbdt", "class_weight": null, "colsample_bytree": 1.0, "importance_type": "split", "learning_rate": 0.042203867755960627, "max_depth": -1, "min_child_samples": 561, "min_child_weight": 0.001, "min_split_gain": 0.0, "n_estimators": 200, "n_jobs": 2, "num_leaves": 42, "objective": "regression_l1", "random_state": 741, "reg_alpha": 0.0, "reg_lambda": 0.0, "subsample": 1.0, "subsample_for_bin": 200000, "subsample_freq": 0, "verbosity": -1, "deterministic": true, "force_col_wise": true}}</td>
+<td>41</td>
+<td>passed</td>
+<td>False</td>
+</tr>
+<tr>
+<td>import</td>
+<td>0</td>
+<td>T6_mae</td>
+<td>final\band0\import\model.joblib</td>
+<td>99e4e160ff100e69f2189d74774703b9695e150d6cb76ef279fbb0699c93ee58</td>
+<td>{"persistence": 171.29459306559937, "T0_mae": 165.8217535930984, "T6_mae": 133.5121369998225}</td>
+<td>{"T0_mae": {"alpha": 638253.6954572692, "copy_X": true, "fit_intercept": true, "max_iter": null, "positive": false, "random_state": null, "solver": "auto", "tol": 0.0001}, "T6_mae": {"boosting_type": "gbdt", "class_weight": null, "colsample_bytree": 1.0, "importance_type": "split", "learning_rate": 0.027186304955188655, "max_depth": -1, "min_child_samples": 495, "min_child_weight": 0.001, "min_split_gain": 0.0, "n_estimators": 200, "n_jobs": 2, "num_leaves": 22, "objective": "regression_l1", "random_state": 741, "reg_alpha": 0.0, "reg_lambda": 0.0, "subsample": 1.0, "subsample_for_bin": 200000, "subsample_freq": 0, "verbosity": -1, "deterministic": true, "force_col_wise": true}}</td>
+<td>41</td>
+<td>passed</td>
+<td>False</td>
+</tr>
+<tr>
+<td>export_tight</td>
+<td>1</td>
+<td>T6_mae</td>
+<td>final\band1\export_tight\model.joblib</td>
+<td>62d3477386b458813654344fd591e4bbcef677ca75483e23643109da99998267</td>
+<td>{"persistence": 466.6813027453883, "T0_mae": 294.47644600052803, "T6_mae": 274.19570066949234}</td>
+<td>{"T0_mae": {"alpha": 10945.893102804604, "copy_X": true, "fit_intercept": true, "max_iter": null, "positive": false, "random_state": null, "solver": "auto", "tol": 0.0001}, "T6_mae": {"boosting_type": "gbdt", "class_weight": null, "colsample_bytree": 1.0, "importance_type": "split", "learning_rate": 0.042203867755960627, "max_depth": -1, "min_child_samples": 561, "min_child_weight": 0.001, "min_split_gain": 0.0, "n_estimators": 200, "n_jobs": 2, "num_leaves": 42, "objective": "regression_l1", "random_state": 741, "reg_alpha": 0.0, "reg_lambda": 0.0, "subsample": 1.0, "subsample_for_bin": 200000, "subsample_freq": 0, "verbosity": -1, "deterministic": true, "force_col_wise": true}}</td>
+<td>41</td>
+<td>passed</td>
+<td>False</td>
+</tr>
+<tr>
+<td>import_tight</td>
+<td>1</td>
+<td>T6_mae</td>
+<td>final\band1\import_tight\model.joblib</td>
+<td>870e08faab3e9b1c077765270a94f87046efce6e18b2a1e1fcad82d3fb0728bd</td>
+<td>{"persistence": 260.9527230938283, "T0_mae": 246.4811979290928, "T6_mae": 186.02750082572356}</td>
+<td>{"T0_mae": {"alpha": 676028.8152630893, "copy_X": true, "fit_intercept": true, "max_iter": null, "positive": false, "random_state": null, "solver": "auto", "tol": 0.0001}, "T6_mae": {"boosting_type": "gbdt", "class_weight": null, "colsample_bytree": 1.0, "importance_type": "split", "learning_rate": 0.027186304955188655, "max_depth": -1, "min_child_samples": 495, "min_child_weight": 0.001, "min_split_gain": 0.0, "n_estimators": 200, "n_jobs": 2, "num_leaves": 22, "objective": "regression_l1", "random_state": 741, "reg_alpha": 0.0, "reg_lambda": 0.0, "subsample": 1.0, "subsample_for_bin": 200000, "subsample_freq": 0, "verbosity": -1, "deterministic": true, "force_col_wise": true}}</td>
+<td>41</td>
+<td>passed</td>
+<td>False</td>
+</tr>
+<tr>
+<td>export</td>
+<td>1</td>
+<td>T6_mae</td>
+<td>final\band1\export\model.joblib</td>
+<td>7c8628288f98a0167cf484e862e2118aef27e1bcb9795c7be5f420be963e0b3a</td>
+<td>{"persistence": 434.48165901635923, "T0_mae": 279.0373401852614, "T6_mae": 259.72467791704713}</td>
+<td>{"T0_mae": {"alpha": 9962.34057502804, "copy_X": true, "fit_intercept": true, "max_iter": null, "positive": false, "random_state": null, "solver": "auto", "tol": 0.0001}, "T6_mae": {"boosting_type": "gbdt", "class_weight": null, "colsample_bytree": 1.0, "importance_type": "split", "learning_rate": 0.042203867755960627, "max_depth": -1, "min_child_samples": 561, "min_child_weight": 0.001, "min_split_gain": 0.0, "n_estimators": 200, "n_jobs": 2, "num_leaves": 42, "objective": "regression_l1", "random_state": 741, "reg_alpha": 0.0, "reg_lambda": 0.0, "subsample": 1.0, "subsample_for_bin": 200000, "subsample_freq": 0, "verbosity": -1, "deterministic": true, "force_col_wise": true}}</td>
+<td>41</td>
+<td>passed</td>
+<td>False</td>
+</tr>
+<tr>
+<td>import</td>
+<td>1</td>
+<td>T6_mae</td>
+<td>final\band1\import\model.joblib</td>
+<td>4afcbc53202adffa2f3348daa73503de87a6720db7129226d0b0b345666340e7</td>
+<td>{"persistence": 255.41387277442502, "T0_mae": 240.4962131915844, "T6_mae": 179.57755018673947}</td>
+<td>{"T0_mae": {"alpha": 657136.5545981338, "copy_X": true, "fit_intercept": true, "max_iter": null, "positive": false, "random_state": null, "solver": "auto", "tol": 0.0001}, "T6_mae": {"boosting_type": "gbdt", "class_weight": null, "colsample_bytree": 1.0, "importance_type": "split", "learning_rate": 0.027186304955188655, "max_depth": -1, "min_child_samples": 495, "min_child_weight": 0.001, "min_split_gain": 0.0, "n_estimators": 200, "n_jobs": 2, "num_leaves": 22, "objective": "regression_l1", "random_state": 741, "reg_alpha": 0.0, "reg_lambda": 0.0, "subsample": 1.0, "subsample_for_bin": 200000, "subsample_freq": 0, "verbosity": -1, "deterministic": true, "force_col_wise": true}}</td>
+<td>41</td>
+<td>passed</td>
+<td>False</td>
+</tr>
+<tr>
+<td>export_tight</td>
+<td>2</td>
+<td>T6_mae</td>
+<td>final\band2\export_tight\model.joblib</td>
+<td>bd6b2dc498d99d68d49343208d569099f85addfebee1200eb584ed9d4844548f</td>
+<td>{"persistence": 431.6175109935528, "T0_mae": 297.72244406207966, "T6_mae": 287.7054204427967}</td>
+<td>{"T0_mae": {"alpha": 9878.082390265605, "copy_X": true, "fit_intercept": true, "max_iter": null, "positive": false, "random_state": null, "solver": "auto", "tol": 0.0001}, "T6_mae": {"boosting_type": "gbdt", "class_weight": null, "colsample_bytree": 1.0, "importance_type": "split", "learning_rate": 0.042203867755960627, "max_depth": -1, "min_child_samples": 561, "min_child_weight": 0.001, "min_split_gain": 0.0, "n_estimators": 200, "n_jobs": 2, "num_leaves": 42, "objective": "regression_l1", "random_state": 741, "reg_alpha": 0.0, "reg_lambda": 0.0, "subsample": 1.0, "subsample_for_bin": 200000, "subsample_freq": 0, "verbosity": -1, "deterministic": true, "force_col_wise": true}}</td>
+<td>41</td>
+<td>passed</td>
+<td>False</td>
+</tr>
+<tr>
+<td>import_tight</td>
+<td>2</td>
+<td>T6_mae</td>
+<td>final\band2\import_tight\model.joblib</td>
+<td>76d28c10a9900ce0dd38392d2b8dcb88246bbc94863741a25dfb242942cde9a3</td>
+<td>{"persistence": 268.4112937758078, "T0_mae": 254.5661466435157, "T6_mae": 198.13570030817596}</td>
+<td>{"T0_mae": {"alpha": 653015.1702325406, "copy_X": true, "fit_intercept": true, "max_iter": null, "positive": false, "random_state": null, "solver": "auto", "tol": 0.0001}, "T6_mae": {"boosting_type": "gbdt", "class_weight": null, "colsample_bytree": 1.0, "importance_type": "split", "learning_rate": 0.027186304955188655, "max_depth": -1, "min_child_samples": 495, "min_child_weight": 0.001, "min_split_gain": 0.0, "n_estimators": 200, "n_jobs": 2, "num_leaves": 22, "objective": "regression_l1", "random_state": 741, "reg_alpha": 0.0, "reg_lambda": 0.0, "subsample": 1.0, "subsample_for_bin": 200000, "subsample_freq": 0, "verbosity": -1, "deterministic": true, "force_col_wise": true}}</td>
+<td>41</td>
+<td>passed</td>
+<td>False</td>
+</tr>
+<tr>
+<td>export</td>
+<td>2</td>
+<td>T6_mae</td>
+<td>final\band2\export\model.joblib</td>
+<td>bb250404bf3a99148642b22bf7e30c9030abd7ca932d0944d70a65e40a74825a</td>
+<td>{"persistence": 405.5968590420088, "T0_mae": 282.9894427561635, "T6_mae": 268.70478726582905}</td>
+<td>{"T0_mae": {"alpha": 8970.945713668681, "copy_X": true, "fit_intercept": true, "max_iter": null, "positive": false, "random_state": null, "solver": "auto", "tol": 0.0001}, "T6_mae": {"boosting_type": "gbdt", "class_weight": null, "colsample_bytree": 1.0, "importance_type": "split", "learning_rate": 0.042203867755960627, "max_depth": -1, "min_child_samples": 561, "min_child_weight": 0.001, "min_split_gain": 0.0, "n_estimators": 200, "n_jobs": 2, "num_leaves": 42, "objective": "regression_l1", "random_state": 741, "reg_alpha": 0.0, "reg_lambda": 0.0, "subsample": 1.0, "subsample_for_bin": 200000, "subsample_freq": 0, "verbosity": -1, "deterministic": true, "force_col_wise": true}}</td>
+<td>41</td>
+<td>passed</td>
+<td>False</td>
+</tr>
+<tr>
+<td>import</td>
+<td>2</td>
+<td>T6_mae</td>
+<td>final\band2\import\model.joblib</td>
+<td>86e59eb7d13138c12227f8b8e82b953d23612270ebdf77dad7fee1a91baed8da</td>
+<td>{"persistence": 262.02020666973675, "T0_mae": 248.35054000346636, "T6_mae": 192.48846233337926}</td>
+<td>{"T0_mae": {"alpha": 635176.2927490403, "copy_X": true, "fit_intercept": true, "max_iter": null, "positive": false, "random_state": null, "solver": "auto", "tol": 0.0001}, "T6_mae": {"boosting_type": "gbdt", "class_weight": null, "colsample_bytree": 1.0, "importance_type": "split", "learning_rate": 0.027186304955188655, "max_depth": -1, "min_child_samples": 495, "min_child_weight": 0.001, "min_split_gain": 0.0, "n_estimators": 200, "n_jobs": 2, "num_leaves": 22, "objective": "regression_l1", "random_state": 741, "reg_alpha": 0.0, "reg_lambda": 0.0, "subsample": 1.0, "subsample_for_bin": 200000, "subsample_freq": 0, "verbosity": -1, "deterministic": true, "force_col_wise": true}}</td>
+<td>41</td>
+<td>passed</td>
+<td>False</td>
+</tr>
+<tr>
+<td>export_tight</td>
+<td>3</td>
+<td>T0_mae</td>
+<td>final\band3\export_tight\model.joblib</td>
+<td>59a0deae57263e079ae347672c09f23a6240591436c830da12528ec345201741</td>
+<td>{"persistence": 333.18784343377536, "T0_mae": 274.45821299388416}</td>
+<td>{"T0_mae": {"alpha": 9410.605348372941, "copy_X": true, "fit_intercept": true, "max_iter": null, "positive": false, "random_state": null, "solver": "auto", "tol": 0.0001}}</td>
+<td>41</td>
+<td>passed</td>
+<td>False</td>
+</tr>
+<tr>
+<td>import_tight</td>
+<td>3</td>
+<td>T6_mae</td>
+<td>final\band3\import_tight\model.joblib</td>
+<td>e10b0a9056ba26654458bf8603bd973bed1c00c6a107024c5fe668b89b3e80a0</td>
+<td>{"persistence": 245.73918013615915, "T0_mae": 233.79679053445528, "T6_mae": 205.99089336401838}</td>
+<td>{"T0_mae": {"alpha": 641046.6868764682, "copy_X": true, "fit_intercept": true, "max_iter": null, "positive": false, "random_state": null, "solver": "auto", "tol": 0.0001}, "T6_mae": {"boosting_type": "gbdt", "class_weight": null, "colsample_bytree": 1.0, "importance_type": "split", "learning_rate": 0.027186304955188655, "max_depth": -1, "min_child_samples": 495, "min_child_weight": 0.001, "min_split_gain": 0.0, "n_estimators": 200, "n_jobs": 2, "num_leaves": 22, "objective": "regression_l1", "random_state": 741, "reg_alpha": 0.0, "reg_lambda": 0.0, "subsample": 1.0, "subsample_for_bin": 200000, "subsample_freq": 0, "verbosity": -1, "deterministic": true, "force_col_wise": true}}</td>
+<td>41</td>
+<td>passed</td>
+<td>False</td>
+</tr>
+<tr>
+<td>export</td>
+<td>3</td>
+<td>T0_mae</td>
+<td>final\band3\export\model.joblib</td>
+<td>b6cd77ac59cff34806cb1a647d70a4e12e06c4c7e4afdc8e7b98ae8c12e387f0</td>
+<td>{"persistence": 320.64429887731205, "T0_mae": 261.97523450661265}</td>
+<td>{"T0_mae": {"alpha": 8546.17977983411, "copy_X": true, "fit_intercept": true, "max_iter": null, "positive": false, "random_state": null, "solver": "auto", "tol": 0.0001}}</td>
+<td>41</td>
+<td>passed</td>
+<td>False</td>
+</tr>
+<tr>
+<td>import</td>
+<td>3</td>
+<td>T6_mae</td>
+<td>final\band3\import\model.joblib</td>
+<td>6a42eea67aa6c13daa4ebfe69968e415744c920b2ab28044032a79fea410e299</td>
+<td>{"persistence": 237.84148875542664, "T0_mae": 226.55880016952932, "T6_mae": 201.95594384254719}</td>
+<td>{"T0_mae": {"alpha": 623432.8086320697, "copy_X": true, "fit_intercept": true, "max_iter": null, "positive": false, "random_state": null, "solver": "auto", "tol": 0.0001}, "T6_mae": {"boosting_type": "gbdt", "class_weight": null, "colsample_bytree": 1.0, "importance_type": "split", "learning_rate": 0.027186304955188655, "max_depth": -1, "min_child_samples": 495, "min_child_weight": 0.001, "min_split_gain": 0.0, "n_estimators": 200, "n_jobs": 2, "num_leaves": 22, "objective": "regression_l1", "random_state": 741, "reg_alpha": 0.0, "reg_lambda": 0.0, "subsample": 1.0, "subsample_for_bin": 200000, "subsample_freq": 0, "verbosity": -1, "deterministic": true, "force_col_wise": true}}</td>
+<td>41</td>
+<td>passed</td>
+<td>False</td>
+</tr>
+</tbody>
+</table></div></section><section id="methods"><h2>Methods and limits of the evidence</h2><p>Rolling chronological partitions separate training, selection, calibration, alert thresholds and evaluation. Inputs use the declared retrospective information track; label maturity includes a 30-minute allowance. MAPE is assessment-only. Directional-reference percentage loss uses a training-fitted floor and the directional limit known at origin. Feature importance and SHAP are predictive diagnostics, not causal outage effects.</p><p>Generator pressure represents the retained aggregate state, not a verified forward generating-unit availability forecast. Any NOS conclusion is conditional on that information set. Prospective confirmation is pending.</p></section></main></body></html>

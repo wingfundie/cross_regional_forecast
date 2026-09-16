@@ -4,6 +4,8 @@ The completed VNI diurnal and NOS study has one entry point:
 
 `data/forecast_experiments/vni_diurnal_nos_v2/report/index.html`
 
+The Git-tracked rendered copy is `reports/vni_diurnal_nos_v2/index.html`. Refresh it after a local report rebuild with `python scripts/publish_vni_reports.py`.
+
 Saved-model loading and forecasting are covered separately in `docs/VNI_SAVED_MODEL_GUIDE.md`. The bundle catalogue is `data/forecast_experiments/vni_diurnal_nos_v2/final/catalogue.json`.
 
 The index links to focused offline HTML reports for model performance, the cell-level model explorer, feature relevance, NOS outages, contraction risk and refinements, and the final model handoff. It also links to the complete all-in-one report and the focused matched-outage study.
