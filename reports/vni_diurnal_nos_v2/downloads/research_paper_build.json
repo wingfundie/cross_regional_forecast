@@ -1,0 +1,1276 @@
+{
+  "title": "VNI time-of-delivery models and scheduled network-outage evidence",
+  "generator": "scripts/build_vni_research_paper.py",
+  "generator_sha256": "3e801fcfb11918a16494d67717a7c4e4e2bba3f1e130d53308ab103d05611bdf",
+  "report_sha256": "74e29884c102a9511510e9f060350ce7261420b242cd1a96c670afdefe1e711f",
+  "sources": [
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/curves/2026-08/export_tight/predictions.parquet",
+      "sha256": "a3a582569133cfd628d6e3c1152471f26c1157f7100340c267d511b3a385fb18"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/curves/2026-08/export_tight/result.json",
+      "sha256": "0753766d0129049771bdf35e868c5dcfa168761413d8fbc4777fb62346ed66b7"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/curves/2026-08/import_tight/predictions.parquet",
+      "sha256": "472ba57a42b4ecc50465686954ca0ba95c601543aa8516b048f78332d28ce9ab"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/curves/2026-08/import_tight/result.json",
+      "sha256": "b3afcf6bd739fcce0ddc243dfe2880ee45d9fbb57cde9bcbe55470e213b96a9a"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-09/band0/export/result.json",
+      "sha256": "7d74a0e9a08710385fa9537fb8e760f2d5b14407d51db9f5829c47a2aed50fdb"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-09/band0/export_tight/explanations.json",
+      "sha256": "8fb268753365b3ecba96497e113cf45b9d6bfba800d3c1e678eee0983550ca94"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-09/band0/export_tight/result.json",
+      "sha256": "467b2360e39b37e0998f390d8b16b9478bbef60565a5f7ce6462f8370147c0a9"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-09/band0/export_tight/T6_mae_shap.parquet",
+      "sha256": "db3f6b1aed3b2f6eabefc238b30f4ed76f196bd0dee379282586f5bafdcaa7c1"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-09/band0/import/result.json",
+      "sha256": "2336bb3a1dacfa6c07a857c993d0d68d6d2c739b85c711a22ee365699ce6009a"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-09/band0/import_tight/explanations.json",
+      "sha256": "e9793c82178a4e8076a7b71b447d73712cc15ea0fcf581d63b046bc2fd12b14e"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-09/band0/import_tight/result.json",
+      "sha256": "b8798937826a12e79c31f5592e83cd281e6accfecccad3fde569187b73abe29a"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-09/band0/import_tight/T6_mae_shap.parquet",
+      "sha256": "7b364a008d0971493dbb79ab8f9ca21eb3d4066fae9150569f94f61c75fbe29c"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-09/band1/export/result.json",
+      "sha256": "cd5d6dce90b9cb45674f5397fc49321bda795bf21b30c258cdbb086791e8d71a"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-09/band1/export_tight/result.json",
+      "sha256": "cca5d9b79af7dcaca1863e20370ab1d769a273a4c36df6f7ad797faf3270d6a6"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-09/band1/import/result.json",
+      "sha256": "8348854cf8dc2dbe1fadc274c5ef2916e5e1cd4354940a2fbbface0eb4f0d0ca"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-09/band1/import_tight/result.json",
+      "sha256": "02e359fa4ebb34ef304c9bc811e9d280f8a24b879a28ba92a4f168b0b5114b39"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-09/band2/export/result.json",
+      "sha256": "ab31e3d087fcfceb7d451729ec082eb1467b22dbb98db3d658d26e2e022c4d9e"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-09/band2/export_tight/result.json",
+      "sha256": "ee14da7c7b84bfd331e4a79b1a9f33653d13befe904ac1497d97b27ab8b8182e"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-09/band2/import/result.json",
+      "sha256": "065a384a3371612e9f4fd7d9cf123e62a110ab6afcc0b02c1cc0cbd0c6d1be88"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-09/band2/import_tight/result.json",
+      "sha256": "ea825ab43837da4f0edf6138b40ff9c8a84db2940bbd7c8032d1e836e8ce2952"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-09/band3/export/result.json",
+      "sha256": "4d26397095fe084ccfbb516b8c004ad7e686162b77aeb1e9ba77f1374e4cea4b"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-09/band3/export_tight/result.json",
+      "sha256": "622ce227bb2efd3a7b3a896c3a2f27e319a229ecec678acef0e1cfc3b7918ff0"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-09/band3/import/result.json",
+      "sha256": "5073613bed6703c54efd9744896029ddd4ee5a3f9c5e9aae5c14533e9e1fbf7d"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-09/band3/import_tight/result.json",
+      "sha256": "7f5814fd7318e7cf486315d6f1776385fa5d82a8527729a5ee2923374e6b6ade"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-10/band0/export/result.json",
+      "sha256": "4b114646c050a9c04b85d0299b2226a65a908f2c23d49c4bf7f96f414e5ffd2a"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-10/band0/export_tight/explanations.json",
+      "sha256": "b70443935c05bb17a923710e3525c46c7d5dcbbf32ae4ce3813f11fa5636e53b"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-10/band0/export_tight/result.json",
+      "sha256": "ac146b994a823ddeb488e6b5c7316b64c81a108500d7a51d20c23d43052e4452"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-10/band0/export_tight/T6_mae_shap.parquet",
+      "sha256": "d4d63b8743888bd7530f8fc6f81382766e018953cd892a8218ee9c02f6dc1a36"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-10/band0/import/result.json",
+      "sha256": "66e2886282b05f68c9358270f204d58453cde5808efe45be9a22197501b2a3ae"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-10/band0/import_tight/explanations.json",
+      "sha256": "c65cdde22aa098523e94daea6377b01fe32c79165f9ed6aa1aae0260fc5d3625"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-10/band0/import_tight/result.json",
+      "sha256": "d6b3687796b5207ebbdc99015bcbb8e39444f0cd912da6b435340f5a3c819b5b"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-10/band0/import_tight/T6_mae_shap.parquet",
+      "sha256": "dda6b7b42bb370e4ee7c09c36987a56fb6a1907fe74fd70210634fc6ad883669"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-10/band1/export/result.json",
+      "sha256": "96ecaa75105fa5d423c31203458fd16e732ed4a53571124d40a6a359cc4c8fda"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-10/band1/export_tight/result.json",
+      "sha256": "659a4c6f114c7f839ea853b1d91b898d7560772f19c59f25559dd7de30ea2143"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-10/band1/import/result.json",
+      "sha256": "a573ffc8e2660daaf7ba0a73180614df65f0a318167cfb2356d47aefde553c4d"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-10/band1/import_tight/result.json",
+      "sha256": "104f71032f5d71aa1559859986daafc723012bd7e3945ea0ce9e7e4633455313"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-10/band2/export/result.json",
+      "sha256": "ada0f2a6c25182d5bacff0195cf6364306fd0214207fe640f1a1ac451a0fda99"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-10/band2/export_tight/result.json",
+      "sha256": "1d7fc4ba7bfa45731448c40b143c188b6c27ba7863ac257bb9a156e492eee1f2"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-10/band2/import/result.json",
+      "sha256": "f5b90a46c1d9eeac34d7e25b52eb6f32fa4011f72252c341b0aa67423843a0a0"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-10/band2/import_tight/result.json",
+      "sha256": "ae8b6eb76274fd27990dd65d1f726ddc3c23356cb5e548a6d55fe4f482830029"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-10/band3/export/result.json",
+      "sha256": "d0dead8c1d1d6ed14d448c134b940e253b2e79f171cc00132209bd3fb573a623"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-10/band3/export_tight/result.json",
+      "sha256": "b977fc380ad1da71b7d90669eb10d5cac68864709010ec99350204c43e0f890c"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-10/band3/import/result.json",
+      "sha256": "29dc5b9ba66b95e9fefbed85bbfee51cdee4c555144911ba0fe42ddaabb81799"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-10/band3/import_tight/result.json",
+      "sha256": "a4595a97ae5007311cd802e88b4c4febb4b94c49b60bc5d91fddef1f6587e081"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-11/band0/export/result.json",
+      "sha256": "4a651b8c8701642f91c9048617fc88aff7a468e6f11f6bac2d7096ac25ac1301"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-11/band0/export_tight/explanations.json",
+      "sha256": "5b50b4edd1a7d840138d2d1b5cbb6210174f2c612cca0f35adf8b8425565e750"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-11/band0/export_tight/result.json",
+      "sha256": "f1249330e857e337bac5809cdb5a8b69c47803456b778b61fd56284c566685e3"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-11/band0/export_tight/T6_mae_shap.parquet",
+      "sha256": "f197e4ee074333ccff5529466f7009c2603153cf9bb63180950bdd1e9a0b4246"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-11/band0/import/result.json",
+      "sha256": "b1143353658843065e076495f8303fb8d4aa39373ea1325743b5f3ef4984cd8d"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-11/band0/import_tight/explanations.json",
+      "sha256": "d5daec9764b12aed07c20b2bd69038e9f720ac58830efbadc895ee2a6047cf8d"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-11/band0/import_tight/result.json",
+      "sha256": "c7a7c76fab2a1a352a56ab7217e42f61b82a4aa3062b09e67c27215a1baa6b46"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-11/band0/import_tight/T6_mae_shap.parquet",
+      "sha256": "a83a5cd2372fb0a112738de4b91bf80054f52add5dab56f2558e617379b18abe"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-11/band1/export/result.json",
+      "sha256": "bdfa9026e40c7bdf99990c522f38d0e79b8e455b0fecd81716fad4498763e50b"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-11/band1/export_tight/result.json",
+      "sha256": "d61b8e225f3a71a2f0954b931fa37e1781681c8164a9ed34445c3e36803a5ee7"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-11/band1/import/result.json",
+      "sha256": "8a3e1d51b55efca50c1802485e1cc2ae66d553edee937407add1bc026cb9b104"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-11/band1/import_tight/result.json",
+      "sha256": "f1543ecc2a28141b9f0630f8ef3f29943edbd34b5f315b56dbf11b369a02affd"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-11/band2/export/result.json",
+      "sha256": "0e3f0eee30ac42dc049367f7df10b78afdcf75ec27eb546b2b00e532661eed12"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-11/band2/export_tight/result.json",
+      "sha256": "5349fba9773331db7d716d2ff0f1a1ae5895bfe8940e978e2310096fec6441ab"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-11/band2/import/result.json",
+      "sha256": "c2548fba60f3dcc13305e3c1db51e3cbbe515cc886326ab8e44f3e8f89aa2e3c"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-11/band2/import_tight/result.json",
+      "sha256": "4a6d7fb710483e0f4ad8e6b10c2b21800a47f8a235fb33f1b46f866e44849263"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-11/band3/export/result.json",
+      "sha256": "e2ad420ad94b781416096b5a8051da8d8d5be4027763af937ef0c5e836dbdecd"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-11/band3/export_tight/result.json",
+      "sha256": "41e41a28ed344c8fd12e9896938b0f66401b18cbbda5868d3a1a5f2af4a327f4"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-11/band3/import/result.json",
+      "sha256": "027ee2541b1e1f206c49672a9019ee5aa287704e3692672eb844fcf5d25f41c6"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-11/band3/import_tight/result.json",
+      "sha256": "231a52234baacae1a88a5cf00e358506c5a02878f187e4a6c89eddbf6b8446dd"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-12/band0/export/result.json",
+      "sha256": "63822f7cc3de1c1a7d5fed2a555ad4ec1fca0bd3a009ce2c86a3744e60e17de0"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-12/band0/export_tight/explanations.json",
+      "sha256": "c2ade505658f862ab4549785ddfe32f91446609c188aadd1d6a3573cfa9f01c6"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-12/band0/export_tight/result.json",
+      "sha256": "2a7b001f781b94594341cbbfdcf01380aad80add31058b712cc769e87c5740b5"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-12/band0/export_tight/T6_mae_shap.parquet",
+      "sha256": "fc70ef6683b4079ba26257a6745ede814f55a56670d14366e32b9b9ebd0263a8"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-12/band0/import/result.json",
+      "sha256": "16e25e5644315da3a6010b8f1e42b913f50417e834834513b34b6fd3a3681728"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-12/band0/import_tight/explanations.json",
+      "sha256": "687db2a341bf4a1712b3f351db77b1833cc9042cd1c4d2a0247b986beca3ab3e"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-12/band0/import_tight/result.json",
+      "sha256": "ba746bfa4181b0673322493c0788c01e14b4465309900b81f7073229ff027191"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-12/band0/import_tight/T6_mae_shap.parquet",
+      "sha256": "d2e286899a50c38dfeebbbb6c230364a1570bc866bd8c3f83f51e2261b901c3b"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-12/band1/export/result.json",
+      "sha256": "366516ae44408d32752e55925f45bce2073aa9c649d78bb90764f6a5ebf2ea03"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-12/band1/export_tight/result.json",
+      "sha256": "5ba99cd4cc8bc034032893435e7d658e548875f6b41cca37962c001f48805bb7"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-12/band1/import/result.json",
+      "sha256": "a8dda3772541ed9e5fc5eff99a1a51d35d85dd9ed0de6feea49b699c4fb7ef90"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-12/band1/import_tight/result.json",
+      "sha256": "912eff8219e3b187d85a11e3c87f64eaabeb6c350bd8890a122e65a0ad88e6ca"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-12/band2/export/result.json",
+      "sha256": "5888d3aab9e1fd8abbaeb1444175a6e4d1443bd2c163e3881438a2174ad2c6cf"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-12/band2/export_tight/result.json",
+      "sha256": "25ebcd18b8d615822f9ed352af755f0060fe8ec73d65fcee2c7d65f851a49eaf"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-12/band2/import/result.json",
+      "sha256": "ee889c5b36a26d5d4aab9deeb6f001c2d5e345e878619f38049db99093867117"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-12/band2/import_tight/result.json",
+      "sha256": "367b7033c9d3f0b8611ab90b41c728c43cf0d511d195a8acfed27aab51bdf956"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-12/band3/export/result.json",
+      "sha256": "cc91769c53b236abc028157103e33e1456be114cb7680c22ca9d9ba156d59808"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-12/band3/export_tight/result.json",
+      "sha256": "e37de18282df999627841e20613b69839db671db56111ea788684e5ba64fd6fe"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-12/band3/import/result.json",
+      "sha256": "6a8884d05c2c8995d4dc1145f45bf4fb1c7a5b4192155fa1917f562f3f46947b"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2025-12/band3/import_tight/result.json",
+      "sha256": "4ba9725bf17149f6ccd41a902522a7f4f1ad5b911059fce871f39b5b2a8f1c9d"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-01/band0/export/result.json",
+      "sha256": "11cdda069bbb351b1f2f7ff892a86146c67c21deb45474efd849c508b77632bd"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-01/band0/export_tight/explanations.json",
+      "sha256": "d9e9b5f4e3dadae0192f6c4c6d30a51ac77b5f56a82466846e86f731517d522d"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-01/band0/export_tight/result.json",
+      "sha256": "b3be21715ee6f751888bbbf330020ec814b4bb79989a8e1fb642c1d61bd7fe12"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-01/band0/export_tight/T6_mae_shap.parquet",
+      "sha256": "563127f02911cdddfe5281c93c72ab92db4ae71754dfc6066b68f8ac08f9cdd9"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-01/band0/import/result.json",
+      "sha256": "080a8bf1de9e839c20972a257ceb6ff512d1e71e7e2d28cb7382aa4b0c7f069d"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-01/band0/import_tight/explanations.json",
+      "sha256": "cc2a472ae81ff0c468cd91f49002f8a18afc4ba0ba83930e79a47f62c1bb0357"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-01/band0/import_tight/result.json",
+      "sha256": "cbbc4da47acad7fde06d9f0849af69b858a451f8e41bdf0a9ff071d735edfe34"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-01/band0/import_tight/T6_mae_shap.parquet",
+      "sha256": "1def03f3a0380be3db11132ba853bede1085729f04c8369cfaf7085f54af778c"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-01/band1/export/result.json",
+      "sha256": "7c2cd698c3b5d7fbc1b96896e8bd5eb2d33c60e28111556504734d9d229b9056"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-01/band1/export_tight/result.json",
+      "sha256": "a2e7a0aef2bc2247eb364fadfc5fd0b1e0ca1059567134060d418244295e6090"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-01/band1/import/result.json",
+      "sha256": "000ae38be19691e8024799876df5b47bf8b3ed309cec19b210097ce23ab57d20"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-01/band1/import_tight/result.json",
+      "sha256": "c79cf559edabbddb4432968bc3cc36e99bfb4b45560bd8530b7ad34d18b826d6"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-01/band2/export/result.json",
+      "sha256": "06085a9362f0ecd27eb623f309255f77ec0b19aa7c0b89d8ba6a4fe9ce37be22"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-01/band2/export_tight/result.json",
+      "sha256": "1354b07b80313666a968e6167beb399a837a4170fb59f5f2820e090647877c4f"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-01/band2/import/result.json",
+      "sha256": "da1fac2cc9750f972ca3e31f3e17b39a049c7c83bfe0fc179e8aea5a2d5ea02b"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-01/band2/import_tight/result.json",
+      "sha256": "13cbb714759cff06cc3ffebe8c45326fc3137597f9e03361512d9956fe124df5"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-01/band3/export/result.json",
+      "sha256": "6ab7b65c4f9320c4ddef5f34214b798d3588dd6766e3e05a146996c1993ab5c3"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-01/band3/export_tight/result.json",
+      "sha256": "76a054412f46e773770a96749d11dfc87dc38107eae1d07cdb995b2dc49fc6eb"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-01/band3/import/result.json",
+      "sha256": "1a9da3b0c52d5463be26b58df8bde88b58383717fd35eedf5f4014065c01ac2b"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-01/band3/import_tight/result.json",
+      "sha256": "32a75159330f2c0764d3b917530f7a64e720d477878b9b082348b75899f5d630"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-02/band0/export/result.json",
+      "sha256": "3ffa8b874eba0c4d2c1d2f730cccfd3a980e3bc9351c55901628a4dea55ded53"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-02/band0/export_tight/explanations.json",
+      "sha256": "2650cf2d9b9b0bd8e9447534cf3e65f17d6b7f0c72bba63a749c92f594278822"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-02/band0/export_tight/result.json",
+      "sha256": "f5ebc92a069338a1fe143248f712b22ddc2f1c94eae7d9237a08c7c87238b60d"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-02/band0/export_tight/T6_mae_shap.parquet",
+      "sha256": "f56550252758565ca24513c10638c47c15172d5da12653d94aa68b2b86690e24"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-02/band0/import/result.json",
+      "sha256": "27545354db67028af4ca3f67cb8db912e512995869a93f764b8cf5c755f81bf1"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-02/band0/import_tight/explanations.json",
+      "sha256": "750399a6a9915c6da10a09f1462f5ea9e2b48fa0967f2e2e7fe04fad8011d988"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-02/band0/import_tight/result.json",
+      "sha256": "0572158696c6e48a71d4108d3935fbfd2f9928c977124853e1a8e6c5eb5363df"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-02/band0/import_tight/T6_mae_shap.parquet",
+      "sha256": "4a0bfdba23b70e20c2367c7ee42f8b2031a0806c9fe2925e41400946c3d6d276"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-02/band1/export/result.json",
+      "sha256": "87fc048b0e8404f710b768af29dd9aa400ab61d5d3b006721314d5a3f1e1df62"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-02/band1/export_tight/result.json",
+      "sha256": "22fee2fcf5fab6b9048b1b2abfa4b70b0adfb119affdf84fc7d40d5a3518c60a"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-02/band1/import/result.json",
+      "sha256": "2f74354099a7971756f9d5d405ebf5dc7af5422f4542e9d841ee1300fa678110"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-02/band1/import_tight/result.json",
+      "sha256": "298440ad8ecefb122263c32f46eb1663866e1f8e0e5e1bb07111c626c16c4ae0"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-02/band2/export/result.json",
+      "sha256": "721500ff477791c540ae961cb7e62ef5e59f6c7556cfe9f069f090d161d980d9"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-02/band2/export_tight/result.json",
+      "sha256": "fde0b1ca16ce64150a415d4d79c41d6d219d330788ece8e658f2b07537beac90"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-02/band2/import/result.json",
+      "sha256": "4c0eabea6e0fd893194d99defe8525ae23fd2600c381e9cfb4a45670e91593b1"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-02/band2/import_tight/result.json",
+      "sha256": "bea45d4e6a5770ff6e6560ab8ad5d8b2ac4be2b166a5ba97f85bf268033bef9f"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-02/band3/export/result.json",
+      "sha256": "0513f58049ecbf4387b34d8ba3e2e06747c8d38c037921c3856038e34dc241ae"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-02/band3/export_tight/result.json",
+      "sha256": "ef5a8fcac17f297c89581381aa3591855c4eb97cbcf39593abb686da55fc7eb0"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-02/band3/import/result.json",
+      "sha256": "9687ff8a3344c60711a9436775f891650a605e2d74b07ea4684356d98c286cf6"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-02/band3/import_tight/result.json",
+      "sha256": "92f5586518d2bda8fed456debbb6a19dd71bc0ba75df9d24df3fdb5094158ad6"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-03/band0/export/result.json",
+      "sha256": "49472aca8058fa370f81c75060209354568d56ade0cf1a8dc2c90fa654d10b19"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-03/band0/export_tight/explanations.json",
+      "sha256": "b9736f431156de2e928d83dde7a24be0d6348750e7301a0e661bf318ca514dac"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-03/band0/export_tight/result.json",
+      "sha256": "4e8ec916b0876cb3284ba475c6a22b7b5eba011c941b7ec1ed8a7871f8f8d191"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-03/band0/export_tight/T6_mae_shap.parquet",
+      "sha256": "d7c0b95ba50aac4e9fed780f8cf2559bf607111f0c36314c4bcbe9e563867e72"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-03/band0/import/result.json",
+      "sha256": "82b2969353a65c5b19323f3f9edd4d9e6dcbecea42d65e4dd025a6e81e60b496"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-03/band0/import_tight/explanations.json",
+      "sha256": "13501eacce0ab94cfb481e45be5c28be75b4cb2a3b7e57650bdec823ddff6ac2"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-03/band0/import_tight/result.json",
+      "sha256": "0d2751349df3ac0a61adf0c95c4815609c8bab76f0b4b9be1713dfac353eb1bc"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-03/band0/import_tight/T6_mae_shap.parquet",
+      "sha256": "7d9ca414157022599129bdd3e964577ac19489cebe23e91eeacb658642d32abd"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-03/band1/export/result.json",
+      "sha256": "aa6f061ca26f61df4757373a7da6a3520d52b7ec87e6ac305df7564825cfd099"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-03/band1/export_tight/result.json",
+      "sha256": "e444adafbb8792b51ff0372515d2cd6fc3a00992bf25ddeaabf993ee29cb6a2b"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-03/band1/import/result.json",
+      "sha256": "de6a3e942077faefc873d6b8c4154e075bb8416ff033c69310c4173b5c2bcd69"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-03/band1/import_tight/result.json",
+      "sha256": "7724e5ab00f50ae04845d71fed829165dccd7c3dc038abd38cc838723a0225d0"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-03/band2/export/result.json",
+      "sha256": "4185b3c97c0aeef21b391eeafd6336ebd95ee76aa23480e420c74a7035f5dcbc"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-03/band2/export_tight/result.json",
+      "sha256": "e850b6f15bd4bbd9928e7b36f4c19a23151c4a843a2c518222d03e4e769a3577"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-03/band2/import/result.json",
+      "sha256": "e605dd3fe5ea1ac9c33f2fca1781e264d27afdb06320adb0f60a482d42c25da8"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-03/band2/import_tight/result.json",
+      "sha256": "0ad60af6fa40cfdb5a51a0b5807a9f5f98104ed8979410e1371e6cd17e0aed98"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-03/band3/export/result.json",
+      "sha256": "858db93502e9912ee7ed6b84d9aafa23cebd54ffaae6001e8a57466dc51ce059"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-03/band3/export_tight/result.json",
+      "sha256": "670f849165aa5dd8cdd7f5a6d1c97012f84a313a5ea80fae260c8729b55d9c73"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-03/band3/import/result.json",
+      "sha256": "d554c35a636fa83563fd8df8b4129e678aa99077dec0516d9fecde06b92fcf91"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-03/band3/import_tight/result.json",
+      "sha256": "72df353910ae8cdd4a227134099ab90e70592dbf26a5dfe45bcdba71c9f27d89"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-04/band0/export/result.json",
+      "sha256": "1372989f17b8bd33f1235303c2bd2c1c731599dabbfb3a67a5c64181f97068a4"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-04/band0/export_tight/explanations.json",
+      "sha256": "e2c6fffc74268a0e7d1fff2dd6476b5b2d3489e28ae96792ee47a5bebb99049f"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-04/band0/export_tight/result.json",
+      "sha256": "13a892f1126e93d4c8339dc65869158128a6ed97ed62f7148b409efca18cdf9b"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-04/band0/export_tight/T6_mae_shap.parquet",
+      "sha256": "73c474530b41716e091505bbba0283f274a412a26ca3ee7d8a682b1c961355c4"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-04/band0/import/result.json",
+      "sha256": "b042594a64479c589085a2d3e9d86a891d3aad23e5e9c691d0e63502180fddd5"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-04/band0/import_tight/explanations.json",
+      "sha256": "a790f0056c5bc42b0fc64fded94c7a959cfeaa3bfc67f24ef333611fd6e9822b"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-04/band0/import_tight/result.json",
+      "sha256": "1c15b7627b9d8b135b22f9e0a1f062629e6aaf329af9485af629aa20c720c013"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-04/band0/import_tight/T6_mae_shap.parquet",
+      "sha256": "9317bbc0346c1b2b2bfc985f3a9302de5ea7b733d0082944bf1d660527710fe4"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-04/band1/export/result.json",
+      "sha256": "d0ad77d5c67b7be4501b96e36c997adb0ad59e28ea63f3739daf9b252d30db74"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-04/band1/export_tight/result.json",
+      "sha256": "56a2b08f38e75198ed959c7a34aece781cd5b450d5e52202444180363edc0951"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-04/band1/import/result.json",
+      "sha256": "0830de6265d0019cf4c8c0f187cddb496c0f51c39eaf26fe44518adc093bb764"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-04/band1/import_tight/result.json",
+      "sha256": "fcf44fca3b65a93b6fc19448c3d46ec7c8198d4b569527543525b1a49c04055e"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-04/band2/export/result.json",
+      "sha256": "06c90018e7037a80d076d9a3cd0133f30fa41f68e60b88a548930c648578a6a2"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-04/band2/export_tight/result.json",
+      "sha256": "f4651735d038c370b33d599c054dc2b0e5d082860062bdedacb1b5836c23dda9"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-04/band2/import/result.json",
+      "sha256": "bd220d866d10322c1640bd82933a04c4ab939332081a20918b0947c05f76f5d7"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-04/band2/import_tight/result.json",
+      "sha256": "af18396b48ff9078f8558f447e1e6a6aa3a9f60db7690858e20c314b77f48d77"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-04/band3/export/result.json",
+      "sha256": "e62ce7cfcb847db93016593a21f335649b753eb8d8b60d9dbfad9deaaf2868a0"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-04/band3/export_tight/result.json",
+      "sha256": "9b349675f5eca5b4221fbc9979e3840e5321ea9cc25068b7651662ba25020c32"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-04/band3/import/result.json",
+      "sha256": "3116b0d8ddc911b1d4830ff2ef9846c080157dea2c22ca95984b41eb89aaa36c"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-04/band3/import_tight/result.json",
+      "sha256": "9358de10fdf1afaac3ad901bcb6a78e71b67abfafcc6726aafc08c8a6743e883"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-05/band0/export/result.json",
+      "sha256": "710d4532ac1e631f3d68029c9b9737e57f295d989a92d6c6833929fcb97c5b78"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-05/band0/export_tight/explanations.json",
+      "sha256": "51dac51fb470164082797209fa88eba1f24b72dbdaa0ed7a40115c616789d77a"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-05/band0/export_tight/result.json",
+      "sha256": "70364c696a70dbfde6281dd6f91b8a3ddf5212d355b7e3e545c3c1ada86b4148"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-05/band0/export_tight/T6_mae_shap.parquet",
+      "sha256": "0b7150db250e7dc5ef90b38e8f217f4ef724bfbbd4a2bbf6b5041d9f7a6fb264"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-05/band0/import/result.json",
+      "sha256": "91f1b9e99e39c3a979c479f9db0f8c61566ef6ecf1cf15bd30f722af7c5c4f30"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-05/band0/import_tight/explanations.json",
+      "sha256": "4919309822923a37fd07774ded2129b75803ad71e9f3629bc0268eecf846159b"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-05/band0/import_tight/result.json",
+      "sha256": "9c5879d41ffadc47995b3e20bdcaab3b76ecc47de9d66d6ad5e4d7052b76fc33"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-05/band0/import_tight/T6_mae_shap.parquet",
+      "sha256": "886fda619f628d0b91dcd5fb51a490b917422e072822b9bfeecc75a897f0a187"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-05/band1/export/result.json",
+      "sha256": "5a9a303b215465f140c8ea724107ac618b259fd6c0f29dca44bd9f515fa54926"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-05/band1/export_tight/result.json",
+      "sha256": "f53f803756c7ebde2e62c3f1b1da5d3720241a7901e107825542424b589be7f7"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-05/band1/import/result.json",
+      "sha256": "d82a55f439368583854b525d5044196a9485f98c6319ab6c1690424b2310ca6f"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-05/band1/import_tight/result.json",
+      "sha256": "52269133a4b5b81b8e1906fc8dffb1b5363552ec0983dfe20c834eeb3e6e1908"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-05/band2/export/result.json",
+      "sha256": "ef2af3c1f25d655f6ac0e2cef4891d62b3119da1fcc0c62e9f6d75bce6985c5b"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-05/band2/export_tight/result.json",
+      "sha256": "2ee9978b031b0eae62532fa87b809b75f4c1035f39df82785d030f572e66a5c8"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-05/band2/import/result.json",
+      "sha256": "b5ccd4d429e0ddddb7c768e1417bbb09687a37fc1bf2c13f6707887548ebe1d4"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-05/band2/import_tight/result.json",
+      "sha256": "0507d9a13438bdffc9281e455d369bd7249d29684a6b7d564391c5210e100e58"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-05/band3/export/result.json",
+      "sha256": "dfd7ca92cf196350c0be65934781c2155f7071649590b4461743c2e11bf5a018"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-05/band3/export_tight/result.json",
+      "sha256": "f1fffe5663bde8567e3f6fdfa45396200b739d0b2d10edc5a95b621aedfc0e7c"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-05/band3/import/result.json",
+      "sha256": "b395151a826fd79789380dc6095e26552f42f03a5e5f1dd7f53a2f94d1dea742"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-05/band3/import_tight/result.json",
+      "sha256": "b4d09018fb05477f75d63fa9f6467e1afcec51fae14e83b289663d21ac5750b7"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-06/band0/export/result.json",
+      "sha256": "943312edd33520b9f17521a0c3371c529d94dd140c49027f3983a594b868be4a"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-06/band0/export_tight/explanations.json",
+      "sha256": "60afb5c06c1d642e6fdaf7fa746794c3401aab893aa67816c8373e56dae7e145"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-06/band0/export_tight/result.json",
+      "sha256": "fd93c32b3ff87a634d2b9589634fc1e3f884b47c92892c3b637f98f9d2c36e07"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-06/band0/export_tight/T6_mae_shap.parquet",
+      "sha256": "3061842cfb84f059b27d21960dd186fb183edcdd936322147cc884063bb1fb1a"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-06/band0/import/result.json",
+      "sha256": "2a474df528e75206335623f7c91339b58341ed9a8b04a711546f5489e4f8102f"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-06/band0/import_tight/explanations.json",
+      "sha256": "6d0ef34b91eab52b5dc539344d7344fa62f1d93016200b27c3e8e1384f3b61eb"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-06/band0/import_tight/result.json",
+      "sha256": "2ced0bb9af4a63171f034a509dc067d094b3596335565c742dadc015e167240f"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-06/band0/import_tight/T6_mae_shap.parquet",
+      "sha256": "778c415c1f2875039657fb9f0dbc175860fc26ebb8a71211875bff853dbc9492"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-06/band1/export/result.json",
+      "sha256": "35637b2fe81e1e2204ed09d974d4f675c8b4738f7125793a0b76e38f2ac44900"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-06/band1/export_tight/result.json",
+      "sha256": "1b124bcd6800127d3588c0dc1e0e7762da46a0b5630a9741f3d2b5848eb33ab5"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-06/band1/import/result.json",
+      "sha256": "8154607290fd057fc4e41963a1f716cab4963a89917354c924674f82599f58c6"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-06/band1/import_tight/result.json",
+      "sha256": "549ace8958c7f1fed55948975bd0de690bf2b76353d66dc72c266a9134d4f431"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-06/band2/export/result.json",
+      "sha256": "4b436ce0f774d5b07db59db556baf4f13ffdff1c2fa3fa6c1ae2167c3047f42a"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-06/band2/export_tight/result.json",
+      "sha256": "d3a487d73d83fb4fa5f7b6a7032060baa10b1df6c0df0e50f616f70c5c726b31"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-06/band2/import/result.json",
+      "sha256": "e7f8ab31c5e7791af63bc85e710057ed85f91ce35d36fa580fc6df2008aeaf36"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-06/band2/import_tight/result.json",
+      "sha256": "ef4ead31e8365310dda633d0462cedc1cd3063e19873eb9fa5188a4f72cd465f"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-06/band3/export/result.json",
+      "sha256": "8abd8da3c5850e852e64536c4565fa30ddb12b01257ad7396b9a1cbffd06ac55"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-06/band3/export_tight/result.json",
+      "sha256": "50fb71425f3de709ed0ae07abb9864a95d49f2e4532d75022d9ee634486d513b"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-06/band3/import/result.json",
+      "sha256": "85e8b64454b5d16602506310aeacabf5bd6aba827cd35dfd9da496e0fb8aa16e"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-06/band3/import_tight/result.json",
+      "sha256": "4a0016f4b106f1c7ae59d18124988fb25c0a755d40426e0067b9de69fa5fe640"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-07/band0/export/result.json",
+      "sha256": "f1ec5889c7b7f22f1039be2f7ccd9966241095661e63fccc7b579412967a5345"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-07/band0/export_tight/explanations.json",
+      "sha256": "334581763797da6392a3253b19b56359a093bd0572f2d366b3156fa546e57851"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-07/band0/export_tight/result.json",
+      "sha256": "40d2a82e2c67ddf20e1041d06734ca8f8998a612a6200ea534a29002196a1421"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-07/band0/export_tight/T6_mae_shap.parquet",
+      "sha256": "5160967a9ee3368ecf33f32ea76ebdd5e6e941dc299c4d77ab25778a361e8f9a"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-07/band0/import/result.json",
+      "sha256": "c2c8195c4105364130a93b58a68e4056882d1fae3dafdeed9c431536d6df785e"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-07/band0/import_tight/explanations.json",
+      "sha256": "5467329d840b25e30cfb5348cb97b02c0b5730c92c76fc38cd5ff4a363a4c266"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-07/band0/import_tight/result.json",
+      "sha256": "62bd803a96b816728021c59b4942247a4e39b5f75570a9067bae54c2cb15ea2f"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-07/band0/import_tight/T6_mae_shap.parquet",
+      "sha256": "252eb89ee166c9a026b0f13b1f88a7e7883e70c57ed7694a282b907b29c53d36"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-07/band1/export/result.json",
+      "sha256": "23ba3e5acf2d3ebc32ce17c5229c259ee1cfddd1136af13405ae406380d25205"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-07/band1/export_tight/result.json",
+      "sha256": "b4c8a42b5cd428e915c281d906bc9af22c4023e136816117b6c94e7f0aef034e"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-07/band1/import/result.json",
+      "sha256": "afc836729b67158493b01ea89f58e6e53b98a3ac06d6362d52ed0379ef759284"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-07/band1/import_tight/result.json",
+      "sha256": "206096cf0751b36362ec23868e948a5b6c569e206a0bab388c24516b0cc38eeb"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-07/band2/export/result.json",
+      "sha256": "74659278f4050efa5ad1585ed3fc83bbddf234f5614dbb47715357e653db3557"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-07/band2/export_tight/result.json",
+      "sha256": "40d2081dc108fd86cd4c3772ea57dfe90a6c73213504bef87325c45e05e7fabc"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-07/band2/import/result.json",
+      "sha256": "1f6a0f50e485e6fe15be49f070492f34a98969343c38fb4ef5cac3d50adc1437"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-07/band2/import_tight/result.json",
+      "sha256": "beadd47e59079938e17e5585b1bfabe6982c86ae8bf25c7db4e585f0023dffb9"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-07/band3/export/result.json",
+      "sha256": "9475f68d669e3cd39e1602de2b0d2fa745bd7252bc41046114713d33681d45f8"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-07/band3/export_tight/result.json",
+      "sha256": "4786acc6cc951f6dcfa43c7d0b248703d4a7ae5dfe60f17ae57bb34427afee6e"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-07/band3/import/result.json",
+      "sha256": "ff2c1c0b67367392749ebe602048931d4e47ea236f3222b7867f319b74ac32b5"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-07/band3/import_tight/result.json",
+      "sha256": "41eff6d1e59567052f66d8ae918a60ed5cc1069581834ac48bcc5b861a29978b"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-08/band0/export/result.json",
+      "sha256": "79449c7a4ba659e2a426507ffae5b93e5cccb34f736a61814ea6194eed253aa9"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-08/band0/export_tight/explanations.json",
+      "sha256": "a3d704818a0562257caac7efba8c296de576dc2ef36253af6238f65c619e8e49"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-08/band0/export_tight/result.json",
+      "sha256": "dce48f77890571c51217b95f457c21badc2c25aecf0e0daddee53b977a5c5074"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-08/band0/export_tight/T6_mae_shap.parquet",
+      "sha256": "3f0f0e07f9f6c5f70bfa5fc68906c4781b719c03540b82daba24d0e7b730d7ec"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-08/band0/import/result.json",
+      "sha256": "20bbbe6910332e1461bb4bc5db94f29a7704496d2c28a819b93d842f62951569"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-08/band0/import_tight/explanations.json",
+      "sha256": "c094430ae2d9e15598340257f7839f796d2e975c0629b55c3ff41f556b490f04"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-08/band0/import_tight/result.json",
+      "sha256": "6cf5ff9081c339bfca418733b95f1d24f90e30a706c27a6cc3aa2d1a2c699859"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-08/band0/import_tight/T6_mae_shap.parquet",
+      "sha256": "5d94f21fad101e2e087164d6641fa2d6c5ea6b39561fc72b9660b0a1dcd2ee55"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-08/band1/export/result.json",
+      "sha256": "fa13f6dad8c0c10e0213526710b6c75d8bf6b4109f2042736fae4e133d3efc7e"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-08/band1/export_tight/result.json",
+      "sha256": "c45e6d805ff672c2038e267b883d04bb85af21efd8a8c34e0400b13d3327147b"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-08/band1/import/result.json",
+      "sha256": "3a0fc9f3f4f365e1cd12a05340efd68d3497311f4cbbf77ed4fb399c43383180"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-08/band1/import_tight/result.json",
+      "sha256": "6213ae67c971c127d9f0e36c7de04806d471c05b7a3e6a2f47e05dbfd3815107"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-08/band2/export/result.json",
+      "sha256": "ce6f7a385eb42e83c9e535f899b346206ace13fbb56b7c19f3a677f2a3986c07"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-08/band2/export_tight/result.json",
+      "sha256": "a85cd26b13a8f2a0d504e9892a5bf3c503bf7f89de29c3b5dfaccf115cbe7475"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-08/band2/import/result.json",
+      "sha256": "f821a1416f992ec4ea6622d4d462646dc7524b6d1baffaff88c62a7a00d550a8"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-08/band2/import_tight/result.json",
+      "sha256": "8910fd4d7d61dcfa3af60db115c74fcae09b43efb45b409eb5c464e36b729825"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-08/band3/export/result.json",
+      "sha256": "a5801ca35a6a3ee51811d33a32fb8f50291e127524736ccfe621ce126d15d259"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-08/band3/export_tight/result.json",
+      "sha256": "505a42608007936806b07556a6962cdfe6f3857b48f11ead1af6fc53dab68d39"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-08/band3/import/result.json",
+      "sha256": "71c2a95d3f18500509860090be91630a65bd5e136c26074f159160e3757a0552"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/2026-08/band3/import_tight/result.json",
+      "sha256": "31ac16ac2601a0d565e161d68e48b7bb05973dfc3e645c4a45124647ec4e1794"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/fixed/band0/export/result.json",
+      "sha256": "728c4cd7c943169a1571651aeffc9fd946b51f9a3e9f354945d3b551db1b1746"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/fixed/band0/export_tight/result.json",
+      "sha256": "e07087fafcc6fe46a9fabfd4f491ff15db019fe3f4034627b20f5ba7b9300e23"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/fixed/band0/import/result.json",
+      "sha256": "f6a474e1c11f7eafcfd5d102f9cd2adb004ee766449c60a0840637fa96ce4953"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/fixed/band0/import_tight/result.json",
+      "sha256": "ffe70dd21c26c53bd1693ec53cacbfb287c28ddeaef7fba43bc4bd41dfe29f7d"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/fixed/band1/export/result.json",
+      "sha256": "03da49595bec74777b8ff38897863a589afe3dceb3a54e20622918734a5cf424"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/fixed/band1/export_tight/result.json",
+      "sha256": "a659fe6328a6103d23f7c355a7dc4d503dba8c452051d1b86157be9515d21091"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/fixed/band1/import/result.json",
+      "sha256": "977fcbfc2f42d738d74a5702f921dedf68feb24f7965cc78795421456fccacf6"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/fixed/band1/import_tight/result.json",
+      "sha256": "41f62ff8431862950a7fe425d0b39a76c323179f7da410f79e6409e982f943a5"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/fixed/band2/export/result.json",
+      "sha256": "39c8e295753c5d4aae7e2ca32a84417d969be8ecaf87d7ea056c489f5398bea5"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/fixed/band2/export_tight/result.json",
+      "sha256": "78cd7c84f5bbfaa4ba877bc30f3c0e104ae635327a237741242664709d211368"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/fixed/band2/import/result.json",
+      "sha256": "1f7567a667e1a0bce515a27c81275c0c8ef44b104f934f0e7463ceeafeb7bc2f"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/fixed/band2/import_tight/result.json",
+      "sha256": "cd31c0dfa392c13a8fe62ef78e1f1b57959d6ffa0194bb48022c974784abd416"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/fixed/band3/export/result.json",
+      "sha256": "7b7a9d1328eb791da6a91a63d826317abd2892ded9625e8d8885c9497a713a01"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/fixed/band3/export_tight/result.json",
+      "sha256": "c011ffd2bde99b414eb3d52172d37755e6bf6665e288cd705de8912aaba44914"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/fixed/band3/import/result.json",
+      "sha256": "a62e7d18363c8fb46764b49b903844c3cf8168bd1a96e78362b00f9750181b76"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/diurnal/fixed/band3/import_tight/result.json",
+      "sha256": "4d94b5c3d288a9c207540ac69f81de513320988054a465597915286048de96f6"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/final/band0/export/manifest.json",
+      "sha256": "96a654bf3d2c74e756b463b2152ed113c3a8e8e66e53fbe1e9171a5f6fe0494e"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/final/band0/export_tight/manifest.json",
+      "sha256": "a5871068d014a97beb1f5646268393dfc0e57e0c9520a9e9a2fbd605684f647c"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/final/band0/import/manifest.json",
+      "sha256": "8cd56216bf73ce150b4e4ca45a72e02840e574743a9b23057fb5b3ee433d7e51"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/final/band0/import_tight/manifest.json",
+      "sha256": "c157f5a3b4932aab00fcab76eafb157f5fb044977bf3d03b39a4ce5f3af9e08f"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/final/band1/export/manifest.json",
+      "sha256": "9cbdf7c2ced9bb1207679df4616b04a1c2b81fefd694d00103355a6ba2276e8a"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/final/band1/export_tight/manifest.json",
+      "sha256": "a039835124e7e9a2eff876bf77c914f1347cb80aecc83472bf2ec951bc6c19d5"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/final/band1/import/manifest.json",
+      "sha256": "572bb45e46a6e83a8f01031c4495b62968862ab9311a9a17cecd8ddb6785bb9f"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/final/band1/import_tight/manifest.json",
+      "sha256": "472c14d7a8b8c7ef483bdde1ed2cd49b585fdbfc110eabd03765236bc649bdb8"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/final/band2/export/manifest.json",
+      "sha256": "60b63fb29037a1e3b25cd7c50e5cd4cd2c7822d02b077dd55c75a117d77cf207"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/final/band2/export_tight/manifest.json",
+      "sha256": "d3ff27dda0dc0c8523bc8b232224f0c2f4b9f144132848d7d76d23c913dfb0cd"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/final/band2/import/manifest.json",
+      "sha256": "c5ff66b49d106818d12bb9411bd5c510e9de8728fa2431bcde3afdc4bf172fad"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/final/band2/import_tight/manifest.json",
+      "sha256": "6fce44775ab780790de121d406aa0806489d521e379f08ff64e2ee5a3571d572"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/final/band3/export/manifest.json",
+      "sha256": "4c2819cf26cd93712ed9cea3eb8d9cd4258263ec4190d0e9584e4bf72eb7aeb4"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/final/band3/export_tight/manifest.json",
+      "sha256": "91cf279bdb081376360f75b98c81a0c224f1ea285c76cd8debf0687267c3a6c2"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/final/band3/import/manifest.json",
+      "sha256": "b7a3bd43477c1e3a87c406c804806a6ea1bcee9befaaee90a6dcb074f8e177b7"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/final/band3/import_tight/manifest.json",
+      "sha256": "9f4c57e8da86affb5f4914b7129582c902ef9933a12b345cac2927d81877c91e"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/final/catalogue.json",
+      "sha256": "194f5a7b9743519f350baa3359cbab3e3f8e35c50268e5a3bab96989b8488964"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/nos/impact/full_development/status.json",
+      "sha256": "e311878c5e800da7773a0101bba63d61935fdba7b554b1db611d4b7f40282ffe"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/nos_models/2026-03/export_tight/explanations.json",
+      "sha256": "f3e52877bdc4e6e102a1f4801ed4eefa1d6c5e8f10d69cbfc280aec5b53f40f9"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/nos_models/2026-03/export_tight/result.json",
+      "sha256": "f0839ffa688eff13a64b0d178a445fac95ada523af08d0164c506a5f9227c0d1"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/nos_models/2026-03/import_tight/explanations.json",
+      "sha256": "e6515a1aa9d66a8ef0bc0f48047ce3e9a8ef1973343b226a7fde26957e4a5256"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/nos_models/2026-03/import_tight/result.json",
+      "sha256": "e589ad442866df3b2511afd535bc8223c8967e53f04f8033885eaa13bc4dd291"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/nos_models/2026-04/export_tight/explanations.json",
+      "sha256": "09471c10a64c6c1c5d03515faee87ec8e34c2db670c31d826b98a8225c82c4d7"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/nos_models/2026-04/export_tight/result.json",
+      "sha256": "60d144e2aeb17be71c4e6553b2472067a588dc7a0a4a743dd45d11a8b353b695"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/nos_models/2026-04/import_tight/explanations.json",
+      "sha256": "d22ff41c58432cfe526e5ce394bf99e5c65447e60628efaadd401850e587adf3"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/nos_models/2026-04/import_tight/result.json",
+      "sha256": "b737a2847e39cea2d5a8df82388f79d2943da184b9060b0cfb9383e3c378b56f"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/nos_models/2026-05/export_tight/explanations.json",
+      "sha256": "c0c9a51dbb9b85e963f9b40e93c9d31e0d78d55ff1bf17c9917f69a4fe0c5cb6"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/nos_models/2026-05/export_tight/result.json",
+      "sha256": "593b15ce04de49db71cc231d3a86ad4c0c20fdf906b95edd64e2cb931f4f92b0"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/nos_models/2026-05/import_tight/explanations.json",
+      "sha256": "1e3ae356fd1f738d782a9c4c201910bf507f3d63b6b6f815b64baea162ca493b"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/nos_models/2026-05/import_tight/result.json",
+      "sha256": "511fbfcacf865779c728b5567d62f95fce3688fa41cf6debd4bded0834032d6b"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/nos_models/2026-06/export_tight/explanations.json",
+      "sha256": "086ee2334ced98b36215ac65d62438357b850f00b5cfe74c24d50e2368ca9f44"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/nos_models/2026-06/export_tight/result.json",
+      "sha256": "d8c9979d1dc1fe4bd0d50fa36e0b8bc1d4ee57b46011c94b5bc0d4c953d01a14"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/nos_models/2026-06/import_tight/explanations.json",
+      "sha256": "2ee95ab185c62502cc00a782562b1f318b76ce25cd2400e6cb9f8664fff8ac7a"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/nos_models/2026-06/import_tight/result.json",
+      "sha256": "2af75876d3436499d5bd4f9be1bb4aeed3bf5d3289f53905cc39e14de2371b86"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/nos_models/2026-07/export_tight/explanations.json",
+      "sha256": "4a5752c963fc143da2a31df131b593c0e5caa4c6eee6dc820f6a434a60a18620"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/nos_models/2026-07/export_tight/result.json",
+      "sha256": "544b8b696433e2aab64fe1112fc346bd51b65f3bed0e1426a00ee75040816943"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/nos_models/2026-07/import_tight/explanations.json",
+      "sha256": "9770d39589e96fc3e5ac9f500790107fef82e95e4df19d549d99f26a702df8c0"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/nos_models/2026-07/import_tight/result.json",
+      "sha256": "d2a39cbeedfaefc6115d06ffd6d91d1011a10986922945edaf582d15db21d11e"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/nos_models/2026-08/export_tight/explanations.json",
+      "sha256": "d9637df9e8ea51e7fcf38612a77910c8e97f3022e84b184b6620c78eed16d720"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/nos_models/2026-08/export_tight/result.json",
+      "sha256": "2436943b22916f7516c5611257f322129d297a7ddad88facd712546d6a179668"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/nos_models/2026-08/import_tight/explanations.json",
+      "sha256": "5387716d69be28fb83f7c0d4e82598a3cc90866de31fa8c4e2839860f61ab4c8"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/nos_models/2026-08/import_tight/result.json",
+      "sha256": "88c19c5de4def54c55ec5caed65d71127114b2905b17c8ed2f8461cdcf4a9852"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/refinements/2026-03/export_tight/result.json",
+      "sha256": "f582737d06cf306aeb5ec0bba50df7f260cddba1dcb789a5cf56e3ed8d3374f3"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/refinements/2026-03/import_tight/result.json",
+      "sha256": "48052d9e744b017de227ebbbae9618a61e5c9fec3d96be8c2c70b013cbe8e29c"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/refinements/2026-04/export_tight/result.json",
+      "sha256": "365092d3cb3c9a2d15aeeae76ee7d0daac08cbd098373e36e77dbdc2ebca4718"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/refinements/2026-04/import_tight/result.json",
+      "sha256": "d3f233602d5c2f495b4917fe85acd2c6362c69f7165911bc980f3622705fb4cd"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/refinements/2026-05/export_tight/result.json",
+      "sha256": "c23518b19ddca37ee9f8d0ab3c13b410da0a9c0635e16349254b8cd6fd27b95b"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/refinements/2026-05/import_tight/result.json",
+      "sha256": "dc571cdeae999d4ca11fa8eca60c0694f0185acc51f9e7f979067e41724132be"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/refinements/2026-06/export_tight/result.json",
+      "sha256": "bf38dc9b088278fce4416d437b77f2c30ab2f700a06819e46c5f330e6a88115a"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/refinements/2026-06/import_tight/result.json",
+      "sha256": "786d55d935e9fd785509e1f7c415af92422c916045b1870dd354dfaf30cff064"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/refinements/2026-07/export_tight/result.json",
+      "sha256": "80f364ba536c9b0c10905f8ef99ca36fb5821857fc8633a6506497d36bf6706d"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/refinements/2026-07/import_tight/result.json",
+      "sha256": "d897fdcd866b5af7728a396684a8bbb98c2f335c674e032b3bd36fd3b6b5de44"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/refinements/2026-08/export_tight/result.json",
+      "sha256": "56239f24ebe472fa452c4d104053688efa1639e0b361a20d836dc82a9d1f826c"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/refinements/2026-08/import_tight/result.json",
+      "sha256": "d644878cba59973901aa3ac48756dfecbe5aa94f65767af7546c569b08e24415"
+    },
+    {
+      "path": "data/forecast_experiments/vni_diurnal_nos_v2/statistics.json",
+      "sha256": "9b4de00c32c128e63b3dcc6c42a59c7d179b723f8dfceb08b68d252b08f14788"
+    }
+  ],
+  "headline": {
+    "export_tight_band0_mae": 216.76277984633865,
+    "import_tight_band0_mae": 192.1158062390977,
+    "export_tight_skill_vs_persistence": 0.3323508746631104,
+    "import_tight_skill_vs_persistence": 0.17131280128000193,
+    "nos_export_skill": 0.0038843778292406705,
+    "nos_import_skill": -0.006261162450906577
+  }
+}
