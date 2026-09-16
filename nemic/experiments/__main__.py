@@ -6,12 +6,21 @@ def main():
     p=argparse.ArgumentParser(description='Replicable interconnector forecasting experiments')
     p.add_argument('command',choices=['inventory','plan','run','report','shadow','score-shadow','recover',
         'inventory-nos','recover-nos','audit-nos','analyse-nos-impacts','audit-nos-feasibility','run-diurnal','run-diurnal-risk',
-        'run-nos-models','run-nos-risk','run-diurnal-fixed','run-diurnal-extensions','run-diurnal-curves','run-diurnal-refinements','run-diurnal-bridge','explain-diurnal','explain-nos','refit-diurnal','diurnal-statistics'])
+        'run-nos-models','run-nos-risk','run-diurnal-fixed','run-diurnal-extensions','run-diurnal-curves','run-diurnal-refinements','run-diurnal-bridge','explain-diurnal','explain-nos','refit-diurnal','diurnal-statistics','forecast-vni'])
     p.add_argument('--config',default=str(DEFAULT));p.add_argument('--kind',default='all',choices=['all','numeric','events'])
     p.add_argument('--ic');p.add_argument('--fold');p.add_argument('--limit',type=int)
     p.add_argument('--stage',choices=['primary','extensions'],default='primary')
+    p.add_argument('--features');p.add_argument('--target',choices=['export_tight','import_tight','export','import'])
+    p.add_argument('--output');p.add_argument('--models-dir',default='data/forecast_experiments/vni_diurnal_nos_v2/final')
+    p.add_argument('--allow-research',action='store_true')
     args=p.parse_args();c=load_config(args.config)
-    if args.command in ('inventory-nos','recover-nos','audit-nos'):
+    if args.command=='forecast-vni':
+        if not args.features or not args.target or not args.output:
+            p.error('forecast-vni requires --features, --target and --output')
+        from .vni_forecast import forecast_file
+        d=forecast_file(args.features,args.target,args.output,final_dir=args.models_dir,allow_research=args.allow_research)
+        print(json.dumps(clean(d),indent=2))
+    elif args.command in ('inventory-nos','recover-nos','audit-nos'):
         from .nos import inventory_nos,recover_nos,audit_nos
         if c.get('schema_version')!=2:raise ValueError('NOS stages require an explicit v2 configuration')
         d={'inventory-nos':lambda:inventory_nos(c),'recover-nos':lambda:recover_nos(c,args.limit),'audit-nos':lambda:audit_nos(c)}[args.command]()
