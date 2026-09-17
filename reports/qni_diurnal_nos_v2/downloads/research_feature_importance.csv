@@ -1,0 +1,13 @@
+target,group,mae_degradation
+export_tight,calendar,22.99959138488283
+export_tight,generator_pressure,3.244754343826371
+export_tight,horizon,6.729430671495088
+export_tight,network_state,0.6470972288645759
+export_tight,observed_history,110.95772336810421
+export_tight,quality,2.703962136882985
+import_tight,calendar,39.23951896672277
+import_tight,generator_pressure,2.2187500041831636
+import_tight,horizon,4.1377335111983955
+import_tight,network_state,0.7733631094380686
+import_tight,observed_history,103.19166634168558
+import_tight,quality,6.050118623576213

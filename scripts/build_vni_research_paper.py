@@ -1,8 +1,9 @@
-"""Build the paper-style report for the completed VNI diurnal/NOS run."""
+"""Build the paper-style report for a completed connector diurnal/NOS run."""
 from __future__ import annotations
 
 import html
 import json
+import argparse
 from pathlib import Path
 import sys
 
@@ -14,13 +15,15 @@ from plotly.subplots import make_subplots
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from nemic.experiments.core import digest
+from nemic.experiments.core import digest, load_config
 from nemic.experiments.diurnal import PERIODS, metrics, origin_weights
 from scripts.report_theme.report_theme import figure_html, hero, metric, render_page, style_plotly
 
 
 RUN = ROOT / "data/forecast_experiments/vni_diurnal_nos_v2"
 OUTPUT = RUN / "report"
+CONNECTOR = {"name": "VNI", "id": "VIC1-NSW1", "regions": ["VIC1", "NSW1"]}
+CONFIG_PATH = "configs/experiments/vni_diurnal_nos_v2.json"
 BAND_LABELS = {0: "0.5–6 h", 1: "6.5–24 h", 2: "24.5–72 h", 3: "72.5–168 h"}
 TARGET_LABELS = {
     "export": "Export mean",
@@ -330,8 +333,13 @@ def _feature_table() -> pd.DataFrame:
     )
 
 
-def build() -> Path:
+def build(config_path: str = CONFIG_PATH) -> Path:
+    global RUN, OUTPUT, CONNECTOR, CONFIG_PATH
+    config = load_config(config_path)
+    RUN = config['_run']; OUTPUT = RUN / 'report'; CONNECTOR = config['connectors'][0]; CONFIG_PATH = config_path
+    name=CONNECTOR['name']; identifier=CONNECTOR['id']; slug=name.lower()
     OUTPUT.mkdir(parents=True, exist_ok=True)
+    (OUTPUT / "downloads").mkdir(parents=True, exist_ok=True)
     performance, periods_frame, leaderboard, fixed, selections, combined, point_sources = _load_point_results()
     importance, shap_frame, explanation_sources = _load_explanations()
     nos, nos_importance, nos_sources = _load_nos_results()
@@ -348,32 +356,55 @@ def build() -> Path:
     nos_export = nos.query("target == 'export_tight'").iloc[0]
     nos_import = nos.query("target == 'import_tight'").iloc[0]
 
+    primary_winners = selections.loc[selections.Band.eq(0) & selections.Target.isin(['export_tight','import_tight']), 'Winner']
+    primary_family = primary_winners.str.split('_').str[0].mode().iat[0]
+    routing = '; '.join(
+        f"{row['Target']} {row['Band']}: {row['Selected model']}"
+        for _, row in bundles.iterrows()
+    )
+    seven_day = [row for row in statistics['comparisons'] if row.get('block_days') == 7]
+    all_primary_positive = bool(seven_day) and all(row.get('ci_low', -np.inf) > 0 for row in seven_day)
+    significance_text = ('All four seven-day paired confidence intervals exclude zero.' if all_primary_positive
+                         else 'At least one seven-day paired comparison includes zero; inference is reported cell by cell.')
+    selected_periods=periods_frame.loc[periods_frame.policy.eq('selected')]
+    period_wide = all(
+        row.mae < periods_frame.loc[
+            periods_frame.target.eq(row.target) & periods_frame.period.eq(row.period) & periods_frame.policy.eq('T0_mae'),
+            'mae'].iloc[0]
+        for row in selected_periods.itertuples()
+    )
+    period_text = ('The selected policy improves on T0 in every reported primary delivery period.' if period_wide
+                   else 'Delivery-period gains are heterogeneous; the period chart identifies where the selected policy does not beat T0.')
+    top_groups = (importance.sort_values(['target','mae_degradation'],ascending=[True,False])
+                  .groupby('target').first().group.to_dict()) if not importance.empty else {}
+    nos_verdict = ('positive in both directions' if nos_export.skill > 0 and nos_import.skill > 0
+                   else 'mixed across directions')
     body = hero(
-        "VNI directional-limit forecasting",
+        f"{name} directional-limit forecasting",
         "Time-of-delivery models",
         "A two-year rolling study with network-outage evidence",
-        "A complete historical evaluation of daily specialization, nonlinear correction, scheduled network outages, feature relevance, uncertainty and deployable saved-model bundles for VIC1–NSW1 directional limits.",
+        f"A complete historical evaluation of daily specialization, nonlinear correction, scheduled network outages, feature relevance, uncertainty and deployable saved-model bundles for {identifier} directional limits.",
         ["Research paper", "September 2024–August 2026 outcomes", "NEM time · UTC+10", "MAE-selected point forecasts", "Development evidence"],
     )
     body += '<nav><a href="#abstract">Abstract</a> · <a href="#methods">Methods</a> · <a href="#models">Models</a> · <a href="#results">Results</a> · <a href="#features">Features</a> · <a href="#nos">NOS</a> · <a href="#verdict">Verdict</a> · <a href="#forward">Forward use</a></nav>'
     body += '<section class="metrics">'
     body += metric("Export minimum MAE", f"{export.selected_mae:.1f} MW", f"{100*export.skill_persistence:.1f}% better than persistence")
     body += metric("Import minimum MAE", f"{imported.selected_mae:.1f} MW", f"{100*imported.skill_persistence:.1f}% better than persistence")
-    body += metric("Primary selected family", "T6", "Shallow absolute-error boosting")
-    body += metric("NOS point-model effect", "Not promoted", f"{100*nos_export.skill:+.2f}% export; {100*nos_import.skill:+.2f}% import")
+    body += metric("Most frequent primary family", primary_family, "Fold-level selection; see the complete routing table")
+    body += metric("NOS point-model effect", nos_verdict.title(), f"{100*nos_export.skill:+.2f}% export; {100*nos_import.skill:+.2f}% import")
     body += "</section>"
 
-    body += f'''<section id="abstract"><h2>Abstract</h2><div class="callout"><strong>Research question.</strong> Does modelling VNI limits as a function of delivery time improve forecasts beyond a shared model, and does issue-known scheduled outage information add further predictive value?</div>
-    <p>This study evaluates minimum and mean directional transfer limits for the Victoria–New South Wales interconnector over twelve rolling monthly evaluation folds. Forecasts cover 0.5 to 168 hours and are selected by origin-balanced mean absolute error (MAE). The candidate ladder separates richer average daily shape, delivery-time-varying driver sensitivity, period-specific correction, independent specialists and shallow nonlinear boosting. Scheduled network-outage information is added only after a source-vintage coverage and matched-episode analysis.</p>
-    <p>The selection-frozen policy reduced band-0 minimum-export MAE from {export.persistence_mae:.1f} MW under persistence to {export.selected_mae:.1f} MW, and minimum-import MAE from {imported.persistence_mae:.1f} MW to {imported.selected_mae:.1f} MW. Against the shared T0 ridge, the reductions were {export.t0_mae-export.selected_mae:.1f} MW and {imported.t0_mae-imported.selected_mae:.1f} MW. Seven- and fourteen-day moving-block confidence intervals excluded zero, and the 90% model confidence set retained T6 alone for both tight directions. Gains persisted across delivery periods and all four lead bands, supporting time-of-delivery specialization. Calendar and recent observed limits carried most of the predictive information. Scheduled NOS features changed source-common MAE by only {100*nos_export.skill:+.2f}% for export and {100*nos_import.skill:+.2f}% for import versus the no-NOS T6 control, so they were not promoted to the point model.</p>
-    <p>The resulting handoff uses T6 for all targets in bands 0–2 and for band-3 imports, with T0 retained for band-3 exports. Sixteen hash-catalogued research bundles reproduce their saved predictions exactly. They are ready for forecasting from the 41-column feature contract, but remain in research status until a receipt-time-verified live feature feed and prospective shadow evaluation are completed.</p></section>'''
+    body += f'''<section id="abstract"><h2>Abstract</h2><div class="callout"><strong>Research question.</strong> Does modelling {name} limits as a function of delivery time improve forecasts beyond a shared model, and does issue-known scheduled outage information add further predictive value?</div>
+    <p>This study evaluates minimum and mean directional transfer limits for {name} ({identifier}) over twelve rolling monthly evaluation folds. Forecasts cover 0.5 to 168 hours and are selected by origin-balanced mean absolute error (MAE). The candidate ladder separates richer average daily shape, delivery-time-varying driver sensitivity, period-specific correction, independent specialists and shallow nonlinear boosting. Scheduled network-outage information is added only after a source-vintage coverage and matched-episode analysis.</p>
+    <p>The selection-frozen policy changed band-0 minimum-export MAE from {export.persistence_mae:.1f} MW under persistence to {export.selected_mae:.1f} MW, and minimum-import MAE from {imported.persistence_mae:.1f} MW to {imported.selected_mae:.1f} MW. Against the shared T0 ridge, the changes were {export.t0_mae-export.selected_mae:+.1f} MW and {imported.t0_mae-imported.selected_mae:+.1f} MW in favor of the selected policy. {significance_text} {period_text} The leading grouped feature is {top_groups.get('export_tight','unavailable')} for export and {top_groups.get('import_tight','unavailable')} for import. Scheduled NOS features changed source-common MAE by {100*nos_export.skill:+.2f}% for export and {100*nos_import.skill:+.2f}% for import versus the no-NOS T6 control.</p>
+    <p>The final handoff is target- and horizon-specific: {html.escape(routing)}. Sixteen hash-catalogued research bundles reproduce their saved predictions exactly. They remain in research status until a receipt-time-verified live feature feed and prospective shadow evaluation are completed.</p></section>'''
 
     body += '''<section id="methods"><h2>1. Data, targets and experimental design</h2>
-    <p>The analysis uses reconstructed directional-limit, flow, constraint-candidate and aggregate generator-pressure histories for VIC1–NSW1. Forecast origins and deliveries are expressed in NEM time. The four targets are mean export, mean import, minimum export and minimum import capability. Direction is normalized so the import target represents positive directional capacity even where source fields use signed values.</p>
+    <p>The analysis uses reconstructed directional-limit, flow, constraint-candidate and aggregate generator-pressure histories for {identifier}. Forecast origins and deliveries are expressed in NEM time. The four targets are mean export, mean import, minimum export and minimum import capability. Direction is normalized so the import target represents positive directional capacity even where source fields use signed values.</p>
     <p>Twelve expanding rolling folds preserve chronology. Within each fold, training, model selection, interval calibration, alert-threshold selection and evaluation are separate. A 30-minute label-maturity allowance prevents a delivery outcome from entering the information set before it could have been observed. Each forecast origin receives total weight one across its configured leads so long-horizon bands do not dominate simply because they contain more origin–lead pairs.</p>
     <p>Lead bands are 1–12, 13–48, 49–144 and 145–336 half-hours. The first band is the primary model-family comparison; later bands reuse the selected family shortlist and fold-specific parameters rather than repeating an unrestricted family × target × band search. A separate fixed-split protocol is reported as sensitivity evidence and does not replace rolling results.</p>
     <h3>Metrics and selection</h3>
-    <p>MAE in MW is the fitting, tuning and selection objective. MAPE is reported only where |actual| ≥ 50 MW and is never used to select the main policy. Supporting diagnostics include directional-reference NMAE, RMSE, bias, tail error, and capacity-overstatement rates above 100 and 200 MW. The statistical comparison uses paired daily losses, 2,000 moving-block bootstrap replicates at seven- and fourteen-day block lengths, Holm correction across the four VNI primary hypotheses, and a 90% model confidence set.</p></section>'''
+    <p>MAE in MW is the fitting, tuning and selection objective. MAPE is reported only where |actual| ≥ 50 MW and is never used to select the main policy. Supporting diagnostics include directional-reference NMAE, RMSE, bias, tail error, and capacity-overstatement rates above 100 and 200 MW. The statistical comparison uses paired daily losses, 2,000 moving-block bootstrap replicates at seven- and fourteen-day block lengths, Holm correction across the four {name} primary hypotheses, and a 90% model confidence set.</p></section>'''
 
     body += '<section id="models"><h2>2. Models tested</h2><p>The ladder was designed to attribute gains rather than compare unrelated black boxes. T1 tests richer mean shape; T2 and T3 test changing sensitivities; T4 and T5 test cautious and fully local specialization; T6 tests whether remaining nonlinear structure matters.</p>'
     body += _table(_model_glossary()) + "</section>"
@@ -425,7 +456,7 @@ def build() -> Path:
             period_fig.add_trace(go.Scatter(x=period_order, y=values.mae, mode="lines+markers", name=label, legendgroup=policy, showlegend=column == 1, line=dict(color=color, width=3)), row=1, col=column)
     style_plotly(period_fig, "MAE by delivery period · primary lead band", height=520)
     period_fig.update_yaxes(title="MAE (MW)", row=1, col=1); period_fig.update_xaxes(tickangle=-25)
-    body += '<h3>Time-of-delivery evidence</h3><p>Errors are higher during the morning, solar and evening transitions than overnight. The selected policy nevertheless improves on the shared model in every reported primary period. The result supports delivery-time specialization without implying that clock time itself causes the limit.</p>'
+    body += f'<h3>Time-of-delivery evidence</h3><p>{period_text} Delivery-time heterogeneity does not imply that clock time itself causes the limit.</p>'
     body += _chart(period_fig, "Figure 3. Performance by delivery period", "Delivery time selects the period behavior; issue-time state remains part of the feature vector.")
 
     # Representative full curves.
@@ -448,8 +479,9 @@ def build() -> Path:
     stats_rows = []
     for row in statistics["comparisons"]:
         if row["block_days"] == 7:
-            stats_rows.append({"Target": TARGET_LABELS[row["target"]], "Control": MODEL_NAMES[row["control"]], "Improvement (MW)": f"{row['improvement_mw']:.1f}", "95% block CI": f"[{row['ci_low']:.1f}, {row['ci_high']:.1f}]", "Holm p": f"{row.get('holm_p_vni_family', np.nan):.4f}"})
-    body += '<h3>Paired statistical evidence</h3><p>Both primary directions improve against persistence and T0 under paired block resampling. The conclusion is unchanged at fourteen-day blocks. The model confidence set contains T6 alone for both directions at both block lengths.</p>' + _table(pd.DataFrame(stats_rows)) + "</section>"
+            stats_rows.append({"Target": TARGET_LABELS[row["target"]], "Control": MODEL_NAMES[row["control"]], "Improvement (MW)": f"{row['improvement_mw']:.1f}", "95% block CI": f"[{row['ci_low']:.1f}, {row['ci_high']:.1f}]", "Holm p": f"{row.get('holm_p_family', row.get('holm_p_vni_family', np.nan)):.4f}"})
+    mcs_text='; '.join(f"{TARGET_LABELS[row['target']]} ({row['block_days']} d): {', '.join(row['members'])}" for row in statistics['mcs90'])
+    body += f'<h3>Paired statistical evidence</h3><p>{significance_text} The 90% model-confidence-set members are: {html.escape(mcs_text)}.</p>' + _table(pd.DataFrame(stats_rows)) + "</section>"
 
     # Explainability.
     importance_fig = make_subplots(rows=1, cols=2, subplot_titles=("Minimum export", "Minimum import"), shared_yaxes=True)
@@ -460,7 +492,7 @@ def build() -> Path:
     style_plotly(importance_fig, "T6 grouped permutation importance · primary cells", height=520)
     importance_fig.update_xaxes(title="Held-out MAE degradation (MW)")
 
-    body += '<section id="feature-results"><h2>5. Feature relevance and SHAP decomposition</h2><p>Grouped permutation tests measure how much held-out MAE worsens when a coherent input family is disrupted. Calendar is dominant for minimum export, consistent with a strong recurring capability shape. Recent observed limits dominate minimum import and rank second for export, showing that current network state remains the principal level anchor. Horizon, network-state and generator-pressure variables make smaller conditional contributions after correlated calendar and history inputs are present.</p>'
+    body += f'<section id="feature-results"><h2>5. Feature relevance and SHAP decomposition</h2><p>Grouped permutation tests measure how much held-out MAE worsens when a coherent input family is disrupted. The largest average group is {top_groups.get("export_tight","unavailable")} for minimum export and {top_groups.get("import_tight","unavailable")} for minimum import. The remaining chart reports the complete ordering. These are conditional predictive dependencies after correlated feature families are present.</p>'
     body += _chart(importance_fig, "Figure 5. Grouped feature importance", "Average across rolling primary folds for T6. Values are predictive dependence, not physical causal effects.")
 
     shap_top = []
@@ -493,57 +525,58 @@ def build() -> Path:
     nos_display["MAPE ≥50 (%)"] = nos_display.mape.map(lambda x: f"{x:.1f}")
 
     body += f'''<section id="nos"><h2>6. Scheduled network-outage evidence</h2>
-    <p>The outage archive contains 17,800 usable snapshots from 53 weekly bundles. Six expanding monthly folds pass the historical source-coverage gate in each direction. The pre-model atlas identifies {impact['candidate_bookings']} candidate bookings but only {impact['matched_direction_episodes']} direction-level episodes with adequate matched controls. No recurring entity passes the support, pre-trend, placebo and leave-one-out stability gates; consequently, no asset or constraint set is reported as the “highest adjusted impact.”</p>
-    <p>The predictive ablation adds burden (O1), transitions and overlap (O2), mapped mechanisms (O3), revision and recall state (O4), and restricted outage × operating-state interactions (OX). On the common source population, the selected NOS route changes export MAE by {100*nos_export.skill:+.2f}% and import MAE by {100*nos_import.skill:+.2f}% relative to the T6 O0 control. This is too small and inconsistent to justify adding NOS to the default point model.</p>'''
+    <p>The pre-model atlas identifies {impact['candidate_bookings']} candidate bookings and {impact['matched_direction_episodes']} direction-level episodes with adequate matched controls. Supported recurring entities: {impact['supported_recurring_entities']}. Unsupported entities are not ranked as having a highest adjusted impact.</p>
+    <p>The predictive ablation adds burden (O1), transitions and overlap (O2), mapped mechanisms (O3), revision and recall state (O4), and restricted outage × operating-state interactions (OX). On the common source population, the selected NOS route changes export MAE by {100*nos_export.skill:+.2f}% and import MAE by {100*nos_import.skill:+.2f}% relative to the T6 O0 control. The effect is {nos_verdict}; NOS remains a separately reported challenger rather than being silently inserted into the final point bundles.</p>'''
     body += _chart(nos_fig, "Figure 7. NOS point-model performance", "All comparisons use the same source-known observations and history window.") + _table(nos_display[["Target", "Selected MAE", "No-NOS T6 MAE", "NOS skill", "MAPE ≥50 (%)", "rows"]])
     if not nos_importance.empty:
         ni = nos_importance.copy(); ni["Target"] = ni.target.map(TARGET_LABELS); ni["Scheduled-outage importance (MW)"] = ni.mae_degradation.map(lambda x: f"{x:+.2f}")
         body += '<p>Scheduled-outage grouped permutation importance is correspondingly small:</p>' + _table(ni[["Target", "Scheduled-outage importance (MW)"]])
-    body += '<p>Five of six NOS risk folds select an outage recipe, but the chosen recipe changes by month and the recall/false-alarm trade-off is unstable. The evidence supports retaining NOS as a monitored risk challenger and targeted diagnostic. A broader conclusion requires original-vintage forward generation availability because current generator pressure is observed/lagged rather than forecast.</p></section>'
+    body += '<p>The evidence supports retaining NOS as a monitored risk challenger and targeted diagnostic. A broader conclusion requires prospective source receipt lineage and original-vintage forward generation availability because current generator pressure is observed/lagged rather than forecast.</p></section>'
 
     # Refinements and verdict.
     refinement_display = refinements.copy(); refinement_display["Target"] = refinement_display.target.map(TARGET_LABELS); refinement_display["Selected MAE"] = refinement_display.selected_mae.map(lambda x: f"{x:.2f}"); refinement_display["Expanding-history MAE"] = refinement_display.expanding_mae.map(lambda x: f"{x:.2f}"); refinement_display["Skill"] = refinement_display.skill.map(lambda x: f"{100*x:+.2f}%")
-    body += '<section><h2>7. Post-selection refinements and warning models</h2><p>Lead-conditioned aggregate pressure and trailing 180/365-day windows were tested only after the calendar/NOS recipe was frozen. Selection-routed refinements worsen aggregate held-out MAE, so the expanding-history model remains the default. Cross-connector pooling remains untested until QNI is executed on the same protocol.</p>' + _table(refinement_display[["Target", "Selected MAE", "Expanding-history MAE", "Skill"]])
+    refinement_verdict=('At least one refinement improves aggregate held-out MAE; inspect the target-specific table before promotion.' if (refinements.skill>0).any() else 'The tested refinements do not improve aggregate held-out MAE, so expanding history remains the default.')
+    body += f'<section><h2>7. Post-selection refinements and warning models</h2><p>Lead-conditioned aggregate pressure and trailing 180/365-day windows were tested only after the calendar/NOS recipe was frozen. {refinement_verdict} Cross-connector pooling still requires a jointly fitted VNI–QNI experiment.</p>' + _table(refinement_display[["Target", "Selected MAE", "Expanding-history MAE", "Skill"]])
     body += '<p>Separate logistic and boosted contraction-warning models were calibrated under a joint three-false-alarms-per-day directional budget. Their performance is useful for development diagnostics, but instability across folds and the historical nature of threshold selection prevent operational promotion. Point forecasts and contraction warnings should therefore remain separate products.</p></section>'
 
     bundle_display = bundles.copy(); bundle_display["Selection MAE (MW)"] = bundle_display["Selection MAE (MW)"].map(lambda x: f"{x:.1f}")
-    body += '''<section id="verdict"><h2>8. Model assessment and selected specification</h2>
-    <div class="callout"><strong>Recommended point model.</strong> Use the MAE-selected calendar policy: T6 for all four targets in bands 0–2 and for band-3 imports; retain T0 for band-3 exports. Keep persistence and seasonal persistence as monitored fallbacks. Do not include NOS or the post-selection refinements in the default point forecast.</div>
-    <p>T6 earns promotion because it improves on both persistence and the shared T0 control in the primary directions, survives block-length sensitivity and the model confidence set, and preserves positive skill across all lead bands. T0 remains preferable for band-3 export because the additional nonlinear structure does not earn a sufficient selection-period gain there. The final routing decision is therefore target- and horizon-specific rather than a claim that one family is universally best.</p>
+    body += f'''<section id="verdict"><h2>8. Model assessment and selected specification</h2>
+    <div class="callout"><strong>Research point-model routing.</strong> {html.escape(routing)}. Keep persistence and seasonal persistence as monitored fallbacks. NOS and post-selection refinements remain separately identifiable challengers.</div>
+    <p>The routing policy is target- and horizon-specific and follows the frozen selection evidence rather than asserting that one family is universally best. {significance_text}</p>
     <p>The model explains limits as a strongly recurring time-of-delivery shape whose realized level is anchored by the latest admissible directional limit and recent network state. Network geometry and generator pressure provide smaller conditional corrections. This interpretation is consistent with the predictive evidence but should not be read as a causal decomposition of individual constraint equations.</p>
     <h3>Saved-model catalogue</h3>''' + _table(bundle_display) + "</section>"
 
-    body += '''<section id="forward"><h2>9. Forecasting forward</h2>
-    <p>The repository contains sixteen saved bundles under <code>data/forecast_experiments/vni_diurnal_nos_v2/final/</code>. The catalogue records target, lead band, winner and SHA-256. Each bundle stores the fitted model, exact ordered schema, parameters, residual quantiles and delivery-period calibration. Reload parity passed for every bundle.</p>
+    body += f'''<section id="forward"><h2>9. Forecasting forward</h2>
+    <p>The repository contains sixteen saved bundles under <code>{RUN.relative_to(ROOT).as_posix()}/final/</code>. The catalogue records target, lead band, winner and SHA-256. Each bundle stores the fitted model, exact ordered schema, parameters, residual quantiles and delivery-period calibration. Reload parity passed for every bundle.</p>
     <h3>Research forecast from prepared features</h3>
-    <pre>python -m nemic.experiments forecast-vni `
-  --features path/to/vni_features.parquet `
+    <pre>python -m nemic.experiments forecast-model --config {CONFIG_PATH} `
+  --features path/to/{slug}_features.parquet `
   --target export_tight `
-  --output local_exports/vni_export_tight.csv `
+  --output local_exports/{slug}_export_tight.csv `
   --allow-research</pre>
     <p>The command verifies the model hash, validates all required columns, routes every row by lead, and writes the point forecast plus calibrated 2.5%, 10%, 50%, 90% and 97.5% estimates. If a delivery timestamp is supplied, interval adjustments use the five delivery periods; otherwise pooled calibration is used.</p>
     <h3>Live feature pipeline required for production</h3>
     <ol><li>At every issue time, record actual receipt timestamps for dispatch limits, flow, constraint candidates and generator-state inputs.</li><li>Construct the 41-column schema using only information available by the issue cutoff. Preserve the latest admissible directional limit as <code>own_anchor</code>.</li><li>Create one row per target delivery and lead; the loader routes leads 1–12, 13–48, 49–144 and 145–336 to the saved bundle.</li><li>Write point and interval forecasts with model hash, issue time, source vintages, schema version and data-quality flags.</li><li>Run prospective shadow forecasts without retuning. Monitor MAE, qualified MAPE, overstatement, interval coverage, boundary jumps and missing-feature rates.</li><li>Promote only after prospective performance meets the predefined improvement and risk gates. Until then, retain persistence as the operational fallback.</li></ol>
     <p>NOS features are absent from the saved point bundles because they did not improve source-common accuracy consistently. A future NOS production test should pair issue-vintage outage exposure with issue-vintage forward demand, renewable and generator-availability forecasts, then repeat the O0–O4 comparison prospectively.</p></section>'''
 
-    body += '''<section><h2>10. Limitations</h2><p>All reported outcomes were available during development and are not independent confirmation. Network state was reconstructed historically, and actual receipt times are represented by a stated availability delay rather than a verified live message ledger. The NOS archive begins later than the core study and supplies limited independent recurring-outage support. SHAP and permutation importance describe model dependence, not causal physical effects. QNI has not yet been executed on this protocol, so cross-connector pooling and external connector generalization remain open questions.</p></section>
-    <section><h2>11. Conclusion</h2><p>Time-of-delivery modelling materially improves VNI directional-limit forecasts. The improvement is not confined to one difficult period or one horizon: it is present across the five reporting periods and all four lead bands, with strongest evidence for shallow nonlinear T6 corrections. Recent observed limits and calendar structure provide most of the useful signal. Scheduled NOS data are operationally meaningful but add little incremental point-forecast accuracy on the available source-common history once current network state and T6 are present. The appropriate handoff is therefore a compact target × horizon routing policy, backed by saved schemas and calibration, with NOS retained as a risk and diagnostic challenger.</p></section>'''
+    body += f'''<section><h2>10. Limitations</h2><p>All reported outcomes were available during development and are not independent confirmation. Network state was reconstructed historically, and actual receipt times are represented by a stated availability delay rather than a verified live message ledger. The NOS archive begins later than the core study. SHAP and permutation importance describe model dependence, not causal physical effects. Cross-connector pooling remains untested because the VNI and QNI campaigns were fitted separately.</p></section>
+    <section><h2>11. Conclusion</h2><p>For {name}, the frozen policy changes primary minimum-limit MAE by {100*export.skill_persistence:+.1f}% versus persistence on export and {100*imported.skill_persistence:+.1f}% on import. {period_text} The most frequent primary selected family is {primary_family}. NOS point-model skill is {nos_verdict}. The appropriate handoff is the reported target × horizon routing policy, backed by saved schemas and calibration, with NOS retained as a separately auditable risk and diagnostic challenger.</p></section>'''
 
-    body += '''<section><h2>References and reproducibility</h2><ol>
+    body += f'''<section><h2>References and reproducibility</h2><ol>
     <li>Soares, L. J. and Medeiros, M. C. (2008). <a href="https://www.econ.puc-rio.br/marcelomedeiros/Soares%20and%20Medeiros%20%28IJF%2C%202008%29.pdf">Modeling and forecasting short-term electricity load</a>. <em>International Journal of Forecasting</em>, 24, 630–644.</li>
     <li>Hyndman, R. J. and Athanasopoulos, G. (2021). <a href="https://otexts.com/fpp3/dhr.html">Dynamic harmonic regression</a> and <a href="https://otexts.com/fpp3/tscv.html">time-series cross-validation</a>. <em>Forecasting: Principles and Practice</em>.</li>
     <li>Hansen, P. R., Lunde, A. and Nason, J. M. (2011). <a href="https://doi.org/10.3982/ECTA5771">The Model Confidence Set</a>. <em>Econometrica</em>.</li>
     <li>AEMO. <a href="https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/nem-events-and-reports/network-outages">Network Outages</a> and <a href="https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/system-operations/congestion-information-resource/constraint-faq">Constraint FAQ</a>.</li></ol>
-    <p>Configuration: <code>configs/experiments/vni_diurnal_nos_v2.json</code>. Full cell-level results, search paths, SHAP decompositions and outage audits remain in the companion report suite. Rebuild this paper with <code>python scripts/build_vni_research_paper.py</code>.</p></section>'''
+    <p>Configuration: <code>{CONFIG_PATH}</code>. Full cell-level results, search paths, SHAP decompositions and outage audits remain in the companion report suite. Rebuild this paper with <code>python scripts/build_vni_research_paper.py --config {CONFIG_PATH}</code>.</p></section>'''
 
-    output_path = OUTPUT / "vni_research_paper.html"
-    output_path.write_text(render_page("VNI time-of-delivery forecasting research paper", body), encoding="utf-8")
+    output_path = OUTPUT / f"{slug}_research_paper.html"
+    output_path.write_text(render_page(f"{name} time-of-delivery forecasting research paper", body), encoding="utf-8")
     performance.to_csv(OUTPUT / "downloads/research_performance.csv", index=False)
     importance.to_csv(OUTPUT / "downloads/research_feature_importance.csv", index=False)
     shap_frame.to_csv(OUTPUT / "downloads/research_shap_importance.csv", index=False)
     all_sources = sorted(set(point_sources + explanation_sources + nos_sources + refinement_sources + bundle_sources + curve_sources + [statistics_path, impact_path]))
     manifest = {
-        "title": "VNI time-of-delivery models and scheduled network-outage evidence",
+        "title": f"{name} time-of-delivery models and scheduled network-outage evidence",
         "generator": str(Path(__file__).relative_to(ROOT)).replace("\\", "/"),
         "generator_sha256": digest(__file__),
         "report_sha256": digest(output_path),
@@ -563,4 +596,5 @@ def build() -> Path:
 
 
 if __name__ == "__main__":
-    build()
+    parser=argparse.ArgumentParser();parser.add_argument('--config',default=CONFIG_PATH)
+    build(parser.parse_args().config)

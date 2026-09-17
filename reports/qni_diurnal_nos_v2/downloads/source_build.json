@@ -1,0 +1,1295 @@
+{
+  "sources": [
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\bridge\\2025-09\\export_tight\\result.json",
+      "sha256": "f6150fb6873d422ee9ad9ef08b3b4e27917f1991bc8bc93846b44a5395b04e62"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\bridge\\2025-09\\import_tight\\result.json",
+      "sha256": "b1249862bdc8ffa2cc4a4cafa75afa867515f5329cedb63dd7f37a8ac8c2e85c"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\bridge\\2025-10\\export_tight\\result.json",
+      "sha256": "44a02ad4ea01a843ece4e5ebb1f209101139269e7e914c812bafed7ebf393a73"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\bridge\\2025-10\\import_tight\\result.json",
+      "sha256": "49abc3a09e670e235cf10fa9e96fd391dcc4f81a78b3f11d19d2c433cdb20353"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\bridge\\2025-11\\export_tight\\result.json",
+      "sha256": "2869bf84f2ec4f7dc08b82ec61fe3de15b78c15fea1bfc4b8ae995c4baec8904"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\bridge\\2025-11\\import_tight\\result.json",
+      "sha256": "e34b5823f795263d957fb26d3258374831afa58d1bfbd47f39c9c8c8c8a696ef"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\bridge\\2025-12\\export_tight\\result.json",
+      "sha256": "b71eceff250b7e608982664c9bca8a1df64cae2e9903a0d0d8e357bdbffdf84a"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\bridge\\2025-12\\import_tight\\result.json",
+      "sha256": "ca814d0d79cf69d49e6979029c271c907af71dc64090f1e5a4655f7c85df395e"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\bridge\\2026-01\\export_tight\\result.json",
+      "sha256": "4949e6fb13239808085e1db669a129204992626d3b73e95f421b6b0103a1dd39"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\bridge\\2026-01\\import_tight\\result.json",
+      "sha256": "22294d844a60651344d42d2eae01dffa93c1479072db91e24a17ec220cf9b9f7"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\bridge\\2026-02\\export_tight\\result.json",
+      "sha256": "f352c6989159190338c9a763b76d14ae08c4f05131208ac87e23c1f827fe52ab"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\bridge\\2026-02\\import_tight\\result.json",
+      "sha256": "6969e2c51e23ae6fe528dca8fa32961739b4c4673eea98f6c73a3893c6aba6f0"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\bridge\\2026-03\\export_tight\\result.json",
+      "sha256": "92528c505039b2bdd6145f6223e5f78151c6de1dec1bf1e85787d968adc11080"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\bridge\\2026-03\\import_tight\\result.json",
+      "sha256": "a6dec34324a37c0be0c2174b142339b21a0d5719852b22ef2dcd3ac905af30d1"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\bridge\\2026-04\\export_tight\\result.json",
+      "sha256": "9076b960cc9a10d2fc8892831dbf7d6690ed881089cf2eee4398f463bdc45861"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\bridge\\2026-04\\import_tight\\result.json",
+      "sha256": "7b5c09d8dc54acce3b19d8e25c84ed9d1f392a690ae783168880a2476e7a9ac4"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\bridge\\2026-05\\export_tight\\result.json",
+      "sha256": "3420187055844e88179f8d641eadbf422ad3c10dcb65107bae354059dae0f4d6"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\bridge\\2026-05\\import_tight\\result.json",
+      "sha256": "db9ec9426a50c4dfa3ffbc2c2cde385e05469ea4df7bbb74123c3b87a40df019"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\bridge\\2026-06\\export_tight\\result.json",
+      "sha256": "fe76a928dc2b5f8006a965d0dc9470e8a1cd023ada266953e8e5809fbc50ffd1"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\bridge\\2026-06\\import_tight\\result.json",
+      "sha256": "3f5ae2e647c23f61599d1bd628638ec9fd47d4bd555371e1e99e2f9bda3db1cf"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\bridge\\2026-07\\export_tight\\result.json",
+      "sha256": "e64d7b78ebe4113cb0df459f981d894c31c1e059552930d67f363a6bae188666"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\bridge\\2026-07\\import_tight\\result.json",
+      "sha256": "1283f881e43f26ff8c20b3bd0a7b8398837ccbe5088d8dd471dea15f59e45d8b"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\bridge\\2026-08\\export_tight\\result.json",
+      "sha256": "194903b3fa8e7963d2a866c479f1bdd9f34ea1b40dc25735e773e5dd83a3159e"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\bridge\\2026-08\\import_tight\\result.json",
+      "sha256": "d31decccc2fef350eaa41ab68c2504196643e9afdcb453922027e5f027060aaa"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\curves\\2025-09\\export_tight\\result.json",
+      "sha256": "5fba8d3823b20eecbf99d2f22ad2de7640195eee99691545b432dc95844e4cd0"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\curves\\2025-09\\import_tight\\result.json",
+      "sha256": "23af21081eaac97e10b352f0e9782e1299e85f11bace459530365d6429a380f4"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\curves\\2025-10\\export_tight\\result.json",
+      "sha256": "5466c72d03b6597ab43fb05b08fd3961f2709533314b00f6380cb47c465f1342"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\curves\\2025-10\\import_tight\\result.json",
+      "sha256": "b4b64c9061d198f4aacb79adc1868e0e5f1fd5d83876e8b00fd7f1324be4d587"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\curves\\2025-11\\export_tight\\result.json",
+      "sha256": "a45423020ba19b749a80dcf36d9d32b625a6af978998a2e829888fbfe4334b75"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\curves\\2025-11\\import_tight\\result.json",
+      "sha256": "564ef51e87c66e2c627dff9d9d9bb0f4e2b4dfa8b5ac471e6e7b8202b4176db8"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\curves\\2025-12\\export_tight\\result.json",
+      "sha256": "8766e65ba9652e2abd176094dd51410a5564ea66802527ce99e9bc06b001cec6"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\curves\\2025-12\\import_tight\\result.json",
+      "sha256": "a38cee25f8ba1cc9d1763d090569037edef721327ffb7e2b0c8f693de923f0c0"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\curves\\2026-01\\export_tight\\result.json",
+      "sha256": "20ee05c6710187373c9d95bb9cca74638907b0478c89505feac2283549672f66"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\curves\\2026-01\\import_tight\\result.json",
+      "sha256": "58ec98e43ad553cc1d591bc37c10c9aaf70be6fb1b3c27524abd3db9dfa98cb5"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\curves\\2026-02\\export_tight\\result.json",
+      "sha256": "b72cb0f3ba5d1ae8d9e22909dd36228132f8d30fcfa629d43c5bd9a9092d0470"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\curves\\2026-02\\import_tight\\result.json",
+      "sha256": "a53b2266e9d69b6efc2522c37d6c1ff66c710773eda90bceca5708609eec4fb1"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\curves\\2026-03\\export_tight\\result.json",
+      "sha256": "b2d64e77d3dd5ab61e46a6add5a5a40ec4112099ababa7e0725336fcf54fac5a"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\curves\\2026-03\\import_tight\\result.json",
+      "sha256": "698a485bd04e9458ab13293994d346d80b9e2923205f2d1b11dca7030076fc20"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\curves\\2026-04\\export_tight\\result.json",
+      "sha256": "787717e91e3d6a072e2121298692495dfd220fbab81d94780c9859d6c3f72c7c"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\curves\\2026-04\\import_tight\\result.json",
+      "sha256": "94feba41cadfe7a719f90c505d56fe2ad80a1bd0a40b95d274a22b15e800e2e0"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\curves\\2026-05\\export_tight\\result.json",
+      "sha256": "7f1746a90dfb30027f24c1f13f6a108d7bee6effb61970bd14656db8b0f23f66"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\curves\\2026-05\\import_tight\\result.json",
+      "sha256": "a66e23cc47ab0f26e9e9d1d4ed9932593d6042ab327b481ccebc33ab70f2b452"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\curves\\2026-06\\export_tight\\result.json",
+      "sha256": "325b0580b45572b3ce29341a9ae062064d8f8a7accc05cab5b357ab8aa15345d"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\curves\\2026-06\\import_tight\\result.json",
+      "sha256": "3421e9403531081a03e52e5601c18d125b3570307f61c42998f8ce21dcaf21ba"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\curves\\2026-07\\export_tight\\result.json",
+      "sha256": "60ed3ea03defe56d01199372fb3433da96c84e4f03ffbd933d95a74f77ee47f9"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\curves\\2026-07\\import_tight\\result.json",
+      "sha256": "67a290dc9a67e369a56524ce66f769fda8c006b80f3e33814f606c8751705245"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\curves\\2026-08\\export_tight\\result.json",
+      "sha256": "8ac266ec48bfc921c3c358722328870707b092bce202dc22fb8213a8f901b90e"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\curves\\2026-08\\import_tight\\result.json",
+      "sha256": "c9836db5c7be91c0ed8f32ae3d29650d2feaecfcdc57ac8714b74ec2dfd7867f"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\curves\\fixed\\export_tight\\result.json",
+      "sha256": "d59ac924f639521377d8a79caf121e67de151e414e64049251e554bba4272f31"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\curves\\fixed\\import_tight\\result.json",
+      "sha256": "90e49b738dabe8f9c298d8c0259bb34212e2bdf00e934f099422a0274c458120"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-09\\band0\\export\\result.json",
+      "sha256": "16d3f174a58319b43f9418d3ca71c6c76fde4f13587149bd12740ffa8047b5de"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-09\\band0\\export_tight\\result.json",
+      "sha256": "d25ac122f590411ebb97c7b18b671414e637fa4f82ad6b76ad7964a63f5f239b"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-09\\band0\\import\\result.json",
+      "sha256": "777a8025b630c8243fa6269c460d25346fc4efc0bd2637ed7cbba44cf4e8dc3e"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-09\\band0\\import_tight\\result.json",
+      "sha256": "ab2f3e618e3cc15943281b9b25d6281dacd3df0c80c30fcdbccdd08a4920298a"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-09\\band1\\export\\result.json",
+      "sha256": "dd2d3b5846b3642976873dc9de7a8338a974312d2bc1fc3d41e2de48c81f323d"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-09\\band1\\export_tight\\result.json",
+      "sha256": "2ac69ae494862e24ca7c1221322879d94a67f53a8432ab2dd7123d7e9e568bba"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-09\\band1\\import\\result.json",
+      "sha256": "d4ff3b7f934fd964388ba645855c370a0695a814703032e2d85d78bc50bdf6a1"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-09\\band1\\import_tight\\result.json",
+      "sha256": "a6f4190a8b3b97de38745cd1c83bb6b06c3f3dfa68c678333c3494dbd27e30eb"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-09\\band2\\export\\result.json",
+      "sha256": "722857189b78086c105b7086a54f1c16dfd9443b013f0734c62c688c4c4fec2e"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-09\\band2\\export_tight\\result.json",
+      "sha256": "715d26076a0ed6b353b17e3a3e8342f7489f601a4e4c8381f8df7d21885a4f28"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-09\\band2\\import\\result.json",
+      "sha256": "cd573276dddfadbc443d5b20d4d3960596e47819ede0d310dfc873dc28120fa6"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-09\\band2\\import_tight\\result.json",
+      "sha256": "6a89465f2419f7d7c8aee548b0addfabe25e717aa58ff69c6e4d5eb4af14c31d"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-09\\band3\\export\\result.json",
+      "sha256": "7386f70dbd9382872afb195d5684c66d9331778d0a68b6339e662fbf86ad0705"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-09\\band3\\export_tight\\result.json",
+      "sha256": "e8172057af938be59196b550aedb35b0d621e04fa8356bf7304d3d278e048317"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-09\\band3\\import\\result.json",
+      "sha256": "c28a180faba2ace41d6f83a56e87a6102defc1a9ccad28e0521b97f3a886387f"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-09\\band3\\import_tight\\result.json",
+      "sha256": "0e0cdad5b8eb9fce2cc7b6710d478834184d993a79c9b3eba56f516627c420ed"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-10\\band0\\export\\result.json",
+      "sha256": "922ecc96639618175991d027e921d69d77c98af1b96fb0ace87f2f2f86ecda05"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-10\\band0\\export_tight\\result.json",
+      "sha256": "af835acbb0b4035061dc289741bc822933ed632079b0b46e8340e69d0e91a006"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-10\\band0\\import\\result.json",
+      "sha256": "05234f223cb844429d03c6ee089feebf8d8e7dcf577f4e883ad5acecf573d1c3"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-10\\band0\\import_tight\\result.json",
+      "sha256": "c5814ecfd39e7297838bacb881ba4ee44f23833e1badba687d896f948aeed9a2"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-10\\band1\\export\\result.json",
+      "sha256": "3969c76f69741615059df62d3f35524addcdd799b5bdb1a9ccf905fea3e61e53"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-10\\band1\\export_tight\\result.json",
+      "sha256": "0b146c8b7f196399a49c19d316227e1b71037f55b6dc0d6695195f24f898e3d0"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-10\\band1\\import\\result.json",
+      "sha256": "eb7e6dedcee18558a08e3b74321502c0c1f55987647e14a62adcb53df2ce4da9"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-10\\band1\\import_tight\\result.json",
+      "sha256": "1d495c61a8eaa2ec5feda659661ef38fa65680f643897948c5cefaf19133337c"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-10\\band2\\export\\result.json",
+      "sha256": "af8005b6681194610c0addbe9ef27a6df3b50001ed5f29587ceded9d4e54415a"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-10\\band2\\export_tight\\result.json",
+      "sha256": "a9dd372d2d964c0ee34f9efeced5a96783487cbe39ebbae2b4b16e9f03228575"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-10\\band2\\import\\result.json",
+      "sha256": "e5dcec20df1f0ca2c4c8f5d6ef752fe62971845fa9d2567676e55d3c9e101a51"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-10\\band2\\import_tight\\result.json",
+      "sha256": "8b051bb3be630c6ea662c960144d5f1ae5104567583ca8678b075e3180b50f02"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-10\\band3\\export\\result.json",
+      "sha256": "3def7dffda4bd71ac2979443b470aa65114f8de04cdc517fa6a673ead16095de"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-10\\band3\\export_tight\\result.json",
+      "sha256": "c3b70d22b3151143736e13905eed738894c0a1742768faaea51602c45f539e9a"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-10\\band3\\import\\result.json",
+      "sha256": "26346dcf93f7f8dcd9b004e34ddef8e5383cd5e2a23cdcac336bafd01160c7f9"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-10\\band3\\import_tight\\result.json",
+      "sha256": "c604fcb40e643a792dc8b2f1ef114fffcf2679e570214a228453a8bb1739d3fe"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-11\\band0\\export\\result.json",
+      "sha256": "2fdf351ea86eba52c7fb18ac69880989c90188535ec5da75f695fb05c1d24c4f"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-11\\band0\\export_tight\\result.json",
+      "sha256": "f664c0dcfacb57688ad465ce96de894838337a26caba5e2ebcb0eea841e4914f"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-11\\band0\\import\\result.json",
+      "sha256": "26d67da49df473cd10f3e51d6bb84bce908d2cc1a823a4449c9b358e202cba6f"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-11\\band0\\import_tight\\result.json",
+      "sha256": "9733e9f56aa0c9247c46b5923180237c6d455c71204278066c51f6261adc3f03"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-11\\band1\\export\\result.json",
+      "sha256": "1e754f25331f888f5c30de63599a768fae2c714d4bbf427b76c9f271727236d7"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-11\\band1\\export_tight\\result.json",
+      "sha256": "0de1eb9e2b8c5bfbef8e44b0d2108c6591e3960098e2a80cd1ce22354206310d"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-11\\band1\\import\\result.json",
+      "sha256": "78a74625f3608461aaaf06d0b312498601aa75b6b445863ff091a7e57b742080"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-11\\band1\\import_tight\\result.json",
+      "sha256": "a9ba83866ea154a7ec84d64b4e1242af02c632dbfc9e9e204aba913949480292"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-11\\band2\\export\\result.json",
+      "sha256": "8c7e1c708b6418497d3543ab1b2ce37cb9f9f90013fd9ddc456c46c4f9c17e8b"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-11\\band2\\export_tight\\result.json",
+      "sha256": "3475a2e2fb01f4bb35abe568e667b76df22be1c3ec736c2758090850be500e53"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-11\\band2\\import\\result.json",
+      "sha256": "39d8752cc1df89f18ccc3e54eb23d8b5ef6de217432e4d501f09a0f8fa9a4640"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-11\\band2\\import_tight\\result.json",
+      "sha256": "a7c4d8369917b49ba237829db034856ecac1da90d36c9639680ea14317e6ad48"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-11\\band3\\export\\result.json",
+      "sha256": "93cc2c44c502bfb2d2b4cf3ddfe178daa8f38a5e6847175da3997121df860f6c"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-11\\band3\\export_tight\\result.json",
+      "sha256": "338e41fd4064e29ab98a658f1e777a38769be73384b356ac16c39da9a6e0eba0"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-11\\band3\\import\\result.json",
+      "sha256": "ab14a7d5a7f1b6301e071d7fa3b467ba04b0127d1ef764c5ddc580caec070958"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-11\\band3\\import_tight\\result.json",
+      "sha256": "08331837bf32bee540269513cf9a7390e89f9caa242c7c68f6649f1980ccfb0f"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-12\\band0\\export\\result.json",
+      "sha256": "78c482661dd1491b79bc98bf8f710e4f1dc44f140504a9e5d662b6ec963aba2b"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-12\\band0\\export_tight\\result.json",
+      "sha256": "073186fbc834ad11466a28c353ec2abf6f977c89fc94c450dd7010763f5cada5"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-12\\band0\\import\\result.json",
+      "sha256": "e1449b034aae6c19d61427a2d47d17b8cfcef4d681e1b92b6e0e7ee7d5037013"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-12\\band0\\import_tight\\result.json",
+      "sha256": "2425676bc2960698ef58c307a571f348805a67472d616842455b88423d57a170"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-12\\band1\\export\\result.json",
+      "sha256": "faa2a8f2b739350bcf56addfc0aa482d9ed20dd606bafdc245d05acdb9ef09a1"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-12\\band1\\export_tight\\result.json",
+      "sha256": "c868d88fc23d230400dd15d010b67bac9c7bf46b69d91b0ff5a4c10e5404aa49"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-12\\band1\\import\\result.json",
+      "sha256": "286fbbaa41b642ae8935a7c6ac73395a7b5ba52d91c0a478d0d4242c0e48fd92"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-12\\band1\\import_tight\\result.json",
+      "sha256": "0f4ddc0ec819f822637a4ab0656314f3ab621a64e110e742c7ec4fdb9525085f"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-12\\band2\\export\\result.json",
+      "sha256": "09d92913de3797f2ead949d04b3c310bc7cd66c8b8a00bfa0e6188bbef7db73f"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-12\\band2\\export_tight\\result.json",
+      "sha256": "dd2dc4490f8882538d678213a6fc0d5ca5323f392145762a432a7a8e8814f1a2"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-12\\band2\\import\\result.json",
+      "sha256": "6802c326bbe45d8f221b2a2539c86f4268f57ca3f0f1209b117aa84225bab739"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-12\\band2\\import_tight\\result.json",
+      "sha256": "78e7602834a91e4e36ebe30c660b631eed9c2d8c9a84f12f2897b08b0c30cbc2"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-12\\band3\\export\\result.json",
+      "sha256": "0cc144d9646a3a29aa6d659498df8ef5945cf645fac37b755abfff27ef02d02d"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-12\\band3\\export_tight\\result.json",
+      "sha256": "ab6030e0bb6b27538cf98fb93d08d712e259df209b0680b1671afc84a73c7fdb"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-12\\band3\\import\\result.json",
+      "sha256": "737fc140bd3ee25e267ab05b2806505ea46bcaa82e75f0b701a426912e2f2271"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2025-12\\band3\\import_tight\\result.json",
+      "sha256": "98d87f9596ecf9e61e48bfbe81f5d4d3944b897909d5dcfb51e0fe8582d92401"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-01\\band0\\export\\result.json",
+      "sha256": "2f843a5920972b8867457ff13bf2461660f80ab50ba0b9ef5ca8be368a3011db"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-01\\band0\\export_tight\\result.json",
+      "sha256": "fe0ad08ddf0abc274189e075e330a3b9d223e45cc75601fd9b4184abe347219a"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-01\\band0\\import\\result.json",
+      "sha256": "fbea6a8588101446024e92944fcda309d816db884e6183f793aff20603e059ff"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-01\\band0\\import_tight\\result.json",
+      "sha256": "e4aad35bc3ef13d66c19c9dd3b705679a3fda2914d7f33fb1a99d748975b13fb"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-01\\band1\\export\\result.json",
+      "sha256": "920c08f851619b6a7ead7807849b08d83ffba6ccc23bba5c87e27dbe84cb4d10"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-01\\band1\\export_tight\\result.json",
+      "sha256": "28babd34fb64c591cc8fb20fac40b9ce64c0f8b40de9169361e986c036e850b3"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-01\\band1\\import\\result.json",
+      "sha256": "bdfd9dceeea48ccbbfdaf9f6e6545a1f6e6f45c49df7a4f82df0f0048337cbe8"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-01\\band1\\import_tight\\result.json",
+      "sha256": "5a6b77c2ecebfab34454648627a59de7bed7189ebde28fa7e280bd4b422425cf"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-01\\band2\\export\\result.json",
+      "sha256": "b3057198693b632e338f151fc401d26ae39fe21ab4376af7f3eff6b48c50d829"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-01\\band2\\export_tight\\result.json",
+      "sha256": "280cf5f01fcc109106e59952ecd4dfcc8a4c4206c567974798c190968f423d5e"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-01\\band2\\import\\result.json",
+      "sha256": "49c0179475ce52f740dd465cc3271ace3fcf4b092be853b0db08b39d673b0a90"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-01\\band2\\import_tight\\result.json",
+      "sha256": "41c938aefb20c1b0cfce591b8630ad9f1e2ff2e82a7d12ca6d8da7f9566ac3e3"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-01\\band3\\export\\result.json",
+      "sha256": "4a5cfc4bf42a587e5650364b735e00f2c177c23120e5fafc130d3e9295dde522"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-01\\band3\\export_tight\\result.json",
+      "sha256": "7069896fb2f35a9214af73a2880c975277cae15d02d1a4c5402f435c9cdd8047"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-01\\band3\\import\\result.json",
+      "sha256": "883ae2ed7b11ac5eafd42dcea54c003ffdf2d792408fefcce661dd402a54bd11"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-01\\band3\\import_tight\\result.json",
+      "sha256": "273da8b6616d9ebee0eaabb17633a859e8c41e4e502de6b19625313d357585e8"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-02\\band0\\export\\result.json",
+      "sha256": "2f66d0ab80a73e0d135d52a94a3bc2aa17dc25864544a0c6f3efbba77263fc66"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-02\\band0\\export_tight\\result.json",
+      "sha256": "0e0fd3edcd685506d45eaa437dc929e8f7db71aee2e9e26ebe9fa8ce58a52694"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-02\\band0\\import\\result.json",
+      "sha256": "5ec38978dc73262c568ba3acacc23798ccdacf97381134b5b2cdc3331473ed7f"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-02\\band0\\import_tight\\result.json",
+      "sha256": "4665004a3ee8b7aa72dec983b3b7e9cef56e5047f80fac29c94a13904aed7ebe"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-02\\band1\\export\\result.json",
+      "sha256": "5e147815471ed0415e4aa8dbd2b8495d11682c02b38645d27e713a53a0563baa"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-02\\band1\\export_tight\\result.json",
+      "sha256": "aefaa56b4cfdec627a6765baf24f1c76f73f5be53632ba0c2a6fec36bc39ef7b"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-02\\band1\\import\\result.json",
+      "sha256": "4a6280477df3031eadd203b7a3183846e6998140daaebcd5e34553662f0db790"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-02\\band1\\import_tight\\result.json",
+      "sha256": "8563de2ac66dcdcc4c1cb58dd90b53ad90e59ac0ca7ee65094f3b1d067795f99"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-02\\band2\\export\\result.json",
+      "sha256": "94669de43306d75b8ef2fcec08086b86d663107acf20443272b07973431178e7"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-02\\band2\\export_tight\\result.json",
+      "sha256": "d30e46316732b26d8e6b38be4550546f122853767cda9ff31ee6ff5c1017bd3b"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-02\\band2\\import\\result.json",
+      "sha256": "cf2d6b29f16fb3a118070313b1ff24cfa85efc5e14a5ec3b633564ba7571852d"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-02\\band2\\import_tight\\result.json",
+      "sha256": "57a58050b956147244429665bab3aac48ae8a22b1ed1d27ccdaf5a52b316dbb3"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-02\\band3\\export\\result.json",
+      "sha256": "f54be283638ec369cf9aaef52fcc95f6e93f9f4c2f51ab47b9e90c128b3b7382"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-02\\band3\\export_tight\\result.json",
+      "sha256": "cb30fe1587ed0781c28e7afd7e5c7f9a35b79073e15d7cdbcd4fb5107f3d257c"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-02\\band3\\import\\result.json",
+      "sha256": "5dda750f9b6c2c1787521f18ce08279259876299d8dab21b399a2966517bd242"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-02\\band3\\import_tight\\result.json",
+      "sha256": "43dd51be45578400f4d0329cdd83e4bd18f0401d5b7f58910d36bb7c4fd93fd5"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-03\\band0\\export\\result.json",
+      "sha256": "686186e028dd72b2db35a987073777afc2e6f48cbfaaa47295973f42e0d85c6a"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-03\\band0\\export_tight\\result.json",
+      "sha256": "5d77b819ec43f5398db45719e22f7cd4fe84297a216b84e7c291bf2ecf6e667d"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-03\\band0\\import\\result.json",
+      "sha256": "f1a5eb4081fcaf9246feecd0203f38a0b07e69d38a5d175812da52242d062d43"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-03\\band0\\import_tight\\result.json",
+      "sha256": "24ad12288a18953100027d523e0ed7180b00fa49e5a09576a2f0e3aea11d740e"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-03\\band1\\export\\result.json",
+      "sha256": "bb9205e7bc30b53cd4dad849359e239a7b42080e1722b932ef8f538bdaf5668d"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-03\\band1\\export_tight\\result.json",
+      "sha256": "63f0e5e574832b6cee6d86949e6bcb2da2d4f7b8da79412a2b8a6c45c3c9e486"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-03\\band1\\import\\result.json",
+      "sha256": "a63f6485ec1b87e6cd0742a5353560e393c5caca5b5da005ee77c31b57e5c0d2"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-03\\band1\\import_tight\\result.json",
+      "sha256": "b74ef40c5031270ae60dff25878dc550bdea652ccae6000275f259bc6cefe458"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-03\\band2\\export\\result.json",
+      "sha256": "ddb2b4235303b983c843d5a6a27e04df266fb9e9cc762fa13c209d6c60f16762"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-03\\band2\\export_tight\\result.json",
+      "sha256": "eb32f8cbc519a4715a2cf0b9d8c1666431f06f5795c6449295ecabbe142cce4d"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-03\\band2\\import\\result.json",
+      "sha256": "c00a0f2af9d8c45a4e0c8c17f7d959857886d19969a7c6ec5bb02d335f4ed38a"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-03\\band2\\import_tight\\result.json",
+      "sha256": "e3a05afb3a8fcc0ca0ff4caa55bbc16092e3d27c8e83bfbc10712429fed67483"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-03\\band3\\export\\result.json",
+      "sha256": "693589681738035e1c915d06465455c6bc717839e703a308a3bbdf58363bd08b"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-03\\band3\\export_tight\\result.json",
+      "sha256": "f7a7f5e65839175e2605107256ecdaabb0898424a5a731eed9c363e5075aa27d"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-03\\band3\\import\\result.json",
+      "sha256": "eea104a3157ceeb0a213bc0a803bfe5b0554e1668cd4e5cf01edd782ebd7be96"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-03\\band3\\import_tight\\result.json",
+      "sha256": "4a30504a3e3317c78dbe7b6f85f104d1e3247d528fc132a9d948e18bc8bc3bdc"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-04\\band0\\export\\result.json",
+      "sha256": "2ab5ce6cef6ec4c7d7ed08c19f6fe1812c90604ba87950cb709529562a0bbdb4"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-04\\band0\\export_tight\\result.json",
+      "sha256": "de46f408027146a85b70adb3bb126b7c6e9a8dc03636e508c8c2e76823fcb237"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-04\\band0\\import\\result.json",
+      "sha256": "b884458a52bbb6cf9578f98f987e728ccc302bd274529b7b673b3c6e3835530e"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-04\\band0\\import_tight\\result.json",
+      "sha256": "ddf04ab47ef43dcf33f6861ba68c0a6df9f5e961214f919546f05de17df725b1"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-04\\band1\\export\\result.json",
+      "sha256": "9cb3aa8703a560adec69ca3cc10b8af0a9efbcd94c1d6ecc9bf2286c3591d789"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-04\\band1\\export_tight\\result.json",
+      "sha256": "738f8c1eee161b8548fcbe5b9763cd6e97f9bc948bebe5fb5f267162617056f4"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-04\\band1\\import\\result.json",
+      "sha256": "1b6ba69851e8c0c6782bcb5c3822ca22befd8b2490dabe7ee718b37956830ab0"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-04\\band1\\import_tight\\result.json",
+      "sha256": "49a35ab81ce5558b461e6c8e110cc2a36c8370598f2e1f4453e21cbe6f7b64cd"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-04\\band2\\export\\result.json",
+      "sha256": "11a30867d7d2d369e1741f053227d426e3cd045e2557c42a9b0df4797ad97bf5"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-04\\band2\\export_tight\\result.json",
+      "sha256": "af485c2f16c56bb44a495dd92cebd8c9b11bf8491a556827413b5b06a7279ffa"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-04\\band2\\import\\result.json",
+      "sha256": "49d8827c55b6ca06e4cc040909419b0971cc74fc0f9b7491d8c646158bd451d2"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-04\\band2\\import_tight\\result.json",
+      "sha256": "8a151c134a512e96bf95e106ba6bd3e992b6c6961f4a54916983a7bf19574583"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-04\\band3\\export\\result.json",
+      "sha256": "79476416e399179f49461aac9ea5964eed5d2aa233364bae339e6d4d37496324"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-04\\band3\\export_tight\\result.json",
+      "sha256": "15b732ccd11bade4040f5b8c30e1791abbd71ab9ad3eaf166d2e98a955825318"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-04\\band3\\import\\result.json",
+      "sha256": "6f19c9638e69b3187ea077b86d6adf505a13072518c09b36851446d116dcd272"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-04\\band3\\import_tight\\result.json",
+      "sha256": "2e9ad14b3b699d0eada27ea1ce1fa05642dfadc8f0beba0a463aed7d017c0a19"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-05\\band0\\export\\result.json",
+      "sha256": "b54b1700dabc32b52bfe44e4f91e34776b20cb4517ab1211a41b250d1c5018cc"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-05\\band0\\export_tight\\result.json",
+      "sha256": "11bf8f723826c3a6fb9cbc1ee03d55196607d5d8d54b77190ea95fd3408a8cb3"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-05\\band0\\import\\result.json",
+      "sha256": "e13807e97ad016f9ba2fe5a4528e067ec1a8446415ec96b12e4926a12f6130d8"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-05\\band0\\import_tight\\result.json",
+      "sha256": "913b7baf7052bc4387433e41e590ab5e037951340eae966eea2a1ba2ba3f53fc"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-05\\band1\\export\\result.json",
+      "sha256": "bc65a21f08c654797256fea8c97aaf6716e547bd20ce8cef3e1683fcbe8c678e"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-05\\band1\\export_tight\\result.json",
+      "sha256": "6ef35c8da0d7f5102719f88ac3176ea30b42f3483d535e13b16095582ba2447b"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-05\\band1\\import\\result.json",
+      "sha256": "836cc3f5e3780ebb5112f782e21d18dbe059436afb0dc9e1296d63a42bb8219b"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-05\\band1\\import_tight\\result.json",
+      "sha256": "af6cc91c5c11bc21d435af78b51ad9943f8f6e919dd9bcab5b6adbe595212708"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-05\\band2\\export\\result.json",
+      "sha256": "56a9d2b4c196f91362f9f6c2e9860ef6aaa0fc93f32ef33aa49a5d8bbc9e344a"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-05\\band2\\export_tight\\result.json",
+      "sha256": "0cdfacddabe6b28ba66a007fe2cab6360d73c00af484ed89876955b6dd25a812"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-05\\band2\\import\\result.json",
+      "sha256": "cddf2ed75347bff7cfe6a165c0a31364559cefa579a315146475efdf8fb55d40"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-05\\band2\\import_tight\\result.json",
+      "sha256": "43b4bd45b0a26d17b6f8649333c986bbbc8ec7b16138b60ba73e8b7a243a0ce4"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-05\\band3\\export\\result.json",
+      "sha256": "2f87082fde55d774b26ea34b8233a9a900b113b05305dd04dc65e01630578f56"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-05\\band3\\export_tight\\result.json",
+      "sha256": "7bd13c745e96a3246fdb60895c4d8a5e0bdbe9de294f75f5d3c2c5061218caa1"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-05\\band3\\import\\result.json",
+      "sha256": "61dea2b0e613d94b2e1d8395869d83db25f9c7a3afe8cdaebe0c21e7f6c0b723"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-05\\band3\\import_tight\\result.json",
+      "sha256": "0e19aba0f75ada20150b97f94599dc50e0018138014f762324d8dbcc82f918a2"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-06\\band0\\export\\result.json",
+      "sha256": "32e790b50ae42bec3a88529d43e22f08cbccb2099cf5a983c0ce2df17469cd82"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-06\\band0\\export_tight\\result.json",
+      "sha256": "d2c4086d27b89df7daa974c9f567b468889ddbf304cb6f9efe56aad7e8b611f6"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-06\\band0\\import\\result.json",
+      "sha256": "c3d5328e341026407379424768f08ac12679fc6170d2e4881de3e82174747356"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-06\\band0\\import_tight\\result.json",
+      "sha256": "7648ff5fcfcc70f6f34b8c03602c0561f3341d137c37386ffbb82c934282ffd7"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-06\\band1\\export\\result.json",
+      "sha256": "a4d8c47c54171928c82ef0933129b4d6df2f4f150b8f2b72e2271c83609e2fc6"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-06\\band1\\export_tight\\result.json",
+      "sha256": "d6440bfae4c406d6d44c9846dae5f0188affe9a0a1a6ef79d8ec1e4ab042a8bd"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-06\\band1\\import\\result.json",
+      "sha256": "b989a574c3489830f5ba2f3918c2ad058fa5597512b42d46184264d30ac160b3"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-06\\band1\\import_tight\\result.json",
+      "sha256": "242efc45394c0f22519f51e3c00e306402fe6cf07fc1d28cf74374ab726866c9"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-06\\band2\\export\\result.json",
+      "sha256": "4996674042d92cb8aef32c1aa775c6aa5d47fbb6f167d8df3343c90dc5b24a5f"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-06\\band2\\export_tight\\result.json",
+      "sha256": "7e4d8d5d3131ea3b11c963b6c330916b73c7bab890a4df5b4913134e1ebddfd8"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-06\\band2\\import\\result.json",
+      "sha256": "bec66c5a173bbaf478983141c57304e54e6211b6ff23945682d7557def5d3f17"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-06\\band2\\import_tight\\result.json",
+      "sha256": "77364802417161b4a6f560e85b8e92b7426d970b1555d3af6c3b981be9d75a90"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-06\\band3\\export\\result.json",
+      "sha256": "86b79129c437dc67587d3853cf5d2ac820f321cccba8b6c7143bf90daf5d0200"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-06\\band3\\export_tight\\result.json",
+      "sha256": "4a440750002af84c67af6f60b4d420a125f0e754d4d91d9cd9fe3c060562b923"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-06\\band3\\import\\result.json",
+      "sha256": "7094a9f7787ca56e384418019b84b1ca646ae75689e18b74cb41aadbd99cff82"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-06\\band3\\import_tight\\result.json",
+      "sha256": "d01186aec61ad28b2c7715ace6c829bbe5c7c3f88ba91091a70cd08488a7d20e"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-07\\band0\\export\\result.json",
+      "sha256": "3614253b79ea262f311399e73e0418d886121deabfc367cf2bca1e30c224a45f"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-07\\band0\\export_tight\\result.json",
+      "sha256": "959cd060a2e902e87b64f21995cdbe0bcdcfdde07e6df82f34f81e565db21f10"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-07\\band0\\import\\result.json",
+      "sha256": "70e857a1eea407f36ee27bf060e558c88d043b8ca405f8e81512afba52ad2d39"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-07\\band0\\import_tight\\result.json",
+      "sha256": "1f2c293b86ebac83c1e318b6e60574298ddea1c5f5723e789ffe8c4149300b25"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-07\\band1\\export\\result.json",
+      "sha256": "21eb10164582fb4ba13225a2eb01991788fb578a49829dbf8c4b3650ea564702"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-07\\band1\\export_tight\\result.json",
+      "sha256": "c186c67acd1ba120e874fa8183cb0562487ed04baa60fc5f627bf4b1e21389ab"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-07\\band1\\import\\result.json",
+      "sha256": "66b8323498c15b94c678beb676fdb6cb1dbd6f6ca003d19197335e478c88de11"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-07\\band1\\import_tight\\result.json",
+      "sha256": "1c32c1127522b453a3d48a3d91ea40bca0efc9be03327336117f926343387a21"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-07\\band2\\export\\result.json",
+      "sha256": "c50dec80f406f446466b657ff2af78a9e80015531a0e4f2c3ac11aa6a0343b6e"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-07\\band2\\export_tight\\result.json",
+      "sha256": "86eaa47bc6020e71ae0fee94dd633aa5c20f92ea04e6deb2ad0807db0413da38"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-07\\band2\\import\\result.json",
+      "sha256": "d8266e29dc268df3d37a3337f0a1bbc4b1d820004c0f7510b8eac0c0e21fd1b2"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-07\\band2\\import_tight\\result.json",
+      "sha256": "c28f36362f3390b45b0a1ec235e1a8c3ee46c3a0c9c819619229a43a829effc1"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-07\\band3\\export\\result.json",
+      "sha256": "a12a011b7a95f31689bbcaee54788986961eb3626d437753927c872fb97f163b"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-07\\band3\\export_tight\\result.json",
+      "sha256": "ad19a262d3370f4b09ffba998c7cb709a94ecdb594ce0194ece864cfa3e6dff8"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-07\\band3\\import\\result.json",
+      "sha256": "691e9dd9ec0ce1cff3ff074a03ea0d1e9411dd4e677320c36aa64e133ef5b9b2"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-07\\band3\\import_tight\\result.json",
+      "sha256": "acc2ce16f21482a0566c4f2c4c934270ab4c7f5e0924785118c98d8c6c9ffa47"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-08\\band0\\export\\result.json",
+      "sha256": "98fe864ed9dbd700ac990806223896f72a83a010708182a9caa2611e0576e5c3"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-08\\band0\\export_tight\\result.json",
+      "sha256": "80c9d212a675a49c89ce4f2bfb840eea1addc97ba80ecd4eb185ba038a35b4b0"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-08\\band0\\import\\result.json",
+      "sha256": "f39d04110b786cae96e2b3936e8835ee39b69f4d8e254e46557d099d0dbce5d0"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-08\\band0\\import_tight\\result.json",
+      "sha256": "a30a3921b31a75bff4fbb62ac8edb874ddd733cdeae7b6e2ff57545a9b0746fa"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-08\\band1\\export\\result.json",
+      "sha256": "8e5124ae6469ff912c405c6e28109d7b52caae40008156b30bdca5f66ecb6578"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-08\\band1\\export_tight\\result.json",
+      "sha256": "2ddc7c0b2e6991b597507d737d8478496b7c8768558d8abcf1b9045f4ba14a9c"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-08\\band1\\import\\result.json",
+      "sha256": "67ed36fcecc14f108354570ecf0df05b6c72cc7e7d50e6756140ce25875e0979"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-08\\band1\\import_tight\\result.json",
+      "sha256": "5be5c9e7c975678d00303fdb423e15234db1dfb09d7605219071cf4073a08991"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-08\\band2\\export\\result.json",
+      "sha256": "454807c84dd63c9c66f8110677c1fe5e2c52103df50bc9cf9b2f1f6b0c83b45d"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-08\\band2\\export_tight\\result.json",
+      "sha256": "69cd2ee7cefd8ae074fb373e1c52b0920a6ca591bca45f4a807f04200df49851"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-08\\band2\\import\\result.json",
+      "sha256": "0f991021d074e38bb496efc55b473d7face564724c777cbbb970b09e29787c00"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-08\\band2\\import_tight\\result.json",
+      "sha256": "27a29fcd2c453b3e7a05d930c0934d6a29966f09e898ac14e4e4c012a61317f8"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-08\\band3\\export\\result.json",
+      "sha256": "64d003cb57eb4d519937a9832d4a74e6d984bf9e2878b2b9271dc38669f02c0c"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-08\\band3\\export_tight\\result.json",
+      "sha256": "d3b9d22b7942bbab0c886967314ba0190d71bd3bc6d4d3037ce03c11832a3201"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-08\\band3\\import\\result.json",
+      "sha256": "057c09e3ac9454cb10230444fbb4606685efb898d3ad8af6ce03d1428012eddf"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\2026-08\\band3\\import_tight\\result.json",
+      "sha256": "a4c8076d1a0905c28c0aa7956a4b32d9ed392157ccf2fec7225155f982e8c45d"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\fixed\\band0\\export\\result.json",
+      "sha256": "f97d9180f83214819810e0ac13e8996677cf4cf48796e769468eeee59bd24353"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\fixed\\band0\\export_tight\\result.json",
+      "sha256": "74c4171436ce7b7fbe4030766f6a925e33be405dc51595abae607908a2cb3592"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\fixed\\band0\\import\\result.json",
+      "sha256": "ecf94659e8f62886881dff969c8e701217c9e9076819d36ee6b5f4a44c9bcd09"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\fixed\\band0\\import_tight\\result.json",
+      "sha256": "acba427affc9757857a30d698406ced1fe7d1d999eb240ed2cc283451c8b3cda"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\fixed\\band1\\export\\result.json",
+      "sha256": "5f2ca9a9df3179b423d824a5842406442b2810f1bcc3a7bc4aec597ee3f012ab"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\fixed\\band1\\export_tight\\result.json",
+      "sha256": "ed034f4b6f8e28352d13add8c20d2966b221a0a4ad61a1f0acd2de68772b6c01"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\fixed\\band1\\import\\result.json",
+      "sha256": "962dd545b13fb9b83ec5db6d7ad48bf5148fae446b648437db05f67a294e949b"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\fixed\\band1\\import_tight\\result.json",
+      "sha256": "060b592d78ff4c694e9821004217d4eda35b7944219f77e10ad6efc3a6b9cffa"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\fixed\\band2\\export\\result.json",
+      "sha256": "ce75a02a2607c16b17ea4dea0c65db9268911338e864faff9625904ccef03e33"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\fixed\\band2\\export_tight\\result.json",
+      "sha256": "aa8d23c580152e5e1acdfd27b134e66711ef59d9d9d1ea65284698099af0df6f"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\fixed\\band2\\import\\result.json",
+      "sha256": "9ea85af8fbe836deee022e423a7cb0adbf1250501222a6b99ca470203f74f00f"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\fixed\\band2\\import_tight\\result.json",
+      "sha256": "7c635e46d44f8c9280a7fbb8a0687bf644e81cfd5b04c8ba1b3da6850d7a9558"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\fixed\\band3\\export\\result.json",
+      "sha256": "e8715b3a05270ee74420a233331194f552fa2361772c8a0cfebcff0b07598a18"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\fixed\\band3\\export_tight\\result.json",
+      "sha256": "8fcabc221b85865d88a8fb0801ccfa7c251807d7e84f5365960da62b8242ed6e"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\fixed\\band3\\import\\result.json",
+      "sha256": "399496c92eaefd73690f52cad8c38d9bce059d0e9c76bbda58c866d9431a3fa6"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\diurnal\\fixed\\band3\\import_tight\\result.json",
+      "sha256": "3e9454a87f8f407ab70d412c52960c8c66eeebd2188338707d8e02832b834f3c"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\final\\band0\\export\\manifest.json",
+      "sha256": "3f71b5dfedd8d18539ef1897aba834a08dec5cf1dae328f3685328fbc39f8eae"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\final\\band0\\export_tight\\manifest.json",
+      "sha256": "fc6a70de0117927374f9509790d7e7549d422246880b5773441476f7912fd052"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\final\\band0\\import\\manifest.json",
+      "sha256": "d695410417a96f90e6d2acc80a71b18b0f16d11c9a8a4d4ba66aa5506b5a3edf"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\final\\band0\\import_tight\\manifest.json",
+      "sha256": "a8d389fdc37d423eec0f1fe70081d74639440d8b0ec582e83aa7d590a89072b6"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\final\\band1\\export\\manifest.json",
+      "sha256": "a657f82204602c7f9dcf6be9d13cde46403b430b149dbd8632993a5b6e7d7c12"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\final\\band1\\export_tight\\manifest.json",
+      "sha256": "a5e048f5e8e54dacb9297330594adeba25af3ff289c974feffe75b83d2672f78"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\final\\band1\\import\\manifest.json",
+      "sha256": "c9df8679c96ab5e7e5e6298f1e44b87d197f6895114c139621b23478d7dc34c2"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\final\\band1\\import_tight\\manifest.json",
+      "sha256": "9d24bf456ab072f3643d51b8ef563ed14153fe0bec82b78a26906f1fbcef758d"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\final\\band2\\export\\manifest.json",
+      "sha256": "483ff13a6c64fb1a6b0a276375be055a43dfee1ab78f0b50831cc6dd54494de8"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\final\\band2\\export_tight\\manifest.json",
+      "sha256": "76e55ca075dae63412bb3ca8f4f2ce60e2818184b3b1ec414ab0a32ac9c381f5"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\final\\band2\\import\\manifest.json",
+      "sha256": "647c3beb710188e19732cdfaabef20bb378d39e15755d1b9753e58b03e7b57ab"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\final\\band2\\import_tight\\manifest.json",
+      "sha256": "c5a49d0fbf08317470df42969b3afcbe77d49047fb8eac6f1a2e826fb85525ea"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\final\\band3\\export\\manifest.json",
+      "sha256": "2830d3087f41b5f14de15c6072e7d5a83041f4b5fb61927aa292aaaacb4a9552"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\final\\band3\\export_tight\\manifest.json",
+      "sha256": "5467691a4de6a5863fd8b87323ec022b9bb0e5d8d244a02e2991de910b198fba"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\final\\band3\\import\\manifest.json",
+      "sha256": "43d7720d3d9c6b05c2068ac1584c7207f30b590180c574343c2db2e77bf02b75"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\final\\band3\\import_tight\\manifest.json",
+      "sha256": "32e3ea473b40f2ea92107ebdd745c2c4c114baa2cc6a205a764538518caa6c40"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\nos\\coverage_audit.json",
+      "sha256": "6f911ffd4453cb0563ccb1021fee731881ca27b69c6ca25ace81c88510325d4a"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\nos\\impact\\full_development\\status.json",
+      "sha256": "0ee7f6c8982ad6b4be103c80cf35f79e3ce35d87bdc439a7134754c75d34c4cb"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\nos\\mapping_audit.json",
+      "sha256": "585f2c66de91de755af522481466e6bc6ac28b7f477b7a030651f2f10ee71019"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\nos\\nos_feasibility.json",
+      "sha256": "87d22ac141966ceb9984d490de593b6ce24524ec4958a433ec4d50f5b490e6e6"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\nos_models\\2026-03\\export_tight\\result.json",
+      "sha256": "7e903f5726ff4c159c275b02fd98d3d627fd5019c97344e2037acc75191cc69f"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\nos_models\\2026-03\\import_tight\\result.json",
+      "sha256": "7e3e5f406559c036db1d1991cc495e1135cc49965ae5e697826e73fe8a5247e7"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\nos_models\\2026-04\\export_tight\\result.json",
+      "sha256": "15d641281497711f76f9b30350b30b2570b792372a0125ca4a1ad84a87886130"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\nos_models\\2026-04\\import_tight\\result.json",
+      "sha256": "da98516b97585a6f0db296dca45aee26106cb94e61f1542674aebfd3b95ed0a5"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\nos_models\\2026-05\\export_tight\\result.json",
+      "sha256": "0dac0f9c316a4786bd5df50a3606b84c44c08b3627d586765ee3ab59d2569a7e"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\nos_models\\2026-05\\import_tight\\result.json",
+      "sha256": "c99811a11a715cbe19cc9efd391177e1d4c7b82298a89355af27cab454141721"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\nos_models\\2026-06\\export_tight\\result.json",
+      "sha256": "bf8b7e50a56880d69bc6e12e2052038edeb781f73e1ae940f5fa897c4861481f"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\nos_models\\2026-06\\import_tight\\result.json",
+      "sha256": "6ace50209314eaab9d423eb20c02f86f921183b4628dfe8a134c692babc18fb6"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\nos_models\\2026-07\\export_tight\\result.json",
+      "sha256": "86baec17fac1ff36f9428a7069f7f999583775e5f65e0f092a253abf5e57b9cf"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\nos_models\\2026-07\\import_tight\\result.json",
+      "sha256": "8fd359e9a41d5380fe5ef9195fca7529b55f0a80f61c35c5bc1d41dad99fa954"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\nos_models\\2026-08\\export_tight\\result.json",
+      "sha256": "d608e31a3a24944fb2a3f9eb44ceae18952aecb9ded4788bee7c0b4a863c9f01"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\nos_models\\2026-08\\import_tight\\result.json",
+      "sha256": "e51fd1e9b04a7c475c07c5d2209bf7d157cdab87e7c61de434243e71c66d5d56"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\nos_risk\\2026-03\\result.json",
+      "sha256": "ffffb38c95b6890cae6ffafcac411753b80459af134a0db510a33b5125d1862f"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\nos_risk\\2026-04\\result.json",
+      "sha256": "8303614527825e25465c8b7079716be3b2ac7de35e4949fa3ee71aecfa4ae860"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\nos_risk\\2026-05\\result.json",
+      "sha256": "5f99ef62b1bb4fe88c41c0cc13d07a3ba2cd427ce64988dbfae90ab11d8010f0"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\nos_risk\\2026-06\\result.json",
+      "sha256": "20153d4f2e3e8bdf315cf731a6b674cbf7f61af6093d33b8534492bbd3850f08"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\nos_risk\\2026-07\\result.json",
+      "sha256": "ce1db4e9066a30aa0843574f80bac6aaa6eb525d25756b2aadbb731fee984f46"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\nos_risk\\2026-08\\result.json",
+      "sha256": "7b38452418b57d8b0266ccb0f4ac0a010eb988c84e7f4354f447c09b4a280c43"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\refinements\\2026-03\\export_tight\\result.json",
+      "sha256": "5257e6d38deeb4ce33590f8964f3dcda71e5c27853823afd9a92cc6a195e88d4"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\refinements\\2026-03\\import_tight\\result.json",
+      "sha256": "d2bfe3577c7d69f5e8c822c7d328df8697cd0d9822cf19ae7c7fb23cd4ebc217"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\refinements\\2026-04\\export_tight\\result.json",
+      "sha256": "5cf2ac1f478a694c1197d114798792091fc66d42dadd6db01fcb0e6a5427a29e"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\refinements\\2026-04\\import_tight\\result.json",
+      "sha256": "b52cdd21d10a37546d1c0224b149d3526bf1b5d33bc88a7c67ef367aa9579393"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\refinements\\2026-05\\export_tight\\result.json",
+      "sha256": "ce62b8876eef9743845c90c689ebdf7cb86a81f6a5d8c5a50f248c31a3f8d058"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\refinements\\2026-05\\import_tight\\result.json",
+      "sha256": "694e15a8f8b2286927756a26afebb02a0b3528afbe49fad5e153f50a6365e36f"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\refinements\\2026-06\\export_tight\\result.json",
+      "sha256": "d5fd0801ce89083d297b36f880fc585cfcf4c097cd52dcdcdd1f29c90db7b392"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\refinements\\2026-06\\import_tight\\result.json",
+      "sha256": "e5119fafdbb667d5d68223e2907a94578093f3a2dd923e7cd2b7dc99cd397409"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\refinements\\2026-07\\export_tight\\result.json",
+      "sha256": "fad95444c222cc8aec64ce40b875aad385f08b045d6503c9abefde0e86b2bdc6"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\refinements\\2026-07\\import_tight\\result.json",
+      "sha256": "b1d90dde1e909c6334a1e223fbeb81e9a3e4abd7822ff39e2fb3b85913269212"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\refinements\\2026-08\\export_tight\\result.json",
+      "sha256": "087b89dfa4efa62a5f1c8b16170f87e761453709a978b522e5eaa3d9b49818ba"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\refinements\\2026-08\\import_tight\\result.json",
+      "sha256": "0c82305f98a82765e87b08c09326e50d3a8e8eada386ac9b0ad69bd62a5ebc25"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\risk\\2025-09\\result.json",
+      "sha256": "16e8c2bb564acd94686757e9260ece471e718127cabf994f0f7e2177acddba95"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\risk\\2025-10\\result.json",
+      "sha256": "dbf6abfb5a23fa2af5ed771c4e34524e70ad1a460137f677d663795a1db01057"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\risk\\2025-11\\result.json",
+      "sha256": "f74f2ad794795d829634d4cff3b1df9f1d19a2e3e95734abfba9d03d7ddcce39"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\risk\\2025-12\\result.json",
+      "sha256": "53f5780ce5354df519e77e71fa5ca07267bae58cb9116c20b81434b4b9dacefa"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\risk\\2026-01\\result.json",
+      "sha256": "f69a69db905d40f364cce1e44f424b1692efcd08022313fa2ea494bd78f70ab7"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\risk\\2026-02\\result.json",
+      "sha256": "6586317ff751c83f56230372d88fe59da80c351bf57157b8cfb64c54134112d9"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\risk\\2026-03\\result.json",
+      "sha256": "16936d280e7179700e112f50178aad23476f792be69ff3981d1b626f59ec0267"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\risk\\2026-04\\result.json",
+      "sha256": "7edef40460acb86b53c0646198091652d12d559c41e283b50accc4ab0d460fa4"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\risk\\2026-05\\result.json",
+      "sha256": "31c5afa0b353f3057a107b6b42b6100b7d31b1b199b9e21d5998c1f0bc6bd959"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\risk\\2026-06\\result.json",
+      "sha256": "bb6e705a9c1b1327abe6726431ce3914f566bcdf692118ff07791880a506bc06"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\risk\\2026-07\\result.json",
+      "sha256": "4af474a2cc6d3f5fe2edb30fd81e320eb3cd4e55791237ef849742c883af4999"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\risk\\2026-08\\result.json",
+      "sha256": "895393c33ab4a4ddbacdb97cbdcf02a8a63627cdb25026e6dc2a26a9868f8ebe"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\risk\\fixed\\result.json",
+      "sha256": "bb5489a447c8886ae7076eb3ba0cb8771fda636ce230bf773ea0cb4ca2d7fe83"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_diurnal_nos_v2\\statistics.json",
+      "sha256": "e83ff94d423feffa4a129f4ef60c7ca5474a2f733cd44c28b91d1ec9b5ba0283"
+    }
+  ],
+  "generator_sha256": "fe877343e97f748d3f47865a562fbb12c8fc3cd0b91981c9e41ca1bd2cb870bb",
+  "completed_cells": 208,
+  "report_sha256": "2a93b837c4499c3bd42166efd198c98f25d7561cdb0484d6e81b23bf76b9b38a"
+}

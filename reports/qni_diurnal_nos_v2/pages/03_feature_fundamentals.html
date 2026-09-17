@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><link href="data:," rel="icon"/><meta content="editorial-html-report/1.0" name="report-theme"/><title>QNI · Features and fundamentals</title><style>:root{--ink:#282b30;--muted:#636870;--blue:#4c94df;--teal:#268a87;--accent:#7658c9;--line:#dfe3eb;--panel:#ececf3}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;border-top:5px solid var(--blue);background:#f5f6f9;color:var(--ink);font:16px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+main{max-width:1344px;margin:auto;padding:50px 32px 70px}.eyebrow,.section-kicker{font-size:12px;letter-spacing:.14em;font-weight:750;color:#3977b7}.section-kicker{margin-bottom:10px}
+h1{font-size:clamp(38px,5vw,65px);line-height:1.08;letter-spacing:-.045em;margin:17px 0 22px}h1 span{color:var(--accent)}.dek{font-size:20px;max-width:1080px;color:var(--muted);margin-bottom:26px}.tags{display:flex;gap:9px;flex-wrap:wrap}.tags span{font-size:12px;border:1px solid var(--line);background:white;border-radius:20px;padding:6px 12px}
+nav{display:flex;flex-wrap:wrap;gap:21px;margin:22px 0 30px;padding:18px 0;border-bottom:1px solid var(--line);font-size:14px}a{color:#276bae;text-decoration:none}a:hover{text-decoration:underline}a:focus-visible,summary:focus-visible,select:focus-visible,.table-wrap:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.metric{background:white;border:1px solid var(--line);border-radius:10px;padding:21px;min-width:0}.metric span,.metric small{display:block;color:var(--muted);font-size:12px}.metric strong{font-size:30px;line-height:1.25;letter-spacing:-.035em;display:block;margin:5px 0;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.callout{background:#eaf3f5;border-left:4px solid var(--teal);padding:19px 23px;margin:25px 0;font-size:15px}.scope-note{background:#fff8e8;border-left-color:#c29330}
+section,.section{margin-top:52px;scroll-margin-top:20px}h2{font-size:29px;line-height:1.25;letter-spacing:-.025em;margin:38px 0 16px}h3{font-size:19px;line-height:1.3;margin:25px 0 13px}
+.findings{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.finding{background:white;border:1px solid var(--line);border-radius:10px;padding:23px;min-width:0}.finding h3{margin-top:11px}.finding p{margin:0;font-size:14px;color:var(--muted)}.index{font-size:12px;font-weight:750;color:var(--teal)}
+.table-wrap{overflow-x:auto;background:white;border:1px solid var(--line);border-radius:10px;max-width:100%;overscroll-behavior-x:contain;margin:16px 0}table{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap}th,td{padding:12px 14px;text-align:right;border-bottom:1px solid #edf0f4;vertical-align:top}th:first-child,td:first-child{text-align:left}td:first-child{font-weight:600}thead{background:var(--panel);font-size:12px;color:#4f545b}tbody tr:nth-child(even){background:#fafbfc}tbody tr:hover{background:#f0f6fc}
+.small,.note,.meta{font-size:13px;color:var(--muted)}figure{margin:26px 0 8px;background:white;border:1px solid var(--line);border-radius:10px;overflow:hidden}figcaption{display:flex;justify-content:space-between;gap:16px;padding:13px 18px;border-bottom:1px solid #edf0f4;color:var(--muted);font-size:12px;font-weight:650}.figure-links{display:flex;gap:20px;flex-shrink:0}figure img{display:block;width:100%;height:auto}.figure-note{padding:0 18px 13px;margin:0;color:var(--muted);font-size:12px}.chart-scroll{overflow-x:auto}.chart-scroll .plotly-graph-div{min-width:680px;border-top:2px solid var(--blue)}
+.method,details{padding:27px;background:white;border:1px solid var(--line);border-radius:10px}details{margin-top:24px}summary{cursor:pointer;font-weight:650}pre{max-width:100%;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere}li{margin:12px 0}.sources{font-size:14px}.sources a{overflow-wrap:anywhere}footer{margin-top:45px;padding-top:22px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}code{background:#f0f2f7;padding:2px 5px;border-radius:3px;font-size:12px;overflow-wrap:anywhere}
+@media(max-width:900px){main{padding:32px 20px 55px}.metrics{grid-template-columns:repeat(2,1fr)}.findings{grid-template-columns:1fr}.dek{font-size:18px}section,.section{margin-top:40px}nav{gap:14px}}
+@media(max-width:520px){main{padding:28px 15px 45px}.metrics{gap:10px}.metric{padding:15px}.metric strong{font-size:24px}.metric small{font-size:11px}h2{font-size:25px}figcaption{padding:11px 12px;align-items:flex-start}.figure-links{gap:12px}.method,details{padding:20px}.callout{padding:17px 18px}}
+@media print{body{background:white}nav,figcaption a{display:none}main{max-width:none;padding:15px}figure,.metrics,.finding{break-inside:avoid}h2{break-after:avoid}.chart-scroll{overflow:visible}.chart-scroll .plotly-graph-div{min-width:0}}
+</style></head><body><main><header><div class="eyebrow">QNI forecasting research</div><h1>Completed run<br/><span>Features and fundamentals</span></h1><p class="dek">Grouped importance and the physical interpretation of calendar, observed-history, network-state and generator-pressure inputs.</p><div class="tags"><span>NSW1-QLD1</span><span>NEM time · UTC+10</span><span>Outcomes through August 2026</span><span>Historical development evidence</span></div></header><nav class="suite-nav"><a href="../index.html">Report home</a> · <a href="../pages/01_model_performance.html">Model performance</a> · <a href="../pages/02_model_explorer.html">Model explorer</a> · <a href="../pages/03_feature_fundamentals.html">Features and fundamentals</a> · <a href="../pages/04_nos_outages.html">NOS outage modelling</a> · <a href="../pages/05_risk_and_refinements.html">Risk and refinements</a> · <a href="../pages/06_model_handoff.html">Model verdict and handoff</a> · <a href="../full_run/qni_diurnal_nos_model_report.html">Full run</a></nav><section id="fundamentals"><h2>Feature relevance to fundamentals</h2><div class="table-wrap" tabindex="0"><table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>model</th>
+<th>feature group</th>
+<th>mean held-out MAE degradation (MW)</th>
+<th>fundamental mechanism</th>
+<th>assessment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T0_dr_nmae</td>
+<td>Delivery-time cycles</td>
+<td>0.490</td>
+<td>Demand, renewable output and unit commitment share daily patterns; calendar remains a proxy.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T0_dr_nmae</td>
+<td>Aggregate generator tightening and relief</td>
+<td>0.337</td>
+<td>Generation patterns alter the LHS/RHS balance and available transfer capability.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T0_dr_nmae</td>
+<td>Forecast lead</td>
+<td>0.486</td>
+<td>Uncertainty and persistence decay vary with lead.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T0_dr_nmae</td>
+<td>Headroom, candidate competition and setter state</td>
+<td>0.193</td>
+<td>Constraint geometry changes which equation can set each directional limit.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T0_dr_nmae</td>
+<td>Recent limits and changes</td>
+<td>111.784</td>
+<td>Current topology and operating conditions persist, especially at short leads.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T0_dr_nmae</td>
+<td>Coverage and reconstruction quality</td>
+<td>0.061</td>
+<td>Missing or inconsistent state can mimic a physical regime change.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T0_mae</td>
+<td>Delivery-time cycles</td>
+<td>0.677</td>
+<td>Demand, renewable output and unit commitment share daily patterns; calendar remains a proxy.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T0_mae</td>
+<td>Aggregate generator tightening and relief</td>
+<td>0.419</td>
+<td>Generation patterns alter the LHS/RHS balance and available transfer capability.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T0_mae</td>
+<td>Forecast lead</td>
+<td>0.000</td>
+<td>Uncertainty and persistence decay vary with lead.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T0_mae</td>
+<td>Headroom, candidate competition and setter state</td>
+<td>0.345</td>
+<td>Constraint geometry changes which equation can set each directional limit.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T0_mae</td>
+<td>Recent limits and changes</td>
+<td>92.610</td>
+<td>Current topology and operating conditions persist, especially at short leads.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T0_mae</td>
+<td>Coverage and reconstruction quality</td>
+<td>0.071</td>
+<td>Missing or inconsistent state can mimic a physical regime change.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T1_dr_nmae</td>
+<td>Delivery-time cycles</td>
+<td>0.484</td>
+<td>Demand, renewable output and unit commitment share daily patterns; calendar remains a proxy.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T1_dr_nmae</td>
+<td>Aggregate generator tightening and relief</td>
+<td>0.025</td>
+<td>Generation patterns alter the LHS/RHS balance and available transfer capability.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T1_dr_nmae</td>
+<td>Forecast lead</td>
+<td>0.225</td>
+<td>Uncertainty and persistence decay vary with lead.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T1_dr_nmae</td>
+<td>Headroom, candidate competition and setter state</td>
+<td>0.085</td>
+<td>Constraint geometry changes which equation can set each directional limit.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T1_dr_nmae</td>
+<td>Recent limits and changes</td>
+<td>97.556</td>
+<td>Current topology and operating conditions persist, especially at short leads.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T1_dr_nmae</td>
+<td>Coverage and reconstruction quality</td>
+<td>-0.001</td>
+<td>Missing or inconsistent state can mimic a physical regime change.</td>
+<td>review redundancy or instability</td>
+</tr>
+<tr>
+<td>T1_mae</td>
+<td>Delivery-time cycles</td>
+<td>2.512</td>
+<td>Demand, renewable output and unit commitment share daily patterns; calendar remains a proxy.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T1_mae</td>
+<td>Aggregate generator tightening and relief</td>
+<td>0.206</td>
+<td>Generation patterns alter the LHS/RHS balance and available transfer capability.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T1_mae</td>
+<td>Forecast lead</td>
+<td>-0.001</td>
+<td>Uncertainty and persistence decay vary with lead.</td>
+<td>review redundancy or instability</td>
+</tr>
+<tr>
+<td>T1_mae</td>
+<td>Headroom, candidate competition and setter state</td>
+<td>0.114</td>
+<td>Constraint geometry changes which equation can set each directional limit.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T1_mae</td>
+<td>Recent limits and changes</td>
+<td>134.274</td>
+<td>Current topology and operating conditions persist, especially at short leads.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T1_mae</td>
+<td>Coverage and reconstruction quality</td>
+<td>-0.053</td>
+<td>Missing or inconsistent state can mimic a physical regime change.</td>
+<td>review redundancy or instability</td>
+</tr>
+<tr>
+<td>T2_dr_nmae</td>
+<td>Delivery-time cycles</td>
+<td>4.578</td>
+<td>Demand, renewable output and unit commitment share daily patterns; calendar remains a proxy.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T2_dr_nmae</td>
+<td>Aggregate generator tightening and relief</td>
+<td>0.075</td>
+<td>Generation patterns alter the LHS/RHS balance and available transfer capability.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T2_dr_nmae</td>
+<td>Forecast lead</td>
+<td>0.265</td>
+<td>Uncertainty and persistence decay vary with lead.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T2_dr_nmae</td>
+<td>Headroom, candidate competition and setter state</td>
+<td>0.115</td>
+<td>Constraint geometry changes which equation can set each directional limit.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T2_dr_nmae</td>
+<td>Recent limits and changes</td>
+<td>93.602</td>
+<td>Current topology and operating conditions persist, especially at short leads.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T2_dr_nmae</td>
+<td>Coverage and reconstruction quality</td>
+<td>-0.000</td>
+<td>Missing or inconsistent state can mimic a physical regime change.</td>
+<td>review redundancy or instability</td>
+</tr>
+<tr>
+<td>T2_mae</td>
+<td>Delivery-time cycles</td>
+<td>4.757</td>
+<td>Demand, renewable output and unit commitment share daily patterns; calendar remains a proxy.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T2_mae</td>
+<td>Aggregate generator tightening and relief</td>
+<td>0.538</td>
+<td>Generation patterns alter the LHS/RHS balance and available transfer capability.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T2_mae</td>
+<td>Forecast lead</td>
+<td>0.002</td>
+<td>Uncertainty and persistence decay vary with lead.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T2_mae</td>
+<td>Headroom, candidate competition and setter state</td>
+<td>0.304</td>
+<td>Constraint geometry changes which equation can set each directional limit.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T2_mae</td>
+<td>Recent limits and changes</td>
+<td>139.120</td>
+<td>Current topology and operating conditions persist, especially at short leads.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T2_mae</td>
+<td>Coverage and reconstruction quality</td>
+<td>0.042</td>
+<td>Missing or inconsistent state can mimic a physical regime change.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T3_dr_nmae</td>
+<td>Delivery-time cycles</td>
+<td>5.186</td>
+<td>Demand, renewable output and unit commitment share daily patterns; calendar remains a proxy.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T3_dr_nmae</td>
+<td>Aggregate generator tightening and relief</td>
+<td>0.103</td>
+<td>Generation patterns alter the LHS/RHS balance and available transfer capability.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T3_dr_nmae</td>
+<td>Forecast lead</td>
+<td>0.217</td>
+<td>Uncertainty and persistence decay vary with lead.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T3_dr_nmae</td>
+<td>Headroom, candidate competition and setter state</td>
+<td>0.416</td>
+<td>Constraint geometry changes which equation can set each directional limit.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T3_dr_nmae</td>
+<td>Recent limits and changes</td>
+<td>31.132</td>
+<td>Current topology and operating conditions persist, especially at short leads.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T3_dr_nmae</td>
+<td>Coverage and reconstruction quality</td>
+<td>0.001</td>
+<td>Missing or inconsistent state can mimic a physical regime change.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T3_mae</td>
+<td>Delivery-time cycles</td>
+<td>3.144</td>
+<td>Demand, renewable output and unit commitment share daily patterns; calendar remains a proxy.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T3_mae</td>
+<td>Aggregate generator tightening and relief</td>
+<td>0.390</td>
+<td>Generation patterns alter the LHS/RHS balance and available transfer capability.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T3_mae</td>
+<td>Forecast lead</td>
+<td>0.003</td>
+<td>Uncertainty and persistence decay vary with lead.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T3_mae</td>
+<td>Headroom, candidate competition and setter state</td>
+<td>0.091</td>
+<td>Constraint geometry changes which equation can set each directional limit.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T3_mae</td>
+<td>Recent limits and changes</td>
+<td>149.390</td>
+<td>Current topology and operating conditions persist, especially at short leads.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T3_mae</td>
+<td>Coverage and reconstruction quality</td>
+<td>0.047</td>
+<td>Missing or inconsistent state can mimic a physical regime change.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T4_dr_nmae</td>
+<td>Delivery-time cycles</td>
+<td>2.189</td>
+<td>Demand, renewable output and unit commitment share daily patterns; calendar remains a proxy.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T4_dr_nmae</td>
+<td>Aggregate generator tightening and relief</td>
+<td>0.166</td>
+<td>Generation patterns alter the LHS/RHS balance and available transfer capability.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T4_dr_nmae</td>
+<td>Forecast lead</td>
+<td>0.201</td>
+<td>Uncertainty and persistence decay vary with lead.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T4_dr_nmae</td>
+<td>Headroom, candidate competition and setter state</td>
+<td>0.014</td>
+<td>Constraint geometry changes which equation can set each directional limit.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T4_dr_nmae</td>
+<td>Recent limits and changes</td>
+<td>169.321</td>
+<td>Current topology and operating conditions persist, especially at short leads.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T4_dr_nmae</td>
+<td>Coverage and reconstruction quality</td>
+<td>0.005</td>
+<td>Missing or inconsistent state can mimic a physical regime change.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T4_mae</td>
+<td>Delivery-time cycles</td>
+<td>4.036</td>
+<td>Demand, renewable output and unit commitment share daily patterns; calendar remains a proxy.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T4_mae</td>
+<td>Aggregate generator tightening and relief</td>
+<td>0.315</td>
+<td>Generation patterns alter the LHS/RHS balance and available transfer capability.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T4_mae</td>
+<td>Forecast lead</td>
+<td>0.000</td>
+<td>Uncertainty and persistence decay vary with lead.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T4_mae</td>
+<td>Headroom, candidate competition and setter state</td>
+<td>0.092</td>
+<td>Constraint geometry changes which equation can set each directional limit.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T4_mae</td>
+<td>Recent limits and changes</td>
+<td>150.251</td>
+<td>Current topology and operating conditions persist, especially at short leads.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T4_mae</td>
+<td>Coverage and reconstruction quality</td>
+<td>0.014</td>
+<td>Missing or inconsistent state can mimic a physical regime change.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T5_dr_nmae</td>
+<td>Delivery-time cycles</td>
+<td>14.688</td>
+<td>Demand, renewable output and unit commitment share daily patterns; calendar remains a proxy.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T5_dr_nmae</td>
+<td>Aggregate generator tightening and relief</td>
+<td>0.867</td>
+<td>Generation patterns alter the LHS/RHS balance and available transfer capability.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T5_dr_nmae</td>
+<td>Forecast lead</td>
+<td>1.076</td>
+<td>Uncertainty and persistence decay vary with lead.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T5_dr_nmae</td>
+<td>Headroom, candidate competition and setter state</td>
+<td>0.041</td>
+<td>Constraint geometry changes which equation can set each directional limit.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T5_dr_nmae</td>
+<td>Recent limits and changes</td>
+<td>173.282</td>
+<td>Current topology and operating conditions persist, especially at short leads.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T5_dr_nmae</td>
+<td>Coverage and reconstruction quality</td>
+<td>0.068</td>
+<td>Missing or inconsistent state can mimic a physical regime change.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T5_mae</td>
+<td>Delivery-time cycles</td>
+<td>16.760</td>
+<td>Demand, renewable output and unit commitment share daily patterns; calendar remains a proxy.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T5_mae</td>
+<td>Aggregate generator tightening and relief</td>
+<td>0.565</td>
+<td>Generation patterns alter the LHS/RHS balance and available transfer capability.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T5_mae</td>
+<td>Forecast lead</td>
+<td>1.316</td>
+<td>Uncertainty and persistence decay vary with lead.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T5_mae</td>
+<td>Headroom, candidate competition and setter state</td>
+<td>0.453</td>
+<td>Constraint geometry changes which equation can set each directional limit.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T5_mae</td>
+<td>Recent limits and changes</td>
+<td>128.666</td>
+<td>Current topology and operating conditions persist, especially at short leads.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T5_mae</td>
+<td>Coverage and reconstruction quality</td>
+<td>0.068</td>
+<td>Missing or inconsistent state can mimic a physical regime change.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T6_dr_nmae</td>
+<td>Delivery-time cycles</td>
+<td>27.886</td>
+<td>Demand, renewable output and unit commitment share daily patterns; calendar remains a proxy.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T6_dr_nmae</td>
+<td>Aggregate generator tightening and relief</td>
+<td>2.028</td>
+<td>Generation patterns alter the LHS/RHS balance and available transfer capability.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T6_dr_nmae</td>
+<td>Forecast lead</td>
+<td>4.849</td>
+<td>Uncertainty and persistence decay vary with lead.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T6_dr_nmae</td>
+<td>Headroom, candidate competition and setter state</td>
+<td>1.086</td>
+<td>Constraint geometry changes which equation can set each directional limit.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T6_dr_nmae</td>
+<td>Recent limits and changes</td>
+<td>116.541</td>
+<td>Current topology and operating conditions persist, especially at short leads.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T6_dr_nmae</td>
+<td>Coverage and reconstruction quality</td>
+<td>3.022</td>
+<td>Missing or inconsistent state can mimic a physical regime change.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T6_mae</td>
+<td>Delivery-time cycles</td>
+<td>25.760</td>
+<td>Demand, renewable output and unit commitment share daily patterns; calendar remains a proxy.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T6_mae</td>
+<td>Aggregate generator tightening and relief</td>
+<td>0.992</td>
+<td>Generation patterns alter the LHS/RHS balance and available transfer capability.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T6_mae</td>
+<td>Forecast lead</td>
+<td>1.881</td>
+<td>Uncertainty and persistence decay vary with lead.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T6_mae</td>
+<td>Headroom, candidate competition and setter state</td>
+<td>0.710</td>
+<td>Constraint geometry changes which equation can set each directional limit.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T6_mae</td>
+<td>Recent limits and changes</td>
+<td>49.802</td>
+<td>Current topology and operating conditions persist, especially at short leads.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>T6_mae</td>
+<td>Coverage and reconstruction quality</td>
+<td>0.945</td>
+<td>Missing or inconsistent state can mimic a physical regime change.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>persistence</td>
+<td>Recent limits and changes</td>
+<td>125.633</td>
+<td>Current topology and operating conditions persist, especially at short leads.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>seasonal_daily</td>
+<td>Recent limits and changes</td>
+<td>119.091</td>
+<td>Current topology and operating conditions persist, especially at short leads.</td>
+<td>retain for testing</td>
+</tr>
+<tr>
+<td>seasonal_weekly</td>
+<td>Recent limits and changes</td>
+<td>49.952</td>
+<td>Current topology and operating conditions persist, especially at short leads.</td>
+<td>retain for testing</td>
+</tr>
+</tbody>
+</table></div><p>Permutation and SHAP measure model dependence. They do not establish that a feature caused a physical limit change.</p></section></main></body></html>

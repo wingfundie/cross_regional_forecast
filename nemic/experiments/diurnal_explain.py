@@ -147,10 +147,14 @@ def explain_risk(c):
     from .events import detect,window_label
     store=Store(c);d=connector_data(c,c['connectors'][0]);d['base']=base_frame(d);idx=d['y'].index
     x=design(d,np.arange(len(idx)),np.repeat(4,len(idx)),'full').astype(float)
+    fold_map={fold.name:fold for fold in folds(c)}
     for folder in sorted((store.root/'risk').glob('*')):
-        if not (folder/'models.joblib').exists():continue
+        # Rolling and fixed protocols share one campaign root. Explain only
+        # folders belonging to the supplied config; the companion invocation
+        # handles the other protocol explicitly.
+        if folder.name not in fold_map or not (folder/'models.joblib').exists():continue
         bundle=joblib.load(folder/'models.joblib')
-        fold=next(f for f in folds(c) if f.name==folder.name)
+        fold=fold_map[folder.name]
         masks=mature_masks(idx,idx+pd.Timedelta(minutes=120),fold)
         background=x.loc[masks['train']].iloc[::max(1,int(masks['train'].sum()/32))].iloc[:32]
         sample=x.loc[masks['evaluate']].iloc[::max(1,int(masks['evaluate'].sum()/256))].iloc[:256]

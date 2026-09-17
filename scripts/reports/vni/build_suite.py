@@ -8,12 +8,15 @@ from __future__ import annotations
 import csv
 import hashlib
 import json
+import argparse
 from copy import copy
 from pathlib import Path
 import shutil
 import sys
 
 from bs4 import BeautifulSoup
+import pandas as pd
+from nemic.experiments.core import load_config
 
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -26,6 +29,9 @@ PAGES = REPORT / "pages"
 FULL = REPORT / "full_run"
 DOWNLOADS = REPORT / "downloads"
 QA = REPORT / "qa"
+CONNECTOR = {"name": "VNI", "id": "VIC1-NSW1"}
+SLUG = "vni"
+CONFIG_PATH = "configs/experiments/vni_diurnal_nos_v2.json"
 
 PAGE_SPECS = (
     (
@@ -99,7 +105,7 @@ def _navigation(prefix: str = "") -> str:
         f'<a href="{prefix}pages/{filename}">{title}</a>'
         for filename, title, _, _ in PAGE_SPECS
     )
-    links.append(f'<a href="{prefix}full_run/vni_diurnal_nos_model_report.html">Full run</a>')
+    links.append(f'<a href="{prefix}full_run/{SLUG}_diurnal_nos_model_report.html">Full run</a>')
     return "<nav class=\"suite-nav\">" + " · ".join(links) + "</nav>"
 
 
@@ -116,15 +122,15 @@ def _focused_page(source: BeautifulSoup, filename: str, title: str, dek: str, he
         if node.name == "script" and not has_plots:
             continue
         document.head.append(copy(node))
-    document.title.string = f"VNI · {title}"
+    document.title.string = f"{CONNECTOR['name']} · {title}"
     main = document.find("main")
     header = BeautifulSoup(
         hero(
-            "VNI forecasting research",
+            f"{CONNECTOR['name']} forecasting research",
             "Completed run",
             title,
             dek,
-            ["VIC1–NSW1", "NEM time · UTC+10", "Outcomes through August 2026", "Historical development evidence"],
+            [CONNECTOR['id'], "NEM time · UTC+10", "Outcomes through August 2026", "Historical development evidence"],
         ),
         "html.parser",
     )
@@ -165,7 +171,7 @@ def _write_catalog(rows: list[dict]) -> None:
         writer.writeheader()
         writer.writerows(rows)
     lines = [
-        "# VNI diurnal and NOS run catalogue",
+        f"# {CONNECTOR['name']} diurnal and NOS run catalogue",
         "",
         "Start with `report/index.html`. Model artifacts remain in their original immutable folders so completed-run lineage and hashes stay valid.",
         "",
@@ -179,7 +185,7 @@ def _write_catalog(rows: list[dict]) -> None:
             "## Rebuild",
             "",
             "```powershell",
-            "python scripts/build_vni_report_suite.py",
+            "python scripts/build_qni_report_suite.py" if SLUG == "qni" else "python scripts/build_vni_report_suite.py",
             "```",
             "",
             "The rebuild reads cached run evidence. It does not retrain models.",
@@ -195,25 +201,29 @@ def _index(rows: list[dict], pages: list[Path]) -> Path:
             '<article class="finding"><div class="finding-index">REPORT</div>'
             f'<h3><a href="pages/{filename}">{title}</a></h3><p>{description}</p></article>'
         )
+    performance=pd.read_csv(DOWNLOADS/'research_performance.csv')
+    export=performance.query("target == 'export_tight' and band == 0").iloc[0]
+    imported=performance.query("target == 'import_tight' and band == 0").iloc[0]
+    completed=len(list((RUN/'diurnal').glob('*/band*/*/result.json')))
     body = hero(
-        "VNI forecasting research",
+        f"{CONNECTOR['name']} forecasting research",
         "Run centre",
         "Models, evidence and reports",
-        "One landing page for the completed VNI diurnal and NOS study. MAE drives selection; MAPE is assessment-only. All pages are offline and reproduce the completed cached run.",
-        ["VIC1–NSW1", "208 evaluated model cells", "16 frozen research bundles", "Outcomes through August 2026"],
+        f"One landing page for the completed {CONNECTOR['name']} diurnal and NOS study. MAE drives selection; MAPE is assessment-only. All pages are offline and reproduce the completed cached run.",
+        [CONNECTOR['id'], f"{completed} evaluated model cells", "16 frozen research bundles", "Outcomes through August 2026"],
     )
     body += _navigation()
     body += '<section class="metrics">'
-    body += metric("Point-model verdict", "T6", "Bands 0–2 and band-3 import; T0 for band-3 export")
-    body += metric("Export tight skill", "33.2%", "Band 0 versus persistence")
-    body += metric("Import tight skill", "17.1%", "Band 0 versus persistence")
-    body += metric("NOS point verdict", "Challenger", "+0.39% export and −0.63% import versus T6 O0")
+    body += metric("Point-model policy", "Target × band", "Frozen MAE selection; see model handoff")
+    body += metric("Export tight skill", f"{100*export.skill_persistence:.1f}%", "Band 0 versus persistence")
+    body += metric("Import tight skill", f"{100*imported.skill_persistence:.1f}%", "Band 0 versus persistence")
+    body += metric("NOS point verdict", "Challenger", "Source-common ablations reported separately")
     body += "</section>"
     body += '<section><h2>Choose a report</h2><div class="findings">' + "".join(cards) + "</div></section>"
     body += '<section><h2>Research paper</h2><div class="callout"><strong>Complete written study.</strong> '
-    body += '<a href="vni_research_paper.html">Read the full research paper</a> for the research question, methods, model and feature definitions, comparative results, explainability, NOS findings, selected specification and forward-forecasting guide.</div></section>'
+    body += f'<a href="{SLUG}_research_paper.html">Read the full research paper</a> for the research question, methods, model and feature definitions, comparative results, explainability, NOS findings, selected specification and forward-forecasting guide.</div></section>'
     body += '<section><h2>Complete-run files</h2><div class="callout"><strong>Full report.</strong> '
-    body += '<a href="full_run/vni_diurnal_nos_model_report.html">Open the complete model report</a> or '
+    body += f'<a href="full_run/{SLUG}_diurnal_nos_model_report.html">Open the complete model report</a> or '
     body += '<a href="full_run/nos_outage_impact_analysis.html">open the matched NOS impact report</a>. '
     body += 'These retain every chart, table, search history, feature-importance result and SHAP decomposition.</div>'
     body += '<p>Downloads: <a href="downloads/model_results.csv">all model results</a> · '
@@ -222,8 +232,8 @@ def _index(rows: list[dict], pages: list[Path]) -> Path:
     body += '<a href="report_suite_manifest.json">report-suite manifest</a>.</p></section>'
     body += '<section><h2>Saved models</h2><div class="callout"><strong>Forecast-ready research bundles.</strong> '
     body += 'The <a href="../final/catalogue.json">saved-model catalogue</a> indexes all 16 target × lead-band bundles. '
-    body += 'Use the <a href="../../../../docs/VNI_SAVED_MODEL_GUIDE.md">saved-model guide</a> for the hash-verified '
-    body += '<code>forecast-vni</code> command, Python API, input schema and deployment status.</div></section>'
+    body += f'Use the <a href="../../../../docs/{CONNECTOR["name"]}_SAVED_MODEL_GUIDE.md">saved-model guide</a> for the hash-verified '
+    body += '<code>forecast-model</code> command, Python API, input schema and deployment status.</div></section>'
     body += '<section><h2>Where the run artifacts live</h2><div class="table-wrap" tabindex="0"><table><thead><tr>'
     body += '<th>Folder</th><th>Area</th><th>Purpose</th><th>Files</th><th>MB</th></tr></thead><tbody>'
     for row in rows:
@@ -231,30 +241,33 @@ def _index(rows: list[dict], pages: list[Path]) -> Path:
     body += "</tbody></table></div></section>"
     body += '<section><h2>Reading the evidence</h2><p>The point-model pages contain actual-versus-forecast charts and MAPE-first/MAE-second tables. The model explorer holds cell-level Optuna ranges, completed trials and parameters. The NOS page separates descriptive outage burden from supported matched effects. The handoff page identifies the selected trained bundles and preserves the historical-development limitation.</p></section>'
     target = REPORT / "index.html"
-    target.write_text(render_page("VNI model run centre", body, plotly=False), encoding="utf-8")
+    target.write_text(render_page(f"{CONNECTOR['name']} model run centre", body, plotly=False), encoding="utf-8")
     return target
 
 
 def _compatibility_page(title: str, target: str) -> str:
     body = hero(
-        "VNI forecasting research",
+        f"{CONNECTOR['name']} forecasting research",
         "Report moved",
         title,
         "The completed report now lives in the organised report suite. This compatibility page keeps the former path usable.",
         ["Offline report", "Completed cached run"],
     )
     body += f'<section><h2>Open report</h2><p><a href="{target}">Continue to {title}</a>.</p></section>'
-    return render_page(f"VNI · {title}", body, plotly=False)
+    return render_page(f"{CONNECTOR['name']} · {title}", body, plotly=False)
 
 
-def build_report_suite() -> Path:
+def build_report_suite(config_path: str = CONFIG_PATH) -> Path:
+    global RUN, REPORT, PAGES, FULL, DOWNLOADS, QA, CONNECTOR, SLUG, CONFIG_PATH
+    config=load_config(config_path);RUN=config['_run'];REPORT=RUN/'report';PAGES=REPORT/'pages';FULL=REPORT/'full_run';DOWNLOADS=REPORT/'downloads';QA=REPORT/'qa'
+    CONNECTOR=config['connectors'][0];SLUG=CONNECTOR['name'].lower();CONFIG_PATH=config_path
     PAGES.mkdir(parents=True, exist_ok=True)
     FULL.mkdir(parents=True, exist_ok=True)
     DOWNLOADS.mkdir(parents=True, exist_ok=True)
-    source_path = REPORT / "vni_diurnal_nos_model_report.html"
+    source_path = REPORT / f"{SLUG}_diurnal_nos_model_report.html"
     nos_path = REPORT / "nos_outage_impact_analysis.html"
     if not source_path.exists() or not nos_path.exists():
-        raise FileNotFoundError("Build the full VNI and NOS reports before building the suite")
+        raise FileNotFoundError(f"Build the full {CONNECTOR['name']} and NOS reports before building the suite")
 
     full_source = FULL / source_path.name
     full_nos = FULL / nos_path.name
@@ -285,9 +298,9 @@ def build_report_suite() -> Path:
     index = _index(rows, pages)
     outputs = [index, *pages, full_source, full_nos]
     manifest = {
-        "run": "vni_diurnal_nos_v2",
+        "run": config['campaign'],
         "source_report": str(full_source.relative_to(ROOT)).replace("\\", "/"),
-        "rebuild_command": "python scripts/build_vni_report_suite.py",
+        "rebuild_command": f"python scripts/build_qni_report_suite.py" if SLUG=='qni' else "python scripts/build_vni_report_suite.py",
         "pages": [
             {"path": str(path.relative_to(ROOT)).replace("\\", "/"), "sha256": _sha(path), "bytes": path.stat().st_size}
             for path in outputs
@@ -310,4 +323,5 @@ def build_report_suite() -> Path:
 
 
 if __name__ == "__main__":
-    print(build_report_suite())
+    parser=argparse.ArgumentParser();parser.add_argument('--config',default=CONFIG_PATH)
+    print(build_report_suite(parser.parse_args().config))
