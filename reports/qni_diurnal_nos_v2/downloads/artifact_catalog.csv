@@ -1,0 +1,11 @@
+folder,label,purpose,file_count,size_mb
+diurnal,Point models,Rolling and fixed fold × target × horizon-band searches and explanations,3106,412.79
+curves,Forecast curves,Frozen 336-step forecast curves and boundary audits,78,9.47
+bridge,Legacy bridge,Aligned sampling comparison against legacy policy families,96,18.65
+risk,Contraction risk,Base contraction-warning models and explanations,195,10.99
+nos,NOS source analysis,"Archive, coverage, mapping, exposure and matched-impact evidence",226,115.74
+nos_models,NOS point models,Source-common outage-feature ablations and explanations,504,26.62
+nos_risk,NOS risk,Scheduled-outage contraction-risk challengers,318,10.62
+refinements,Post-selection refinements,Training-window and lead-conditioned pressure tests,144,28.85
+final,Trained bundles,"Frozen research bundles, schemas, parameters and reload checks",65,0.92
+report,Reports,"Human-facing HTML pages, downloads, manifests and QA evidence",21,132.97

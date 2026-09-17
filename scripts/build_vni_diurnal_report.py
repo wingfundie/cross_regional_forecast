@@ -1,6 +1,7 @@
 """Render cached v2 results without fitting or silently changing their snapshot."""
 import html
 import json
+import argparse
 from pathlib import Path
 import sys
 
@@ -26,16 +27,17 @@ def lazy_chart(fig):
     return '<div class="lazy-plot" style="min-height:510px"><script type="application/json">'+payload+'</script></div>'
 
 
-def build():
-    c=load_config('configs/experiments/vni_diurnal_nos_v2.json'); root=c['_run']
+def build(config_path='configs/experiments/vni_diurnal_nos_v2.json'):
+    c=load_config(config_path); root=c['_run']; connector=c['connectors'][0]
+    name=connector['name']; identifier=connector['id']; slug=name.lower()
     paths=sorted((root/'diurnal').glob('*/band*/*/result.json'))
     results=[json.loads(p.read_text()) for p in paths]
     if not results:
-        raise ValueError('No completed VNI models')
+        raise ValueError(f'No completed {name} models')
     output=root/'report';output.mkdir(parents=True,exist_ok=True)
-    body=hero('VNI forecasting research', 'Directional limits', 'Diurnal models and outage evidence',
+    body=hero(f'{name} forecasting research', 'Directional limits', 'Diurnal models and outage evidence',
         'MAE selects the point forecasts. Percentage metrics assess their errors. Historical results are development evidence; prospective validation is separate.',
-        ['VNI · VIC1-NSW1', 'NEM time · UTC+10', 'Outcomes through August 2026', f'{len(results)} completed cells'])
+        [f'{name} · {identifier}', 'NEM time · UTC+10', 'Outcomes through August 2026', f'{len(results)} completed cells'])
     body+='<nav><a href="#results">Results</a> · <a href="#models">Models and charts</a> · <a href="#nos">NOS</a> · <a href="#risk">Warnings</a> · <a href="#methods">Methods</a></nav>'
     body+='<section class="metrics">'+metric('Completed cells',len(results),'Fold × target × horizon band')+metric('Primary objective','MAE','Origin-balanced; all finite targets including zero and negative limits')+metric('Percentage assessment','MAPE','Qualified |actual| ≥50 MW, with coverage')+metric('Validation status','Historical','No prospective claim')+'</section>'
     glossary=[
@@ -161,7 +163,7 @@ def build():
                 top=sf.groupby('feature').shap_mw.apply(lambda s:float(np.mean(abs(s)))).sort_values(ascending=False).head(8)
                 refinement_shap.extend([{'fold':result['fold']['name'],'target':result['target'],'model':row['model'],
                     'feature':feature,'mean |SHAP| (MW)':value,'reconstruction error':row['max_reconstruction_error_mw']} for feature,value in top.items()])
-    body+='<section><h2>Bounded refinements</h2><p>Lead-conditioned aggregate pressure and recent-history windows are assessed after the calendar/NOS recipe is frozen. Cross-connector pooling awaits QNI.</p>'+table(refinements)
+    body+='<section><h2>Bounded refinements</h2><p>Lead-conditioned aggregate pressure and recent-history windows are assessed after the calendar/NOS recipe is frozen. Cross-connector pooling requires a separate joint VNI–QNI fit and is not inferred from this single-connector run.</p>'+table(refinements)
     body+='<h3>Refinement actual-versus-forecast charts</h3>'+refinement_charts
     body+='<h3>Refinement grouped feature importance</h3>'+table(refinement_importance)
     body+='<h3>Refinement SHAP decomposition · leading contributions</h3>'+table(refinement_shap)+'</section>'
@@ -358,7 +360,7 @@ def build():
     else:body+='<p>Final refit bundles are pending; no trained handoff is claimed.</p>'
     body+='</section>'
     body+='<section id="methods"><h2>Methods and limits of the evidence</h2><p>Rolling chronological partitions separate training, selection, calibration, alert thresholds and evaluation. Inputs use the declared retrospective information track; label maturity includes a 30-minute allowance. MAPE is assessment-only. Directional-reference percentage loss uses a training-fitted floor and the directional limit known at origin. Feature importance and SHAP are predictive diagnostics, not causal outage effects.</p><p>Generator pressure represents the retained aggregate state, not a verified forward generating-unit availability forecast. Any NOS conclusion is conditional on that information set. Prospective confirmation is pending.</p></section><script>renderVisible();</script>'
-    result_path=output/'vni_diurnal_nos_model_report.html';result_path.write_text(render_page('VNI directional-limit research',body),encoding='utf-8')
+    result_path=output/f'{slug}_diurnal_nos_model_report.html';result_path.write_text(render_page(f'{name} directional-limit research',body),encoding='utf-8')
     pd.DataFrame(records).to_csv(output/'model_results.csv',index=False)
     evidence_paths=set(paths)
     for pattern in ('curves/*/*/result.json','bridge/*/*/result.json','refinements/*/*/result.json','nos_models/*/*/result.json','risk/*/result.json','nos_risk/*/result.json',
@@ -370,4 +372,6 @@ def build():
     print(result_path)
 
 
-if __name__=='__main__':build()
+if __name__=='__main__':
+    parser=argparse.ArgumentParser();parser.add_argument('--config',default='configs/experiments/vni_diurnal_nos_v2.json')
+    build(parser.parse_args().config)

@@ -1,4 +1,4 @@
-"""Load and apply the frozen VNI research bundles."""
+"""Load and apply frozen connector research bundles."""
 from __future__ import annotations
 
 import hashlib
@@ -35,8 +35,8 @@ def _band_for_lead(lead: float) -> int:
     raise ValueError(f"Lead {int(lead)} is outside the supported 1–336 half-hour range")
 
 
-class VniBundleRepository:
-    """Catalogue-backed access to the frozen VNI bundle set."""
+class BundleRepository:
+    """Catalogue-backed access to a frozen connector bundle set."""
 
     def __init__(self, final_dir: str | Path = DEFAULT_FINAL_DIR, *, verify_hashes: bool = True):
         self.final_dir = Path(final_dir)
@@ -165,7 +165,7 @@ def forecast_file(
 ) -> dict:
     features_path, output_path = Path(features_path), Path(output_path)
     features = _read_table(features_path)
-    repository = VniBundleRepository(final_dir)
+    repository = BundleRepository(final_dir)
     forecast = repository.forecast(features, target, allow_research=allow_research)
     _write_table(forecast, output_path)
     return {
@@ -177,3 +177,7 @@ def forecast_file(
         "models": sorted(str(value) for value in forecast.model.unique()),
         "operationally_eligible": False,
     }
+
+
+# Backwards-compatible public name used by the VNI saved-model guide/tests.
+VniBundleRepository = BundleRepository

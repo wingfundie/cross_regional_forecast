@@ -1,0 +1,98 @@
+{
+  "study": "qni_diurnal_nos_v2",
+  "source": "validated cached run reports",
+  "rebuild": "python scripts/build_qni_report_suite.py",
+  "publish": "python scripts/publish_qni_reports.py",
+  "files": [
+    {
+      "path": "reports/qni_diurnal_nos_v2/index.html",
+      "bytes": 11882,
+      "sha256": "e8c20ad782d421c873bafc851559e6331b72d08de709603a3ad9a41a4bcbfc2a"
+    },
+    {
+      "path": "reports/qni_diurnal_nos_v2/qni_research_paper.html",
+      "bytes": 4863294,
+      "sha256": "49918d22375b1b4bee643054fb59c26acdcfdf1fdec1ba88618c7f1335e9284a"
+    },
+    {
+      "path": "reports/qni_diurnal_nos_v2/pages/01_model_performance.html",
+      "bytes": 6378263,
+      "sha256": "e64d754ed8da2646e5cb20bb6fef6154d552b05ecbf447e9c8ed05639c3082c3"
+    },
+    {
+      "path": "reports/qni_diurnal_nos_v2/pages/02_model_explorer.html",
+      "bytes": 30551578,
+      "sha256": "763b7ad3d871d27093dfa930f89000bc32296ce63cce43c8deca5757a64281ff"
+    },
+    {
+      "path": "reports/qni_diurnal_nos_v2/pages/03_feature_fundamentals.html",
+      "bytes": 24226,
+      "sha256": "5b8b743acdb1115286893ae4c69d3dc51816ef7cf977dd851699ecf6149bfed4"
+    },
+    {
+      "path": "reports/qni_diurnal_nos_v2/pages/04_nos_outages.html",
+      "bytes": 7205416,
+      "sha256": "27870faa39e55a86fffa3ee15c7e3a5338609146c7358d3e3c45afa396e13817"
+    },
+    {
+      "path": "reports/qni_diurnal_nos_v2/pages/05_risk_and_refinements.html",
+      "bytes": 5906841,
+      "sha256": "23180c0b3c7cedfbf3074fc0c2964ac2ea9c612b371bf46e67a5726b0bab1ec5"
+    },
+    {
+      "path": "reports/qni_diurnal_nos_v2/pages/06_model_handoff.html",
+      "bytes": 37053,
+      "sha256": "21757e8e69f11c1fdc77782a2d78eb05cb7274a2c992a2b993f49ad8f8abafea"
+    },
+    {
+      "path": "reports/qni_diurnal_nos_v2/full_run/qni_diurnal_nos_model_report.html",
+      "bytes": 37232017,
+      "sha256": "e6adf1696182dc497e07cd1026404f506962160733ca8b83982a6828ee8e027a"
+    },
+    {
+      "path": "reports/qni_diurnal_nos_v2/full_run/nos_outage_impact_analysis.html",
+      "bytes": 4713819,
+      "sha256": "391762de6d28dbf31df8a6b334c98d7c6c88ac430a06e9c0b373f173b746ff0a"
+    },
+    {
+      "path": "reports/qni_diurnal_nos_v2/downloads/model_results.csv",
+      "bytes": 181949,
+      "sha256": "319615b96c4eb36b6315b992024119b5c60df995770b6b3d8887e608cb9ce5ba"
+    },
+    {
+      "path": "reports/qni_diurnal_nos_v2/downloads/artifact_catalog.csv",
+      "bytes": 967,
+      "sha256": "32ee5893bc62fddace46f0c6c3e33813b3dc40bd5da248195d3e6078fd5728b7"
+    },
+    {
+      "path": "reports/qni_diurnal_nos_v2/downloads/source_build.json",
+      "bytes": 67893,
+      "sha256": "5bc837254a9423c70ff5792458b2b0418f855c64e174cc8bf4721ac1f42c6c6f"
+    },
+    {
+      "path": "reports/qni_diurnal_nos_v2/downloads/nos_impact_build.json",
+      "bytes": 362,
+      "sha256": "a3acb898d6a7bc301fc8db6ac8f156769c30007f5acb43d58a61f6758839d0c2"
+    },
+    {
+      "path": "reports/qni_diurnal_nos_v2/downloads/research_performance.csv",
+      "bytes": 3214,
+      "sha256": "738cecff9bd3f6f6b8e730b841a5e1b035b0d07547790bb34a91496d13f4969c"
+    },
+    {
+      "path": "reports/qni_diurnal_nos_v2/downloads/research_feature_importance.csv",
+      "bytes": 570,
+      "sha256": "3475dc1b25f9fcfc508d88a9d9c009a028c97c4e53490ac2c2ee0909b13a6f1b"
+    },
+    {
+      "path": "reports/qni_diurnal_nos_v2/downloads/research_shap_importance.csv",
+      "bytes": 4625,
+      "sha256": "63554025b2cf74c08c140217ce544780dff78793e43dbf15d46527a79e8358e7"
+    },
+    {
+      "path": "reports/qni_diurnal_nos_v2/downloads/research_paper_build.json",
+      "bytes": 65937,
+      "sha256": "e2c54d1c9278aaca968308dd5eec0a8b6eefec978cd2dc986f70c332f006ff86"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "id": "vni-regional-export",
+  "version": "1",
+  "connectors": ["VNI"],
+  "target": "export",
+  "resolution_minutes": 30,
+  "lead_min": 1,
+  "lead_max": 336,
+  "recipe": "regional-v1",
+  "features": ["lead", "hour_sin", "hour_cos", "weekend", "source_demand", "sink_demand", "source_wind", "sink_wind", "source_solar", "sink_solar", "residual_difference"],
+  "max_age_hours": 48,
+  "sources": {"demand": "your-provider", "wind": "your-provider", "solar": "your-provider"}
+}

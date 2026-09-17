@@ -1,5 +1,5 @@
 """Render the pre-model NOS impact audit from frozen cached outputs."""
-import html,json,sys
+import argparse,html,json,sys
 from pathlib import Path
 import pandas as pd
 import plotly.graph_objects as go
@@ -13,12 +13,13 @@ def table(rows):
     return '<div class="table-wrap" tabindex="0">'+pd.DataFrame(rows).to_html(index=False,escape=True,float_format=lambda x:f'{x:,.2f}')+'</div>' if rows else '<p>No supported rows.</p>'
 
 
-def build():
-    c=load_config('configs/experiments/vni_diurnal_nos_v2.json');root=c['_run'];folder=root/'nos/impact/full_development'
+def build(config_path='configs/experiments/vni_diurnal_nos_v2.json'):
+    c=load_config(config_path);root=c['_run'];folder=root/'nos/impact/full_development'
+    connector=c['connectors'][0];name=connector['name'];identifier=connector['id']
     status=json.loads((folder/'status.json').read_text());rankings=json.loads((folder/'rankings.json').read_text())
-    body=hero('VNI network-outage research','Which scheduled outages coincide with','the largest directional-limit reductions',
+    body=hero(f'{name} network-outage research','Which scheduled outages coincide with','the largest directional-limit reductions',
         'Pre-model evidence distinguishes scheduled exposure, expected sets and adjusted limit associations. Results are exploratory development evidence.',
-        ['VNI · VIC1-NSW1','NOS snapshots · Aug 2025–Aug 2026','MW effects','No causal claim'])
+        [f'{name} · {identifier}','NOS snapshots · Aug 2025–Aug 2026','MW effects','No causal claim'])
     body+='<section class="metrics">'+metric('Candidate bookings',status['candidate_bookings'],'Known before scheduled start')+metric('Matched direction episodes',status['matched_direction_episodes'],'Isolated episodes with controls')+metric('Supported recurring entities',status['supported_recurring_entities'],'≥10 episodes across ≥3 months')+metric('O5 feature gate','Closed' if not status['O5_gate'] else 'Open',status['reason'])+'</section>'
     body+='<section><h2>Usually highest observed impact</h2><p>Ranked by median episode-level adjusted MW reduction. Positive values mean lower transfer capability. A shortlist entry requires recurring support, acceptable pre-trend balance and an effect larger than its matched pseudo-start placebo magnitude; leave-one-episode-out ranks show stability.</p>'+table(status['highest_impact'])
     supported=pd.DataFrame([r for r in rankings if r['supported_recurring']])
@@ -44,9 +45,11 @@ def build():
              if exclusions else [])
     body+='<section><h2>Identification and exclusions</h2><p>Controls are earlier same-clock, same-weekday windows with comparable pre-limit level/trend and operating state, and no mapped outage exposure. Concurrent mapped outages are excluded from individual attribution. Failed balance or insufficient controls produce unavailable results.</p>'+table(reasons)+'</section>'
     body+='<section><h2>Interpretation</h2><p>NOS lists expected constraint sets. It does not prove invocation or that a set determined the limit. Standing equation mappings are reconstructed retrospectively, so this report cannot establish live feature availability. O5 outcome-weighted features remain disabled until fold-local encodings and dependence/rank-stability gates pass.</p></section>'
-    out=root/'report/nos_outage_impact_analysis.html';out.parent.mkdir(parents=True,exist_ok=True);out.write_text(render_page('VNI NOS impact analysis',body),encoding='utf-8')
+    out=root/'report/nos_outage_impact_analysis.html';out.parent.mkdir(parents=True,exist_ok=True);out.write_text(render_page(f'{name} NOS impact analysis',body),encoding='utf-8')
     (out.parent/'nos_impact_build.json').write_text(json.dumps(clean({'status_sha256':digest(folder/'status.json'),'rankings_sha256':digest(folder/'rankings.json'),'report_sha256':digest(out),'generator_sha256':digest(__file__)}),indent=2)+'\n')
     print(out)
 
 
-if __name__=='__main__':build()
+if __name__=='__main__':
+    parser=argparse.ArgumentParser();parser.add_argument('--config',default='configs/experiments/vni_diurnal_nos_v2.json')
+    build(parser.parse_args().config)

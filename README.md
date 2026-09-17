@@ -16,6 +16,8 @@ Read `BUILD_PLAN.md` for the agreed specification and `BACKTEST_REPORT.md` for e
 
 - [Diurnal and NOS forecasting research](docs/QNI_VNI_DIURNAL_NOS_RESEARCH.md), [implementation plan](docs/QNI_VNI_DIURNAL_NOS_IMPLEMENTATION_PLAN.md) and [VNI execution guide](docs/VNI_DIURNAL_NOS_EXECUTION.md): delivery-period models, NOS vintage replay, data-profiled chronological optimization, MAPE/MAE reporting, model explanations and trained research-bundle handoff. Generated predictions, fitted models and reports remain local and reproducible from the execution guide.
 
+- [QNI diurnal/NOS execution guide](docs/QNI_DIURNAL_NOS_EXECUTION.md), [executed results](docs/QNI_DIURNAL_NOS_RESULTS.md), [saved-model guide](docs/QNI_SAVED_MODEL_GUIDE.md) and [published report centre](reports/qni_diurnal_nos_v2/index.html): the same v2 chronological research protocol rerun for `NSW1-QLD1`, with QNI-specific selection, NOS evidence, explanations and sixteen target × lead-band bundles. Reproduce the complete resumable campaign with `python scripts/run_qni_diurnal_nos_campaign.py`.
+
 The complete offline [HTML handbook](docs/html/index.html) includes the research, results, backtest protocol and improvement roadmap. Rebuild it with `python scripts/build_docs_html.py`. Open the downloaded file in a browser; GitHub's file view displays HTML source.
 
 Five interactive charts cover flow improvement versus persistence, import/export limit errors, interval coverage and restriction recall/precision. `docs/chart_data.json` is an intentionally included compact aggregate-score snapshot, not the raw dataset. Its source hash and the HTML build manifest preserve provenance. The HTML embeds Plotly and works offline; the Python dashboard remains a separate application.
@@ -66,3 +68,6 @@ The repository contains source code, Markdown documentation and the requested HT
 - The server binds only to `127.0.0.1:8050`; stopping that Python process stops the dashboard.
 
 HTTPS verification stays enabled. On Windows, `nemic/common.py` builds a local CA bundle from the operating system's trusted public certificates if necessary. The bundle is not committed.
+# Multi-interconnector forecasting scaffold
+
+See [the production pipeline guide](docs/PRODUCTION_PIPELINE_GUIDE.md) for provider mappings, model registration/routing, training, portable saved models, scenarios and offline HTML reports. Start with `python -m nemic.production --help` or the synthetic `demo` command. This scaffold does not deploy or schedule live forecasts.

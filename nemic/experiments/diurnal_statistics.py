@@ -77,15 +77,21 @@ def run_statistics(config_path=CONFIG):
             for block in (7,14):
                 rows.append({'target':target,'control':control,**paired_improvement(f,'selected_policy',control,block)})
     primary=[r for r in rows if r.get('block_days')==7]
-    for r,p in zip(primary,holm([r['p_one_sided'] for r in primary])):r['holm_p_vni_family']=float(p)
+    for r,p in zip(primary,holm([r['p_one_sided'] for r in primary])):
+        # Keep the historical key for cached VNI report compatibility while
+        # exposing a connector-neutral field for all subsequent campaigns.
+        r['holm_p_family']=float(p)
+        r['holm_p_vni_family']=float(p)
     common=['persistence','seasonal_daily','seasonal_weekly']+[f'T{i}_mae' for i in range(7)]
     common=[name for name in common if all(name in f.columns for f in frames)]
     mcs=[]
     for target,f in combined.groupby('target'):
         for block in (7,14):mcs.append({'target':target,**model_confidence_set(f,common,block)})
+    connector=c['connectors'][0]
     store.json(store.root/'statistics.json',{'comparisons':rows,
         'mcs90':mcs,
-        'multiplicity':'VNI-only execution: four primary hypotheses (two directions × two controls); QNI not silently treated as tested',
+        'connector':connector['name'],
+        'multiplicity':f"{connector['name']}-only execution: four primary hypotheses (two directions × two controls); other connectors are not silently treated as tested",
         'claim':'Development-only bootstrap evidence; no independent confirmation',
         'control_limitations':'T0 is the corrected shared full-feature ridge. Full legacy candidate/blend-policy bridge must be reported separately.'})
 

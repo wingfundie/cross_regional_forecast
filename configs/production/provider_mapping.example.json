@@ -1,0 +1,10 @@
+{
+  "source": "your-provider",
+  "columns": {"issue": "forecast_issued", "received": "received_at", "delivery": "interval_end", "region": "region", "variable": "variable", "value": "forecast"},
+  "timezone": "Australia/Brisbane",
+  "interval_minutes": 30,
+  "interval_label": "end",
+  "regions": {"Victoria": "VIC1", "NSW": "NSW1"},
+  "variables": {"Demand": "demand", "Wind": "wind", "Solar": "solar"},
+  "units": {"demand": "MW", "wind": "MW", "solar": "MW", "temperature": "C"}
+}

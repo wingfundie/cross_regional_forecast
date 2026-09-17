@@ -1,4 +1,4 @@
-"""Bounded VNI refinements after calendar and NOS recipe selection."""
+"""Bounded connector refinements after calendar and NOS recipe selection."""
 import json
 import numpy as np
 import pandas as pd
@@ -80,7 +80,9 @@ def run_refinements(config_path=CONFIG):
                 'operationally_eligible':False})
             payload={'fold':fold.dict(),'target':target,'base_nos_policy':winner,'winner':selected,'selection':selection,
                 'scores':scores,'parameters':settings,
-                'cross_connector_partial_pooling':{'status':'pending QNI execution','reason':'VNI-first run has no second connector to pool'},
+                'cross_connector_partial_pooling':{
+                    'status':'not executed in single-connector campaign',
+                    'reason':'A paired, jointly fitted VNI–QNI design is required; separate completed campaigns do not constitute partial pooling.'},
                 'claim':'Post-selection bounded refinements; gains are not attributed to diurnal or NOS main effects'}
             store.json(folder/'result.json',payload);store.complete(ident,fp,folder/'result.json')
             print('REFINEMENT',fold.name,target,selected,flush=True)

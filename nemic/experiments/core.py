@@ -141,7 +141,16 @@ class Store:
         p=self.owned(path);base=(self.root/'scratch').resolve()
         if not p.is_relative_to(base) or p==base:raise ValueError('Deletion requires an explicit scratch child')
         if p.is_dir():raise ValueError('Delete explicit scratch files, not directories')
-        if p.exists():p.unlink()
+        # Windows can briefly retain an archive handle after ZIP parsing (or
+        # while an antivirus scanner inspects it). Retry boundedly so a fully
+        # recovered batch is not marked failed solely by transient cleanup.
+        for attempt in range(20):
+            try:
+                if p.exists():p.unlink()
+                return
+            except PermissionError:
+                if attempt == 19:raise
+                time.sleep(.25)
 
 
 def source_item(p,role):
