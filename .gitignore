@@ -8,6 +8,7 @@ execution/**/STATUS.md
 execution/**/checkpoints/
 execution/**/manifests/
 execution/**/logs/
+execution/**/execution_plan.json
 execution/**/handoff.md*
 execution/**/methodology/versions/
 execution/**/*.tmp
