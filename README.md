@@ -14,6 +14,8 @@ Read `BUILD_PLAN.md` for the agreed specification and `BACKTEST_REPORT.md` for e
 
 ## Documentation
 
+- [Quarterly interregional valuation research](reports/interregional_valuation_research_20260918/Quarterly_Interregional_Valuation_Research.html) and [research package guide](reports/interregional_valuation_research_20260918/README.md): interactive energy-versus-scarcity decomposition, joint regional price states, scarcity frequency and severity, an illustrative futures/SRA valuation workbench, 32 external references, and a staged implementation design. The checked-in CSVs are compact aggregate evidence used by the report; raw market archives remain local and excluded from Git.
+
 - [Diurnal and NOS forecasting research](docs/QNI_VNI_DIURNAL_NOS_RESEARCH.md), [implementation plan](docs/QNI_VNI_DIURNAL_NOS_IMPLEMENTATION_PLAN.md) and [VNI execution guide](docs/VNI_DIURNAL_NOS_EXECUTION.md): delivery-period models, NOS vintage replay, data-profiled chronological optimization, MAPE/MAE reporting, model explanations and trained research-bundle handoff. Generated predictions, fitted models and reports remain local and reproducible from the execution guide.
 
 - [QNI diurnal/NOS execution guide](docs/QNI_DIURNAL_NOS_EXECUTION.md), [executed results](docs/QNI_DIURNAL_NOS_RESULTS.md), [saved-model guide](docs/QNI_SAVED_MODEL_GUIDE.md) and [published report centre](reports/qni_diurnal_nos_v2/index.html): the same v2 chronological research protocol rerun for `NSW1-QLD1`, with QNI-specific selection, NOS evidence, explanations and sixteen target × lead-band bundles. Reproduce the complete resumable campaign with `python scripts/run_qni_diurnal_nos_campaign.py`.

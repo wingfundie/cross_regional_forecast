@@ -1,0 +1,83 @@
+const fs=require('node:fs');
+const path=require('node:path');
+const {pathToFileURL}=require('node:url');
+const {createRequire}=require('node:module');
+const modules=process.argv[2]||path.join(process.env.USERPROFILE,'.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules');
+const req=createRequire(path.join(modules,'_qa_resolver.cjs'));
+const {chromium}=req('playwright');
+const root=__dirname;
+const assert=(v,message)=>{if(!v)throw new Error(message);};
+(async()=>{
+ const browser=await chromium.launch({headless:true});
+ const page=await browser.newPage({viewport:{width:1440,height:1100},deviceScaleFactor:1});
+ const errors=[],requests=[];
+ page.on('pageerror',e=>errors.push(e.message));
+ page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
+ await page.route(/^https?:/,route=>{requests.push(route.request().url());route.abort();});
+ await page.goto(pathToFileURL(path.join(root,'Quarterly_Interregional_Valuation_Research.html')).href,{waitUntil:'load'});
+ await page.waitForSelector('html.ready',{timeout:30000});
+ await page.addStyleTag({content:'html{scroll-behavior:auto!important}*{animation:none!important;transition:none!important}'});
+ const screenAt=async(selector,file)=>{await page.locator(selector).evaluate(el=>el.scrollIntoView({behavior:'instant',block:'start'}));await page.screenshot({path:path.join(root,'qa',file),animations:'disabled'});};
+ await page.screenshot({path:path.join(root,'qa','desktop_hero.png')});
+ await screenAt('#historicalExplorer','desktop_history.png');
+ const chapterCount=await page.locator('details.chapter').count();assert(chapterCount===26,'All 26 chapters present');
+ const integrity=await page.evaluate(()=>{
+   const ids=[...document.querySelectorAll('[id]')].map(e=>e.id);
+   const missing=[...document.querySelectorAll('a[href^="#"]')].map(e=>e.getAttribute('href').slice(1)).filter(id=>!document.getElementById(id));
+   return {duplicates:ids.filter((id,i)=>ids.indexOf(id)!==i),missing,overflow:document.documentElement.scrollWidth>innerWidth,width:innerWidth,scrollWidth:document.documentElement.scrollWidth,offenders:[...document.querySelectorAll('body *')].filter(e=>e.getBoundingClientRect().right>innerWidth+1&&e.getBoundingClientRect().width>0).slice(0,12).map(e=>({element:e.id||e.className||e.tagName,right:e.getBoundingClientRect().right,width:e.getBoundingClientRect().width})),downloads:document.querySelectorAll('a[download]').length,externalSources:document.querySelectorAll('.source-entry').length};
+ });
+ assert(!integrity.duplicates.length,'Duplicate anchors: '+integrity.duplicates);
+ assert(!integrity.missing.length,'Missing anchors: '+integrity.missing);
+ assert(!integrity.overflow,'Desktop document overflow '+JSON.stringify(integrity));assert(integrity.downloads===6,'Embedded downloads');
+ assert(await page.locator('img:not([src^="data:"])').count()===0,'Every research figure is embedded');
+ console.log('Desktop layout, anchors and embedded assets passed.');
+ await page.selectOption('#quarter','2024Q4');
+ await page.selectOption('#direction','0');
+ const forwardHours=await page.locator('#regimeBody tr td:nth-child(2)').allTextContents();
+ await page.selectOption('#direction','1');
+ const reverseHours=await page.locator('#regimeBody tr td:nth-child(2)').allTextContents();
+ assert(forwardHours[1]===reverseHours[2]&&forwardHours[2]===reverseHours[1]&&forwardHours[0]===reverseHours[0]&&forwardHours[3]===reverseHours[3],'Reversal exchanges origin-only and destination-only states');
+ const expected=await page.evaluate(()=>DATA.spreads.filter(r=>r.complete));
+ let combinations=0;
+ for(let d=0;d<6;d++){
+   await page.selectOption('#direction',String(d));
+   for(const q of ['2024Q4','2025Q1','2025Q2','2025Q3','2025Q4','2026Q1','2026Q2']){
+     await page.selectOption('#quarter',q);
+     const check=await page.evaluate(()=>{const r=route(),v=DATA.spreads.find(x=>x.complete&&x.direction===r.base&&x.quarter===$('quarter').value);const total=$('totalValue').textContent;const states=[...document.querySelectorAll('#regimeBody tr')];return {correct:total===money(v.spread*r.sign),states:states.length};});
+     assert(check.correct&&check.states===4,'Direction / quarter numerical test');combinations++;
+   }
+ }
+ for(const r of ['NSW1','QLD1','SA1','VIC1']){await page.selectOption('#region',r);await page.selectOption('#eventQuarter','2026Q1');assert((await page.textContent('#eventHours')).includes('h'),'Region control');}
+ console.log('All 42 direction/quarter combinations and regional controls passed.');
+ const calc=await page.evaluate(()=>({total:$('marketTotal').textContent,energy:$('marketEnergy').textContent,scarcity:$('marketScarcity').textContent,edge:$('marketEdge').textContent,hours:$('impliedHours').textContent,unit:$('unitEdge').textContent}));
+ assert(calc.total==='$34.00'&&calc.energy==='$18.00'&&calc.scarcity==='$16.00'&&calc.edge==='$5.00','Market decomposition');
+ assert(calc.hours==='22.08 hours'&&calc.unit==='$650.00 / unit','Illustrative sensitivity / SRA bridge');
+ await page.fill('#severity','4000');assert((await page.textContent('#impliedHours'))==='11.04 hours','Inverse severity relationship');
+ await page.fill('#capB','-1');assert(await page.locator('#calcError').isVisible(),'Invalid input visibly rejected');
+ await page.click('#resetInputs');assert(!(await page.locator('#calcError').isVisible()),'Reset clears invalid state');
+ await page.click('#collapseChapters');assert(await page.locator('details.chapter[open]').count()===0,'Collapse chapters');
+ await page.evaluate(()=>jump('source-S04'));assert(await page.locator('#source-S04').isVisible(),'Citation opens collapsed source chapter');
+ await page.click('#expandChapters');assert(await page.locator('details.chapter[open]').count()===26,'Expand chapters');
+ await page.fill('#reportSearch','entropy');assert(await page.locator('#searchResults button').count()>0,'Full text search');
+ await page.fill('#reportSearch','');
+ await page.selectOption('#direction','0');await page.selectOption('#quarter','2024Q4');await page.selectOption('#region','SA1');await page.selectOption('#eventQuarter','2026Q1');
+ await screenAt('#eventExplorer','desktop_events.png');
+ await screenAt('#valuationLab','desktop_workbench.png');
+ await page.locator('#chapter-8').scrollIntoViewIfNeeded();await page.screenshot({path:path.join(root,'qa','desktop_methods.png')});
+ await page.locator('#source-S01').scrollIntoViewIfNeeded();await page.screenshot({path:path.join(root,'qa','desktop_sources.png')});
+ await page.setViewportSize({width:390,height:844});await page.evaluate(()=>window.scrollTo(0,0));await page.waitForTimeout(700);
+ await page.screenshot({path:path.join(root,'qa','mobile_hero.png')});
+ const overflow=await page.evaluate(()=>({width:innerWidth,scroll:document.documentElement.scrollWidth,offenders:[...document.querySelectorAll('body *')].filter(e=>e.getBoundingClientRect().right>innerWidth+1&&e.getBoundingClientRect().width>0&&e.tagName!=='svg'&&!e.closest('.js-plotly-plot')).slice(0,30).map(e=>({element:e.id||e.className||e.tagName,width:e.getBoundingClientRect().width,right:e.getBoundingClientRect().right,overflow:getComputedStyle(e).overflowX}))}));
+ assert(overflow.scroll<=overflow.width,'Mobile document overflow '+JSON.stringify(overflow));
+ await screenAt('#historicalExplorer','mobile_history.png');
+ await screenAt('#valuationLab','mobile_workbench.png');
+ await page.locator('#fullResearch').scrollIntoViewIfNeeded();await page.screenshot({path:path.join(root,'qa','mobile_reading.png')});
+ console.log('Mobile layout passed with no document overflow.');
+ await page.setViewportSize({width:1440,height:1100});
+ await page.emulateMedia({media:'print'});
+ await page.pdf({path:path.join(root,'qa','print_check.pdf'),format:'A4',printBackground:true,margin:{top:'12mm',bottom:'12mm',left:'12mm',right:'12mm'}});
+ assert(!errors.length,'Browser errors '+errors.join('; '));assert(!requests.length,'External rendering dependencies '+requests.join('; '));
+ const result={passed:true,chapterCount,integrity,directionQuarterCombinations:combinations,calc,browserErrors:errors,externalRenderingRequests:requests,mobile:overflow,checked:['six directions, seven complete quarters','four regional selectors','payoff identities','severity sensitivity','invalid inputs and reset','source navigation and chapter expansion','full research search','offline render','desktop and mobile screenshots','print PDF']};
+ fs.writeFileSync(path.join(root,'qa','browser_checks.json'),JSON.stringify(result,null,2));
+ console.log(JSON.stringify(result,null,2));await browser.close();
+})().catch(e=>{console.error(e);process.exit(1);});
