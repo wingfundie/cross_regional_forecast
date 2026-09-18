@@ -17,6 +17,9 @@ def predict(manifest, folder, features, delivery, bundle=None):
         point = np.asarray(predict_bundle(bundle, features), dtype=float)
         group = int(periods(pd.DatetimeIndex([delivery]))[0])
         adjustments = np.asarray(bundle["period_adjustments"][group])
+    elif manifest["adapter"] == "fundamentals-v3":
+        from nemic.fundamentals.packaging import predict as predict_fundamentals
+        return predict_fundamentals(bundle, features)
     elif manifest["adapter"] == "sklearn":
         from threadpoolctl import threadpool_limits
         with threadpool_limits(limits=1):
@@ -55,7 +58,7 @@ def forecast(registry, policy, inputs, *, origin, connectors, days=1, targets=TA
                            eligibility=None, selection=None, forecast_mw=np.nan,
                            **{column: np.nan for column in QCOLS})
                 source, sink = CONNECTORS[name][1:]
-                row["direction"] = f"{source} → {sink}" if target.startswith("export") else f"{sink} → {source}"
+                row["direction"] = f"{source} → {sink}" if target.startswith("export") or target == "flow" else f"{sink} → {source}"
                 failures = []
                 for rank, key in enumerate(registry.candidates(policy, name, target, lead)):
                     try:
@@ -68,7 +71,7 @@ def forecast(registry, policy, inputs, *, origin, connectors, days=1, targets=TA
                         cutoff = m.get("calibration_end") or m.get("training_cutoff")
                         if cutoff and origin <= pd.Timestamp(cutoff):
                             raise ValueError("Model/calibration contains outcomes at or after forecast origin")
-                        if m["recipe"] == "legacy-vni-v1":
+                        if m["recipe"] in {"legacy-vni-v1", "fundamentals-v3"}:
                             if prepared is None:
                                 raise ValueError("Prepared legacy features required")
                             f = prepared[(prepared.connector == name) & (prepared.target == target)
@@ -76,7 +79,7 @@ def forecast(registry, policy, inputs, *, origin, connectors, days=1, targets=TA
                             if len(f) != 1:
                                 raise ValueError("Exactly one target-specific prepared row required")
                             f = f[m["features"]].astype(float)
-                            if not np.isfinite(f.to_numpy()).all():
+                            if m["recipe"] == "legacy-vni-v1" and not np.isfinite(f.to_numpy()).all():
                                 raise ValueError("Non-finite prepared features")
                         else:
                             f = build(m, origin, delivery, name, inputs, history, context=context)

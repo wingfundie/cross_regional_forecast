@@ -1,0 +1,20 @@
+{
+  "schema_version": 2,
+  "campaign": "qni_vni_fundamentals_v3",
+  "root": "data/forecast_experiments",
+  "tracking_root": "execution/qni_vni_fundamentals_v3",
+  "start": "2024-09-08", "end": "2026-09-01", "seed": 741,
+  "connectors": [
+    {"id": "NSW1-QLD1", "name": "QNI", "regions": ["NSW1", "QLD1"], "study": "constraint_qni_2y", "atlas": "event_qni_2y"},
+    {"id": "VIC1-NSW1", "name": "VNI", "regions": ["VIC1", "NSW1"], "study": "constraint_vni_2y", "atlas": "event_vni_2y"}
+  ],
+  "targets": ["flow", "export", "import", "export_tight", "import_tight"],
+  "leads": [1,2,4,8,12,24,48,72,96,144,192,240,288,336],
+  "bands": [[1,12],[13,48],[49,144],[145,336]],
+  "limits": {"additional_bytes": 50000000000, "min_free_bytes": 20000000000, "file_bytes": 600000000, "expanded_bytes": 3000000000, "workers": 2, "threads": 2, "batch_hours": 12, "modelling_hours": 48},
+  "performance": {"feature_backend": "date_sharded_pyarrow_v1", "partition_days": 1, "feature_workers": 2, "feature_threads": 1, "model_workers": 2, "model_threads": 2, "memory_bytes": 8000000000, "soft_batch_hours": 12, "single_worker_speedup": 5.0, "two_worker_speedup": 7.0},
+  "weather": {"providers": ["bom_access_global", "ecmwf_ifs"], "variables": ["temperature_2m", "relative_humidity_2m", "wind_speed_10m", "shortwave_radiation", "cloud_cover"], "forecast_days": 8, "daily_call_budget": 8000, "historical_provenance": "hindcast_or_unverified", "assumed_delay_hours": 8},
+  "folds": {"train_days": 60, "select_days": 14, "calibrate_days": 14, "alert_days": 14, "evaluate_days": 28},
+  "acceptance": {"mae_skill": 0.02, "overstatement_margin": 0.02, "recall_margin_pp": 2, "false_alerts_per_day": 3, "min_evaluation_weeks": 8, "min_incidents": 30},
+  "feature_version": "fundamentals-v3.0"
+}

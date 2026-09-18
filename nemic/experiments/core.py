@@ -60,7 +60,10 @@ def code_manifest():
 class Store:
     def __init__(self,c):
         self.c=c;self.root=c['_run'];self.root.mkdir(parents=True,exist_ok=True)
-        self.db=self.root/'ledger.sqlite'
+        self.tracking_root=(ROOT/c['tracking_root']).resolve() if c.get('tracking_root') else self.root
+        if c.get('tracking_root') and not self.tracking_root.is_relative_to(ROOT):raise ValueError('Tracking directory outside workspace')
+        self.tracking_root.mkdir(parents=True,exist_ok=True)
+        self.db=self.tracking_root/'ledger.sqlite'
         self.budget_db=self.root.parent/'budget.sqlite'
         with self.connection() as con:
             con.executescript('CREATE TABLE IF NOT EXISTS reservations (id TEXT PRIMARY KEY, bytes INTEGER, pid INTEGER, created REAL); CREATE TABLE IF NOT EXISTS trials (id TEXT PRIMARY KEY, fingerprint TEXT, status TEXT, output TEXT, hash TEXT, detail TEXT, updated REAL);')

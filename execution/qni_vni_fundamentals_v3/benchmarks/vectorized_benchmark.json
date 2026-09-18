@@ -1,0 +1,30 @@
+{
+  "baseline_rows_per_second": 3.673,
+  "single_worker": {
+    "rows": 8863,
+    "seconds": 443.6720000000205,
+    "rows_per_second": 19.976469103300616,
+    "speedup": 5.438733760767932
+  },
+  "two_workers": {
+    "rows": 19034,
+    "seconds": 618.2809999999881,
+    "rows_per_second": 30.785354879092782,
+    "speedup": 8.381528690196783
+  },
+  "disk_free_bytes": 219307868160,
+  "gates": {
+    "single_5x": true,
+    "two_7x": true,
+    "disk_20gb": true
+  },
+  "golden": {
+    "status": "passed",
+    "days": 7,
+    "rows": 4271,
+    "keys": true,
+    "categorical": true,
+    "numeric": true,
+    "missingness": true
+  }
+}

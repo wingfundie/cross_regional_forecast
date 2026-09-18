@@ -52,7 +52,9 @@ def render_page(title, body_html, *, plotly=True, accent='purple'):
     elif accent!='purple':
         raise ValueError('accent must be purple or blue')
     runtime=''
-    if plotly:
+    if isinstance(plotly,str):
+        runtime=f'<script src="{escape(plotly,quote=True)}"></script>'
+    elif plotly:
         from plotly.offline import get_plotlyjs
         runtime='<script>'+get_plotlyjs()+'</script>'
     return ('<!doctype html><html lang="en"><head><meta charset="utf-8">'

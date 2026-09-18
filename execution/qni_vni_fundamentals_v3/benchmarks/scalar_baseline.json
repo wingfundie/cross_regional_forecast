@@ -1,0 +1,19 @@
+{
+  "captured_at": "2026-09-18T00:08:00+08:00",
+  "implementation": "scalar-whole-history-v1",
+  "connector": "QNI",
+  "started_utc": "2026-09-17T13:44:40.419148+00:00",
+  "stopped_after_partition_utc": "2026-09-17T16:07:58.836181+00:00",
+  "completed_origin_days": 47,
+  "completed_origins": 2256,
+  "configured_leads": 14,
+  "attempted_rows": 31584,
+  "elapsed_seconds": 8598.4,
+  "origins_per_second": 0.2624,
+  "attempted_rows_per_second": 3.673,
+  "private_memory_gb": 3.88,
+  "working_set_gb": 1.02,
+  "cpu_observation": "85-93% of one logical processor counter",
+  "disk_busy_observation": "1-3%",
+  "legacy_partition_policy": "Preserved as golden-reference evidence; never mixed into optimized generation"
+}

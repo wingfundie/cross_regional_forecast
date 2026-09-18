@@ -1,5 +1,17 @@
 data/
 models/
+execution/**/ledger.sqlite*
+execution/**/events.jsonl
+execution/**/status.json
+execution/**/status.html
+execution/**/STATUS.md
+execution/**/checkpoints/
+execution/**/manifests/
+execution/**/logs/
+execution/**/handoff.md*
+execution/**/methodology/versions/
+execution/**/*.tmp
+reports/qni_vni_fundamentals_v3/
 results/predictions/
 results/validation_predictions/
 *.log

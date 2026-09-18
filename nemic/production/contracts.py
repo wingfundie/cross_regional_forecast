@@ -11,7 +11,7 @@ CONNECTORS = {
     "Murraylink": ("V-S-MNSP1", "VIC1", "SA1"),
     "Basslink": ("T-V-MNSP1", "TAS1", "VIC1"),
 }
-TARGETS = ("export", "import", "export_tight", "import_tight")
+TARGETS = ("export", "import", "export_tight", "import_tight", "flow")
 QUANTILES = (.025, .1, .5, .9, .975)
 QCOLS = ("p02_5_mw", "p10_mw", "p50_mw", "p90_mw", "p97_5_mw")
 
