@@ -1,6 +1,6 @@
 # Quarterly interregional valuation research
 
-Open `Quarterly_Interregional_Valuation_Research.html` in a modern browser. It is the final deliverable. Charts, styles, JavaScript, research text and six data/text downloads are embedded, so the report works offline. External academic and market-rule links require an internet connection.
+Open `Quarterly_Interregional_Valuation_Research.html` in a modern browser. It is the final deliverable. Nine interactive charts, three explanatory diagrams, styles, JavaScript, research text and six data/text downloads are embedded, so the report works offline. External academic and market-rule links require an internet connection.
 
 The presentation adapts the navy title band, white research pages, compact side notes and numbered exhibits of the two PDFs supplied by the user. It does not reproduce the reference issuers' identities or their oil research.
 
@@ -20,13 +20,13 @@ Run from this directory:
 python build_html.py --node PATH_TO_NODE --marked PATH_TO_MARKED_ESM
 ```
 
-Python requires Plotly and Beautiful Soup. The defaults locate the Codex bundled Node and Marked runtime on this computer. `report_theme.py` and `report.css` are project-local copies of the editorial report helper; `institutional.css` adapts the layout to the user-supplied references. `report_interactions.js` implements the three exhibits and research navigation. The build does not acquire new prices or update research claims.
+Python requires Plotly and Beautiful Soup. The defaults locate the Codex bundled Node and Marked runtime on this computer. `report_theme.py` and `report.css` are project-local copies of the editorial report helper; `institutional.css` adapts the layout to the user-supplied references. `report_interactions.js` implements the nine interactive charts and research navigation. The build does not acquire new prices or update research claims.
 
 `report_manifest.json` records the build time, research/data cutoffs, input hashes, output hash and dependencies. `research_report.md` is the full research source. `analyse_history.py` calculates the historical results from the existing project price and flow archives; it additionally requires pandas and pyarrow. Review its repository input paths before running it on another machine.
 
 ## Verification
 
-`qa_report.cjs` uses Playwright to check the offline report, all six directions across seven quarters, region controls, payoff identities, sensitivity calculations, input errors/reset, citation navigation, full-text chapter search, embedded downloads and desktop/mobile overflow. It saves screenshots and `qa/browser_checks.json`. The QA PDF is only a print-layout check; the requested final deliverable is HTML.
+`qa_report.cjs` uses Playwright to check the offline report, all six directions across seven quarters, region controls, payoff identities, sensitivity calculations, all nine interactive charts, the three explanatory diagrams, input errors/reset, citation navigation, full-text chapter search, embedded downloads and desktop/mobile overflow. It saves screenshots and `qa/browser_checks.json`. The QA PDF is only a print-layout check; the requested final deliverable is HTML.
 
 ```text
 node qa_report.cjs PATH_TO_NODE_MODULES
