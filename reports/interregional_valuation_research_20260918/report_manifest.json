@@ -1,0 +1,48 @@
+{
+  "research_cutoff": "2026-09-18",
+  "historical_end_inclusive": "2026-09-01 00:00:00 UTC+10",
+  "presentation_built_utc": "2026-09-18T07:35:50.022203+00:00",
+  "output": "Quarterly_Interregional_Valuation_Research.html",
+  "theme": "editorial-html-report/1.0, locally adapted to the two supplied institutional research PDF references",
+  "sources_count": 32,
+  "chapters_count": 26,
+  "complete_quarters": [
+    "2024Q4",
+    "2025Q1",
+    "2025Q2",
+    "2025Q3",
+    "2025Q4",
+    "2026Q1",
+    "2026Q2"
+  ],
+  "dependencies": {
+    "python": "3.x",
+    "plotly": "7.1.0",
+    "beautifulsoup4": "installed",
+    "node": "C:\\Users\\HomePC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+    "marked": "C:\\Users\\HomePC\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\node_modules\\marked\\lib\\marked.esm.js"
+  },
+  "rebuild": "python build_html.py [--node PATH_TO_NODE --marked PATH_TO_MARKED_ESM]",
+  "data_rebuild": "python analyse_history.py (requires pandas, pyarrow and archived project inputs)",
+  "inputs_sha256": {
+    "research_report.md": "988f9e1d0c8ec2ed0cbe4c12fd55ac3e0a534ca3c41f913585e01e19ad3ea5eb",
+    "historical_audit.json": "bb60a7a546fda19abe36b179df8619bc80cc4ef46483b3832854a0a1b156e2e5",
+    "historical_spread_decomposition.csv": "8977c6121905c37ff93f3a2aa7f0442be53611d1cface128627b4ae9da1d45c6",
+    "historical_regional_decomposition.csv": "9aebb3beb4fe37660392a408659ff4065ac5b5959f4ef2e70c7d0507df738bce",
+    "historical_joint_regimes.csv": "377e2e071f72fc372d9631648f0ce5bc595fcb5e9972fdaac79bc333434ca376",
+    "historical_flow_diagnostics.csv": "e5bdb14f994c1d0e0894960d20eee79af656111f435dfb11ee35f9f97c44cc00",
+    "report_theme.py": "035ed645c3510b2d552be6d152eb96c9b026058d8cab129f87e7dd6c2699c815",
+    "report.css": "1215f17336b7d5034354e4ba37d25652ce2f1ef4bd1ff93df57b22f06121461e",
+    "institutional.css": "c7dcc9c9175ee614399d8595efc22062e6f2a9f2524861bcd27c876d788f847d",
+    "report_interactions.js": "e6e82a294772de0020024ca403cbd0c037bba614beeaaf0bef9b8379e7e15004",
+    "convert_markdown.mjs": "e39f69970e64186ea325f4761dd6ec63c62aaca590606ac2849a829c5df685b2",
+    "build_html.py": "f709b83b5810eb05d658562a7a9623f741aaa80b39f03fa3f5882fa08bb48d80",
+    "figures/quarterly_spreads.png": "15d03535de585f9b4da214c8e423a3f3565d948cd41462a4276e509121d67385"
+  },
+  "output_sha256": "9dc630573cf28976f134c29ce82594ee4efa3bc5551f5a27a5f30c856b3accf2",
+  "notes": [
+    "No market data refreshed during presentation build.",
+    "Charts, scripts, styles and downloads are embedded. External references require internet access.",
+    "Historical data are descriptive, not a forecast or an independently reconciled exchange settlement series."
+  ]
+}

@@ -1,0 +1,3 @@
+# The self-contained report embeds minified Plotly JavaScript and chart data.
+# Treat it as a publication artifact so Git does not attempt a multi-megabyte text diff.
+reports/interregional_valuation_research_20260918/Quarterly_Interregional_Valuation_Research.html -diff

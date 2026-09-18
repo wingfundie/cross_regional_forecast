@@ -28,6 +28,9 @@ results/
 local_exports/
 .codex-remote-attachments/
 
+# Local visual QA for the published interregional valuation report.
+reports/interregional_valuation_research_20260918/qa/
+
 # Retain only compact, reproducible forecasting research evidence under docs/data.
 !docs/data/
 docs/data/*

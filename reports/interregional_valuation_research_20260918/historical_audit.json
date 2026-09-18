@@ -1,0 +1,30 @@
+{
+  "start_exclusive": "2024-09-01 00:00:00",
+  "end_inclusive": "2026-09-01 00:00:00",
+  "intervals": 210240,
+  "regions": [
+    "NSW1",
+    "QLD1",
+    "SA1",
+    "VIC1"
+  ],
+  "conflicting_prices": 0,
+  "price_identity_max_error": 0.0,
+  "apc_flag_rows": 95,
+  "suspended_rows": 146,
+  "source_files": [
+    {
+      "path": "data\\event_vni_2y\\prices_5min.parquet",
+      "sha256": "8e4b53c3f63a61233fe7ebaabf7a40a552b0c8b343ac578b74e02fe21b24a6c1"
+    },
+    {
+      "path": "data\\event_qni_2y\\prices_5min.parquet",
+      "sha256": "257735cca7d752b8c2851475d8697449404d30f54c0070d6bae76ef527fdfd55"
+    },
+    {
+      "path": "data\\event_vsa_2y\\prices_5min.parquet",
+      "sha256": "da39f424f345cf3160bedaf6bbe9295e5a1a1007fba83c7f241ba3b12f432424"
+    }
+  ],
+  "caveat": "Descriptive archived dispatch prices and flows. No independent settlement-price revision audit, losses, SRA allocation or forecast backtest."
+}
