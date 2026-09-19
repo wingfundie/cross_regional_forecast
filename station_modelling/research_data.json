@@ -7,27 +7,27 @@
       "ORIGINAL_BASE_AUD_GJ": 3.6,
       "ORIGINAL_LOW_AUD_GJ": 3.2,
       "ORIGINAL_HIGH_AUD_GJ": 4.1241,
-      "BASE_AUD_GJ": 3.6,
-      "LOW_AUD_GJ": 3.2,
+      "BASE_AUD_GJ": 4.2,
+      "LOW_AUD_GJ": 3.6,
       "HIGH_AUD_GJ": 5.5,
-      "CHANGE_AUD_GJ": 0.0,
-      "PRICE_SOURCE_TYPE": "RETAIN_PRIOR_FLEET_CONSTRAINED",
+      "CHANGE_AUD_GJ": 0.6,
+      "PRICE_SOURCE_TYPE": "AGL_FY26_FLEET_RESIDUAL_PROXY",
       "CONFIDENCE": "LOW",
       "PRODUCTION_STATUS": "ACTIVE_ASSET_NOT_LIVE_AVAILABILITY",
       "MODEL_INPUT_STATUS": "PROVISIONAL_ANALYST_ASSUMPTION",
       "PRICE_BASIS": "DELIVERED_STATION_AVERAGE_FUEL_COST_TARGET",
       "REAL_BASE_DATE": "2025-06-30",
-      "EVIDENCE_CUTOFF": "2026-09-15",
+      "EVIDENCE_CUTOFF": "2026-09-19",
       "ASSUMPTION_HORIZON": "NEAR_TERM_USING_LATEST_KNOWN_REGIME",
       "SUPPLY_REGIME": "Wilpinjong legacy open-book plus other contracted Hunter supply",
       "ORIGINAL_GROSS_BETA_REFERENCE": 0.6375,
       "VERIFIED_EXPORT_PRICE_WEIGHT": null,
       "CURRENT_PUBLIC_STATION_PRICE_AUD_GJ": null,
-      "HISTORICAL_OR_PROXY_ANCHOR_AUD_GJ": null,
-      "SELECTION_METHOD": "RETAIN_PRIOR_FLEET_CONSTRAINED",
-      "SOURCE_IDS": "S01;S02;S03;S04",
-      "SOURCE_URL": "https://www.sec.gov/Archives/edgar/data/1064728/000106472826000006/btu_20251231xex962.htm | https://announcements.asx.com.au/asxpdf/20250813/pdf/06mtcw5jhkzf4t.pdf | https://www.agl.com.au/content/dam/digital/agl/documents/about-agl/company-docs/250813-2-agl-energy-limited-annual-report-2025.pdf | https://www.agl.com.au/content/dam/digital/agl/documents/about-agl/news-centre/2026/260211-appendix-4d-and-fy26-half-year-report.pdf",
-      "NOTES": "Retain 3.60 as provisional prior; fleet reconciliation cannot identify station price. Increase high to 5.50 for contract roll-off and higher recent cost. Wilpinjong contract ends 2028, not universal FY2030. Current mine and export-linked energy weights unavailable.",
+      "HISTORICAL_OR_PROXY_ANCHOR_AUD_GJ": 4.17161263401912,
+      "SELECTION_METHOD": "AGL_FY26_FLEET_RESIDUAL_PROXY",
+      "SOURCE_IDS": "S01;S02;S48;S49;S50",
+      "SOURCE_URL": "https://www.sec.gov/Archives/edgar/data/1064728/000106472826000006/btu_20251231xex962.htm | https://announcements.asx.com.au/asxpdf/20250813/pdf/06mtcw5jhkzf4t.pdf | https://www.agl.com.au/content/dam/digital/agl/documents/about-agl/investors/2026/260812-2026-annual-report.pdf | https://www.agl.com.au/content/dam/digital/agl/documents/about-agl/investors/2026/260812-fy26-results-presentation-1.pdf | https://www.agl.com.au/content/dam/digital/agl/documents/about-agl/news-centre/2025/250212-2025-half-year-results-presentation.pdf",
+      "NOTES": "Raise base to 4.20 using an explicitly assumption-dependent residual from AGL FY26 fleet coal cost: A$666m less estimated Loy Yang A fuel cost, divided by estimated Bayswater heat input. The result is 4.17/GJ using 10.0GJ/MWh Bayswater, 11.2GJ/MWh Loy Yang A and 0.68/GJ Loy Yang A. It is not a disclosed station invoice. Wilpinjong covered about 75% only in FY25; 2.9Mt contracted in FY26 has no disclosed delivery profile or export-index slope. No verified future international-price weight.",
       "RANGE_TYPE": "ANALYST_SCENARIO_NOT_STATISTICAL_CONFIDENCE_INTERVAL"
     },
     {
@@ -47,7 +47,7 @@
       "MODEL_INPUT_STATUS": "PROVISIONAL_ANALYST_ASSUMPTION",
       "PRICE_BASIS": "DELIVERED_STATION_AVERAGE_FUEL_COST_TARGET",
       "REAL_BASE_DATE": "2025-06-30",
-      "EVIDENCE_CUTOFF": "2026-09-15",
+      "EVIDENCE_CUTOFF": "2026-09-19",
       "ASSUMPTION_HORIZON": "NEAR_TERM_USING_LATEST_KNOWN_REGIME",
       "SUPPLY_REGIME": "Myuna captive-to-customer plus Mandalong/other suppliers; discounted index contracts and hedges",
       "ORIGINAL_GROSS_BETA_REFERENCE": 0.325,
@@ -77,7 +77,7 @@
       "MODEL_INPUT_STATUS": "PROVISIONAL_ANALYST_ASSUMPTION",
       "PRICE_BASIS": "DELIVERED_STATION_AVERAGE_FUEL_COST_TARGET",
       "REAL_BASE_DATE": "2025-06-30",
-      "EVIDENCE_CUTOFF": "2026-09-15",
+      "EVIDENCE_CUTOFF": "2026-09-19",
       "ASSUMPTION_HORIZON": "NEAR_TERM_USING_LATEST_KNOWN_REGIME",
       "SUPPLY_REGIME": "Centennial multi-mine Springvale/Airly supply; confidential domestic contracts",
       "ORIGINAL_GROSS_BETA_REFERENCE": 0.325,
@@ -107,7 +107,7 @@
       "MODEL_INPUT_STATUS": "PROVISIONAL_ANALYST_ASSUMPTION",
       "PRICE_BASIS": "DELIVERED_STATION_AVERAGE_FUEL_COST_TARGET",
       "REAL_BASE_DATE": "2025-06-30",
-      "EVIDENCE_CUTOFF": "2026-09-15",
+      "EVIDENCE_CUTOFF": "2026-09-19",
       "ASSUMPTION_HORIZON": "NEAR_TERM_USING_LATEST_KNOWN_REGIME",
       "SUPPLY_REGIME": "Approximately half Chain Valley; remaining external domestic supply",
       "ORIGINAL_GROSS_BETA_REFERENCE": 0.4,
@@ -131,23 +131,23 @@
       "LOW_AUD_GJ": 2.2,
       "HIGH_AUD_GJ": 4.5,
       "CHANGE_AUD_GJ": 0.0,
-      "PRICE_SOURCE_TYPE": "RETAIN_PRIOR_LEGACY_CSA_WITH_RESET_RISK",
-      "CONFIDENCE": "LOW",
+      "PRICE_SOURCE_TYPE": "RETAIN_PRIOR_LEGACY_CSA_WITH_DISCLOSED_RESET",
+      "CONFIDENCE": "LOW_MEDIUM",
       "PRODUCTION_STATUS": "ACTIVE_ASSET_NOT_LIVE_AVAILABILITY",
       "MODEL_INPUT_STATUS": "PROVISIONAL_ANALYST_ASSUMPTION",
       "PRICE_BASIS": "DELIVERED_STATION_AVERAGE_FUEL_COST_TARGET",
       "REAL_BASE_DATE": "2025-06-30",
-      "EVIDENCE_CUTOFF": "2026-09-15",
+      "EVIDENCE_CUTOFF": "2026-09-19",
       "ASSUMPTION_HORIZON": "NEAR_TERM_USING_LATEST_KNOWN_REGIME",
-      "SUPPLY_REGIME": "Curragh domestic CSA; amendments, prepayments and rebate changes",
+      "SUPPLY_REGIME": "Curragh ACSA through expected H1 2027; NCSA and additional transaction supply thereafter",
       "ORIGINAL_GROSS_BETA_REFERENCE": 0.125,
       "VERIFIED_EXPORT_PRICE_WEIGHT": null,
       "CURRENT_PUBLIC_STATION_PRICE_AUD_GJ": null,
       "HISTORICAL_OR_PROXY_ANCHOR_AUD_GJ": null,
-      "SELECTION_METHOD": "RETAIN_PRIOR_LEGACY_CSA_WITH_RESET_RISK",
-      "SOURCE_IDS": "S20;S21;S22;S35",
-      "SOURCE_URL": "https://www.sec.gov/Archives/edgar/data/1770561/000110465926046838/tm264496d1_ars.pdf | https://www.sec.gov/Archives/edgar/data/1770561/000110465926007024/tm264164d1_ex99-1.htm | https://www.sec.gov/Archives/edgar/data/1770561/000156276226000094/Form10q2026q2.htm | https://minedocs.com/22/Queensland_Coals-Other-2003.pdf",
-      "NOTES": "Retain2.55 only as legacy-price prior; increase high for altered economics. 2025/26 changes invalidate a timeless fixed-price description. Do not divide financing advances by current burn and call the result current fuel expense; current tariff reconciliation unresolved.",
+      "SELECTION_METHOD": "RETAIN_PRIOR_LEGACY_CSA_WITH_DISCLOSED_RESET",
+      "SOURCE_IDS": "S20;S21;S22;S35;S51;S52",
+      "SOURCE_URL": "https://www.sec.gov/Archives/edgar/data/1770561/000110465926046838/tm264496d1_ars.pdf | https://www.sec.gov/Archives/edgar/data/1770561/000110465926007024/tm264164d1_ex99-1.htm | https://www.sec.gov/Archives/edgar/data/1770561/000156276226000094/Form10q2026q2.htm | https://minedocs.com/22/Queensland_Coals-Other-2003.pdf | https://www.sec.gov/Archives/edgar/data/1770561/000110465925102549/tm2529515d2_ex99-1.htm | https://www.sec.gov/Archives/edgar/data/1770561/000110465925116582/tm2532291d1_8k.htm",
+      "NOTES": "Retain 2.55 as a delivered-station legacy prior. Public terms now establish about A$40/t for 3.2Mtpa under ACSA, then about A$50/t for 2.2Mtpa plus 0.8Mtpa split half fixed and half market-priced. From expected H1 2027, the market-priced portion is about 0.4/3.0 = 13.3% of the disclosed package, not a complete Newcastle beta. Export rebates are waived from January 2026 to ACSA expiry and absent under NCSA. Rail, quality, prepayments and accounting prevent direct conversion to all-in station price.",
       "RANGE_TYPE": "ANALYST_SCENARIO_NOT_STATISTICAL_CONFIDENCE_INTERVAL"
     },
     {
@@ -167,7 +167,7 @@
       "MODEL_INPUT_STATUS": "PROVISIONAL_ANALYST_ASSUMPTION",
       "PRICE_BASIS": "DELIVERED_STATION_AVERAGE_FUEL_COST_TARGET",
       "REAL_BASE_DATE": "2025-06-30",
-      "EVIDENCE_CUTOFF": "2026-09-15",
+      "EVIDENCE_CUTOFF": "2026-09-19",
       "ASSUMPTION_HORIZON": "NEAR_TERM_USING_LATEST_KNOWN_REGIME",
       "SUPPLY_REGIME": "Owned Meandu mine and conveyor",
       "ORIGINAL_GROSS_BETA_REFERENCE": 0.069,
@@ -197,7 +197,7 @@
       "MODEL_INPUT_STATUS": "PROVISIONAL_ANALYST_ASSUMPTION",
       "PRICE_BASIS": "DELIVERED_STATION_AVERAGE_FUEL_COST_TARGET",
       "REAL_BASE_DATE": "2025-06-30",
-      "EVIDENCE_CUTOFF": "2026-09-15",
+      "EVIDENCE_CUTOFF": "2026-09-19",
       "ASSUMPTION_HORIZON": "NEAR_TERM_USING_LATEST_KNOWN_REGIME",
       "SUPPLY_REGIME": "Owned Meandu mine and conveyor",
       "ORIGINAL_GROSS_BETA_REFERENCE": 0.069,
@@ -227,7 +227,7 @@
       "MODEL_INPUT_STATUS": "PROVISIONAL_ANALYST_ASSUMPTION",
       "PRICE_BASIS": "DELIVERED_STATION_AVERAGE_FUEL_COST_TARGET",
       "REAL_BASE_DATE": "2025-06-30",
-      "EVIDENCE_CUTOFF": "2026-09-15",
+      "EVIDENCE_CUTOFF": "2026-09-19",
       "ASSUMPTION_HORIZON": "NEAR_TERM_USING_LATEST_KNOWN_REGIME",
       "SUPPLY_REGIME": "Owned Kogan Creek mine and conveyor",
       "ORIGINAL_GROSS_BETA_REFERENCE": 0.0975,
@@ -257,7 +257,7 @@
       "MODEL_INPUT_STATUS": "PROVISIONAL_ANALYST_ASSUMPTION",
       "PRICE_BASIS": "DELIVERED_STATION_AVERAGE_FUEL_COST_TARGET",
       "REAL_BASE_DATE": "2025-06-30",
-      "EVIDENCE_CUTOFF": "2026-09-15",
+      "EVIDENCE_CUTOFF": "2026-09-19",
       "ASSUMPTION_HORIZON": "NEAR_TERM_USING_LATEST_KNOWN_REGIME",
       "SUPPLY_REGIME": "Batchfire Callide domestic priority contract; common mine system",
       "ORIGINAL_GROSS_BETA_REFERENCE": 0.505,
@@ -287,7 +287,7 @@
       "MODEL_INPUT_STATUS": "PROVISIONAL_ANALYST_ASSUMPTION",
       "PRICE_BASIS": "DELIVERED_STATION_AVERAGE_FUEL_COST_TARGET",
       "REAL_BASE_DATE": "2025-06-30",
-      "EVIDENCE_CUTOFF": "2026-09-15",
+      "EVIDENCE_CUTOFF": "2026-09-19",
       "ASSUMPTION_HORIZON": "NEAR_TERM_USING_LATEST_KNOWN_REGIME",
       "SUPPLY_REGIME": "Batchfire Callide domestic priority contract; common mine system",
       "ORIGINAL_GROSS_BETA_REFERENCE": 0.505,
@@ -317,7 +317,7 @@
       "MODEL_INPUT_STATUS": "PROVISIONAL_ANALYST_ASSUMPTION",
       "PRICE_BASIS": "DELIVERED_STATION_AVERAGE_FUEL_COST_TARGET",
       "REAL_BASE_DATE": "2025-06-30",
-      "EVIDENCE_CUTOFF": "2026-09-15",
+      "EVIDENCE_CUTOFF": "2026-09-19",
       "ASSUMPTION_HORIZON": "NEAR_TERM_USING_LATEST_KNOWN_REGIME",
       "SUPPLY_REGIME": "Owned brown-coal mine and conveyor",
       "ORIGINAL_GROSS_BETA_REFERENCE": 0,
@@ -347,7 +347,7 @@
       "MODEL_INPUT_STATUS": "PROVISIONAL_ANALYST_ASSUMPTION",
       "PRICE_BASIS": "DELIVERED_STATION_AVERAGE_FUEL_COST_TARGET",
       "REAL_BASE_DATE": "2025-06-30",
-      "EVIDENCE_CUTOFF": "2026-09-15",
+      "EVIDENCE_CUTOFF": "2026-09-19",
       "ASSUMPTION_HORIZON": "NEAR_TERM_USING_LATEST_KNOWN_REGIME",
       "SUPPLY_REGIME": "Loy Yang mine supplied under separate CSA",
       "ORIGINAL_GROSS_BETA_REFERENCE": 0,
@@ -377,7 +377,7 @@
       "MODEL_INPUT_STATUS": "PROVISIONAL_ANALYST_ASSUMPTION",
       "PRICE_BASIS": "DELIVERED_STATION_AVERAGE_FUEL_COST_TARGET",
       "REAL_BASE_DATE": "2025-06-30",
-      "EVIDENCE_CUTOFF": "2026-09-15",
+      "EVIDENCE_CUTOFF": "2026-09-19",
       "ASSUMPTION_HORIZON": "NEAR_TERM_USING_LATEST_KNOWN_REGIME",
       "SUPPLY_REGIME": "Integrated brown-coal mine and conveyor",
       "ORIGINAL_GROSS_BETA_REFERENCE": 0,
@@ -407,7 +407,7 @@
       "MODEL_INPUT_STATUS": "PROVISIONAL_ANALYST_ASSUMPTION",
       "PRICE_BASIS": "DELIVERED_STATION_AVERAGE_FUEL_COST_TARGET",
       "REAL_BASE_DATE": "2025-06-30",
-      "EVIDENCE_CUTOFF": "2026-09-15",
+      "EVIDENCE_CUTOFF": "2026-09-19",
       "ASSUMPTION_HORIZON": "NEAR_TERM_USING_LATEST_KNOWN_REGIME",
       "SUPPLY_REGIME": "Rail-delivered coal; IPPA/tolling and distinct allocation arrangements",
       "ORIGINAL_GROSS_BETA_REFERENCE": 0.505,
@@ -437,7 +437,7 @@
       "MODEL_INPUT_STATUS": "PROVISIONAL_ANALYST_ASSUMPTION",
       "PRICE_BASIS": "DELIVERED_STATION_AVERAGE_FUEL_COST_TARGET",
       "REAL_BASE_DATE": "2025-06-30",
-      "EVIDENCE_CUTOFF": "2026-09-15",
+      "EVIDENCE_CUTOFF": "2026-09-19",
       "ASSUMPTION_HORIZON": "NEAR_TERM_USING_LATEST_KNOWN_REGIME",
       "SUPPLY_REGIME": "Commodore captive mine and conveyor",
       "ORIGINAL_GROSS_BETA_REFERENCE": 0,
@@ -467,7 +467,7 @@
       "MODEL_INPUT_STATUS": "EXCLUDE_CLOSED",
       "PRICE_BASIS": "DELIVERED_STATION_AVERAGE_FUEL_COST_TARGET",
       "REAL_BASE_DATE": "2025-06-30",
-      "EVIDENCE_CUTOFF": "2026-09-15",
+      "EVIDENCE_CUTOFF": "2026-09-19",
       "ASSUMPTION_HORIZON": "NEAR_TERM_USING_LATEST_KNOWN_REGIME",
       "SUPPLY_REGIME": "Closed April2023",
       "ORIGINAL_GROSS_BETA_REFERENCE": 0,
@@ -497,9 +497,9 @@
       "FY27_CONTRACTED_HEDGED_STOCK_COVERAGE_LOW": null,
       "FY27_CONTRACTED_HEDGED_STOCK_COVERAGE_HIGH": null,
       "COMPONENT_PRICE_AUD_GJ": null,
-      "SOURCE_IDS": "S01;S02",
-      "SOURCE_URL": "https://www.sec.gov/Archives/edgar/data/1064728/000106472826000006/btu_20251231xex962.htm | https://announcements.asx.com.au/asxpdf/20250813/pdf/06mtcw5jhkzf4t.pdf",
-      "NOTES": "Historical7Mtpa Wilpinjong nomination cannot be used as current Bayswater share after Liddell closure. Original beta0.6375 unverified."
+      "SOURCE_IDS": "S01;S02;S49;S50",
+      "SOURCE_URL": "https://www.sec.gov/Archives/edgar/data/1064728/000106472826000006/btu_20251231xex962.htm | https://announcements.asx.com.au/asxpdf/20250813/pdf/06mtcw5jhkzf4t.pdf | https://www.agl.com.au/content/dam/digital/agl/documents/about-agl/investors/2026/260812-fy26-results-presentation-1.pdf | https://www.agl.com.au/content/dam/digital/agl/documents/about-agl/news-centre/2025/250212-2025-half-year-results-presentation.pdf",
+      "NOTES": "Wilpinjong covered about 75% of FY25 demand, not future demand. AGL contracted 2.9Mt during FY26 but did not disclose delivery years, source mix or index slope. Original beta 0.6375 remains unverified."
     },
     {
       "PLANT": "Eraring",
@@ -598,22 +598,41 @@
     },
     {
       "PLANT": "Stanwell PS",
-      "COMPONENT": "Curragh domestic CSA",
-      "PHYSICAL_SUPPLY_SHARE": null,
-      "SHARE_BASIS": "CURRENT_VOLUME_SHARE_NOT_DISCLOSED",
+      "COMPONENT": "Curragh ACSA to expected H1 2027",
+      "PHYSICAL_SUPPLY_SHARE": 1,
+      "SHARE_BASIS": "DISCLOSED_CONTRACT_PACKAGE",
       "SHARE_PERIOD": "LATEST_PUBLIC_DESCRIPTION_NOT_METERED_CURRENT_YEAR",
       "DOMESTIC_SUPPLY": "YES",
-      "CONTRACT_EXPORT_INDEXATION": "AMENDED_CONTRACT_NOT_SIMPLE_SPOT_LINK",
+      "CONTRACT_EXPORT_INDEXATION": "FIXED_ABOUT_AUD40_PER_TONNE; EXPORT_REBATES_WAIVED_FROM_JAN2026",
       "PHYSICAL_EXPORT_DIVERTIBILITY": "CONTRACTUAL_PRIORITY_AND_SUPPLIER_EXPORTS",
-      "RECOMMENDED_NEAR_TERM_EXPORT_WEIGHT": null,
-      "WEIGHT_STATUS": "UNKNOWN_AFTER_AMENDMENTS",
+      "RECOMMENDED_NEAR_TERM_EXPORT_WEIGHT": 0,
+      "WEIGHT_STATUS": "DIRECT_POSITIVE_EXPORT_WEIGHT_TO_ACSA_EXPIRY",
       "VERIFIED_EXPORT_BLEND_WEIGHT": null,
       "FY27_CONTRACTED_HEDGED_STOCK_COVERAGE_LOW": null,
       "FY27_CONTRACTED_HEDGED_STOCK_COVERAGE_HIGH": null,
       "COMPONENT_PRICE_AUD_GJ": null,
-      "SOURCE_IDS": "S20;S21;S22",
-      "SOURCE_URL": "https://www.sec.gov/Archives/edgar/data/1770561/000110465926046838/tm264496d1_ars.pdf | https://www.sec.gov/Archives/edgar/data/1770561/000110465926007024/tm264164d1_ex99-1.htm | https://www.sec.gov/Archives/edgar/data/1770561/000156276226000094/Form10q2026q2.htm",
-      "NOTES": "Coronado thermal33% of Australian sales is not station export share. Original0.125 unverified."
+      "SOURCE_IDS": "S20;S51;S52",
+      "SOURCE_URL": "https://www.sec.gov/Archives/edgar/data/1770561/000110465926046838/tm264496d1_ars.pdf | https://www.sec.gov/Archives/edgar/data/1770561/000110465925102549/tm2529515d2_ex99-1.htm | https://www.sec.gov/Archives/edgar/data/1770561/000110465925116582/tm2532291d1_8k.htm",
+      "NOTES": "The positive export-price weight is zero after the rebate waiver. Before waiver, the export rebate created inverse net-cost exposure, not the screenshot positive beta."
+    },
+    {
+      "PLANT": "Stanwell PS",
+      "COMPONENT": "Curragh NCSA plus 2025 transaction from expected H1 2027",
+      "PHYSICAL_SUPPLY_SHARE": 1,
+      "SHARE_BASIS": "DISCLOSED_3.0MTPA_CONTRACT_PACKAGE",
+      "SHARE_PERIOD": "LATEST_PUBLIC_DESCRIPTION_NOT_METERED_CURRENT_YEAR",
+      "DOMESTIC_SUPPLY": "YES",
+      "CONTRACT_EXPORT_INDEXATION": "2.2MTPA_FIXED_ABOUT_AUD50_PER_TONNE_PLUS_0.8MTPA_HALF_FIXED_HALF_MARKET",
+      "PHYSICAL_EXPORT_DIVERTIBILITY": "CONTRACTUAL_PRIORITY; MARKET_PRICE_FOR_0.4MTPA",
+      "RECOMMENDED_NEAR_TERM_EXPORT_WEIGHT": 0.13333333333333333,
+      "WEIGHT_STATUS": "DISCLOSED_MARKET_PRICED_SHARE_NOT_FULL_NEWCASTLE_BETA",
+      "VERIFIED_EXPORT_BLEND_WEIGHT": null,
+      "FY27_CONTRACTED_HEDGED_STOCK_COVERAGE_LOW": null,
+      "FY27_CONTRACTED_HEDGED_STOCK_COVERAGE_HIGH": null,
+      "COMPONENT_PRICE_AUD_GJ": null,
+      "SOURCE_IDS": "S20;S51;S52",
+      "SOURCE_URL": "https://www.sec.gov/Archives/edgar/data/1770561/000110465926046838/tm264496d1_ars.pdf | https://www.sec.gov/Archives/edgar/data/1770561/000110465925102549/tm2529515d2_ex99-1.htm | https://www.sec.gov/Archives/edgar/data/1770561/000110465925116582/tm2532291d1_8k.htm",
+      "NOTES": "About 0.4Mt of a disclosed 3.0Mt package is market/seaborne priced, giving 13.3%. Rail, quality, timing and any non-linear formula remain unknown. Coronado supplier tonnes released to seaborne markets are not extra Stanwell exposure."
     },
     {
       "PLANT": "Tarong",
@@ -806,6 +825,332 @@
       "NOTES": "No defensible export weight; original0.505 remains only an archived input. No Newcastle4500/5500/6000 mix established."
     }
   ],
+  "international_exposure": [
+    {
+      "PLANT": "Bayswater",
+      "OWNER_OR_COUNTERPARTY": "AGL",
+      "REGIME_PERIOD": "FY25 historical disclosure",
+      "PHYSICAL_EXPORT_DIVERTIBILITY": "MIXED; WILPINJONG_EXPORT_CAPABLE",
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_LOW": 0.75,
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_HIGH": 0.75,
+      "DISCLOSED_UNCOVERED_SHARE_LOW": null,
+      "DISCLOSED_UNCOVERED_SHARE_HIGH": null,
+      "DISCLOSED_MARKET_PRICED_CONTRACT_SHARE": null,
+      "MARKET_BENCHMARK": "NONE_DISCLOSED",
+      "RECOMMENDED_MODEL_WEIGHT": null,
+      "WEIGHT_MEANING": "NO_FUTURE_WEIGHT_INFERRED",
+      "CONFIDENCE": "HIGH_FOR_HISTORICAL_COVERAGE; LOW_FOR_PRICE_EXPOSURE",
+      "SOURCE_IDS": "S50",
+      "SOURCE_URL": "https://www.agl.com.au/content/dam/digital/agl/documents/about-agl/news-centre/2025/250212-2025-half-year-results-presentation.pdf",
+      "NOTES": "About 75% was Wilpinjong contract coverage for FY25. This is a historical physical procurement share, not international price exposure."
+    },
+    {
+      "PLANT": "Bayswater",
+      "OWNER_OR_COUNTERPARTY": "AGL",
+      "REGIME_PERIOD": "FY26 contracting update and forward years",
+      "PHYSICAL_EXPORT_DIVERTIBILITY": "MIXED; LOWER_QUALITY_COAL_CAPABILITY",
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_LOW": null,
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_HIGH": null,
+      "DISCLOSED_UNCOVERED_SHARE_LOW": null,
+      "DISCLOSED_UNCOVERED_SHARE_HIGH": null,
+      "DISCLOSED_MARKET_PRICED_CONTRACT_SHARE": null,
+      "MARKET_BENCHMARK": "DISCOUNT_TO_NEWCASTLE_DISCLOSED_FOR_SOME_SUPPLY",
+      "RECOMMENDED_MODEL_WEIGHT": null,
+      "WEIGHT_MEANING": "UNKNOWN_EFFECTIVE_PRICE_BETA",
+      "CONFIDENCE": "LOW",
+      "SOURCE_IDS": "S02;S49",
+      "SOURCE_URL": "https://announcements.asx.com.au/asxpdf/20250813/pdf/06mtcw5jhkzf4t.pdf | https://www.agl.com.au/content/dam/digital/agl/documents/about-agl/investors/2026/260812-fy26-results-presentation-1.pdf",
+      "NOTES": "AGL disclosed 2.9Mt contracted during FY26 but no delivery years, source allocation, benchmark slope or replacement status. Do not divide 2.9Mt by one year of burn or apply the old 0.6375 beta."
+    },
+    {
+      "PLANT": "Eraring",
+      "OWNER_OR_COUNTERPARTY": "Origin Energy",
+      "REGIME_PERIOD": "FY27 as disclosed April 2026",
+      "PHYSICAL_EXPORT_DIVERTIBILITY": "MIXED; MYUNA_LANDLOCKED",
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_LOW": 0.75,
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_HIGH": 0.85,
+      "DISCLOSED_UNCOVERED_SHARE_LOW": 0.15,
+      "DISCLOSED_UNCOVERED_SHARE_HIGH": 0.25,
+      "DISCLOSED_MARKET_PRICED_CONTRACT_SHARE": null,
+      "MARKET_BENCHMARK": "LARGELY_DISCOUNTED_NEWCASTLE_6000_WITH_HEDGES",
+      "RECOMMENDED_MODEL_WEIGHT": null,
+      "WEIGHT_MEANING": "UNCOVERED_PROCUREMENT_BAND_NOT_EXPORT_BETA",
+      "CONFIDENCE": "MEDIUM_FOR_COVERAGE; LOW_FOR_PRICE_BETA",
+      "SOURCE_IDS": "S05;S06;S08",
+      "SOURCE_URL": "https://announcements.asx.com.au/asxpdf/20260427/pdf/06ywbyxms9scmn.pdf | https://www.originenergy.com.au/about/investors-media/origin-and-centennial-agree-supply-from-myuna-colliery/ | https://www.aph.gov.au/Parliamentary_Business/Hansard/Hansard_Display?bid=committees%2Fcommsen%2F27922%2F&sid=0000",
+      "NOTES": "Coverage includes opening stock plus contracted/hedged coal. The 15-25% complement is exposed procurement volume, but its eventual price slope and physical mine mix are unknown."
+    },
+    {
+      "PLANT": "Mt Piper",
+      "OWNER_OR_COUNTERPARTY": "EnergyAustralia / CLP",
+      "REGIME_PERIOD": "Current multi-mine regime",
+      "PHYSICAL_EXPORT_DIVERTIBILITY": "WESTERN_COAL_SYSTEM_HAS_EXPORT_ROUTE",
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_LOW": null,
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_HIGH": null,
+      "DISCLOSED_UNCOVERED_SHARE_LOW": null,
+      "DISCLOSED_UNCOVERED_SHARE_HIGH": null,
+      "DISCLOSED_MARKET_PRICED_CONTRACT_SHARE": null,
+      "MARKET_BENCHMARK": "CONFIDENTIAL_DOMESTIC_CONTRACT",
+      "RECOMMENDED_MODEL_WEIGHT": null,
+      "WEIGHT_MEANING": "UNKNOWN",
+      "CONFIDENCE": "LOW",
+      "SOURCE_IDS": "S10;S16;S54;S55",
+      "SOURCE_URL": "https://www.energyaustralia.com.au//about-us/media/news/energyaustralia-accelerates-investment-energy-supply-reliability-following-2022 | https://www.clpgroup.com/content/dam/clp-group/channels/investor/document/3-2-results---presentations/2025/CLP%20Holdings_2025%20Annual%20Results%20Analyst%20Briefing_Transcript.pdf.coredownload.pdf | https://www.banpu.com/wp-content/uploads/2026/03/BANPU_OR_2025_EN_LINK_260308_web.pdf | https://www.clpgroup.com/content/dam/clp-group/channels/investor/document/3-3-financial-reports/2025/e_2025%20Annual%20Report.pdf",
+      "NOTES": "Supplier-wide exports cannot be used as the station denominator. No public mine allocation or index formula found."
+    },
+    {
+      "PLANT": "Vales Point B",
+      "OWNER_OR_COUNTERPARTY": "Delta Electricity",
+      "REGIME_PERIOD": "Current",
+      "PHYSICAL_EXPORT_DIVERTIBILITY": "CHAIN_VALLEY_RESTRICTED_TO_VALES_POINT; EXTERNAL_UNKNOWN",
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_LOW": null,
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_HIGH": null,
+      "DISCLOSED_UNCOVERED_SHARE_LOW": null,
+      "DISCLOSED_UNCOVERED_SHARE_HIGH": null,
+      "DISCLOSED_MARKET_PRICED_CONTRACT_SHARE": null,
+      "MARKET_BENCHMARK": "NONE_DISCLOSED",
+      "RECOMMENDED_MODEL_WEIGHT": null,
+      "WEIGHT_MEANING": "UNKNOWN",
+      "CONFIDENCE": "LOW",
+      "SOURCE_IDS": "S17;S18;S19",
+      "SOURCE_URL": "https://www.deltapae.com.au/operations/chain-valley-colliery/chain-valley-colliery-environment/consolidation-project | https://www.ipcn.nsw.gov.au/news/chain-valley-colliery-consolidation-project-approved-limited-supplying-vales-point-power | https://www.ipcn.nsw.gov.au/sites/default/files/2026-02/Chain%20Valley%20Colliery%20Consolidation%20Project_Applicant%20meeting%20transcript.pdf",
+      "NOTES": "Approximate 50% Chain Valley is a tonne supply share. The external half is not proven export-indexed."
+    },
+    {
+      "PLANT": "Stanwell PS",
+      "OWNER_OR_COUNTERPARTY": "Stanwell / Coronado Curragh",
+      "REGIME_PERIOD": "ACSA through expected H1 2027",
+      "PHYSICAL_EXPORT_DIVERTIBILITY": "CURRAGH_EXPORT_CAPABLE",
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_LOW": 1,
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_HIGH": 1,
+      "DISCLOSED_UNCOVERED_SHARE_LOW": 0,
+      "DISCLOSED_UNCOVERED_SHARE_HIGH": 0,
+      "DISCLOSED_MARKET_PRICED_CONTRACT_SHARE": 0,
+      "MARKET_BENCHMARK": "FIXED_ABOUT_AUD40_PER_TONNE; REBATE_WAIVED",
+      "RECOMMENDED_MODEL_WEIGHT": 0,
+      "WEIGHT_MEANING": "POSITIVE_DIRECT_EXPORT_PRICE_WEIGHT",
+      "CONFIDENCE": "MEDIUM_HIGH",
+      "SOURCE_IDS": "S51;S52",
+      "SOURCE_URL": "https://www.sec.gov/Archives/edgar/data/1770561/000110465925102549/tm2529515d2_ex99-1.htm | https://www.sec.gov/Archives/edgar/data/1770561/000110465925116582/tm2532291d1_8k.htm",
+      "NOTES": "Export rebates are waived from January 2026 to ACSA expiry. Historical rebates made net fuel cost fall as export prices rose, which is inverse exposure."
+    },
+    {
+      "PLANT": "Stanwell PS",
+      "OWNER_OR_COUNTERPARTY": "Stanwell / Coronado Curragh",
+      "REGIME_PERIOD": "NCSA plus transaction from expected H1 2027",
+      "PHYSICAL_EXPORT_DIVERTIBILITY": "CURRAGH_EXPORT_CAPABLE",
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_LOW": 1,
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_HIGH": 1,
+      "DISCLOSED_UNCOVERED_SHARE_LOW": 0,
+      "DISCLOSED_UNCOVERED_SHARE_HIGH": 0,
+      "DISCLOSED_MARKET_PRICED_CONTRACT_SHARE": 0.13333333333333333,
+      "MARKET_BENCHMARK": "0.4MTPA MARKET_OR_SEABORNE_PRICED_WITHIN_3.0MTPA_PACKAGE",
+      "RECOMMENDED_MODEL_WEIGHT": 0.13333333333333333,
+      "WEIGHT_MEANING": "CONTRACT_PACKAGE_MARKET_PRICED_SHARE",
+      "CONFIDENCE": "MEDIUM_HIGH_FOR_SHARE; MEDIUM_FOR_EFFECTIVE_BETA",
+      "SOURCE_IDS": "S20;S51;S52",
+      "SOURCE_URL": "https://www.sec.gov/Archives/edgar/data/1770561/000110465926046838/tm264496d1_ars.pdf | https://www.sec.gov/Archives/edgar/data/1770561/000110465925102549/tm2529515d2_ex99-1.htm | https://www.sec.gov/Archives/edgar/data/1770561/000110465925116582/tm2532291d1_8k.htm",
+      "NOTES": "2.2Mtpa is approximately A$50/t and 0.8Mtpa is half fixed/half market. The 13.3% weight is a disclosed package share, not a fully specified delivered Newcastle beta."
+    },
+    {
+      "PLANT": "Tarong",
+      "OWNER_OR_COUNTERPARTY": "Stanwell",
+      "REGIME_PERIOD": "Current captive Meandu regime",
+      "PHYSICAL_EXPORT_DIVERTIBILITY": "NO_ROUTINE_DIVERSION_MODELLED",
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_LOW": 1,
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_HIGH": 1,
+      "DISCLOSED_UNCOVERED_SHARE_LOW": 0,
+      "DISCLOSED_UNCOVERED_SHARE_HIGH": 0,
+      "DISCLOSED_MARKET_PRICED_CONTRACT_SHARE": 0,
+      "MARKET_BENCHMARK": "CAPTIVE_MINE_COST",
+      "RECOMMENDED_MODEL_WEIGHT": 0,
+      "WEIGHT_MEANING": "NEAR_TERM_MODEL_WEIGHT",
+      "CONFIDENCE": "MEDIUM",
+      "SOURCE_IDS": "S23;S24;S25",
+      "SOURCE_URL": "https://www.stanwell.com/meandu-mine | https://nrw.com.au/golding-awarded-stanwell-meandu-mine-contract/ | https://announcements.asx.com.au/asxpdf/20260219/pdf/06wgt7sqywy861.pdf",
+      "NOTES": "Dedicated mine and conveyor support zero direct international coal-price weight; mining cost can still escalate."
+    },
+    {
+      "PLANT": "Tarong North",
+      "OWNER_OR_COUNTERPARTY": "Stanwell",
+      "REGIME_PERIOD": "Current captive Meandu regime",
+      "PHYSICAL_EXPORT_DIVERTIBILITY": "NO_ROUTINE_DIVERSION_MODELLED",
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_LOW": 1,
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_HIGH": 1,
+      "DISCLOSED_UNCOVERED_SHARE_LOW": 0,
+      "DISCLOSED_UNCOVERED_SHARE_HIGH": 0,
+      "DISCLOSED_MARKET_PRICED_CONTRACT_SHARE": 0,
+      "MARKET_BENCHMARK": "CAPTIVE_MINE_COST",
+      "RECOMMENDED_MODEL_WEIGHT": 0,
+      "WEIGHT_MEANING": "NEAR_TERM_MODEL_WEIGHT",
+      "CONFIDENCE": "MEDIUM",
+      "SOURCE_IDS": "S23;S24;S25",
+      "SOURCE_URL": "https://www.stanwell.com/meandu-mine | https://nrw.com.au/golding-awarded-stanwell-meandu-mine-contract/ | https://announcements.asx.com.au/asxpdf/20260219/pdf/06wgt7sqywy861.pdf",
+      "NOTES": "Dedicated mine and conveyor support zero direct international coal-price weight; mining cost can still escalate."
+    },
+    {
+      "PLANT": "Kogan Creek",
+      "OWNER_OR_COUNTERPARTY": "CS Energy",
+      "REGIME_PERIOD": "Current captive regime",
+      "PHYSICAL_EXPORT_DIVERTIBILITY": "NO_ROUTINE_DIVERSION_MODELLED",
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_LOW": 1,
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_HIGH": 1,
+      "DISCLOSED_UNCOVERED_SHARE_LOW": 0,
+      "DISCLOSED_UNCOVERED_SHARE_HIGH": 0,
+      "DISCLOSED_MARKET_PRICED_CONTRACT_SHARE": 0,
+      "MARKET_BENCHMARK": "CAPTIVE_MINE_COST",
+      "RECOMMENDED_MODEL_WEIGHT": 0,
+      "WEIGHT_MEANING": "NEAR_TERM_MODEL_WEIGHT",
+      "CONFIDENCE": "MEDIUM",
+      "SOURCE_IDS": "S27;S28;S53",
+      "SOURCE_URL": "https://www.csenergy.com.au/what-we-do/thermal-generation/kogan-creek-power-station | https://www.csenergy.com.au/ArticleDocuments/191/CS%20ENERGY%20ANNUAL%20REPORT%202022%20ONLINE.pdf.aspx | https://www.csenergy.com.au/ArticleDocuments/191/CS%20ENERGY%20ANNUAL%20REPORT%202025%20FULL%20COLOUR%2020250926.pdf.aspx",
+      "NOTES": "Captive adjacent mine. Public reporting does not disclose a change to an international index."
+    },
+    {
+      "PLANT": "Callide B",
+      "OWNER_OR_COUNTERPARTY": "CS Energy / Batchfire",
+      "REGIME_PERIOD": "Current long-term domestic CSA",
+      "PHYSICAL_EXPORT_DIVERTIBILITY": "SUPPLIER_EXPORTS; DOMESTIC_OBLIGATIONS_PRIORITY",
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_LOW": 1,
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_HIGH": 1,
+      "DISCLOSED_UNCOVERED_SHARE_LOW": 0,
+      "DISCLOSED_UNCOVERED_SHARE_HIGH": 0,
+      "DISCLOSED_MARKET_PRICED_CONTRACT_SHARE": 0,
+      "MARKET_BENCHMARK": "HISTORICALLY_NON_MARKET_LINKED",
+      "RECOMMENDED_MODEL_WEIGHT": 0,
+      "WEIGHT_MEANING": "CONDITIONAL_POSITIVE_EXPORT_WEIGHT",
+      "CONFIDENCE": "LOW_MEDIUM",
+      "SOURCE_IDS": "S28;S29;S31;S53",
+      "SOURCE_URL": "https://www.csenergy.com.au/ArticleDocuments/191/CS%20ENERGY%20ANNUAL%20REPORT%202022%20ONLINE.pdf.aspx | https://changeflow.com/govping/courts-legal/shareholder-oppression-claim-dismissed-20th-mar-2026-04-02 | https://www.batchfire.com.au/about/ | https://www.csenergy.com.au/ArticleDocuments/191/CS%20ENERGY%20ANNUAL%20REPORT%202025%20FULL%20COLOUR%2020250926.pdf.aspx",
+      "NOTES": "Best public evidence supports zero positive international-price pass-through while the domestic CSA continues. Undisclosed escalation can still raise price."
+    },
+    {
+      "PLANT": "Callide C",
+      "OWNER_OR_COUNTERPARTY": "CS Energy / Batchfire",
+      "REGIME_PERIOD": "Current long-term domestic CSA",
+      "PHYSICAL_EXPORT_DIVERTIBILITY": "SUPPLIER_EXPORTS; DOMESTIC_OBLIGATIONS_PRIORITY",
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_LOW": 1,
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_HIGH": 1,
+      "DISCLOSED_UNCOVERED_SHARE_LOW": 0,
+      "DISCLOSED_UNCOVERED_SHARE_HIGH": 0,
+      "DISCLOSED_MARKET_PRICED_CONTRACT_SHARE": 0,
+      "MARKET_BENCHMARK": "HISTORICALLY_NON_MARKET_LINKED",
+      "RECOMMENDED_MODEL_WEIGHT": 0,
+      "WEIGHT_MEANING": "CONDITIONAL_POSITIVE_EXPORT_WEIGHT",
+      "CONFIDENCE": "LOW_MEDIUM",
+      "SOURCE_IDS": "S28;S29;S31;S53",
+      "SOURCE_URL": "https://www.csenergy.com.au/ArticleDocuments/191/CS%20ENERGY%20ANNUAL%20REPORT%202022%20ONLINE.pdf.aspx | https://changeflow.com/govping/courts-legal/shareholder-oppression-claim-dismissed-20th-mar-2026-04-02 | https://www.batchfire.com.au/about/ | https://www.csenergy.com.au/ArticleDocuments/191/CS%20ENERGY%20ANNUAL%20REPORT%202025%20FULL%20COLOUR%2020250926.pdf.aspx",
+      "NOTES": "Best public evidence supports zero positive international-price pass-through while the domestic CSA continues. Undisclosed escalation can still raise price."
+    },
+    {
+      "PLANT": "Loy Yang A",
+      "OWNER_OR_COUNTERPARTY": "AGL",
+      "REGIME_PERIOD": "Current brown-coal regime",
+      "PHYSICAL_EXPORT_DIVERTIBILITY": "NO_CONVENTIONAL_EXPORT_PRODUCT",
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_LOW": 1,
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_HIGH": 1,
+      "DISCLOSED_UNCOVERED_SHARE_LOW": 0,
+      "DISCLOSED_UNCOVERED_SHARE_HIGH": 0,
+      "DISCLOSED_MARKET_PRICED_CONTRACT_SHARE": 0,
+      "MARKET_BENCHMARK": "CAPTIVE_OR_DEDICATED_BROWN_COAL",
+      "RECOMMENDED_MODEL_WEIGHT": 0,
+      "WEIGHT_MEANING": "DIRECT_INTERNATIONAL_COAL_PRICE_WEIGHT",
+      "CONFIDENCE": "HIGH",
+      "SOURCE_IDS": "S36;S48",
+      "SOURCE_URL": "https://www.agl.com.au/content/dam/digital/agl/documents/about-agl/investors/2018/20181023-transcript-from-webcast-loy-yang.pdf | https://www.agl.com.au/content/dam/digital/agl/documents/about-agl/investors/2026/260812-2026-annual-report.pdf",
+      "NOTES": "Brown coal is mine-mouth and not a conventional seaborne thermal export product."
+    },
+    {
+      "PLANT": "Loy Yang B",
+      "OWNER_OR_COUNTERPARTY": "Alinta / AGL Loy Yang mine",
+      "REGIME_PERIOD": "Current brown-coal regime",
+      "PHYSICAL_EXPORT_DIVERTIBILITY": "NO_CONVENTIONAL_EXPORT_PRODUCT",
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_LOW": 1,
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_HIGH": 1,
+      "DISCLOSED_UNCOVERED_SHARE_LOW": 0,
+      "DISCLOSED_UNCOVERED_SHARE_HIGH": 0,
+      "DISCLOSED_MARKET_PRICED_CONTRACT_SHARE": 0,
+      "MARKET_BENCHMARK": "CAPTIVE_OR_DEDICATED_BROWN_COAL",
+      "RECOMMENDED_MODEL_WEIGHT": 0,
+      "WEIGHT_MEANING": "DIRECT_INTERNATIONAL_COAL_PRICE_WEIGHT",
+      "CONFIDENCE": "HIGH",
+      "SOURCE_IDS": "S38",
+      "SOURCE_URL": "https://classic.austlii.edu.au/au/legis/vic/consol_act/lyba1992114/sch1.html",
+      "NOTES": "Brown coal is mine-mouth and not a conventional seaborne thermal export product."
+    },
+    {
+      "PLANT": "Yallourn",
+      "OWNER_OR_COUNTERPARTY": "EnergyAustralia / CLP",
+      "REGIME_PERIOD": "Current brown-coal regime",
+      "PHYSICAL_EXPORT_DIVERTIBILITY": "NO_CONVENTIONAL_EXPORT_PRODUCT",
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_LOW": 1,
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_HIGH": 1,
+      "DISCLOSED_UNCOVERED_SHARE_LOW": 0,
+      "DISCLOSED_UNCOVERED_SHARE_HIGH": 0,
+      "DISCLOSED_MARKET_PRICED_CONTRACT_SHARE": 0,
+      "MARKET_BENCHMARK": "CAPTIVE_OR_DEDICATED_BROWN_COAL",
+      "RECOMMENDED_MODEL_WEIGHT": 0,
+      "WEIGHT_MEANING": "DIRECT_INTERNATIONAL_COAL_PRICE_WEIGHT",
+      "CONFIDENCE": "HIGH",
+      "SOURCE_IDS": "S40",
+      "SOURCE_URL": "https://www.clpgroup.com/en/about/our-business/assets-and-services/australia/yallourn-coal-fired-power-station-and-brown-coal-open-cut-mine.html",
+      "NOTES": "Brown coal is mine-mouth and not a conventional seaborne thermal export product."
+    },
+    {
+      "PLANT": "Gladstone",
+      "OWNER_OR_COUNTERPARTY": "NRG / IPPA participants",
+      "REGIME_PERIOD": "Current IPPA regime",
+      "PHYSICAL_EXPORT_DIVERTIBILITY": "UNKNOWN",
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_LOW": null,
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_HIGH": null,
+      "DISCLOSED_UNCOVERED_SHARE_LOW": null,
+      "DISCLOSED_UNCOVERED_SHARE_HIGH": null,
+      "DISCLOSED_MARKET_PRICED_CONTRACT_SHARE": null,
+      "MARKET_BENCHMARK": "UNKNOWN",
+      "RECOMMENDED_MODEL_WEIGHT": null,
+      "WEIGHT_MEANING": "UNKNOWN",
+      "CONFIDENCE": "VERY_LOW",
+      "SOURCE_IDS": "S41;S42;S43",
+      "SOURCE_URL": "https://www.casechat.au/cases/au/gps-power-pty-ltd-v-cs-energy-ltd-2 | https://casechat.au/cases/au/cs-energy-limited-v-gps-power-pty-limited | https://www.csenergy.com.au/ArticleDocuments/191/CS%20ENERGY%20ANNUAL%20REPORT%202025%20FULL%20COLOUR%2020250926.pdf.aspx",
+      "NOTES": "Trading rights, coal supply and rail allocation differ. No public station benchmark weight established."
+    },
+    {
+      "PLANT": "Millmerran",
+      "OWNER_OR_COUNTERPARTY": "InterGen / Commodore mine",
+      "REGIME_PERIOD": "Current captive regime",
+      "PHYSICAL_EXPORT_DIVERTIBILITY": "NO_ROUTINE_DIVERSION_MODELLED",
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_LOW": 1,
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_HIGH": 1,
+      "DISCLOSED_UNCOVERED_SHARE_LOW": 0,
+      "DISCLOSED_UNCOVERED_SHARE_HIGH": 0,
+      "DISCLOSED_MARKET_PRICED_CONTRACT_SHARE": 0,
+      "MARKET_BENCHMARK": "CAPTIVE_MINE_COST",
+      "RECOMMENDED_MODEL_WEIGHT": 0,
+      "WEIGHT_MEANING": "NEAR_TERM_MODEL_WEIGHT",
+      "CONFIDENCE": "MEDIUM",
+      "SOURCE_IDS": "S33;S34",
+      "SOURCE_URL": "https://www.nzx.com/announcements/323414 | https://buma.com.au/project/commodore/",
+      "NOTES": "Dedicated mine-mouth supply supports zero direct international coal-price weight, while successor mining costs remain uncertain."
+    },
+    {
+      "PLANT": "Liddell",
+      "OWNER_OR_COUNTERPARTY": "AGL",
+      "REGIME_PERIOD": "Closed April 2023",
+      "PHYSICAL_EXPORT_DIVERTIBILITY": "NOT_APPLICABLE",
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_LOW": null,
+      "DISCLOSED_CONTRACTED_HEDGED_SHARE_HIGH": null,
+      "DISCLOSED_UNCOVERED_SHARE_LOW": null,
+      "DISCLOSED_UNCOVERED_SHARE_HIGH": null,
+      "DISCLOSED_MARKET_PRICED_CONTRACT_SHARE": null,
+      "MARKET_BENCHMARK": "NOT_APPLICABLE",
+      "RECOMMENDED_MODEL_WEIGHT": null,
+      "WEIGHT_MEANING": "EXCLUDE",
+      "CONFIDENCE": "NOT_APPLICABLE",
+      "SOURCE_IDS": "S01",
+      "SOURCE_URL": "https://www.sec.gov/Archives/edgar/data/1064728/000106472826000006/btu_20251231xex962.htm",
+      "NOTES": "Closed station; no active exposure input."
+    }
+  ],
   "sources": [
     {
       "SOURCE_ID": "S01",
@@ -817,7 +1162,7 @@
       "FACT_USED": "AGL open-book supply agreement scheduled to finish in 2028; flexible nominations; remaining production exported.",
       "LIMITATIONS": "No current AGL price or Bayswater blend percentage disclosed.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S02",
@@ -829,7 +1174,7 @@
       "FACT_USED": "Bayswater can use 4800 kcal/kg coal; additional FY26/27 supply discounted to Newcastle; legacy contracts roll off.",
       "LIMITATIONS": "Capability is not actual average coal quality. Discounts do not disclose delivered price.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S03",
@@ -841,7 +1186,7 @@
       "FACT_USED": "FY25 coal fuel expense A$583m and about A$22/MWh across coal fleet.",
       "LIMITATIONS": "Fleet total cannot uniquely identify Bayswater and Loy Yang unit prices.",
       "ACCESS_STATUS": "PRIMARY_INDEXED_TEXT; large PDF not fully retrieved",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S04",
@@ -853,7 +1198,7 @@
       "FACT_USED": "Coal fleet fuel expense A$289m, A$23.8/MWh; higher Bayswater coal costs.",
       "LIMITATIONS": "Half-year fleet expense; no station coal price.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S05",
@@ -865,7 +1210,7 @@
       "FACT_USED": "Eraring 5.5-6 Mtpa; largely discounted Newcastle 6000 pricing and hedging. FY27 approximately 1Mt opening stock plus 3.6Mt contracted/hedged, 75-85% coverage.",
       "LIMITATIONS": "Coverage excludes closing stockpile; neither mine mix nor derivative of delivered cost to export price.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S06",
@@ -877,7 +1222,7 @@
       "FACT_USED": "Final agreement supplies Myuna coal to December 2028; significant costs absorbed.",
       "LIMITATIONS": "Final tariff and surcharge not published; direct page returned 404 during review.",
       "ACCESS_STATUS": "PRIMARY_INDEXED_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S07",
@@ -889,7 +1234,7 @@
       "FACT_USED": "A$50m/year relates to Centennial demand above market during negotiations.",
       "LIMITATIONS": "Not evidence that the final March agreement adopted this exact premium.",
       "ACCESS_STATUS": "PRIMARY_INDEXED_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S08",
@@ -901,7 +1246,7 @@
       "FACT_USED": "Myuna described as landlocked and supplying Eraring exclusively.",
       "LIMITATIONS": "Does not establish Myuna share of Eraring total burn.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S09",
@@ -913,7 +1258,7 @@
       "FACT_USED": "Mandalong supplies Eraring and Vales Point.",
       "LIMITATIONS": "No current station allocation or price.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S10",
@@ -925,7 +1270,7 @@
       "FACT_USED": "Mt Piper multi-mine agreement includes Airly and Springvale.",
       "LIMITATIONS": "Agreement economics and current mine shares undisclosed.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S11",
@@ -937,7 +1282,7 @@
       "FACT_USED": "2024 Australian domestic ASP excluding traded coal A$170.52/t, versus A$123.39/t in 2023.",
       "LIMITATIONS": "Supplier-wide nominal ASP, not Mt Piper invoice or necessarily delivered basis; direct link returned 404.",
       "ACCESS_STATUS": "PRIMARY_INDEXED_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S12",
@@ -949,7 +1294,7 @@
       "FACT_USED": "Australia domestic pricing increased with new contracts; corroborates S11.",
       "LIMITATIONS": "Same underlying disclosure as S11, not independent evidence; direct download unavailable.",
       "ACCESS_STATUS": "PRIMARY_INDEXED_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S13",
@@ -961,7 +1306,7 @@
       "FACT_USED": "2025 Australian mixed-market ASP A$152.90/t and cost A$143.80/t.",
       "LIMITATIONS": "Includes export business; cannot replace domestic ASP or station tariff.",
       "ACCESS_STATUS": "PRIMARY_INDEXED_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S14",
@@ -973,7 +1318,7 @@
       "FACT_USED": "Q1 2026 Australian mixed ASP A$153.89/t, cost A$152.57/t.",
       "LIMITATIONS": "Mixed-market and mine-cost measures; not domestic delivered station prices.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S15",
@@ -985,7 +1330,7 @@
       "FACT_USED": "BPA valuation used book-value approach; future Australian mine production/prices could not be estimated sufficiently for DCF.",
       "LIMITATIONS": "Transaction opinion supplies no usable current station tariff.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S16",
@@ -997,7 +1342,7 @@
       "FACT_USED": "Higher Mt Piper coal costs noted.",
       "LIMITATIONS": "Qualitative direction, not price/GJ.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S17",
@@ -1009,7 +1354,7 @@
       "FACT_USED": "Around 1.3Mt/year, approximately half of Vales Point coal requirements.",
       "LIMITATIONS": "Approximate physical tonnage share; current energy share and component prices not disclosed.",
       "ACCESS_STATUS": "PRIMARY_INDEXED_TEXT; direct access restricted",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S18",
@@ -1021,7 +1366,7 @@
       "FACT_USED": "Extracted coal restricted to Vales Point; mine life to 31 December 2029.",
       "LIMITATIONS": "Supply restriction does not set price or actual blend.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S19",
@@ -1033,7 +1378,7 @@
       "FACT_USED": "Applicant explains Chain Valley is not always the cheapest coal source; logistics and security matter.",
       "LIMITATIONS": "No numeric captive or external price disclosed.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S20",
@@ -1045,7 +1390,7 @@
       "FACT_USED": "Legacy thermal contract below supplier cost through 2025; 2025 amendments include prepayments, rebate changes and additional future tonnage.",
       "LIMITATIONS": "Financing and deferred accounting are not a simple delivered coal tariff; supplier thermal/export mix is not station exposure.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S21",
@@ -1057,7 +1402,7 @@
       "FACT_USED": "Contract reset advanced into 2026.",
       "LIMITATIONS": "No complete all-in station cost disclosed.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S22",
@@ -1069,7 +1414,7 @@
       "FACT_USED": "NCSA timing expected in Q2 2027; continuing deferred contractual balances.",
       "LIMITATIONS": "Update must be read with earlier amendments; does not support a timeless fixed-price assumption.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S23",
@@ -1081,7 +1426,7 @@
       "FACT_USED": "Meandu exclusively supplies adjacent Tarong stations; 1.5km conveyor; capacity 7.6Mtpa.",
       "LIMITATIONS": "Capacity is not actual annual output; no mine cost disclosed.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S24",
@@ -1093,7 +1438,7 @@
       "FACT_USED": "A$750m over 5.5 years; capital-light mining contract.",
       "LIMITATIONS": "Contract revenue excludes some owner costs and is forward nominal money.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S25",
@@ -1105,7 +1450,7 @@
       "FACT_USED": "Meandu operational control July 2026; 100% client-owned fleet.",
       "LIMITATIONS": "Owner fleet depreciation/capital cost not captured by contractor-only quotient.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S26",
@@ -1117,7 +1462,7 @@
       "FACT_USED": "A$150m four-year contract July 2022-June 2026, further four-year option; contractor provides major equipment.",
       "LIMITATIONS": "Option exercise and current all-in owner cost not verified.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S27",
@@ -1129,7 +1474,7 @@
       "FACT_USED": "Owned adjacent mine, coal supplied by conveyor.",
       "LIMITATIONS": "Does not disclose delivered cost.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S28",
@@ -1141,7 +1486,7 @@
       "FACT_USED": "Long-term coal arrangements insulated from international price movements; Kogan captive and Callide non-market-linked.",
       "LIMITATIONS": "Historical contract description; later amendments must be checked.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S29",
@@ -1153,7 +1498,7 @@
       "FACT_USED": "2016 transaction context: approximate A$27/t domestic coal, mandatory CSE 2.4Mtpa to 2032 and CPM 3Mtpa to 2033; domestic priority.",
       "LIMITATIONS": "Historical price, not current invoice. Indexed reproduction; official court endpoint restricted and mirror direct link returned 410. Treat as historical research lead with access limitation.",
       "ACCESS_STATUS": "INDEXED_JUDGMENT_REPRODUCTION",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S30",
@@ -1165,7 +1510,7 @@
       "FACT_USED": "Confirms identity and outcome of FCA 307 litigation concerning Batchfire.",
       "LIMITATIONS": "Lawyer commentary corroborates case, not independently the A$27/t passage.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S31",
@@ -1177,7 +1522,7 @@
       "FACT_USED": "Domestic product 4550 kcal/kg as received; export product 4500-5000 GAR.",
       "LIMITATIONS": "Product specification may vary; not station invoice or realized annual quality.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S32",
@@ -1189,7 +1534,7 @@
       "FACT_USED": "Common coal bunker and bookkeeping allocation between B and C.",
       "LIMITATIONS": "Historical operational arrangement, not proof that all current contract charges are identical.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S33",
@@ -1201,7 +1546,7 @@
       "FACT_USED": "A$286m five-year mining services contract ending August 2024.",
       "LIMITATIONS": "Contract service revenue is not total station fuel cost and contract has expired.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S34",
@@ -1213,7 +1558,7 @@
       "FACT_USED": "Mine exclusively supplied Millmerran; historical average 3.6Mt raw coal annually; contract ended August 2024.",
       "LIMITATIONS": "Historical throughput, no verified successor contract price.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S35",
@@ -1225,7 +1570,7 @@
       "FACT_USED": "Historical station fuel energy: Millmerran 17.6, Tarong 19.6, Callide 19, Stanwell 26-30 GJ/t.",
       "LIMITATIONS": "Old engineering reference, not contemporary assays; original parliamentary copy could not be retrieved.",
       "ACCESS_STATUS": "PUBLICATION_REPRODUCTION",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S36",
@@ -1237,7 +1582,7 @@
       "FACT_USED": "Management indicated roughly A$4/t all-up coal cost.",
       "LIMITATIONS": "Historical approximate verbal disclosure; question partially inaudible; cash/accounting scope not fully specified.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S37",
@@ -1249,7 +1594,7 @@
       "FACT_USED": "Loy Yang energy content 8.2GJ/t; differentiates total and variable mining cost.",
       "LIMITATIONS": "Very old consultant assumptions used only as a conversion sensitivity, not current truth.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S38",
@@ -1261,7 +1606,7 @@
       "FACT_USED": "Contract architecture includes capability and coal-consumption payments.",
       "LIMITATIONS": "Historic statutory agreement description, not current price or escalation schedule.",
       "ACCESS_STATUS": "PUBLIC_LEGISLATION_REPRODUCTION",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S39",
@@ -1273,7 +1618,7 @@
       "FACT_USED": "RTL total revenue approximately A$450m; Thiess share A$195m; extension to 2026; includes coal, overburden and conveyors.",
       "LIMITATIONS": "Partner share must not be mistaken for total contract cost; throughput and owner costs still needed.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S40",
@@ -1285,7 +1630,7 @@
       "FACT_USED": "Integrated brown-coal mine/power station; scheduled closure mid-2028.",
       "LIMITATIONS": "No public current cost/GJ.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S41",
@@ -1297,7 +1642,7 @@
       "FACT_USED": "Gladstone arrangements distinguish coal supply, rail costs and contractual averaging.",
       "LIMITATIONS": "Historical litigation; no single current station tariff; appeal also relevant.",
       "ACCESS_STATUS": "INDEXED_JUDGMENT_REPRODUCTION",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S42",
@@ -1309,7 +1654,7 @@
       "FACT_USED": "Appellate treatment confirms need to consider contractual stockpile/accounting arrangements.",
       "LIMITATIONS": "Used for commercial structure only, not a legal conclusion or current price.",
       "ACCESS_STATUS": "INDEXED_JUDGMENT_REPRODUCTION",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S43",
@@ -1321,7 +1666,7 @@
       "FACT_USED": "Group fuel expense A$172.456m; Gladstone onerous-contract provision is a different accounting item.",
       "LIMITATIONS": "No station split. Provision is not annual coal expense.",
       "ACCESS_STATUS": "PRIMARY_PDF_DOWNLOADED",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S44",
@@ -1333,7 +1678,7 @@
       "FACT_USED": "Forward modelling uses export parity/mine economics and assumes Bayswater legacy contract expiry FY2030.",
       "LIMITATIONS": "Scenario forecast in real January 2024 dollars; not observed station invoices. Peabody S01 specifies 2028 for its AGL contract.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S45",
@@ -1345,7 +1690,7 @@
       "FACT_USED": "June 2025 CPI 141.7; June 2024 138.8; December 2021 121.3.",
       "LIMITATIONS": "General CPI conversion, not actual coal-contract escalation.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S46",
@@ -1357,7 +1702,7 @@
       "FACT_USED": "September 2016 index 109.4.",
       "LIMITATIONS": "Quarter used as approximate transaction-era anchor.",
       "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
     },
     {
       "SOURCE_ID": "S47",
@@ -1369,7 +1714,103 @@
       "FACT_USED": "September 2018 index 113.5.",
       "LIMITATIONS": "Third-party submission on official host; standard CPI input, not a coal-cost source.",
       "ACCESS_STATUS": "PUBLIC_SECONDARY_DOCUMENT",
-      "REVIEW_DATE": "2026-09-15"
+      "REVIEW_DATE": "2026-09-19"
+    },
+    {
+      "SOURCE_ID": "S48",
+      "TITLE": "Annual Report 2026",
+      "PUBLISHER": "AGL",
+      "PUBLICATION_DATE": "2026-08-12",
+      "URL": "https://www.agl.com.au/content/dam/digital/agl/documents/about-agl/investors/2026/260812-2026-annual-report.pdf",
+      "LOCATOR": "Operating and financial review, fuel costs",
+      "FACT_USED": "FY26 coal fuel expense A$666m and A$26.0/MWh across Bayswater and Loy Yang A, up from A$583m and A$22.0/MWh; increase driven by higher Bayswater supply costs.",
+      "LIMITATIONS": "Fleet aggregate cannot identify a station price without heat inputs and a Loy Yang allocation.",
+      "ACCESS_STATUS": "PRIMARY_PDF_LARGE",
+      "REVIEW_DATE": "2026-09-19"
+    },
+    {
+      "SOURCE_ID": "S49",
+      "TITLE": "FY26 full-year results presentation",
+      "PUBLISHER": "AGL",
+      "PUBLICATION_DATE": "2026-08-12",
+      "URL": "https://www.agl.com.au/content/dam/digital/agl/documents/about-agl/investors/2026/260812-fy26-results-presentation-1.pdf",
+      "LOCATOR": "pp.4 and 31",
+      "FACT_USED": "AGL contracted 2.9Mt of coal during FY26; FY26 pool volumes were 13,804GWh at Bayswater and 11,837GWh at Loy Yang A.",
+      "LIMITATIONS": "Contract delivery years, benchmark formula and whether tonnage is replacement or incremental were not disclosed.",
+      "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
+      "REVIEW_DATE": "2026-09-19"
+    },
+    {
+      "SOURCE_ID": "S50",
+      "TITLE": "FY25 half-year results presentation",
+      "PUBLISHER": "AGL",
+      "PUBLICATION_DATE": "2025-02-12",
+      "URL": "https://www.agl.com.au/content/dam/digital/agl/documents/about-agl/news-centre/2025/250212-2025-half-year-results-presentation.pdf",
+      "LOCATOR": "p.19",
+      "FACT_USED": "Wilpinjong covered about 75% of Bayswater FY25 demand; balance came from stockpile and long-term/spot purchases; Bayswater can burn 4,800kcal/kg coal below export quality.",
+      "LIMITATIONS": "Historical FY25 coverage is not a future international-price exposure percentage.",
+      "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
+      "REVIEW_DATE": "2026-09-19"
+    },
+    {
+      "SOURCE_ID": "S51",
+      "TITLE": "Stanwell arrangements transaction presentation",
+      "PUBLISHER": "Coronado Global Resources / SEC",
+      "PUBLICATION_DATE": "2025-11",
+      "URL": "https://www.sec.gov/Archives/edgar/data/1770561/000110465925102549/tm2529515d2_ex99-1.htm",
+      "LOCATOR": "pp.17 and 33",
+      "FACT_USED": "Legacy ACSA approximately 3.2Mtpa at A$40/t. From expected 2027, NCSA approximately 2.2Mtpa at A$50/t plus 0.8Mtpa split 50% fixed and 50% market/seaborne pricing; no NCSA export rebates.",
+      "LIMITATIONS": "Market pricing is explicit, but the public presentation does not provide the complete station-delivered formula, quality basis or rail charges.",
+      "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
+      "REVIEW_DATE": "2026-09-19"
+    },
+    {
+      "SOURCE_ID": "S52",
+      "TITLE": "Second amendment to Stanwell coal supply agreement",
+      "PUBLISHER": "Coronado Global Resources / SEC",
+      "PUBLICATION_DATE": "2025-12-19",
+      "URL": "https://www.sec.gov/Archives/edgar/data/1770561/000110465925116582/tm2532291d1_8k.htm",
+      "LOCATOR": "Item 1.01",
+      "FACT_USED": "Export rebates waived from January 2026 until legacy ACSA expiry; NCSA term extended to 2043 with annual nominations of 1.2-2.24Mt.",
+      "LIMITATIONS": "Amendment changes rebate and term mechanics; it is not a complete delivered fuel-cost schedule.",
+      "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
+      "REVIEW_DATE": "2026-09-19"
+    },
+    {
+      "SOURCE_ID": "S53",
+      "TITLE": "Annual Report 2025",
+      "PUBLISHER": "CS Energy",
+      "PUBLICATION_DATE": "2025-09-26",
+      "URL": "https://www.csenergy.com.au/ArticleDocuments/191/CS%20ENERGY%20ANNUAL%20REPORT%202025%20FULL%20COLOUR%2020250926.pdf.aspx",
+      "LOCATOR": "Fuel supply and financial notes",
+      "FACT_USED": "Kogan remains captive and Callide remains under long-term domestic supply; no new international-index formula is disclosed.",
+      "LIMITATIONS": "The earlier explicit no-international-exposure wording is from 2022; absence of a disclosed change is not proof no private amendment occurred.",
+      "ACCESS_STATUS": "PRIMARY_PDF_DOWNLOADED",
+      "REVIEW_DATE": "2026-09-19"
+    },
+    {
+      "SOURCE_ID": "S54",
+      "TITLE": "Annual Report 2025",
+      "PUBLISHER": "Banpu",
+      "PUBLICATION_DATE": "2026-03",
+      "URL": "https://www.banpu.com/wp-content/uploads/2026/03/BANPU_OR_2025_EN_LINK_260308_web.pdf",
+      "LOCATOR": "Australian operations",
+      "FACT_USED": "Springvale serves domestic and international markets and the Lidsdale loader retains export capability.",
+      "LIMITATIONS": "Supplier export capability and production totals do not identify Mt Piper contract weights or station price exposure.",
+      "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
+      "REVIEW_DATE": "2026-09-19"
+    },
+    {
+      "SOURCE_ID": "S55",
+      "TITLE": "Annual Report 2025",
+      "PUBLISHER": "CLP Holdings",
+      "PUBLICATION_DATE": "2026-02",
+      "URL": "https://www.clpgroup.com/content/dam/clp-group/channels/investor/document/3-3-financial-reports/2025/e_2025%20Annual%20Report.pdf",
+      "LOCATOR": "EnergyAustralia operating review",
+      "FACT_USED": "Mt Piper coal cost rose and supply reliability is managed through diversified arrangements.",
+      "LIMITATIONS": "No mine allocation, export index or delivered station tariff disclosed.",
+      "ACCESS_STATUS": "PUBLIC_PRIMARY_TEXT",
+      "REVIEW_DATE": "2026-09-19"
     }
   ],
   "calculations": [
@@ -1502,6 +1943,56 @@
       "UNIT": "AUD_PER_GJ_IF_ENERGY_WEIGHTS_EQUAL",
       "SOURCE_IDS": "S17",
       "ASSUMPTIONS_AND_LIMITATIONS": "Component prices3.5 and6.5 are UNSOURCED screenshot inputs.50% public share is tonnes; formula only valid if energy shares also50%. Not used as validated price evidence."
+    },
+    {
+      "CALC_ID": "C14",
+      "PLANT": "Bayswater",
+      "CALCULATION": "FY26 residual station price proxy",
+      "FORMULA_TEXT": "(666m - 11.837mMWh * 11.2GJ/MWh * 0.68/GJ) / (13.804mMWh * 10.0GJ/MWh)",
+      "RESULT": 4.171612634019125,
+      "UNIT": "AUD_PER_GJ",
+      "SOURCE_IDS": "S48;S49",
+      "ASSUMPTIONS_AND_LIMITATIONS": "Uses disclosed fleet cost and pool volumes, but analyst heat rates and retained Loy Yang A price. Stockpile and accounting allocation may differ. Rounded reviewed base is 4.20."
+    },
+    {
+      "CALC_ID": "C15",
+      "PLANT": "AGL coal fleet",
+      "CALCULATION": "FY26 fleet coal cost per pool MWh",
+      "FORMULA_TEXT": "666m / (13.804mMWh + 11.837mMWh)",
+      "RESULT": 25.974025974025974,
+      "UNIT": "AUD_PER_MWH",
+      "SOURCE_IDS": "S48;S49",
+      "ASSUMPTIONS_AND_LIMITATIONS": "Reproduces disclosed approximately26.0/MWh; fleet aggregate is not a Bayswater price."
+    },
+    {
+      "CALC_ID": "C16",
+      "PLANT": "Stanwell PS",
+      "CALCULATION": "Post-reset market-priced contract share",
+      "FORMULA_TEXT": "0.4 / (2.2 + 0.8)",
+      "RESULT": 0.13333333333333333,
+      "UNIT": "FRACTION_OF_DISCLOSED_CONTRACT_PACKAGE",
+      "SOURCE_IDS": "S51",
+      "ASSUMPTIONS_AND_LIMITATIONS": "0.4Mtpa market-priced half of 0.8Mt transaction volume divided by disclosed 3.0Mtpa package. Not a complete delivered-price beta."
+    },
+    {
+      "CALC_ID": "C17",
+      "PLANT": "Stanwell PS",
+      "CALCULATION": "Legacy ACSA coal-only price at illustrative28GJ/t",
+      "FORMULA_TEXT": "40 / 28",
+      "RESULT": 1.4285714285714286,
+      "UNIT": "AUD_PER_GJ_BEFORE_DELIVERY_AND_OTHER_CHARGES",
+      "SOURCE_IDS": "S35;S51",
+      "ASSUMPTIONS_AND_LIMITATIONS": "28GJ/t is midpoint of old26-30GJ/t engineering range. Excludes rail, quality, rebate, finance and station allocation."
+    },
+    {
+      "CALC_ID": "C18",
+      "PLANT": "Stanwell PS",
+      "CALCULATION": "NCSA fixed coal-only price at illustrative28GJ/t",
+      "FORMULA_TEXT": "50 / 28",
+      "RESULT": 1.7857142857142858,
+      "UNIT": "AUD_PER_GJ_BEFORE_DELIVERY_AND_OTHER_CHARGES",
+      "SOURCE_IDS": "S35;S51",
+      "ASSUMPTIONS_AND_LIMITATIONS": "Illustrative conversion only; actual formula, quality and all-in delivery costs remain undisclosed."
     }
   ]
 }

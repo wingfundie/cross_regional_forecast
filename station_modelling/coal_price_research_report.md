@@ -2,7 +2,7 @@
 
 ## Findings
 
-The most defensible revision is to raise Mt Piper’s provisional delivered fuel assumption from A$5.00/GJ to **A$7.50/GJ**, with an analyst range of A$5.50–8.50/GJ. Centennial’s parent, Banpu, disclosed a substantially higher Australian domestic selling price than the screenshot’s A$5/GJ would imply under ordinary black-coal energy assumptions. This remains a supplier-level proxy: the actual Mt Piper contract price, calorific value and delivered-cost adjustments are not public. [11](https://www.banpu.com/wp-content/uploads/2025/02/2024-Banpu-MDA-En.pdf)
+The most defensible price revisions are to raise Mt Piper’s provisional delivered fuel assumption from A$5.00/GJ to **A$7.50/GJ**, and Bayswater from A$3.60/GJ to **A$4.20/GJ**. Mt Piper remains a supplier-level proxy. Bayswater is an assumption-dependent residual from AGL’s FY26 A$666 million fleet coal cost after allowing for Loy Yang A; it is close to the screenshot’s A$4.1241 current value but is not a disclosed station invoice. [11](https://www.banpu.com/wp-content/uploads/2025/02/2024-Banpu-MDA-En.pdf), [48](https://www.agl.com.au/content/dam/digital/agl/documents/about-agl/investors/2026/260812-2026-annual-report.pdf), [49](https://www.agl.com.au/content/dam/digital/agl/documents/about-agl/investors/2026/260812-fy26-results-presentation-1.pdf)
 
 Most other central assumptions should remain provisional rather than be replaced with apparently precise numbers inferred from incomplete contracts. Historical mine-cost disclosures support the broad scale of Loy Yang A’s assumption. Callide’s historical domestic contract terms provide a useful crosscheck. Contractor announcements help bound mine costs at Meandu, Kogan Creek and Commodore, but do not disclose the full cost of delivering coal to the station.
 
@@ -10,11 +10,19 @@ Most other central assumptions should remain provisional rather than be replaced
 
 Export exposure requires a separate reconstruction. Vales Point’s approximately 50% Chain Valley supply share is a physical tonne share, while Eraring’s disclosed contracted/hedged coverage is a financial and inventory measure. Neither is an export price weight. The original `GROSS_BETA_REFERENCE` numbers have been archived, not promoted to verified weights. [5](https://announcements.asx.com.au/asxpdf/20260427/pdf/06ywbyxms9scmn.pdf), [17](https://www.deltapae.com.au/operations/chain-valley-colliery/chain-valley-colliery-environment/consolidation-project)
 
+## International coal exposure findings
+
+AGL did **not** disclose that Bayswater’s international coal-price exposure will rise to a stated percentage. The likely source of that recollection is one of three different disclosures: Wilpinjong covered about 75% of FY25 demand; AGL contracted 2.9 million tonnes during FY26; and some additional FY26/FY27 coal was bought at a material discount to Newcastle. None supplies the delivery profile and price formula needed for a forward export beta. AGL’s realised coal-fleet cost did rise from A$22.0/MWh to A$26.0/MWh in FY26, driven by higher Bayswater supply costs, but that is an actual fleet cost change rather than an international-exposure percentage. [2](https://announcements.asx.com.au/asxpdf/20250813/pdf/06mtcw5jhkzf4t.pdf), [48](https://www.agl.com.au/content/dam/digital/agl/documents/about-agl/investors/2026/260812-2026-annual-report.pdf), [49](https://www.agl.com.au/content/dam/digital/agl/documents/about-agl/investors/2026/260812-fy26-results-presentation-1.pdf), [50](https://www.agl.com.au/content/dam/digital/agl/documents/about-agl/news-centre/2025/250212-2025-half-year-results-presentation.pdf)
+
+Stanwell has the clearest public forward split. The expected post-H1-2027 package is about 2.2Mtpa at approximately A$50/t plus 0.8Mtpa split equally between fixed and market/seaborne pricing. Therefore about 0.4Mt of the disclosed 3.0Mt package, or **13.3%**, is market-priced. This is a contract-package share, not a complete delivered Newcastle beta. The legacy ACSA is about 3.2Mtpa at approximately A$40/t; export rebates are waived from January 2026 to expiry, so the direct positive export-price weight is zero over that remaining regime. [51](https://www.sec.gov/Archives/edgar/data/1770561/000110465925102549/tm2529515d2_ex99-1.htm), [52](https://www.sec.gov/Archives/edgar/data/1770561/000110465925116582/tm2532291d1_8k.htm)
+
+For Eraring, the best disclosed forward measure is 75–85% contracted, hedged or covered by opening stock for FY27, leaving 15–25% procurement exposure. That complement should not be loaded as an export beta because contract slopes, quality discounts, hedge maturities and the eventual residual supply source remain unknown. Mt Piper’s suppliers have export routes, but their supplier-wide export share is the wrong denominator for the station. Vales Point’s external-coal share is similarly not proven export-indexed. Captive or mine-mouth systems at Tarong, Tarong North, Kogan Creek, Loy Yang A, Loy Yang B, Yallourn and Millmerran receive zero direct international coal-price weights; Callide B/C receive conditional zero weights while the long-term domestic CSA regime continues. Gladstone remains unknown. The station-by-station fields are in `nem_coal_international_exposure.csv`.
+
 ## Scope and interpretation
 
 The review covers the 16 rows visible in the supplied screenshots: 15 operating-asset rows and closed Liddell. Tarong/Tarong North, Callide B/C and Loy Yang A/B remain separate rows. Operating-asset status is not a claim about real-time unit availability. The screenshots are the input record; hidden columns, formulas and the original workbook were not available. Instructions embedded in their notes, such as retaining a prior value, are treated as assertions to assess.
 
-All recommended price inputs target **average delivered station fuel cost in real June-2025 Australian dollars**. Evidence is considered through 15 September 2026; the assumed commercial regime is the latest established in the cited sources. This is a near-term modelling set expressed in a common currency base, not a reconstruction of actual FY25 invoices and not a complete annual forecast to closure. A 2026 contract is not made into a 2025 historical contract by deflating its price.
+All recommended price inputs target **average delivered station fuel cost in real June-2025 Australian dollars**. Evidence is considered through 19 September 2026; the assumed commercial regime is the latest established in the cited sources. This is a near-term modelling set expressed in a common currency base, not a reconstruction of actual FY25 invoices and not a complete annual forecast to closure. A 2026 contract is not made into a 2025 historical contract by deflating its price.
 
 The target includes coal acquisition or allocated captive mining cost and delivery to the station. Actual source accounting boundaries differ. Mining services may exclude owner staff, royalties, fleet costs, sustaining expenditure or conveyor operation. Accounting fuel expense may contain stockpile effects. The report does not silently combine those scopes into a purported observed price.
 
@@ -24,7 +32,7 @@ All figures below are A$/GJ in June-2025 money. Ranges are deliberately broad **
 
 | Station | Screenshot base | Reviewed base | Reviewed low–high | Basis of decision |
 |---|---:|---:|---:|---|
-| Bayswater | 3.60 | 3.60 | 3.20–5.50 | Retain prior; raise upper case for contract changes |
+| Bayswater | 3.60 | **4.20** | 3.60–5.50 | FY26 fleet-cost residual proxy; assumption-dependent |
 | Eraring | 5.50 | 5.50 | 4.50–8.00 | Retain unverified prior; negotiated costs and mine mix unresolved |
 | Mt Piper | 5.00 | **7.50** | 5.50–8.50 | Domestic supplier ASP proxy |
 | Vales Point B | 5.00 | 5.00 | 4.00–7.50 | Physical blend partly known; component prices unknown |
@@ -75,9 +83,9 @@ Fuel cost per MWh is price/GJ multiplied by heat rate/GJ per MWh. Different heat
 
 ### 1. Bayswater
 
-Peabody’s Wilpinjong technical report identifies an open-book AGL supply arrangement scheduled to finish in 2028, with flexible nominations. The historic quantity is unsuitable as a current Bayswater blend after Liddell’s closure. AGL’s disclosures also describe access to lower-energy coal and discounted additional supply, alongside rising costs as legacy arrangements change. [1](https://www.sec.gov/Archives/edgar/data/1064728/000106472826000006/btu_20251231xex962.htm), [2](https://announcements.asx.com.au/asxpdf/20250813/pdf/06mtcw5jhkzf4t.pdf)
+Peabody’s Wilpinjong technical report identifies an open-book AGL supply arrangement scheduled to finish in 2028, with flexible nominations. AGL said Wilpinjong covered about 75% of FY25 demand; the balance came from stockpile and long-term/spot purchases. That historical coverage cannot be carried forward as a current blend or international-price weight. AGL contracted 2.9Mt during FY26, but did not disclose delivery years, benchmark slopes or whether this replaced expiring supply. [1](https://www.sec.gov/Archives/edgar/data/1064728/000106472826000006/btu_20251231xex962.htm), [2](https://announcements.asx.com.au/asxpdf/20250813/pdf/06mtcw5jhkzf4t.pdf), [49](https://www.agl.com.au/content/dam/digital/agl/documents/about-agl/investors/2026/260812-fy26-results-presentation-1.pdf), [50](https://www.agl.com.au/content/dam/digital/agl/documents/about-agl/news-centre/2025/250212-2025-half-year-results-presentation.pdf)
 
-The screenshot’s claim that A$3.60/GJ is established by fleet reconciliation is too strong. Two station prices cannot be uniquely solved from one fleet-cost total without independent fuel quantities and a cost-allocation rule. The FY25 and HY26 fleet disclosures are useful consistency checks, but neither supplies that missing identification. Retain A$3.60/GJ provisionally and widen the high case to A$5.50/GJ; obtain current Wilpinjong nominations and other supplier contract shares before assigning an export sensitivity. [3](https://www.agl.com.au/content/dam/digital/agl/documents/about-agl/company-docs/250813-2-agl-energy-limited-annual-report-2025.pdf), [4](https://www.agl.com.au/content/dam/digital/agl/documents/about-agl/news-centre/2026/260211-appendix-4d-and-fy26-half-year-report.pdf)
+AGL’s FY26 coal-fleet cost of A$666m and A$26.0/MWh is a stronger current anchor. Subtracting an estimated Loy Yang A cost using 11.2GJ/MWh and A$0.68/GJ, then dividing the remainder by Bayswater output at 10.0GJ/MWh, gives A$4.17/GJ. The reviewed base is rounded to A$4.20/GJ with a A$3.60–5.50/GJ range. Heat rates, stockpile effects and cost allocation are analyst assumptions, so confidence remains low and the figure is labelled as a residual proxy. [48](https://www.agl.com.au/content/dam/digital/agl/documents/about-agl/investors/2026/260812-2026-annual-report.pdf), [49](https://www.agl.com.au/content/dam/digital/agl/documents/about-agl/investors/2026/260812-fy26-results-presentation-1.pdf)
 
 ### 2. Eraring
 
@@ -101,9 +109,9 @@ The applicant’s hearing evidence expressly complicates the assumption that cap
 
 ### 5. Stanwell PS
 
-The Curragh relationship supports domestic-contract economics, but the screenshot’s fixed-contract description needs updating. Coronado reports significant amendments involving prepayments, rebate treatment and additional supply; subsequent disclosures discuss reset timing and continuing deferred balances. An assumption of permanent insulation at one unchanged tariff is therefore too strong. [20](https://www.sec.gov/Archives/edgar/data/1770561/000110465926046838/tm264496d1_ars.pdf), [21](https://www.sec.gov/Archives/edgar/data/1770561/000110465926007024/tm264164d1_ex99-1.htm), [22](https://www.sec.gov/Archives/edgar/data/1770561/000156276226000094/Form10q2026q2.htm)
+The Curragh relationship now has unusually specific public terms. The legacy ACSA is approximately 3.2Mtpa at A$40/t to expected H1 2027. Export rebates are waived from January 2026 to expiry. The next package is approximately 2.2Mtpa at A$50/t plus 0.8Mtpa split equally between fixed and market/seaborne pricing; it has no export rebates. [20](https://www.sec.gov/Archives/edgar/data/1770561/000110465926046838/tm264496d1_ars.pdf), [51](https://www.sec.gov/Archives/edgar/data/1770561/000110465925102549/tm2529515d2_ex99-1.htm), [52](https://www.sec.gov/Archives/edgar/data/1770561/000110465925116582/tm2532291d1_8k.htm)
 
-Retain A$2.55/GJ as a legacy-price prior and widen the upper case to A$4.50/GJ. A complete reconciliation needs the contracted delivery charge, prepayment recovery, waived or deferred rebates, inventory and any right-to-mine accounting. Dividing a financing advance by current coal burn would mix cash timing with fuel expense. Supplier-wide thermal or export shares are not a substitute for this contract analysis.
+Retain A$2.55/GJ as a delivered-station legacy prior and keep the upper case at A$4.50/GJ. The disclosed A$40/t and A$50/t prices equate to roughly A$1.43/GJ and A$1.79/GJ at an illustrative 28GJ/t before rail and other charges. From the reset, 0.4Mtpa of the 3.0Mtpa disclosed package is market-priced, giving the recommended 13.3% contract-package weight. A complete delivered-price response still needs quality, rail, timing, prepayment and formula details.
 
 ### 6. Tarong
 
@@ -285,4 +293,20 @@ Full titles, dates, exact URLs, relevant locations and access limitations follow
 46. ABS. [Consumer Price Index, September quarter 2016](https://www.abs.gov.au/ausstats/abs@.nsf/7d12b0f6763c78caca257061001cc588/7c3192fae31616f9ca2580b20076cf0f!OpenDocument). 2016. All groups, weighted average eight capitals. Access: PUBLIC_PRIMARY_TEXT.
 
 47. David Hardidge / Australian Treasury host. [Submission discussing CPI indexation](https://treasury.gov.au/sites/default/files/2019-04/c2019-t342318-david_hardidge.pdf). 2019. Historical CPI series. Access: PUBLIC_SECONDARY_DOCUMENT.
+
+48. AGL. [Annual Report 2026](https://www.agl.com.au/content/dam/digital/agl/documents/about-agl/investors/2026/260812-2026-annual-report.pdf). 2026-08-12. Operating and financial review, fuel costs. Access: PRIMARY_PDF_LARGE.
+
+49. AGL. [FY26 full-year results presentation](https://www.agl.com.au/content/dam/digital/agl/documents/about-agl/investors/2026/260812-fy26-results-presentation-1.pdf). 2026-08-12. pp.4 and 31. Access: PUBLIC_PRIMARY_TEXT.
+
+50. AGL. [FY25 half-year results presentation](https://www.agl.com.au/content/dam/digital/agl/documents/about-agl/news-centre/2025/250212-2025-half-year-results-presentation.pdf). 2025-02-12. p.19. Access: PUBLIC_PRIMARY_TEXT.
+
+51. Coronado Global Resources / SEC. [Stanwell arrangements transaction presentation](https://www.sec.gov/Archives/edgar/data/1770561/000110465925102549/tm2529515d2_ex99-1.htm). 2025-11. pp.17 and 33. Access: PUBLIC_PRIMARY_TEXT.
+
+52. Coronado Global Resources / SEC. [Second amendment to Stanwell coal supply agreement](https://www.sec.gov/Archives/edgar/data/1770561/000110465925116582/tm2532291d1_8k.htm). 2025-12-19. Item 1.01. Access: PUBLIC_PRIMARY_TEXT.
+
+53. CS Energy. [Annual Report 2025](https://www.csenergy.com.au/ArticleDocuments/191/CS%20ENERGY%20ANNUAL%20REPORT%202025%20FULL%20COLOUR%2020250926.pdf.aspx). 2025-09-26. Fuel supply and financial notes. Access: PRIMARY_PDF_DOWNLOADED.
+
+54. Banpu. [Annual Report 2025](https://www.banpu.com/wp-content/uploads/2026/03/BANPU_OR_2025_EN_LINK_260308_web.pdf). 2026-03. Australian operations. Access: PUBLIC_PRIMARY_TEXT.
+
+55. CLP Holdings. [Annual Report 2025](https://www.clpgroup.com/content/dam/clp-group/channels/investor/document/3-3-financial-reports/2025/e_2025%20Annual%20Report.pdf). 2026-02. EnergyAustralia operating review. Access: PUBLIC_PRIMARY_TEXT.
 
