@@ -1,0 +1,22 @@
+{
+  "measured_at": "2026-09-19",
+  "prepared_index_files_scanned": 954,
+  "stpasa": {
+    "coherent_wide_rows": 2523168,
+    "maximum_delivery_minus_available_hours": 182.83583333333334,
+    "rows_at_or_beyond_168_hours": 87624,
+    "rows_at_or_beyond_336_hours": 0
+  },
+  "pdpasa": {
+    "coherent_wide_rows": 1025713,
+    "maximum_delivery_minus_available_hours": 39.42027777777778,
+    "rows_at_or_beyond_168_hours": 0,
+    "rows_at_or_beyond_336_hours": 0
+  },
+  "decision": {
+    "24_hours": "score",
+    "48_hours": "score",
+    "168_hours": "score where an admissible ST PASA vintage exists",
+    "336_hours": "unavailable from retained PASA sources; report as unavailable and do not impute"
+  }
+}

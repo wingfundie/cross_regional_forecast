@@ -194,7 +194,7 @@ def metrics(y,p):
 
 def estimator(family,setting):
     return (ridge(setting) if family=='ridge' else
-            lgb.LGBMRegressor(objective='regression_l1',n_estimators=180,num_leaves=setting,
+            lgb.LGBMRegressor(objective='regression_l1',n_estimators=180,num_leaves=int(setting),
                               min_child_samples=100,learning_rate=.05,n_jobs=2,random_state=741,verbosity=-1))
 
 

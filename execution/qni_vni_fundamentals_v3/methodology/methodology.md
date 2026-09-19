@@ -84,6 +84,14 @@ Required pages: 15–20-panel HTML executive deck, feature engineering research,
 
 VNI is the mandatory first connector for every post-feature forecasting stage. Complete VNI feature acceptance, feature reduction, model fitting, exhaustive scoring, NOS/risk assessment, research packaging and connector report material before beginning the corresponding QNI work. QNI is always second. Do not run VNI and QNI model campaigns concurrently. Within the active connector, bounded parallelism may still be used for independent model cells when it respects the configured memory and thread ceilings. The already-running independent QNI/VNI source-feature backfill may finish in parallel; this amendment applies to all downstream forecasting work and future campaign launches.
 
+## Balanced model campaign amendment — 2026-09-19
+
+Replace the exhaustive model search with a frozen two-stage campaign. Discovery uses the PASA/coal information track, two representative chronological folds spanning early and recent/seasonally distinct history, all four existing lead bands, and the `flow`, `export_tight`, and `import_tight` targets. Compare only network, main fundamentals, full interactions, and endpoint recipes. Screen one regularized linear and one shallow boosting candidate per recipe with two VNI-local cell workers. Freeze the recipe, family, hyperparameters and feature set independently by target and lead band using discovery evidence only.
+
+Confirmation compares only the frozen winner and matched network baseline over every mature PASA/coal fold. ECMWF is a sensitivity track on two representative folds using the frozen choices; it is not pooled with PASA/coal or treated as another full search. Ordinary `export` and `import` targets are deferred. Preserve earlier exhaustive-search cells as pilot evidence under their existing contract; never mix them into balanced results.
+
+Final horizon reporting is limited to literal 24-hour, 48-hour, 168-hour and 336-hour delivery horizons, corresponding to half-hour lead indices 48, 96, 336 and 672. The 336-hour horizon lies beyond the seven-day ST PASA and retained weather coverage. Evaluate it only as a separately labelled PD-PASA/coal-only long-range track when an admissible coherent PD vintage and outcome exist; otherwise report it unavailable. Do not impute ST or weather beyond source coverage. Maintain issue-time rules, chronological partitions, four training bands, matched network controls, risk/calibration gates and research-only packaging.
+
 ## Research sources
 
 Access reviewed during planning and recheck on implementation:

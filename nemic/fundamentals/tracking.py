@@ -106,7 +106,8 @@ class Ledger:
         # its own content manifest, not by prose/report edits. Computational stages
         # remain tied to configuration and code contracts.
         immutable=ident.startswith(('acquisition/','weather/','coal/','prepare-indexes/')) or ident in ('inventory','acquisition')
-        if not immutable and row['config_hash'] != self.config_hash:return False
+        feature_artifact=ident.startswith('features/')
+        if not immutable and not feature_artifact and row['config_hash'] != self.config_hash:return False
         # Feature artifacts carry their own source/config/feature-contract generation
         # and daily hashes, so unrelated campaign/report edits do not invalidate them.
         if ident.startswith(('train/','selection/','assessment/','packaging/')) and row['code_hash']!=self.code_hash:return False

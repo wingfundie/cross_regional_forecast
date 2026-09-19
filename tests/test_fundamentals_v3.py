@@ -52,6 +52,13 @@ def test_compact_index_matches_reference_and_rejects_future(tmp_path):
         assert pasa_at(index,nem_time(origin),delivery)==pasa_at(f,nem_time(origin),delivery)
 
 
+def test_balanced_fold_indices_are_ordered_and_unique():
+    from nemic.fundamentals.balanced import _resolve_indices
+    assert _resolve_indices(10,[0,-1])==[0,9]
+    assert _resolve_indices(2,[0,-1,0])==[0,1]
+    with pytest.raises(IndexError):_resolve_indices(1,[2])
+
+
 def test_date_sharded_store_matches_compact_index(tmp_path):
     from nemic.fundamentals.features import PasaIndex,PasaStore
     f=pasa_fixture();f['feature']=f.region+'__'+f.variable

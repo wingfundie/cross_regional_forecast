@@ -11,7 +11,7 @@ from .sources import inventory,acquire,coverage_audit
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command',choices=['status','inventory','acquire','weather','coal','prepare-indexes','features','train','assess','test','report','benchmark','run'])
+    parser.add_argument('command',choices=['status','inventory','acquire','weather','coal','prepare-indexes','features','train','balanced','assess','test','report','benchmark','run'])
     parser.add_argument('--config',default=str(DEFAULT))
     parser.add_argument('--scope',choices=['CURRENT','ARCHIVE'],default='CURRENT')
     parser.add_argument('--limit',type=int,default=1,help='Archives per product; 0 requests all eligible archive files')
@@ -20,6 +20,7 @@ def main():
     parser.add_argument('--max-origins',type=int,help='Feature pilot only; excluded from full training')
     parser.add_argument('--workers',type=int,default=2,choices=[1,2])
     parser.add_argument('--resume',action='store_true',help='Resume verified partitions and cells')
+    parser.add_argument('--stage',choices=['discovery','confirmation','sensitivity','score'],default='discovery')
     parser.add_argument('--table',type=Path)
     args=parser.parse_args();ledger=Ledger(args.config)
     if args.command=='status':ledger.reconcile();print((ledger.root/'STATUS.md').read_text());return
@@ -54,6 +55,10 @@ def main():
             # Cross-connector training is never parallel: VNI completes first.
             result=[fit_table(ledger,path) for path in paths]
         print(json.dumps(result,default=str));return
+    if args.command=='balanced':
+        if args.connector=='all':parser.error('balanced runs one connector at a time; VNI must complete before QNI')
+        from .balanced import run as run_balanced
+        print(run_balanced(ledger,args.connector,args.stage));return
     if args.command=='test':
         result=subprocess.run([sys.executable,'-m','pytest','tests/test_fundamentals_v3.py','-q'],capture_output=True,text=True)
         out=ledger.root/'logs/tests.txt';atomic(out,result.stdout+result.stderr)

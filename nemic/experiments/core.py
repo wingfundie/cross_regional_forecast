@@ -43,7 +43,10 @@ def load_config(path=DEFAULT):
     if c.get('schema_version') not in (1,2):raise ValueError('Unsupported experiment schema')
     ids=[x['id'] for x in c['connectors']]
     if len(set(ids))!=len(ids):raise ValueError('Duplicate connector')
-    if not all(1<=x<=336 for x in c['leads']):raise ValueError('Invalid lead')
+    declared=c.get('balanced_campaign',{}).get('final_leads_half_hours',[])
+    maximum=max([336]+[int(x) for x in declared])
+    if not all(1<=x<=maximum for x in c['leads']):raise ValueError('Invalid lead')
+    if any(x>336 and x not in declared for x in c['leads']):raise ValueError('Long-range lead is not declared by the campaign contract')
     run=(ROOT/c['root']/c['campaign']).resolve()
     allowed=(ROOT/'data/forecast_experiments').resolve()
     if not run.is_relative_to(allowed) or run==allowed:raise ValueError('Run root must be a child of data/forecast_experiments')
