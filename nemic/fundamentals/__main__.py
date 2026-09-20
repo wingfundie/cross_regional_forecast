@@ -20,7 +20,7 @@ def main():
     parser.add_argument('--max-origins',type=int,help='Feature pilot only; excluded from full training')
     parser.add_argument('--workers',type=int,default=2,choices=[1,2])
     parser.add_argument('--resume',action='store_true',help='Resume verified partitions and cells')
-    parser.add_argument('--stage',choices=['discovery','confirmation','sensitivity','score'],default='discovery')
+    parser.add_argument('--stage',choices=['discovery','confirmation','sensitivity','score','risk'],default='discovery')
     parser.add_argument('--table',type=Path)
     args=parser.parse_args();ledger=Ledger(args.config)
     if args.command=='status':ledger.reconcile();print((ledger.root/'STATUS.md').read_text());return

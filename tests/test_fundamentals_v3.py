@@ -201,6 +201,18 @@ def test_holm_and_paired_acceptance_do_not_pass_missing_evidence():
     assert block_evidence(f,7)['pvalue']==1
 
 
+def test_balanced_risk_warning_window_and_paired_recall():
+    from nemic.fundamentals.balanced_risk import _eligible_times,_paired_recall
+    origins=pd.date_range('2026-01-01T00:00Z',periods=5,freq='30min')
+    catalogue=pd.DataFrame({'time':[pd.Timestamp('2026-01-01T01:30Z'),pd.Timestamp('2026-01-01T04:01Z')]})
+    assert _eligible_times(origins,catalogue)==['2026-01-01 01:30:00+00:00']
+    base={'direction':'export','eligible_times':['a','b'],'events':{'matched_times':['a']}}
+    candidate={'direction':'export','eligible_times':['a','b'],'events':{'matched_times':['a','b']}}
+    rows=[{'scores':{'network':[base],'both':[candidate]}}]
+    result=_paired_recall(rows,'both','export',repeats=100)
+    assert result['incidents']==2 and result['delta_recall']==.5 and result['ci95'][0]>=0
+
+
 def test_portable_research_fit_and_reload(ledger):
     from nemic.fundamentals.modelling import fit_cohort
     from nemic.fundamentals.packaging import export_model,predict

@@ -98,6 +98,14 @@ The provider-sensitivity runner must consume a physically separate `ecmwf_explor
 
 Balanced assessment and connector reports consume only result files with sibling held-out predictions. Primary confirmation is labelled `balanced-v1:pasa_coal`; provider sensitivity is labelled `balanced-v1:ecmwf_exploratory`. Discovery-only scores and unrelated result JSON files without held-out predictions are excluded. Provider-sensitivity rows remain explicitly non-promotional when they do not carry the primary risk gate. This compatibility mapping changes only evidence routing, not model results or acceptance thresholds.
 
+## Balanced VNI NOS/risk closure amendment — 2026-09-20
+
+Run the contraction-risk gate only on source-common VNI rows at the two-hour issue point (`lead=4`). Join the separately audited NOS archive by exact origin and lead. Admit a row only when the original NOS report generation time plus 30 minutes is no later than origin and its post-delay age is no more than 90 minutes. Use only balanced folds with at least 80% admissible NOS coverage in every train, selection, calibration, alert and evaluation partition; keep all five partitions chronological and disjoint.
+
+Fit a matched four-way factorial per direction: network; network plus the frozen band-0 directional fundamentals; network plus NOS; and network plus both. The combined recipe may add only declared NOS-count/overlap/directional-set interactions with room, setter-age and calendar controls. Use a fixed shallow LightGBM contraction classifier so the factorial changes information, not tuning breadth. Fit on training, calibrate probabilities on calibration, and choose the two directional thresholds jointly on the alert partition subject to the three-false-alerts-per-day budget. Evaluation labels use the training-frozen sharp-limit detector and 30–120 minute advance-warning window. Selection and evaluation outcomes never choose features, models or thresholds.
+
+Report held-out recall, precision, Brier score, average precision, joint false alerts per exposure day, incident counts and paired incident-bootstrap recall differences versus network. The risk gate requires at least 30 evaluation incidents per direction, combined held-out false alerts no greater than three per day, and a 95% lower bound on recall difference no worse than -2 percentage points. Existing NOS coverage, mapping and power audits remain prerequisites. Because the equation mapping is reconstructed and operational receipt history is unavailable, passing statistical gates closes only the historical-development gate; production promotion remains prohibited.
+
 ## Research sources
 
 Access reviewed during planning and recheck on implementation:

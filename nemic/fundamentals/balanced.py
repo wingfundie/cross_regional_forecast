@@ -320,4 +320,7 @@ def run(ledger,connector,stage='discovery'):
     if stage=='confirmation':return confirmation(ledger,connector)
     if stage=='sensitivity':return sensitivity(ledger,connector)
     if stage=='score':return score_horizons(ledger,connector)
+    if stage=='risk':
+        from .balanced_risk import run_risk
+        return run_risk(ledger,connector)
     raise ValueError(f'Balanced stage not implemented: {stage}')
