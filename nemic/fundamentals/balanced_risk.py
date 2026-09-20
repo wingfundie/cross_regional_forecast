@@ -1,4 +1,4 @@
-"""Matched four-way VNI fundamentals/NOS contraction-risk assessment."""
+"""Matched four-way fundamentals/NOS contraction-risk assessment."""
 from __future__ import annotations
 
 import json
@@ -72,11 +72,11 @@ def _paired_recall(rows,recipe,direction,repeats=5000):
 
 
 def run_risk(ledger,connector='VNI'):
-    if connector!='VNI':raise ValueError('Balanced risk closure must complete VNI before QNI')
+    if connector not in ('VNI','QNI'):raise ValueError(connector)
     profile=ledger.c['balanced_campaign'];version=profile['version']
-    feature_path=ledger.data/'features/VNI/pasa_coal/table.parquet'
+    feature_path=ledger.data/'features'/connector/'pasa_coal/table.parquet'
     schema=json.loads(feature_path.with_suffix('.schema.json').read_text(encoding='utf-8'))
-    frozen=json.loads((ledger.data/'balanced/VNI'/version/'frozen.json').read_text(encoding='utf-8'))
+    frozen=json.loads((ledger.data/'balanced'/connector/version/'frozen.json').read_text(encoding='utf-8'))
     network=[c for c,g in schema['groups'].items() if g=='network']
     directional={d:list(dict.fromkeys(network+[c for c in frozen[f'{d}_tight/band0']['columns'] if c!='own_anchor']))
                  for d in ('export','import')}
@@ -84,7 +84,8 @@ def run_risk(ledger,connector='VNI'):
     import pyarrow.parquet as pq
     names=set(pq.ParquetFile(feature_path).schema_arrow.names)
     table=pd.read_parquet(feature_path,columns=[c for c in required if c in names],filters=[('lead','=',4)]).sort_values('origin').reset_index(drop=True)
-    exposure_root=Path('data/forecast_experiments/vni_diurnal_nos_v2/nos')
+    archive=f'{connector.lower()}_diurnal_nos_v2'
+    exposure_root=Path('data/forecast_experiments')/archive/'nos'
     coverage=json.loads((exposure_root/'coverage_audit.json').read_text(encoding='utf-8'))
     mapping=json.loads((exposure_root/'mapping_audit.json').read_text(encoding='utf-8'))
     feasibility=json.loads((exposure_root/'nos_feasibility.json').read_text(encoding='utf-8'))
@@ -95,7 +96,9 @@ def run_risk(ledger,connector='VNI'):
     joined=table.join(exposure[NOS_COLUMNS+['nos_report_generated']],on='origin')
     age=joined.origin-joined.nos_report_generated-pd.Timedelta(minutes=30)
     known=joined.nos_report_generated.add(pd.Timedelta(minutes=30)).le(joined.origin)&age.le(pd.Timedelta(minutes=90))&age.ge(pd.Timedelta(0))
-    old=load_config('configs/experiments/vni_diurnal_nos_v2.json');raw=connector_data(old,old['connectors'][0])['raw']
+    old=load_config(f'configs/experiments/{archive}.json')
+    connector_config=next(x for x in old['connectors'] if x['name']==connector)
+    raw=connector_data(old,connector_config)['raw']
     fs=list(folds(table,ledger.c));results=[]
     with threadpool_limits(limits=2):
         for bounds in fs:
@@ -110,7 +113,7 @@ def run_risk(ledger,connector='VNI'):
             valid=known.to_numpy()&np.isfinite(labels['export'])&np.isfinite(labels['import'])
             use={k:v&valid for k,v in ms.items()}
             if min(v.sum() for v in use.values())<100:continue
-            ident=f'assessment/VNI/{version}/risk/{fold}';folder=ledger.data/ident;result_path=folder/'result.json'
+            ident=f'assessment/{connector}/{version}/risk/{fold}';folder=ledger.data/ident;result_path=folder/'result.json'
             if ledger.valid(ident):results.append(json.loads(result_path.read_text()));continue
             with ledger.job(ident,acceptance='Matched calibrated NOS/fundamentals contraction-risk fold') as (artifacts,checkpoint):
                 scores={};models={};predictions=[]
@@ -164,10 +167,10 @@ def run_risk(ledger,connector='VNI'):
     both=aggregate['both'];gate={'minimum_incidents':all(both['directions'][d]['incidents']>=ledger.c['acceptance']['min_incidents'] for d in ('export','import')),
         'joint_false_alert_budget':both['joint_false_alarms_per_day']<=ledger.c['acceptance']['false_alerts_per_day'],
         'recall_noninferiority':all(both['recall_difference'][d]['ci95'][0]>=-ledger.c['acceptance']['recall_margin_pp']/100 for d in ('export','import'))}
-    summary={'connector':'VNI','profile':version,'folds':len(results),'aggregate':aggregate,'gates':gate,'historical_statistical_gate':all(gate.values()),
+    summary={'connector':connector,'profile':version,'folds':len(results),'aggregate':aggregate,'gates':gate,'historical_statistical_gate':all(gate.values()),
         'operational_provenance_gate':False,'promotion':False,'limitations':mapping['limitations'],
         'power':{'risk_floor':feasibility['risk_floor'],'pre_evaluation_design_incidents':feasibility['pre_evaluation_design_incidents'],
                  'minimum_detectable_gain_80pct':feasibility['minimum_detectable_gain_80pct']}}
-    output=ledger.data/'balanced/VNI'/version/'risk_summary.json';atomic(output,json.dumps(summary,indent=2))
-    ledger.record(f'assessment/VNI/{version}/risk','completed','Historical NOS/risk gates measured; operational provenance remains blocked',[output])
+    output=ledger.data/'balanced'/connector/version/'risk_summary.json';atomic(output,json.dumps(summary,indent=2))
+    ledger.record(f'assessment/{connector}/{version}/risk','completed','Historical NOS/risk gates measured; operational provenance remains blocked',[output])
     return output

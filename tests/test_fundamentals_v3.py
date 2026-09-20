@@ -213,6 +213,16 @@ def test_balanced_risk_warning_window_and_paired_recall():
     assert result['incidents']==2 and result['delta_recall']==.5 and result['ci95'][0]>=0
 
 
+def test_primary_balanced_specs_exclude_weather_and_children():
+    from nemic.fundamentals.balanced import _specs
+    schema={'cohort':'pasa_coal','groups':{'network':'network','demand':'demand','temperature':'weather',
+        'gradient':'weather_cross','ix_weather':'interaction','ix_demand':'interaction'},
+        'parents':{'ix_weather':['temperature','demand'],'ix_demand':['demand','network']}}
+    specs=_specs(list(schema['groups']),schema)
+    assert {'network','demand','ix_demand'}<=set(specs['interactions'])
+    assert not {'temperature','gradient','ix_weather'}&set(specs['interactions'])
+
+
 def test_portable_research_fit_and_reload(ledger):
     from nemic.fundamentals.modelling import fit_cohort
     from nemic.fundamentals.packaging import export_model,predict

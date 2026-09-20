@@ -29,7 +29,15 @@ def _schema(path):
 def _specs(names,schema):
     features=[c for c in names if c not in META]
     group=schema['groups'];network=[c for c in features if group.get(c)=='network']
-    no_nos=[c for c in features if group.get(c)!='nos' and 'nos_' not in c]
+    blocked=set()
+    if schema.get('cohort')=='pasa_coal':
+        blocked={c for c in features if str(group.get(c,'')).startswith('weather')}
+        parents=schema.get('parents',{})
+        while True:
+            dependent={child for child,items in parents.items() if any(parent in blocked for parent in items)}
+            if dependent<=blocked:break
+            blocked.update(dependent)
+    no_nos=[c for c in features if group.get(c)!='nos' and 'nos_' not in c and c not in blocked]
     return {
         'network':network,
         'main':[c for c in no_nos if not c.startswith('ix__')],
@@ -63,9 +71,10 @@ def _ensure_cohort_table(ledger,connector,cohort):
     temporary=destination.with_name(destination.name+f'.{os.getpid()}.tmp')
     rows=0
     dataset=ds.dataset(base,format='parquet')
+    source_filter=None if cohort=='pasa_coal' else ds.field('source_cohort')==cohort
     try:
         with pq.ParquetWriter(temporary,dataset.schema,compression='zstd') as writer:
-            for batch in dataset.scanner(filter=ds.field('source_cohort')==cohort,batch_size=8192).to_batches():
+            for batch in dataset.scanner(filter=source_filter,batch_size=8192).to_batches():
                 writer.write_batch(batch);rows+=batch.num_rows
         if rows==0:raise ValueError(f'No {cohort} rows in verified base feature table')
         os.replace(temporary,destination)
@@ -121,8 +130,7 @@ def _discovery_cell(config,path,bounds,band,target):
 
 def discovery(ledger,connector):
     """Run 24 bounded discovery cells for one connector with two workers."""
-    profile=ledger.c['balanced_campaign'];path=ledger.data/'features'/connector/'pasa_coal/table.parquet'
-    if not path.exists():raise FileNotFoundError(f'Prepared PASA/coal table missing: {path}')
+    profile=ledger.c['balanced_campaign'];path=_ensure_cohort_table(ledger,connector,'pasa_coal')
     meta=pd.read_parquet(path,columns=['origin','delivery']);fs=list(folds(meta,ledger.c))
     indices=_resolve_indices(len(fs),profile['discovery_fold_indices'])
     tasks=[(fs[index],band,target) for index in indices for band in range(len(ledger.c['bands'])) for target in profile['targets']]
@@ -208,7 +216,7 @@ def _confirmation_cell(config,path,bounds,band,target,frozen):
 
 
 def confirmation(ledger,connector):
-    profile=ledger.c['balanced_campaign'];version=profile['version'];path=ledger.data/'features'/connector/'pasa_coal/table.parquet'
+    profile=ledger.c['balanced_campaign'];version=profile['version'];path=_ensure_cohort_table(ledger,connector,'pasa_coal')
     frozen_path=ledger.data/'balanced'/connector/version/'frozen.json'
     if not frozen_path.exists():freeze_discovery(ledger,connector)
     frozen=json.loads(frozen_path.read_text(encoding='utf-8'));meta=pd.read_parquet(path,columns=['origin','delivery']);fs=list(folds(meta,ledger.c))
