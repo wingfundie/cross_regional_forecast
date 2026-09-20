@@ -35,8 +35,16 @@ def assess(ledger):
     grouped={}
     for path in (ledger.data/'train').glob('**/result.json'):
         result=json.loads(path.read_text())
-        key=(result['connector'],result['target'],result['band'],result['information_track'])
-        grouped.setdefault(key,[]).append(path.parent/'predictions.parquet')
+        predictions=path.parent/'predictions.parquet'
+        if not predictions.exists() or not {'connector','target','band'}<=set(result):continue
+        track=result.get('information_track') or result.get('cohort')
+        if not track:
+            stage=result.get('stage');profile=result.get('profile','balanced')
+            if stage=='confirmation':track=f'{profile}:pasa_coal'
+            elif stage=='ecmwf_sensitivity':track=f'{profile}:ecmwf_exploratory'
+            else:continue
+        key=(result['connector'],result['target'],result['band'],track)
+        grouped.setdefault(key,[]).append(predictions)
     rows=[]
     for key,paths in grouped.items():
         f=pd.concat([pd.read_parquet(p) for p in paths],ignore_index=True)

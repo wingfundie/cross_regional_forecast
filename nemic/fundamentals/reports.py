@@ -29,8 +29,13 @@ def render(ledger):
     out=ROOT/'reports'/ledger.c['campaign'];out.mkdir(parents=True,exist_ok=True)
     status=json.loads((ledger.root/'status.json').read_text())
     covpath=ledger.data/'coverage.json';coverage=json.loads(covpath.read_text()) if covpath.exists() else {'partitions':[]}
-    result_paths=list((ledger.data/'train').glob('**/result.json'))
-    results=[json.loads(p.read_text()) for p in result_paths]
+    candidates=list((ledger.data/'train').glob('**/result.json'))
+    measured=[]
+    for path in candidates:
+        result=json.loads(path.read_text())
+        if (path.parent/'predictions.parquet').exists() and {'connector','target','band','fold','score','network_score'}<=set(result):
+            measured.append((path,result))
+    result_paths=[path for path,_ in measured];results=[result for _,result in measured]
     links=[('index.html','Overview'),('deck.html','Presentation'),('feature_research.html','Feature research'),
            ('selection.html','Feature reduction'),('pipeline.html','Data and pipeline'),('QNI.html','QNI'),('VNI.html','VNI'),('decisions.html','Decisions'),('execution.html','Execution')]
     nav='<nav>'+ ' · '.join(f'<a href="{p}">{escape(t)}</a>' for p,t in links)+'</nav>'
@@ -69,7 +74,7 @@ def render(ledger):
     pages['pipeline.html']+='<h2>Weather provider audit</h2>'+table(weather)
     for name in ('VNI','QNI'):
         rs=[r for r in results if r['connector']==name]
-        rows=[dict(target=r['target'],band=r['band'],fold=r['fold'],winner=r['winner'],mae=r['score']['mae'],network_mae=r['network_score']['mae'],skill=r['skill'],promotion=r['promotion'],risk_gate=r['risk_gate']) for r in rs]
+        rows=[dict(target=r['target'],band=r['band'],fold=r['fold'],winner=r.get('winner'),mae=r['score']['mae'],network_mae=r['network_score']['mae'],skill=r.get('skill'),promotion=r.get('promotion',False),risk_gate=r.get('risk_gate','Provider sensitivity; primary risk gate not applicable')) for r in rs]
         pages[name+'.html']=hero('Connector assessment',name,'Model comparisons',note,[])+nav+table(rows)
         if rows:
             df=pd.DataFrame(rows)
@@ -80,7 +85,7 @@ def render(ledger):
                 pages[name+'.html']+=chart(px.line(curve,x='delivery',y=['actual','point','network','persistence']),'Example forecast path',f'Origin {origin}; sampled configured leads. This is not exhaustive 336-lead verification.')
     pages['decisions.html']=hero('Acceptance audit','Model decisions','Measured gains and remaining gates',note,[])+nav+markdown.markdown((ledger.root/'decisions.md').read_text(encoding='utf-8'))
     pages['decisions.html']+='<p>Replacement requires 2% MAE skill, supported paired uncertainty, capacity-overstatement and recall non-inferiority, and the joint false-alert budget. Missing risk evidence prevents promotion.</p>'
-    pages['decisions.html']+=table([dict(connector=r['connector'],target=r['target'],band=r['band'],winner=r['winner'],promotion=r['promotion'],reason=r['risk_gate']) for r in results])
+    pages['decisions.html']+=table([dict(connector=r['connector'],target=r['target'],band=r['band'],winner=r.get('winner'),promotion=r.get('promotion',False),reason=r.get('risk_gate','Provider sensitivity; primary risk gate not applicable')) for r in results])
     pages['execution.html']=hero('Persistent execution record','Campaign state','Checkpoints and next actions','Generated from the authoritative dedicated ledger.',[])+nav+table([dict(job=r['id'],status=r['status'],updated=r['updated'],detail=r['detail']) for r in status['jobs']])
     benchmark_path=ledger.root/'benchmarks/scalar_baseline.json'
     benchmark=json.loads(benchmark_path.read_text()) if benchmark_path.exists() else {}

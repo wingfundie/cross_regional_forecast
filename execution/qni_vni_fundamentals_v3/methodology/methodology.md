@@ -96,6 +96,8 @@ Final horizon reporting is limited to literal 24-hour, 48-hour, 168-hour and 336
 
 The provider-sensitivity runner must consume a physically separate `ecmwf_exploratory` feature table. If that cohort table is absent while the verified connector feature table already contains rows explicitly labelled `source_cohort=ecmwf_exploratory`, materialize the missing cohort by streaming only those labelled rows into a unique temporary Parquet file and atomically renaming it. Copy the feature schema with the cohort label, record row count and verified artifact hashes, and never rebuild features, substitute another provider, or rerun completed confirmation cells. An empty labelled subset is an error. This recovery is a deterministic cache repair and does not alter feature values, chronology, source availability or model methodology.
 
+Balanced assessment and connector reports consume only result files with sibling held-out predictions. Primary confirmation is labelled `balanced-v1:pasa_coal`; provider sensitivity is labelled `balanced-v1:ecmwf_exploratory`. Discovery-only scores and unrelated result JSON files without held-out predictions are excluded. Provider-sensitivity rows remain explicitly non-promotional when they do not carry the primary risk gate. This compatibility mapping changes only evidence routing, not model results or acceptance thresholds.
+
 ## Research sources
 
 Access reviewed during planning and recheck on implementation:
