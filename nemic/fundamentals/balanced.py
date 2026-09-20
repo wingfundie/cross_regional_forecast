@@ -10,6 +10,7 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+import pyarrow.dataset as ds
 import pyarrow.parquet as pq
 import joblib
 from threadpoolctl import threadpool_limits
@@ -48,6 +49,33 @@ def _resolve_indices(length,indices):
 
 def _read_band(path,lo,hi,columns):
     return pd.read_parquet(path,columns=columns,filters=[('lead','>=',lo),('lead','<=',hi)])
+
+
+def _ensure_cohort_table(ledger,connector,cohort):
+    """Repair a missing provider cohort cache from the verified base table."""
+    base=ledger.data/'features'/connector/'table.parquet'
+    destination=ledger.data/'features'/connector/cohort/'table.parquet'
+    schema_destination=destination.with_suffix('.schema.json')
+    if destination.exists() and schema_destination.exists():return destination
+    if not base.exists() or not base.with_suffix('.schema.json').exists():
+        raise FileNotFoundError(f'Verified base feature table missing: {base}')
+    destination.parent.mkdir(parents=True,exist_ok=True)
+    temporary=destination.with_name(destination.name+f'.{os.getpid()}.tmp')
+    rows=0
+    dataset=ds.dataset(base,format='parquet')
+    try:
+        with pq.ParquetWriter(temporary,dataset.schema,compression='zstd') as writer:
+            for batch in dataset.scanner(filter=ds.field('source_cohort')==cohort,batch_size=8192).to_batches():
+                writer.write_batch(batch);rows+=batch.num_rows
+        if rows==0:raise ValueError(f'No {cohort} rows in verified base feature table')
+        os.replace(temporary,destination)
+    finally:
+        if temporary.exists():temporary.unlink()
+    schema=json.loads(base.with_suffix('.schema.json').read_text(encoding='utf-8'))
+    atomic(schema_destination,json.dumps({**schema,'cohort':cohort},indent=2))
+    ledger.record(f'features/{connector}/{cohort}','completed',f'Atomically materialized {rows} labelled rows',
+                  [destination,schema_destination])
+    return destination
 
 
 def _discovery_cell(config,path,bounds,band,target):
@@ -210,16 +238,17 @@ def _sensitivity_cell(config,path,bounds,band,target,frozen):
     table=_read_band(path,lo,hi,[c for c in names if c in required]).reset_index(drop=True);ms=masks(table,bounds)
     if any(ms[k].sum()<30 for k in ms):raise ValueError('Insufficient rows in ECMWF sensitivity partition')
     tr,cal,te=(ms[k] for k in ('train','calibrate','evaluate'));y=table['actual_'+target].to_numpy();anchor=table['anchor_'+target].to_numpy();correction=y-anchor
-    if recipe=='network':columns=network_columns;review=None
-    else:
-        chosen,review=select(table.loc[tr,recipe_columns].reset_index(drop=True),correction[tr],
-                             table.loc[tr,['origin','delivery']].reset_index(drop=True),schema)
-        columns=list(dict.fromkeys(chosen+['own_anchor']))
     weights=origin_weights(table.loc[tr,'origin']);name=str(table.connector.iloc[0])
     ident=f"train/{name}/{profile['version']}/ecmwf_sensitivity/{bounds[-2].date()}/{target}/band{band}"
     folder=ledger.data/ident;result_path=folder/'result.json'
     if ledger.valid(ident):return str(result_path)
     with threadpool_limits(limits=2),ledger.job(ident,acceptance='ECMWF sensitivity kept separate from primary confirmation') as (artifacts,checkpoint):
+        if recipe=='network':columns=network_columns;review=None
+        else:
+            chosen,review=select(table.loc[tr,recipe_columns].reset_index(drop=True),correction[tr],
+                                 table.loc[tr,['origin','delivery']].reset_index(drop=True),schema)
+            columns=list(dict.fromkeys(chosen+['own_anchor']))
+        checkpoint(dict(stage='ecmwf_sensitivity',step='feature_selection',features=len(columns)))
         x=table[[c for c in columns if c!='own_anchor']].copy();x['own_anchor']=anchor;winner=frozen['winner']
         model=fit_estimator(winner['family'],winner['setting'],x.loc[tr,columns],correction[tr],weights);checkpoint(dict(stage='ecmwf_sensitivity',model='winner'))
         residual=y[cal]-anchor[cal]-model.predict(x.loc[cal,columns]);levels=[.025,.1,.5,.9,.975];adjust=np.quantile(residual,levels)
@@ -240,6 +269,7 @@ def _sensitivity_cell(config,path,bounds,band,target,frozen):
 
 def sensitivity(ledger,connector):
     profile=ledger.c['balanced_campaign'];version=profile['version'];path=ledger.data/'features'/connector/'ecmwf_exploratory/table.parquet'
+    path=_ensure_cohort_table(ledger,connector,'ecmwf_exploratory')
     frozen_path=ledger.data/'balanced'/connector/version/'frozen.json'
     if not frozen_path.exists():raise RuntimeError('Confirmation choices have not been frozen')
     frozen=json.loads(frozen_path.read_text(encoding='utf-8'));meta=pd.read_parquet(path,columns=['origin','delivery']);fs=list(folds(meta,ledger.c))

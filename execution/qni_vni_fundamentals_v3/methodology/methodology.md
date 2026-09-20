@@ -92,6 +92,10 @@ Confirmation compares only the frozen winner and matched network baseline over e
 
 Final horizon reporting is limited to literal 24-hour, 48-hour, 168-hour and 336-hour delivery horizons, corresponding to half-hour lead indices 48, 96, 336 and 672. The 336-hour horizon lies beyond the seven-day ST PASA and retained weather coverage. Evaluate it only as a separately labelled PD-PASA/coal-only long-range track when an admissible coherent PD vintage and outcome exist; otherwise report it unavailable. Do not impute ST or weather beyond source coverage. Maintain issue-time rules, chronological partitions, four training bands, matched network controls, risk/calibration gates and research-only packaging.
 
+## ECMWF cohort recovery amendment — 2026-09-20
+
+The provider-sensitivity runner must consume a physically separate `ecmwf_exploratory` feature table. If that cohort table is absent while the verified connector feature table already contains rows explicitly labelled `source_cohort=ecmwf_exploratory`, materialize the missing cohort by streaming only those labelled rows into a unique temporary Parquet file and atomically renaming it. Copy the feature schema with the cohort label, record row count and verified artifact hashes, and never rebuild features, substitute another provider, or rerun completed confirmation cells. An empty labelled subset is an error. This recovery is a deterministic cache repair and does not alter feature values, chronology, source availability or model methodology.
+
 ## Research sources
 
 Access reviewed during planning and recheck on implementation:
