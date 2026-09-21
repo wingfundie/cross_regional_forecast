@@ -64,10 +64,13 @@ def render(ledger):
         if (path.parent/'predictions.parquet').exists() and {'connector','target','band','fold','score','network_score'}<=set(result):
             measured.append((path,result))
     result_paths=[path for path,_ in measured];results=[result for _,result in measured]
-    balanced_root=ledger.data/'balanced/VNI'/ledger.c['balanced_campaign']['version']
-    risk_path=balanced_root/'risk_summary.json';risk=json.loads(risk_path.read_text()) if risk_path.exists() else {}
-    horizon_path=balanced_root/'horizon_scores.json';horizon=json.loads(horizon_path.read_text()) if horizon_path.exists() else {}
-    risk_rows=_risk_rows(risk);horizon_rows=_weighted_horizon_rows(horizon)
+    balanced={}
+    for connector in ('VNI','QNI'):
+        root=ledger.data/'balanced'/connector/ledger.c['balanced_campaign']['version']
+        risk_path=root/'risk_summary.json';horizon_path=root/'horizon_scores.json'
+        balanced[connector]=dict(root=root,risk_path=risk_path,horizon_path=horizon_path,
+            risk=json.loads(risk_path.read_text()) if risk_path.exists() else {},
+            horizon=json.loads(horizon_path.read_text()) if horizon_path.exists() else {})
     links=[('index.html','Overview'),('deck.html','Presentation'),('feature_research.html','Feature research'),
            ('selection.html','Feature reduction'),('pipeline.html','Data and pipeline'),('QNI.html','QNI'),('VNI.html','VNI'),('decisions.html','Decisions'),('execution.html','Execution')]
     nav='<style>html,body{overflow-x:hidden}.table-scroll{display:block;width:100%;max-width:100%;overflow-x:auto;contain:inline-size}</style><nav>'+ ' · '.join(f'<a href="{p}">{escape(t)}</a>' for p,t in links)+'</nav>'
@@ -106,23 +109,27 @@ def render(ledger):
     pages['pipeline.html']+='<h2>Weather provider audit</h2>'+table(weather)
     for name in ('VNI','QNI'):
         rs=[r for r in results if r['connector']==name]
+        risk=balanced[name]['risk'];horizon=balanced[name]['horizon']
+        risk_rows=_risk_rows(risk);horizon_rows=_weighted_horizon_rows(horizon)
         rows=[dict(target=r['target'],band=r['band'],fold=r['fold'],winner=r.get('winner'),mae=r['score']['mae'],network_mae=r['network_score']['mae'],skill=r.get('skill'),promotion=r.get('promotion',False),risk_gate=r.get('risk_gate','Provider sensitivity; primary risk gate not applicable')) for r in rs]
         pages[name+'.html']=hero('Connector assessment',name,'Model comparisons',note,[])+nav
-        if name=='VNI' and risk:
+        if risk:
             gates=risk['gates'];both=risk['aggregate']['both']
+            incident_text=' · '.join(f"{direction.title()} {score['incidents']}" for direction,score in both['directions'].items())
+            failed=', '.join(key.replace('_',' ') for key,value in gates.items() if not value) or 'none'
             pages[name+'.html']+='<div class="metrics">'+''.join([
                 metric('Risk folds',risk['folds'],'Chronological held-out folds'),
                 metric('Joint false alerts/day',f"{both['joint_false_alarms_per_day']:.2f}",'Budget ≤ 3.00'),
-                metric('Incident floor','PASS' if gates['minimum_incidents'] else 'FAIL','Export 618 · import 445'),
+                metric('Incident floor','PASS' if gates['minimum_incidents'] else 'FAIL',incident_text),
                 metric('Recall non-inferiority','PASS' if gates['recall_noninferiority'] else 'FAIL','95% paired lower bound ≥ −2 pp')])+'</div>'
-            pages[name+'.html']+='<section><h2>NOS and contraction-risk gates</h2><p>The combined fundamentals + NOS recipe met the incident-count and false-alert gates, but failed recall non-inferiority. The historical statistical gate therefore failed. The separate operational provenance gate also remains blocked because the mapping was reconstructed rather than receipt-verified. These models are research-only.</p>'+table(risk_rows)+'</section>'
+            pages[name+'.html']+=f'<section><h2>NOS and contraction-risk gates</h2><p>The historical statistical gate is {"PASS" if risk["historical_statistical_gate"] else "FAIL"}; failed component gates: {escape(failed)}. The separate operational provenance gate is {"PASS" if risk["operational_provenance_gate"] else "BLOCKED"}. These models remain research-only.</p>'+table(risk_rows)+'</section>'
             rdf=pd.DataFrame(risk_rows)
             pages[name+'.html']+=chart(px.bar(rdf,x='recipe',y='recall_pct',color='direction',barmode='group'),
                 'Contraction-event recall by recipe','30–120 minute warning window across seven held-out folds; higher is better.')
             false_alarm=rdf.groupby('recipe',as_index=False).joint_false_alerts_day.first()
             ffig=px.bar(false_alarm,x='recipe',y='joint_false_alerts_day');ffig.add_hline(y=3,line_dash='dash',annotation_text='budget 3/day')
             pages[name+'.html']+=chart(ffig,'Joint false-alert rate','Both directions share one daily false-alert budget; lower is better.')
-        if name=='VNI' and horizon_rows:
+        if horizon_rows:
             hdf=pd.DataFrame(horizon_rows)
             pages[name+'.html']+='<section><h2>Selected-horizon forecast accuracy</h2><p>Weighted held-out results are shown for the requested 24, 48 and 168-hour checkpoints. The requested 336-hour point could not be measured because the retained coherent PASA archive reaches only 182.84 hours.</p>'+table(horizon_rows)+'</section>'
             pages[name+'.html']+=chart(px.line(hdf,x='hours',y='skill_pct',color='target',markers=True),
@@ -136,8 +143,11 @@ def render(ledger):
                 f=pd.read_parquet(pp);origin=f.origin.min();curve=f[f.origin.eq(origin)]
                 pages[name+'.html']+=chart(px.line(curve,x='delivery',y=['actual','point','network','persistence']),'Example forecast path',f'Origin {origin}; sampled configured leads. This is not exhaustive 336-lead verification.')
     pages['decisions.html']=hero('Acceptance audit','Model decisions','Measured gains and remaining gates',note,[])+nav+markdown.markdown((ledger.root/'decisions.md').read_text(encoding='utf-8'))
-    if risk:
-        pages['decisions.html']+='<h2>VNI risk decision</h2><p>The NOS/risk evaluation is now complete. Incident count and joint false-alert gates passed, while paired recall non-inferiority failed. Historical NOS evidence therefore does not support promotion. Operational promotion is independently blocked by reconstructed, non-receipt-verified NOS mapping provenance.</p>'+table([dict(gate=k,status='PASS' if v else 'FAIL') for k,v in risk['gates'].items()])
+    measured_risks=[name for name,item in balanced.items() if item['risk']]
+    if measured_risks:
+        for name in measured_risks:
+            risk=balanced[name]['risk']
+            pages['decisions.html']+=f'<h2>{name} risk decision</h2><p>The connector-local NOS/risk evaluation is complete. Historical statistical gate: {"PASS" if risk["historical_statistical_gate"] else "FAIL"}. Operational provenance gate: {"PASS" if risk["operational_provenance_gate"] else "BLOCKED"}. No production activation is authorized.</p>'+table([dict(gate=k,status='PASS' if v else 'FAIL') for k,v in risk['gates'].items()])
     else:
         pages['decisions.html']+='<p>Replacement requires 2% MAE skill, supported paired uncertainty, capacity-overstatement and recall non-inferiority, and the joint false-alert budget. Missing risk evidence prevents promotion.</p>'
     pages['decisions.html']+=table([dict(connector=r['connector'],target=r['target'],band=r['band'],winner=r.get('winner'),promotion=r.get('promotion',False),reason=r.get('risk_gate','Provider sensitivity; primary risk gate not applicable')) for r in results])
@@ -154,6 +164,14 @@ def render(ledger):
     if daily:
         perf=pd.DataFrame(daily)
         pages['pipeline.html']+=chart(px.line(perf,x='date',y='rows_per_second',color='connector',markers=True),'Feature throughput by partition','Cached partition manifests; no pipeline execution occurs during report rendering.')
+    risk_panel=[]
+    for connector in ('VNI','QNI'):
+        payload=balanced[connector]['risk']
+        if payload:
+            failed=', '.join(key.replace('_',' ') for key,value in payload['gates'].items() if not value) or 'none'
+            body=f"Seven folds completed. Historical gate {'passed' if payload['historical_statistical_gate'] else 'failed'}; failed components: {failed}. Operational NOS provenance remains {'verified' if payload['operational_provenance_gate'] else 'blocked'}."
+        else:body='Risk assessment is not yet available.'
+        risk_panel.append((f'{connector} risk result',body))
     panels=[('Purpose','Improve network models using forecast fundamentals with issue-time discipline.'),('Scope','QNI and VNI; flow and four limits; seven days.'),
         ('Source roles','PD/ST PASA demand and renewables; MT PASA coal; BOM/ECMWF weather.'),('Weather policy','Prefer usable BOM; ECMWF fallback; distinguish older hindcasts.'),
         ('Vintage contract','Publication evidence, initialization and retrieval are distinct.'),('Regional balance','Demand minus renewable availability/constrained capacity.'),
@@ -162,28 +180,33 @@ def render(ledger):
         ('Chronological evaluation','Separate training, selection, calibration, alert and evaluation windows.'),('Network controls','Keep the original 41-feature design; establish a flow control.'),
         ('Acquired evidence',f'{len(source_rows)} source partitions; {len(weather)} weather runs.'),('Measured models',f'{len(results)} saved evaluation cells.'),
         ('Risk requirements','2% MAE improvement; overstatement/recall margins; joint three-alert/day budget.'),
-        ('VNI risk result',('Seven folds completed. Incident and false-alert gates passed; recall non-inferiority failed. ' if risk else 'Risk assessment is not yet available. ')+ 'Operational NOS provenance remains blocked.'),
+        *risk_panel,
         ('Selected horizons','Measured at 24, 48 and 168 hours. The 336-hour checkpoint is unavailable because coherent retained PASA coverage ends at 182.84 hours.'),
-        ('Current limitations','VNI remains research-only; the evidence does not authorize production activation.'),
+        ('Current limitations','QNI and VNI remain research-only; the evidence does not authorize production activation.'),
         ('Reproducibility','Immutable sources, versioned methodology, ledger, hashes and saved schemas.'),('Decision','Retain controls unless all measured acceptance checks pass.')]
     panel_charts={3:chart(pipeline,'Data to model pipeline','Source and selection stages are tracked independently.')}
     if source_rows:panel_charts[13]=chart(px.bar(pd.DataFrame(source_rows),x='product',y='rows',color='product'),'Acquisition evidence','Normalized rows, not model accuracy.')
     pages['deck.html']=hero('Research presentation','QNI/VNI fundamentals','Implementation and evidence',note,[])+nav+'<style>.slide{min-height:65vh;padding:40px 0;border-bottom:2px solid #dfe3eb;break-after:page}.slide h2{font-size:36px}</style>'+''.join(f'<section class="slide" id="slide-{i}"><p>{i:02d} / {len(panels)}</p><h2>{escape(title)}</h2><p class="dek">{escape(body)}</p>{panel_charts.get(i, "")}</section>' for i,(title,body) in enumerate(panels,1))
-    downloads_nav='<section><h2>Evidence downloads</h2><p><a href="downloads/results.json">Measured model results (JSON)</a> · <a href="downloads/coverage.json">Source coverage (JSON)</a> · <a href="downloads/feature_selection.csv">Feature-selection results (CSV)</a> · <a href="downloads/vni_risk_summary.json">VNI risk gates (JSON)</a> · <a href="downloads/vni_horizon_scores.json">VNI horizon scores (JSON)</a></p></section>'
+    connector_downloads=' · '.join(f'<a href="downloads/{name.lower()}_risk_summary.json">{name} risk gates (JSON)</a> · <a href="downloads/{name.lower()}_horizon_scores.json">{name} horizon scores (JSON)</a>' for name in ('VNI','QNI'))
+    downloads_nav='<section><h2>Evidence downloads</h2><p><a href="downloads/results.json">Measured model results (JSON)</a> · <a href="downloads/coverage.json">Source coverage (JSON)</a> · <a href="downloads/feature_selection.csv">Feature-selection results (CSV)</a> · '+connector_downloads+'</p></section>'
     assets=out/'assets';assets.mkdir(exist_ok=True)
     from plotly.offline import get_plotlyjs
     atomic(assets/'plotly.min.js',get_plotlyjs())
     for name,body in pages.items():atomic(out/name,render_page('QNI/VNI · '+name.removesuffix('.html'),body+downloads_nav,plotly='assets/plotly.min.js'))
     downloads=out/'downloads';downloads.mkdir(exist_ok=True)
     atomic(downloads/'results.json',json.dumps(clean(results),indent=2));atomic(downloads/'coverage.json',json.dumps(coverage,indent=2))
-    atomic(downloads/'vni_risk_summary.json',json.dumps(risk,indent=2));atomic(downloads/'vni_horizon_scores.json',json.dumps(horizon,indent=2))
+    for name,item in balanced.items():
+        atomic(downloads/f'{name.lower()}_risk_summary.json',json.dumps(item['risk'],indent=2))
+        atomic(downloads/f'{name.lower()}_horizon_scores.json',json.dumps(item['horizon'],indent=2))
     pd.DataFrame(selected).to_csv(downloads/'feature_selection.csv',index=False)
     manifest=dict(built=now(),methodology=ledger.method_hash,code=ledger.code_hash,rebuild='python -m nemic.fundamentals report',
                   measured_cells=len(results),visual_review='pending',plotly_asset=digest(assets/'plotly.min.js'),
                   inputs=dict(status=digest(ledger.root/'status.json'),coverage=digest(covpath) if covpath.exists() else None,
                               results={str(p.relative_to(ROOT)):digest(p) for p in result_paths},
-                              vni_risk=digest(risk_path) if risk_path.exists() else None,
-                              vni_horizons=digest(horizon_path) if horizon_path.exists() else None),
+                              connector_evidence={name.lower():dict(
+                                  risk=digest(item['risk_path']) if item['risk_path'].exists() else None,
+                                  horizons=digest(item['horizon_path']) if item['horizon_path'].exists() else None)
+                                  for name,item in balanced.items()}),
                   outputs=[dict(path=str((out/n).relative_to(ROOT)),sha256=digest(out/n)) for n in pages])
     atomic(out/'manifest.json',json.dumps(manifest,indent=2))
     # Rendering is complete; the higher report stage stays open for visual QA.

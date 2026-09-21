@@ -32,8 +32,11 @@ def block_evidence(frame,block_days,skill=.02,overstatement_margin=.02,repeats=2
 
 
 def assess(ledger):
-    risk_path=ledger.data/'balanced/VNI'/ledger.c['balanced_campaign']['version']/'risk_summary.json'
-    vni_risk=json.loads(risk_path.read_text()) if risk_path.exists() else None
+    version=ledger.c['balanced_campaign']['version']
+    risks={}
+    for connector in ledger.c['balanced_campaign']['connector_order']:
+        risk_path=ledger.data/'balanced'/connector/version/'risk_summary.json'
+        if risk_path.exists():risks[connector]=json.loads(risk_path.read_text())
     grouped={}
     for path in (ledger.data/'train').glob('**/result.json'):
         result=json.loads(path.read_text())
@@ -54,18 +57,19 @@ def assess(ledger):
         evidence=[block_evidence(f,b,ledger.c['acceptance']['mae_skill'],ledger.c['acceptance']['overstatement_margin']) for b in (7,14)]
         lo,hi=ledger.c['bands'][key[2]]
         complete_leads=all(set(g.lead)==set(range(lo,hi+1)) for _,g in f.groupby('origin'))
-        primary=key[0]=='VNI' and key[3].endswith(':pasa_coal')
-        risk_measured=primary and vni_risk is not None
+        primary=key[3].endswith(':pasa_coal')
+        connector_risk=risks.get(key[0]);risk_measured=primary and connector_risk is not None
         if risk_measured:
-            risk_gate='pass' if vni_risk['historical_statistical_gate'] else 'failed: '+', '.join(k for k,v in vni_risk['gates'].items() if not v)
+            risk_gate='pass' if connector_risk['historical_statistical_gate'] else 'failed: '+', '.join(k for k,v in connector_risk['gates'].items() if not v)
         elif primary:risk_gate='not measured'
         else:risk_gate='not applicable to provider sensitivity cohort'
+        risk_outstanding=[] if risk_measured or not primary else ['Joint-direction incident recall/false-alert and power audit']
         rows.append(dict(connector=key[0],target=key[1],band=key[2],cohort=key[3],folds=len(paths),
             evidence=evidence,pvalue=max(e['pvalue'] for e in evidence),full_band_leads=complete_leads,
             evaluation_days=int(f.origin.dt.normalize().nunique()),promotion=False,risk_gate=risk_gate,
-            historical_risk_gate=vni_risk['historical_statistical_gate'] if risk_measured else None,
-            operational_provenance_gate=vni_risk['operational_provenance_gate'] if risk_measured else None,
-            outstanding=([] if risk_measured else ['Joint-direction incident recall/false-alert and power audit'])+
+            historical_risk_gate=connector_risk['historical_statistical_gate'] if risk_measured else None,
+            operational_provenance_gate=connector_risk['operational_provenance_gate'] if risk_measured else None,
+            outstanding=risk_outstanding+
                         ['Coal daily-boundary and publication-delay sensitivities','Historical network/source receipt validation']+
                         ([] if complete_leads else ['Exhaustive 336-lead evaluation'])))
     adjusted=holm([r['pvalue'] for r in rows])
@@ -76,5 +80,5 @@ def assess(ledger):
         row['decision']='rejected_risk_gate' if row.get('historical_risk_gate') is False else 'inconclusive_pending_acceptance_gates'
     output=ledger.data/'assessment/results.json';atomic(output,json.dumps(rows,indent=2))
     ledger.record('assessment/point_audit','completed' if rows else 'ready',
-                  'Paired point audit complete; measured VNI risk gate integrated and remaining gates explicit' if rows else 'No measured model cells yet',[output] if rows else [])
+                  'Paired point audit complete; connector-local risk gates integrated and remaining gates explicit' if rows else 'No measured model cells yet',[output] if rows else [])
     return output

@@ -118,6 +118,12 @@ For QNI contraction risk, use the separately audited `qni_diurnal_nos_v2` NOS ex
 
 Start modelling with one cell worker because current free memory is below 4 GB. After three completed discovery cells, raise the worker count to two only if combined peak RSS remains below 8 GB and at least 1.5 GB operating-system headroom remains. Each completed phase is committed and pushed separately; generated data, models, ledgers, reports and screenshots remain outside Git. The 12-hour boundary exits `ready/resumable`. Final QNI completion requires terminal model cells, horizon and risk summaries, updated assessment, 44 or more passing focused tests, offline link/anchor validation, desktop and narrow browser QA, and a research-only `complete.json`.
 
+## Cross-connector assessment and report closure amendment — 2026-09-21
+
+After each connector has a verified balanced risk summary, the paired acceptance audit must resolve risk evidence by connector rather than treating VNI as the only primary track. A primary `balanced-v1:pasa_coal` row may consume only the risk summary under its own connector directory. Provider-sensitivity rows remain non-promotional and do not inherit a primary risk gate. Missing connector-local risk evidence is explicit and never passes. The paired 7/14-day block evidence, Holm adjustment, capacity-overstatement threshold and minimum evaluation duration remain unchanged.
+
+The cached report renderer must load horizon and risk summaries independently for QNI and VNI, render the same evidence panels for either connector when present, and publish connector-labelled downloads and manifest hashes. Conclusions must be derived from each connector's measured gate values; no VNI incident counts, recalls or decisions may be hard-coded into QNI pages. Rendering remains read-only over cached evidence and does not retrain models. Visual QA, local-link validation and the research-only completion marker occur only after both connector pages and combined decisions expose their applicable evidence and limitations.
+
 ## Research sources
 
 Access reviewed during planning and recheck on implementation:
