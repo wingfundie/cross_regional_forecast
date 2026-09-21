@@ -25,11 +25,40 @@ def test_calendar_quarter_completeness_excludes_boundary_fragments():
     assert complete.tolist() == [False, True, True, False]
 
 
+def test_daily_periods_cover_the_full_day_without_gaps():
+    time = pd.Series(pd.to_datetime([
+        "2026-01-01 02:00", "2026-01-01 07:00", "2026-01-01 12:00",
+        "2026-01-01 18:00", "2026-01-01 22:00"]))
+    assert MODULE.daily_period(time).tolist() == [
+        "Overnight", "Morning peak", "Solar period", "Evening peak", "Overnight"]
+
+
 def test_report_is_observational_not_modelled():
     source = (ROOT / "scripts" / "build_all_ic_regime_report.py").read_text(encoding="utf-8")
     assert "regime_scatter_sample.csv.gz" in source
     assert "HistGradientBoosting" not in source
     assert "adjusted_effects.csv" not in source
+
+
+def test_enso_uses_five_overlapping_season_episode_rule():
+    panel = pd.DataFrame({
+        "time": pd.to_datetime(["2023-09-15", "2024-05-15", "2025-11-15", "2026-07-15"]),
+        "ic": ["NSW1-QLD1"] * 4,
+        "name": ["QNI"] * 4,
+        "direction": ["forward"] * 4,
+        "direction_label": ["NSW → QLD"] * 4,
+        "directional_flow": [1.0] * 4,
+        "capacity": [2.0] * 4,
+        "headroom": [1.0] * 4,
+        "restricted": [False] * 4,
+        "forced_direction": [False] * 4,
+    })
+    monthly, summary = MODULE.enso_tables(panel)
+    states = monthly.set_index("center_month").enso_state
+    assert states.loc[pd.Timestamp("2023-09-01")] == "El Niño"
+    assert states.loc[pd.Timestamp("2025-11-01")] == "Neutral"
+    assert states.loc[pd.Timestamp("2026-07-01")] == "Neutral"
+    assert set(summary.enso_state) == {"El Niño", "Neutral"}
 
 
 def test_all_six_constraint_adapters_declared():

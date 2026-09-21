@@ -10,6 +10,7 @@ import argparse
 import hashlib
 import json
 import sys
+from html import escape
 from pathlib import Path
 
 import numpy as np
@@ -29,8 +30,10 @@ from report_theme import figure_html, finding, hero, metric, render_page, style_
 REPORT_ID = "all_interconnector_regime_research_20260921"
 OUT = ROOT / "reports" / REPORT_ID
 DATA_OUT = OUT / "downloads"
+SOURCES_OUT = OUT / "sources"
 COLORS = {"Summer": "#ce9a48", "Autumn": "#8370b4", "Winter": "#5696b9", "Spring": "#268a87"}
 SEASON_ORDER = ["Summer", "Autumn", "Winter", "Spring"]
+DAILY_PERIOD_ORDER = ["Overnight", "Morning peak", "Solar period", "Evening peak"]
 IC_ORDER = ["NSW1-QLD1", "N-Q-MNSP1", "VIC1-NSW1", "V-SA", "V-S-MNSP1", "T-V-MNSP1"]
 IC_NAMES = {key: value["name"] for key, value in IC.items()}
 REGION_PREFIX = {"NSW1": "NSW_", "QLD1": "QLD_", "VIC1": "VIC_", "SA1": "SA_", "TAS1": "TAS_"}
@@ -332,7 +335,212 @@ def table_html(frame: pd.DataFrame, columns, formats=None, limit=30) -> str:
     for col, fmt in formats.items():
         if col in use:
             use[col] = use[col].map(lambda x: "—" if pd.isna(x) else fmt(x))
+    use = use.astype(object).where(use.notna(), "—")
     return '<div class="table-wrap" tabindex="0">' + use.to_html(index=False, classes="data-table", border=0, escape=True) + "</div>"
+
+
+def clock_label(value) -> str:
+    half_hour = int(value)
+    return f"{half_hour // 2:02d}:{(half_hour % 2) * 30:02d}"
+
+
+def regime_delta_table(regimes: pd.DataFrame) -> pd.DataFrame:
+    rows = []
+    variables = {
+        "temperature_mean": "Temperature",
+        "humidity_mean": "Humidity",
+        "source_vre": "Source VRE",
+    }
+    selected = regimes[regimes.variable.isin(variables)]
+    for (ic, name, direction, variable), group in selected.groupby(
+            ["ic", "name", "direction", "variable"], sort=False):
+        pivot = group.pivot_table(index="season", columns="regime", values="capacity_median")
+        if not {"low", "high"}.issubset(pivot.columns):
+            continue
+        pivot["delta"] = pivot.high - pivot.low
+        season = pivot.delta.abs().idxmax()
+        rows.append({
+            "ic": ic, "name": name, "direction": direction.title(),
+            "driver": variables[variable], "season": season,
+            "low_regime_limit": pivot.loc[season, "low"],
+            "high_regime_limit": pivot.loc[season, "high"],
+            "high_minus_low": pivot.loc[season, "delta"],
+        })
+    return pd.DataFrame(rows)
+
+
+def enso_tables(panel: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Attach the historical ONI episode definition without fitting an effect model."""
+    path = SOURCES_OUT / "noaa_oni_v6_study_context.csv"
+    monthly = pd.read_csv(path, parse_dates=["center_month"]).sort_values("center_month").reset_index(drop=True)
+    monthly["threshold_sign"] = np.select([monthly.oni_c.ge(.5), monthly.oni_c.le(-.5)], [1, -1], default=0)
+    run_id = monthly.threshold_sign.ne(monthly.threshold_sign.shift()).cumsum()
+    monthly["threshold_run"] = monthly.groupby(run_id).threshold_sign.transform("size")
+    monthly["enso_state"] = np.select(
+        [monthly.threshold_sign.eq(1) & monthly.threshold_run.ge(5),
+         monthly.threshold_sign.eq(-1) & monthly.threshold_run.ge(5)],
+        ["El Niño", "La Niña"], default="Neutral")
+    monthly["provisional"] = monthly.center_month.ge(pd.Timestamp("2026-06-01"))
+
+    source = panel.copy()
+    source["center_month"] = source.time.dt.to_period("M").dt.to_timestamp()
+    source = source.merge(monthly[["center_month", "season_code", "oni_c", "enso_state", "provisional"]],
+                          on="center_month", how="left", validate="many_to_one")
+    retained = source[source.enso_state.notna()]
+    summary = (retained.groupby(["ic", "name", "direction", "direction_label", "enso_state"], as_index=False)
+               .agg(n=("time", "size"), months=("center_month", "nunique"), oni_median=("oni_c", "median"),
+                    flow_median=("directional_flow", "median"), capacity_median=("capacity", "median"),
+                    capacity_p10=("capacity", lambda s: s.quantile(.1)),
+                    headroom_median=("headroom", "median"), restricted_rate=("restricted", "mean"),
+                    forced_rate=("forced_direction", "mean")))
+    return monthly, summary
+
+
+def daily_period(time: pd.Series) -> pd.Series:
+    hour = time.dt.hour
+    return pd.Series(np.select(
+        [hour.ge(21) | hour.lt(6), hour.lt(9), hour.lt(16)],
+        ["Overnight", "Morning peak", "Solar period"], default="Evening peak"), index=time.index)
+
+
+def _rank_constraint_counts(frame: pd.DataFrame, keys: list[str]) -> pd.DataFrame:
+    counts = (frame.groupby(keys + ["constraint"], observed=True, as_index=False)
+              .size().rename(columns={"size": "setter_intervals"}))
+    counts["period_intervals"] = counts.groupby(keys, observed=True).setter_intervals.transform("sum")
+    counts["setter_share"] = counts.setter_intervals / counts.period_intervals
+    counts.sort_values(keys + ["setter_intervals", "constraint"],
+                       ascending=[True] * len(keys) + [False, True], inplace=True)
+    counts["rank"] = counts.groupby(keys, observed=True).cumcount() + 1
+    return counts[counts["rank"].le(3)].reset_index(drop=True)
+
+
+def constraint_regime_setters(panel: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    """Rank active reconstructed setters by day period, quarter block and weather/VRE regime."""
+    lookup = panel[["time", "ic", "name", "direction", "season", "season_block",
+                    "temperature_mean", "source_vre"]].copy()
+    for variable, label in [("temperature_mean", "temperature_regime"), ("source_vre", "source_vre_regime")]:
+        grouped = lookup.groupby(["ic", "direction", "season"], observed=True)[variable]
+        p20 = grouped.transform(lambda s: s.quantile(.2))
+        p80 = grouped.transform(lambda s: s.quantile(.8))
+        lookup[label] = np.select(
+            [lookup[variable].le(p20), lookup[variable].ge(p80)],
+            ["low", "high"], default="normal")
+        lookup.loc[lookup[variable].isna(), label] = np.nan
+
+    parts = []
+    for ic, folder in CONSTRAINT_DIRS.items():
+        paths = sorted((ROOT / "data" / folder / "months").glob("*/constraint_features_5min.parquet"))
+        for path in paths:
+            features = pd.read_parquet(path, columns=["time", "upper_constraint", "lower_constraint"])
+            upper = features[["time", "upper_constraint"]].rename(columns={"upper_constraint": "constraint"})
+            upper["direction"] = "upper"
+            lower = features[["time", "lower_constraint"]].rename(columns={"lower_constraint": "constraint"})
+            lower["direction"] = "lower"
+            long = pd.concat([upper, lower], ignore_index=True).dropna(subset=["constraint"])
+            long["ic"] = ic
+            parts.append(long)
+    setters = pd.concat(parts, ignore_index=True)
+    setters["name"] = setters.ic.map(IC_NAMES)
+    setters["panel_direction"] = setters.direction.map({"upper": "forward", "lower": "reverse"})
+    setters["join_time"] = setters.time.dt.ceil("30min")
+    setters["daily_period"] = daily_period(setters.time)
+    joined = setters.merge(
+        lookup.rename(columns={"time": "join_time", "direction": "panel_direction"}),
+        on=["join_time", "ic", "name", "panel_direction"], how="left", validate="many_to_one")
+    joined = joined[joined.season.notna()].copy()
+
+    common = ["ic", "name", "direction", "daily_period"]
+    period_top = _rank_constraint_counts(joined, common)
+    constraint_window = lookup[lookup.time.between(pd.Timestamp("2024-09-01"), pd.Timestamp("2026-08-31 23:59"))]
+    complete_blocks = (constraint_window.groupby("season_block").time.nunique()
+                       .loc[lambda s: s.ge(4000)].index)
+    season_top = _rank_constraint_counts(
+        joined[joined.season_block.isin(complete_blocks)], common + ["season", "season_block"])
+    weather = pd.concat([
+        joined[common + ["constraint", "temperature_regime"]].rename(columns={"temperature_regime": "regime"}).assign(driver="Temperature"),
+        joined[common + ["constraint", "source_vre_regime"]].rename(columns={"source_vre_regime": "regime"}).assign(driver="Source VRE"),
+    ], ignore_index=True).dropna(subset=["regime"])
+    regime_top = _rank_constraint_counts(weather, common + ["driver", "regime"])
+    return period_top, season_top, regime_top
+
+
+def constraint_rank_tables(family: pd.DataFrame, duid: pd.DataFrame):
+    binders = (family.sort_values(["ic", "direction", "binding_intervals", "leading_intervals"],
+                                  ascending=[True, True, False, False])
+               .groupby(["ic", "direction"], as_index=False).head(3).copy())
+    setters = (family.sort_values(["ic", "direction", "leading_intervals", "binding_intervals"],
+                                  ascending=[True, True, False, False])
+               .groupby(["ic", "direction"], as_index=False).head(3).copy())
+    pressure = (duid.sort_values(["ic", "direction", "total_tightening"],
+                                 ascending=[True, True, False])
+                .groupby(["ic", "direction"], as_index=False).head(3).copy())
+    return binders, setters, pressure
+
+
+def connector_story(name: str, summary: pd.DataFrame, diurnal: pd.DataFrame,
+                    seasonal: pd.DataFrame, regime_deltas: pd.DataFrame, enso: pd.DataFrame,
+                    family: pd.DataFrame, duid: pd.DataFrame, period_top: pd.DataFrame) -> str:
+    score = summary[summary.name.eq(name)].set_index("direction")
+    forward, reverse = score.loc["forward"], score.loc["reverse"]
+    net_direction = forward.direction_label if forward.flow_median >= 0 else reverse.direction_label
+    net_flow = abs(forward.flow_median)
+
+    pooled = diurnal[(diurnal.name.eq(name)) & diurnal.quarter_system.eq("season_pooled")]
+    clock = (pooled.groupby(["direction", "half_hour"], as_index=False)
+             .agg(flow=("flow_median", "median"), capacity=("capacity_median", "median")))
+    f_clock = clock[clock.direction.eq("forward")]
+    r_clock = clock[clock.direction.eq("reverse")]
+    f_lo, f_hi = f_clock.loc[f_clock.flow.idxmin()], f_clock.loc[f_clock.flow.idxmax()]
+    f_cap_lo, f_cap_hi = f_clock.loc[f_clock.capacity.idxmin()], f_clock.loc[f_clock.capacity.idxmax()]
+    r_cap_lo, r_cap_hi = r_clock.loc[r_clock.capacity.idxmin()], r_clock.loc[r_clock.capacity.idxmax()]
+
+    complete = seasonal[(seasonal.name.eq(name)) & seasonal.intervals.ge(4000)]
+    f_season = complete[complete.direction.eq("forward")]
+    r_season = complete[complete.direction.eq("reverse")]
+    f_slo, f_shi = f_season.loc[f_season.capacity_median.idxmin()], f_season.loc[f_season.capacity_median.idxmax()]
+    r_slo, r_shi = r_season.loc[r_season.capacity_median.idxmin()], r_season.loc[r_season.capacity_median.idxmax()]
+
+    deltas = regime_deltas[regime_deltas.name.eq(name)]
+    temperature = deltas[deltas.driver.eq("Temperature")].sort_values("high_minus_low", key=lambda s: s.abs(), ascending=False).iloc[0]
+    vre = deltas[deltas.driver.eq("Source VRE")].sort_values("high_minus_low", key=lambda s: s.abs(), ascending=False).iloc[0]
+
+    enso_name = enso[enso.name.eq(name)].pivot(index="direction", columns="enso_state", values="capacity_median")
+    f_enso_delta = enso_name.loc["forward", "El Niño"] - enso_name.loc["forward", "Neutral"]
+    r_enso_delta = enso_name.loc["reverse", "El Niño"] - enso_name.loc["reverse", "Neutral"]
+
+    fam = family[family.name.eq(name)]
+    top_upper_binding = fam[fam.direction.eq("upper")].sort_values("binding_intervals", ascending=False).iloc[0]
+    top_lower_binding = fam[fam.direction.eq("lower")].sort_values("binding_intervals", ascending=False).iloc[0]
+    top_upper_setter = fam[fam.direction.eq("upper")].sort_values("leading_intervals", ascending=False).iloc[0]
+    top_lower_setter = fam[fam.direction.eq("lower")].sort_values("leading_intervals", ascending=False).iloc[0]
+
+    influence = duid[duid.name.eq(name)]
+    top_upper_duid = influence[influence.direction.eq("upper")].sort_values("total_tightening", ascending=False).iloc[0]
+    top_lower_duid = influence[influence.direction.eq("lower")].sort_values("total_tightening", ascending=False).iloc[0]
+
+    dayparts = period_top[(period_top.name.eq(name)) & period_top["rank"].eq(1)].copy()
+    dayparts["daily_period"] = pd.Categorical(dayparts.daily_period, DAILY_PERIOD_ORDER, ordered=True)
+    def daypart_text(direction: str) -> str:
+        selected = dayparts[dayparts.direction.eq(direction)].sort_values("daily_period")
+        return "; ".join(
+            f"{str(row.daily_period).lower()} <code>{escape(str(row.constraint))}</code> ({row.setter_share:.0%})"
+            for row in selected.itertuples())
+    upper_dayparts, lower_dayparts = daypart_text("upper"), daypart_text("lower")
+
+    temp_direction = "higher" if temperature.high_minus_low > 0 else "lower"
+    vre_direction = "higher" if vre.high_minus_low > 0 else "lower"
+    anchor = name.lower().replace(" ", "-")
+    return f'''<section class="connector-section" id="connector-{anchor}">
+<div class="section-kicker">CONNECTOR ANALYSIS · {escape(str(forward.direction_label))}</div>
+<h2>{escape(name)}</h2>
+<p><strong>Observed transfer and operating envelope.</strong> The three-year median transfer is {net_flow:,.1f} MW toward {escape(net_direction)}. The median dispatch limit is {forward.capacity_median:,.1f} MW in the named forward direction and {reverse.capacity_median:,.1f} MW in reverse. The forward limit is classified as restricted in {forward.restricted_rate:.1%} of half-hours and negative—meaning the solved envelope forces flow the other way—in {forward.forced_rate:.1%}. The comparable reverse shares are {reverse.restricted_rate:.1%} and {reverse.forced_rate:.1%}. This asymmetry matters: a single nameplate rating would conceal the direction in which the market was actually permitted to move.</p>
+<p><strong>Diurnal shape.</strong> The pooled seasonal median forward flow ranges from {f_lo.flow:,.1f} MW at {clock_label(f_lo.half_hour)} to {f_hi.flow:,.1f} MW at {clock_label(f_hi.half_hour)}, a {f_hi.flow - f_lo.flow:,.1f} MW within-day swing. The forward limit itself ranges from {f_cap_lo.capacity:,.1f} MW at {clock_label(f_cap_lo.half_hour)} to {f_cap_hi.capacity:,.1f} MW at {clock_label(f_cap_hi.half_hour)}. Reverse capability ranges from {r_cap_lo.capacity:,.1f} MW at {clock_label(r_cap_lo.half_hour)} to {r_cap_hi.capacity:,.1f} MW at {clock_label(r_cap_hi.half_hour)}. The coincidence—or lack of it—between the flow turning point and the limit trough indicates whether the daily pattern is primarily dispatch-led or envelope-led.</p>
+<p><strong>Quarter-block variation.</strong> Across complete Australian three-month blocks, median forward capability is lowest in {escape(str(f_slo.season_block))} at {f_slo.capacity_median:,.1f} MW and highest in {escape(str(f_shi.season_block))} at {f_shi.capacity_median:,.1f} MW, a spread of {f_shi.capacity_median - f_slo.capacity_median:,.1f} MW. Reverse capability spans {r_slo.capacity_median:,.1f} MW in {escape(str(r_slo.season_block))} to {r_shi.capacity_median:,.1f} MW in {escape(str(r_shi.season_block))}. These are realised quarterly operating regimes, not an assumption that every summer or winter behaves alike.</p>
+<p><strong>Weather and VRE regimes.</strong> The largest temperature-regime separation occurs for the {temperature.direction.lower()} direction in {temperature.season}: the median limit under the high-temperature regime is {temperature.high_regime_limit:,.1f} MW versus {temperature.low_regime_limit:,.1f} MW in the low-temperature regime, or {abs(temperature.high_minus_low):,.1f} MW {temp_direction}. The largest source-VRE separation occurs for the {vre.direction.lower()} direction in {vre.season}: {vre.high_regime_limit:,.1f} MW under high VRE versus {vre.low_regime_limit:,.1f} MW under low VRE, or {abs(vre.high_minus_low):,.1f} MW {vre_direction}. These are unadjusted conditional comparisons: temperature, humidity, demand, outages and VRE can move together.</p>
+<p><strong>ENSO context.</strong> Under the NOAA ONI historical episode rule, the study window contains an El Niño segment from September 2023 through April 2024 and otherwise neutral-labelled observations; no run qualifies as La Niña. Relative to neutral-labelled months, the El Niño median limit differs by {f_enso_delta:+,.1f} MW forward and {r_enso_delta:+,.1f} MW reverse. Because ENSO state is strongly confounded with the specific months and network conditions in a three-year sample, this is a sample comparison, not an estimated ENSO effect.</p>
+<p><strong>Constraints and generator pressure.</strong> The most frequently published upper binding family is <code>{escape(str(top_upper_binding.CONSTRAINTID))}</code> ({int(top_upper_binding.binding_intervals):,} binding five-minute intervals), while <code>{escape(str(top_upper_setter.CONSTRAINTID))}</code> is the most frequent reconstructed upper limit-setter ({int(top_upper_setter.leading_intervals):,} intervals). On the lower side the corresponding families are <code>{escape(str(top_lower_binding.CONSTRAINTID))}</code> ({int(top_lower_binding.binding_intervals):,} binding intervals) and <code>{escape(str(top_lower_setter.CONSTRAINTID))}</code> ({int(top_lower_setter.leading_intervals):,} leader intervals). Within active leader equations, the largest cumulative upper tightening pressure is associated with {escape(str(top_upper_duid.DUID))} under <code>{escape(str(top_upper_duid.constraint))}</code> ({top_upper_duid.total_tightening:,.0f} MW-observations); the lower-side leader is {escape(str(top_lower_duid.DUID))} under <code>{escape(str(top_lower_duid.constraint))}</code> ({top_lower_duid.total_tightening:,.0f}). These pressure rankings attribute realised movement through −b/a; they do not claim that the DUID independently caused the constraint to bind.</p>
+<p><strong>Key-period setters.</strong> The leading upper equations by time block are {upper_dayparts}. The leading lower equations are {lower_dayparts}. Percentages are each constraint's share of reconstructed setter intervals within that connector, side and time block; the regime matrices later in the report show how these leaders change by quarter block, temperature and source VRE.</p>
+</section>'''
 
 
 def figures(panel, diurnal, regimes, scatter, family, duid, pressure_regime):
@@ -417,7 +625,7 @@ def methodology_text(coverage: pd.DataFrame) -> str:
 
 ## Scope and frozen windows
 
-The flow, dispatch-limit, weather and VRE study covers `(2023-09-01 00:00, 2026-09-01 00:00]` in fixed UTC+10 NEM time. The constraint and DUID-pressure study covers `2024-09-01 00:00` through `2026-08-31 23:55`. The six links are QNI, Directlink, VNI, Heywood, Murraylink and Basslink. Nominal ratings, ENSO and prices are outside scope.
+The flow, dispatch-limit, weather, VRE and ENSO study covers `(2023-09-01 00:00, 2026-09-01 00:00]` in fixed UTC+10 NEM time. The constraint and DUID-pressure study covers `2024-09-01 00:00` through `2026-08-31 23:55`. The six links are QNI, Directlink, VNI, Heywood, Murraylink and Basslink. Nominal ratings and prices are outside scope.
 
 Australian seasons are complete three-month blocks: Summer December–February, Autumn March–May, Winter June–August and Spring September–November. December belongs to the summer ending in the next year. Calendar-quarter sensitivity uses only complete Q1–Q4 blocks; partial boundary quarters are excluded.
 
@@ -429,9 +637,13 @@ Signed flow follows each connector's declared forward orientation. `forward_capa
 
 Weather is the mean of retained representative sites in each endpoint region; endpoint maximum temperature is also retained. Regional VRE is cleared semi-scheduled wind plus solar. Residual demand is regional demand less those wind and solar fields; rooftop PV is not subtracted again. Regimes are defined within connector and Australian season: low ≤P20, normal P20–P80 and high ≥P80. Scatterplots use a deterministic sample of 3,000 observed half-hours per connector-direction for browser performance. No trend line, regression or model-derived effect is fitted.
 
+ENSO context uses the NOAA Climate Prediction Center ONI version 6 table retrieved 21 September 2026. ONI is the three-month running mean of ERSST.v6 Niño 3.4 anomalies. Warm and cold historical episodes require at least five consecutive overlapping seasons at or beyond ±0.5°C; shorter threshold excursions remain neutral-labelled. The study window contains an El Niño segment from September 2023 through April 2024 and no qualifying La Niña segment. NOAA identifies the most recent values as estimates; August 2026 has no centered-season ONI value in the retained snapshot and is excluded from ENSO summaries.
+
 ## Constraint reconstruction
 
 For `aF + Σ(bᵢPᵢ) + Z ≤ RHS`, the conditional bound is `observed flow + (RHS − solved LHS)/a`, and DUID sensitivity is `−bᵢ/a`. Positive `a` forms an upper candidate; negative `a` forms a lower candidate. Minimum upper and maximum lower candidates form the reconstructed envelope. Binding means absolute published marginal value above `1e-9`; near-binding means interconnector-normalized slack from 0 to 50 MW. Reported setters and reconstructed leaders remain separate.
+
+Regime-resolved constraint tables use the active reconstructed upper or lower leader at each five-minute interval. The full day is partitioned into overnight (21:00–05:59), morning peak (06:00–08:59), solar period (09:00–15:59) and evening peak (16:00–20:59). Each five-minute setter is joined to the corresponding half-hour connector-direction weather/VRE observation. Temperature and source-VRE regimes reuse the connector-direction-season P20/P80 definitions. Quarterly constraint tables use complete Australian season blocks within the two-year constraint window. These tables describe which equation set the retained envelope; only the separate published-binding table uses non-zero marginal value.
 
 Constraint run coverage at build time:
 
@@ -443,7 +655,7 @@ For the active reconstructed leader, movement contribution is `sᵢ × (Pᵢ[t] 
 
 ## Output lineage
 
-`connector_summary.csv`, `diurnal_profiles.csv`, `seasonal_profiles.csv`, `weather_vre_regimes.csv`, `regime_scatter_sample.csv`, `constraint_family_summary.csv`, `constraint_duid_influence.csv`, `constraint_duid_regime_matrix.csv` and `coverage_audit.csv` are generated before report rendering. The build manifest records input and output hashes. Missing observations are never converted to zero.
+`connector_summary.csv`, `diurnal_profiles.csv`, `seasonal_profiles.csv`, `weather_vre_regimes.csv`, `enso_monthly.csv`, `enso_regimes.csv`, `regime_scatter_sample.csv`, `constraint_family_summary.csv`, `constraint_diurnal_setters.csv`, `constraint_season_block_setters.csv`, `constraint_weather_vre_setters.csv`, `constraint_duid_influence.csv`, `constraint_duid_regime_matrix.csv` and `coverage_audit.csv` are generated before report rendering. The build manifest records input and output hashes. Missing observations are never converted to zero.
 
 ## Rebuild
 
@@ -455,7 +667,7 @@ python C:\\Users\\HomePC\\.codex\\skills\\editorial-html-report\\scripts\\valida
 
 
 def build():
-    OUT.mkdir(parents=True, exist_ok=True); DATA_OUT.mkdir(parents=True, exist_ok=True)
+    OUT.mkdir(parents=True, exist_ok=True); DATA_OUT.mkdir(parents=True, exist_ok=True); SOURCES_OUT.mkdir(parents=True, exist_ok=True)
     panel = build_panel()
     summary = connector_summary(panel)
     diurnal = diurnal_profiles(panel)
@@ -465,73 +677,182 @@ def build():
                      headroom_median=("headroom", "median"), restricted_rate=("restricted", "mean"),
                      forced_rate=("forced_direction", "mean")))
     regimes = regime_tables(panel)
+    enso_monthly, enso = enso_tables(panel)
     scatter = scatter_sample(panel)
     population, pressure_paths, constraint_coverage = load_constraints()
     family, duid, pressure_regime = constraint_summaries(population, pressure_paths)
+    period_setters, season_setters, regime_setters = constraint_regime_setters(panel)
 
     outputs = {
         "connector_summary.csv": summary, "diurnal_profiles.csv": diurnal,
         "seasonal_profiles.csv": seasonal, "weather_vre_regimes.csv": regimes,
+        "enso_monthly.csv": enso_monthly, "enso_regimes.csv": enso,
         "regime_scatter_sample.csv.gz": scatter,
         "constraint_family_summary.csv.gz": family, "constraint_duid_influence.csv": duid,
+        "constraint_diurnal_setters.csv.gz": period_setters,
+        "constraint_season_block_setters.csv.gz": season_setters,
+        "constraint_weather_vre_setters.csv.gz": regime_setters,
         "constraint_duid_regime_matrix.csv.gz": pressure_regime, "coverage_audit.csv": constraint_coverage,
     }
     for name, frame in outputs.items():
         compression = {"method": "gzip", "mtime": 0} if name.endswith(".gz") else None
-        frame.to_csv(DATA_OUT / name, index=False, compression=compression)
+        target = DATA_OUT / name
+        temporary = target.with_name(target.name + ".tmp")
+        frame.to_csv(temporary, index=False, compression=compression)
+        temporary.replace(target)
     (OUT / "METHODOLOGY.md").write_text(methodology_text(constraint_coverage), encoding="utf-8")
 
     complete_constraints = int(constraint_coverage.complete_months.sum()) if not constraint_coverage.empty else 0
     top_family = family.sort_values("binding_intervals", ascending=False).iloc[0] if not family.empty else None
     top_duid = duid.sort_values("total_tightening", ascending=False).iloc[0] if not duid.empty else None
+    regime_deltas = regime_delta_table(regimes)
+    binders, setters, pressure = constraint_rank_tables(family, duid)
+    figs = figures(panel, diurnal, regimes, scatter, family, duid, pressure_regime)
+
     body = hero("NEM · SIX INTERCONNECTORS · FIVE-MINUTE EVIDENCE",
                 "When interconnectors move —", "and what tightens them",
-                "Three years of observed diurnal flow, dispatch-limit, weather and renewable regimes, joined to two years of constraint and DUID-level pressure evidence—without fitted effect models.",
-                ["Data through 31 Aug 2026", "12 Australian seasonal blocks", "Calendar-quarter sensitivity", "Offline interactive report"])
-    body += '<nav class="anchor-nav"><a href="#findings">Findings</a><a href="#diurnal">Diurnal</a><a href="#quarters">Quarter blocks</a><a href="#weather">Weather & VRE</a><a href="#constraints">Constraints</a><a href="#duids">DUID pressure</a><a href="#profiles">Profiles</a><a href="#methods">Methods</a></nav>'
+                "A descriptive research report on three years of observed interconnector flows and dispatch limits, with quarterly seasonal blocks, weather and renewable regimes, two years of constraint evidence, and generator-level tightening pressure. The analysis is visual and conditional: no effect model is fitted.",
+                ["Flow and limits: Sep 2023–Aug 2026", "Constraints: Sep 2024–Aug 2026", "NOAA ONI v6 ENSO context", "631,296 directional half-hours"])
+    body += '<nav class="anchor-nav"><a href="#executive">Executive analysis</a><a href="#system">System comparison</a><a href="#connectors">Connector chapters</a><a href="#weather">Weather & VRE</a><a href="#constraints">Constraints</a><a href="#duids">DUID pressure</a><a href="#methods">Methods</a></nav>'
     body += '<section class="metrics">' + metric("Market observations", f"{len(panel)//2:,}", "connector × half-hour rows before directional expansion")
     body += metric("Seasonal blocks", "12", "three complete blocks for each Australian season")
     body += metric("Constraint months", f"{complete_constraints}/144", "completed connector-months at build time")
     body += metric("DUID pressure pairs", f"{len(duid):,}", "DUID × governing-constraint rankings") + '</section>'
-    body += '<section class="callout"><strong>Interpretation boundary.</strong> Reported dispatch limits are solved operating outcomes, not nominal physical ratings. Weather/VRE results are conditional associations. DUID pressure is a mechanical −b/a × dispatch-movement attribution under the active reconstructed equation, not independent causation.</section>'
+    body += '<section class="callout"><strong>What this report measures.</strong> Reported dispatch limits are solved operating outcomes, not nominal physical ratings. A negative directional limit is retained because it shows the solved envelope forcing flow the opposite way. Weather and VRE regimes compare observed high, normal and low conditions within each connector-season. Constraint binding, reconstructed limit-setting and DUID pressure are kept as separate concepts throughout.</section>'
+    body += '<section class="callout scope-note"><strong>ENSO coverage.</strong> ENSO labels use the NOAA Climate Prediction Center ONI version 6 historical episode rule: at least five consecutive overlapping three-month seasons at or beyond ±0.5°C. The study window includes El Niño-labelled observations from September 2023 through April 2024 and no qualifying La Niña segment. August 2026 is excluded from ENSO summaries because the retained official table ends at centered July 2026.</section>'
 
-    body += '<section id="findings"><h2>Evidence-led findings</h2><div class="findings">'
+    body += '<section id="executive"><div class="section-kicker">EXECUTIVE ANALYSIS</div><h2>What the evidence says</h2><p>The six links do not behave as interchangeable pipes. Their realised transfer bias, available direction, daily turning points and exposure to constraint equations differ materially. The clearest result is asymmetry: QNI carries a median reverse-oriented transfer while retaining much more reverse than forward capability; VNI carries a median VIC-to-NSW transfer while its reverse envelope generally has more unused headroom; and the two South Australian links show different limit and constraint signatures despite connecting the same broad region pair.</p><p>The second result is that quarter blocks matter more than a single pooled seasonal label suggests. Several links move from positive to negative median capability between blocks of the same broad study window. Basslink is the strongest example: its forward median limit ranges by almost 500 MW across complete Australian seasonal blocks, while the reverse range is of similar size. QNI also shows large inter-quarter changes, particularly in reverse capability. The report therefore gives block-level values before presenting pooled seasonal summaries.</p><p>The third result is that weather and VRE scatter is descriptive, not a fitted effect. Large high-versus-low regime gaps exist—especially for VNI, Basslink and QNI—but those gaps can reflect correlated demand, outage and network states. A scatter cloud or regime median is useful for seeing where the operating envelope sits; it is not a causal coefficient. That distinction is why the report does not draw regression lines through the data.</p><p>Finally, the constraint evidence has three layers. Published binding counts identify equations with non-zero marginal value. Reconstructed leader counts identify the equation forming the tightest conditional upper or lower envelope at each interval. Generator pressure then attributes the movement of that active equation to DUID dispatch changes using −b/a × ΔMW. A family can bind frequently without being the reconstructed leader, and a DUID can have a large pressure total because it moves often, has a large sensitivity, or both.</p><div class="findings">'
     restricted = summary.sort_values("restricted_rate", ascending=False).iloc[0]
     forced = summary.sort_values("forced_rate", ascending=False).iloc[0]
     body += finding(1, "Restrictions are link and direction specific", f"{restricted['name']} {restricted['direction']} has the highest three-year restricted-limit share in this build ({restricted['restricted_rate']:.1%}). Parallel links are therefore kept separate.")
     body += finding(2, "Forced-direction limits are visible", f"{forced['name']} {forced['direction']} has the highest negative directional-limit share ({forced['forced_rate']:.1%}); negative limits are preserved rather than clipped.")
-    body += finding(3, "Quarter blocks expose variation", "The report shows each complete three-month Australian seasonal block before pooling by season, then repeats core tables on complete calendar quarters.")
+    body += finding(3, "Quarter blocks expose variation", "Each complete December–February, March–May, June–August and September–November block is shown separately. Partial boundary blocks are excluded from block-extreme claims.")
     if top_family is not None:
         body += finding(4, "Binding evidence is equation specific", f"{top_family['CONSTRAINTID']} on {top_family['name']} is the most frequent binding family in the completed archive ({int(top_family['binding_intervals']):,} five-minute intervals).")
     if top_duid is not None:
         body += finding(5, "Movement matters as much as sensitivity", f"{top_duid['DUID']} has the largest cumulative tightening pressure among retained top-constraint pairs; the ranking uses realised 30-minute movement, not coefficient magnitude alone.")
-    body += finding(6, "Coverage remains explicit", "Every table carries counts, and connector constraint coverage is published so control-mode or unsupported intervals remain unattributed rather than assigned to a generator.")
+    body += finding(6, "Coverage is complete but attribution is conditional", "All 144 requested connector-months completed. Pressure is only assigned while an equation is the reconstructed active leader; unsupported or non-leading equations are not given duplicated generator attribution.")
     body += '</div></section>'
 
-    figs = figures(panel, diurnal, regimes, scatter, family, duid, pressure_regime)
-    ids = ["diurnal", "diurnal-limits", "quarters", "weather", "vre", "temperature-scatter", "humidity-scatter", "vre-flow-scatter", "vre-limit-scatter", "constraints", "duids"]
-    for ident, (fig, caption, note, data_file) in zip(ids, figs):
-        body += f'<section id="{ident}"><h2>{caption}</h2>' + figure_html(plot_div(fig), caption, note, "downloads/" + data_file) + '</section>'
-
-    body += '<section id="profiles"><h2>Connector and direction scorecard</h2><p>The scorecard uses the complete three-year half-hour panel. Restricted limits are below half of the positive Australian-season reference.</p>'
+    body += '<section id="system"><div class="section-kicker">SYSTEM COMPARISON</div><h2>Direction, diurnal shape and operating room</h2><p>The scorecard below is the starting point for the report. Flow is expressed in each named direction, while capacity is the solved limit for that direction. A negative median directional flow therefore means that actual transfer is usually opposite the label; a negative capacity means that the envelope itself usually requires the opposite direction. Restricted shares use a connector-direction-season reference rather than a universal MW threshold.</p>'
     show = summary.copy(); show["direction"] = show.direction.str.title()
     body += table_html(show.sort_values(["name", "direction"]),
                        ["name", "direction", "direction_label", "flow_median", "capacity_median", "capacity_p10", "headroom_median", "restricted_rate", "forced_rate"],
                        {"flow_median": lambda x: f"{x:,.1f}", "capacity_median": lambda x: f"{x:,.1f}",
                         "capacity_p10": lambda x: f"{x:,.1f}", "headroom_median": lambda x: f"{x:,.1f}",
-                        "restricted_rate": lambda x: f"{x:.1%}", "forced_rate": lambda x: f"{x:.1%}"}, 20) + '</section>'
+                        "restricted_rate": lambda x: f"{x:.1%}", "forced_rate": lambda x: f"{x:.1%}"}, 20)
+    body += figure_html(plot_div(figs[0][0]), figs[0][1], figs[0][2], "downloads/" + figs[0][3])
+    body += '<p>The diurnal flow profiles show that the daily turning points are not common across links. VNI’s pooled forward median rises from a reverse-oriented trough around the morning solar period to a strong VIC-to-NSW transfer overnight. QNI displays the opposite sign pattern in the forward convention, while Murraylink’s much smaller envelope turns within a narrower band. These differences argue against using one generic “interconnector hour” feature across the fleet.</p>'
+    body += figure_html(plot_div(figs[1][0]), figs[1][1], figs[1][2], "downloads/" + figs[1][3])
+    body += '<p>Limit profiles explain only part of the flow shape. On some links the flow turning point occurs close to the daily limit trough, which is consistent with the operating envelope shaping dispatch. Elsewhere the available limit stays well above realised flow, indicating that regional supply-demand conditions are more important than the interconnector ceiling during the median day. The connector chapters quantify those timings individually.</p></section>'
 
-    if not duid.empty:
-        leaders = duid.sort_values("total_tightening", ascending=False).groupby(["ic", "direction", "constraint"], as_index=False).head(3).head(60)
-        body += '<section><h2>Top DUIDs within top constraints</h2><p>Each row is a DUID evaluated only while the named constraint was the active reconstructed directional leader. Full rankings are downloadable.</p>'
-        body += table_html(leaders, ["name", "direction", "constraint", "DUID", "sensitivity_median", "active_intervals", "season_blocks", "total_tightening", "total_relief", "p95_tightening"],
-                           {"sensitivity_median": lambda x: f"{x:,.4f}", "total_tightening": lambda x: f"{x:,.0f}",
-                            "total_relief": lambda x: f"{x:,.0f}", "p95_tightening": lambda x: f"{x:,.1f}"}, 60) + '</section>'
+    body += '<section id="quarters"><div class="section-kicker">QUARTERLY SEASON BLOCKS</div><h2>Seasonality is evaluated as complete three-month blocks</h2><p>Australian seasons are treated as quarterly blocks: summer is December–February, autumn March–May, winter June–August and spring September–November. December is assigned to the summer ending in the following year. The heatmap keeps each block separate, so “Winter 2024” and “Winter 2025” are evidence points rather than being collapsed into one climatological average.</p>'
+    body += figure_html(plot_div(figs[2][0]), figs[2][1], figs[2][2], "downloads/" + figs[2][3])
+    body += '<p>The block comparison reveals structural shifts as well as recurring seasonality. QNI reverse capability reaches its highest complete-block median in Winter 2025 but its lowest in Spring 2025. Basslink changes sign in both directional capacity summaries across the window. Heywood’s forward envelope is strongest in Autumn 2024 and materially lower in Winter 2025, whereas VNI’s forward block range is smaller relative to its scale. These are precisely the variations hidden by a single annual median.</p></section>'
 
-    body += '<section id="methods"><h2>Methods, coverage and downloads</h2><p>The complete definitions, equations, quarterly calendars, sampling design and interpretation limits are in <a href="METHODOLOGY.md">METHODOLOGY.md</a>.</p>'
+    body += '<section id="connectors"><div class="section-kicker">CONNECTOR CHAPTERS</div><h2>Six links, twelve directional operating regimes</h2><p>Each chapter follows the same logic: first the realised transfer and directional envelope, then the within-day pattern, quarterly seasonal blocks, weather/VRE regime separation, and finally the published binding, reconstructed setter and DUID-pressure evidence. “Upper” corresponds to the named forward limit; “lower” corresponds to the reverse-side limit before sign normalization.</p></section>'
+    for connector_name in [IC_NAMES[x] for x in IC_ORDER]:
+        body += connector_story(connector_name, summary, diurnal, seasonal, regime_deltas, enso, family, duid, period_setters)
+
+    body += '<section id="weather"><div class="section-kicker">WEATHER & RENEWABLE REGIMES</div><h2>Conditional differences are large—but not causal estimates</h2><p>For each connector, direction and Australian season, the low regime is at or below the within-season 20th percentile and the high regime is at or above the 80th percentile. This controls for the broad seasonal level without fitting a model. The table reports the season with the largest absolute high-minus-low difference for each driver, which is useful for screening where a regime matters most. It should not be read as an all-else-equal temperature or VRE effect.</p>'
+    body += table_html(regime_deltas.sort_values(["driver", "name", "direction"]),
+                       ["name", "direction", "driver", "season", "low_regime_limit", "high_regime_limit", "high_minus_low"],
+                       {"low_regime_limit": lambda x: f"{x:,.1f}", "high_regime_limit": lambda x: f"{x:,.1f}", "high_minus_low": lambda x: f"{x:+,.1f}"}, 50)
+    body += '<p>Temperature and humidity often show opposite-signed splits because they proxy the same synoptic conditions from different directions. The clearest example is VNI forward in summer: the high-temperature regime has a much lower median limit than the low-temperature regime, while the high-humidity regime has a much higher limit than the low-humidity regime. That is a useful operating pattern, but it is also a warning against treating either variable independently without controlling for concurrent demand, outages and network configuration.</p>'
+    body += figure_html(plot_div(figs[3][0]), figs[3][1], figs[3][2], "downloads/" + figs[3][3])
+    body += figure_html(plot_div(figs[4][0]), figs[4][1], figs[4][2], "downloads/" + figs[4][3])
+    enso_fig = px.bar(enso, x="name", y="capacity_median", color="enso_state", facet_col="direction", barmode="group",
+                      category_orders={"enso_state": ["El Niño", "Neutral"]},
+                      color_discrete_map={"El Niño": "#ce9a48", "Neutral": "#66717e"},
+                      labels={"capacity_median": "Median directional limit MW", "name": "", "enso_state": "ONI episode state"})
+    style_plotly(enso_fig, "Directional dispatch limits by ONI historical episode state", 540)
+    body += '<h3>ENSO state comparison</h3><p>The study window is not balanced across ENSO states: El Niño covers eight months at the front of the sample, while the remainder is neutral-labelled under the five-overlapping-season rule. The late-2025 cold excursion and April–July 2026 warm excursion do not meet the duration rule in the retained data. Differences below therefore combine ENSO state with the particular seasons, outages and demand conditions present in those months.</p>'
+    body += figure_html(plot_div(enso_fig), "Interconnector limits by ENSO state", "NOAA CPC ONI v6 historical episode labels; August 2026 excluded because the centered-season value was unavailable.", "downloads/enso_regimes.csv")
+    body += table_html(enso.sort_values(["name", "direction", "enso_state"]),
+                       ["name", "direction", "direction_label", "enso_state", "months", "oni_median", "flow_median", "capacity_median", "capacity_p10", "restricted_rate", "forced_rate"],
+                       {"months": lambda x: f"{int(x):,}", "oni_median": lambda x: f"{x:+.1f}", "flow_median": lambda x: f"{x:,.1f}", "capacity_median": lambda x: f"{x:,.1f}", "capacity_p10": lambda x: f"{x:,.1f}", "restricted_rate": lambda x: f"{x:.1%}", "forced_rate": lambda x: f"{x:.1%}"}, 30)
+    body += '<h3>Observed-point scatter: inspect the shape, not a fitted line</h3><p>The scatterplots retain individual observed half-hours in a deterministic sample. Vertical bands indicate repeated operating limits; sloped or curved clouds can reflect changing network states, demand and correlated weather rather than a stable response coefficient. Hovering a point shows the connector, direction, season and timestamp so apparent clusters can be traced back to the underlying regime.</p>'
+    for index in [5, 6, 7, 8]:
+        body += figure_html(plot_div(figs[index][0]), figs[index][1], figs[index][2], "downloads/" + figs[index][3])
+    body += '</section>'
+
+    binders["limit_side"] = binders.direction.map({"upper": "Forward / upper", "lower": "Reverse / lower"})
+    setters["limit_side"] = setters.direction.map({"upper": "Forward / upper", "lower": "Reverse / lower"})
+    body += '<section id="constraints"><div class="section-kicker">CONSTRAINT EVIDENCE</div><h2>Binding families and active limit-setters answer different questions</h2><p>A published binding interval is one in which AEMO’s marginal value for the constraint is non-zero. It tells us that relaxing the equation would have changed the dispatch solution. A reconstructed active limit-setter is the equation producing the tightest conditional interconnector bound after solving its generic-constraint equation for the interconnector term. It tells us which retained equation most directly formed the directional envelope. The same family can appear in both lists, but it need not.</p>'
+    body += '<h3>Most frequent published binding families</h3><p>Counts below are five-minute intervals across the two-year constraint window. Binding rate is calculated only over intervals in which the exact family version was applicable. Descriptions are retained because IDs alone often obscure whether the equation addresses an outage, thermal limit, stability limit or a broader transfer requirement.</p>'
+    body += table_html(binders, ["name", "limit_side", "CONSTRAINTID", "DESCRIPTION", "binding_intervals", "binding_rate", "near_binding_intervals", "exact_versions"],
+                       {"binding_intervals": lambda x: f"{int(x):,}", "binding_rate": lambda x: f"{x:.1%}", "near_binding_intervals": lambda x: f"{int(x):,}", "exact_versions": lambda x: f"{int(x):,}"}, 40)
+    body += figure_html(plot_div(figs[9][0]), figs[9][1], figs[9][2], "downloads/" + figs[9][3])
+    body += '<h3>Most frequent reconstructed directional setters</h3><p>This ranking focuses on the equations that actually formed the tightest retained upper or lower candidate. A zero leader count beside a high binding count is not an error: the equation could bind for another term in the dispatch solution without becoming the tightest reconstructed interconnector bound.</p>'
+    body += table_html(setters, ["name", "limit_side", "CONSTRAINTID", "DESCRIPTION", "leading_intervals", "binding_intervals", "near_setting_intervals", "exact_versions"],
+                       {"leading_intervals": lambda x: f"{int(x):,}", "binding_intervals": lambda x: f"{int(x):,}", "near_setting_intervals": lambda x: f"{int(x):,}", "exact_versions": lambda x: f"{int(x):,}"}, 40)
+    body += '<p>For QNI and Directlink, <code>N&gt;&gt;NIL_33_34</code> is a prominent reconstructed upper setter, but the lower-side published binding leaders are different families. Murraylink and VNI share some Victorian/NSW constraint families, yet their realised leader frequencies and DUID pressure differ. This is why equation IDs should not be transferred from one interconnector model to another without checking the interconnector coefficient and active direction.</p>'
+
+    body += '<h3>Diurnal constraint leaders: overnight, morning peak, solar and evening peak</h3><p>The next view ranks the active reconstructed equation inside four exhaustive time blocks: overnight 21:00–05:59, morning peak 06:00–08:59, solar period 09:00–15:59 and evening peak 16:00–20:59. Colour measures concentration—the share of retained setter intervals accounted for by the leading equation. Hover reveals the equation ID. A high share indicates a stable dominant envelope constraint; a low share indicates a rotating constraint set.</p>'
+    period_leaders = period_setters[period_setters["rank"].eq(1)].copy()
+    period_leaders["side"] = period_leaders.direction.map({"upper": "forward / upper", "lower": "reverse / lower"})
+    period_leaders["row"] = period_leaders.name + " · " + period_leaders.side
+    row_order = [f"{IC_NAMES[ic]} · {side}" for ic in IC_ORDER for side in ["forward / upper", "reverse / lower"]]
+    share_matrix = period_leaders.pivot(index="row", columns="daily_period", values="setter_share").reindex(index=row_order, columns=DAILY_PERIOD_ORDER)
+    id_matrix = period_leaders.pivot(index="row", columns="daily_period", values="constraint").reindex(index=row_order, columns=DAILY_PERIOD_ORDER)
+    period_fig = go.Figure(go.Heatmap(
+        z=share_matrix.values, x=share_matrix.columns, y=share_matrix.index,
+        customdata=id_matrix.values, colorscale="Blues", zmin=0, zmax=1,
+        text=np.vectorize(lambda x: "—" if pd.isna(x) else f"{x:.0%}")(share_matrix.values),
+        texttemplate="%{text}",
+        hovertemplate="%{y}<br>%{x}<br>%{customdata}<br>setter share %{z:.1%}<extra></extra>",
+        colorbar=dict(title="Top setter share")))
+    style_plotly(period_fig, "Dominant reconstructed constraint by key daily period", 720)
+    period_fig.update_layout(hovermode="closest")
+    body += figure_html(plot_div(period_fig), "Dominant constraint by daily operating period", "Cell labels are the leading constraint's share; hover for constraint ID. Active reconstructed setters, not marginal-value binding classifications.", "downloads/constraint_diurnal_setters.csv.gz")
+
+    body += '<h3>Temperature and source-VRE regime matrices</h3><p>Each cell below shows the top reconstructed setter and its share for one connector side, daily period and within-season regime. Reading across a row answers the practical question: does the constraint that sets the morning, solar or evening envelope change when temperature or source-region VRE moves from low to high? The downloadable table retains the top three equations for every cell.</p>'
+    for connector_name in [IC_NAMES[x] for x in IC_ORDER]:
+        use = regime_setters[(regime_setters.name.eq(connector_name)) & regime_setters["rank"].eq(1)].copy()
+        use["side"] = use.direction.map({"upper": "Forward / upper", "lower": "Reverse / lower"})
+        use["daily_period"] = pd.Categorical(use.daily_period, DAILY_PERIOD_ORDER, ordered=True)
+        use["cell"] = use.constraint.astype(str) + " (" + use.setter_share.map(lambda x: f"{x:.0%}") + ")"
+        matrix = use.pivot_table(index=["side", "daily_period"], columns=["driver", "regime"], values="cell", aggfunc="first", observed=True).reset_index()
+        matrix.columns = [" · ".join([str(x) for x in col if str(x)]) if isinstance(col, tuple) else str(col) for col in matrix.columns]
+        wanted = ["side", "daily_period", "Temperature · low", "Temperature · normal", "Temperature · high",
+                  "Source VRE · low", "Source VRE · normal", "Source VRE · high"]
+        matrix = matrix.rename(columns={"side · ": "side", "daily_period · ": "daily_period"})
+        matrix = matrix[[col for col in wanted if col in matrix.columns]].sort_values(["side", "daily_period"])
+        matrix = matrix.astype(object).where(matrix.notna(), "—")
+        body += f'<details><summary>{escape(connector_name)} — regime × daily-period leaders</summary>'
+        body += table_html(matrix, list(matrix.columns), limit=20) + '</details>'
+
+    body += '<h3>Quarter-block × daily-period matrices</h3><p>These matrices repeat the same ranking for each complete Australian seasonal block in the two-year constraint window. They make persistent seasonality distinguishable from one-off network configurations: a constraint that dominates the same daily period across several blocks is structurally different from one appearing only during a single outage-rich quarter.</p>'
+    constraint_start, constraint_end = pd.Timestamp("2024-09-01"), pd.Timestamp("2026-08-31 23:59")
+    season_order = (panel[panel.time.between(constraint_start, constraint_end)]
+                    .groupby("season_block", as_index=False).time.min().sort_values("time").season_block.tolist())
+    for connector_name in [IC_NAMES[x] for x in IC_ORDER]:
+        use = season_setters[(season_setters.name.eq(connector_name)) & season_setters["rank"].eq(1)].copy()
+        use["side"] = use.direction.map({"upper": "Forward / upper", "lower": "Reverse / lower"})
+        use["daily_period"] = pd.Categorical(use.daily_period, DAILY_PERIOD_ORDER, ordered=True)
+        use["cell"] = use.constraint.astype(str) + " (" + use.setter_share.map(lambda x: f"{x:.0%}") + ")"
+        matrix = use.pivot_table(index=["side", "daily_period"], columns="season_block", values="cell", aggfunc="first", observed=True).reset_index()
+        matrix.columns.name = None
+        matrix = matrix[["side", "daily_period"] + [col for col in season_order if col in matrix.columns]]
+        matrix.sort_values(["side", "daily_period"], inplace=True)
+        matrix = matrix.astype(object).where(matrix.notna(), "—")
+        body += f'<details><summary>{escape(connector_name)} — quarter-block × daily-period leaders</summary>'
+        body += table_html(matrix, list(matrix.columns), limit=20) + '</details>'
+    body += '<p class="callout scope-note"><strong>Binding-versus-setting limitation.</strong> Exact equation-level marginal values were compacted to monthly published-binding counts, so the retained files cannot truthfully split published binding intervals by weather regime or time block without rerunning the raw dispatch-equation pipeline. The regime matrices therefore use the retained five-minute active reconstructed setter—the equation actually forming the conditional upper or lower envelope. The overall published-binding tables above remain the authoritative marginal-value ranking.</p></section>'
+
+    pressure["limit_side"] = pressure.direction.map({"upper": "Forward / upper", "lower": "Reverse / lower"})
+    body += '<section id="duids"><div class="section-kicker">GENERATOR PRESSURE</div><h2>Which DUIDs move the active constraint envelope?</h2><p>For an active equation written as aF + Σ(bᵢPᵢ) + Z ≤ RHS, the DUID sensitivity of the interconnector bound is −bᵢ/a. The report multiplies that sensitivity by observed dispatch movement and then normalizes the sign so positive pressure means directional capacity tightened. Cumulative tightening therefore combines three things: how often the equation leads, how sensitive the bound is to the unit, and how much the unit actually moves while that equation leads.</p>'
+    body += figure_html(plot_div(figs[10][0]), figs[10][1], figs[10][2], "downloads/" + figs[10][3])
+    body += '<p>The heatmap should be read within connector and constraint context, not as a league table of “bad” generators. A DUID may appear as the largest tightening contributor on one equation and provide relief on another. Storage, pumps and loads retain their source dispatch signs, and simultaneous non-leading equations do not receive duplicate pressure attribution.</p>'
+    body += table_html(pressure, ["name", "limit_side", "constraint", "DUID", "sensitivity_median", "active_intervals", "season_blocks", "total_tightening", "p95_tightening", "total_relief"],
+                       {"sensitivity_median": lambda x: f"{x:,.3f}", "active_intervals": lambda x: f"{int(x):,}", "season_blocks": lambda x: f"{int(x):,}", "total_tightening": lambda x: f"{x:,.0f}", "p95_tightening": lambda x: f"{x:,.1f}", "total_relief": lambda x: f"{x:,.0f}"}, 40)
+    body += '<p>Several rankings are operationally intuitive. Basslink’s strongest retained pressure pairs are tied to Tasmanian units under Basslink-specific frequency or transfer equations. The QNI/Directlink rankings concentrate on northern NSW and Queensland renewable DUIDs under NSW–Queensland transfer families. Victorian and South Australian links show a broader mixture of wind, solar, hydro, battery and thermal DUIDs because the active equations span shared western-Victorian and NSW–Victoria network elements.</p></section>'
+
+    body += '<section id="methods"><div class="section-kicker">METHODS & LIMITATIONS</div><h2>How to use the results</h2><p>The analysis window for flow, limits, weather and VRE is 1 September 2023 through 31 August 2026 in fixed UTC+10 NEM market time. The constraint and pressure archive covers 1 September 2024 through 31 August 2026. Half-hour observations require six distinct five-minute records. Weather is the mean of retained representative sites at the connector endpoints; VRE is cleared semi-scheduled wind plus solar in the source or sink region.</p><p>“Restricted” means the directional limit is below 50% of the positive connector-direction-season median. This is a comparative operating-regime definition, not an engineering derating declaration. Quarter-block claims use only blocks with at least 4,000 half-hours, excluding the one-observation boundary block at 1 September 2026. Regime comparisons use P20/P80 splits within connector and Australian season.</p><p>The constraint reconstruction solves each applicable generic equation for the interconnector term. Minimum upper and maximum lower candidates form the retained envelope. Published marginal value defines binding; 0–50 MW normalized slack defines near-binding. The generator-pressure method is a deterministic equation decomposition, not an econometric estimate and not proof of operator intent.</p><p><strong>Most important limitation.</strong> Local weather, VRE, demand, outages, constraint configuration and ENSO state are correlated. The report deliberately presents scatter, medians and counts rather than fitted coefficients. The ENSO comparison contains one El Niño episode segment and no qualifying La Niña segment, so it cannot separate episode effects from the specific months represented. Any decision that requires an isolated weather or ENSO sensitivity, or a forecast, should be built as a separate model with explicit train/test periods and stability checks.</p><p>The full field definitions, equations, calendars, sampling design and interpretation boundaries are in <a href="METHODOLOGY.md">METHODOLOGY.md</a>. The ONI source is the <a href="https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/oni/v6/">NOAA Climate Prediction Center historical ONI v6 table</a>.</p>'
     body += table_html(constraint_coverage, ["name", "expected_months", "complete_months", "status"], limit=10)
-    body += '<div class="downloads"><h3>Research data</h3><ul>' + ''.join(f'<li><a href="downloads/{name}" download>{name}</a></li>' for name in outputs) + '</ul></div></section>'
-    body += '<footer><p>Prepared 21 September 2026 · NEM market time UTC+10 · Generated from retained public-market and weather data.</p></footer>'
+    body += '<div class="downloads"><h3>Research data</h3><ul>' + ''.join(f'<li><a href="downloads/{name}" download>{name}</a></li>' for name in outputs)
+    body += '</ul><h3>Source snapshots</h3><ul><li><a href="sources/noaa_oni_v6_study_context.csv" download>NOAA CPC ONI v6 study-window snapshot</a></li></ul></div></section>'
+    body += '<footer><p>Prepared 21 September 2026 · NEM market time UTC+10 · Descriptive research report generated from retained public-market, constraint and weather data. No fitted effect model.</p></footer>'
     html = render_page("NEM interconnector diurnal and constraint-pressure research", body, plotly=True, accent="purple")
     html = "\n".join(line.rstrip() for line in html.splitlines()) + "\n"
     (OUT / "index.html").write_text(html, encoding="utf-8")
@@ -539,7 +860,8 @@ def build():
     manifest = {"report_id": REPORT_ID, "built_at": pd.Timestamp.now(tz="Asia/Singapore").isoformat(),
                 "inputs": {}, "outputs": {}, "constraint_coverage": constraint_coverage.to_dict("records"),
                 "rebuild": "python scripts/build_all_ic_regime_report.py"}
-    for path in [ROOT / "data/processed/targets.parquet", ROOT / "data/processed/regional_30min.parquet", ROOT / "data/processed/weather_30min.parquet"]:
+    for path in [ROOT / "data/processed/targets.parquet", ROOT / "data/processed/regional_30min.parquet", ROOT / "data/processed/weather_30min.parquet",
+                 SOURCES_OUT / "noaa_oni_v6_study_context.csv"]:
         manifest["inputs"][str(path.relative_to(ROOT))] = {"bytes": path.stat().st_size, "sha256": digest(path)}
     for path in sorted(OUT.rglob("*")):
         excluded_local_outputs = {
