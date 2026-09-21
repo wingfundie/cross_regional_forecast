@@ -39,7 +39,7 @@ For the active reconstructed leader, movement contribution is `sᵢ × (Pᵢ[t] 
 
 ## Output lineage
 
-`connector_summary.csv`, `diurnal_profiles.csv`, `seasonal_profiles.csv`, `weather_vre_regimes.csv`, `enso_monthly.csv`, `enso_regimes.csv`, `regime_scatter_sample.csv`, `constraint_family_summary.csv`, `constraint_diurnal_setters.csv`, `constraint_season_block_setters.csv`, `constraint_weather_vre_setters.csv`, `constraint_duid_influence.csv`, `constraint_duid_regime_matrix.csv` and `coverage_audit.csv` are generated before report rendering. The build manifest records input and output hashes. Missing observations are never converted to zero.
+`connector_summary.csv`, `diurnal_profiles.csv`, `seasonal_limit_summary.csv`, `seasonal_profiles.csv`, `weather_vre_regimes.csv`, `enso_monthly.csv`, `enso_regimes.csv`, `regime_scatter_sample.csv`, `constraint_family_summary.csv`, `constraint_diurnal_setters.csv`, `constraint_season_block_setters.csv`, `constraint_weather_vre_setters.csv`, `constraint_duid_influence.csv`, `constraint_duid_regime_matrix.csv` and `coverage_audit.csv` are generated before report rendering. The build manifest records input and output hashes. Missing observations are never converted to zero.
 
 ## Rebuild
 
