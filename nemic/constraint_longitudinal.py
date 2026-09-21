@@ -30,8 +30,9 @@ def load_study(path=CONFIG):
         raise ValueError(f"Missing study configuration keys: {sorted(missing)}")
     if int(config["limits"]["study_disk_bytes"]) != 10_000_000_000:
         raise ValueError("The approved longitudinal study disk budget must be exactly 10 GB")
-    if config["interconnector"] not in {"VIC1-NSW1", "NSW1-QLD1", "V-SA"}:
-        raise ValueError("Longitudinal execution currently supports VNI, QNI and V-SA")
+    supported = {"VIC1-NSW1", "NSW1-QLD1", "V-SA", "N-Q-MNSP1", "V-S-MNSP1", "T-V-MNSP1"}
+    if config["interconnector"] not in supported:
+        raise ValueError(f"Unsupported longitudinal interconnector: {config['interconnector']}")
     if pd.Timestamp(config["standing_start"]) != pd.Timestamp(config["start"]):
         raise ValueError("Standing-data acquisition must use the same two-year start as the study")
     return config

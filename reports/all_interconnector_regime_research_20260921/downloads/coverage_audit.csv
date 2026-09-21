@@ -1,0 +1,7 @@
+ic,name,expected_months,complete_months,status
+NSW1-QLD1,QNI,24,24,complete
+N-Q-MNSP1,Directlink,24,24,complete
+VIC1-NSW1,VNI,24,24,complete
+V-SA,Heywood,24,24,complete
+V-S-MNSP1,Murraylink,24,24,complete
+T-V-MNSP1,Basslink,24,24,complete

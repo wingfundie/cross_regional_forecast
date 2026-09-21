@@ -1,0 +1,109 @@
+{
+  "report_id": "all_interconnector_regime_research_20260921",
+  "built_at": "2026-09-21T16:42:30.240186+08:00",
+  "inputs": {
+    "data\\processed\\targets.parquet": {
+      "bytes": 16074351,
+      "sha256": "01c16959a22b7238ce6059b190a9ba0895671df4a5b913ac384a34bd54dda257"
+    },
+    "data\\processed\\regional_30min.parquet": {
+      "bytes": 19029100,
+      "sha256": "0ec0dc89330bbc2812b2da13c8efaf5823bf087c08818febc4a6472be86d9610"
+    },
+    "data\\processed\\weather_30min.parquet": {
+      "bytes": 5106632,
+      "sha256": "80c800a6f7649d5e3e858e16d55566f1014acea3f3bd2af52c6bddc7eac3c97a"
+    }
+  },
+  "outputs": {
+    "downloads\\connector_summary.csv": {
+      "bytes": 2980,
+      "sha256": "89871937b8a0e156e2e9651a376e46aa29a4e0faee5b6ada9f9bd079071f8a28"
+    },
+    "downloads\\constraint_duid_influence.csv": {
+      "bytes": 1469443,
+      "sha256": "7668c3ab19e81a3df75466bbd78cf91460b880dc32a45148a0a2ef942c0f6da5"
+    },
+    "downloads\\constraint_duid_regime_matrix.csv.gz": {
+      "bytes": 21030923,
+      "sha256": "025642ce9d928084f0b1f78a8e3ae4d1c4eba8dc5da72c9a96a5d3bc6f86b3ac"
+    },
+    "downloads\\constraint_family_summary.csv.gz": {
+      "bytes": 747040,
+      "sha256": "5db58a60156efbe2e16597d9a2181f47f1baec0f54d3c90c539e3bd441edc592"
+    },
+    "downloads\\coverage_audit.csv": {
+      "bytes": 246,
+      "sha256": "0158448eea0d3e85a386037c957d5b2522aae8a0668c92ad3521c8e19a3aecb4"
+    },
+    "downloads\\diurnal_profiles.csv": {
+      "bytes": 4130789,
+      "sha256": "f9b4aea19d3399e258cb1b7ee1ff3fb7124d8b594bd933dda77be60db86fa2ca"
+    },
+    "downloads\\regime_scatter_sample.csv.gz": {
+      "bytes": 2585248,
+      "sha256": "39cce0e5acec7da7ef90b8d44fe715df7c557167777e9999466323b883d73311"
+    },
+    "downloads\\seasonal_profiles.csv": {
+      "bytes": 23761,
+      "sha256": "156837427826ffbc0d1fe2c249216f0cbd05d8355e62a7699d71f3ff85517cd9"
+    },
+    "downloads\\weather_vre_regimes.csv": {
+      "bytes": 366551,
+      "sha256": "e945384b80723d5c3cf93a7441a1c046ad9f568d1180c51ecfcc0da2ed66a557"
+    },
+    "index.html": {
+      "bytes": 8135926,
+      "sha256": "51ea08e7bb72459c6c7a859c396cf74c76bf2e32dbd46850d824d8d5257a6a95"
+    },
+    "METHODOLOGY.md": {
+      "bytes": 4371,
+      "sha256": "d115e14f0dae6ab42dda2a69fd0cc6d1ded62c4598962974f510c90de5a39ecd"
+    }
+  },
+  "constraint_coverage": [
+    {
+      "ic": "NSW1-QLD1",
+      "name": "QNI",
+      "expected_months": 24,
+      "complete_months": 24,
+      "status": "complete"
+    },
+    {
+      "ic": "N-Q-MNSP1",
+      "name": "Directlink",
+      "expected_months": 24,
+      "complete_months": 24,
+      "status": "complete"
+    },
+    {
+      "ic": "VIC1-NSW1",
+      "name": "VNI",
+      "expected_months": 24,
+      "complete_months": 24,
+      "status": "complete"
+    },
+    {
+      "ic": "V-SA",
+      "name": "Heywood",
+      "expected_months": 24,
+      "complete_months": 24,
+      "status": "complete"
+    },
+    {
+      "ic": "V-S-MNSP1",
+      "name": "Murraylink",
+      "expected_months": 24,
+      "complete_months": 24,
+      "status": "complete"
+    },
+    {
+      "ic": "T-V-MNSP1",
+      "name": "Basslink",
+      "expected_months": 24,
+      "complete_months": 24,
+      "status": "complete"
+    }
+  ],
+  "rebuild": "python scripts/build_all_ic_regime_report.py"
+}

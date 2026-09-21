@@ -116,7 +116,19 @@ def run(config_path=CONFIG):
             "forced_contribution_rows": len(forced),
             "forced_mean_abs_impact_mw": forced.abs_impact_mw.mean() if len(forced) else np.nan,
         })
-    influence = pd.DataFrame(rows)
+    influence_columns = [
+        "DUID", "contribution_rows", "active_constraint_versions", "active_state_intervals",
+        "total_abs_impact_mw_observations", "mean_abs_bound_impact_mw", "p95_abs_bound_impact_mw",
+        "total_tightening_mw_observations", "total_relief_mw_observations", "top_contributor_intervals",
+        "limit_move_spearman", "flow_move_spearman", "contraction_contribution_rows",
+        "contraction_mean_tightening_mw", "contraction_positive_share", "reversal_contribution_rows",
+        "reversal_mean_abs_impact_mw", "reversal_flow_alignment", "forced_contribution_rows",
+        "forced_mean_abs_impact_mw",
+    ]
+    # Controllable links can have a valid reconstructed envelope in a month but
+    # no mapped DUID movement under the active leader. Preserve a schema-correct
+    # empty result instead of failing or inventing zero influence.
+    influence = pd.DataFrame(rows, columns=influence_columns)
     # Total absolute impact is the persistence-weighted mechanical influence over
     # the study month; mean impact is retained as the intensity measure.
     influence["overall_rank"] = influence.total_abs_impact_mw_observations.rank(ascending=False, method="min")
