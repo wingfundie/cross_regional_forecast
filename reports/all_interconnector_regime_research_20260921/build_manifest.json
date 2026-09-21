@@ -1,6 +1,6 @@
 {
   "report_id": "all_interconnector_regime_research_20260921",
-  "built_at": "2026-09-21T19:38:02.478841+08:00",
+  "built_at": "2026-09-21T20:04:44.717761+08:00",
   "inputs": {
     "data\\processed\\targets.parquet": {
       "bytes": 16074351,
@@ -15,8 +15,8 @@
       "sha256": "80c800a6f7649d5e3e858e16d55566f1014acea3f3bd2af52c6bddc7eac3c97a"
     },
     "reports\\all_interconnector_regime_research_20260921\\sources\\noaa_oni_v6_study_context.csv": {
-      "bytes": 4461,
-      "sha256": "b348109ce8693cef33d5b75f30270e93a8a35be74e8284aa76f1a6488f8bc2c9"
+      "bytes": 4505,
+      "sha256": "b2e69a3d6a486ec8d8611a41303b4606b88111e3ad06e741a60406852d9da1be"
     }
   },
   "outputs": {
@@ -29,12 +29,12 @@
       "sha256": "366a4d3a159d6de99691e4050ee97d7804a117a023bdf8b7a4d791e373bb4e54"
     },
     "downloads\\constraint_duid_influence.csv": {
-      "bytes": 1469494,
-      "sha256": "8d3e3d87083e4c54de6408f1cbc639144decef1e32e41863ef537df27bbb0875"
+      "bytes": 1469511,
+      "sha256": "4b9921c24ca041a61d4029faa87f71477ef6085f39d7515baeec2f31d804cde4"
     },
     "downloads\\constraint_duid_regime_matrix.csv.gz": {
-      "bytes": 21031183,
-      "sha256": "61c03b2ae5a634808c25e83443c4d9b9600f832a9f543b56feca825e045f71a0"
+      "bytes": 21031630,
+      "sha256": "46dd06d7ac21c5e44b1b151553a6b620f179d049db99b296c6c023528b486917"
     },
     "downloads\\constraint_family_summary.csv.gz": {
       "bytes": 747047,
@@ -68,25 +68,29 @@
       "bytes": 2585255,
       "sha256": "0d85a9bd1f2bc36137d17d875400d7a5535deb5011c33103394ca4a339fe2180"
     },
+    "downloads\\seasonal_limit_summary.csv": {
+      "bytes": 7619,
+      "sha256": "c62473911fef31f2ba00f262d3e161f2786d43159e20ad57e34833966eceb5e3"
+    },
     "downloads\\seasonal_profiles.csv": {
-      "bytes": 23761,
-      "sha256": "156837427826ffbc0d1fe2c249216f0cbd05d8355e62a7699d71f3ff85517cd9"
+      "bytes": 27959,
+      "sha256": "fba1ef7e9aede8579ba866071529729aff21c13165df723b7e3ee51e224a5f25"
     },
     "downloads\\weather_vre_regimes.csv": {
       "bytes": 366551,
       "sha256": "e945384b80723d5c3cf93a7441a1c046ad9f568d1180c51ecfcc0da2ed66a557"
     },
     "index.html": {
-      "bytes": 8272374,
-      "sha256": "39df6368dfbc31b32a8ec25807ac372b551e0c9cf30d4c9fe961284663d1f0e3"
+      "bytes": 8400787,
+      "sha256": "bf362cc9673160a3932191b3da3885e0057e56250da27bc65f1003b49469375b"
     },
     "METHODOLOGY.md": {
-      "bytes": 5857,
-      "sha256": "f53672c648735fb5d1bc210d0fb5bf9882e94591f36b111b2c99ac571f086ff8"
+      "bytes": 5887,
+      "sha256": "630f1d10fc10f317fb534946198da353ca2bd0290d5632ee2df5a0b2aea64c5b"
     },
     "sources\\noaa_oni_v6_study_context.csv": {
-      "bytes": 4461,
-      "sha256": "b348109ce8693cef33d5b75f30270e93a8a35be74e8284aa76f1a6488f8bc2c9"
+      "bytes": 4505,
+      "sha256": "b2e69a3d6a486ec8d8611a41303b4606b88111e3ad06e741a60406852d9da1be"
     }
   },
   "constraint_coverage": [

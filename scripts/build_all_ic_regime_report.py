@@ -199,6 +199,24 @@ def connector_summary(panel: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
+def seasonal_limit_summaries(panel: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Summarise directional operating limits by pooled season and exact quarter block."""
+    measures = {
+        "intervals": ("time", "size"),
+        "capacity_p10": ("capacity", lambda s: s.quantile(.10)),
+        "capacity_median": ("capacity", "median"),
+        "capacity_p90": ("capacity", lambda s: s.quantile(.90)),
+        "headroom_median": ("headroom", "median"),
+        "restricted_rate": ("restricted", "mean"),
+        "forced_rate": ("forced_direction", "mean"),
+    }
+    common = ["ic", "name", "direction", "direction_label"]
+    pooled = panel.groupby(common + ["season"], as_index=False, observed=True).agg(**measures)
+    blocks = panel.groupby(common + ["season", "season_block"], as_index=False, observed=True).agg(
+        flow_median=("directional_flow", "median"), **measures)
+    return pooled, blocks
+
+
 def regime_tables(panel: pd.DataFrame) -> pd.DataFrame:
     variables = ["temperature_mean", "temperature_max", "humidity_mean", "source_wind", "source_solar",
                  "source_vre", "sink_vre", "vre_difference", "residual_difference",
@@ -543,7 +561,7 @@ def connector_story(name: str, summary: pd.DataFrame, diurnal: pd.DataFrame,
 </section>'''
 
 
-def figures(panel, diurnal, regimes, scatter, family, duid, pressure_regime):
+def figures(panel, diurnal, seasonal, regimes, scatter, family, duid, pressure_regime):
     figs = []
     pooled = diurnal[diurnal.quarter_system.eq("season_pooled")]
     fig = make_subplots(rows=3, cols=2, subplot_titles=[IC_NAMES[x] for x in IC_ORDER], shared_xaxes=True)
@@ -616,6 +634,50 @@ def figures(panel, diurnal, regimes, scatter, family, duid, pressure_regime):
                         labels=dict(color="log(1 + tightening MW-observations)"))
         style_plotly(fig, "DUID tightening pressure within top constraints", 760)
         figs.append((fig, "Generator pressure heatmap", "Pressure uses the active reconstructed leader and direction-normalized −b/a × ΔMW contribution.", "constraint_duid_influence.csv"))
+
+    for direction in ["forward", "reverse"]:
+        fig = make_subplots(rows=3, cols=2, subplot_titles=[IC_NAMES[x] for x in IC_ORDER], shared_xaxes=True)
+        for i, ic in enumerate(IC_ORDER):
+            row, col = i // 2 + 1, i % 2 + 1
+            part = pooled[(pooled.ic.eq(ic)) & pooled.direction.eq(direction)]
+            for season in SEASON_ORDER:
+                use = part[part.season.eq(season)].sort_values("half_hour")
+                fig.add_trace(go.Scatter(
+                    x=use.half_hour, y=use.capacity_median, name=season, legendgroup=season,
+                    showlegend=i == 0, line=dict(color=COLORS[season])), row=row, col=col)
+        style_plotly(fig, f"{direction.title()} directional limits by Australian season", 900)
+        fig.update_xaxes(title="NEM time", tickvals=[0, 12, 24, 36, 47],
+                         ticktext=["00:00", "06:00", "12:00", "18:00", "23:30"])
+        fig.update_yaxes(title="Directional limit MW")
+        figs.append((
+            fig, f"{direction.title()} seasonal limit profiles",
+            "Each line is the median limit at that half-hour across all observations in the named Australian season; reverse capacity is sign-normalised.",
+            "diurnal_profiles.csv"))
+
+    complete = seasonal[seasonal.intervals.ge(4000)].copy()
+    block_order = (panel.groupby("season_block", as_index=False).time.min()
+                   .sort_values("time").season_block.tolist())
+    row_order = [f"{IC_NAMES[ic]} · {direction.title()}" for ic in IC_ORDER for direction in ["forward", "reverse"]]
+    complete["row"] = complete.name + " · " + complete.direction.str.title()
+    median = complete.pivot(index="row", columns="season_block", values="capacity_median").reindex(
+        index=row_order, columns=[x for x in block_order if x in complete.season_block.unique()])
+    p10 = complete.pivot(index="row", columns="season_block", values="capacity_p10").reindex_like(median)
+    p90 = complete.pivot(index="row", columns="season_block", values="capacity_p90").reindex_like(median)
+    restricted = complete.pivot(index="row", columns="season_block", values="restricted_rate").reindex_like(median)
+    custom = np.dstack([p10.values, p90.values, restricted.values])
+    text_values = np.vectorize(lambda x: "—" if pd.isna(x) else f"{x:,.0f}")(median.values)
+    fig = go.Figure(go.Heatmap(
+        z=median.values, x=median.columns, y=median.index, customdata=custom,
+        colorscale="RdBu", zmid=0, text=text_values, texttemplate="%{text}",
+        hovertemplate=("%{y}<br>%{x}<br>median %{z:,.1f} MW<br>"
+                       "P10 %{customdata[0]:,.1f} MW<br>P90 %{customdata[1]:,.1f} MW<br>"
+                       "restricted %{customdata[2]:.1%}<extra></extra>"),
+        colorbar=dict(title="Median limit MW")))
+    style_plotly(fig, "Directional operating limits by Australian seasonal block", 760)
+    figs.append((
+        fig, "Quarter-block directional limits",
+        "Cells show the actual median MW limit for each complete three-month block; hover adds P10, P90 and the restricted-limit share.",
+        "seasonal_profiles.csv"))
     return figs
 
 
@@ -655,7 +717,7 @@ For the active reconstructed leader, movement contribution is `sᵢ × (Pᵢ[t] 
 
 ## Output lineage
 
-`connector_summary.csv`, `diurnal_profiles.csv`, `seasonal_profiles.csv`, `weather_vre_regimes.csv`, `enso_monthly.csv`, `enso_regimes.csv`, `regime_scatter_sample.csv`, `constraint_family_summary.csv`, `constraint_diurnal_setters.csv`, `constraint_season_block_setters.csv`, `constraint_weather_vre_setters.csv`, `constraint_duid_influence.csv`, `constraint_duid_regime_matrix.csv` and `coverage_audit.csv` are generated before report rendering. The build manifest records input and output hashes. Missing observations are never converted to zero.
+`connector_summary.csv`, `diurnal_profiles.csv`, `seasonal_limit_summary.csv`, `seasonal_profiles.csv`, `weather_vre_regimes.csv`, `enso_monthly.csv`, `enso_regimes.csv`, `regime_scatter_sample.csv`, `constraint_family_summary.csv`, `constraint_diurnal_setters.csv`, `constraint_season_block_setters.csv`, `constraint_weather_vre_setters.csv`, `constraint_duid_influence.csv`, `constraint_duid_regime_matrix.csv` and `coverage_audit.csv` are generated before report rendering. The build manifest records input and output hashes. Missing observations are never converted to zero.
 
 ## Rebuild
 
@@ -671,11 +733,7 @@ def build():
     panel = build_panel()
     summary = connector_summary(panel)
     diurnal = diurnal_profiles(panel)
-    seasonal = (panel.groupby(["ic", "name", "direction", "season", "season_block"], as_index=False)
-                .agg(intervals=("time", "size"), flow_median=("directional_flow", "median"),
-                     capacity_median=("capacity", "median"), capacity_p10=("capacity", lambda s: s.quantile(.1)),
-                     headroom_median=("headroom", "median"), restricted_rate=("restricted", "mean"),
-                     forced_rate=("forced_direction", "mean")))
+    seasonal_pooled, seasonal = seasonal_limit_summaries(panel)
     regimes = regime_tables(panel)
     enso_monthly, enso = enso_tables(panel)
     scatter = scatter_sample(panel)
@@ -685,6 +743,7 @@ def build():
 
     outputs = {
         "connector_summary.csv": summary, "diurnal_profiles.csv": diurnal,
+        "seasonal_limit_summary.csv": seasonal_pooled,
         "seasonal_profiles.csv": seasonal, "weather_vre_regimes.csv": regimes,
         "enso_monthly.csv": enso_monthly, "enso_regimes.csv": enso,
         "regime_scatter_sample.csv.gz": scatter,
@@ -707,13 +766,13 @@ def build():
     top_duid = duid.sort_values("total_tightening", ascending=False).iloc[0] if not duid.empty else None
     regime_deltas = regime_delta_table(regimes)
     binders, setters, pressure = constraint_rank_tables(family, duid)
-    figs = figures(panel, diurnal, regimes, scatter, family, duid, pressure_regime)
+    figs = figures(panel, diurnal, seasonal, regimes, scatter, family, duid, pressure_regime)
 
     body = hero("NEM · SIX INTERCONNECTORS · FIVE-MINUTE EVIDENCE",
                 "When interconnectors move —", "and what tightens them",
                 "A descriptive research report on three years of observed interconnector flows and dispatch limits, with quarterly seasonal blocks, weather and renewable regimes, two years of constraint evidence, and generator-level tightening pressure. The analysis is visual and conditional: no effect model is fitted.",
                 ["Flow and limits: Sep 2023–Aug 2026", "Constraints: Sep 2024–Aug 2026", "NOAA ONI v6 ENSO context", "631,296 directional half-hours"])
-    body += '<nav class="anchor-nav"><a href="#executive">Executive analysis</a><a href="#system">System comparison</a><a href="#connectors">Connector chapters</a><a href="#weather">Weather & VRE</a><a href="#constraints">Constraints</a><a href="#duids">DUID pressure</a><a href="#methods">Methods</a></nav>'
+    body += '<nav class="anchor-nav"><a href="#executive">Executive analysis</a><a href="#system">System comparison</a><a href="#quarters">Seasonal limits</a><a href="#connectors">Connector chapters</a><a href="#weather">Weather & VRE</a><a href="#constraints">Constraints</a><a href="#duids">DUID pressure</a><a href="#methods">Methods</a></nav>'
     body += '<section class="metrics">' + metric("Market observations", f"{len(panel)//2:,}", "connector × half-hour rows before directional expansion")
     body += metric("Seasonal blocks", "12", "three complete blocks for each Australian season")
     body += metric("Constraint months", f"{complete_constraints}/144", "completed connector-months at build time")
@@ -746,9 +805,45 @@ def build():
     body += figure_html(plot_div(figs[1][0]), figs[1][1], figs[1][2], "downloads/" + figs[1][3])
     body += '<p>Limit profiles explain only part of the flow shape. On some links the flow turning point occurs close to the daily limit trough, which is consistent with the operating envelope shaping dispatch. Elsewhere the available limit stays well above realised flow, indicating that regional supply-demand conditions are more important than the interconnector ceiling during the median day. The connector chapters quantify those timings individually.</p></section>'
 
-    body += '<section id="quarters"><div class="section-kicker">QUARTERLY SEASON BLOCKS</div><h2>Seasonality is evaluated as complete three-month blocks</h2><p>Australian seasons are treated as quarterly blocks: summer is December–February, autumn March–May, winter June–August and spring September–November. December is assigned to the summer ending in the following year. The heatmap keeps each block separate, so “Winter 2024” and “Winter 2025” are evidence points rather than being collapsed into one climatological average.</p>'
+    seasonal_spread = (seasonal_pooled.groupby(["name", "direction"])
+                       .capacity_median.agg(["min", "max"]).assign(spread=lambda x: x["max"] - x["min"])
+                       .reset_index().sort_values("spread", ascending=False).iloc[0])
+    spread_rows = seasonal_pooled[(seasonal_pooled.name.eq(seasonal_spread["name"])) &
+                                  (seasonal_pooled.direction.eq(seasonal_spread["direction"]))]
+    spread_low = spread_rows.loc[spread_rows.capacity_median.idxmin()]
+    spread_high = spread_rows.loc[spread_rows.capacity_median.idxmax()]
+    body += f'<section id="quarters"><div class="section-kicker">SEASONAL LIMITS · QUARTERLY BLOCKS</div><h2>Directional limits are shown by season and by exact three-month block</h2><p>Australian seasons are treated as quarterly blocks: summer is December–February, autumn March–May, winter June–August and spring September–November. December is assigned to the summer ending in the following year. The pooled-season curves answer whether a repeatable within-day limit shape exists across summers, autumns, winters and springs; the block heatmap then keeps each individual quarter separate so structural changes are not mistaken for climatology.</p><p>Across the pooled seasonal medians, the largest seasonal separation is on {escape(str(seasonal_spread["name"]))} {escape(str(seasonal_spread["direction"]))}: {spread_low.capacity_median:,.1f} MW in {escape(str(spread_low.season))} versus {spread_high.capacity_median:,.1f} MW in {escape(str(spread_high.season))}, a {seasonal_spread.spread:,.1f} MW range. This is a descriptive operating-envelope comparison and can include outages, network configuration and demand conditions that recur within those months.</p>'
     body += figure_html(plot_div(figs[2][0]), figs[2][1], figs[2][2], "downloads/" + figs[2][3])
-    body += '<p>The block comparison reveals structural shifts as well as recurring seasonality. QNI reverse capability reaches its highest complete-block median in Winter 2025 but its lowest in Spring 2025. Basslink changes sign in both directional capacity summaries across the window. Heywood’s forward envelope is strongest in Autumn 2024 and materially lower in Winter 2025, whereas VNI’s forward block range is smaller relative to its scale. These are precisely the variations hidden by a single annual median.</p></section>'
+    body += '<p>The forward-flow heatmap provides dispatch context, but flow is not the same as capability. The next two figures isolate the directional operating limits themselves and show how the median envelope changes over the 48 half-hours of the day within each pooled Australian season.</p>'
+    body += figure_html(plot_div(figs[11][0]), figs[11][1], figs[11][2], "downloads/" + figs[11][3])
+    body += figure_html(plot_div(figs[12][0]), figs[12][1], figs[12][2], "downloads/" + figs[12][3])
+    body += '<h3>Pooled-season limit distribution</h3><p>The table reports the median operating limit together with P10 and P90, so a season with a similar median but a much weaker lower tail remains visible. Restricted share is measured against the connector-direction seasonal reference; forced share is the proportion of intervals where the directional limit is negative.</p>'
+    pooled_show = seasonal_pooled.copy()
+    pooled_show["direction"] = pooled_show.direction.str.title()
+    pooled_show["season"] = pd.Categorical(pooled_show.season, SEASON_ORDER, ordered=True)
+    pooled_show.sort_values(["name", "direction", "season"], inplace=True)
+    body += table_html(pooled_show,
+                       ["name", "direction", "season", "intervals", "capacity_p10", "capacity_median", "capacity_p90", "headroom_median", "restricted_rate", "forced_rate"],
+                       {"intervals": lambda x: f"{int(x):,}", "capacity_p10": lambda x: f"{x:,.1f}",
+                        "capacity_median": lambda x: f"{x:,.1f}", "capacity_p90": lambda x: f"{x:,.1f}",
+                        "headroom_median": lambda x: f"{x:,.1f}", "restricted_rate": lambda x: f"{x:.1%}",
+                        "forced_rate": lambda x: f"{x:.1%}"}, 60)
+    body += '<h3>Exact quarter-block limits</h3><p>Cell labels below are median directional limits in MW. Hovering a cell adds the P10, P90 and restricted-limit share. Only complete blocks with at least 4,000 directional half-hours are shown, so the one-observation September 2026 boundary fragment is excluded.</p>'
+    body += figure_html(plot_div(figs[13][0]), figs[13][1], figs[13][2], "downloads/" + figs[13][3])
+    block_order = (panel.groupby("season_block", as_index=False).time.min().sort_values("time").season_block.tolist())
+    for connector_name in [IC_NAMES[x] for x in IC_ORDER]:
+        block_show = seasonal[(seasonal.name.eq(connector_name)) & seasonal.intervals.ge(4000)].copy()
+        block_show["direction"] = block_show.direction.str.title()
+        block_show["season_block"] = pd.Categorical(block_show.season_block, block_order, ordered=True)
+        block_show.sort_values(["direction", "season_block"], inplace=True)
+        body += f'<details><summary>{escape(connector_name)} — directional limit statistics by quarter block</summary>'
+        body += table_html(block_show,
+                           ["direction", "season_block", "intervals", "capacity_p10", "capacity_median", "capacity_p90", "headroom_median", "restricted_rate", "forced_rate"],
+                           {"intervals": lambda x: f"{int(x):,}", "capacity_p10": lambda x: f"{x:,.1f}",
+                            "capacity_median": lambda x: f"{x:,.1f}", "capacity_p90": lambda x: f"{x:,.1f}",
+                            "headroom_median": lambda x: f"{x:,.1f}", "restricted_rate": lambda x: f"{x:.1%}",
+                            "forced_rate": lambda x: f"{x:.1%}"}, 30) + '</details>'
+    body += '<p>The block comparison reveals structural shifts as well as recurring seasonality. A gap between two winters or two summers is evidence that the network state changed within the same climatological season; it should not be smoothed away as a weather effect. These are realised solved limits, not nominal ratings.</p></section>'
 
     body += '<section id="connectors"><div class="section-kicker">CONNECTOR CHAPTERS</div><h2>Six links, twelve directional operating regimes</h2><p>Each chapter follows the same logic: first the realised transfer and directional envelope, then the within-day pattern, quarterly seasonal blocks, weather/VRE regime separation, and finally the published binding, reconstructed setter and DUID-pressure evidence. “Upper” corresponds to the named forward limit; “lower” corresponds to the reverse-side limit before sign normalization.</p></section>'
     for connector_name in [IC_NAMES[x] for x in IC_ORDER]:

@@ -33,6 +33,31 @@ def test_daily_periods_cover_the_full_day_without_gaps():
         "Overnight", "Morning peak", "Solar period", "Evening peak", "Overnight"]
 
 
+def test_seasonal_limit_summaries_keep_pooled_and_exact_blocks():
+    panel = pd.DataFrame({
+        "time": pd.to_datetime(["2025-01-01", "2025-01-02", "2025-07-01", "2025-07-02"]),
+        "ic": ["NSW1-QLD1"] * 4,
+        "name": ["QNI"] * 4,
+        "direction": ["forward"] * 4,
+        "direction_label": ["NSW → QLD"] * 4,
+        "season": ["Summer", "Summer", "Winter", "Winter"],
+        "season_block": ["Summer 2024–25", "Summer 2024–25", "Winter 2025", "Winter 2025"],
+        "directional_flow": [10.0, 20.0, 30.0, 40.0],
+        "capacity": [100.0, 200.0, 300.0, 400.0],
+        "headroom": [90.0, 180.0, 270.0, 360.0],
+        "restricted": [True, False, False, False],
+        "forced_direction": [False, False, False, False],
+    })
+    pooled, blocks = MODULE.seasonal_limit_summaries(panel)
+    assert set(pooled.season) == {"Summer", "Winter"}
+    assert set(blocks.season_block) == {"Summer 2024–25", "Winter 2025"}
+    summer = pooled[pooled.season.eq("Summer")].iloc[0]
+    assert summer.capacity_median == 150.0
+    assert summer.capacity_p10 == 110.0
+    assert summer.capacity_p90 == 190.0
+    assert summer.restricted_rate == 0.5
+
+
 def test_report_is_observational_not_modelled():
     source = (ROOT / "scripts" / "build_all_ic_regime_report.py").read_text(encoding="utf-8")
     assert "regime_scatter_sample.csv.gz" in source
