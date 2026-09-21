@@ -27,6 +27,10 @@ results/
 !.env.example
 local_exports/
 .codex-remote-attachments/
+reports/all_interconnector_regime_research_20260921/finalization_status.json
+reports/all_interconnector_regime_research_20260921/downloads/constraint_duid_regime_matrix.csv
+reports/all_interconnector_regime_research_20260921/downloads/constraint_family_summary.csv
+reports/all_interconnector_regime_research_20260921/downloads/regime_scatter_sample.csv
 
 # Local visual QA for the published interregional valuation report.
 reports/interregional_valuation_research_20260918/qa/
