@@ -1,6 +1,6 @@
 {
   "report_id": "all_interconnector_regime_research_20260921",
-  "built_at": "2026-09-21T16:42:30.240186+08:00",
+  "built_at": "2026-09-21T19:38:02.478841+08:00",
   "inputs": {
     "data\\processed\\targets.parquet": {
       "bytes": 16074351,
@@ -13,6 +13,10 @@
     "data\\processed\\weather_30min.parquet": {
       "bytes": 5106632,
       "sha256": "80c800a6f7649d5e3e858e16d55566f1014acea3f3bd2af52c6bddc7eac3c97a"
+    },
+    "reports\\all_interconnector_regime_research_20260921\\sources\\noaa_oni_v6_study_context.csv": {
+      "bytes": 4461,
+      "sha256": "b348109ce8693cef33d5b75f30270e93a8a35be74e8284aa76f1a6488f8bc2c9"
     }
   },
   "outputs": {
@@ -20,17 +24,29 @@
       "bytes": 2980,
       "sha256": "89871937b8a0e156e2e9651a376e46aa29a4e0faee5b6ada9f9bd079071f8a28"
     },
+    "downloads\\constraint_diurnal_setters.csv.gz": {
+      "bytes": 3552,
+      "sha256": "366a4d3a159d6de99691e4050ee97d7804a117a023bdf8b7a4d791e373bb4e54"
+    },
     "downloads\\constraint_duid_influence.csv": {
-      "bytes": 1469443,
-      "sha256": "7668c3ab19e81a3df75466bbd78cf91460b880dc32a45148a0a2ef942c0f6da5"
+      "bytes": 1469494,
+      "sha256": "8d3e3d87083e4c54de6408f1cbc639144decef1e32e41863ef537df27bbb0875"
     },
     "downloads\\constraint_duid_regime_matrix.csv.gz": {
-      "bytes": 21030923,
-      "sha256": "025642ce9d928084f0b1f78a8e3ae4d1c4eba8dc5da72c9a96a5d3bc6f86b3ac"
+      "bytes": 21031183,
+      "sha256": "61c03b2ae5a634808c25e83443c4d9b9600f832a9f543b56feca825e045f71a0"
     },
     "downloads\\constraint_family_summary.csv.gz": {
-      "bytes": 747040,
-      "sha256": "5db58a60156efbe2e16597d9a2181f47f1baec0f54d3c90c539e3bd441edc592"
+      "bytes": 747047,
+      "sha256": "bf86a43bcce6c52cabdeefcd234b9189ef32c25fc6a8707579ef7a1937e37d6f"
+    },
+    "downloads\\constraint_season_block_setters.csv.gz": {
+      "bytes": 19868,
+      "sha256": "a4868fb27aac6d899c2dabc7073433507665a8023eda46eb0cbdc1c6d41fe8d1"
+    },
+    "downloads\\constraint_weather_vre_setters.csv.gz": {
+      "bytes": 17503,
+      "sha256": "40452d3006dd688d01f380997c1f4c41e53ff5a42e9b51d1f000b803c78ab916"
     },
     "downloads\\coverage_audit.csv": {
       "bytes": 246,
@@ -40,9 +56,17 @@
       "bytes": 4130789,
       "sha256": "f9b4aea19d3399e258cb1b7ee1ff3fb7124d8b594bd933dda77be60db86fa2ca"
     },
+    "downloads\\enso_monthly.csv": {
+      "bytes": 5358,
+      "sha256": "875258c4d2cfcc7aab15d4d017dc88e8d1301d6c8896f47728e9b73b94cd1dab"
+    },
+    "downloads\\enso_regimes.csv": {
+      "bytes": 4084,
+      "sha256": "18ea4e8283d939bcaf359dd134d4fb95f163f06e3be534244525e22bfc38b131"
+    },
     "downloads\\regime_scatter_sample.csv.gz": {
-      "bytes": 2585248,
-      "sha256": "39cce0e5acec7da7ef90b8d44fe715df7c557167777e9999466323b883d73311"
+      "bytes": 2585255,
+      "sha256": "0d85a9bd1f2bc36137d17d875400d7a5535deb5011c33103394ca4a339fe2180"
     },
     "downloads\\seasonal_profiles.csv": {
       "bytes": 23761,
@@ -53,12 +77,16 @@
       "sha256": "e945384b80723d5c3cf93a7441a1c046ad9f568d1180c51ecfcc0da2ed66a557"
     },
     "index.html": {
-      "bytes": 8135926,
-      "sha256": "51ea08e7bb72459c6c7a859c396cf74c76bf2e32dbd46850d824d8d5257a6a95"
+      "bytes": 8272374,
+      "sha256": "39df6368dfbc31b32a8ec25807ac372b551e0c9cf30d4c9fe961284663d1f0e3"
     },
     "METHODOLOGY.md": {
-      "bytes": 4371,
-      "sha256": "d115e14f0dae6ab42dda2a69fd0cc6d1ded62c4598962974f510c90de5a39ecd"
+      "bytes": 5857,
+      "sha256": "f53672c648735fb5d1bc210d0fb5bf9882e94591f36b111b2c99ac571f086ff8"
+    },
+    "sources\\noaa_oni_v6_study_context.csv": {
+      "bytes": 4461,
+      "sha256": "b348109ce8693cef33d5b75f30270e93a8a35be74e8284aa76f1a6488f8bc2c9"
     }
   },
   "constraint_coverage": [
