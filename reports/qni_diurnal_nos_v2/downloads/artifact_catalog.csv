@@ -8,4 +8,4 @@ nos_models,NOS point models,Source-common outage-feature ablations and explanati
 nos_risk,NOS risk,Scheduled-outage contraction-risk challengers,318,10.62
 refinements,Post-selection refinements,Training-window and lead-conditioned pressure tests,144,28.85
 final,Trained bundles,"Frozen research bundles, schemas, parameters and reload checks",65,0.92
-report,Reports,"Human-facing HTML pages, downloads, manifests and QA evidence",21,132.97
+report,Reports,"Human-facing HTML pages, downloads, manifests and QA evidence",22,92.76

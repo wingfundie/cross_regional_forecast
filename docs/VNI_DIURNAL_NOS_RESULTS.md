@@ -29,6 +29,17 @@ MAPE is reported only where `|actual| >= 50 MW`; MAE is the optimization and mod
 
 The comprehensive HTML report also includes the standard export/import targets, fixed-split sensitivity, delivery-period results, all 208 evaluated cells, and full 336-step curve diagnostics.
 
+## Rolling prediction-interval coverage
+
+Across the twelve rolling monthly folds from September 2025 through August 2026, the delivery-period-calibrated nominal 80% interval covered **74.14%** of outcomes and the nominal 95% interval covered **90.53%**. Both intervals under-cover, so the empirical uncertainty bands are too narrow for their stated nominal levels. These figures are row-weighted across four targets and four lead bands (910,032 forecast rows). Target-level and pooled-calibration results are published in [`research_interval_coverage.csv`](../reports/vni_diurnal_nos_v2/downloads/research_interval_coverage.csv).
+
+| Calibration | Nominal coverage | Empirical coverage | Coverage gap | Mean width | Forecast rows |
+|---|---:|---:|---:|---:|---:|
+| Delivery period | 80% | 74.14% | -5.86 pp | 668.4 MW | 910,032 |
+| Delivery period | 95% | 90.53% | -4.47 pp | 1,117.9 MW | 910,032 |
+| Pooled | 80% | 76.14% | -3.86 pp | 680.2 MW | 910,032 |
+| Pooled | 95% | 92.35% | -2.65 pp | 1,200.2 MW | 910,032 |
+
 ## Feature evidence and fundamentals
 
 For the boosted primary cells, calendar perturbation causes the largest mean MAE degradation on export (149.6–170.5 MW). Observed history is the largest group on import (55.7–58.1 MW) and the second-largest group on export (62.5–65.9 MW). Horizon contributes roughly 9.9–18.7 MW. Network state and aggregate generator pressure contribute roughly 1.6–2.7 MW each after the stronger correlated groups are present.

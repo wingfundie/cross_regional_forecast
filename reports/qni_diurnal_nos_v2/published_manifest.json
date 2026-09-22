@@ -6,13 +6,13 @@
   "files": [
     {
       "path": "reports/qni_diurnal_nos_v2/index.html",
-      "bytes": 11882,
-      "sha256": "e8c20ad782d421c873bafc851559e6331b72d08de709603a3ad9a41a4bcbfc2a"
+      "bytes": 12456,
+      "sha256": "861571d00105128a432f70b81521d637a2281fc7aad6466f5757f0cb6d684299"
     },
     {
       "path": "reports/qni_diurnal_nos_v2/qni_research_paper.html",
-      "bytes": 4863294,
-      "sha256": "49918d22375b1b4bee643054fb59c26acdcfdf1fdec1ba88618c7f1335e9284a"
+      "bytes": 4865157,
+      "sha256": "4559ab6df9d2305e5628b918174122dc81bf9df5d6eddd15fbf9851dfe4519d2"
     },
     {
       "path": "reports/qni_diurnal_nos_v2/pages/01_model_performance.html",
@@ -61,8 +61,8 @@
     },
     {
       "path": "reports/qni_diurnal_nos_v2/downloads/artifact_catalog.csv",
-      "bytes": 967,
-      "sha256": "32ee5893bc62fddace46f0c6c3e33813b3dc40bd5da248195d3e6078fd5728b7"
+      "bytes": 966,
+      "sha256": "339c74b014eb7d1139dfe8ca4bfe676c20cecf47df3d362e32257984124854da"
     },
     {
       "path": "reports/qni_diurnal_nos_v2/downloads/source_build.json",
@@ -80,6 +80,11 @@
       "sha256": "738cecff9bd3f6f6b8e730b841a5e1b035b0d07547790bb34a91496d13f4969c"
     },
     {
+      "path": "reports/qni_diurnal_nos_v2/downloads/research_interval_coverage.csv",
+      "bytes": 2545,
+      "sha256": "287308ee7c3b6e79aaee33cd3ce6aef624db57002a3502029b60989c16ef1d8a"
+    },
+    {
       "path": "reports/qni_diurnal_nos_v2/downloads/research_feature_importance.csv",
       "bytes": 570,
       "sha256": "3475dc1b25f9fcfc508d88a9d9c009a028c97c4e53490ac2c2ee0909b13a6f1b"
@@ -91,8 +96,8 @@
     },
     {
       "path": "reports/qni_diurnal_nos_v2/downloads/research_paper_build.json",
-      "bytes": 65937,
-      "sha256": "e2c54d1c9278aaca968308dd5eec0a8b6eefec978cd2dc986f70c332f006ff86"
+      "bytes": 66049,
+      "sha256": "d23291730feb149e64a7246c56dbac1473f1b5baa30980809cfa4a12f9fe42e5"
     }
   ]
 }

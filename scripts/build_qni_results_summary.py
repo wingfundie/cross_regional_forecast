@@ -34,6 +34,7 @@ def nos_scores() -> pd.DataFrame:
 
 def build() -> Path:
     performance=pd.read_csv(RUN/'report/downloads/research_performance.csv')
+    interval_coverage=pd.read_csv(RUN/'report/downloads/research_interval_coverage.csv')
     tight=performance.loc[performance.target.isin(['export_tight','import_tight'])].copy()
     tight['Target']=tight.target.map({'export_tight':'Export minimum','import_tight':'Import minimum'})
     tight['Band']=tight.band.map({0:'0.5–6 h',1:'6.5–24 h',2:'24.5–72 h',3:'72.5–168 h'})
@@ -61,6 +62,18 @@ def build() -> Path:
     top['MAE degradation (MW)']=top.mae_degradation.round(2)
     primary=display.loc[display.Band.eq('0.5–6 h')].set_index('Target')
     export=primary.loc['Export minimum']; imported=primary.loc['Import minimum']
+    coverage_display=interval_coverage.loc[
+        interval_coverage.scope.eq('overall'),
+        ['calibration_mode','nominal_coverage','empirical_coverage','coverage_gap','mean_width_mw','observations'],
+    ].copy()
+    coverage_display['Calibration']=coverage_display.calibration_mode.map({'period':'Delivery period','pooled':'Pooled'})
+    coverage_display['Nominal coverage (%)']=(100*coverage_display.nominal_coverage).round(0).astype(int)
+    coverage_display['Empirical coverage (%)']=(100*coverage_display.empirical_coverage).round(2)
+    coverage_display['Coverage gap (pp)']=(100*coverage_display.coverage_gap).round(2)
+    coverage_display['Mean width (MW)']=coverage_display.mean_width_mw.round(1)
+    coverage_display['Forecast rows']=coverage_display.observations.astype(int)
+    coverage_display=coverage_display[['Calibration','Nominal coverage (%)','Empirical coverage (%)','Coverage gap (pp)','Mean width (MW)','Forecast rows']]
+    period_coverage=interval_coverage.query("scope == 'overall' and calibration_mode == 'period'").set_index('nominal_coverage')
 
     text=f'''# QNI diurnal and NOS modelling results
 
@@ -77,6 +90,12 @@ Scheduled NOS point-model skill is evaluated on the source-common population and
 MAE is the selection objective. MAPE is assessment-only and is reported where `|actual| ≥ 50 MW`.
 
 {display.to_markdown(index=False)}
+
+## Rolling prediction-interval coverage
+
+Across the twelve rolling monthly folds, delivery-period-calibrated empirical coverage was **{100*period_coverage.loc[0.8,'empirical_coverage']:.2f}%** for the nominal 80% interval and **{100*period_coverage.loc[0.95,'empirical_coverage']:.2f}%** for the nominal 95% interval. Both intervals under-cover, so the empirical uncertainty bands are too narrow for their stated nominal levels. The figures are row-weighted across four targets and four lead bands.
+
+{coverage_display.to_markdown(index=False)}
 
 ## Paired statistical evidence
 

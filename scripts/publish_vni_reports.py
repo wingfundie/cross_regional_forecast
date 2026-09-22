@@ -25,6 +25,7 @@ def report_files(slug: str):
     "downloads/source_build.json",
     "downloads/nos_impact_build.json",
     "downloads/research_performance.csv",
+    "downloads/research_interval_coverage.csv",
     "downloads/research_feature_importance.csv",
     "downloads/research_shap_importance.csv",
     "downloads/research_paper_build.json",
@@ -91,7 +92,8 @@ def publish(name='VNI', campaign='vni_diurnal_nos_v2', build_script='build_vni_r
         f"Open [`{slug}_research_paper.html`]({slug}_research_paper.html) for the full research paper or "
         "[`index.html`](index.html) for the report centre. The focused pages split model performance, "
         "the model explorer, feature fundamentals, NOS outages, risk/refinements and the trained-model handoff. "
-        "`full_run/` contains the complete report and matched NOS impact report.\n\n"
+        "`full_run/` contains the complete report and matched NOS impact report. The downloads include the "
+        "row-weighted rolling interval-coverage summary without publishing raw forecast rows.\n\n"
         "These files are rendered from the completed cached run. Rebuild locally with "
         f"`python scripts/{build_script}`, then refresh this tracked copy with "
         f"`python scripts/{publish_script}`.\n",

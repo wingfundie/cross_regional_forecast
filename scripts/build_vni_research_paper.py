@@ -158,6 +158,60 @@ def _load_point_results():
     )
 
 
+def _load_interval_coverage() -> tuple[pd.DataFrame, list[Path]]:
+    """Aggregate rolling interval diagnostics without publishing row-level forecasts."""
+    rows = []
+    sources = []
+    for result_path in sorted((RUN / "diurnal").glob("*/band*/*/result.json")):
+        result = json.loads(result_path.read_text(encoding="utf-8"))
+        if result["fold"]["protocol"] != "rolling":
+            continue
+        sources.append(result_path)
+        selected = next(score for score in result["scores"] if score["selected"])
+        for interval in result["intervals"]:
+            rows.append(
+                {
+                    "fold": result["fold"]["name"],
+                    "target": result["target"],
+                    "band": int(result["band"]),
+                    "calibration_mode": interval["mode"],
+                    "nominal_coverage": float(interval["nominal"]),
+                    "observations": int(selected["n"]),
+                    "empirical_coverage": float(interval["coverage"]),
+                    "mean_width_mw": float(interval["width"]),
+                    "mean_interval_score": float(interval["interval_score"]),
+                }
+            )
+
+    detail = pd.DataFrame(rows)
+    summaries = []
+    scopes = [("overall", "all targets", detail)]
+    scopes.extend(("target", target, local) for target, local in detail.groupby("target", sort=True))
+    for scope, target, scoped in scopes:
+        for (mode, nominal), local in scoped.groupby(["calibration_mode", "nominal_coverage"], sort=True):
+            weights = local.observations.to_numpy(dtype=float)
+            summaries.append(
+                {
+                    "scope": scope,
+                    "target": target,
+                    "calibration_mode": mode,
+                    "nominal_coverage": nominal,
+                    "empirical_coverage": float(np.average(local.empirical_coverage, weights=weights)),
+                    "coverage_gap": float(np.average(local.empirical_coverage, weights=weights) - nominal),
+                    "mean_width_mw": float(np.average(local.mean_width_mw, weights=weights)),
+                    "mean_interval_score": float(np.average(local.mean_interval_score, weights=weights)),
+                    "observations": int(local.observations.sum()),
+                    "cells": int(len(local)),
+                    "rolling_folds": int(local.fold.nunique()),
+                }
+            )
+    summary = pd.DataFrame(summaries).sort_values(
+        ["scope", "target", "calibration_mode", "nominal_coverage"],
+        ascending=[True, True, True, False],
+    )
+    return summary, sources
+
+
 def _load_explanations():
     importance, shap_rows, sources = [], [], []
     for result_path in sorted((RUN / "diurnal").glob("*/band0/*_tight/result.json")):
@@ -341,6 +395,7 @@ def build(config_path: str = CONFIG_PATH) -> Path:
     OUTPUT.mkdir(parents=True, exist_ok=True)
     (OUTPUT / "downloads").mkdir(parents=True, exist_ok=True)
     performance, periods_frame, leaderboard, fixed, selections, combined, point_sources = _load_point_results()
+    interval_coverage, interval_sources = _load_interval_coverage()
     importance, shap_frame, explanation_sources = _load_explanations()
     nos, nos_importance, nos_sources = _load_nos_results()
     refinements, refinement_sources = _load_refinements()
@@ -355,6 +410,9 @@ def build(config_path: str = CONFIG_PATH) -> Path:
     imported = performance.query("target == 'import_tight' and band == 0").iloc[0]
     nos_export = nos.query("target == 'export_tight'").iloc[0]
     nos_import = nos.query("target == 'import_tight'").iloc[0]
+    period_coverage = interval_coverage.query("scope == 'overall' and calibration_mode == 'period'").set_index("nominal_coverage")
+    period_coverage80 = period_coverage.loc[0.8]
+    period_coverage95 = period_coverage.loc[0.95]
 
     primary_winners = selections.loc[selections.Band.eq(0) & selections.Target.isin(['export_tight','import_tight']), 'Winner']
     primary_family = primary_winners.str.split('_').str[0].mode().iat[0]
@@ -436,6 +494,17 @@ def build(config_path: str = CONFIG_PATH) -> Path:
     paper_performance["Skill vs T0"] = paper_performance.skill_t0.map(lambda x: f"{100*x:.1f}%")
     paper_performance[">100 MW overstatement"] = paper_performance.over100.map(lambda x: f"{100*x:.1f}%")
     body += '<h3>Comprehensive rolling results</h3>' + _table(paper_performance[["Target", "Lead band", "MAPE ≥50 (%)", "MAPE coverage", "MAE (MW)", "Persistence MAE", "Shared T0 MAE", "Skill vs persistence", "Skill vs T0", ">100 MW overstatement"]])
+
+    interval_display = interval_coverage.query("scope == 'overall'").copy()
+    interval_display["Calibration"] = interval_display.calibration_mode.map({"period": "Delivery period", "pooled": "Pooled"})
+    interval_display["Nominal coverage"] = interval_display.nominal_coverage.map(lambda x: f"{100*x:.0f}%")
+    interval_display["Empirical coverage"] = interval_display.empirical_coverage.map(lambda x: f"{100*x:.2f}%")
+    interval_display["Coverage gap"] = interval_display.coverage_gap.map(lambda x: f"{100*x:+.2f} pp")
+    interval_display["Mean width (MW)"] = interval_display.mean_width_mw.map(lambda x: f"{x:.1f}")
+    interval_display["Forecast rows"] = interval_display.observations.map(lambda x: f"{x:,}")
+    body += f'''<h3>Rolling prediction-interval coverage</h3>
+    <p>Across twelve rolling monthly folds, the delivery-period-calibrated nominal 80% interval covered <strong>{100*period_coverage80.empirical_coverage:.2f}%</strong> of outcomes and the nominal 95% interval covered <strong>{100*period_coverage95.empirical_coverage:.2f}%</strong>. Both intervals under-cover, so the empirical uncertainty bands are too narrow for their stated nominal levels. Coverage is row-weighted across four targets and four lead bands; the downloadable table also reports target-level results.</p>'''
+    body += _table(interval_display[["Calibration", "Nominal coverage", "Empirical coverage", "Coverage gap", "Mean width (MW)", "Forecast rows"]])
 
     # Primary model ladder.
     ladder_fig = make_subplots(rows=1, cols=2, subplot_titles=("Minimum export", "Minimum import"), shared_yaxes=True)
@@ -572,9 +641,10 @@ def build(config_path: str = CONFIG_PATH) -> Path:
     output_path = OUTPUT / f"{slug}_research_paper.html"
     output_path.write_text(render_page(f"{name} time-of-delivery forecasting research paper", body), encoding="utf-8")
     performance.to_csv(OUTPUT / "downloads/research_performance.csv", index=False)
+    interval_coverage.to_csv(OUTPUT / "downloads/research_interval_coverage.csv", index=False)
     importance.to_csv(OUTPUT / "downloads/research_feature_importance.csv", index=False)
     shap_frame.to_csv(OUTPUT / "downloads/research_shap_importance.csv", index=False)
-    all_sources = sorted(set(point_sources + explanation_sources + nos_sources + refinement_sources + bundle_sources + curve_sources + [statistics_path, impact_path]))
+    all_sources = sorted(set(point_sources + interval_sources + explanation_sources + nos_sources + refinement_sources + bundle_sources + curve_sources + [statistics_path, impact_path]))
     manifest = {
         "title": f"{name} time-of-delivery models and scheduled network-outage evidence",
         "generator": str(Path(__file__).relative_to(ROOT)).replace("\\", "/"),
@@ -588,6 +658,8 @@ def build(config_path: str = CONFIG_PATH) -> Path:
             "import_tight_skill_vs_persistence": imported.skill_persistence,
             "nos_export_skill": nos_export.skill,
             "nos_import_skill": nos_import.skill,
+            "period_interval_coverage_80": period_coverage80.empirical_coverage,
+            "period_interval_coverage_95": period_coverage95.empirical_coverage,
         },
     }
     (OUTPUT / "downloads/research_paper_build.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
