@@ -23,6 +23,17 @@ MAE is the selection objective. MAPE is assessment-only and is reported where `|
 | Import minimum | 24.5–72 h  |               274.8 |                   94.2 |                  270.6 |         258.7 |                       -1.6 |              -6.2 |
 | Import minimum | 72.5–168 h |               283.7 |                   92.8 |                  288.1 |         273.4 |                        1.5 |              -3.8 |
 
+## Rolling prediction-interval coverage
+
+Across the twelve rolling monthly folds, delivery-period-calibrated empirical coverage was **71.93%** for the nominal 80% interval and **87.41%** for the nominal 95% interval. Both intervals under-cover, so the empirical uncertainty bands are too narrow for their stated nominal levels. The figures are row-weighted across four targets and four lead bands.
+
+| Calibration     |   Nominal coverage (%) |   Empirical coverage (%) |   Coverage gap (pp) |   Mean width (MW) |   Forecast rows |
+|:----------------|-----------------------:|-------------------------:|--------------------:|------------------:|----------------:|
+| Delivery period |                     95 |                    87.41 |               -7.59 |             951.8 |          910032 |
+| Delivery period |                     80 |                    71.93 |               -8.07 |             565.3 |          910032 |
+| Pooled          |                     95 |                    89.91 |               -5.09 |            1002   |          910032 |
+| Pooled          |                     80 |                    73.77 |               -6.23 |             577.2 |          910032 |
+
 ## Paired statistical evidence
 
 Positive improvement favors the selected policy. Confidence intervals use paired seven-day moving blocks; the run also preserves fourteen-day results and 90% model-confidence sets in `statistics.json`.

@@ -1,8 +1,8 @@
 {
-  "title": "VNI time-of-delivery models and scheduled network-outage evidence",
+  "title": "Selected policy time-of-delivery models and scheduled network-outage evidence",
   "generator": "scripts/build_vni_research_paper.py",
-  "generator_sha256": "3e801fcfb11918a16494d67717a7c4e4e2bba3f1e130d53308ab103d05611bdf",
-  "report_sha256": "74e29884c102a9511510e9f060350ce7261420b242cd1a96c670afdefe1e711f",
+  "generator_sha256": "b331c7ce7f5c4faa717b08eefd0e4938ebd2bbcbecafbfda51dbb17ac15e8b07",
+  "report_sha256": "4a5609e7ed6e22f21f334d2db33ecf4ef1d3e4048d3d5cbb85ee25d31b85b18a",
   "sources": [
     {
       "path": "data/forecast_experiments/vni_diurnal_nos_v2/curves/2026-08/export_tight/predictions.parquet",
@@ -1271,6 +1271,8 @@
     "export_tight_skill_vs_persistence": 0.3323508746631104,
     "import_tight_skill_vs_persistence": 0.17131280128000193,
     "nos_export_skill": 0.0038843778292406705,
-    "nos_import_skill": -0.006261162450906577
+    "nos_import_skill": -0.006261162450906577,
+    "period_interval_coverage_80": 0.7413574467711026,
+    "period_interval_coverage_95": 0.9052626720818608
   }
 }

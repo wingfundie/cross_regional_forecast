@@ -6,53 +6,53 @@
   "files": [
     {
       "path": "reports/vni_diurnal_nos_v2/index.html",
-      "bytes": 11885,
-      "sha256": "85cd7f99baee12058606c11680a97449aeffbbe4e508e4fd293630a0a8aca297"
+      "bytes": 12456,
+      "sha256": "bfba2c12b40b57ac60f8a90b82a7e7f476cf586bb1cf8879994b3516474e2b78"
     },
     {
       "path": "reports/vni_diurnal_nos_v2/vni_research_paper.html",
-      "bytes": 4864101,
-      "sha256": "fb5508a683609fb52f69fd0b2d833e2daa492e5233166e17d5068a14feb68f40"
+      "bytes": 4865594,
+      "sha256": "6f9e38eafcaa5df469eebd84c93b0d476a1fb8258e6fee5cd60f1386a0303975"
     },
     {
       "path": "reports/vni_diurnal_nos_v2/pages/01_model_performance.html",
-      "bytes": 6381703,
-      "sha256": "d42c90f3fc592e7e7528dd1d1b2e738e2cf318031eae0232c9b0364054815d01"
+      "bytes": 6381701,
+      "sha256": "3347a6073b84957e1eb3b96b8fc0d597f490fc48941ec1069e2de3636cdbe1d3"
     },
     {
       "path": "reports/vni_diurnal_nos_v2/pages/02_model_explorer.html",
-      "bytes": 30820858,
-      "sha256": "48f6e9596ac17e2a875d27a625a484791c33a5e0f9c64212655aa3b82ddc39c7"
+      "bytes": 30820856,
+      "sha256": "340f528ce85109ff895d3c3c6934229f9d2acf3ceba82da31882e87104d3d614"
     },
     {
       "path": "reports/vni_diurnal_nos_v2/pages/03_feature_fundamentals.html",
-      "bytes": 23015,
-      "sha256": "77336a045371943b8aebbc7f2833093efc0d9619c3b77f50bb32253069386b0c"
+      "bytes": 23013,
+      "sha256": "98fa64213becf3c71b3e0fcf2586dbe74ac95322ae586e88f6561688fb18304e"
     },
     {
       "path": "reports/vni_diurnal_nos_v2/pages/04_nos_outages.html",
-      "bytes": 7205545,
-      "sha256": "f99a300e47dce613d4bbc612ff867e72e82dd1bd1c5674c89bd0e2eb431750f2"
+      "bytes": 7205543,
+      "sha256": "529e365e0cedc0f519bcb8a714be803abf9234d901a99e5df9d42cc86c7d28e6"
     },
     {
       "path": "reports/vni_diurnal_nos_v2/pages/05_risk_and_refinements.html",
-      "bytes": 5896524,
-      "sha256": "13f2d2abbb57f012a8f627376b437713575c7f6873f50376fa9ce27b35e7fc7d"
+      "bytes": 5896602,
+      "sha256": "fe6799a311b70781590891e7ee4ff22abc4737f502d7c29597d4702e5e193dc2"
     },
     {
       "path": "reports/vni_diurnal_nos_v2/pages/06_model_handoff.html",
-      "bytes": 42866,
-      "sha256": "ec33ef0a91d3542c632052e6a127041e30e66ccf96ce0a77757fd9add540d6f6"
+      "bytes": 42864,
+      "sha256": "119a840da0f5b716440f8b4c6df563f1566bba3812f2582d906f2091182d45d8"
     },
     {
       "path": "reports/vni_diurnal_nos_v2/full_run/vni_diurnal_nos_model_report.html",
-      "bytes": 37527412,
-      "sha256": "f91d261f2ad3f38f847da0973fa0792af7bfea9b29b7abdd13f4dbcdac353d39"
+      "bytes": 37527503,
+      "sha256": "29099812ced1e52528d58789ad2a0d2fe84a12e2d7b6b9a2389cd36b27cc9053"
     },
     {
       "path": "reports/vni_diurnal_nos_v2/full_run/nos_outage_impact_analysis.html",
       "bytes": 4709025,
-      "sha256": "ddb3f8bd683918eaaf67eb8f7f6489f0bfb5d52a78b57b2576124c3944ad8f89"
+      "sha256": "f0157975fea75058e7385fc59966675302923667cc1e78378ead64c918b9617c"
     },
     {
       "path": "reports/vni_diurnal_nos_v2/downloads/model_results.csv",
@@ -62,22 +62,27 @@
     {
       "path": "reports/vni_diurnal_nos_v2/downloads/artifact_catalog.csv",
       "bytes": 963,
-      "sha256": "ed1a405614c731e8f778352307a328c06b77e945ae7dd4b5eb549099d74c6932"
+      "sha256": "309777da20c93109c1a06547ab084706c4c3ddaba09bab26c64da7571c09ee13"
     },
     {
       "path": "reports/vni_diurnal_nos_v2/downloads/source_build.json",
       "bytes": 67703,
-      "sha256": "84d939a333c5507772f73ba65f49de7fcd4f283519f082752c7ef0083e982bfc"
+      "sha256": "759bbad7b25ce3b5f8e7ed3991076aa68cedaff8d2b4a497fe7b0e9155a60b1f"
     },
     {
       "path": "reports/vni_diurnal_nos_v2/downloads/nos_impact_build.json",
       "bytes": 362,
-      "sha256": "0dcc596e8c84077ac6803efa83454506de3efe07924e8e7ba59b2e7814b5abe4"
+      "sha256": "a1c893f7e910afd00cad26799f45776b68f05d799d1dd6c4f962818b7c8ffd00"
     },
     {
       "path": "reports/vni_diurnal_nos_v2/downloads/research_performance.csv",
       "bytes": 3159,
       "sha256": "83f09fa1e18e35a23abac2c3caa0bc6207410fd4ad73ff0ee1893011d516d761"
+    },
+    {
+      "path": "reports/vni_diurnal_nos_v2/downloads/research_interval_coverage.csv",
+      "bytes": 2558,
+      "sha256": "8c31dbc129f15cef206d80be672d1ddb44455fc894758edc30a35a615cbdce1f"
     },
     {
       "path": "reports/vni_diurnal_nos_v2/downloads/research_feature_importance.csv",
@@ -91,8 +96,8 @@
     },
     {
       "path": "reports/vni_diurnal_nos_v2/downloads/research_paper_build.json",
-      "bytes": 65924,
-      "sha256": "01e44a014baeb07b4e835b8c96217a086268cb5721132c5f8c72976008d9d403"
+      "bytes": 66048,
+      "sha256": "cefee46345aafe86cc2013beb03d276821dc86c016e1b89d3b57d7c6c00c6dcb"
     }
   ]
 }

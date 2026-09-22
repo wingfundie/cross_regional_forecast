@@ -202,8 +202,10 @@ def _index(rows: list[dict], pages: list[Path]) -> Path:
             f'<h3><a href="pages/{filename}">{title}</a></h3><p>{description}</p></article>'
         )
     performance=pd.read_csv(DOWNLOADS/'research_performance.csv')
+    interval_coverage=pd.read_csv(DOWNLOADS/'research_interval_coverage.csv')
     export=performance.query("target == 'export_tight' and band == 0").iloc[0]
     imported=performance.query("target == 'import_tight' and band == 0").iloc[0]
+    coverage80=interval_coverage.query("scope == 'overall' and calibration_mode == 'period' and nominal_coverage == 0.8").iloc[0]
     completed=len(list((RUN/'diurnal').glob('*/band*/*/result.json')))
     body = hero(
         f"{CONNECTOR['name']} forecasting research",
@@ -217,6 +219,7 @@ def _index(rows: list[dict], pages: list[Path]) -> Path:
     body += metric("Point-model policy", "Target × band", "Frozen MAE selection; see model handoff")
     body += metric("Export tight skill", f"{100*export.skill_persistence:.1f}%", "Band 0 versus persistence")
     body += metric("Import tight skill", f"{100*imported.skill_persistence:.1f}%", "Band 0 versus persistence")
+    body += metric("80% interval coverage", f"{100*coverage80.empirical_coverage:.1f}%", "Delivery-period calibrated; rolling OOS")
     body += metric("NOS point verdict", "Challenger", "Source-common ablations reported separately")
     body += "</section>"
     body += '<section><h2>Choose a report</h2><div class="findings">' + "".join(cards) + "</div></section>"
@@ -227,6 +230,7 @@ def _index(rows: list[dict], pages: list[Path]) -> Path:
     body += '<a href="full_run/nos_outage_impact_analysis.html">open the matched NOS impact report</a>. '
     body += 'These retain every chart, table, search history, feature-importance result and SHAP decomposition.</div>'
     body += '<p>Downloads: <a href="downloads/model_results.csv">all model results</a> · '
+    body += '<a href="downloads/research_interval_coverage.csv">interval coverage</a> · '
     body += '<a href="downloads/artifact_catalog.csv">artifact catalogue</a> · '
     body += '<a href="downloads/source_build.json">source build manifest</a> · '
     body += '<a href="report_suite_manifest.json">report-suite manifest</a>.</p></section>'

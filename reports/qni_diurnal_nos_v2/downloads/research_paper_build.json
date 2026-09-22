@@ -1,8 +1,8 @@
 {
   "title": "Selected policy time-of-delivery models and scheduled network-outage evidence",
   "generator": "scripts/build_vni_research_paper.py",
-  "generator_sha256": "e13b37305ead8e3148c179dd50a3b4362fce9c62c6c762bbb345a6a692ed3cb8",
-  "report_sha256": "6652877d1dc52fe5a9f0832f7125f28946e1c9e4999b624e47090e4820e9d8f1",
+  "generator_sha256": "b331c7ce7f5c4faa717b08eefd0e4938ebd2bbcbecafbfda51dbb17ac15e8b07",
+  "report_sha256": "336f33a2177699ada706f778bdc9ba9e49e8a2169132bb5e1a5c4b67d5dbdca2",
   "sources": [
     {
       "path": "data/forecast_experiments/qni_diurnal_nos_v2/curves/2026-08/export_tight/predictions.parquet",
@@ -1271,6 +1271,8 @@
     "export_tight_skill_vs_persistence": 0.046204315318609024,
     "import_tight_skill_vs_persistence": -0.08712978258536341,
     "nos_export_skill": 0.0102712883727486,
-    "nos_import_skill": -0.003963814544218236
+    "nos_import_skill": -0.003963814544218236,
+    "period_interval_coverage_80": 0.7193296499463755,
+    "period_interval_coverage_95": 0.8740637691861385
   }
 }
