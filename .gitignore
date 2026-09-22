@@ -11,6 +11,7 @@ execution/**/logs/
 execution/**/execution_plan.json
 execution/**/handoff.md*
 execution/**/methodology/versions/
+execution/qni_vni_fundamentals_v3/longform_assessments/
 execution/**/*.tmp
 reports/qni_vni_fundamentals_v3/
 results/predictions/
