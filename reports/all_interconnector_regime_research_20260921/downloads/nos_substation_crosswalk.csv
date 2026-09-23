@@ -1,0 +1,1024 @@
+SUBSTATIONID,substation_name,region,owner,osm_id,osm_name,lat,lon,method,confidence
+T34_MRNB,Moranbah 132kV,QLD1,Powerlink,way/205014147,Moranbah,-21.9865353,148.0248601,name_match,medium
+T20_BUND,Bundaberg 132kV,QLD1,Powerlink,way/175017770,Bundaberg Substation,-24.9171564,152.299739,name_match,medium
+SSBHD,Burleigh 110kV,QLD1,Powerlink,,,,,unmatched,
+T139_BDN,Burton Downs 132kV,QLD1,Powerlink,way/205012494,Burton Downs,-21.6917672,148.210347,name_match,medium
+T11_CBLT,Caboolture 110kV,QLD1,Powerlink,way/25159931,Caboolture Substation,-27.065145,152.9630525,name_match,medium
+T81_CADE,Cades County 110kV,QLD1,Powerlink,,,,,unmatched,
+T51_CRNS,Cairns 132kV,QLD1,Powerlink,way/194550807,Cairns Substation,-16.9462564,145.7549771,name_match,medium
+CRNS_CTY,Cairns City,QLD1,Powerlink,way/308211031,Cairns City Substation,-16.9266534,145.7767533,name_match,medium
+T101_CMD,Callemondah 132kV,QLD1,Powerlink,,,,,unmatched,
+T22_CALL,Callide 132kV,QLD1,Powerlink,,,,,unmatched,
+R3_BULLI,Bulli Creek 330kV,QLD1,Powerlink,way/172887193,Bulli Creek Substation,-27.9210334,150.8432416,name_match,medium
+CAL_A_PS,Callide A Ps 132kV,QLD1,Powerlink,,,,,unmatched,
+CAL_C_PS,Callide C Ps 275kV,QLD1,Powerlink,,,,,unmatched,
+H24_CALV,Calvale 275kV,QLD1,Powerlink,way/119995150,Calvale Substation,-24.3424399,150.6270737,name_match,medium
+T134_CDW,Cardwell 132kV,QLD1,Powerlink,way/196680355,Cardwell,-18.3400567,146.0468276,name_match,medium
+H32_CHLM,Chalumbin 275kV,QLD1,Powerlink,way/196583889,Chalumbin Substation,-17.8007227,145.5265615,name_match,medium
+SSCST,Charlotte St. 110kV,QLD1,Powerlink,,,,,unmatched,
+T13_CHIN,Chinchilla 132kV,QLD1,Powerlink,way/171588475,Chinchilla Substation,-26.7446,150.645209,name_match,medium
+T93_CLS,Clare South 132kV,QLD1,Powerlink,way/171845369,Clare South,-19.83836,147.2126162,name_match,medium
+T71_CLMT,Clermont 132kV,QLD1,Powerlink,way/469420118,Clermont,-22.8496747,147.6109302,name_match,medium
+SSCVL,Cleveland 110kV,QLD1,Powerlink,way/26230748,Cleveland Substation,-27.5465487,153.2528721,name_match,medium
+CAL_B_PS,Callide B Ps 275kV,QLD1,Powerlink,,,,,unmatched,
+T37_COLL,Collinsville 132kV,QLD1,Powerlink,,,,,unmatched,
+SSBPN,Browns Plains,QLD1,Powerlink,relation/19869907,Browns Plains Zone Substation,-27.6627801,153.0375307,name_match,medium
+SSBBH,Broadbeach,QLD1,Powerlink,way/460151996,Broadbeach substation,-28.0259057,153.4298652,name_match,medium
+T150_ASH,Alan Sheriff  132kV,QLD1,Powerlink,,,,,unmatched,
+SSAST,Ann Street City 110kV,QLD1,Powerlink,,,,,unmatched,
+T30_ASHW,Ashgrove West 110kV,QLD1,Powerlink,way/22368872,Ashgrove West Substation,-27.4509936,152.9722406,name_match,medium
+SSQR42,Bald Hills 110kV,QLD1,Powerlink,way/1056365301,Bald Hills substation,-27.3285653,153.0153816,name_match,medium
+T31_BRAL,Baralaba 132kV,QLD1,Powerlink,way/205297490,Baralaba,-24.190808,149.8741859,name_match,medium
+T72_BARC,Barcaldine 132kV,QLD1,Powerlink,way/164418528,Barcaldine,-23.5514111,145.3123405,name_match,medium
+BCDE_PS,Barcaldine Ps,QLD1,Powerlink,,,,,unmatched,
+T54_BG_H,Barron Gorge Ps 132kV,QLD1,Powerlink,,,,,unmatched,
+H20_BSND,Broadsound 275kV,QLD1,Powerlink,way/121646942,Broadsound Substation,-22.8207415,149.4040362,name_match,medium
+T108_BNL,Beenleigh 110kV,QLD1,Powerlink,way/142359087,Beenleigh Substation,-27.7246863,153.208178,name_match,medium
+T26_BILO,Biloela 132kV,QLD1,Powerlink,way/171573029,Biloela,-24.4015401,150.5079003,name_match,medium
+T32_BWTR,Blackwater 132kV,QLD1,Powerlink,way/94905412,Blackwater Transmission Substation,-23.5875239,148.826004,name_match,medium
+H10_BCMB,Bouldercombe 275kV,QLD1,Powerlink,way/171486427,Bouldercombe Substation,-23.5370551,150.4871373,name_match,medium
+H8_BOYNE,Boyne Island 275kV,QLD1,Powerlink,,,,,unmatched,
+R2_BRAE,Braemar 330kV/275kv,QLD1,Powerlink,way/170842253,Braemar Substation,-27.1147927,150.9001585,name_match,medium
+SSBRD,Brendale 110kV,QLD1,Powerlink,way/328300146,Brendale Zone Substation,-27.3258347,152.9710238,name_match,medium
+SSBWH,Beerwah,QLD1,Powerlink,,,,,unmatched,
+COLL_PS,Collinsville Ps 132kV,QLD1,Powerlink,,,,,unmatched,
+T70_CORY,Cooroy 132kV,QLD1,Powerlink,,,,,unmatched,
+T107_COP,Coppabella 132kV,QLD1,Powerlink,way/178240025,Coppabella,-21.9131228,148.352862,name_match,medium
+T36_INVA,Invicta Mill 132kV,QLD1,Powerlink,way/610270962,Invicta Mill Substation,-19.5173335,147.1074183,name_match,medium
+T131_ISI,Isis 132kV,QLD1,Powerlink,way/173551375,Isis Zone substation,-25.2552171,152.3668531,name_match,medium
+T53_KAM,Kamerunga 132kV,QLD1,Powerlink,way/194550809,Kamerunga Substation,-16.8661107,145.6875419,name_match,medium
+KAR_H_PS,Kareeya Ps 132kV,QLD1,Powerlink,,,,,unmatched,
+T67_KMIS,Kemmis 132kV,QLD1,Powerlink,way/205012488,Kemmis Substation,-21.5735092,148.3844324,name_match,medium
+T77_KIDS,Kidston 132kV,QLD1,Powerlink,way/218593824,Kidston,-18.8745611,144.1431409,name_match,medium
+T12_KILK,Kilkivan 132kV,QLD1,Powerlink,,,,,unmatched,
+KINGAROY,Kingaroy 66kV,QLD1,Powerlink,way/253930085,Kingaroy,-26.5402765,151.8565423,name_match,medium
+H15_LILY,Lilyvale 275kV,QLD1,Powerlink,way/171843734,Lilyvale Substation,-23.1294306,148.4282265,name_match,medium
+T50_INFL,Innisfail 132kV,QLD1,Powerlink,way/173224446,Innisfail Transmission Substation,-17.5351432,145.9732235,name_match,medium
+T78_LOCK,Lockrose 110kV,QLD1,Powerlink,way/66035178,Lockrose Substation,-27.4994001,152.4526414,name_match,medium
+SSLBS,Lytton 110kV,QLD1,Powerlink,way/44418993,Lytton Bulk Supply Substation,-27.4343023,153.1425913,name_match,medium
+T38_MKAY,Mackay 132kV,QLD1,Powerlink,way/373381185,Mackay,-21.1451591,149.1588231,name_match,medium
+SSMST,Makerston St. 110kV,QLD1,Powerlink,,,,,unmatched,
+T59_MRBO,Maryborough 132kV,QLD1,Powerlink,way/173139255,Maryborough Substation,-25.4983217,152.6672943,name_match,medium
+SSMLS,Mclachlan Street City,QLD1,Powerlink,,,,,unmatched,
+SSMDH,Meeandah 110kV,QLD1,Powerlink,way/349728935,Meeandah substation,-27.4305831,153.1123071,name_match,medium
+H14_MRDG,Middle Ridge 275kV,QLD1,Powerlink,way/172878761,Middle Ridge Substation,-27.6224674,151.9451984,name_match,medium
+T95_MILL,Millchester 132kV,QLD1,Powerlink,way/469438778,Millchester,-20.1013641,146.2804796,name_match,medium
+H22_LOGN,Loganlea 275kV,QLD1,Powerlink,way/46099414,Loganlea Substation,-27.6641723,153.131428,name_match,medium
+T47_INGM,Ingham 132kV,QLD1,Powerlink,way/798877591,Ingham,-18.6649342,146.1561289,name_match,medium
+T40_IFLT,Image Flat 132kV,QLD1,Powerlink,,,,,unmatched,
+SSIBS,Ibis 110kV,QLD1,Powerlink,,,,,unmatched,
+CRAIGLIE,Craiglie 132kV,QLD1,Powerlink,way/192518673,Craiglie Substation,-16.5308634,145.4578922,name_match,medium
+T2_DALBY,Dalby 110kV,QLD1,Powerlink,way/458636832,Dalby Substation,-27.2142923,151.3097823,name_match,medium
+T92_DNGL,Dan Gleeson 132kV,QLD1,Powerlink,way/171189095,Dan Gleeson,-19.3204779,146.7181084,name_match,medium
+T98_DNGO,Dingo 132kV,QLD1,Powerlink,way/309152531,Dingo,-23.6596918,149.4093191,name_match,medium
+SSDBS,Doboy 110kV,QLD1,Powerlink,way/26231071,Doboy Zone Substation,-27.4474561,153.1108282,name_match,medium
+T35_DYST,Dysart 132kV,QLD1,Powerlink,way/288176202,Dysart,-22.5473683,148.4061777,name_match,medium
+T127_EGN,Egans Hill 132kV,QLD1,Powerlink,way/545952624,Egans Hill Substation,-23.4442667,150.5072162,name_match,medium
+T46_GARB,Garbutt 132kV,QLD1,Powerlink,way/508992535,Garbutt Substation,-19.2690699,146.7779423,name_match,medium
+H6_GNGN,Gin Gin 275kV,QLD1,Powerlink,way/171728751,Gin Gin Substation,-24.9012594,151.8194056,name_match,medium
+T5_GLAD,Gladstone 132kV,QLD1,Powerlink,way/54674751,Gladstone Substation,-23.849933,151.2164708,name_match,medium
+H7_GLAD,Gladstone 275kV,QLD1,Powerlink,way/54674751,Gladstone Substation,-23.849933,151.2164708,name_match,medium
+GLAD_PS,Gladstone Ps 275kV,QLD1,Powerlink,,,,,unmatched,
+T19_GSTH,Gladstone South 132kV,QLD1,Powerlink,way/69034090,Gladstone South Substation,-23.8863184,151.2737452,name_match,medium
+T99_GRNT,Grantleigh 132kV,QLD1,Powerlink,,,,,unmatched,
+T97_GREG,Gregory 132kV,QLD1,Powerlink,way/310058226,Gregory Substation,-23.1380049,148.4254171,name_match,medium
+T8_GYMP,Gympie 132kV,QLD1,Powerlink,way/171852863,Gympie,-26.1962272,152.681909,name_match,medium
+H23_UKED,H23 Upper Kedron 110kV,QLD1,Powerlink,,,,,unmatched,
+H36_BLKW,Blackwall 275kV,QLD1,Powerlink,way/170832455,Blackwall Substation,-27.5413656,152.7859721,name_match,medium
+H51_SBKE,H51 Swanbank E,QLD1,Powerlink,,,,,unmatched,
+SSHIL,Hays Inlet 110kV,QLD1,Powerlink,way/46056595,Hays Inlet substation,-27.2202487,153.0479224,name_match,medium
+T136_ABM,Abermain 110kV,QLD1,Powerlink,way/173223683,Abermain Substation,-27.5778299,152.7712356,name_match,medium
+SSMLT,Milton 110kV,QLD1,Powerlink,,,,,unmatched,
+SSMLB,Moolloolaba 132kV,QLD1,Powerlink,,,,,unmatched,
+H29_STAN,Stanwell 275kV,QLD1,Powerlink,way/171484159,Stanwell,-23.5157161,150.3200188,name_match,medium
+T39_PROS,Proserpine 132kV,QLD1,Powerlink,way/171979185,Proserpine,-20.3884806,148.539876,name_match,medium
+T141_PVA,Pioneer Valley 132kV,QLD1,Powerlink,way/171846476,Pioneer Valley Substation,-21.1596153,149.0141862,name_match,medium
+T110_PKD,Peak Downs 132kV,QLD1,Powerlink,way/280695700,Peak Downs,-22.2320182,148.2080585,name_match,medium
+H9_PLMWD,Palmwoods 275kV,QLD1,Powerlink,way/170840487,Palmwoods Substation,-26.7068685,152.9368942,name_match,medium
+T105_OON,Oonooie 132kV,QLD1,Powerlink,,,,,unmatched,
+OAKEY_PS,Oakey Power Station,QLD1,Powerlink,way/171575467,Oakey Substation,-27.4293042,151.7071471,name_match,medium
+SSNGE,Nudgee 110kV,QLD1,Powerlink,relation/16070112,Nudgee Substation,-27.3898585,153.0830757,name_match,medium
+T111_NOR,Norwich Park 132kV,QLD1,Powerlink,way/610270930,Norwich Park,-22.7055846,148.4414305,name_match,medium
+T137_NGY,North Goonyalla Mine 132kV,QLD1,Powerlink,,,,,unmatched,
+SSNSD,Newstead   110kV,QLD1,Powerlink,way/220816141,Newstead substation,-27.4507859,153.0476271,name_match,medium
+H1_SBK_B,Swanbank B 275kV,QLD1,Powerlink,,,,,unmatched,
+SBK_B_PS,Swanbank B PS,QLD1,Powerlink,,,,,unmatched,
+SBK_C_PS,Swanbank C 275kV,QLD1,Powerlink,,,,,unmatched,
+SBK_D_PS,Swanbank D Ps,QLD1,Powerlink,,,,,unmatched,
+SBK_E_PS,Swanbank E Ps,QLD1,Powerlink,,,,,unmatched,
+T69_NLDS,Newlands 132kV,QLD1,Powerlink,way/178065775,Newlands,-21.2882254,147.9421673,name_match,medium
+T146_OAK,T146_oakey,QLD1,Powerlink,,,,,unmatched,
+T147_TAN,Tangkam 110kV,QLD1,Powerlink,way/171575468,Tangkam Substation,-27.4795576,151.6696154,name_match,medium
+H18_TRNG,Tarong 275kV,QLD1,Powerlink,,,,,unmatched,
+T21_QAL,Qal  (qld. Aluminium) 132kV,QLD1,Powerlink,,,,,unmatched,
+TRNGN_PS,Tarong North  Ps,QLD1,Powerlink,,,,,unmatched,
+T153_QAW,Queensland Alumina West,QLD1,Powerlink,,,,,unmatched,
+T80_REDB,Redbank Plains 110kV,QLD1,Powerlink,relation/19825243,Redbank Plains 110kV Transmission Substation,-27.6405573,152.8518312,name_match,medium
+T104_STN,Stanwell Ps Aux,QLD1,Powerlink,,,,,unmatched,
+STAN_PS,Stanwell Ps,QLD1,Powerlink,,,,,unmatched,
+T4_SBK_A,Swanbank A 110kV,QLD1,Powerlink,,,,,unmatched,
+T60_STAN,Stanthorpe 110kV,QLD1,Powerlink,way/1058068739,Stanthorpe,-28.6454651,151.9169589,name_match,medium
+SSSFD,Stafford 110kV,QLD1,Powerlink,way/46336726,Stafford Zone Substation,-27.3991557,153.0093321,name_match,medium
+SSRVW,Ssrvw,QLD1,Powerlink,,,,,unmatched,
+SSSPO,Southport,QLD1,Powerlink,,,,,unmatched,
+T43_STWB,South Toowoomba 110kV,QLD1,Powerlink,way/173094501,South Toowoomba,-27.5848168,151.943085,name_match,medium
+H2_SPINE,South Pine 275kV,QLD1,Powerlink,relation/19988398,South Pine Substation,-27.3238563,152.9702805,name_match,medium
+T24_RUNC,Runcorn 110kV,QLD1,Powerlink,way/26161587,Runcorn Substation,-27.5830419,153.070134,name_match,medium
+H13_ROSS,Ross 275kV,QLD1,Powerlink,way/171189090,Ross Substation,-19.404248,146.7265214,name_match,medium
+ROMA_PS,Roma Power Station,QLD1,Powerlink,way/493486041,Roma,-26.5781549,148.8396284,name_match,medium
+T83_ROMA,Roma 132kV,QLD1,Powerlink,way/493486041,Roma,-26.5781549,148.8396284,name_match,medium
+SSRPT_PS,Rocky Point,QLD1,Powerlink,,,,,unmatched,
+H16_RLEA,Rocklea 275kV,QLD1,Powerlink,way/19388978,Rocklea Substation,-27.5530331,152.9996149,name_match,medium
+T23_ROCK,Rockhampton 132kV,QLD1,Powerlink,,,,,unmatched,
+SBK_A_PS,Swanbank A PS,QLD1,Powerlink,,,,,unmatched,
+T128_RBA,Robina 110kV,QLD1,Powerlink,way/125600603,Robina Substation,-28.0696307,153.376397,name_match,medium
+T187_RLD,Richlands 110kV,QLD1,Powerlink,way/303420374,Richlands Substation,-27.5797277,152.9599184,name_match,medium
+MILLM_PS,R5 Millmeran Ps,QLD1,Powerlink,,,,,unmatched,
+TRNG_PS,Tarong Ps,QLD1,Powerlink,,,,,unmatched,
+T174_TRA,Terranora 110kV,QLD1,Powerlink,way/171581686,Terranora Substation,-28.2412067,153.5035292,name_match,medium
+T145_TVL,Townsville 132kV,QLD1,Powerlink,way/508992530,Townsville,-19.2000853,146.6193732,name_match,medium
+T16_NAMB,Nambour 132kV,QLD1,Powerlink,way/171581834,Nambour substation,-26.6157508,152.9610283,name_match,medium
+H11_NEBO,Nebo 275kV,QLD1,Powerlink,way/166113109,Nebo Substation,-21.6310634,148.6832692,name_match,medium
+T75_NRNG,Nerang 110kV,QLD1,Powerlink,,,,,unmatched,
+H35_STHM,Strathmore 275kV,QLD1,Powerlink,way/171744075,Strathmore Substation,-20.499711,147.77542,name_match,medium
+T10_YARR,Yarranlea 110kV,QLD1,Powerlink,way/173095385,Yarranlea,-27.7218949,151.5313885,name_match,medium
+H40_WURD,Wurdong 275kV,QLD1,Powerlink,way/171170697,Wurdong Substation,-23.9606462,151.2889239,name_match,medium
+H4_MUGBA,Mudgeeraba 275kV,QLD1,Powerlink,way/45020488,Mudgeeraba Substation,-28.0934946,153.3976425,name_match,medium
+H12_MT_E,Mt. England 275kV,QLD1,Powerlink,way/153737699,Mt England Substation,-27.3830427,152.647375,name_match,medium
+T112_MTM,Mt Mclaren 132kV,QLD1,Powerlink,way/610270937,Mt McLaren,-22.4785621,147.699235,name_match,medium
+T27_MRA,Moura 132kV,QLD1,Powerlink,way/119275831,Moura Transmission Substation,-24.5139365,150.0655579,name_match,medium
+MT_S_PS,Mount Stuart Ps,QLD1,Powerlink,,,,,unmatched,
+SSSPD,Surfers Paradise,QLD1,Powerlink,,,,,unmatched,
+WIV_PS,Wivenhoe Ps,QLD1,Powerlink,,,,,unmatched,
+SSWED,West End 110kV,QLD1,Powerlink,way/307697165,West End Substation,-27.4756603,153.012726,name_match,medium
+T155_WDR,West Darra 110kV,QLD1,Powerlink,way/19388439,West Darra Substation,-27.563513,152.9015248,name_match,medium
+T58_WRCK,Warwick 110kV,QLD1,Powerlink,way/186256359,Warwick Zone Substation,-28.1971309,152.0507755,name_match,medium
+Virginia,Virginia Control Centre,QLD1,Powerlink,,,,,unmatched,
+SSVPK,Victoria Park 110kV,QLD1,Powerlink,way/43945599,Victoria Park substation,-27.4517825,153.0281656,name_match,medium
+T55_TURK,Turkinje 132kV,QLD1,Powerlink,relation/19858976,Turkinje Substation,-17.0629188,145.4351908,name_match,medium
+T48_TLLY,Tully 132kV,QLD1,Powerlink,way/196583888,Tully Substation,-17.9547016,145.9095704,name_match,medium
+H5_WLGA,Woolooga 275kV,QLD1,Powerlink,way/170990862,Woolooga Substation,-26.0900036,152.4385618,name_match,medium
+TVLLE_PS,Townsville Gt Ps,QLD1,Powerlink,,,,,unmatched,
+T56_TV_S,Townsville South 132kV,QLD1,Powerlink,way/172245698,Townsville South Substation,-19.3510819,146.8529737,name_match,medium
+T124_TRV,Traveston 132kV,QLD1,Powerlink,way/1169539687,Traveston,-26.3180858,152.7780233,name_match,medium
+CLPS,Clover Ps 66kV,VIC1,AusNet,,,,,unmatched,
+CLC,Colac 66kV,VIC1,AusNet,way/315418901,Colac Zone Substation,-38.3406568,143.6064119,name_match,medium
+DDTS,Dederang 330kV,VIC1,AusNet,way/286063160,Dederang Terminal Station,-36.4544006,146.9918718,name_match,medium
+CDN,Camperdown 66kV,VIC1,AusNet,way/497831665,Camperdown Zone Substation,-38.2269355,143.1548349,name_match,medium
+ERTS,East Rowville 220kV,VIC1,AusNet,way/239972088,East Rowville Terminal Station,-37.9408975,145.2364401,name_match,medium
+DPS,Dartmouth Ps 220kV,VIC1,AusNet,,,,,unmatched,
+BTS,Brunswick 220kV,VIC1,AusNet,way/41098451,Brunswick Terminal Station,-37.7729015,144.9844183,name_match,medium
+BATS,Ballarat 220kV,VIC1,AusNet,,,,,unmatched,
+BRT,Bright 66kV,VIC1,AusNet,way/506189898,Bright Zone Substation,-36.7263945,146.9701057,name_match,medium
+BETS,Bendigo 220kV,VIC1,AusNet,way/173103530,Bendigo Terminal Station,-36.7840447,144.2536844,name_match,medium
+BAN,Ballarat 66kV,VIC1,AusNet,,,,,unmatched,
+BDSS,Bairnsdale Ps,VIC1,AusNet,,,,,unmatched,
+ART,Ararat 66kV,VIC1,AusNet,,,,,unmatched,
+APS,Anglesea Ps 220kV,VIC1,AusNet,,,,,unmatched,
+AC,Altona Chemicals 66kV,VIC1,AusNet,,,,,unmatched,
+AL,Altona 66kV,VIC1,AusNet,way/51542858,Altona Terminal Station,-37.8387068,144.7890716,name_match,medium
+ATS,Altona 220kV,VIC1,AusNet,way/51542858,Altona Terminal Station,-37.8387068,144.7890716,name_match,medium
+FBTS,Fishermans Bend 220kV,VIC1,AusNet,way/384601555,Fishermans Bend Terminal Station,-37.8252699,144.929333,name_match,medium
+BLTS,Brooklyn 220kV,VIC1,AusNet,way/235143897,Brooklyn Terminal Station,-37.8258097,144.8602171,name_match,medium
+APD,Alcoa/portland 500kV,VIC1,AusNet,,,,,unmatched,
+EPS,Eildon Ps 220kV,VIC1,AusNet,,,,,unmatched,
+MBTS,Mt Beauty 220kV,VIC1,AusNet,,,,,unmatched,
+MPS,Morwell Ps 66kV,VIC1,AusNet,,,,,unmatched,
+MWTS,Morwell 220kV,VIC1,AusNet,way/168810465,Morwell Terminal Station,-38.258173,146.4203407,name_match,medium
+MLTS,Moorabool 500kV,VIC1,AusNet,way/49455810,Moorabool Terminal Station,-38.0370563,144.2963592,name_match,medium
+MKPS,Mckay Creek Ps 220kV,VIC1,AusNet,,,,,unmatched,
+MTS,Malvern 220kV,VIC1,AusNet,way/28225387,Malvern Terminal Station,-37.8780731,145.0845307,name_match,medium
+LYPS,Loy Yang Ps 500kV,VIC1,AusNet,,,,,unmatched,
+LYGS,Loy Yang Gas,VIC1,AusNet,,,,,unmatched,
+LYPB,Loy Yang B Ps 500kV,VIC1,AusNet,,,,,unmatched,
+LYPA,Loy Yang A Ps 500kV,VIC1,AusNet,,,,,unmatched,
+LVN,Laverton North 66kV,VIC1,AusNet,way/244224112,Laverton North Zone Substation,-37.8274974,144.7862714,name_match,medium
+KGTS,Kerang 220kV,VIC1,AusNet,way/169793928,Kerang Terminal Station,-35.7716461,143.9338668,name_match,medium
+KTS,Keilor 500kV,VIC1,AusNet,way/21239912,Keilor Terminal Station,-37.7381077,144.8457651,name_match,medium
+JLA,John Lysaght Aust. 220kV,VIC1,AusNet,,,,,unmatched,
+JLGSB,Jeeralang B Ps 220kV,VIC1,AusNet,,,,,unmatched,
+JLGSA,Jeeralang A Ps 220kV,VIC1,AusNet,,,,,unmatched,
+JLTS,Jeeralang 220kV,VIC1,AusNet,way/146581923,Jeeralang Terminal Station,-38.2767498,146.4246139,name_match,medium
+TEE1,Hwps/mwts/mps 220kV Tee,VIC1,AusNet,,,,,unmatched,
+HOTS,Horsham 220kV,VIC1,AusNet,way/173571301,Horsham Terminal Station,-36.7223072,142.2472235,name_match,medium
+HYTS,Heywood 500kV,VIC1,AusNet,way/169673123,Heywood Terminal Station,-38.1818997,141.6384511,name_match,medium
+HTS,Heatherton 220kV,VIC1,AusNet,way/512994266,Heatherton Terminal Station,-37.941394,145.0776994,name_match,medium
+HWPS,Hazelwood Ps 220kV,VIC1,AusNet,,,,,unmatched,
+HWTS,Hazelwood 500kV,VIC1,AusNet,way/348778201,Hazelwood Switchyard,-38.2737595,146.3929457,name_match,medium
+GNTS,Glenrowan 220kV,VIC1,AusNet,way/205163985,Glenrowan Terminal Station,-36.4935335,146.1322967,name_match,medium
+MLRC,Murraylink Vic,VIC1,AusNet,,,,,unmatched,
+LY,Loy Yang 66kV,VIC1,AusNet,way/146581911,Loy Yang Power Station,-38.256984,146.5744453,name_match,medium
+NPSD,Newport D Ps 220kV,VIC1,AusNet,,,,,unmatched,
+YPS,Yallourn  Ps 220kV,VIC1,AusNet,,,,,unmatched,
+MYT,Myrtleford 66kV,VIC1,AusNet,way/307514888,Myrtleford Zone Substation,-36.5652991,146.7028583,name_match,medium
+WIN,Winchelsea 66kV,VIC1,AusNet,way/312889671,Winchelsea Zone Substation,-38.2361461,144.0027849,name_match,medium
+WMTS,West Melbourne 220kV,VIC1,AusNet,way/208198646,West Melbourne Terminal Station,-37.8006312,144.93476,name_match,medium
+WKPS,West Kiewa Ps 220kV,VIC1,AusNet,,,,,unmatched,
+WN,Wangaratta 66kV,VIC1,AusNet,way/507562529,Wangaratta Zone Substation,-36.3645423,146.3143215,name_match,medium
+TBTS,Tyabb 220kV,VIC1,AusNet,way/142662542,Tyabb Terminal Station,-38.2684009,145.2018875,name_match,medium
+TYA,Toyota 66kV,VIC1,AusNet,,,,,unmatched,
+TTS,Thomastown 220kV,VIC1,AusNet,way/23718970,Thomastown Terminal Station,-37.6926522,145.0096965,name_match,medium
+TGTS,Terang 220kV,VIC1,AusNet,way/156598151,Terang Terminal Station,-38.2330795,142.9323139,name_match,medium
+TSTS,Templestowe 220kV,VIC1,AusNet,way/23718111,Templestowe Terminal Station,-37.7483861,145.1710688,name_match,medium
+SYTS,Sydenham 500kV,VIC1,AusNet,way/23647798,Sydenham Terminal Station,-37.6764761,144.7475622,name_match,medium
+STL,Stanwell 66kV,VIC1,AusNet,,,,,unmatched,
+WOTS,Wodonga 330kV,VIC1,AusNet,way/179898706,Wodonga Terminal Station,-36.1550177,146.9499854,name_match,medium
+SMTS,South Morang 500kV,VIC1,AusNet,way/64943050,South Morang Terminal Station,-37.6451066,145.0750777,name_match,medium
+SVTS,Springvale 220kV,VIC1,AusNet,way/134534513,Springvale Terminal Station,-37.9281711,145.1460353,name_match,medium
+RCTS,Red Cliffs 220kV,VIC1,AusNet,way/483430155,Red Cliffs Terminal Station,-34.2926817,142.2386982,name_match,medium
+RTS,Richmond 220kV,VIC1,AusNet,way/30837800,Richmond Terminal Station,-37.8307001,145.0019401,name_match,medium
+RWTS,Ringwood 220kV,VIC1,AusNet,way/24577195,Ringwood Terminal Station,-37.8214026,145.215419,name_match,medium
+ROTS,Rowville 220kV,VIC1,AusNet,way/570175005,Rowville Terminal Station,-37.9301602,145.2269932,name_match,medium
+ROTS_500,Rowville 500kV,VIC1,AusNet,way/570175005,Rowville Terminal Station,-37.9301602,145.2269932,name_match,medium
+PTH,Point Henry 220kV,VIC1,AusNet,,,,,unmatched,
+SHTS,Shepparton 220kV,VIC1,AusNet,way/174893662,Shepparton Terminal Station,-36.3427717,145.4144307,name_match,medium
+SPS,Somerton Ps,VIC1,AusNet,,,,,unmatched,
+SSS,Somerton Sw 66kV,VIC1,AusNet,,,,,unmatched,
+RUBA,Rubicon A 66kV,VIC1,AusNet,way/496003699,Rubicon A Zone Substation,-37.2927727,145.818448,name_match,medium
+PGWEST,Parafield Gardens West 275kV,SA1,ElectraNet,way/172363326,Parafield Gardens West substation,-34.7768806,138.5983356,name_match,medium
+PENO_W,Penola West,SA1,ElectraNet,way/603868062,Penola West Substation,-37.4569585,140.7816124,name_match,medium
+PENFLD,Penfield 66kV,SA1,ElectraNet,,,,,unmatched,
+PANAPTEE,Tips_a/p_ad_n/athol 66kV,SA1,ElectraNet,,,,,unmatched,
+PELI_P,Pelican Point Switching station,SA1,ElectraNet,way/1071991895,Pelican Point Substation,-34.7655408,138.5069401,name_match,medium
+PARLWE,Paralowie 66kV,SA1,ElectraNet,,,,,unmatched,
+PARA_G,Parafield Gardens 66kV,SA1,ElectraNet,,,,,unmatched,
+PARA,Para 275kV,SA1,ElectraNet,way/172362099,Para,-34.7354053,138.7121666,name_match,medium
+PANORA,Panorama 66kV,SA1,ElectraNet,,,,,unmatched,
+PIMBA,Pimba 132kV,SA1,ElectraNet,way/170407602,Pimba,-31.2347079,136.8314468,name_match,medium
+PEL_PS,Pelican Point ps,SA1,ElectraNet,,,,,unmatched,
+PLAY,Playford A + B Ps 275kV,SA1,ElectraNet,,,,,unmatched,
+PT_STA,Point Stanvac 66kV,SA1,ElectraNet,,,,,unmatched,
+PLYMPT,Plympton 66kV,SA1,ElectraNet,,,,,unmatched,
+PROSP,Prospect 66kV,SA1,ElectraNet,way/174295053,Prospect,-34.8804638,138.584898,name_match,medium
+PT_L_T,Port Lincoln 132kV,SA1,ElectraNet,way/165169360,Port Lincoln Terminal,-34.6995292,135.8047141,name_match,medium
+PT_NOA,Point Noarlunga 66kV,SA1,ElectraNet,,,,,unmatched,
+PWSPT_T,Pwpst_t 132kV,SA1,ElectraNet,,,,,unmatched,
+QNSTWN,Queenstown 66kV,SA1,ElectraNet,,,,,unmatched,
+QPS,Quarantine Ps,SA1,ElectraNet,,,,,unmatched,
+R_TOWN,Robertstown 275kV,SA1,ElectraNet,way/164775125,Robertstown Substation,-33.9563911,139.1267587,name_match,medium
+RSWTHY,Roseworthy 132kV,SA1,ElectraNet,way/498834495,Roseworthy,-34.5487086,138.7610543,name_match,medium
+SALISB,Salisbury 66kV,SA1,ElectraNet,,,,,unmatched,
+P_PIRI_S,Port Pirie 33kV,SA1,ElectraNet,way/599669844,Port Pirie Substation,-33.1710022,138.0070109,name_match,medium
+PLMGPTEE,Play:mt_gun:pimba 132kV Tee,SA1,ElectraNet,,,,,unmatched,
+P_PIRI,Port Pirie 132kV,SA1,ElectraNet,way/599669844,Port Pirie Substation,-33.1710022,138.0070109,name_match,medium
+N_UNLY,North Unley 66kV,SA1,ElectraNet,,,,,unmatched,
+P_AD_N,Pt Adelaide Nth 66kV,SA1,ElectraNet,,,,,unmatched,
+EDINBR,Edinburgh 66kV,SA1,ElectraNet,,,,,unmatched,
+ELIZ_D,Elizabeth Downs 66kV,SA1,ElectraNet,,,,,unmatched,
+ELIZ_H,Elizabeth Heights 66kV,SA1,ElectraNet,,,,,unmatched,
+ELIZ_S,Elizabeth South 66kV,SA1,ElectraNet,way/807503346,Elizabeth South Substation,-34.7416903,138.6609918,name_match,medium
+EVANST,Evanston 66kV,SA1,ElectraNet,,,,,unmatched,
+FINDON,Findon 66kV,SA1,ElectraNet,,,,,unmatched,
+FLIN_P,Flinders Park 66kV,SA1,ElectraNet,,,,,unmatched,
+FULGDN,Fulham Gardens 66kV,SA1,ElectraNet,,,,,unmatched,
+GLANV,Glanville 66kV,SA1,ElectraNet,,,,,unmatched,
+GLEN_N,Glenelg North 66kV,SA1,ElectraNet,,,,,unmatched,
+GOLD_G,Golden Grove 66kV,SA1,ElectraNet,way/448230795,Golden Grove Substation,-34.7897598,138.7054476,name_match,medium
+H_HILL,Holden Hill 66kV,SA1,ElectraNet,way/603668795,Holden Hill,-34.8454362,138.6717057,name_match,medium
+H_VALL,Happy Valley 275kV,SA1,ElectraNet,way/172867383,Happy Valley,-35.0519831,138.5766776,name_match,medium
+HALLET,Hallet Ps,SA1,ElectraNet,,,,,unmatched,
+HARROW,Harrow 66kV,SA1,ElectraNet,way/603710302,Harrow,-34.883699,138.6202909,name_match,medium
+HENLEY,Henley South 66kV,SA1,ElectraNet,,,,,unmatched,
+HILLCR,Hillcrest 66kV,SA1,ElectraNet,way/603710304,Hillcrest,-34.861841,138.6481842,name_match,medium
+KINCRA,Kincraig 132kV,SA1,ElectraNet,way/164764211,Kincraig,-36.964985,140.6879679,name_match,medium
+P_ADEL,Pt Adelaide  66kV,SA1,ElectraNet,,,,,unmatched,
+KILBUR,Kilburn 275kV,SA1,ElectraNet,way/603633301,Kilburn,-34.8481629,138.5805423,name_match,medium
+KILB_S,Kilburn South 66kV,SA1,ElectraNet,way/603646225,Kilburn South,-34.8651739,138.5858588,name_match,medium
+KESWIC,Keswick 66kV,SA1,ElectraNet,,,,,unmatched,
+KENT_T,Kent_t 66kV,SA1,ElectraNet,,,,,unmatched,
+E_TCE,East Terrace 275kV,SA1,ElectraNet,way/353174285,East Terrace,-34.9247632,138.6104122,name_match,medium
+KEITH,Keith 132kV,SA1,ElectraNet,way/169687537,Keith Substation,-36.1078141,140.2990182,name_match,medium
+KADINA_E,Kadina_East 132kV,SA1,ElectraNet,way/600362200,Kadina East,-33.9768579,137.7300009,name_match,medium
+K_WOOD,Kingswood 66kV,SA1,ElectraNet,,,,,unmatched,
+I_FARM,Ingle Farm 66kV,SA1,ElectraNet,way/176679145,Ingle Farm,-34.8214203,138.6512348,name_match,medium
+HVEWME,Hvewme 66kV,SA1,ElectraNet,,,,,unmatched,
+HUMMOC,Hummocks 132kV,SA1,ElectraNet,way/598333066,Hummocks,-34.0879,138.0912127,name_match,medium
+HIND_S,Hindley St 66kV,SA1,ElectraNet,,,,,unmatched,
+KANM_M,Kanmantoo Mine,SA1,ElectraNet,,,,,unmatched,
+DRY_CK,Dry Creek 66kV,SA1,ElectraNet,,,,,unmatched,
+DORRIE,Dorrien 132kV,SA1,ElectraNet,way/170066302,Dorrien,-34.4918061,138.9663749,name_match,medium
+DCPKSTEE,Dry_ck/kilb_s/prosp 66kV Tee,SA1,ElectraNet,,,,,unmatched,
+BRINKW,Brinkworth 275kV,SA1,ElectraNet,way/170036971,Brinkworth Substation,-33.6312682,138.372189,name_match,medium
+BLANCH,Blanch 132kV,SA1,ElectraNet,,,,,unmatched,
+BERRI,Berri 132kV,SA1,ElectraNet,way/601143294,Berri Substation,-34.2698815,140.5980491,name_match,medium
+BAROOT,Baroota 132kV,SA1,ElectraNet,way/170528246,Baroota,-32.9676331,138.0392693,name_match,medium
+B_WOOD,Blackwood 66kV,SA1,ElectraNet,,,,,unmatched,
+B_POOL,Blackpool 66kV,SA1,ElectraNet,,,,,unmatched,
+BRNSDE,Burnside 66kV,SA1,ElectraNet,,,,,unmatched,
+ATHOL,Athol Park 66kV,SA1,ElectraNet,,,,,unmatched,
+ARDN_W,Ardrossan West 132kV,SA1,ElectraNet,way/600367678,Ardrossan West,-34.4294078,137.8889061,name_match,medium
+ANGAST,Angaston,SA1,ElectraNet,way/715631437,Angaston substation,-34.5039727,139.0250945,name_match,medium
+ANG_CK,Angas Creek 132kV,SA1,ElectraNet,way/601710781,Angas Creek,-34.8471347,138.936875,name_match,medium
+ALDING,Aldinga 66kV,SA1,ElectraNet,,,,,unmatched,
+ABC_B,Adelaide Brighton Cement 66kV,SA1,ElectraNet,,,,,unmatched,
+A_VALE,Angle Vale 66kV,SA1,ElectraNet,,,,,unmatched,
+ASCOT,Ascot Park 66kV,SA1,ElectraNet,,,,,unmatched,
+LADB_G,Ladbroke Grove 132kV,SA1,ElectraNet,,,,,unmatched,
+BUNGAM,Bungama 132kV,SA1,ElectraNet,way/120511705,Bungama Substation,-33.194794,138.0670335,name_match,medium
+CANOWI,Canowie,SA1,ElectraNet,way/170058930,Canowie,-33.3478877,138.7509301,name_match,medium
+DAVENP,Davenport 275kV,SA1,ElectraNet,way/164764363,Davenport,-32.5362576,137.8127486,name_match,medium
+DALRYM,Dalrymple,SA1,ElectraNet,way/600670369,Dalrymple,-34.9360163,137.7442188,name_match,medium
+CULTAN,Cultana 275kV,SA1,ElectraNet,way/165154628,Cultana Substation,-32.9317614,137.5445353,name_match,medium
+CUD_PK,Cudmore Park 66kV,SA1,ElectraNet,,,,,unmatched,
+CROYDTEE,Prosp/nadeltee/croydn 66kV Tee,SA1,ElectraNet,,,,,unmatched,
+CROYDN,Croydon 66kV,SA1,ElectraNet,,,,,unmatched,
+CAMBTN,Campbelltown 66kV,SA1,ElectraNet,,,,,unmatched,
+CROY_P,Croydon Park 66kV,SA1,ElectraNet,,,,,unmatched,
+CLVIEW,Clearview 66kV,SA1,ElectraNet,way/603716602,Clearview,-34.8604579,138.6105441,name_match,medium
+CLAREN,Clarendon 66kV,SA1,ElectraNet,,,,,unmatched,
+CLAR_G,Clarence Gardens 66kV,SA1,ElectraNet,,,,,unmatched,
+CHLTNM,Cheltenham 66kV,SA1,ElectraNet,,,,,unmatched,
+CHCRPTEE,Chltnm/croy_p/croydn 66kV Tee,SA1,ElectraNet,,,,,unmatched,
+CH_GDN,Cherry Gardens 275kV,SA1,ElectraNet,way/172364007,Cherry Gardens,-35.094988,138.6458102,name_match,medium
+CORO,Coromandel Pl 66kV,SA1,ElectraNet,,,,,unmatched,
+LARG_N,Largs North,SA1,ElectraNet,,,,,unmatched,
+KILKEN,Kilkenny 66kV,SA1,ElectraNet,,,,,unmatched,
+LIN_PK,Linden Park,SA1,ElectraNet,,,,,unmatched,
+NPS,Northern Ps 275kV,SA1,ElectraNet,,,,,unmatched,
+NORWD,Norwood 66kV,SA1,ElectraNet,,,,,unmatched,
+NORTHF,Northfield 275kV,SA1,ElectraNet,way/172715843,Northfield,-34.8476686,138.6342227,name_match,medium
+NOAR_C,Noarlunga Centre 66kV,SA1,ElectraNet,,,,,unmatched,
+NEUROO,Neuroo 132kV,SA1,ElectraNet,,,,,unmatched,
+NADELTEE,Croytee/n_adel/hind_s 66kV Tee,SA1,ElectraNet,,,,,unmatched,
+N_W_B,North West Bend 132kV,SA1,ElectraNet,way/402624716,North West Bend,-33.9947961,139.7322939,name_match,medium
+N_RICH,New Richmond 66kV,SA1,ElectraNet,,,,,unmatched,
+NRICHTEE,Keswic/n_rich/plympt 66kV Tee,SA1,ElectraNet,,,,,unmatched,
+N_OSBN,New Osborne 66kV,SA1,ElectraNet,,,,,unmatched,
+MW_4,Mwps4 132kV,SA1,ElectraNet,,,,,unmatched,
+MW_3,Mwps3 132kV,SA1,ElectraNet,,,,,unmatched,
+MW_2,Mwps2 132kV,SA1,ElectraNet,,,,,unmatched,
+MW_1,Mwps1 132kV,SA1,ElectraNet,,,,,unmatched,
+MVILLE,Morphettville 66kV,SA1,ElectraNet,,,,,unmatched,
+LE_FEV,Lefevre 66kV,SA1,ElectraNet,way/172714955,LeFevre,-34.779766,138.5092816,name_match,medium
+MT_GUN,Mt Gunson 132kV,SA1,ElectraNet,,,,,unmatched,
+MT_GAM,Mt Gambier 132kV,SA1,ElectraNet,,,,,unmatched,
+N_ADEL,North Adelaide 66kV,SA1,ElectraNet,,,,,unmatched,
+MT_BAR,Mt Barker 132kV,SA1,ElectraNet,,,,,unmatched,
+OAKLND,Oaklands 66kV,SA1,ElectraNet,,,,,unmatched,
+OLYM_N,Olympic Dam North 132kV,SA1,ElectraNet,way/462419044,Olympic Dam North,-30.4424351,136.8712527,name_match,medium
+LINPKT,Uraidt/lin_pk/panora 66kV Tee,SA1,ElectraNet,,,,,unmatched,
+LMITCH,Lower Mitchem 66kV,SA1,ElectraNet,,,,,unmatched,
+MA_1,Mannum-adelaide 1,SA1,ElectraNet,,,,,unmatched,
+MA_2,Mannum-adelaide 2,SA1,ElectraNet,,,,,unmatched,
+MA_3,Mannum-adelaide 3,SA1,ElectraNet,,,,,unmatched,
+MAGILL,Magill 275kV,SA1,ElectraNet,way/172364006,Magill Substation,-34.9110265,138.6818119,name_match,medium
+MANNUM,Mannum,SA1,ElectraNet,way/502271904,Mannum,-34.9170551,139.2645719,name_match,medium
+MBH_1,Murray Bridge-hahndorf 1,SA1,ElectraNet,,,,,unmatched,
+OCPL,Osborne Cogen Plant,SA1,ElectraNet,,,,,unmatched,
+MBH_2,Murray Bridge-hahndorf 2,SA1,ElectraNet,,,,,unmatched,
+MC_L_F,Mclaren Flat,SA1,ElectraNet,,,,,unmatched,
+MCLFTEE,Morp_e:mc_l_f:willun 66kV Tee,SA1,ElectraNet,,,,,unmatched,
+MDLBCK,Midback 132kV,SA1,ElectraNet,,,,,unmatched,
+MILLBR,Millbr 132kV,SA1,ElectraNet,,,,,unmatched,
+MINTAR,Mintaro 132kV,SA1,ElectraNet,way/831284067,Mintaro,-33.9027284,138.7379712,name_match,medium
+MOBILO,Mobilong 132kV,SA1,ElectraNet,way/172998381,Mobilong,-35.0647022,139.2664441,name_match,medium
+MONASH,Monash 132kV,SA1,ElectraNet,way/170066758,Monash Substation,-34.2377679,140.5967495,name_match,medium
+OLYM_W,Olympic Dam West 275kV,SA1,ElectraNet,way/185835127,Olympic Dam West,-30.4492262,136.8604105,name_match,medium
+MBH_3,Murray Bridge-hahndorf 3,SA1,ElectraNet,,,,,unmatched,
+MORP_E,Morphett Vale East 275kV,SA1,ElectraNet,way/172867384,Morphett Vale East Substation,-35.113573,138.54948,name_match,medium
+T_BEND,Tailem Bend 275kV,SA1,ElectraNet,way/75514732,Tailem Bend,-35.2710262,139.4923235,name_match,medium
+SHE_PK,Sheidow Park 66kV,SA1,ElectraNet,,,,,unmatched,
+YADNAR,Yadnarie 132kV,SA1,ElectraNet,way/165170273,Yadnarie Substation,-33.6895562,136.4006268,name_match,medium
+WOOMER,Woomera 132kV,SA1,ElectraNet,way/170407657,Woomera,-31.1472055,136.8018321,name_match,medium
+WOODFD,Woodforde 66kV,SA1,ElectraNet,,,,,unmatched,
+WILLUN,Willunga 66kV,SA1,ElectraNet,,,,,unmatched,
+WHY_T,Whyalla Terminal 132kV,SA1,ElectraNet,way/167924823,Whyalla Terminal,-33.0096953,137.5766583,name_match,medium
+WHITSTEE,N_unly/whit_s/keswic 66kV Tee,SA1,ElectraNet,,,,,unmatched,
+WHIT_S,Whitmore Square 66kV,SA1,ElectraNet,,,,,unmatched,
+SEACOM,Seacombe 66kV,SA1,ElectraNet,,,,,unmatched,
+W_LOO,Waterloo 132kV,SA1,ElectraNet,way/516938456,Waterloo,-33.9902114,138.8740983,name_match,medium
+URAIDT,Magill/uraidl/linpkt 66kV Tee,SA1,ElectraNet,,,,,unmatched,
+URAIDL,Uraidl 66kV,SA1,ElectraNet,,,,,unmatched,
+WDVILL,Woodville 66kV,SA1,ElectraNet,,,,,unmatched,
+STON_P,Stony Point 132kV,SA1,ElectraNet,way/598946461,Stony Point,-32.9869897,137.7741018,name_match,medium
+TIPS_B,Torrens B Ps 275kV,SA1,ElectraNet,,,,,unmatched,
+TIPS_A,Torrens A Ps 275kV,SA1,ElectraNet,,,,,unmatched,
+TIE_DVPL,Tie Dav-pla 132kV,SA1,ElectraNet,,,,,unmatched,
+TI_N,Torrens North,SA1,ElectraNet,way/603736533,Torrens North,-34.779559,138.5218574,name_match,medium
+THEBAR,Thebarton 66kV,SA1,ElectraNet,,,,,unmatched,
+TEMPLE,Templers 132kV,SA1,ElectraNet,way/231510030,Templers,-34.4626125,138.7714965,name_match,medium
+TATNTEE,Tips_a:ti_n  :qps    66kV Tee,SA1,ElectraNet,,,,,unmatched,
+T_T_G,Tea Tree Gully 66kV,SA1,ElectraNet,,,,,unmatched,
+TONS_P,Tonsley Park 66kV,SA1,ElectraNet,,,,,unmatched,
+SNUGGY,Snuggery 132kV,SA1,ElectraNet,way/164674789,Snuggery Substation,-37.6641937,140.416464,name_match,medium
+WWANG,Wallerawang Ps 330kV,NSW1,Transgrid,,,,,unmatched,
+WARRIMOO,Warrimoo 132kV,NSW1,Transgrid,way/200566122,Warrimoo Transmission Substation,-33.7331654,150.6029137,name_match,medium
+WELLNGTN,Wellington 330kV,NSW1,Transgrid,way/1468637853,Wellington Substation,-32.527001,148.9632404,name_match,medium
+WAGGA330,Wagga 330kV,NSW1,Transgrid,,,,,unmatched,
+W_LIVRPL,West Liverpool 132kV,NSW1,Transgrid,way/203043713,West Liverpool Transmission Substation,-33.9309867,150.8719517,name_match,medium
+YANCO,Yanco 132kV,NSW1,Transgrid,,,,,unmatched,
+YASS,Yass 330kV,NSW1,Transgrid,way/656231964,Yass ZS,-34.8338323,148.8943028,name_match,medium
+947TEE,Wellington/piper/orange 132kV Tee,NSW1,Transgrid,,,,,unmatched,
+VINEYARD,Vineyard 330kV,NSW1,Transgrid,way/257580093,Vineyard Bulk Supply Substation,-33.6568319,150.8435013,name_match,medium
+WAGGA132,Wagga 132kV,NSW1,Transgrid,,,,,unmatched,
+FINLEY,Finley 132kV,NSW1,Transgrid,,,,,unmatched,
+MUNMORAH,Munmorah 330kV,NSW1,Transgrid,way/24024039,Munmorah,-33.209683,151.5398904,name_match,medium
+MULLUMB,Mullumbimby 132kV (northpower),NSW1,Transgrid,,,,,unmatched,
+DENILIQN,Deniliquin 132kV,NSW1,Transgrid,,,,,unmatched,
+ERARING,Eraring 500kV,NSW1,Transgrid,way/24038114,Eraring substation,-33.0616555,151.5156448,name_match,medium
+MOLONG,Molong 132kV,NSW1,Transgrid,way/173553203,Molong Substation,-33.0869151,148.8988911,name_match,medium
+MEADOWBK,Meadowbank 132kV,NSW1,Transgrid,way/480637075,Meadowbank Zone Substation,-33.8135438,151.0935788,name_match,medium
+MASONPRK,Mason Park 132kV,NSW1,Transgrid,,,,,unmatched,
+MARULAN,Marulan 330kV,NSW1,Transgrid,way/160295596,Marulan,-34.6152903,150.0528516,name_match,medium
+MARCKVLE,MarrickVille 132kv,NSW1,Transgrid,way/476441263,Marrickville Zone Substation,-33.9119307,151.1622641,name_match,medium
+MAROUBRA,Maroubra 132kV,NSW1,Transgrid,way/476441252,Maroubra Zone Substation,-33.9423896,151.2380634,name_match,medium
+TUMUT3,Lower Tumut,NSW1,Transgrid,way/208364780,Lower Tumut Switching Station,-35.6066188,148.2886088,name_match,medium
+LIVERPL,Liverpool 330kV,NSW1,Transgrid,way/203043714,Liverpool Bulk Supply Substation,-33.932709,150.8657546,name_match,medium
+LISMORE,Lismore 330kV,NSW1,Transgrid,way/171581252,Lismore 132/66kV,-28.8190345,153.243448,name_match,medium
+LISM132,Lismore 132kV,NSW1,Transgrid,way/171581252,Lismore 132/66kV,-28.8190345,153.243448,name_match,medium
+LIDDELL,Liddell Ps 330kV,NSW1,Transgrid,,,,,unmatched,
+LAWSON,Lawson 132kV,NSW1,Transgrid,way/854391898,Lawson Transmission Substation,-33.7210902,150.4255445,name_match,medium
+LANECOVE,Lane Cove 132kV,NSW1,Transgrid,way/480637072,Lane Cove Zone Substation,-33.8116971,151.1450273,name_match,medium
+KOOLKHAN,Koolkhan 132kV,NSW1,Transgrid,way/98964542,Koolkhan Zone Substation,-29.6175171,152.9305109,name_match,medium
+KEMPSEY,Kempsey 132kV Sub,NSW1,Transgrid,,,,,unmatched,
+KEMPS_CK,Kemps Creek 500kV,NSW1,Transgrid,way/686798447,Kemps Creek Zone Substation,-33.8840164,150.7915453,name_match,medium
+KANGAROO,Kangaroo Valley Ps,NSW1,Transgrid,,,,,unmatched,
+JINDERA,Jinderra 330kV,NSW1,Transgrid,,,,,unmatched,
+INGLBURN,Ingleburn 330kV,NSW1,Transgrid,way/172609354,Ingleburn Bulk Supply Substation,-34.0140112,150.8507025,name_match,medium
+HBSH_BAY,Homebush Bay 132kV,NSW1,Transgrid,,,,,unmatched,
+HAYMARKT,Haymarket 330kV,NSW1,Transgrid,way/476441268,Haymarket Bulk Supply Substation,-33.8814548,151.2022255,name_match,medium
+GUTHEGA,Guthega,NSW1,Transgrid,way/208498232,Guthega Substation,-36.3494836,148.4134332,name_match,medium
+GRIFFITH,Griffith 132kV,NSW1,Transgrid,,,,,unmatched,
+GOSFORD,Gosford 132kV,NSW1,Transgrid,,,,,unmatched,
+GADARA,Gadara 132kV,NSW1,Transgrid,way/480673869,Gadara Substation,-35.2961445,148.1355472,name_match,medium
+21TEE,Munmorah/sydnth/tuggerah 330kV Tee,NSW1,Transgrid,,,,,unmatched,
+FORBES,Forbes 132kV,NSW1,Transgrid,way/480673880,Forbes Substation,-33.3653095,148.0195542,name_match,medium
+MUNYANG,Munyang 132kV,NSW1,Transgrid,way/208498119,Munyang Substation,-36.3510337,148.4117662,name_match,medium
+MUSBK132,Muswellbrook 132kV,NSW1,Transgrid,way/204894935,Muswellbrook Substation,-32.2222034,150.9411372,name_match,medium
+BURONGA,Buronga 220kV,NSW1,Transgrid,,,,,unmatched,
+BUNNERNG,Bunnerong 132kV,NSW1,Transgrid,,,,,unmatched,
+BRKNHILL,Broken Hill 220kV,NSW1,Transgrid,,,,,unmatched,
+BLOWERG,Blowering Ps 132kV,NSW1,Transgrid,,,,,unmatched,
+BERYL,Beryl 132kV,NSW1,Transgrid,way/234245468,Beryl Substation,-32.3482164,149.4609947,name_match,medium
+BENDEELA,Bendeela Ps,NSW1,Transgrid,,,,,unmatched,
+CANTERBY,Canterbury 132kV,NSW1,Transgrid,,,,,unmatched,
+BAYSWATR,Bayswater 330kV,NSW1,Transgrid,way/167694317,Bayswater Substation,-32.3991171,150.945249,name_match,medium
+BALRANLD,Balranald 220/22kV Substation,NSW1,Transgrid,,,,,unmatched,
+AVON,Avon 330kV,NSW1,Transgrid,way/172739944,Avon Substation,-34.4473833,150.7438331,name_match,medium
+ARMIDALE,Armidale 330kV,NSW1,Transgrid,way/160201298,Armidale Substation,-30.532674,151.7129863,name_match,medium
+ANM,Anm 132kV,NSW1,Transgrid,,,,,unmatched,
+ALBURY,Albury 132kV,NSW1,Transgrid,,,,,unmatched,
+CAPRAL,Capral 132kV,NSW1,Transgrid,,,,,unmatched,
+CHULLORA,Chullora 132kV,NSW1,Transgrid,,,,,unmatched,
+COFFS,Coffs Harbour 330kV,NSW1,Transgrid,,,,,unmatched,
+VALES_PT,Vales Point 330kV,NSW1,Transgrid,way/376493893,Vales Point Bulk Supply Substation,-33.1594128,151.5413754,name_match,medium
+COLMBLLY,Coleambally 132kV,NSW1,Transgrid,,,,,unmatched,
+COOMA,Cooma 132kV,NSW1,Transgrid,way/439689405,Cooma ZS,-36.2183121,149.1401748,name_match,medium
+COWRA,Cowra 132kV,NSW1,Transgrid,way/1019427179,Cowra Zone Substation,-33.8404319,148.70734,name_match,medium
+ORANGE,Orange 132kV,NSW1,Transgrid,way/477585580,Orange 66kV Bulk Supply Substation,-33.2796604,149.1058859,name_match,medium
+DAPTO,Dapto 330kV,NSW1,Transgrid,way/261770823,Dapto Zone Substation,-34.5015817,150.7872342,name_match,medium
+DARL_PT,Darlington Point 330kV,NSW1,Transgrid,,,,,unmatched,
+NEWCSTLE,Newcastle 330kV,NSW1,Transgrid,way/24028364,Newcastle substation,-32.9276708,151.5616988,name_match,medium
+NEPEAN,Nepean 132kV,NSW1,Transgrid,way/231418854,Nepean Transmission Substation,-34.0723599,150.732269,name_match,medium
+OURIMBAH,Ourimbah 132kV,NSW1,Transgrid,,,,,unmatched,
+NAMBUCCA,Nambucca 132kV,NSW1,Transgrid,,,,,unmatched,
+MUSBK330,Muswellbrook 330kV,NSW1,Transgrid,way/204894935,Muswellbrook Substation,-32.2222034,150.9411372,name_match,medium
+MURRUMBR,Murrumburrah 132kV,NSW1,Transgrid,way/637324497,Murrumburrah ZS,-34.5428066,148.32813,name_match,medium
+BURRINJK,Burrinjuck 132kV,NSW1,Transgrid,way/480673870,Burrinjuck Substation,-35.0009605,148.582536,name_match,medium
+CANBERRA,Canberra 330kV,NSW1,Transgrid,way/160191425,Canberra Substation,-35.2193405,148.9970196,name_match,medium
+PEAKHRST,Peakhurst 132kV,NSW1,Transgrid,,,,,unmatched,
+PANORAMA,Panorama 132kV,NSW1,Transgrid,way/230707206,Panorama Substation,-33.4304185,149.5213866,name_match,medium
+PENRITH,Penrith 132kV,NSW1,Transgrid,way/45767058,Penrith Transmission Substation,-33.7466304,150.6916785,name_match,medium
+PT_MCQAR,Port Macquarie 132kV,NSW1,Transgrid,,,,,unmatched,
+REDBANK,Redbank 132kV,NSW1,Transgrid,,,,,unmatched,
+REGENTVL,Regentville 330kV,NSW1,Transgrid,way/45378183,Regentville Bulk Supply Substation,-33.7877907,150.6489729,name_match,medium
+SINGLETN,Singleton 132kV,NSW1,Transgrid,,,,,unmatched,
+ST_PETER,St Peters 132kV,NSW1,Transgrid,way/476441262,St Peters Zone Substation,-33.9063502,151.183137,name_match,medium
+STROUD,Stroud 132kV,NSW1,Transgrid,,,,,unmatched,
+SYD_NTH,Sydney North 330kV,NSW1,Transgrid,way/179923658,Sydney North Bulk Supply Substation,-33.6556542,151.0299827,name_match,medium
+SYD_STH,Sydney South 330kV,NSW1,Transgrid,way/681005983,Sydney South Bulk Supply Substation,-33.9786268,151.013063,name_match,medium
+SYD_EAST,Sydney East 330kV,NSW1,Transgrid,way/179921457,Sydney East Bulk Supply Substation,-33.7259672,151.2083591,name_match,medium
+TUGGERAH,Tuggerah 330kV,NSW1,Transgrid,,,,,unmatched,
+TUMUT1_2,Upper Tumut,NSW1,Transgrid,way/208359871,Upper Tumut Switching Station,-35.9111671,148.385943,name_match,medium
+TUMUT132,Tumut 132kV,NSW1,Transgrid,way/439868272,Tumut ZS,-35.2999257,148.2034717,name_match,medium
+SYD_WEST,Sydney West 330kV,NSW1,Transgrid,way/45237469,Sydney West Bulk Supply Substation,-33.8159579,150.8286604,name_match,medium
+TOMAGO,Tomago 330kV,NSW1,Transgrid,way/239269272,Tomago,-32.8170557,151.7128637,name_match,medium
+TOMAG132,Tomago 132kV,NSW1,Transgrid,way/239269272,Tomago,-32.8170557,151.7128637,name_match,medium
+PARKES,Parkes 132kV,NSW1,Transgrid,way/173554767,Parkes Substation,-33.1028483,148.0749547,name_match,medium
+TAREE,Taree 132kV,NSW1,Transgrid,,,,,unmatched,
+TAMWORTH,Tamworth 330kV,NSW1,Transgrid,way/1271306861,Tamworth 132kV Substation,-31.1319574,150.9247045,name_match,medium
+TENTFLD,Tenterfield 132kV,NSW1,Transgrid,,,,,unmatched,
+SNOWY1,Snowy,SNOWY1,Transgrid,,,,,unmatched,
+92ZTEE,Syd-Nth/Syd-East/Somersby 132kV Tee,NSW1,Transgrid,,,,,unmatched,
+NDSC_N,NDSC-North,QLD1,Powerlink,,,,,unmatched,
+T152_G_S,Gladstone South (T152) 132kV,QLD1,Powerlink,way/69034090,Gladstone South Substation,-23.8863184,151.2737452,name_match,medium
+JINDABYN,Jindabyn Ps,SNOWY1,Transgrid,,,,,unmatched,
+MT_DRUIT,Mt Druit 132kV,NSW1,Transgrid,,,,,unmatched,
+WYONG,Wyong 132kV,NSW1,Transgrid,way/452155002,Wyong ZS,-33.2672933,151.4377647,name_match,medium
+H21_MRRE,Murarrie 110kV,QLD1,Powerlink,way/44418650,Murarrie Substation,-27.4473719,153.113257,name_match,medium
+H31_MDNR,Molendinar (H31) 275kV ,QLD1,Powerlink,way/95612087,Molendinar Substation,-27.9786391,153.360642,name_match,medium
+MLNK_B,Murraylink-SA,SA1,APT,,,,,unmatched,
+MAYURA,Mayura 132kV,SA1,ElectraNet,way/177601131,Mayura,-37.7380646,140.3877263,name_match,medium
+BNGALORA,Directlink-QLD ,QLD1,APT,,,,,unmatched,
+SAVRIVER,Savage River,TAS1,TasNetworks,way/509857699,Savage River Substation,-41.4874066,145.2122364,name_match,medium
+SCOTDALE,Scottsdale,TAS1,TasNetworks,way/234863481,Scottsdale Substation,-41.1649995,147.5237399,name_match,medium
+ROWALLAN,Rowallen,TAS1,TasNetworks,,,,,unmatched,
+TARRALEA,Tarraleah,TAS1,TasNetworks,way/435794781,Tarraleah Substation,-42.300436,146.4578293,name_match,medium
+SHEFIELD,Sheffield,TAS1,TasNetworks,way/88191017,Sheffield Substation,-41.3356752,146.3070657,name_match,medium
+SMITHTON,Smithton,TAS1,TasNetworks,way/234176499,Smithton Substation,-40.8480945,145.1309684,name_match,medium
+SORELL,Sorell,TAS1,TasNetworks,way/180760073,Sorell Substation,-42.7762603,147.5554173,name_match,medium
+ST_MARYS,St Marys,TAS1,TasNetworks,way/547001769,St Marys Substation,-41.5922569,148.1836882,name_match,medium
+STARWOOD,Starwood,TAS1,TasNetworks,way/545150713,Starwood Substation,-41.1215658,146.847686,name_match,medium
+TEMCO,Temco,TAS1,TasNetworks,way/545150722,Temco Substation,-41.1297108,146.8556127,name_match,medium
+NORWOOD,Norwood,TAS1,TasNetworks,way/118035945,Norwood Substation,-41.4733034,147.1847164,name_match,medium
+TRIABUNA,Triabunna,TAS1,TasNetworks,way/375778791,Triabunna Substation,-42.4999196,147.9093469,name_match,medium
+TRIBUTE,Tribute,TAS1,TasNetworks,way/557883073,Tribute Power Station Switchyard,-41.8160018,145.6497504,name_match,medium
+TUNGATIN,Tungatinah,TAS1,TasNetworks,way/435794582,Tungatinah Substation,-42.2978945,146.4573003,name_match,medium
+ULVERSTN,Ulverstone,TAS1,TasNetworks,way/175174348,Ulverstone Substation,-41.1715586,146.1625037,name_match,medium
+WADAMANA,Waddamana,TAS1,TasNetworks,way/247356159,Waddamana Substation,-42.1257662,146.7456672,name_match,medium
+WARTAH_T,Waratah Tee,TAS1,TasNetworks,way/234083164,Waratah Tee,-41.4888048,145.4827945,name_match,medium
+WES_VALE,Wesley Vale,TAS1,TasNetworks,way/437715076,Wesley Vale Substation,-41.1793344,146.4450834,name_match,medium
+WILMOT,Wilmot,TAS1,TasNetworks,way/552021418,Wilmot Substation,-41.483095,146.1249926,name_match,medium
+ROSEBERY,Rosebery,TAS1,TasNetworks,way/557883162,Rosebery Substation,-41.7770261,145.539328,name_match,medium
+TREVALYN,Trevallyn,TAS1,TasNetworks,way/61649117,Trevallyn Substation,-41.4232547,147.1125753,name_match,medium
+PALMSTN,Palmerston,TAS1,TasNetworks,way/174441055,Palmerston Substation,-41.7874668,146.9904471,name_match,medium
+ROKEBY,Rokeby,TAS1,TasNetworks,way/551259890,Rokeby Substation,-42.9022923,147.4402468,name_match,medium
+REPULSE,Repulse,TAS1,TasNetworks,way/548367438,Repulse Substation,-42.5074341,146.6470441,name_match,medium
+PALOONA,Paloona,TAS1,TasNetworks,way/174434683,Paloona Substation,-41.2828892,146.2496447,name_match,medium
+DEVILS_G,Devils Gate,TAS1,TasNetworks,,,,,unmatched,
+DEVNPORT,Devonport,TAS1,TasNetworks,way/174431697,Devonport Substation,-41.1959912,146.3409216,name_match,medium
+ELECTRNA,Electrona,TAS1,TasNetworks,way/509868935,Electrona Substation,-43.0574802,147.2611012,name_match,medium
+EMU_BAY,Emu Bay,TAS1,TasNetworks,way/554780216,Emu Bay Substation,-41.0656627,145.9139826,name_match,medium
+FARRELL,Farrell,TAS1,TasNetworks,way/306840322,Farrell Substation,-41.7344135,145.5314936,name_match,medium
+FISHER,Fisher,TAS1,TasNetworks,,,,,unmatched,
+G_TOWN,George Town,TAS1,TasNetworks,way/545150725,George Town Substation,-41.1283897,146.8856513,name_match,medium
+GORDON,Gordon,TAS1,TasNetworks,way/550211808,Gordon Substation,-42.7405331,145.9820542,name_match,medium
+HADSPEN,Hadspen,TAS1,TasNetworks,way/88187651,Hadspen Substation,-41.5014674,147.0951482,name_match,medium
+HMPSHIRE,Hampshire,TAS1,TasNetworks,way/234083565,Hampshire Substation,-41.2698323,145.7275178,name_match,medium
+JBUTTERS,John Butters,TAS1,TasNetworks,way/558447265,John Butters Power Station Switchyard,-42.1546219,145.5345183,name_match,medium
+KERMANDE,Kermandie,TAS1,TasNetworks,way/229953010,Kermandie Substation,-43.1644605,146.9455897,name_match,medium
+KINGSTON,Kingston,TAS1,TasNetworks,way/560228875,Kingston Substation,-42.975134,147.3037347,name_match,medium
+KNIGHTS,Knights Road,TAS1,TasNetworks,way/233927458,Knights Road Substation,-43.0228776,147.073899,name_match,medium
+L_ECHO,Lake Echo,TAS1,TasNetworks,way/547818722,Lake Echo Substation,-42.2539001,146.620369,name_match,medium
+LEMONTYM,Lemonthyme,TAS1,TasNetworks,way/552038078,Lemonthyme Substation,-41.6039673,146.1390438,name_match,medium
+LIAPOOTA,Liapootah,TAS1,TasNetworks,way/547874512,Liapootah Substation,-42.3760614,146.5115892,name_match,medium
+LINFARNE,Lindisfarne,TAS1,TasNetworks,way/509831194,Lindisfarne Substation,-42.8246678,147.3492289,name_match,medium
+MAKNTOSH,Mackintosh,TAS1,TasNetworks,way/557523514,Mackintosh Power Station Switchyard,-41.6999664,145.6460821,name_match,medium
+MDWBANK,Meadowbank,TAS1,TasNetworks,way/548702985,Meadowbank Power Station Switchyard,-42.6110018,146.8458452,name_match,medium
+MOWBRAY,Mowbray,TAS1,TasNetworks,way/545672755,Mowbray Substation,-41.4092555,147.1364403,name_match,medium
+N_NRFOLK,New Norfolk,TAS1,TasNetworks,way/175926345,New Norfolk Substation,-42.7804901,147.0788061,name_match,medium
+NEWTON,Newton,TAS1,TasNetworks,way/558447279,Newton Substation,-41.9101163,145.5660276,name_match,medium
+N_HOBART,North Hobart,TAS1,TasNetworks,way/208921100,North Hobart Substation,-42.8732589,147.3211204,name_match,medium
+DERBY,Derby,TAS1,TasNetworks,way/496891060,Derby Substation,-41.1336041,147.8119679,name_match,medium
+RISDON,Risdon,TAS1,TasNetworks,way/550345987,Risdon Substation,-42.8360473,147.3162734,name_match,medium
+CREEK_RD,Creek Road,TAS1,TasNetworks,way/23239876,Creek Road Substation,-42.8597953,147.2915594,name_match,medium
+CLUNY,Cluny,TAS1,TasNetworks,way/175964354,Cluny Substation,-42.5059466,146.6796139,name_match,medium
+REECE,Reece,TAS1,TasNetworks,way/557523534,Reece Substation,-41.7238022,145.1363122,name_match,medium
+RAILTON,Railton,TAS1,TasNetworks,way/89484976,Railton Substation,-41.3340477,146.4234222,name_match,medium
+QNSTOWN,Queenstown,TAS1,TasNetworks,way/558447274,Queenstown Substation,-42.0660807,145.5601211,name_match,medium
+QUE,Que,TAS1,TasNetworks,way/234083162,Que Substation,-41.5991388,145.6918023,name_match,medium
+PT_LATTA,Port Latta,TAS1,TasNetworks,,,,,unmatched,
+POATINA,Poatina,TAS1,TasNetworks,,,,,unmatched,
+COMALCO,Comalco,TAS1,TasNetworks,way/545202641,Comalco Substation,-41.1240718,146.8723193,name_match,medium
+ARTHURS,Arthurs Lake,TAS1,TasNetworks,way/547042787,Arthurs Lake Substation,-41.9881032,146.8621189,name_match,medium
+AVOCA,Avoca,TAS1,TasNetworks,way/88205425,Avoca Substation,-41.785167,147.7276178,name_match,medium
+DERWENT,Derwent Bridge,TAS1,TasNetworks,way/548168948,Derwent Bridge Substation,-42.1410954,146.2248584,name_match,medium
+BELL_BAY,Bell Bay,TAS1,TasNetworks,,,,,unmatched,
+BOYER,Boyer,TAS1,TasNetworks,way/175927476,Boyer Substation,-42.7793959,147.101331,name_match,medium
+B_WATER,Bridgewater,TAS1,TasNetworks,way/168403935,Bridgewater Substation,-42.7313444,147.2314165,name_match,medium
+CLUNY_T,Cluny,TAS1,TasNetworks,way/175964354,Cluny Substation,-42.5059466,146.6796139,name_match,medium
+CHAPEL,Chapel Street,TAS1,TasNetworks,way/23298443,Chapel Street Substation,-42.8431445,147.2548721,name_match,medium
+CETHANA,Cethana,TAS1,TasNetworks,way/552021429,Cethana Substation,-41.4786853,146.1350039,name_match,medium
+CATAGNYA,Catagunya,TAS1,TasNetworks,,,,,unmatched,
+BASTYAN,Bastyan,TAS1,TasNetworks,,,,,unmatched,
+BUTLERS,Butlers Gorge Tee,TAS1,TasNetworks,,,,,unmatched,
+WRH_WEST,Waratah West ,NSW1,Transgrid,,,,,unmatched,
+SLEAFD,Sleaford,SA1,ElectraNet,way/598531273,Sleaford,-34.8504582,135.5942928,name_match,medium
+SSCMA,Coomera 110kV,QLD1,Powerlink,,,,,unmatched,
+WARRAGAM,Warragamba Power Station ,NSW1,Transgrid,,,,,unmatched,
+BURNIE,Burnie,TAS1,TasNetworks,way/167791635,Burnie Substation,-41.0766396,145.8912016,name_match,medium
+T129_EDM,T129 Edmonton,QLD1,Powerlink,,,,,unmatched,
+CBTS,Cranbourne 220kV,VIC1,AusNet,way/48955336,Cranbourne Terminal Station,-38.0848339,145.2653277,name_match,medium
+SST29,Postmans Ridge (SST29) 110kV,QLD1,Powerlink,way/308160585,Postmans Ridge Substation,-27.5332664,152.0663346,name_match,medium
+WATT_P,Wattle Point Windfarm,SA1,ElectraNet,,,,,unmatched,
+SOMERSBY,Somersby 132kV,NSW1,Transgrid,way/284934380,Somersby ZS,-33.414335,151.2927931,name_match,medium
+MT_MIL,Mt Millar 132kV,SA1,ElectraNet,,,,,unmatched,
+T157_IS,Ingham South 132kV,QLD1,Powerlink,way/196680356,Ingham South,-18.6655679,146.1564735,name_match,medium
+T162_BND,Bundamba (T162) 110kV,QLD1,Powerlink,way/176443359,Bundamba Substation,-27.594077,152.8182501,name_match,medium
+BLGT,George Town Converter Station,TAS1,TasNetworks,,,,,unmatched,
+BERESFLD,Beresfield 132kV eA,NSW1,Transgrid,,,,,unmatched,
+MAMRE,Mamre 132kV IE,NSW1,Transgrid,,,,,unmatched,
+BLLC,Basslink Loy Yang,VIC1,AusNet,,,,,unmatched,
+BRAE_PS,Braemar Power Station (H47),QLD1,Powerlink,way/170842253,Braemar Substation,-27.1147927,150.9001585,name_match,medium
+KOGAN_PS,H53 Kogan Creek PS Switchyard,QLD1,Powerlink,,,,,unmatched,
+S3_GNBNK,Greenbank (S003),QLD1,Powerlink,relation/19816725,Greenbank Substation,-27.7322897,152.956311,name_match,medium
+CHARMHVN,Charmhaven 132kV,NSW1,Transgrid,way/377141169,Charmhaven ZS,-33.2446917,151.4920582,name_match,medium
+MITCHELL,Mitchell 132kV,NSW1,Transgrid,,,,,unmatched,
+T142_TEN,Tennyson (T142) 110kV,QLD1,Powerlink,way/30471365,Tennyson substation,-27.5262401,153.0077655,name_match,medium
+DUNOON,Dunoon 132kV,NSW1,Essential E,way/306952781,Dunoon ZS,-28.6921194,153.3130983,name_match,medium
+T160_SMR,Sumner (T160) 110kV,QLD1,Powerlink,way/303417152,Sumner Substation,-27.5574488,152.9450756,name_match,medium
+BALLINA,Ballina 66/11kV,NSW1,Essential E,way/189960843,Ballina ZS,-28.8609764,153.5522532,name_match,medium
+EWINGSDL,Ewingsdale 66/11kV,NSW1,Essential E,way/695761053,Ewingsdale ZS,-28.6372398,153.5541953,name_match,medium
+H38_GDNA,Goodna (H38),QLD1,Powerlink,way/46305863,Goodna Substation,-27.6209954,152.8779204,name_match,medium
+T161_ALG,Algester (T161),QLD1,Powerlink,way/46146107,Algester Substation,-27.5988462,153.0313913,name_match,medium
+TUNKIL,Tungkillo,SA1,ElectraNet,way/224209320,Tungkillo,-34.8777239,139.0594851,name_match,medium
+WST_GSFD,West Gosford 132kV,NSW1,Transgrid,way/165712062,West Gosford ZS,-33.4209883,151.3316152,name_match,medium
+T74_GNTH,Gladstone North (T074),QLD1,Powerlink,,,,,unmatched,
+LENNOX_H,Lennox Head 66/11kV,NSW1,Essential E,way/698697574,Lennox Head ZS,-28.7815562,153.5522246,name_match,medium
+STUDLAND,Studland Bay Wind Farm,TAS1,TasNetworks,way/194582508,Studland Bay Wind Farm Substation,-40.7866058,144.7385361,name_match,medium
+ALSTONVL,Alstonville 66/11kV,NSW1,Essential E,way/344262335,Alstonville ZS,-28.8642922,153.4332688,name_match,medium
+GLEN_INN,Glen Innes 132kV,NSW1,Transgrid,way/364412878,Glen Innes zone substation,-29.7333227,151.7124166,name_match,medium
+CAMPBELL,Campbell St,NSW1,Transgrid,,,,,unmatched,
+GREEN_SQ,Green Square,NSW1,Transgrid,way/476441261,Green Square Substation,-33.9125306,151.1946262,name_match,medium
+ROTHBURY,Rothbury 132kV Substation,NSW1,Transgrid,way/67959727,Rothbury ZS,-32.7121224,151.327704,name_match,medium
+MLINK_B,Berri C/S,SA1,ElectraNet,,,,,unmatched,
+SSGBS,Gatton (SSGBS) 110kV,QLD1,Powerlink,,,,,unmatched,
+T177_KCK,King Creek (T177) 132kV,QLD1,Powerlink,way/298020591,King Creek,-20.3652552,147.4728639,name_match,medium
+S_TOWN,Snowtown,SA1,ElectraNet,way/600259239,Snowtown,-33.7137242,138.1403002,name_match,medium
+URANQNTY,Uranquinty 132kV,NSW1,Transgrid,way/588873006,Uranquinty ZS,-35.2020298,147.2446056,name_match,medium
+H63_TBAR,H63 Teebar Creek,QLD1,Powerlink,,,,,unmatched,
+T173_ARM,Aramara,QLD1,Powerlink,way/171735144,Aramara Substation,-25.5108373,152.3489741,name_match,medium
+MOKOTA,Mokota,SA1,ElectraNet,way/600951291,Mokota,-33.556993,138.8483523,name_match,medium
+PROM_H,Prominent Hill,SA1,ElectraNet,way/598423462,Prominent Hill,-29.7315212,135.5594289,name_match,medium
+CLEM_G,Clements Gap Wind Fram,SA1,ElectraNet,,,,,unmatched,
+REDHIL,Redhill,SA1,ElectraNet,,,,,unmatched,
+TAMAR_PS,Tamar Valley PS,TAS1,TasNetworks,,,,,unmatched,
+T171_ELR,El Arish 132KV,QLD1,Powerlink,way/173224184,El Arish Transmission Substation,-17.8098644,146.025581,name_match,medium
+H71_DDPS,Darling Downs PS 275KV,QLD1,Powerlink,,,,,unmatched,
+COLONGRA,Colongra Power Station,NSW1,Transgrid,,,,,unmatched,
+H48_B2PS,Braemar Power Station 2 (H48),QLD1,Powerlink,way/170842253,Braemar Substation,-27.1147927,150.9001585,name_match,medium
+TALAWARA,Tallawarra,NSW1,Endeavour E,way/255775145,Tallawarra Power Station,-34.5221889,150.807218,name_match,medium
+SPRNGHLL,Spring Hill,NSW1,Endeavour E,way/142733661,Spring Hill Transmission Station,-34.4590577,150.8604557,name_match,medium
+MT_PIPER,Mount Piper 500kV,NSW1,Transgrid,way/174239045,Mount Piper 132 Transmission Station,-33.3512555,150.0225234,name_match,medium
+BANNABY,Bannaby 500kV,NSW1,Transgrid,way/168227360,Bannaby 330kV Substation,-34.4470448,150.0524311,name_match,medium
+T116_TRN,Torrington (T116),QLD1,Powerlink,,,,,unmatched,
+CAPITAL,Capital Wind Farm 330kV,NSW1,Transgrid,,,,,unmatched,
+BOAMBEE,Boambee South 132kV,NSW1,Transgrid,way/205012118,Boambee South ZS,-30.3451718,153.0673324,name_match,medium
+MACARTHR,Macarthur 330kV,NSW1,Transgrid,way/49831064,Macarthur Bulk Supply Substation,-34.0853568,150.7661526,name_match,medium
+RALEIGH,Raleigh 132kV,NSW1,Transgrid,way/205012114,Raleigh ZS,-30.4624748,153.0012056,name_match,medium
+WAGGANTH,Wagga North 132kV,NSW1,Transgrid,,,,,unmatched,
+WOLLAR,Wollar 500kV,NSW1,Transgrid,way/169302216,Wollar Substation,-32.4116268,149.9530617,name_match,medium
+MACKSVIL,Macksville 132kV,NSW1,Transgrid,way/574206212,Macksville ZS,-30.7217752,152.9095615,name_match,medium
+T193_CLS,Clare South 132kV,QLD1,Powerlink,way/171845369,Clare South,-19.83836,147.2126162,name_match,medium
+L_BONY,Lake Bonney Wind Farm,SA1,ElectraNet,,,,,unmatched,
+H62_ABMN,Abermain(H62),QLD1,Powerlink,way/173223683,Abermain Substation,-27.5778299,152.7712356,name_match,medium
+T94_TVE,Townsville East 132kV,QLD1,Powerlink,way/549146600,Townsville East,-19.261721,146.833726,name_match,medium
+EAST_LIS,East Lismore 66/11kV,NSW1,Essential E,,,,,unmatched,
+LISM_SS,Lismore 66kV,NSW1,Essential E,way/171581252,Lismore 132/66kV,-28.8190345,153.243448,name_match,medium
+STH_LISM,South Lismore 66kV,NSW1,Essential E,,,,,unmatched,
+H58_LARC,Larcom Creek (H58),QLD1,Powerlink,way/759433641,Larcom Creek Transmission Substation,-23.8228615,151.0698565,name_match,medium
+H56_YBLS,Yabulu South (H56),QLD1,Powerlink,way/171980651,Yabulu South Substation,-19.2511309,146.5745301,name_match,medium
+T200CMPS,Condamine Power Station (T200),QLD1,Powerlink,,,,,unmatched,
+T194_CLB,Columboola 132kV (T194),QLD1,Powerlink,way/171582472,Columboola,-26.6488955,150.2797059,name_match,medium
+T189_OKY,Oakey 110kV (T189),QLD1,Powerlink,way/171575467,Oakey Substation,-27.4293042,151.7071471,name_match,medium
+BELALI,Belalie,SA1,ElectraNet,way/505288448,Belalie,-33.3092152,138.7283939,name_match,medium
+NO_B_H,North Brown Hill Wind Farm,SA1,ElectraNet,,,,,unmatched,
+WATE_E,Waterloo East,SA1,ElectraNet,way/659832877,Waterloo East,-33.989837,138.8766079,name_match,medium
+WAT_WF,Waterloo Wind Farm,SA1,ElectraNet,way/598324358,Waterloo Wind Farm Substation,-34.0012834,138.9108524,name_match,medium
+S5_WESTD,S5 Western Downs,QLD1,Powerlink,,,,,unmatched,
+SSWRD,Wellington Rd 110kV,QLD1,Powerlink,,,,,unmatched,
+H72_BKST,Blackstone (H72),QLD1,Powerlink,way/246978103,Blackstone Substation,-27.648635,152.8121225,name_match,medium
+GOULBURN,Goulburn 132kV,NSW1,Essential E,way/149985564,Goulburn 132,-34.769504,149.7311365,name_match,medium
+CULLERIN,Cullerin Range 132kV,NSW1,Transgrid,,,,,unmatched,
+H75_KUMP,Kumarilla Park (H75),QLD1,Powerlink,,,,,unmatched,
+CLAR_N,Clare North,SA1,ElectraNet,way/600725898,Clare North,-33.8234118,138.6266663,name_match,medium
+H73_RAGL,Raglan (H73),QLD1,Powerlink,way/171483749,Raglan Substation,-23.750902,150.8378273,name_match,medium
+T199_YAR,Yarwun (T199),QLD1,Powerlink,,,,,unmatched,
+KURRI,Kurri 132kV eA,NSW1,Transgrid,,,,,unmatched,
+KURRI_ZS,Kurri 132/11kV,NSW1,Transgrid,relation/6116676,Kurri Transmission Substation,-32.8059358,151.5002184,name_match,medium
+WAYATINA,Wayatinah Tee,TAS1,TasNetworks,,,,,unmatched,
+MOPS,Mortlake Power Station,VIC1,AusNet,,,,,unmatched,
+TEMP_W,Templers West,SA1,ElectraNet,way/598317777,Templers West,-34.4616673,138.7681213,name_match,medium
+MORNGTON,Mornington,TAS1,TasNetworks,way/258723245,Mornington Substation,-42.860636,147.4067413,name_match,medium
+CITY_W,City West,SA1,ElectraNet,way/353168338,City West,-34.9393078,138.5798339,name_match,medium
+BACK_C,Back Callington,SA1,ElectraNet,way/602151953,Back Callington,-35.0995338,138.9989841,name_match,medium
+WILLMSDL,Williamsdale 330kV,NSW1,Transgrid,,,,,unmatched,
+CRONULLA,Cronulla 132kV,NSW1,Transgrid,way/87498050,Cronulla Zone Substation,-34.051204,151.1471598,name_match,medium
+KURNELL,Kurnell 132kV,NSW1,Transgrid,,,,,unmatched,
+GUNNING,Gunning Wind Farm,NSW1,Essential E,way/637324498,Gunning Wind Farm,-34.6958746,149.3831361,name_match,medium
+WETS,Wemen 220kV,VIC1,AusNet,,,,,unmatched,
+ACTBRU,ActewAGL Bruce 132kV,NSW1,Transgrid,,,,,unmatched,
+ACTCIV,ActewAGL Civic 132kV,NSW1,Transgrid,,,,,unmatched,
+ACTBEL,ActewAGL Belconnen 132kV,NSW1,Transgrid,,,,,unmatched,
+ACTTHEO,ActewAGL Theodore 132kV,NSW1,Transgrid,,,,,unmatched,
+ACTWANN,ActewAGL Wanniassa 132kV,NSW1,Transgrid,,,,,unmatched,
+ACTWOD,ActewAGL Woden 132kV,NSW1,Transgrid,,,,,unmatched,
+ACTLAT,ActewAGL Latham 132kV,NSW1,Transgrid,,,,,unmatched,
+ACTGIL,ActewAGL Gilmore 132kV,NSW1,Transgrid,,,,,unmatched,
+ACTGCK,ActewAGL Gold Creek 132kV,NSW1,Transgrid,,,,,unmatched,
+ACTCE,ActewAGL City East 132kV,NSW1,Transgrid,,,,,unmatched,
+ACTCAU,ActewAGL Causeway 132kV,NSW1,Transgrid,,,,,unmatched,
+NRCS,NRCS,VIC1,AusNet,,,,,unmatched,
+SRCS,SRCS,VIC1,AusNet,,,,,unmatched,
+WDP,WPD,VIC1,AusNet,,,,,unmatched,
+INVERELL,Inverell 132kV,NSW1,Transgrid,,,,,unmatched,
+T188_DND,Daandine 110kV,QLD1,Powerlink,,,,,unmatched,
+BFIELD_W,Beaconsfield 330kV,NSW1,Transgrid,,,,,unmatched,
+TRTS,Tarrone 500kV,VIC1,AusNet,way/312550977,Tarrone Terminal Station,-38.1790066,142.1807806,name_match,medium
+WHYA_C,Whyalla Central,SA1,ElectraNet,,,,,unmatched,
+MACQPARK,Macquarie Park 132kV,NSW1,Transgrid,way/474805154,Macquarie Park Zone Substation,-33.7865939,151.1328382,name_match,medium
+CAMELLIA,Camellia 132kV,NSW1,Transgrid,way/480637091,Camellia Transmission Substation,-33.8261256,151.0304844,name_match,medium
+GLDFORD,Guildford 132kV,NSW1,Transgrid,way/45477753,Guildford Transmission Substation,-33.8505452,150.9571944,name_match,medium
+WETH_PRK,Wetherill Park 132kV,NSW1,Transgrid,way/480637101,Wetherill Park Transmission Station,-33.8420043,150.9115989,name_match,medium
+WWTH_PRK,West Wetherill Park 132kV,NSW1,Transgrid,way/45423647,West Wetherill Park Zone Substation,-33.8422312,150.8812921,name_match,medium
+H76_WAND,Wandoan South (H76),QLD1,Powerlink,way/550221344,Wandoan South,-26.2685342,149.7689218,name_match,medium
+T220_COL,Collinsville North,QLD1,Powerlink,way/549546891,Collinsville North,-20.5427755,147.8054949,name_match,medium
+SSCOR,Cooran,QLD1,Powerlink,way/1169539674,Cooran,-26.3450434,152.8641265,name_match,medium
+ACTELK,Eastlakes 132kV,NSW1,Transgrid,,,,,unmatched,
+T166_GCK,Granite Creek 132kV,QLD1,Powerlink,way/1081927956,Granite Creek ZS,-24.462777,151.680853,name_match,medium
+T120_KOR,Korenan 132kV,QLD1,Powerlink,,,,,unmatched,
+T100_RCK,Rocklands 132kV,QLD1,Powerlink,,,,,unmatched,
+T61_PAND,Pandoin 132kV,QLD1,Powerlink,way/545954664,Pandoin Substation,-23.2652665,150.4710297,name_match,medium
+T221_WTG,Wotonga (T221),QLD1,Powerlink,way/610270945,Wotonga,-21.9372635,148.0961698,name_match,medium
+T217_CBC,Condabri Central (T217),QLD1,Powerlink,way/458412248,Condabri Central,-26.8010262,150.2029692,name_match,medium
+T65_ALCK,Alligator Creek 132kV,QLD1,Powerlink,way/219209922,Alligator Creek Substation,-21.3242571,149.1916424,name_match,medium
+T93_CNTH,Cairns North 132kv,QLD1,Powerlink,way/578366374,Cairns North,-16.9138075,145.7503152,name_match,medium
+T123_MUN,Mungar 132kV,QLD1,Powerlink,way/625723497,Mungar,-25.5987937,152.5939641,name_match,medium
+SSBBS,Belmont Bulk Supply 110kV,QLD1,Powerlink,relation/19826324,Belmont Substation,-27.5372455,153.1148255,name_match,medium
+H3_BELMT,Belmont 275kV,QLD1,Powerlink,relation/19826324,Belmont Substation,-27.5372455,153.1148255,name_match,medium
+T176_LCK,Louisa Creek,QLD1,Powerlink,way/211083027,Louisa Creek,-21.2961871,149.2692527,name_match,medium
+T192_QMP,Mackay Ports,QLD1,Powerlink,way/549537880,Mackay Ports Substation,-21.3025008,149.2764355,name_match,medium
+T182_QLS,Queensland Alumina South,QLD1,Powerlink,,,,,unmatched,
+St.T158_YAL,Yalkula,QLD1,Powerlink,way/191779550,Yalkula,-16.6939879,145.3425371,name_match,medium
+T163_RLS,Rollston 132kV,QLD1,Powerlink,,,,,unmatched,
+T219_WCK,Woleebee Creek,QLD1,Powerlink,,,,,unmatched,
+SSGFN,Griffin 110kV,QLD1,Powerlink,way/374644110,Griffin Substation,-27.2730483,153.0206134,name_match,medium
+HAL_WF,HALLET WINDFARM,SA1,AEMO,,,,,unmatched,
+STS_WF,Snowtown South 275kV,SA1,ElectraNet,,,,,unmatched,
+SNW_NTH,Snowtown Nth,SA1,AEMO,,,,,unmatched,
+SNW_STH,Snowtown Sth,SA1,AEMO,,,,,unmatched,
+BEGA,Bega,NSW1,Essential E,way/643258483,Bega 132,-36.7158371,149.8412171,name_match,medium
+STEEPLE,Steeple Flat,NSW1,Essential E,,,,,unmatched,
+BOCOROCK,Boco Rock Wind Farm,NSW1,Essential E,way/613804831,Boco Rock Wind Farm Substation,-36.5763095,149.1268136,name_match,medium
+MWF,MACARTHUR WF,VIC1,AEMO,,,,,unmatched,
+TARALGA,Taralga WF,NSW1,Essential E,,,,,unmatched,
+NYNGN132,Nyngan 132kV,NSW1,Essential E,,,,,unmatched,
+H82_BLYD,Blythdale,QLD1,Powerlink,way/551075207,Blythdale,-26.4695331,149.027536,name_match,medium
+ARTS,Ararat,VIC1,AusNet,,,,,unmatched,
+AT.ARWF,Ararat Wind Farm,VIC1,TOA,way/568866200,Ararat Wind Farm Substation,-37.2387207,143.0792219,name_match,medium
+HRN_WF,Hornsdale WF,SA1,ElectraNet,,,,,unmatched,
+SUNRY_SF,Sunraysia SF,NSW1,Transgrid,,,,,unmatched,
+YENDON,Yendon Windfarm,VIC1,TOA,,,,,unmatched,
+T159_LKL,Lakeland,QLD1,Powerlink,way/192353822,Lakeland,-15.872377,144.8618247,name_match,medium
+HGTS,Haunted Gully TS 500kV,VIC1,AusNet,way/1247967428,Haunted Gully Substation,-38.0072738,143.3141676,name_match,medium
+BARK_I,Barker Inlet PS,SA1,ElectraNet,,,,,unmatched,
+KIAMALSF,Kiamal SF,VIC1,Transgrid,,,,,unmatched,
+PIEMAN,Pieman,TAS1,TasNetworks,,,,,unmatched,
+SSYTA,Yatala,QLD1,Powerlink,,,,,unmatched,
+T236_MML,Memooloo,QLD1,Powerlink,way/610807811,Memooloo,-24.134588,148.6787873,name_match,medium
+H85_COOP,Coopers Gap,QLD1,Powerlink,way/670835027,Coopers Gap Substation,-26.7350126,151.4745297,name_match,medium
+Z4_CGWF,Coopers Gas WF,QLD1,Powerlink,,,,,unmatched,
+H86_DDSF,Darling Downs SF,QLD1,Powerlink,,,,,unmatched,
+LIN_GP,Lincoln Gap WF,SA1,ElectraNet,,,,,unmatched,
+R4_MILLM,Millmerran 330kV,QLD1,Powerlink,way/170833885,Millmerran Substation,-27.9652357,151.2742839,name_match,medium
+T241_LKR,Lake Ross,QLD1,Powerlink,,,,,unmatched,
+T255_RRS,Rugby Run Solar Farm,QLD1,Powerlink,,,,,unmatched,
+YDW,Yendon Windfarm,VIC1,TOA,,,,,unmatched,
+SAPWF,Sapphire 330kV,NSW1,Transgrid,way/704099978,Sapphire Switchyard,-29.6995053,151.4123449,name_match,medium
+DUMARESQ,Dumaresq 330kV,NSW1,Powerlink,way/172887491,Dumaresq Switching Station,-29.2031059,151.3288308,name_match,medium
+BGWF,Bulgana WF,VIC1,AusNet,,,,,unmatched,
+ARWF,Ararat WF (TempForVds),VIC1,AusNet,,,,,unmatched,
+BRYBNKSS,Berrybank SS,VIC1,Transgrid,,,,,unmatched,
+BRYBNKWF,Berrybank TG,VIC1,Transgrid,,,,,unmatched,
+SSNVR_T,Pialba,QLD1,Powerlink,,,,,unmatched,
+OAKEY_SF,Oakey SF,QLD1,Powerlink,,,,,unmatched,
+CWWF,Crowlands WF,VIC1,AusNet,,,,,unmatched,
+MARYR_SF,Maryrorough SF,QLD1,Powerlink,,,,,unmatched,
+BERYL_SF,Beryl SF,NSW1,Transgrid,,,,,unmatched,
+BANGOWF,Bango WF,NSW1,Transgrid,,,,,unmatched,
+STOCKDIL,Stockdill,NSW1,Transgrid,way/852208441,Stockdill substation,-35.2460885,148.9832564,name_match,medium
+GRWF,Gullen Range 330kV WF,NSW1,Transgrid,,,,,unmatched,
+CRUDNEWF,Crudine Ridge WF,NSW1,Transgrid,,,,,unmatched,
+REAC_1B_220,Keilor 220kV REACT,VIC1,AEMO,,,,,unmatched,
+BOGBRI_E,Boggabri East,NSW1,Transgrid,,,,,unmatched,
+GUNNEDAH,Gunnedah,NSW1,Transgrid,,,,,unmatched,
+COLLECWF,Collector Wind Farm 330kV.,NSW1,AEMO,way/1303472061,Collector Wind Farm,-34.8237749,149.3896501,name_match,medium
+GWSF,Glenrowan West Solar Farm,VIC1,AEMO,,,,,unmatched,
+WISF,Winton Solar Farm,VIC1,AEMO,,,,,unmatched,
+T140_TZC,Townsville Zinc,QLD1,Powerlink,way/172246489,Townsville Zinc,-19.335406,146.8885307,name_match,medium
+WBTS,Waubra 220kV,VIC1,AusNet,way/193910534,Waubra Terminal Station,-37.355738,143.6061385,name_match,medium
+P_PA_N,PT_PATERSON_N,SA1,ElectraNet,,,,,unmatched,
+BOGBRI_N,Baggabri North 132kV Substation,NSW1,Transgrid,,,,,unmatched,
+MOREE,Moree 132kV Substation,NSW1,Transgrid,way/366321212,Moree Substation,-29.4851945,149.8555887,name_match,medium
+NARRABRI,Narrabri 132kV Substation,NSW1,Transgrid,way/366605306,Narrabri zone substation,-30.3172305,149.7956272,name_match,medium
+METZ_SF,Metz Solar Farm132/33kV,NSW1,Transgrid,,,,,unmatched,
+VBB,VBB,VIC1,AEMO,,,,,unmatched,
+GUNDH_SF,Gunnedah SF,NSW1,AEMO,,,,,unmatched,
+SNAP_P,SNAPPER POINT GENERATOR SWITCHYARD,SA1,ElectraNet,,,,,unmatched,
+HUGH,HUGH,QLD1,Powerlink,,,,,unmatched,
+JRDNE_CK,JARDINE RIVER,QLD1,Powerlink,,,,,unmatched,
+CPR_EAST,CAPE RIVER EAST,QLD1,Powerlink,way/1152815440,Cape River East,-20.4757125,145.4683882,name_match,medium
+KEPG,KENNEDY ENERGY PARK,QLD1,Powerlink,,,,,unmatched,
+CHARTWRS,CHARTERS TOWERS,QLD1,Powerlink,way/1152807814,Charters Towers,-20.0620057,146.2799162,name_match,medium
+QUEANBYN,QUEANBEYAN 132kV,NSW1,Transgrid,,,,,unmatched,
+CLRMT_SF,Clermont_SF,QLD1,Powerlink,,,,,unmatched,
+H78_ORAN,Orana (H78),QLD1,Powerlink,way/458404087,Orana Substation,-26.8930968,150.550548,name_match,medium
+T258_WCK,WIDGEE CREEK,QLD1,Powerlink,,,,,unmatched,
+SUNTP_SF,Suntop SF,NSW1,AEMO,,,,,unmatched,
+T254_BNA,T254 BANANA,QLD1,Powerlink,,,,,unmatched,
+94K_TEE,94K_Tee,NSW1,AEMO,,,,,unmatched,
+T271_WSB,T271 Wandoan South Bess,QLD1,AEMO,,,,,unmatched,
+H108_TUM,H108 TUMOULIN,QLD1,Powerlink,,,,,unmatched,
+H116_KWF,Kaban Wind Farm,QLD1,Powerlink,,,,,unmatched,
+NEWEN_SF,New England Solar Farm,NSW1,Transgrid,way/1293021615,New England Solar Farm,-30.62553,151.6177788,name_match,medium
+URALLA,URALLA 330kV,NSW1,Transgrid,,,,,unmatched,
+TEMORA,TEMORA,NSW1,Essential E,,,,,unmatched,
+SEBAS_SF,SEBASTOPOL SOLAR,NSW1,Essential E,,,,,unmatched,
+WWYAL_SF,west wyalong sol,NSW1,Essential E,,,,,unmatched,
+JUNEE_SF,JUNEE SOLAR FARM,NSW1,Essential E,,,,,unmatched,
+JUNEE,Junee Station,NSW1,Essential E,way/596376817,Junee ZS,-34.8617176,147.5910875,name_match,medium
+EDVL_SF,H146 Edenvale Solar Substation,QLD1,Powerlink,,,,,unmatched,
+MLSW,Mortlake Sth WF,VIC1,AEMO,,,,,unmatched,
+H125_JND,H125 JUANDAH,QLD1,Powerlink,,,,,unmatched,
+NARRAND,NARRANDERA,NSW1,Transgrid,way/584856552,Narrandera ZS,-34.7436091,146.5390106,name_match,medium
+HILLSTON,HILLSTON,NSW1,Essential E,way/583092827,Hillston Zone Substation,-33.5159917,145.5298033,name_match,medium
+ FORBES,FORBES 132kV,NSW1,Essential E,way/480673880,Forbes Substation,-33.3653095,148.0195542,name_match,medium
+W_JEMALN,West Jemalong,NSW1,Essential E,way/934627402,West Jemalong Zone Substation,-33.3791362,147.6625442,name_match,medium
+WDSK_STH,Woodstock,QLD1,Powerlink,,,,,unmatched,
+T280_DRL,Drillham,QLD1,Powerlink,way/1290871202,Drillham,-26.6326407,149.8673996,name_match,medium
+T287_DWF,Dulacca Wind Farm,QLD1,Powerlink,way/1290871203,Dulacca Wind Farm,-26.632068,149.8660408,name_match,medium
+RYE_PARK,Rye Park Wind Farm South,NSW1,Transgrid,,,,,unmatched,
+WOLLAR_W,Wollar West 330kV Substation,NSW1,Transgrid,,,,,unmatched,
+NYNGN_SF,Nyngan Solar Farm,NSW1,Essential E,,,,,unmatched,
+Z13_BCMB,Z13_BOULDERCOMBE BESS,QLD1,Powerlink,,,,,unmatched,
+RYE_P_WF,Rye Park Wind Farm North,NSW1,Transgrid,,,,,unmatched,
+RIVERINA,Riverina132kV Substation,NSW1,Transgrid,,,,,unmatched,
+WYA_SF,Wyalong Solar Farm,NSW1,Essential E,,,,,unmatched,
+Z35_CCB,Z035 CHINCHILLA BESS STATION,QLD1,Powerlink,,,,,unmatched,
+EMRLDWST,Emerald West Tee Station,QLD1,Powerlink,,,,,unmatched,
+DUBBO132,Dubbo 132 substation,NSW1,Essential E,way/174991765,Dubbo Zone Substation,-32.2487432,148.6295939,name_match,medium
+NEVRT_SF,Nevertire substation,NSW1,Essential E,,,,,unmatched,
+NRMN_STH,Narromine South substation,NSW1,Essential E,way/587773645,Narromine South Switching Substation,-32.258387,148.2634574,name_match,medium
+DUBOWEST,Dubbo West substation,NSW1,Essential E,way/943438689,Dubbo West Zone Substation,-32.2402651,148.5805216,name_match,medium
+DUBO_STH,Dubbo South substation,NSW1,Essential E,way/173401274,Dubbo South Zone Substation,-32.2693761,148.6297235,name_match,medium
+TI_BESS,Torrens Island BESS,SA1,AEMO,,,,,unmatched,
+COOR_2,Coorong2 SF,SA1,AEMO,,,,,unmatched,
+R14_TUMM,TUMMAVILLE 330KV,QLD1,Powerlink,way/1148235139,Tummaville Substation,-27.9633296,151.5111885,name_match,medium
+H90_TLYS,TULLY SOUTH 275KV,QLD1,Powerlink,,,,,unmatched,
+H162_BNB,H162 BANANA BRIDGE,QLD1,Powerlink,,,,,unmatched,
+R15_MISS,MISS 330KV,QLD1,Powerlink,,,,,unmatched,
+T256_GRL,T256 GREENLAND 1,QLD1,Powerlink,,,,,unmatched,
+Z34_BGSF,Z34 BLUE GRASS SOLAR FARM,QLD1,Powerlink,,,,,unmatched,
+H169_EUR,EUROA 275KV,QLD1,Powerlink,,,,,unmatched,
+SSMTN,MYRTLETOWN 110KV,QLD1,Powerlink,way/349559643,Myrtletown substation,-27.4030007,153.1303947,name_match,medium
+T257_FRI,T257_FRI IRONBARK 13,QLD1,Powerlink,,,,,unmatched,
+GYDR_WF,Goyder South Wind Farm,SA1,ElectraNet,,,,,unmatched,
+WALAWALA,Walla Walla 330kV,NSW1,Transgrid,,,,,unmatched,
+H93_GUMN,Guybal Munjan 275 kV,QLD1,Powerlink,way/1172891447,Guybal Munjan Substation,-18.8578919,145.8406262,name_match,medium
+R13_MNWFMACNT_WF,Macintyre North 330kV,QLD1,Powerlink,,,,,unmatched,
+STUBO_SF,Stubbo 330kV station,NSW1,Transgrid,,,,,unmatched,
+CRTS,Cressy 500 kV Station,VIC1,AusNet,,,,,unmatched,
+H100_CKN,H100 CLARKE CREEK WIND FARM NORTH,QLD1,Powerlink,,,,,unmatched,
+H102_CKC,H102 CLARKE CREEK WIND FARM CENTRAL,QLD1,Powerlink,,,,,unmatched,
+H97_ARUM,AURUMFIELD 275KV,QLD1,Powerlink,way/1295556559,Aurumfield,-18.8747872,144.1452074,name_match,medium
+H138_TRB,H138 TARONG BESS STATION,QLD1,Powerlink,,,,,unmatched,
+WAR_BESS,Waratah BESS,NSW1,Transgrid,,,,,unmatched,
+GPTS,Golden Plains 220 kV Station,VIC1,AusNet,,,,,unmatched,
+WEL_N_SF,Wellington North SF,NSW1,AEMO,,,,,unmatched,
+R17_MSWF,Macintyre South (R17),QLD1,Powerlink,,,,,unmatched,
+BUNDEY,Bundey 330kV Substation,NSW1,Transgrid,,,,,unmatched,
+GPEC,Golden Plains Wind Farm,VIC1,AusNet,,,,,unmatched,
+H148_DMN,H148 DIAMONDY,QLD1,Powerlink,,,,,unmatched,
+H121_WDB,Western Downs BESS (H121),QLD1,AEMO,,,,,unmatched,
+SSTPS,TOWNSVILLE PORT 66kV,QLD1,Powerlink,way/549146598,Townsville Port,-19.260312,146.8327739,name_match,medium
+ERA_BESS,Eraring BESS Substation,NSW1,Transgrid,,,,,unmatched,
+KOTS,Koorangie 220 kV Station,VIC1,AusNet,,,,,unmatched,
+H13_ALD,H13 Aldoga,QLD1,Powerlink,,,,,unmatched,
+BLYBSS,Blyth BESS,SA1,AEMO,,,,,unmatched,
+H98_WBWF,H098 Wambo Windfarm,QLD1,Powerlink,,,,,unmatched,
+FLYCR_WF,Flyer Creek WF,NSW1,Essential E,,,,,unmatched,
+ORANGE_N,Orange North 132kV,NSW1,Transgrid,way/1078509870,Orange North Zone Substation,-33.2804625,149.1053918,name_match,medium
+H157_ULB,ULINDA PARK BESS,QLD1,Powerlink,,,,,unmatched,
+HOLROYD,Holroyd 330kV,NSW1,Transgrid,relation/12101895,Holroyd Transmission Substation,-33.8347505,150.9189654,name_match,medium
+RAVINE,Ravine,NSW1,Transgrid,,,,,unmatched,
+ROOKWOOD,Rookwood Road 330kV,NSW1,Transgrid,,,,,unmatched,
+COROWA,Corowa 132kV,NSW1,Transgrid,,,,,unmatched,
+MULWALA,Mulwala 132kV,NSW1,Transgrid,,,,,unmatched,
+Z36_GBB,Greenbank BESS,QLD1,AEMO,,,,,unmatched,
+H126_MUR,H126 MURANU,QLD1,Powerlink,,,,,unmatched,
+T285_MCR,T285 MUNNA CREEK,QLD1,Powerlink,,,,,unmatched,
+CULC_SF,Culcairn SF 330kV Station,NSW1,Transgrid,,,,,unmatched,
+PRTS,Plumpton 500 kV,VIC1,Transgrid,,,,,unmatched,
+T158_YAL,Yalkula,QLD1,Powerlink,way/191779550,Yalkula,-16.6939879,145.3425371,name_match,medium
+MARAGLE,Maragle 500kV,NSW1,Transgrid,,,,,unmatched,
+T294_BDL,T294 Brendale BESS,QLD1,Powerlink,,,,,unmatched,
+H182_SBK,H182 Swanbank BESS,QLD1,Powerlink,,,,,unmatched,
+H154_SNB,Supernode BESS (H154),QLD1,Powerlink,,,,,unmatched,
+GEL_SF,Glenellen Solar Farm,NSW1,Transgrid,,,,,unmatched,
+NEW_BESS,New England BESS,NSW1,Transgrid,,,,,unmatched,
+LDL_EAST,Liddell East 330kV,NSW1,Transgrid,,,,,unmatched,
+T264_DAMASCUS,T264 DAMASCUS 132kV,QLD1,Powerlink,,,,,unmatched,
+MOSS,Mossman 132kV,QLD1,Powerlink,way/192518671,Mossman,-16.5049778,145.3954658,name_match,medium
+H110_BSD,Broadsound H110 275kV,QLD1,Powerlink,,,,,unmatched,
+ORA_BESS,Orana BESS 330kV,NSW1,Transgrid,,,,,unmatched,
+NEVERTIRE,Nevertire 132kV,NSW1,Essential E,,,,,unmatched,
+LDL_BESS,Liddell BESS,NSW1,Transgrid,,,,,unmatched,
+T296_GON,T296 Goodiwindi North,QLD1,Powerlink,,,,,unmatched,
+GUNSD_SF,Gunsynd Solar farm,QLD1,Powerlink,,,,,unmatched,
+H92_K2H,H092 K2H Kidston Hydro Station,QLD1,Powerlink,,,,,unmatched,
+GTS,Geelong 220kV,VIC1,AusNet,way/244141232,Geelong Terminal Station,-38.0828702,144.3384413,name_match,medium
+CPTS,Carwarp CPTS,VIC1,AusNet,,,,,unmatched,
+PLTS,Pine Lodge PLTS 220kV,VIC1,AusNet,,,,,unmatched,
+GETS,Goorambat East GETS Station,VIC1,AusNet,,,,,unmatched,
+CULTAN_E,Cultana East 275kV,SA1,ElectraNet,,,,,unmatched,
+H154_SND,Supernode BESS (154),QLD1,AEMO,,,,,unmatched,
+S2_HALYS,Halys (S2),QLD1,Powerlink,way/544496526,Halys Substation,-26.7709981,151.7112866,name_match,medium
+MRTS,Murra Warra,VIC1,AusNet,,,,,unmatched,
+H79_YULN,Yuleba North (H79),QLD1,Powerlink,way/550224417,Yuleba North,-26.18683,149.4376185,name_match,medium
+T211_WYC,Wycarbah (T211),QLD1,Powerlink,,,,,unmatched,
+SSQRW,Wulkaraka,QLD1,Powerlink,,,,,unmatched,
+Z2_WHSF,Whitsunday SF,QLD1,Powerlink,,,,,unmatched,
+T106_WAN,Wandoo,QLD1,Powerlink,way/218220945,Wandoo,-21.7759782,148.8854712,name_match,medium
+H60_WALK,Walkamin,QLD1,Powerlink,way/798877610,Walkamin Substation,-17.1850088,145.3797323,name_match,medium
+H83_APOR,APLNG Orana,QLD1,Powerlink,,,,,unmatched,
+MUNN_P,Munno Para,SA1,ElectraNet,way/559362075,Munno Para,-34.6530841,138.7001091,name_match,medium
+SSVSL,Varsity Lakes,QLD1,Powerlink,,,,,unmatched,
+CORR_H,Corraberra Hill,SA1,ElectraNet,way/719078738,Corraberra Hill,-32.6172968,137.5925408,name_match,medium
+BLYT_W,Blyth West,SA1,ElectraNet,way/600317408,Blyth West,-33.8468498,138.4077661,name_match,medium
+BLAC_R,Black Range Series Cap Station,SA1,ElectraNet,,,,,unmatched,
+T178_SCK,Stoney Creek (T178),QLD1,Powerlink,,,,,unmatched,
+T209_BLF,Bluff (T209),QLD1,Powerlink,way/331770448,Bluff,-23.5881654,149.0398097,name_match,medium
+SSSGT,SSSGT Sandgate 110kV,QLD1,Powerlink,,,,,unmatched,
+T175_BLB,Bolingbroke,QLD1,Powerlink,,,,,unmatched,
+T242_SPR,Springlands,QLD1,Powerlink,,,,,unmatched,
+BLUFF_WF,Porcupine Range Wind Farm,SA1,ElectraNet,,,,,unmatched,
+T181_BWN,Bowen North (T181),QLD1,Powerlink,way/171746362,Bowen North,-20.0186846,148.1674156,name_match,medium
+Z7_RRSF,Ross River SF,QLD1,Powerlink,,,,,unmatched,
+HALHIL,Hallet Hill Wind Farm,SA1,ElectraNet,,,,,unmatched,
+T198_BLA,Broadlea,QLD1,Powerlink,,,,,unmatched,
+T244_BDA,Bundoora,QLD1,Powerlink,,,,,unmatched,
+T172_MND,QR Mindi (T172),QLD1,Powerlink,,,,,unmatched,
+SSQRT,QR Transit Cnt,QLD1,Powerlink,,,,,unmatched,
+SSNSW,North Springwood (SSNSW),QLD1,Powerlink,,,,,unmatched,
+T109_MBS,Moranbah South 132kV,QLD1,Powerlink,way/610270938,Moranbah South,-22.0602941,147.9921591,name_match,medium
+T245_MPN,Moranbah Plains,QLD1,Powerlink,,,,,unmatched,
+SSMMC,Merrimac,QLD1,Powerlink,way/460735950,Merrimac Substation,-28.0351307,153.4073767,name_match,medium
+T167_KYP,Kearneys Spring,QLD1,Powerlink,,,,,unmatched,
+H91_HGTN,Haughton River,QLD1,Powerlink,way/949429976,Haughton River Substation,-19.7419344,147.0493574,name_match,medium
+H95HN1SF,Haughton Solar Farm,QLD1,Powerlink,,,,,unmatched,
+H96HN2SF,Haughton Solar Farm 2,QLD1,Powerlink,,,,,unmatched,
+T225_CCK,Clifford Creek (T225),QLD1,Powerlink,way/550227806,Clifford Creek,-26.3488933,149.380981,name_match,medium
+T218_CBS,Condabri South (T218),QLD1,Powerlink,way/550386485,Condabri South,-26.9320015,150.2236115,name_match,medium
+H87_CRCK,Crush Creek,QLD1,Powerlink,,,,,unmatched,
+T224_DNS,Dinoun South (T224),QLD1,Powerlink,way/550224416,Dinoun South,-26.2411556,149.5066721,name_match,medium
+T210_DUR,Duaringa (T210),QLD1,Powerlink,way/610807805,Duaringa,-23.7107585,149.6789872,name_match,medium
+T215_EDW,Eagle Downs (T215),QLD1,Powerlink,way/610270936,Eagle Downs,-22.1749293,148.1890735,name_match,medium
+EMERALD,Emerald 66/22kV,QLD1,Powerlink,,,,,unmatched,
+H80_ERMB,Eurombah (H80),QLD1,Powerlink,way/550224397,Eurombah,-25.9348591,149.1990637,name_match,medium
+T227_FVW,Fairview,QLD1,Powerlink,,,,,unmatched,
+H81_FVWS,Fairview South,QLD1,Powerlink,way/800728528,Fairview South,-25.7540567,149.0718243,name_match,medium
+H77_CLMB,Columboola (H77),QLD1,Powerlink,way/171582472,Columboola,-26.6488955,150.2797059,name_match,medium
+S,Callide 132kV,QLD1,Powerlink,,,,,unmatched,
+T130_BCK,Boat Creek 132kV,QLD1,Powerlink,,,,,unmatched,
+T234_BLV,Bellevue,QLD1,Powerlink,way/550229927,Bellevue,-26.6917641,150.2765142,name_match,medium
+TOP_RYDE,Top Ryde 132kV,NSW1,Transgrid,way/480637074,Top Ryde Zone Substation,-33.81171,151.1138021,name_match,medium
+BFIELD_S,Beaconsfield 330kV,NSW1,Transgrid,,,,,unmatched,
+BFIELD_N,Beaconsfield North 132kV,NSW1,Transgrid,way/476441260,Beaconsfield North Bulk Supply Substation,-33.9142493,151.1880198,name_match,medium
+MANILDRA,Manildra 132kV,NSW1,Transgrid,way/480673879,Manildra Substation,-33.1798688,148.7168847,name_match,medium
+WILLOG,Willogoleche WF,SA1,ElectraNet,,,,,unmatched,
+MT_LOC,Mount Lock,SA1,ElectraNet,way/544861273,Mount Lock Substation,-33.085922,138.5214471,name_match,medium
+EMEROO,EMEROO,SA1,ElectraNet,way/752846574,Emeroo Substation,-32.4144893,137.8478121,name_match,medium
+DALR_N,Dalrymple North,SA1,ElectraNet,,,,,unmatched,
+COOR_S,COORONG SF,SA1,ElectraNet,,,,,unmatched,
+MT_G_S,Mount Gunson South,SA1,ElectraNet,,,,,unmatched,
+KING,Kingaroy 66kV,QLD1,Powerlink,way/253930085,Kingaroy,-26.5402765,151.8565423,name_match,medium
+H67_CALR,Calliope River (H067),QLD1,Powerlink,way/432510474,Calliope River Substation,-23.8561501,151.1929892,name_match,medium
+Z6_DAYSF,Daydream SF,QLD1,Powerlink,,,,,unmatched,
+LV,Laverton 66kV,VIC1,AusNet,,,,,unmatched,
+Z3_HAMSF,Hamilton SF,QLD1,Powerlink,,,,,unmatched,
+ST,Somerton/epping Subs,VIC1,AusNet,,,,,unmatched,
+Z5_HAYSF,Hayman SF,QLD1,Powerlink,,,,,unmatched,
+WOOL_NTH,Woolnorth,TAS1,TasNetworks,,,,,unmatched,
+ST_LENRD,ST Leonards,TAS1,TasNetworks,,,,,unmatched,
+MUSSELRO,Musselroe,TAS1,TasNetworks,way/391535009,Musselroe Substation,-40.7800334,148.010269,name_match,medium
+HUON,Huon River,TAS1,TasNetworks,way/550408235,Huon River Substation,-43.0537493,146.8155758,name_match,medium
+ELTS,Elaine Terminal Station 220kV,VIC1,TOA,way/346232962,Elaine Terminal Station,-37.7308232,144.0119598,name_match,medium
+MEWF,Mt Mercer WF,VIC1,TOA,,,,,unmatched,
+BOPS,Bogong PS,VIC1,AEMO,,,,,unmatched,
+DEERPARK,Deer Park (Ausnet),VIC1,AusNet,way/235397963,Deer Park Terminal Station,-37.7776796,144.7353723,name_match,medium
+CWTS,Crowlands,VIC1,AusNet,way/751742419,Crowlands Terminal Station,-37.1208415,143.1543186,name_match,medium
+BGTS,Bulgana,VIC1,AusNet,,,,,unmatched,
+CATHILL,Wild Cattle Hill,TAS1,TasNetworks,,,,,unmatched,
+MNWF,Moorabool Nth WF,VIC1,TOA,,,,,unmatched,
+MSWF,Moorabool Sth WF,VIC1,TOA,,,,,unmatched,
+T239_KSF,Kidston Solar PS,QLD1,Powerlink,,,,,unmatched,
+DPTS,DEERPARK,VIC1,Transgrid,,,,,unmatched,
+SSKG,Kelvin Grove,QLD1,Powerlink,way/35692907,Kelvin Grove substation,-27.4545332,153.0127485,name_match,medium
+Z8_LV1SF,Lilyvale SF,QLD1,Powerlink,,,,,unmatched,
+H84_MTEW,Mount Emerald WF,QLD1,Powerlink,,,,,unmatched,
+T243_YRN,Yarranlea North,QLD1,Powerlink,way/948385223,Yarranlea North,-27.716584,151.5281017,name_match,medium
+T240_CSF,Clare Solar Farm,QLD1,Powerlink,,,,,unmatched,
+T103_CAL,Callide 132kV,QLD1,Powerlink,,,,,unmatched,
+H114_WB2,H114 WAMBO WIND FARM 2,QLD1,Powerlink,,,,,unmatched,
+MNM_BESS,Mannum BESS,SA1,AEMO,,,,,unmatched,
+MT_B_S,Mount Barker South,SA1,ElectraNet,,,,,unmatched,
+WILLAL,Willalo,SA1,ElectraNet,,,,,unmatched,
+H39_WORE,Woree 275kV,QLD1,Powerlink,way/196363948,Woree Substation,-16.9558789,145.7518081,name_match,medium
+CLEM_G_N,Clements Gap North,SA1,ElectraNet,,,,,unmatched,
+BLGC,Basslink TAS George Town Converter Station,TAS1,APT,,,,,unmatched,
+UUNG_SS,UUNGULA 330kV SWITCHING STATION,NSW1,Transgrid,,,,,unmatched,
+UUNG_WF,UUNGULA 330kV WIND FARM,NSW1,Transgrid,,,,,unmatched,
+T293_WGA,T293 WOOLOOGA BESS,QLD1,Powerlink,,,,,unmatched,
+DINAWAN,DINAWAN 330kV Switching Station,NSW1,Transgrid,,,,,unmatched,
+TEPKO,Tepko 275kV,SA1,ElectraNet,,,,,unmatched,
+ROOPENA,Roopena 275kV,SA1,ElectraNet,,,,,unmatched,
+H139_STB,H139 STANWELL BESS,QLD1,Powerlink,,,,,unmatched,
+BUNGAM_B,Bungam_B,SA1,AEMO,,,,,unmatched,
+QRNPRK,QUORN PARK 132kV,NSW1,Essential E,,,,,unmatched,
+WOES,Woreen BESS,VIC1,AusNet,,,,,unmatched,
+H170_GLN,Glencoe,QLD1,Powerlink,,,,,unmatched,
+HUME,Hume Ps 132kV,NSW1,AusNet,,,,,unmatched,
+MURRAY,Murray,NSW1,AusNet,way/174875093,Murray Switching Station,-36.2256705,148.1442073,name_match,medium
+S_EAST,South East 275kV,SA1,AusNet,way/164675939,South East Substation,-37.7333557,140.8405601,name_match,medium
+SUMFD1,Summer Field BESS 1,SA1,ElectraNet,,,,,unmatched,
+SUMFD2,Summer Field BESS 2,SA1,ElectraNet,,,,,unmatched,

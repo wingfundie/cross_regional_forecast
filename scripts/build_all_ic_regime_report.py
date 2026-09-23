@@ -951,6 +951,10 @@ def build():
     html = render_page("NEM interconnector diurnal and constraint-pressure research", body, plotly=True, accent="purple")
     html = "\n".join(line.rstrip() for line in html.splitlines()) + "\n"
     (OUT / "index.html").write_text(html, encoding="utf-8")
+    if (SOURCES_OUT / "nos_outage_regime_section.html").exists():
+        # Re-insert the cached outage-regime section (scripts/build_nos_regime_section.py) after a base rebuild.
+        from build_nos_regime_section import inject
+        inject(OUT)
 
     manifest = {"report_id": REPORT_ID, "built_at": pd.Timestamp.now(tz="Asia/Singapore").isoformat(),
                 "inputs": {}, "outputs": {}, "constraint_coverage": constraint_coverage.to_dict("records"),

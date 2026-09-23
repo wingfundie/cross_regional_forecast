@@ -1,0 +1,18 @@
+{
+  "validator": "PASS offline deps, links, anchors",
+  "viewports": {
+    "desktop_1360": {
+      "scrollWidth": 1360,
+      "errors": 0
+    },
+    "narrow_390": {
+      "scrollWidth": 390,
+      "errors": 0
+    }
+  },
+  "lookup_filter_test": "'Dumaresq' -> 8 of 1028 rows",
+  "section_height_px": {
+    "desktop": 20724,
+    "narrow": 25646
+  }
+}
