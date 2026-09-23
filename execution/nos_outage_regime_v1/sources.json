@@ -1,0 +1,454 @@
+{
+  "mmsdm": [
+    {
+      "month": "2024-09",
+      "rows": 781144,
+      "sha256": "b39246d3f0278864de15e4aeadbf291feb8933090fcaa3b3906a4649e598dd30",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGEDETAIL",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2024/MMSDM_2024_09/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGEDETAIL%23FILE01%23202409010000.zip",
+      "zip_sha256": "9d1c691604c4706ea53791c995ad9c396ca65b9d9de1739c07a6d24675268b0c"
+    },
+    {
+      "month": "2024-09",
+      "rows": 3316,
+      "sha256": "35e6db7d32ae43764a2de74301dfc89b10d9069c07913d303cf0e9be7ec473f3",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGECONSTRAINTSET",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2024/MMSDM_2024_09/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGECONSTRAINTSET%23FILE01%23202409010000.zip",
+      "zip_sha256": "ded9299b3e52bbd9b406cfa1b8579d3a6f60de9279f5e9f1aff9de0177e3ac09"
+    },
+    {
+      "month": "2024-10",
+      "rows": 787226,
+      "sha256": "381f574fa3500eb3338c0aa00358c5eb41f8d02671b83231fcc049c0fcb22f6d",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGEDETAIL",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2024/MMSDM_2024_10/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGEDETAIL%23FILE01%23202410010000.zip",
+      "zip_sha256": "c4e2467f74a6cd82a2a310afb65430afcb2fedcd983a4740940b0cfd6c9da2f9"
+    },
+    {
+      "month": "2024-10",
+      "rows": 4303,
+      "sha256": "6a0bfa990e186fb86641113fe25aa04553641ec7583945aa3ecd78b6084b2e08",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGECONSTRAINTSET",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2024/MMSDM_2024_10/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGECONSTRAINTSET%23FILE01%23202410010000.zip",
+      "zip_sha256": "b5ff70d12293392a2a68698529bf5e51009a6f8c04773198d7caf1460084468f"
+    },
+    {
+      "month": "2024-11",
+      "rows": 792261,
+      "sha256": "2429d116ad1307f30bbfb31fb4fdf85b3c72f97a579ad7bf308665a3d537fcb4",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGEDETAIL",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2024/MMSDM_2024_11/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGEDETAIL%23FILE01%23202411010000.zip",
+      "zip_sha256": "bae7e2fef4fcc298ea23726ee78da09b29bf9378cc660e3e56f468aba7e8a8ad"
+    },
+    {
+      "month": "2024-11",
+      "rows": 5142,
+      "sha256": "f73292b8547c067bcc5ea35129b1b1280064a6b62a72a5c0bc718ca0c1a4e9a5",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGECONSTRAINTSET",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2024/MMSDM_2024_11/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGECONSTRAINTSET%23FILE01%23202411010000.zip",
+      "zip_sha256": "8ddfb2315fb9969e8bc588345a380ef36c16c82eb5749bcdd618c583c1fd883b"
+    },
+    {
+      "month": "2024-12",
+      "rows": 795998,
+      "sha256": "b0bc757962e660934c4ed7ba8bec122a50e68e66e6a16ed50a855b89339b1e3a",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGEDETAIL",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2024/MMSDM_2024_12/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGEDETAIL%23FILE01%23202412010000.zip",
+      "zip_sha256": "68f9746082471d7934deddd343fea7b6fbe0ee5d022f38c7c63285831c800395"
+    },
+    {
+      "month": "2024-12",
+      "rows": 5620,
+      "sha256": "213719e44087d3ce76fe84b7447dff008178586b3d817f2f1511880bba538b30",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGECONSTRAINTSET",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2024/MMSDM_2024_12/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGECONSTRAINTSET%23FILE01%23202412010000.zip",
+      "zip_sha256": "115ef059b7f2ed4a85f225f7ce726941d0f76b15b565292a4158ea55e3c74319"
+    },
+    {
+      "month": "2025-01",
+      "rows": 802912,
+      "sha256": "994e39b193df33c9cb9453fa9ce570af8abb85bd773f648ba8915cca40807b03",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGEDETAIL",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2025/MMSDM_2025_01/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGEDETAIL%23FILE01%23202501010000.zip",
+      "zip_sha256": "8d2518afc54b7d68f4538c7faa2a2b9520f5aa489a9d6cbbd82966842f2ab26f"
+    },
+    {
+      "month": "2025-01",
+      "rows": 6656,
+      "sha256": "f716e55a557ef4eca6552449f4337cd5d7311b34b15eb03a690a0200c4f9cb2a",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGECONSTRAINTSET",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2025/MMSDM_2025_01/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGECONSTRAINTSET%23FILE01%23202501010000.zip",
+      "zip_sha256": "af286feefe166f739195617e6a564901545111881c19af0de11c5b5d49e9f283"
+    },
+    {
+      "month": "2025-02",
+      "rows": 807217,
+      "sha256": "82fef749df423442398536cb93a4ecd6b15ebea2359b37e96492d5861494d4c1",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGEDETAIL",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2025/MMSDM_2025_02/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGEDETAIL%23FILE01%23202502010000.zip",
+      "zip_sha256": "f298e2e853d2fcbbc9701247ea904a3dc380355fe15e0eacf4e86ed5a818c688"
+    },
+    {
+      "month": "2025-02",
+      "rows": 7217,
+      "sha256": "a1a38c74bfbb2bff039680b257f48f592b119796bed2a345d5636363f53635a0",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGECONSTRAINTSET",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2025/MMSDM_2025_02/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGECONSTRAINTSET%23FILE01%23202502010000.zip",
+      "zip_sha256": "9bcc63a527eec8488e1fd795da9473d3677425706b69361c70d850fc53df767e"
+    },
+    {
+      "month": "2025-03",
+      "rows": 810992,
+      "sha256": "bfaa441daf8eebaf5c15e6b8f80e08eb792a0ab91d1b001170806bf22071309e",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGEDETAIL",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2025/MMSDM_2025_03/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGEDETAIL%23FILE01%23202503010000.zip",
+      "zip_sha256": "70470be2c65c3685c85d07ccfda413915bfe6bdb32c56655deddc2af0b27e551"
+    },
+    {
+      "month": "2025-03",
+      "rows": 7804,
+      "sha256": "cbda411beb3a383ca0e334ec07969eda52df246d4d1061b19e4613be8a4e274f",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGECONSTRAINTSET",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2025/MMSDM_2025_03/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGECONSTRAINTSET%23FILE01%23202503010000.zip",
+      "zip_sha256": "1826abfaf734f10169ebe0d4f2465d2a0b8795a459fcd0cd882bf476ab86b4e3"
+    },
+    {
+      "month": "2025-04",
+      "rows": 816559,
+      "sha256": "5473613e5136adefa579c7e995a3c78cd86094c0843e5fd63c3d6428ec2a933d",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGEDETAIL",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2025/MMSDM_2025_04/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGEDETAIL%23FILE01%23202504010000.zip",
+      "zip_sha256": "5cf1d91774aaf0aad6cf7c4e35d0712a8227d590c4089272202efddd4b446d99"
+    },
+    {
+      "month": "2025-04",
+      "rows": 8641,
+      "sha256": "74c1c45bddd879a15f95cd75b0ae4e0bf11be3e9dd159d29872d789a8abfb7f6",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGECONSTRAINTSET",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2025/MMSDM_2025_04/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGECONSTRAINTSET%23FILE01%23202504010000.zip",
+      "zip_sha256": "f74734ffb6dbd5e28f8010ef5e15721df5b6784af6f457dfa08ed5b4c4f639f5"
+    },
+    {
+      "month": "2025-05",
+      "rows": 820441,
+      "sha256": "40b2dcdabcb74829312d369d171da068e9390d01841018f5a1ad2ac8a825fc6c",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGEDETAIL",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2025/MMSDM_2025_05/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGEDETAIL%23FILE01%23202505010000.zip",
+      "zip_sha256": "d973d7e934a1160722c19ecb4424078b45517901ff5be9afcb3c33a427fb30ea"
+    },
+    {
+      "month": "2025-05",
+      "rows": 9384,
+      "sha256": "35bb2d2bc044ed1f70ddf10b9e2643d925970f8207f8c87f98993ca74d257780",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGECONSTRAINTSET",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2025/MMSDM_2025_05/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGECONSTRAINTSET%23FILE01%23202505010000.zip",
+      "zip_sha256": "2a34217d0691ab50bc7eb1f13a06ffcca443b0adf5afbc10c47e28aa71c3c7ad"
+    },
+    {
+      "month": "2025-06",
+      "rows": 825397,
+      "sha256": "eb8ce547f40ca424cdbf8070ff807182d1d19a269af86e9fc90b075aaecf60fb",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGEDETAIL",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2025/MMSDM_2025_06/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGEDETAIL%23FILE01%23202506010000.zip",
+      "zip_sha256": "02d7ba8313b5e532d9b8cf83684b56ea274a318515c9b648764f3f62a3d517f8"
+    },
+    {
+      "month": "2025-06",
+      "rows": 10080,
+      "sha256": "7e097bb11249b71cc53d475c5e5c8b3d6ed75febfb59d90e63403c75a7d73773",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGECONSTRAINTSET",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2025/MMSDM_2025_06/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGECONSTRAINTSET%23FILE01%23202506010000.zip",
+      "zip_sha256": "294a594c7a4a8c691fd8f77ac1b1d1ecdeab56630215c4963acec7abd1eecc54"
+    },
+    {
+      "month": "2025-07",
+      "rows": 830726,
+      "sha256": "dfe5d61f1a247d7119ce1d341d27358476a7fcdc6216d95752c2a945fd254564",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGEDETAIL",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2025/MMSDM_2025_07/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGEDETAIL%23FILE01%23202507010000.zip",
+      "zip_sha256": "dbb699ded55d744b4550ff6b31f00eacf01e346de25269aae645f49501c66612"
+    },
+    {
+      "month": "2025-07",
+      "rows": 10875,
+      "sha256": "0834c12bccf7d9fa8360d26ba2a51651533c5210fd3378ea5e66db8d374dc97a",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGECONSTRAINTSET",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2025/MMSDM_2025_07/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGECONSTRAINTSET%23FILE01%23202507010000.zip",
+      "zip_sha256": "d62de45120a6e42e530c33e156d0fe7b3b981019235c90f6af5c91e76987f051"
+    },
+    {
+      "month": "2025-08",
+      "rows": 836415,
+      "sha256": "043832948cc24bd84b80bc3cd4b870af3a82d440ba59eea4c85390212c8bafb1",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGEDETAIL",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2025/MMSDM_2025_08/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGEDETAIL%23FILE01%23202508010000.zip",
+      "zip_sha256": "c62c88e415a7f92f100e2480f2299a4ccaea61a7ce90a2b1068788221542b72c"
+    },
+    {
+      "month": "2025-08",
+      "rows": 11800,
+      "sha256": "c2c8d451fc5e35dd8d7e9af0122fb76378d44a7c645dfd094f19d89d157f4107",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGECONSTRAINTSET",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2025/MMSDM_2025_08/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGECONSTRAINTSET%23FILE01%23202508010000.zip",
+      "zip_sha256": "462c51328efe9e80a821430f8bdd3b4af97ca9fe818f468e25d9d42e1e97698e"
+    },
+    {
+      "month": "2025-09",
+      "rows": 839942,
+      "sha256": "16ec29ff752094febb76f386e2ca9536031f1e1ff67ebf32bdc96e2e09ec129b",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGEDETAIL",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2025/MMSDM_2025_09/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGEDETAIL%23FILE01%23202509010000.zip",
+      "zip_sha256": "82c82f30f11bfdeb287c7b8a25b5d13fcb9f4f0468a2cce894d49d5223531106"
+    },
+    {
+      "month": "2025-09",
+      "rows": 12308,
+      "sha256": "f9e554442d36de84d9df903b35b54de8b710498fbcbd6c020b39312e56b15b5e",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGECONSTRAINTSET",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2025/MMSDM_2025_09/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGECONSTRAINTSET%23FILE01%23202509010000.zip",
+      "zip_sha256": "aa6d28a606eec93831a9050823ebb4b7e70a16bfd8253614806b80b1f38099bf"
+    },
+    {
+      "month": "2025-10",
+      "rows": 846807,
+      "sha256": "8d3526d55257b5e935da4ca7525c063d2a9ebf17de0d4f17dc16b43cf171339b",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGEDETAIL",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2025/MMSDM_2025_10/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGEDETAIL%23FILE01%23202510010000.zip",
+      "zip_sha256": "97567ab182a3020897bfac6983487d724d060018c03b10622671b1174873f919"
+    },
+    {
+      "month": "2025-10",
+      "rows": 13312,
+      "sha256": "0a0e201bf9d3e3c8aceaab7345bdaed055798d9469884ecc2e0169d42c3f5b0c",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGECONSTRAINTSET",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2025/MMSDM_2025_10/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGECONSTRAINTSET%23FILE01%23202510010000.zip",
+      "zip_sha256": "99b02e9aa919b6c4ce5bde46f3a08beeab5fe08a1bd4fef1116879bd1a0beda0"
+    },
+    {
+      "month": "2025-11",
+      "rows": 849747,
+      "sha256": "75af63af9753ed196adf7a51872453827a847283ad5b7ddcfae4c5af46731e6a",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGEDETAIL",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2025/MMSDM_2025_11/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGEDETAIL%23FILE01%23202511010000.zip",
+      "zip_sha256": "877481dc487219f9e3681eac7e57f777f904daee952cb3e5a944ec77120dbbac"
+    },
+    {
+      "month": "2025-11",
+      "rows": 13764,
+      "sha256": "b8126a4f0dace54f99d66587a563054cf1f4d1101bef7f5b5397485f7cf437a1",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGECONSTRAINTSET",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2025/MMSDM_2025_11/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGECONSTRAINTSET%23FILE01%23202511010000.zip",
+      "zip_sha256": "8e5e82e4a9cb3b523879f8e6213ecc5acdeff01fd048b22a41c23bac1593f8e8"
+    },
+    {
+      "month": "2025-12",
+      "rows": 853353,
+      "sha256": "8fc3ed4fe6c7d90fe88297d3c3bff58b86549a8b9d86f16cfc4698e41ab565a3",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGEDETAIL",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2025/MMSDM_2025_12/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGEDETAIL%23FILE01%23202512010000.zip",
+      "zip_sha256": "1b8c486b644b6e6301da6e63a19a6d85be3c18e48a99af6241924c6308295a9c"
+    },
+    {
+      "month": "2025-12",
+      "rows": 14257,
+      "sha256": "1b126541e741f0872d3109c71708c01c7ecf0acb5f92988d246cdb7a62ad3e41",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGECONSTRAINTSET",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2025/MMSDM_2025_12/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGECONSTRAINTSET%23FILE01%23202512010000.zip",
+      "zip_sha256": "5ce8827c8afbea2991fbf824a31fb75ffbcc3acece228de40f43eb7da1501c3f"
+    },
+    {
+      "month": "2026-01",
+      "rows": 857400,
+      "sha256": "f3da259f6c9692ec5ba3bea404e4b349ecfdb6aac71a79b6361b7a7864f2657f",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGEDETAIL",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2026/MMSDM_2026_01/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGEDETAIL%23FILE01%23202601010000.zip",
+      "zip_sha256": "400e65431b27493a45e16e2f818f3b67f9592d112efb61f1c38f8160aece6d61"
+    },
+    {
+      "month": "2026-01",
+      "rows": 14839,
+      "sha256": "23c9573de6d4e06466f5b5a886a370ab1713ec05520145ee08705dccbfa34d6a",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGECONSTRAINTSET",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2026/MMSDM_2026_01/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGECONSTRAINTSET%23FILE01%23202601010000.zip",
+      "zip_sha256": "36e9d25bc35920d635633c689eaec5172971d83955a3c04b66b21b1ff6aa18e8"
+    },
+    {
+      "month": "2026-02",
+      "rows": 863101,
+      "sha256": "b4eec4174d8159f39dfda39ab1a632ab069c024bb0f1abe4a358fb79f3b16646",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGEDETAIL",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2026/MMSDM_2026_02/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGEDETAIL%23FILE01%23202602010000.zip",
+      "zip_sha256": "5eb7b7722a2f11151d442c0740cdcad3bdb8c99c84061100450691c1526ee650"
+    },
+    {
+      "month": "2026-02",
+      "rows": 15359,
+      "sha256": "eb9d5e76786871a96bb8045ae41576963c61030253962a57bd3ec1faa9b1c098",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGECONSTRAINTSET",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2026/MMSDM_2026_02/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGECONSTRAINTSET%23FILE01%23202602010000.zip",
+      "zip_sha256": "f40718a76f4fbcc62c85a03df2b46f0c4500cbcdd45e9c9d9d6a1f380a07bb35"
+    },
+    {
+      "month": "2026-03",
+      "rows": 867756,
+      "sha256": "9ff0c368e2def9105db7cc99f5ae9556dbf5f2eb6770689c1af2f40a9990f0a5",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGEDETAIL",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2026/MMSDM_2026_03/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGEDETAIL%23FILE01%23202603010000.zip",
+      "zip_sha256": "c2741620fece65c0bae7379c53651d676eaabca0ac87e9160665c51c7b066640"
+    },
+    {
+      "month": "2026-03",
+      "rows": 15843,
+      "sha256": "2bcc4e9164946a2e0516bb89bb2ca666392e6afd399541c4587fef326cc1bf00",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGECONSTRAINTSET",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2026/MMSDM_2026_03/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGECONSTRAINTSET%23FILE01%23202603010000.zip",
+      "zip_sha256": "49247f2bc1889754292c9907be491c206a77127dc39d6532c6854902477e8c95"
+    },
+    {
+      "month": "2026-04",
+      "rows": 873377,
+      "sha256": "26fb00119f556d390c27a539e91d6f8b3d3e8539712cfff41c7781c855a8f843",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGEDETAIL",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2026/MMSDM_2026_04/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGEDETAIL%23FILE01%23202604010000.zip",
+      "zip_sha256": "45ba219a9df0287dbf8b796eb6688d7e463c586850abbe774589666a143f7867"
+    },
+    {
+      "month": "2026-04",
+      "rows": 16900,
+      "sha256": "9bd5c87cc7b7bc2f944af136e285a94f84f62bd415c0fdea7fbebacdb2670ebb",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGECONSTRAINTSET",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2026/MMSDM_2026_04/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGECONSTRAINTSET%23FILE01%23202604010000.zip",
+      "zip_sha256": "61b90c4b69f33084e9de3055f1b116b38a74cbe54de4274819cfd57f04d66164"
+    },
+    {
+      "month": "2026-05",
+      "rows": 879418,
+      "sha256": "1778bc65820cc1321236a5c66e53d9a3bf86d8670405507085e0704bd722caf7",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGEDETAIL",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2026/MMSDM_2026_05/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGEDETAIL%23FILE01%23202605010000.zip",
+      "zip_sha256": "0ef31c20b2d5b08dae4fb0c5de3070fceb891a41b5d15dbe4d66383d053fe633"
+    },
+    {
+      "month": "2026-05",
+      "rows": 17663,
+      "sha256": "9fa8efcac21b62aaab2f26e41193968bae14d382d29ff7820649c559d318ebd9",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGECONSTRAINTSET",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2026/MMSDM_2026_05/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGECONSTRAINTSET%23FILE01%23202605010000.zip",
+      "zip_sha256": "baa8e03f55caa476dd7bc7a28c36826b45a1bf94c4b6a4526c88ff6baa9bc912"
+    },
+    {
+      "month": "2026-06",
+      "rows": 884672,
+      "sha256": "808105f18c175126b55353752eff14db5c7761a60263737870a7f4c3bbf642ad",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGEDETAIL",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2026/MMSDM_2026_06/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGEDETAIL%23FILE01%23202606010000.zip",
+      "zip_sha256": "82fb84fd66eed088566e80eb9ac4d4d2e8422faa6f103cde74e20aa9dd109a04"
+    },
+    {
+      "month": "2026-06",
+      "rows": 18618,
+      "sha256": "04a9847c75f69d63ae2c16c987ce75224289cf77c7128e184761c9d05cdc7ae5",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGECONSTRAINTSET",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2026/MMSDM_2026_06/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGECONSTRAINTSET%23FILE01%23202606010000.zip",
+      "zip_sha256": "4bbb297b6ebaa67392e4933ece95608b4affae83dfc183491a77d3f247f249be"
+    },
+    {
+      "month": "2026-07",
+      "rows": 890226,
+      "sha256": "0a58cbc8b8c324200cd44a531191c47fc219540299426a7f48c1df0a18347408",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGEDETAIL",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2026/MMSDM_2026_07/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGEDETAIL%23FILE01%23202607010000.zip",
+      "zip_sha256": "32905a5b9e38d1f208d626057540acf87d85fc8da1d21b3499f5a15a05e8402b"
+    },
+    {
+      "month": "2026-07",
+      "rows": 19489,
+      "sha256": "976888df312441ae568998307ec9a84fd9d1bc31ba8e2f22913d69e83147804b",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGECONSTRAINTSET",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2026/MMSDM_2026_07/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGECONSTRAINTSET%23FILE01%23202607010000.zip",
+      "zip_sha256": "e461230829172d1db37d41f6163013014c78483d864a23391b12e71f184f1278"
+    },
+    {
+      "month": "2026-08",
+      "rows": 896157,
+      "sha256": "7626fbfec702e8770ceb3121eb1ecc684b5c0efe6be3599606754d37ef483e19",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGEDETAIL",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2026/MMSDM_2026_08/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGEDETAIL%23FILE01%23202608010000.zip",
+      "zip_sha256": "914f1f5b7f066347a532f49e027f08a8bfc5f2dd2d7597a758584dae38fe2b14"
+    },
+    {
+      "month": "2026-08",
+      "rows": 20574,
+      "sha256": "233b9dd69e85c3816d9483db4b41870f381dd983017b666b0e854023b70a58af",
+      "status": "downloaded",
+      "table": "NETWORK_OUTAGECONSTRAINTSET",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2026/MMSDM_2026_08/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_OUTAGECONSTRAINTSET%23FILE01%23202608010000.zip",
+      "zip_sha256": "51087c4b6f09a1ecc3fe64c2bd862965cd5f6faeae4fcf67c6daf241e1b2260b"
+    },
+    {
+      "month": "2026-08",
+      "rows": 30922,
+      "sha256": "725e5d1f05f06bb5fed24a320e3fce4da0a17beab041de5783d491e35540215a",
+      "status": "downloaded",
+      "table": "NETWORK_EQUIPMENTDETAIL",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2026/MMSDM_2026_08/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_EQUIPMENTDETAIL%23FILE01%23202608010000.zip",
+      "zip_sha256": "8b494577cbbfb2536d99fcead91a1d9d8fb5cf3b089fbf6ddb53542afd632a6d"
+    },
+    {
+      "month": "2026-08",
+      "rows": 1231,
+      "sha256": "c9a770f19ba0f77169be8cdf07c8ca4ef394d1a248f04856075f02ab90e22b49",
+      "status": "downloaded",
+      "table": "NETWORK_SUBSTATIONDETAIL",
+      "url": "https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2026/MMSDM_2026_08/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23NETWORK_SUBSTATIONDETAIL%23FILE01%23202608010000.zip",
+      "zip_sha256": "c66db161bde434f6c3d63bf7e26e7ddc234a8e0de6fd16824336f2279f4dc92d"
+    }
+  ]
+}

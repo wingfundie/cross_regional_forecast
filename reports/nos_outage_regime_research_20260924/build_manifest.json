@@ -1,0 +1,545 @@
+{
+  "report_id": "nos_outage_regime_research_20260924",
+  "built_at": "2026-09-24T07:21:48.026696+08:00",
+  "theme_version": "1.0",
+  "rebuild": "python scripts/build_nos_outage_report.py",
+  "window": "(2024-09-01, 2026-09-01]",
+  "inputs": {
+    "data\\nos_regime_v1\\tables\\booking_reliability__full.parquet": {
+      "bytes": 9146,
+      "sha256": "655d3c1de1c12d52bddf4e388cc1575f87564890ffbc8aa859ab1ea8a7044a0c"
+    },
+    "data\\nos_regime_v1\\tables\\booking_reliability__pilot.parquet": {
+      "bytes": 8524,
+      "sha256": "936f5ebab0184be41d85277a6ba30fcb7fe3f9f28947e9acb576c1514d70560d"
+    },
+    "data\\nos_regime_v1\\tables\\event_study__N-Q-MNSP1.parquet": {
+      "bytes": 220670,
+      "sha256": "915e611b8df074813653ea39fe54f47893fcc7340e47e9f3f9837bf12aa36772"
+    },
+    "data\\nos_regime_v1\\tables\\event_study__NSW1-QLD1.parquet": {
+      "bytes": 371891,
+      "sha256": "93c3f6cebe0a478f445a5a3ca5da323b3ce922d436385b4ca9f9b93e076ae1f4"
+    },
+    "data\\nos_regime_v1\\tables\\event_study__T-V-MNSP1.parquet": {
+      "bytes": 142332,
+      "sha256": "1f6814812f9537ae04655189397736a38fd096d9201ea9bc5e8ce67c9066cd09"
+    },
+    "data\\nos_regime_v1\\tables\\event_study__V-S-MNSP1.parquet": {
+      "bytes": 665424,
+      "sha256": "b8a5e91b40778384aa93cfdd40623cc051345b5e725b8e1e3b25d250e6854862"
+    },
+    "data\\nos_regime_v1\\tables\\event_study__V-SA.parquet": {
+      "bytes": 546607,
+      "sha256": "ac7c2f0c2a5cce3f77d2034f0e97f71712c1cba53d55c8059cac7e0adeb6349f"
+    },
+    "data\\nos_regime_v1\\tables\\event_study__VIC1-NSW1.parquet": {
+      "bytes": 704621,
+      "sha256": "aaecc6f1334e4a573fad96e0e89e7c2e4749c811511bdc7f51ce3e5671cbdcdb"
+    },
+    "data\\nos_regime_v1\\tables\\family_effects__N-Q-MNSP1.parquet": {
+      "bytes": 61804,
+      "sha256": "2c6cbd7f7a7c617ddf8b0e984c178cac5b773f142b5db32f3dfa1e314265d166"
+    },
+    "data\\nos_regime_v1\\tables\\family_effects__NSW1-QLD1.parquet": {
+      "bytes": 78142,
+      "sha256": "657f09b7c0d6c53919700a71854975cc21849ffaa774851e25a9430c099ffbe1"
+    },
+    "data\\nos_regime_v1\\tables\\family_effects__T-V-MNSP1.parquet": {
+      "bytes": 54942,
+      "sha256": "305b49c4ec18f7d83ffe5746d366d06bf4c2498f51d7f9b24efb032f80bf21be"
+    },
+    "data\\nos_regime_v1\\tables\\family_effects__V-S-MNSP1.parquet": {
+      "bytes": 118824,
+      "sha256": "b186710bdd440f7c359853146ae0dad6eeba8e8a5f4ce509bae8886c4b116026"
+    },
+    "data\\nos_regime_v1\\tables\\family_effects__V-SA.parquet": {
+      "bytes": 102178,
+      "sha256": "4babcbf21c37cb428a0f5015870e37af96b207c5dfebe055663093765517f815"
+    },
+    "data\\nos_regime_v1\\tables\\family_effects__VIC1-NSW1.parquet": {
+      "bytes": 115871,
+      "sha256": "db173f166dc8dd1c3cb358a941302d6faa06d6cc53a3abe813842eeec56697ec"
+    },
+    "data\\nos_regime_v1\\tables\\key_effects__N-Q-MNSP1.parquet": {
+      "bytes": 80255,
+      "sha256": "bee3aa1f35b7257b1d78b584054e1801b3bfdf26224917bca00b29dcdf17bd3d"
+    },
+    "data\\nos_regime_v1\\tables\\key_effects__NSW1-QLD1.parquet": {
+      "bytes": 112706,
+      "sha256": "272c9802bcc5ad645b0afb701cc0819e7b2243968e3bdc462c93d8f0085166ad"
+    },
+    "data\\nos_regime_v1\\tables\\key_effects__T-V-MNSP1.parquet": {
+      "bytes": 67740,
+      "sha256": "8b84117f3b6e90897b8fe48ac1a8a77d60e85b4a58c5ffd13d201f324a367bca"
+    },
+    "data\\nos_regime_v1\\tables\\key_effects__V-S-MNSP1.parquet": {
+      "bytes": 152433,
+      "sha256": "9b6bd5072f6f5518d95cca5485facc6e12698cc3b9881ef7606025e01d88f6d8"
+    },
+    "data\\nos_regime_v1\\tables\\key_effects__V-SA.parquet": {
+      "bytes": 142884,
+      "sha256": "f909f4cbaaca2c1af334d81e12c17973b67f8adeeb28ec3022c7281fe2e432a9"
+    },
+    "data\\nos_regime_v1\\tables\\key_effects__VIC1-NSW1.parquet": {
+      "bytes": 151085,
+      "sha256": "6e75a0fd2068c644eeeba115c86c64c4cb3cbbd86cd7283c9e899e370ce2c1c4"
+    },
+    "data\\nos_regime_v1\\tables\\spillover__N-Q-MNSP1.parquet": {
+      "bytes": 155835,
+      "sha256": "38573d868542eaa49ada30f80dccccab7fd0f6febdaed1e9ac7db21ae0317b86"
+    },
+    "data\\nos_regime_v1\\tables\\spillover__NSW1-QLD1.parquet": {
+      "bytes": 154662,
+      "sha256": "acc75dd845802312061dc60426665a58332d5d823205ca8ca281a0378c544d9b"
+    },
+    "data\\nos_regime_v1\\tables\\spillover__T-V-MNSP1.parquet": {
+      "bytes": 144698,
+      "sha256": "bb79046d55ac94e127068d8880eb53403178bff81f54f45ba8200359d547892f"
+    },
+    "data\\nos_regime_v1\\tables\\spillover__V-S-MNSP1.parquet": {
+      "bytes": 108379,
+      "sha256": "35d9494b7031a0f9219ed188b5218a9c211c1365556bf9bc95a648e343b648b5"
+    },
+    "data\\nos_regime_v1\\tables\\spillover__V-SA.parquet": {
+      "bytes": 135003,
+      "sha256": "780366ce24d6e4c81969bce2bb6811b64180f37497bf02223de5b0c54562d246"
+    },
+    "data\\nos_regime_v1\\tables\\spillover__VIC1-NSW1.parquet": {
+      "bytes": 124458,
+      "sha256": "1151a5296dde1d25fedd16cb028dac12f77f2f17fa558828e142f5e2ce0e3786"
+    },
+    "data\\nos_regime_v1\\tables\\state_panel__N-Q-MNSP1.parquet": {
+      "bytes": 1841326,
+      "sha256": "d5199c5f8eaa3113f55fd015904e67349403a81593360dfaa198d2fb9a878659"
+    },
+    "data\\nos_regime_v1\\tables\\state_panel__NSW1-QLD1.parquet": {
+      "bytes": 2470967,
+      "sha256": "fe0c60d768fe4ccef0793e15e053ffb06375c1b50e8219ccbeaa39adc7458f6e"
+    },
+    "data\\nos_regime_v1\\tables\\state_panel__T-V-MNSP1.parquet": {
+      "bytes": 2055996,
+      "sha256": "391a79584e5f39d78cfdbf3c7e3bc196ff42c6d5b9087b3fe12494bc97ca550b"
+    },
+    "data\\nos_regime_v1\\tables\\state_panel__V-S-MNSP1.parquet": {
+      "bytes": 1785441,
+      "sha256": "0f87d9c5218d25c0ee8f96a4b975916353de673607a1439da01be12911c7df5e"
+    },
+    "data\\nos_regime_v1\\tables\\state_panel__V-SA.parquet": {
+      "bytes": 2404797,
+      "sha256": "3a8002a70c968a908ab0a4549b509cd0a9b61b2f615a06c0bc4733234004ed02"
+    },
+    "data\\nos_regime_v1\\tables\\state_panel__VIC1-NSW1.parquet": {
+      "bytes": 2424386,
+      "sha256": "032404bd14204fe4ff778f7cf7d6f1ab540c019194652b38318b776aaf380665"
+    },
+    "data\\nos_regime_v1\\tables\\states__N-Q-MNSP1.parquet": {
+      "bytes": 63430,
+      "sha256": "e004b6d0d710edc49d77146090b15931ae8f447ba30c9757ace07c3c10e52ce4"
+    },
+    "data\\nos_regime_v1\\tables\\states__NSW1-QLD1.parquet": {
+      "bytes": 80331,
+      "sha256": "ef0302e0b81b14a48d9632b5ef838e51539b20158ec112ad754c3436f541446c"
+    },
+    "data\\nos_regime_v1\\tables\\states__T-V-MNSP1.parquet": {
+      "bytes": 50294,
+      "sha256": "13f7efd65dd5e40e0b387ba7c4418368cb00f6bbd4cb25da82323944d8ffbb3f"
+    },
+    "data\\nos_regime_v1\\tables\\states__V-S-MNSP1.parquet": {
+      "bytes": 119683,
+      "sha256": "516821188485e2ac716f20b8093ad6853f0d34d21658310fd7cb52480b1540bd"
+    },
+    "data\\nos_regime_v1\\tables\\states__V-SA.parquet": {
+      "bytes": 110007,
+      "sha256": "27bb1e5b430f85f0455d53694e7699ff5e20c6bf3e97c291f49ed657f73523ec"
+    },
+    "data\\nos_regime_v1\\tables\\states__VIC1-NSW1.parquet": {
+      "bytes": 134200,
+      "sha256": "d7a54a9bca549c56a5f2ca0b684855fc50de157d876906ed48cd35ca7365fee9"
+    },
+    "data\\nos_regime_v1\\tables\\units__N-Q-MNSP1.parquet": {
+      "bytes": 3716565,
+      "sha256": "c0ce96a78e0ed68f212b912037768ca3b5ac616536983f83c853606882c728a8"
+    },
+    "data\\nos_regime_v1\\tables\\units__NSW1-QLD1.parquet": {
+      "bytes": 6566946,
+      "sha256": "2f2dc932ab7a9e769dc4a723d99035bdbf038c088065f6c1ef2e5aa5b9242399"
+    },
+    "data\\nos_regime_v1\\tables\\units__T-V-MNSP1.parquet": {
+      "bytes": 1989117,
+      "sha256": "a5821e4f6b735e788f7095417a3b3443164b09a9d0caccff74ea9d18c0a59dfc"
+    },
+    "data\\nos_regime_v1\\tables\\units__V-S-MNSP1.parquet": {
+      "bytes": 9760711,
+      "sha256": "a7432d55279cffc9a2a6d26f38438a884b6fd705082f391a487d56c1da6c26f4"
+    },
+    "data\\nos_regime_v1\\tables\\units__V-SA.parquet": {
+      "bytes": 10138215,
+      "sha256": "a9a9fefc8ace257050eed407fbe9b2a67ba370d6955dd3980e796d429f3a2cc3"
+    },
+    "data\\nos_regime_v1\\tables\\units__VIC1-NSW1.parquet": {
+      "bytes": 10612775,
+      "sha256": "3740abd24ec1e7c75f2ca1f35e32372839f472f5b0ec89ed0a8abd9638e01a9d"
+    },
+    "data\\nos_regime_v1\\report_tables\\diurnal_48.parquet": {
+      "bytes": 126080,
+      "sha256": "478c71d09c2a3662bc0366044993f9786d318c344d384d8e7d74f072d8c120ee"
+    },
+    "data\\nos_regime_v1\\report_tables\\duid_pressure.parquet": {
+      "bytes": 144096,
+      "sha256": "1a5e264fb225e07a9d40adbfaba7fd61a23bf3dea3df314072e2e1e8c44574a3"
+    },
+    "data\\nos_regime_v1\\report_tables\\flow_response.parquet": {
+      "bytes": 25633,
+      "sha256": "437b00f931725077043ab06336613453c2ba707327b70b4f2bdff3b5fc83239a"
+    },
+    "data\\nos_regime_v1\\report_tables\\footprint.parquet": {
+      "bytes": 83289,
+      "sha256": "fac0fa6f5b5f3c52bb9cd44d78643693da07a6774a42054b6b2e3668a837bc38"
+    },
+    "data\\nos_regime_v1\\set_relevance.parquet": {
+      "bytes": 26506,
+      "sha256": "a409cff34c1923041142d70eb497fb7d52b882597844ec63e8824ffd9d4eca68"
+    },
+    "data\\nos_regime_v1\\k5_electrical.parquet": {
+      "bytes": 33906,
+      "sha256": "dab94d9a19eb54c2b6e17d41fe2a61b09d75eb03e61a1f535a5e52e208dd4480"
+    },
+    "data\\nos_regime_v1\\outage_keys.parquet": {
+      "bytes": 1074426,
+      "sha256": "0d298b86bb0a463a67636fa49e4ae531aa361fb3f4960a45127bd30449044483"
+    },
+    "data\\nos_regime_v1\\episodes.parquet": {
+      "bytes": 2433608,
+      "sha256": "68b9bbf053a4f8e01c29a3cf66fafcd29f70223295673d881666dacc395c256b"
+    },
+    "data\\nos_regime_v1\\episode_sets.parquet": {
+      "bytes": 203695,
+      "sha256": "5f577423a4ec5463512c8467379ad13b2044fd69be91bfb437bfd8ede95037ff"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_EQUIPMENTDETAIL_202608.parquet": {
+      "bytes": 1032579,
+      "sha256": "725e5d1f05f06bb5fed24a320e3fce4da0a17beab041de5783d491e35540215a"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGECONSTRAINTSET_202409.parquet": {
+      "bytes": 56233,
+      "sha256": "35e6db7d32ae43764a2de74301dfc89b10d9069c07913d303cf0e9be7ec473f3"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGECONSTRAINTSET_202410.parquet": {
+      "bytes": 69894,
+      "sha256": "6a0bfa990e186fb86641113fe25aa04553641ec7583945aa3ecd78b6084b2e08"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGECONSTRAINTSET_202411.parquet": {
+      "bytes": 80465,
+      "sha256": "f73292b8547c067bcc5ea35129b1b1280064a6b62a72a5c0bc718ca0c1a4e9a5"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGECONSTRAINTSET_202412.parquet": {
+      "bytes": 88431,
+      "sha256": "213719e44087d3ce76fe84b7447dff008178586b3d817f2f1511880bba538b30"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGECONSTRAINTSET_202501.parquet": {
+      "bytes": 104982,
+      "sha256": "f716e55a557ef4eca6552449f4337cd5d7311b34b15eb03a690a0200c4f9cb2a"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGECONSTRAINTSET_202502.parquet": {
+      "bytes": 112942,
+      "sha256": "a1a38c74bfbb2bff039680b257f48f592b119796bed2a345d5636363f53635a0"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGECONSTRAINTSET_202503.parquet": {
+      "bytes": 121768,
+      "sha256": "cbda411beb3a383ca0e334ec07969eda52df246d4d1061b19e4613be8a4e274f"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGECONSTRAINTSET_202504.parquet": {
+      "bytes": 133872,
+      "sha256": "74c1c45bddd879a15f95cd75b0ae4e0bf11be3e9dd159d29872d789a8abfb7f6"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGECONSTRAINTSET_202505.parquet": {
+      "bytes": 144975,
+      "sha256": "35bb2d2bc044ed1f70ddf10b9e2643d925970f8207f8c87f98993ca74d257780"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGECONSTRAINTSET_202506.parquet": {
+      "bytes": 154673,
+      "sha256": "7e097bb11249b71cc53d475c5e5c8b3d6ed75febfb59d90e63403c75a7d73773"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGECONSTRAINTSET_202507.parquet": {
+      "bytes": 166519,
+      "sha256": "0834c12bccf7d9fa8360d26ba2a51651533c5210fd3378ea5e66db8d374dc97a"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGECONSTRAINTSET_202508.parquet": {
+      "bytes": 181215,
+      "sha256": "c2c8d451fc5e35dd8d7e9af0122fb76378d44a7c645dfd094f19d89d157f4107"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGECONSTRAINTSET_202509.parquet": {
+      "bytes": 191990,
+      "sha256": "f9e554442d36de84d9df903b35b54de8b710498fbcbd6c020b39312e56b15b5e"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGECONSTRAINTSET_202510.parquet": {
+      "bytes": 208256,
+      "sha256": "0a0e201bf9d3e3c8aceaab7345bdaed055798d9469884ecc2e0169d42c3f5b0c"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGECONSTRAINTSET_202511.parquet": {
+      "bytes": 215960,
+      "sha256": "b8126a4f0dace54f99d66587a563054cf1f4d1101bef7f5b5397485f7cf437a1"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGECONSTRAINTSET_202512.parquet": {
+      "bytes": 223798,
+      "sha256": "1b126541e741f0872d3109c71708c01c7ecf0acb5f92988d246cdb7a62ad3e41"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGECONSTRAINTSET_202601.parquet": {
+      "bytes": 232930,
+      "sha256": "23c9573de6d4e06466f5b5a886a370ab1713ec05520145ee08705dccbfa34d6a"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGECONSTRAINTSET_202602.parquet": {
+      "bytes": 241229,
+      "sha256": "eb9d5e76786871a96bb8045ae41576963c61030253962a57bd3ec1faa9b1c098"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGECONSTRAINTSET_202603.parquet": {
+      "bytes": 249414,
+      "sha256": "2bcc4e9164946a2e0516bb89bb2ca666392e6afd399541c4587fef326cc1bf00"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGECONSTRAINTSET_202604.parquet": {
+      "bytes": 266099,
+      "sha256": "9bd5c87cc7b7bc2f944af136e285a94f84f62bd415c0fdea7fbebacdb2670ebb"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGECONSTRAINTSET_202605.parquet": {
+      "bytes": 277470,
+      "sha256": "9fa8efcac21b62aaab2f26e41193968bae14d382d29ff7820649c559d318ebd9"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGECONSTRAINTSET_202606.parquet": {
+      "bytes": 290146,
+      "sha256": "04a9847c75f69d63ae2c16c987ce75224289cf77c7128e184761c9d05cdc7ae5"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGECONSTRAINTSET_202607.parquet": {
+      "bytes": 303138,
+      "sha256": "976888df312441ae568998307ec9a84fd9d1bc31ba8e2f22913d69e83147804b"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGECONSTRAINTSET_202608.parquet": {
+      "bytes": 319797,
+      "sha256": "233b9dd69e85c3816d9483db4b41870f381dd983017b666b0e854023b70a58af"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGEDETAIL_202409.parquet": {
+      "bytes": 30729980,
+      "sha256": "b39246d3f0278864de15e4aeadbf291feb8933090fcaa3b3906a4649e598dd30"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGEDETAIL_202410.parquet": {
+      "bytes": 30961752,
+      "sha256": "381f574fa3500eb3338c0aa00358c5eb41f8d02671b83231fcc049c0fcb22f6d"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGEDETAIL_202411.parquet": {
+      "bytes": 31155768,
+      "sha256": "2429d116ad1307f30bbfb31fb4fdf85b3c72f97a579ad7bf308665a3d537fcb4"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGEDETAIL_202412.parquet": {
+      "bytes": 31305240,
+      "sha256": "b0bc757962e660934c4ed7ba8bec122a50e68e66e6a16ed50a855b89339b1e3a"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGEDETAIL_202501.parquet": {
+      "bytes": 31585062,
+      "sha256": "994e39b193df33c9cb9453fa9ce570af8abb85bd773f648ba8915cca40807b03"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGEDETAIL_202502.parquet": {
+      "bytes": 31752732,
+      "sha256": "82fef749df423442398536cb93a4ecd6b15ebea2359b37e96492d5861494d4c1"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGEDETAIL_202503.parquet": {
+      "bytes": 31906687,
+      "sha256": "bfaa441daf8eebaf5c15e6b8f80e08eb792a0ab91d1b001170806bf22071309e"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGEDETAIL_202504.parquet": {
+      "bytes": 32133798,
+      "sha256": "5473613e5136adefa579c7e995a3c78cd86094c0843e5fd63c3d6428ec2a933d"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGEDETAIL_202505.parquet": {
+      "bytes": 32286150,
+      "sha256": "40b2dcdabcb74829312d369d171da068e9390d01841018f5a1ad2ac8a825fc6c"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGEDETAIL_202506.parquet": {
+      "bytes": 32481794,
+      "sha256": "eb8ce547f40ca424cdbf8070ff807182d1d19a269af86e9fc90b075aaecf60fb"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGEDETAIL_202507.parquet": {
+      "bytes": 32692044,
+      "sha256": "dfe5d61f1a247d7119ce1d341d27358476a7fcdc6216d95752c2a945fd254564"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGEDETAIL_202508.parquet": {
+      "bytes": 32924586,
+      "sha256": "043832948cc24bd84b80bc3cd4b870af3a82d440ba59eea4c85390212c8bafb1"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGEDETAIL_202509.parquet": {
+      "bytes": 33070989,
+      "sha256": "16ec29ff752094febb76f386e2ca9536031f1e1ff67ebf32bdc96e2e09ec129b"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGEDETAIL_202510.parquet": {
+      "bytes": 33360841,
+      "sha256": "8d3526d55257b5e935da4ca7525c063d2a9ebf17de0d4f17dc16b43cf171339b"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGEDETAIL_202511.parquet": {
+      "bytes": 33484233,
+      "sha256": "75af63af9753ed196adf7a51872453827a847283ad5b7ddcfae4c5af46731e6a"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGEDETAIL_202512.parquet": {
+      "bytes": 33631857,
+      "sha256": "8fc3ed4fe6c7d90fe88297d3c3bff58b86549a8b9d86f16cfc4698e41ab565a3"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGEDETAIL_202601.parquet": {
+      "bytes": 33796992,
+      "sha256": "f3da259f6c9692ec5ba3bea404e4b349ecfdb6aac71a79b6361b7a7864f2657f"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGEDETAIL_202602.parquet": {
+      "bytes": 34020534,
+      "sha256": "b4eec4174d8159f39dfda39ab1a632ab069c024bb0f1abe4a358fb79f3b16646"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGEDETAIL_202603.parquet": {
+      "bytes": 34215732,
+      "sha256": "9ff0c368e2def9105db7cc99f5ae9556dbf5f2eb6770689c1af2f40a9990f0a5"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGEDETAIL_202604.parquet": {
+      "bytes": 34446834,
+      "sha256": "26fb00119f556d390c27a539e91d6f8b3d3e8539712cfff41c7781c855a8f843"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGEDETAIL_202605.parquet": {
+      "bytes": 34688355,
+      "sha256": "1778bc65820cc1321236a5c66e53d9a3bf86d8670405507085e0704bd722caf7"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGEDETAIL_202606.parquet": {
+      "bytes": 34905204,
+      "sha256": "808105f18c175126b55353752eff14db5c7761a60263737870a7f4c3bbf642ad"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGEDETAIL_202607.parquet": {
+      "bytes": 35134501,
+      "sha256": "0a58cbc8b8c324200cd44a531191c47fc219540299426a7f48c1df0a18347408"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_OUTAGEDETAIL_202608.parquet": {
+      "bytes": 35391291,
+      "sha256": "7626fbfec702e8770ceb3121eb1ecc684b5c0efe6be3599606754d37ef483e19"
+    },
+    "data\\nos_regime_v1\\raw\\mmsdm\\NETWORK_SUBSTATIONDETAIL_202608.parquet": {
+      "bytes": 49623,
+      "sha256": "c9a770f19ba0f77169be8cdf07c8ca4ef394d1a248f04856075f02ab90e22b49"
+    },
+    "data\\nos_regime_v1\\raw\\osm\\au_power.json": {
+      "bytes": 897174,
+      "sha256": "72dc25550afdee9e95b77a77615ed91b43db1cdbaf31ea46cec5a1428ffee0c4"
+    }
+  },
+  "outputs": {
+    "downloads\\nos_booking_reliability.csv": {
+      "bytes": 2118,
+      "sha256": "747e0ab6d6ef9d3a3ba99f979646430a023817c1c568e46a74b7754f1ec97af7"
+    },
+    "downloads\\nos_booking_states.csv": {
+      "bytes": 836077,
+      "sha256": "8e9fce046be64358940a675b0552a30e2723d93bdb0e00786222242cca75d2b9"
+    },
+    "downloads\\nos_diurnal_profiles_48.csv": {
+      "bytes": 342605,
+      "sha256": "42dc0ff4280ec58439b69e78eb57973610c6a51d41cd05756f335a11523d17c7"
+    },
+    "downloads\\nos_duid_pressure.csv": {
+      "bytes": 383563,
+      "sha256": "969f1c764cc35258613ce3e0239c707982f56e3099ad53dbc36c8669d9af3c22"
+    },
+    "downloads\\nos_event_study.csv.gz": {
+      "bytes": 3093245,
+      "sha256": "eaf75e983efcbb460b65b26de573e5e873661b4a4b908c6bb167216f57b1bd1d"
+    },
+    "downloads\\nos_execution_log.csv": {
+      "bytes": 14593,
+      "sha256": "ecef877b78ab97bb0870f47cc918aa1c06b2e830de1c99e5244f3c722d32b651"
+    },
+    "downloads\\nos_family_effects.csv": {
+      "bytes": 805522,
+      "sha256": "fcd64bf086949f0650fa87694e8049865048eb0d2b7aafb43e5a8eb877d87307"
+    },
+    "downloads\\nos_flow_response.csv": {
+      "bytes": 50434,
+      "sha256": "a186aa0859cdbe08e7b4b0b9792224fb8d7b0432d7b95f2f8f2bf44331857f16"
+    },
+    "downloads\\nos_k5_electrical.csv": {
+      "bytes": 285049,
+      "sha256": "7a2a34005a4abd4db7230e322e81f6ae03902f19e90a79ff402e43a9beb17e53"
+    },
+    "downloads\\nos_key_effects.csv.gz": {
+      "bytes": 415804,
+      "sha256": "94cb8e8fc81ca5abf2d239cf2a9569f464392852334d605c6cf1fa75602b6c4d"
+    },
+    "downloads\\nos_leader_transitions.csv": {
+      "bytes": 50615,
+      "sha256": "bb435793a22e6d24e954b2940ed1af0fc5e6f5dc1e219b57b72bec4af45a9d1b"
+    },
+    "downloads\\nos_outage_episodes.csv.gz": {
+      "bytes": 1724041,
+      "sha256": "1188bff21d4a5ea17a16ea2b83b15a604fb768cf0f6c6c1592443bb3dec7c0f8"
+    },
+    "downloads\\nos_outage_keys.csv.gz": {
+      "bytes": 1846742,
+      "sha256": "8b45014c7abfd6375887025cd728ed63bb597b31bfb7143dcca803fe6b5c977b"
+    },
+    "downloads\\nos_outage_lookup.csv": {
+      "bytes": 621774,
+      "sha256": "0cb77586ea137b1ef12dfe9c2dcda78802898396d29e974361cb67313da84379"
+    },
+    "downloads\\nos_placebo_checks.csv": {
+      "bytes": 112110,
+      "sha256": "a4f314edcca7b2201b72e22d00d81cd4e7c7c17d2d5deabb5878be0a5c20f00a"
+    },
+    "downloads\\nos_set_relevance.csv": {
+      "bytes": 178099,
+      "sha256": "46df269d166ae4138fcc4da98de81ab7cdfc185edd5d4e256fae4364e3925e4b"
+    },
+    "downloads\\nos_spillover.csv": {
+      "bytes": 1497780,
+      "sha256": "ef0832842b3d0598d7e6bdbe44f29ffade40f1d137adc6e3410498c16d766397"
+    },
+    "downloads\\nos_state_coverage.csv": {
+      "bytes": 3835,
+      "sha256": "5afe18622fc04d9816b2991ebea4a243df11869584d81767461957cab15162ab"
+    },
+    "downloads\\nos_state_regime_summary.csv": {
+      "bytes": 9820,
+      "sha256": "0b25cfaa7843d5ebc77b1d9c011c5f2b0cec5042ade014456cf75dcc1cd414f6"
+    },
+    "downloads\\nos_substation_crosswalk.csv": {
+      "bytes": 86026,
+      "sha256": "aadfc753d113a965f9972339b203913c6a542da85b3c8f8e941567a701fd03e7"
+    },
+    "downloads\\nos_system_footprint.csv": {
+      "bytes": 348526,
+      "sha256": "7652b679ff8cb971a6b14dc063e23aee252c5ac7d47d7508f0476889cc4650fc"
+    },
+    "downloads\\nos_timing_effects.csv": {
+      "bytes": 18171,
+      "sha256": "105fc238d69aa9f6b33d8453cc6e5f33a3604d8e604bdc0ca14a393b4576d75e"
+    },
+    "downloads\\nos_weather_vre_interaction.csv": {
+      "bytes": 10774,
+      "sha256": "136d82036906a52777814ba25b53f040ecf94c48065eb92748288f9f5da7553e"
+    },
+    "index.html": {
+      "bytes": 6109649,
+      "sha256": "86ee84770f6ed427c68362edd4bbc798fdfd404b784f4e93ed5e08c02c142201"
+    },
+    "METHODOLOGY.md": {
+      "bytes": 17507,
+      "sha256": "e2797f68c9ca795bab31c60c49916b4307bb3cd20362461c0b9e2f10256b44f2"
+    },
+    "sources\\EXECUTION_LOG.md": {
+      "bytes": 15867,
+      "sha256": "5c08d331d5247eb5f67910ef0281e209528b370a130037db6ff54bf400862b18"
+    },
+    "sources\\pilot_summary.md": {
+      "bytes": 2233,
+      "sha256": "2df4b3faa207889323dae9d7806a344a6ece0ea61a92031e7f4ea36c057711b2"
+    },
+    "sources\\PLAN.md": {
+      "bytes": 12885,
+      "sha256": "34c5d5ac8ad839a245fd4f99971966aa2cd92713ebf5e2a581ca71684274216b"
+    },
+    "sources\\RESULTS_SUMMARY.md": {
+      "bytes": 3960,
+      "sha256": "bdbf271401ad364922afa0ca6acaac3f77d681be1a47debefae9449d7c3f669b"
+    }
+  },
+  "generator_sha256": "54f7e9d06e49f542b2ead4a79faa2d935d569f76bde5d93340f6381348a21e4d",
+  "execution": "execution/nos_outage_regime_v1"
+}

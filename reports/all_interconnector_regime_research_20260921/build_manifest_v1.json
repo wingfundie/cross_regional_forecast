@@ -1,0 +1,141 @@
+{
+  "report_id": "all_interconnector_regime_research_20260921",
+  "built_at": "2026-09-21T20:04:44.717761+08:00",
+  "inputs": {
+    "data\\processed\\targets.parquet": {
+      "bytes": 16074351,
+      "sha256": "01c16959a22b7238ce6059b190a9ba0895671df4a5b913ac384a34bd54dda257"
+    },
+    "data\\processed\\regional_30min.parquet": {
+      "bytes": 19029100,
+      "sha256": "0ec0dc89330bbc2812b2da13c8efaf5823bf087c08818febc4a6472be86d9610"
+    },
+    "data\\processed\\weather_30min.parquet": {
+      "bytes": 5106632,
+      "sha256": "80c800a6f7649d5e3e858e16d55566f1014acea3f3bd2af52c6bddc7eac3c97a"
+    },
+    "reports\\all_interconnector_regime_research_20260921\\sources\\noaa_oni_v6_study_context.csv": {
+      "bytes": 4505,
+      "sha256": "b2e69a3d6a486ec8d8611a41303b4606b88111e3ad06e741a60406852d9da1be"
+    }
+  },
+  "outputs": {
+    "downloads\\connector_summary.csv": {
+      "bytes": 2980,
+      "sha256": "89871937b8a0e156e2e9651a376e46aa29a4e0faee5b6ada9f9bd079071f8a28"
+    },
+    "downloads\\constraint_diurnal_setters.csv.gz": {
+      "bytes": 3552,
+      "sha256": "366a4d3a159d6de99691e4050ee97d7804a117a023bdf8b7a4d791e373bb4e54"
+    },
+    "downloads\\constraint_duid_influence.csv": {
+      "bytes": 1469511,
+      "sha256": "4b9921c24ca041a61d4029faa87f71477ef6085f39d7515baeec2f31d804cde4"
+    },
+    "downloads\\constraint_duid_regime_matrix.csv.gz": {
+      "bytes": 21031630,
+      "sha256": "46dd06d7ac21c5e44b1b151553a6b620f179d049db99b296c6c023528b486917"
+    },
+    "downloads\\constraint_family_summary.csv.gz": {
+      "bytes": 747047,
+      "sha256": "bf86a43bcce6c52cabdeefcd234b9189ef32c25fc6a8707579ef7a1937e37d6f"
+    },
+    "downloads\\constraint_season_block_setters.csv.gz": {
+      "bytes": 19868,
+      "sha256": "a4868fb27aac6d899c2dabc7073433507665a8023eda46eb0cbdc1c6d41fe8d1"
+    },
+    "downloads\\constraint_weather_vre_setters.csv.gz": {
+      "bytes": 17503,
+      "sha256": "40452d3006dd688d01f380997c1f4c41e53ff5a42e9b51d1f000b803c78ab916"
+    },
+    "downloads\\coverage_audit.csv": {
+      "bytes": 246,
+      "sha256": "0158448eea0d3e85a386037c957d5b2522aae8a0668c92ad3521c8e19a3aecb4"
+    },
+    "downloads\\diurnal_profiles.csv": {
+      "bytes": 4130789,
+      "sha256": "f9b4aea19d3399e258cb1b7ee1ff3fb7124d8b594bd933dda77be60db86fa2ca"
+    },
+    "downloads\\enso_monthly.csv": {
+      "bytes": 5358,
+      "sha256": "875258c4d2cfcc7aab15d4d017dc88e8d1301d6c8896f47728e9b73b94cd1dab"
+    },
+    "downloads\\enso_regimes.csv": {
+      "bytes": 4084,
+      "sha256": "18ea4e8283d939bcaf359dd134d4fb95f163f06e3be534244525e22bfc38b131"
+    },
+    "downloads\\regime_scatter_sample.csv.gz": {
+      "bytes": 2585255,
+      "sha256": "0d85a9bd1f2bc36137d17d875400d7a5535deb5011c33103394ca4a339fe2180"
+    },
+    "downloads\\seasonal_limit_summary.csv": {
+      "bytes": 7619,
+      "sha256": "c62473911fef31f2ba00f262d3e161f2786d43159e20ad57e34833966eceb5e3"
+    },
+    "downloads\\seasonal_profiles.csv": {
+      "bytes": 27959,
+      "sha256": "fba1ef7e9aede8579ba866071529729aff21c13165df723b7e3ee51e224a5f25"
+    },
+    "downloads\\weather_vre_regimes.csv": {
+      "bytes": 366551,
+      "sha256": "e945384b80723d5c3cf93a7441a1c046ad9f568d1180c51ecfcc0da2ed66a557"
+    },
+    "index.html": {
+      "bytes": 8400787,
+      "sha256": "bf362cc9673160a3932191b3da3885e0057e56250da27bc65f1003b49469375b"
+    },
+    "METHODOLOGY.md": {
+      "bytes": 5887,
+      "sha256": "630f1d10fc10f317fb534946198da353ca2bd0290d5632ee2df5a0b2aea64c5b"
+    },
+    "sources\\noaa_oni_v6_study_context.csv": {
+      "bytes": 4505,
+      "sha256": "b2e69a3d6a486ec8d8611a41303b4606b88111e3ad06e741a60406852d9da1be"
+    }
+  },
+  "constraint_coverage": [
+    {
+      "ic": "NSW1-QLD1",
+      "name": "QNI",
+      "expected_months": 24,
+      "complete_months": 24,
+      "status": "complete"
+    },
+    {
+      "ic": "N-Q-MNSP1",
+      "name": "Directlink",
+      "expected_months": 24,
+      "complete_months": 24,
+      "status": "complete"
+    },
+    {
+      "ic": "VIC1-NSW1",
+      "name": "VNI",
+      "expected_months": 24,
+      "complete_months": 24,
+      "status": "complete"
+    },
+    {
+      "ic": "V-SA",
+      "name": "Heywood",
+      "expected_months": 24,
+      "complete_months": 24,
+      "status": "complete"
+    },
+    {
+      "ic": "V-S-MNSP1",
+      "name": "Murraylink",
+      "expected_months": 24,
+      "complete_months": 24,
+      "status": "complete"
+    },
+    {
+      "ic": "T-V-MNSP1",
+      "name": "Basslink",
+      "expected_months": 24,
+      "complete_months": 24,
+      "status": "complete"
+    }
+  ],
+  "rebuild": "python scripts/build_all_ic_regime_report.py"
+}

@@ -1,57 +1,4 @@
-# Methodology — all-interconnector diurnal and constraint-pressure research
-
-## Scope and frozen windows
-
-The flow, dispatch-limit, weather, VRE and ENSO study covers `(2023-09-01 00:00, 2026-09-01 00:00]` in fixed UTC+10 NEM time. The constraint and DUID-pressure study covers `2024-09-01 00:00` through `2026-08-31 23:55`. The six links are QNI, Directlink, VNI, Heywood, Murraylink and Basslink. Nominal ratings and prices are outside scope.
-
-Australian seasons are complete three-month blocks: Summer December–February, Autumn March–May, Winter June–August and Spring September–November. December belongs to the summer ending in the next year. Calendar-quarter sensitivity uses only complete Q1–Q4 blocks; partial boundary quarters are excluded.
-
-## Flow and dispatch limits
-
-Signed flow follows each connector's declared forward orientation. `forward_capacity = upper_bound`; `reverse_capacity = -lower_bound`. Headroom is capacity less directional flow. Negative capacities are retained and counted as forced-direction observations. A restricted limit is below 50% of the connector-direction Australian-season median of strictly positive capacity. A complete half-hour requires six distinct five-minute observations.
-
-## Weather and VRE
-
-Weather is the mean of retained representative sites in each endpoint region; endpoint maximum temperature is also retained. Regional VRE is cleared semi-scheduled wind plus solar. Residual demand is regional demand less those wind and solar fields; rooftop PV is not subtracted again. Regimes are defined within connector and Australian season: low ≤P20, normal P20–P80 and high ≥P80. Scatterplots use a deterministic sample of 3,000 observed half-hours per connector-direction for browser performance. No trend line, regression or model-derived effect is fitted.
-
-ENSO context uses the NOAA Climate Prediction Center ONI version 6 table retrieved 21 September 2026. ONI is the three-month running mean of ERSST.v6 Niño 3.4 anomalies. Warm and cold historical episodes require at least five consecutive overlapping seasons at or beyond ±0.5°C; shorter threshold excursions remain neutral-labelled. The study window contains an El Niño segment from September 2023 through April 2024 and no qualifying La Niña segment. NOAA identifies the most recent values as estimates; August 2026 has no centered-season ONI value in the retained snapshot and is excluded from ENSO summaries.
-
-## Constraint reconstruction
-
-For `aF + Σ(bᵢPᵢ) + Z ≤ RHS`, the conditional bound is `observed flow + (RHS − solved LHS)/a`, and DUID sensitivity is `−bᵢ/a`. Positive `a` forms an upper candidate; negative `a` forms a lower candidate. Minimum upper and maximum lower candidates form the reconstructed envelope. Binding means absolute published marginal value above `1e-9`; near-binding means interconnector-normalized slack from 0 to 50 MW. Reported setters and reconstructed leaders remain separate.
-
-Regime-resolved constraint tables use the active reconstructed upper or lower leader at each five-minute interval. The full day is partitioned into overnight (21:00–05:59), morning peak (06:00–08:59), solar period (09:00–15:59) and evening peak (16:00–20:59). Each five-minute setter is joined to the corresponding half-hour connector-direction weather/VRE observation. Temperature and source-VRE regimes reuse the connector-direction-season P20/P80 definitions. Quarterly constraint tables use complete Australian season blocks within the two-year constraint window. These tables describe which equation set the retained envelope; only the separate published-binding table uses non-zero marginal value.
-
-Constraint run coverage at build time:
-
-| ic        | name       |   expected_months |   complete_months | status   |
-|:----------|:-----------|------------------:|------------------:|:---------|
-| NSW1-QLD1 | QNI        |                24 |                24 | complete |
-| N-Q-MNSP1 | Directlink |                24 |                24 | complete |
-| VIC1-NSW1 | VNI        |                24 |                24 | complete |
-| V-SA      | Heywood    |                24 |                24 | complete |
-| V-S-MNSP1 | Murraylink |                24 |                24 | complete |
-| T-V-MNSP1 | Basslink   |                24 |                24 | complete |
-
-## DUID pressure
-
-For the active reconstructed leader, movement contribution is `sᵢ × (Pᵢ[t] − Pᵢ[t−30m])`. Upper capacity uses that sign; lower/reverse capacity negates it. Tightening is the positive part of a capacity reduction; relief is the positive part of a capacity increase. Rankings therefore reflect observed movement under an active equation, not coefficient size alone and not independent causation. Pumps, batteries and loads retain source dispatch signs. Compact monthly files preserve leader-based pressure; simultaneous non-leading binding equations remain in the constraint-population table but do not receive duplicated connector-level pressure.
-
-## Output lineage
-
-`connector_summary.csv`, `diurnal_profiles.csv`, `seasonal_limit_summary.csv`, `seasonal_profiles.csv`, `weather_vre_regimes.csv`, `enso_monthly.csv`, `enso_regimes.csv`, `regime_scatter_sample.csv`, `constraint_family_summary.csv`, `constraint_diurnal_setters.csv`, `constraint_season_block_setters.csv`, `constraint_weather_vre_setters.csv`, `constraint_duid_influence.csv`, `constraint_duid_regime_matrix.csv` and `coverage_audit.csv` are generated before report rendering. The build manifest records input and output hashes. Missing observations are never converted to zero.
-
-## Rebuild
-
-```powershell
-python scripts/build_all_ic_regime_report.py
-python C:\Users\HomePC\.codex\skills\editorial-html-report\scripts\validate_report.py reports\all_interconnector_regime_research_20260921\index.html
-```
-
-<!--NOS-OUTAGE-REGIME:START-->
-<a id="outage-regimes"></a>
-
-## Outage regimes (NOS) — added 2026-09-24
+# Methodology — interconnector limits and flow under NOS outage regimes (v1)
 
 Companion to [`PLAN.md`](PLAN.md). This document defines every quantity. Code must implement these definitions exactly, and any change is logged as a `decision` in [`EXECUTION_LOG.md`](EXECUTION_LOG.md).
 
@@ -248,5 +195,3 @@ The share of `invoked_unbooked` time per family is in the states table.
 | Placebo gate | ≥90% of supported families clean | Holds by construction; the eligible-family clean share is reported | E030 |
 | Specific assets | NOS asset only | Plus element-described `EL…` assets | E036 |
 | DUID pressure | DUID-level pressure by state | Leader-level tightening/relief aggregates by state + K5 sensitivities | E023 |
-
-<!--NOS-OUTAGE-REGIME:END-->
