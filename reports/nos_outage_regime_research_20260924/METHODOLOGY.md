@@ -194,4 +194,4 @@ The share of `invoked_unbooked` time per family is in the states table.
 | Matching | Single strict rule | Three-rung ladder, ±1 half-hour | E026 |
 | Placebo gate | ≥90% of supported families clean | Holds by construction; the eligible-family clean share is reported | E030 |
 | Specific assets | NOS asset only | Plus element-described `EL…` assets | E036 |
-| DUID pressure | DUID-level pressure by state | Leader-level tightening/relief aggregates by state + K5 sensitivities | E023 |
+| DUID pressure | DUID-level pressure by state | Comparison stage: leader-level tightening/relief aggregates by state + K5 sensitivities. Report extras: per-DUID leader-attributed tightening/relief per half-hour for each supported family-direction, matched treated half-hours vs same-month half-hours with the family not invoked; top 10 DUIDs by excess (`nos_duid_pressure.csv`) | E023, E045 |
