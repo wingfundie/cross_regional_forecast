@@ -111,7 +111,7 @@ def asknown(ic: str, layer, members, outage_members, pairs: pd.DataFrame, seen: 
             continue
         times = pd.DatetimeIndex(g.t_time.unique())
         s, e, o = l.start.to_numpy(), l.end.to_numpy(), l.OUTAGEID.astype(str).to_numpy()
-        seen_o = np.array([seen.get(x, pd.NaT) for x in o], dtype="datetime64[ns]")
+        seen_o = pd.to_datetime(pd.Series([seen.get(x, pd.NaT) for x in o], dtype=object), errors="coerce").to_numpy("datetime64[ns]")
         for lag in LAGS:
             ref = times - pd.Timedelta(days=lag)
             known = ref >= first_report

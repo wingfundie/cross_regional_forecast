@@ -1,6 +1,6 @@
 # NOS outage constraint mechanics and forward outlook — execution plan (v1)
 
-**Status:** in progress (2026-09-24). Release 0 and Phase A (Release 1) complete; Phases B, D and C running. Decisions were settled in a grilling session (Q1–Q28, §3). See [`RESULTS_SUMMARY.md`](RESULTS_SUMMARY.md); the execution log is authoritative.
+**Status:** complete (2026-09-24). Releases 0, 1 and 2 published; all stages A, B, D and C ran. Decisions were settled in a grilling session (Q1–Q28, §3); deviations are listed in METHODOLOGY §9. See [`RESULTS_SUMMARY.md`](RESULTS_SUMMARY.md); the execution log is authoritative.
 **Builds on:** [`execution/nos_outage_regime_v1/`](../nos_outage_regime_v1/PLAN.md) (episodes, families, K1–K5 keys, matched comparison), the six two-year constraint studies (`data/constraint_*_2y/`) and the weekly NOS snapshots (`data/forecast_experiments/*_diurnal_nos_v2/nos/weeks/`).
 **Owner documents (created at A0):** this plan, `METHODOLOGY.md`, `EXECUTION_LOG.md` + `execution_log.jsonl`, `sources.json`, `RESULTS_SUMMARY.md`. The execution log is authoritative once work starts.
 

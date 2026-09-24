@@ -412,7 +412,7 @@ def build_outlook(as_of: pd.Timestamp, detail: pd.DataFrame, sets: pd.DataFrame,
                 rows.append(r)
     out = pd.DataFrame(rows)
     if len(out):
-        out = add_overlaps(out)
+        out = add_overlaps(out, as_of, evidence)
         out = add_network_flags(out, as_of)
     return out, b
 
@@ -428,43 +428,81 @@ def members_asof(as_of: pd.Timestamp) -> dict:
     return cur.groupby("GENCONSETID").GENCONID.apply(set).to_dict()
 
 
-def add_overlaps(out: pd.DataFrame) -> pd.DataFrame:
-    """Q17 (fallback part): flag bookings that overlap another booking on the same connector-direction."""
+def add_overlaps(out: pd.DataFrame, as_of: pd.Timestamp | None = None, evidence: dict | None = None) -> pd.DataFrame:
+    """Q17: flag bookings that overlap another booking on the same connector-direction and, where the two most likely
+    families were invoked together for at least 48 half-hours before the embargo, give their joint historical own-set
+    binding share (union of both sets; share of intervals with any member binding)."""
     ids = []
-    for (ic, d), g in out.groupby(["ic", "direction"]):
-        g = g.drop_duplicates("OUTAGEID")[["OUTAGEID", "booked_start", "booked_end"]].sort_values("booked_start")
+    cov = pd.read_parquet(DATA / "family_coverage_30min.parquet") if evidence is not None else None
+    joint_cache: dict = {}
+    top = out.sort_values("family_probability", ascending=False).drop_duplicates(["OUTAGEID", "ic", "direction"])
+    fam_of = top.set_index(["OUTAGEID", "ic", "direction"]).family.to_dict()
+    for (ic, d), g in top.groupby(["ic", "direction"]):
+        g = g[["OUTAGEID", "booked_start", "booked_end"]].sort_values("booked_start")
         s, e, o = g.booked_start.to_numpy(), g.booked_end.to_numpy(), g.OUTAGEID.to_numpy()
         for i in range(len(g)):
             ov = o[(s < e[i]) & (e > s[i]) & (o != o[i])]
-            ids.append({"ic": ic, "direction": d, "OUTAGEID": o[i], "overlap_ids": "|".join(map(str, ov[:20])), "overlap_count": len(ov)})
+            row = {"ic": ic, "direction": d, "OUTAGEID": o[i], "overlap_ids": "|".join(map(str, ov[:20])), "overlap_count": len(ov),
+                   "overlap_joint": False}
+            if len(ov) and cov is not None and ic in evidence and "binding" in evidence[ic].layers:
+                fa = fam_of[(o[i], ic, d)]
+                best = None
+                for other in ov[:20]:
+                    fb = fam_of.get((other, ic, d))
+                    if fb is None or fb == fa or fa not in cov or fb not in cov:
+                        continue
+                    key = (ic, d, *sorted([fa, fb]), as_of)
+                    if key not in joint_cache:
+                        c = cov[cov.index <= as_of - EMBARGO]
+                        idx = np.flatnonzero(((c[fa] == 6) & (c[fb] == 6)).to_numpy())
+                        layer = evidence[ic].layers["binding"]
+                        own = layer.codes.isin(evidence[ic].own_of.get(fa, set()) | evidence[ic].own_of.get(fb, set()))
+                        share = float(layer.own_share(d, own)[GRID30.get_indexer(c.index[idx])].mean()) if len(idx) >= 48 else np.nan
+                        joint_cache[key] = (len(idx), share)
+                    n, share = joint_cache[key]
+                    if n >= 48 and (best is None or share > best[2]):
+                        best = (other, n, share)
+                if best:
+                    row.update(overlap_joint=True, overlap_joint_with=str(best[0]), overlap_joint_half_hours=best[1],
+                               overlap_joint_own_binding=best[2])
+            ids.append(row)
     return out.merge(pd.DataFrame(ids), on=["ic", "direction", "OUTAGEID"], how="left")
 
 
 def add_network_flags(out: pd.DataFrame, as_of: pd.Timestamp) -> pd.DataFrame:
-    """Q23: flag equations re-versioned within 180 days before as_of (changed) using dispatch version dates."""
-    vers = equation_versions()
-    recent = set(vers[(vers.first_seen > as_of - pd.Timedelta(days=180)) & (vers.first_seen <= as_of)].CONSTRAINTID) if len(vers) else set()
+    """Q23: flag rows whose named equations are new to the history (first seen in the 180 days before as_of) or were
+    re-versioned in the 30 days before as_of, i.e. after nearly all of the embargoed evidence."""
+    first, rever = equation_versions()
+    new = set(first[(first > as_of - pd.Timedelta(days=180)) & (first <= as_of)].index)
+    changed = set(rever[(rever.first_seen > as_of - pd.Timedelta(days=30)) & (rever.first_seen <= as_of)].CONSTRAINTID) if len(rever) else set()
     eqcols = [c for c in out.columns if re.match(r"(binding|setter)_eq_\d", c)]
-    out["network_change_flag"] = out[eqcols].isin(recent).any(axis=1) if eqcols else False
+    isnew = out[eqcols].isin(new).any(axis=1) if eqcols else False
+    ischg = out[eqcols].isin(changed).any(axis=1) if eqcols else False
+    out["network_change_flag"] = np.where(isnew, "new equation", np.where(ischg, "re-versioned in last 30 days", ""))
     return out
 
 
-_VERS: pd.DataFrame | None = None
+_VERS: tuple | None = None
 
 
-def equation_versions() -> pd.DataFrame:
-    """First interval each (CONSTRAINTID, EFFECTIVEDATE, VERSIONNO) appears in the binding panel."""
+def equation_versions() -> tuple:
+    """First appearance of each equation in dispatch (presence files, all scope equations) and the first binding or
+    near-binding interval of each later version (binding panel)."""
     global _VERS
     if _VERS is None:
         from .binding import PANEL
+        pres = [pd.read_parquet(p, columns=["CONSTRAINTID", "first"]) for p in sorted(PANEL.glob("presence__*.parquet"))]
+        first = pd.concat(pres).groupby("CONSTRAINTID")["first"].min() if pres else pd.Series(dtype="datetime64[ns]")
         parts = [pd.read_parquet(p, columns=["time", "CONSTRAINTID", "EFFECTIVEDATE", "VERSIONNO"]) for p in sorted(PANEL.glob("20*.parquet"))]
         if parts:
             v = pd.concat(parts)
             v = v.groupby(["CONSTRAINTID", "EFFECTIVEDATE", "VERSIONNO"]).time.min().rename("first_seen").reset_index()
             first_version = v.groupby("CONSTRAINTID").first_seen.transform("min")
-            _VERS = v[v.first_seen > first_version]          # re-versions only (not the first appearance in the window)
+            rever = v[v.first_seen > first_version]          # re-versions only (not the first appearance in the window)
         else:
-            _VERS = pd.DataFrame(columns=["CONSTRAINTID", "first_seen"])
+            rever = pd.DataFrame(columns=["CONSTRAINTID", "first_seen"])
+        first = first[first > pd.Timestamp("2024-09-08")]  # present from the window start: not "new"
+        _VERS = (first, rever)
     return _VERS
 
 
@@ -580,7 +618,7 @@ def score_origin(pred: pd.DataFrame, as_of: pd.Timestamp, evidence: dict, succ: 
 def skill_tables(sc: pd.DataFrame, fit_origins: int = 6) -> dict:
     if sc.empty:
         return {}
-    sc = sc.copy()
+    sc = sc[sc.tier.isin(["supported", "indicative"])].copy()      # the rows the outlook displays
     for k in ["outlook", "normal", "lastyear"]:
         sc[f"se_{k}"] = (sc[f"p_{k}"] - sc.y) ** 2
     ords = sorted(sc.as_of.unique())
@@ -624,9 +662,15 @@ def skill_tables(sc: pd.DataFrame, fit_origins: int = 6) -> dict:
     inf = sc.drop_duplicates(["as_of", "OUTAGEID", "family"])
     inf = inf[inf.family_source.eq("inferred")]
     top1 = inf.sort_values("family_probability", ascending=False).drop_duplicates(["as_of", "OUTAGEID"])
+    has_sets = set(pd.read_parquet(DATA / "episode_sets.parquet").OUTAGEID.astype(str))
+    g = inf[inf.final_id.astype(str).isin(has_sets)]
+    t1g = g.sort_values("family_probability", ascending=False).drop_duplicates(["as_of", "OUTAGEID"])
     fam_acc = pd.DataFrame([{"inferred_bookings": int(inf[["as_of", "OUTAGEID"]].drop_duplicates().shape[0]),
                              "top1_accuracy": float(top1.family_realised.mean()) if len(top1) else np.nan,
-                             "top3_accuracy": float(inf.groupby(["as_of", "OUTAGEID"]).family_realised.any().mean()) if len(inf) else np.nan}])
+                             "top3_accuracy": float(inf.groupby(["as_of", "OUTAGEID"]).family_realised.any().mean()) if len(inf) else np.nan,
+                             "bookings_with_any_final_set": int(g[["as_of", "OUTAGEID"]].drop_duplicates().shape[0]),
+                             "top1_accuracy_given_set": float(t1g.family_realised.mean()) if len(t1g) else np.nan,
+                             "top3_accuracy_given_set": float(g.groupby(["as_of", "OUTAGEID"]).family_realised.any().mean()) if len(g) else np.nan}])
     return {"cells": cells, "reliability": reliability, "mw": mwt, "family_inference": fam_acc,
             "thresholds": pd.DataFrame([{"layer": k, "alert_threshold": v} for k, v in taus.items()])}
 
@@ -650,7 +694,52 @@ def load_evidence(ics=None) -> dict:
     return ev
 
 
-def backtest(ics=None) -> dict:
+def backtest(ics=None, only: list[int] | None = None) -> dict:
+    """Score every origin (or the ``only`` indices, for parallel workers), then combine all per-origin files."""
+    OUT.mkdir(parents=True, exist_ok=True)
+    (OUT / "origins").mkdir(exist_ok=True)
+    if only is not None:
+        evidence = load_evidence(ics)
+        succ = successor_map()
+        eps = pd.read_parquet(DATA / "episodes.parquet")
+        fam_final = pd.read_parquet(DATA / "episode_sets.parquet").assign(OUTAGEID=lambda d: d.OUTAGEID.astype(str))             .groupby("OUTAGEID").GENCONSETID.apply(lambda s: sorted(set(s)))
+        ors = origins()
+        for i in only:
+            o = ors.iloc[i]
+            as_of, member, detail, sets, meta = snapshot(o.path)
+            pred, b = build_outlook(as_of, detail, sets, evidence, meta)
+            sc = score_origin(pred, as_of, evidence, succ, eps, fam_final, {}) if len(pred) else pd.DataFrame()
+            m = {**meta, "as_of": str(as_of), "bookings": len(b), "prediction_rows": len(pred), "scored_rows": len(sc)}
+            write_parquet(OUT / "origins" / f"pred_{i:02d}.parquet", pred.assign(origin=str(as_of)))
+            write_parquet(OUT / "origins" / f"scored_{i:02d}.parquet", sc if len(sc) else pd.DataFrame({"empty": []}))
+            write_json(OUT / "origins" / f"meta_{i:02d}.json", m)
+            print(json.dumps(m, default=str), flush=True)
+        return {"origins_done": list(only)}
+    return combine_backtest()
+
+
+def combine_backtest() -> dict:
+    n = len(origins())
+    missing = [i for i in range(n) if not (OUT / "origins" / f"meta_{i:02d}.json").exists()]
+    if missing:
+        raise RuntimeError(f"origins not scored yet: {missing}")
+    meta_rows = [json.loads((OUT / "origins" / f"meta_{i:02d}.json").read_text()) for i in range(n)]
+    pred = pd.concat([pd.read_parquet(OUT / "origins" / f"pred_{i:02d}.parquet") for i in range(n)], ignore_index=True)
+    parts = [pd.read_parquet(OUT / "origins" / f"scored_{i:02d}.parquet") for i in range(n)]
+    sc = pd.concat([p for p in parts if "empty" not in p.columns], ignore_index=True)
+    write_parquet(OUT / "backtest_predictions.parquet", pred)
+    write_parquet(OUT / "backtest_scored.parquet", sc)
+    tabs = skill_tables(sc)
+    for k, v in tabs.items():
+        write_parquet(OUT / f"backtest_{k}.parquet", v)
+    write_json(OUT / "backtest_meta.json", meta_rows)
+    cells = tabs.get("cells", pd.DataFrame())
+    return {"origins": len(meta_rows), "prediction_rows": len(pred), "scored_rows": len(sc),
+            "skilful_cells": int(cells.skilful.sum()) if len(cells) else 0, "cells": len(cells),
+            "family_inference": tabs.get("family_inference", pd.DataFrame()).to_dict("records")}
+
+
+def _backtest_sequential_unused(ics=None) -> dict:
     OUT.mkdir(parents=True, exist_ok=True)
     evidence = load_evidence(ics)
     succ = successor_map()

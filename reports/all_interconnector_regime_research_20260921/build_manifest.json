@@ -1,6 +1,6 @@
 {
   "report_id": "all_interconnector_regime_research_20260921",
-  "built_at": "2026-09-24T17:23:34.372113+08:00",
+  "built_at": "2026-09-24T20:40:29.193641+08:00",
   "inputs": {
     "data\\processed\\targets.parquet": {
       "bytes": 16074351,
@@ -472,6 +472,10 @@
       "bytes": 4084,
       "sha256": "18ea4e8283d939bcaf359dd134d4fb95f163f06e3be534244525e22bfc38b131"
     },
+    "downloads\\nos_binding_family.csv": {
+      "bytes": 346681,
+      "sha256": "5fa304d51958ef24512da287eddadeb0535cf202ff2c18a5cd8d3e82e27a540a"
+    },
     "downloads\\nos_booking_reliability.csv": {
       "bytes": 2118,
       "sha256": "747e0ab6d6ef9d3a3ba99f979646430a023817c1c568e46a74b7754f1ec97af7"
@@ -532,6 +536,10 @@
       "bytes": 178099,
       "sha256": "46df269d166ae4138fcc4da98de81ab7cdfc185edd5d4e256fae4364e3925e4b"
     },
+    "downloads\\nos_setter_family.csv": {
+      "bytes": 305240,
+      "sha256": "9d841155c1645665477a8799cebc57d6fc00c53befe791fe3363e223c5f3a473"
+    },
     "downloads\\nos_spillover_matrix.csv": {
       "bytes": 3445,
       "sha256": "7ce8584cc3a1b467ba737b1ed8c38260798dbac2e32ffc6c25070a3e1fd4c381"
@@ -581,8 +589,8 @@
       "sha256": "e945384b80723d5c3cf93a7441a1c046ad9f568d1180c51ecfcc0da2ed66a557"
     },
     "index.html": {
-      "bytes": 9415291,
-      "sha256": "35bf06345a5616021ff41621f0659647c9f3a9203439a5b34845f332c8c7ee27"
+      "bytes": 9417487,
+      "sha256": "0921aeabf2fe98a4511b19f8b21a6a906bc858776d6cdcce9fefd5f4be799b20"
     },
     "METHODOLOGY.md": {
       "bytes": 23723,
@@ -597,8 +605,8 @@
       "sha256": "717febd3ddc84e35d7b949f7bd3cc151712632be32068b89f8b264eacac7a9c1"
     },
     "sources\\nos_outage_regime_section.html": {
-      "bytes": 1014454,
-      "sha256": "405ece6fb569ea80a096cbd2c65aa374bbfb452d03348efa69f7226192295423"
+      "bytes": 1016650,
+      "sha256": "ccc28fa7260d9906523809f561bfe41d7e49872a9b7fe83cfff989be04be7279"
     }
   },
   "constraint_coverage": [

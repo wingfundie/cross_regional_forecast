@@ -91,6 +91,19 @@ def load() -> dict:
     return d
 
 
+def safe_replace(tmp, target, attempts: int = 20) -> None:
+    """os.replace with retries: on this host the search indexer briefly locks freshly written report files."""
+    import time
+    for i in range(attempts):
+        try:
+            tmp.replace(target)
+            return
+        except (PermissionError, OSError):
+            if i == attempts - 1:
+                raise
+            time.sleep(1.0)
+
+
 def rowlab(df: pd.DataFrame) -> pd.Series:
     return df.name + " · " + df.direction.map(DIRL)
 
@@ -393,7 +406,7 @@ def fig_calendar(d: dict) -> go.Figure | None:
                                hovertemplate="%{customdata[8]}<br>Outage %{customdata[0]}: %{customdata[1]}<br>%{x|%d %b %Y}<br>Family %{customdata[2]} (%{customdata[3]})"
                                              "<br>Most likely binding: %{customdata[4]} (%{customdata[5]:.0%})<br>Limit change if invoked: %{customdata[6]:+.0f} MW"
                                              "<br>%{customdata[7]}<extra></extra>"))
-    fig.update_yaxes(tickvals=list(y.values()), ticktext=list(y.keys()), autorange="reversed")
+    fig.update_yaxes(tickvals=list(y.values()), ticktext=list(y.keys()), autorange="reversed", zeroline=False)
     style_plotly(fig, "Booked outages over the next 12 months and the constraints they are likely to bring", 700)
     fig.update_layout(hovermode="closest")
     return fig
@@ -470,7 +483,17 @@ def next_weeks_table(d: dict) -> str:
     q["binds"] = q.binding_eq_1.fillna("—") + " · " + q.binding_p_1.map(lambda x: "—" if pd.isna(x) else f"{x:.0%}")
     q["sets"] = q.get("setter_eq_1", pd.Series(index=q.index, dtype=object)).fillna("—")
     q["mw"] = q.limit_change_mw.map(lambda x: "—" if pd.isna(x) else f"{x:+.0f}")
-    return table(q, ["when", "link", "what", "fam", "binds", "sets", "mw", "tier", "skill_status"], limit=80)
+    def ov(r):
+        if not r.get("overlap_count"):
+            return "—"
+        j = f"; together {r['overlap_joint_own_binding']:.0%} own-set binding" if r.get("overlap_joint") and pd.notna(r.get("overlap_joint_own_binding")) else ""
+        return f"{int(r['overlap_count'])} overlapping{j}"
+    q["overlaps"] = [ov(r) for r in q.to_dict("records")]
+    q["change"] = q.get("network_change_flag", pd.Series("", index=q.index)).replace("", "—")
+    q = q.rename(columns={"when": "booked window", "link": "link", "what": "outage", "fam": "constraint family", "binds": "most likely binding (P)",
+                          "sets": "most likely limit-setter", "mw": "limit change if invoked (MW)", "skill_status": "skill"})
+    return table(q, ["booked window", "link", "outage", "constraint family", "most likely binding (P)", "most likely limit-setter",
+                     "limit change if invoked (MW)", "overlaps", "change", "tier", "skill"], limit=80)
 
 
 # --------------------------------------------------------------------------- downloads
@@ -485,7 +508,7 @@ def write_downloads(d: dict, dl: Path, lookup: pd.DataFrame) -> list[str]:
                     ("mv", "nos_binding_marginal_value.csv"), ("genonly", "nos_genonly_pressure.csv"), ("recon", "nos_binding_reconciliation.csv"),
                     ("bt_cells", "nos_outlook_backtest_scores.csv"), ("bt_reliability", "nos_outlook_backtest_reliability.csv"),
                     ("bt_mw", "nos_outlook_backtest_mw_error.csv"), ("bt_family_inference", "nos_outlook_backtest_family_inference.csv"),
-                    ("embargo", "nos_outlook_embargo_confirmation.csv"), ("live", "nos_outlook_outages.csv"), ("live_weekly", "nos_outlook_weekly.csv")]:
+                    ("embargo", "nos_outlook_embargo_confirmation.csv"), ("live", "nos_outlook_outages.csv.gz"), ("live_weekly", "nos_outlook_weekly.csv")]:
         f = d.get(k)
         if isinstance(f, pd.DataFrame) and len(f):
             out[name] = f
@@ -495,7 +518,7 @@ def write_downloads(d: dict, dl: Path, lookup: pd.DataFrame) -> list[str]:
         target = dl / name
         tmp = target.with_name(target.name + ".tmp")
         frame.to_csv(tmp, index=False, compression={"method": "gzip", "mtime": 0} if name.endswith(".gz") else None)
-        tmp.replace(target)
+        safe_replace(tmp, target)
     return list(out)
 
 
@@ -605,7 +628,7 @@ def build(dl: Path) -> dict:
                  'This is not an operational forecast.</section>')
         f = fig_calendar(d)
         if f is not None:
-            o.append(fblock(f, "12-month outage calendar", "Marker size: limit change if invoked; colour: chance the most likely equation binds.", "nos_outlook_outages.csv")); figs += 1
+            o.append(fblock(f, "12-month outage calendar", "Marker size: limit change if invoked; colour: chance the most likely equation binds.", "nos_outlook_outages.csv.gz")); figs += 1
         o.append('<h3>Next eight weeks</h3>' + next_weeks_table(d))
         wk = d["live_weekly"]
         if len(wk):
@@ -620,8 +643,19 @@ def build(dl: Path) -> dict:
         o.append(f'<p>The outlook procedure was re-run from {len(d["bt_meta"])} monthly NOS snapshots in year 2, each time using only data available before the snapshot '
                  f'(matched outage half-hours embargoed 21 days before it). {int(cb.skilful.sum())} of {len(cb)} lead-time × link-direction cells beat the '
                  'equation\'s normal season × half-hour rate on Brier score with at least 30 scored rows.'
-                 + (f' Family inference for bookings without a linked set picked a realised family first {fi.top1_accuracy:.0%} of the time and within its top three '
-                    f'{fi.top3_accuracy:.0%} of the time ({int(fi.inferred_bookings):,} bookings).' if fi is not None else '') + '</p>')
+                 + (f' Family inference for bookings without a linked set is weak: across {int(fi.inferred_bookings):,} inferred bookings the first-ranked family '
+                    f'was later linked {fi.top1_accuracy:.0%} of the time (top three {fi.top3_accuracy:.0%}), mostly because most such bookings never invoke any '
+                    f'constraint set; among the {int(fi.bookings_with_any_final_set):,} that did, the first-ranked family was right {fi.top1_accuracy_given_set:.0%} '
+                    f'of the time (top three {fi.top3_accuracy_given_set:.0%}).' if fi is not None and "top1_accuracy_given_set" in fi else '') + '</p>')
+        rl = d["bt_reliability"]
+        if len(rl):
+            q = rl[rl.layer.eq("binding") & (rl.n >= 100)]
+            hi = q.sort_values("p_mean").iloc[-1] if len(q) else None
+            if hi is not None:
+                o.append(f'<p>The outlook over-predicts binding: in the highest well-populated bin, predicted shares averaging {hi.p_mean:.0%} were followed by '
+                         f'realised shares of {hi.y_mean:.0%} ({int(hi.n):,} rows). The binding outlook beats last year\'s family rate in most lead bands, but it beats the '
+                         'normal rate reliably only for QNI reverse (8–365 days) and parts of Directlink reverse; the limit-setter outlook adds Basslink. '
+                         'Most rows in the live outlook therefore show the matched normal rate.</p>')
         for fn, cap, note, href in [(fig_skill, "Skill by lead time", "Brier skill = 1 − Brier(outlook) / Brier(normal rate); n = scored rows.", "nos_outlook_backtest_scores.csv"),
                                     (fig_reliability, "Calibration", "Bins of predicted share; marker size ∝ √n.", "nos_outlook_backtest_reliability.csv")]:
             f = fn(d)

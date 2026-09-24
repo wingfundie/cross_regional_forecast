@@ -62,7 +62,7 @@ def main(argv=None) -> int:
         result = pressure()
     elif args.stage == "D2":
         from nemic.experiments.nos_regime.outlook import backtest
-        result = backtest()
+        result = backtest(only=[int(x) for x in args.months] if args.months else None)   # --months = origin indices for a worker
     elif args.stage == "D2c":
         from nemic.experiments.nos_regime.outlook import confirm_embargo
         result = confirm_embargo()

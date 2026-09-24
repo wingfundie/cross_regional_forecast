@@ -43,6 +43,15 @@ class Layer:
     last: dict = field(default_factory=dict)     # direction -> int array (N30): code active at the half-hour's last interval
     avail: dict = field(default_factory=dict)    # direction -> float array (N30): intervals with data (0..6)
     any: dict = field(default_factory=dict)      # direction -> float array (N30): share of intervals with >= 1 active equation
+    pos: dict = field(default_factory=dict)      # direction -> (five-minute position, code) arrays of active equations
+
+    def own_share(self, direction: str, own_mask: np.ndarray) -> np.ndarray:
+        """Per half-hour: share of intervals with at least one active equation from ``own_mask`` (not a sum)."""
+        pos, code = self.pos[direction]
+        hit = np.unique(pos[own_mask[code]]) if own_mask.any() else np.array([], dtype=np.int64)
+        avail = self.avail[direction]
+        inv = np.divide(1.0, avail, out=np.zeros_like(avail), where=avail > 0)
+        return np.bincount(hit // 6, minlength=N30) * inv
     eq_type: dict = field(default_factory=dict)  # constraint -> equation type (Thermal, Voltage Stability, ...)
 
 
@@ -80,6 +89,7 @@ def build_layer(frame: pd.DataFrame, name: str, avail5: dict | None = None) -> L
         layer.H[direction] = sparse.diags(inv) @ counts
         layer.avail[direction] = avail
         layer.any[direction] = np.bincount(d.drop_duplicates("pos").pos.to_numpy() // 6, minlength=N30) * inv
+        layer.pos[direction] = (d.pos.to_numpy(), col)
         last = np.full(N30, -1, np.int64)
         s = d.sort_values("pos")
         lastpos = s.groupby(s.pos // 6).tail(1)
@@ -141,13 +151,21 @@ def unit_matrices(H: sparse.csr_matrix, pairs: pd.DataFrame, any_share: np.ndarr
     return units, H[units], W @ H, any_share[units], W @ any_share
 
 
+def unit_weights(pairs: pd.DataFrame, units: np.ndarray) -> sparse.csr_matrix:
+    t = GRID30.get_indexer(pairs.t_time); c = GRID30.get_indexer(pairs.c_time)
+    u = np.searchsorted(units, t)
+    n = np.bincount(u, minlength=len(units)).astype(float)
+    return sparse.coo_matrix((1.0 / n[u], (u, c)), shape=(len(units), N30)).tocsr()
+
+
 def family_stats(layer: Layer, direction: str, pairs: pd.DataFrame, own_mask: np.ndarray, classes: np.ndarray,
                  top_k: int = TOP_K) -> tuple[dict, pd.DataFrame, pd.DataFrame]:
     units, Ht, Hc, at, ac = unit_matrices(layer.H[direction], pairs, layer.any[direction])
     days = (GRID30[units] - pd.Timedelta(minutes=1)).floor("D").asi8 // 86_400_000_000_000   # NEM date of the interval
     ts = np.asarray(Ht.mean(axis=0)).ravel(); cs = np.asarray(Hc.mean(axis=0)).ravel()
-    t_own = np.asarray(Ht[:, own_mask].sum(axis=1)).ravel() if own_mask.any() else np.zeros(len(units))
-    c_own = np.asarray(Hc[:, own_mask].sum(axis=1)).ravel() if own_mask.any() else np.zeros(len(units))
+    own_vec = layer.own_share(direction, own_mask)
+    t_own = own_vec[units]
+    c_own = np.asarray(unit_weights(pairs, units) @ own_vec).ravel()
     d_own = t_own - c_own
     lo, hi = boot_mean(d_own, days)
     row = {"n_units": len(units), "treated_hours": len(units) / 2, "own_treated": float(t_own.mean()),
@@ -210,7 +228,7 @@ def transitions(layer: Layer, direction: str, treated_idx: np.ndarray) -> pd.Dat
 def event_profile(layer: Layer, direction: str, spells: pd.DataFrame, own_mask: np.ndarray, code: int | None,
                   lo_h: float = -6, hi_h: float = 12) -> pd.DataFrame:
     H = layer.H[direction]
-    own = np.asarray(H[:, own_mask].sum(axis=1)).ravel() if own_mask.any() else np.zeros(N30)
+    own = layer.own_share(direction, own_mask)
     top = np.asarray(H[:, code].todense()).ravel() if code is not None else np.full(N30, np.nan)
     avail = layer.avail[direction] > 0
     offs = np.arange(int(lo_h * 2), int(hi_h * 2) + 1)
