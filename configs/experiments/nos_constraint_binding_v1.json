@@ -1,0 +1,18 @@
+{
+  "experiment_id": "nos_constraint_binding_v1",
+  "plan": "execution/nos_constraint_binding_v1/PLAN.md",
+  "window": {"start": "2024-09-01 00:00", "end": "2026-09-01 00:00", "year2_start": "2025-09-01 00:00", "time_basis": "NEM (UTC+10), interval ending"},
+  "data_dir": "data/nos_binding_v1",
+  "binding": {"marginal_value_abs_gt": 1e-9, "intervention": 0, "near_binding_slack_mw": [0, 50], "aggregate_by": "CONSTRAINTID"},
+  "marginal_value": {"fixed_thresholds": [100, 1000], "own_percentile": 0.9, "summed": false},
+  "evidence": {"family_tiers": "v1 (compare.tier)", "asset_min_binding_intervals": 30, "lookup_min_treated_hours": 24,
+               "headline_tiers": ["supported"], "download_tiers": ["supported", "indicative"]},
+  "setters": {"top_k": 10, "event_window_h": [-6, 12], "min_clean_spells": 5, "placebo_shift_days": 7},
+  "asknown": {"lead_days": [1, 7, 14]},
+  "outlook": {"horizon_days": 365, "inference_levels": ["K1", "K3", "K4"], "same_equipment_type": true,
+              "lead_bands_days": [[0, 7], [8, 30], [31, 90], [91, 365]]},
+  "backtest": {"origins": "first weekly NOS file of each month 2025-09..2026-08", "embargo_days": 21,
+               "full_rerun_confirmations": 2, "baselines": ["equation_season_halfhour_rate", "last_year_family_rate"],
+               "threshold_fit_origins": 6},
+  "seed": 20260924
+}

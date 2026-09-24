@@ -24,6 +24,7 @@ for p in [ROOT, ROOT / "scripts", ROOT / "scripts" / "report_theme"]:
     sys.path.insert(0, str(p))
 
 import build_all_ic_regime_report as rr  # noqa: E402
+import build_nos_constraint_chapter as cm  # noqa: E402
 import build_nos_regime_section as sec  # noqa: E402
 from report_theme import VERSION, figure_html, finding, hero, metric, render_page, style_plotly  # noqa: E402
 
@@ -483,6 +484,13 @@ def build():
     shutil.copy2(EXEC / "METHODOLOGY.md", OUT / "METHODOLOGY.md")
     for f in ["PLAN.md", "EXECUTION_LOG.md", "RESULTS_SUMMARY.md", "pilot_summary.md"]:
         shutil.copy2(EXEC / f, OUT / "sources" / f)
+    # constraint mechanics and outlook chapters (execution/nos_constraint_binding_v1), from cached tables
+    ch = cm.build(DL)
+    EXEC2 = cm.EXEC2
+    (OUT / "sources" / "constraint_mechanics").mkdir(exist_ok=True)
+    for f in ["PLAN.md", "METHODOLOGY.md", "EXECUTION_LOG.md", "RESULTS_SUMMARY.md"]:
+        if (EXEC2 / f).exists():
+            shutil.copy2(EXEC2 / f, OUT / "sources" / "constraint_mechanics" / f)
 
     # ---------------- figures
     f_month, f_type = fig_landscape(d)
@@ -531,8 +539,8 @@ def build():
                    f"Built {pd.Timestamp.now(tz='Australia/Brisbane'):%d %b %Y}"]))
     b.append('<nav class="anchor-nav"><a href="#executive">Executive summary</a><a href="#design">Research design</a><a href="#landscape">Outage landscape</a>'
              '<a href="#effects">Limit effects</a><a href="#timing">Timing & weather</a><a href="#flow">Flow response</a><a href="#spillover">Effects on other links</a>'
-             '<a href="#mechanics">Constraint & DUID mechanics</a><a href="#events">Onset & recovery</a><a href="#connectors">Connector chapters</a>'
-             '<a href="#lookup">Specific outage lookup</a><a href="#bookings">Bookings</a><a href="#robustness">Robustness</a><a href="#methods">Methods</a><a href="#record">Execution record</a></nav>')
+             '<a href="#mechanics">Constraint & DUID mechanics</a><a href="#constraints">What binds during outages</a><a href="#events">Onset & recovery</a><a href="#connectors">Connector chapters</a>'
+             '<a href="#lookup">Specific outage lookup</a><a href="#outlook">12-month outlook</a><a href="#bookings">Bookings</a><a href="#robustness">Robustness</a><a href="#methods">Methods</a><a href="#record">Execution record</a></nav>')
     b.append('<section class="metrics">' + metric("NEM outage episodes", f"{len(eps):,}", f"{n_live:,} live, {len(eps) - n_live:,} withdrawn; MMSDM final state")
              + metric("Relevant outage families", f"{int(rel.relevant.sum())}", f"connector × constraint-set pairs; {len(multi)} families relevant to 2+ links")
              + metric("Supported family effects", f"{n_sup_fam}", "pass episode, hours, match-rate and placebo gates")
@@ -712,6 +720,8 @@ def build():
                    {c: lambda x: f"{x:,.1f}" for c in ["tightening_per_hh_treated", "tightening_per_hh_base", "excess_tightening", "excess_relief"]}, 20))
     b.append('</section>')
 
+    b.append(ch["constraints"])
+
     # events
     b.append('<section id="events"><div class="section-kicker">ONSET & RECOVERY</div><h2>How quickly limits switch into and out of outage configurations</h2>')
     ev = d["event_study"]; ev = ev[ev.scope.eq("pooled_supported") & ev.clean.fillna(False)]
@@ -750,6 +760,7 @@ def build():
     b.append('</section>')
 
     # bookings
+    b.append(ch["outlook"])
     b.append('<section id="bookings"><div class="section-kicker">BOOKINGS</div><h2>How outage bookings play out</h2>')
     b.append(f'<p>In year 2, a median {br2.withdrawn_share.median():.0%} of bookings that list a relevant family were withdrawn. Live outages returned more than an hour early far more often '
              f'({br2.early_return_share.median():.0%}) than they overran ({br2.overrun_share.median():.0%}), and the median booking was submitted about {br2.lead_days_p50.median():.0f} days before its scheduled start. '
@@ -774,6 +785,7 @@ def build():
     so = states.groupby(["name", "state"]).agg(families=("GENCONSETID", "nunique"), median_effect=("effect_capacity", "median"), unbooked_share=("share_of_invoked", "median")).reset_index()
     b.append(table(so.rename(columns={"name": "connector", "median_effect": "median limit change", "unbooked_share": "share of invoked time unbooked"}),
                    ["connector", "state", "families", "median limit change", "share of invoked time unbooked"], {"median limit change": fmt_mw, "share of invoked time unbooked": pct}, 30))
+    b.append(ch["robustness"])
     b.append('</section>')
 
     # methods
@@ -795,13 +807,28 @@ def build():
     b.append('<p>Full definitions, every deviation from the plan and its log reference: <a href="METHODOLOGY.md">METHODOLOGY.md</a>. Plan, pilot summary and results summary: '
              '<a href="sources/PLAN.md">PLAN.md</a>, <a href="sources/pilot_summary.md">pilot_summary.md</a>, <a href="sources/RESULTS_SUMMARY.md">RESULTS_SUMMARY.md</a>.</p></div></section>')
 
+    b.append('<div class="method"><p><strong>Constraint mechanics and outlook.</strong> The matched pairs behind every limit effect were replayed and saved (identical to the original '
+             'matching). For each pair, the share of five-minute intervals in which each equation sets the link’s limit (reconstructed envelope) or binds (published |marginal value| > 1e-9, '
+             'physical-run selection as in the base report) is compared between outage and matched control half-hours. Binding data were re-read from the monthly DISPATCHCONSTRAINT archives, '
+             'hash-checked against the constraint studies, and reconcile exactly with the base report’s monthly binding counts. The outlook applies the as-of evidence to NOS bookings: '
+             'P(equation active) = q × outage share + (1 − q) × matched normal share, where q is the chance the booking proceeds and the family applies. Its backtest re-runs the whole '
+             'procedure from 12 monthly year-2 snapshots with a 21-day embargo on history. Limitations: year-1 bookings are final-state only; the outlook assumes past outage behaviour '
+             'carries forward; marginal values depend on prices. Plan, methodology and log: <a href="sources/constraint_mechanics/PLAN.md">PLAN.md</a>, '
+             '<a href="sources/constraint_mechanics/METHODOLOGY.md">METHODOLOGY.md</a>, <a href="sources/constraint_mechanics/EXECUTION_LOG.md">EXECUTION_LOG.md</a>.</p></div>')
+
     # record
     log = pd.DataFrame(d["log"])
     log["time"] = log.time.str.slice(0, 16).str.replace("T", " ")
     b.append(f'<section id="record"><div class="section-kicker">EXECUTION RECORD</div><h2>Every execution in this pass</h2><p>The campaign log records {len(log)} entries from {first_log} to {last_log}: '
              f'{(log.kind == "start").sum()} stage runs, {(log.kind == "decision").sum()} method decisions and {(log.kind == "check").sum()} one-off checks. Failed and partial runs are kept.</p>')
     b.append('<details><summary>Show the full execution log</summary>' + table(log, ["id", "time", "kind", "stage", "status", "note"], limit=200) + '</details>')
-    b.append('<div class="downloads"><h3>Research data</h3><ul>' + "".join(f'<li><a href="downloads/{n}" download>{n}</a></li>' for n in outputs) + '</ul>'
+    if ch["log"]:
+        log2 = pd.DataFrame(ch["log"])
+        log2["time"] = log2.time.str.slice(0, 16).str.replace("T", " ")
+        b.append(f'<p>The constraint-mechanics and outlook campaign (execution/nos_constraint_binding_v1) has its own log: {len(log2)} entries, '
+                 f'{(log2.kind == "start").sum()} stage runs, {(log2.kind == "decision").sum()} decisions.</p>'
+                 '<details><summary>Show the constraint-mechanics execution log</summary>' + table(log2, ["id", "time", "kind", "stage", "status", "note"], limit=300) + '</details>')
+    b.append('<div class="downloads"><h3>Research data</h3><ul>' + "".join(f'<li><a href="downloads/{n}" download>{n}</a></li>' for n in list(outputs) + ch["downloads"]) + '</ul>'
              '<h3>Documents</h3><ul><li><a href="METHODOLOGY.md">METHODOLOGY.md</a></li><li><a href="sources/PLAN.md">PLAN.md</a></li><li><a href="sources/EXECUTION_LOG.md">EXECUTION_LOG.md</a></li>'
              '<li><a href="sources/RESULTS_SUMMARY.md">RESULTS_SUMMARY.md</a></li><li><a href="sources/pilot_summary.md">pilot_summary.md</a></li>'
              '<li><a href="../all_interconnector_regime_research_20260921/index.html">Base regime report</a></li></ul></div></section>')
@@ -818,13 +845,15 @@ def build():
            "generator_sha256": rr.digest(Path(__file__)), "execution": "execution/nos_outage_regime_v1"}
     ins = sorted((DATA / "tables").glob("*.parquet")) + sorted(RT.glob("*.parquet")) + [DATA / f"{k}.parquet" for k in ["set_relevance", "k5_electrical", "outage_keys", "episodes", "episode_sets"]]
     ins += sorted((DATA / "raw" / "mmsdm").glob("*.parquet")) + [DATA / "raw/osm/au_power.json"]
+    ins += sorted(cm.T.glob("*.parquet")) + sorted(cm.OUTLOOK.glob("*.parquet"))
     for p in ins:
         man["inputs"][str(p.relative_to(ROOT))] = {"bytes": p.stat().st_size, "sha256": rr.digest(p)}
     for p in sorted(OUT.rglob("*")):
         if p.is_file() and p.name != "build_manifest.json":
             man["outputs"][str(p.relative_to(OUT))] = {"bytes": p.stat().st_size, "sha256": rr.digest(p)}
     (OUT / "build_manifest.json").write_text(json.dumps(man, indent=2), encoding="utf-8")
-    return {"report": str(OUT / "index.html"), "downloads": len(outputs), "supported_families": n_sup_fam, "lookup_rows": n_lk, "figures": 23 + len(forests)}
+    return {"report": str(OUT / "index.html"), "downloads": len(outputs), "supported_families": n_sup_fam, "lookup_rows": n_lk, "figures": 23 + len(forests) + ch["figures"], "constraint_downloads": len(ch["downloads"]),
+            "binding_layer": ch["have_binding"], "outlook": ch["have_outlook"]}
 
 
 if __name__ == "__main__":

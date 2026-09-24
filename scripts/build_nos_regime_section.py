@@ -82,7 +82,7 @@ def leader_transitions(units: pd.DataFrame, supported: pd.DataFrame) -> pd.DataF
                 times = pd.DatetimeIndex(g.time).sort_values()
                 during = ser.reindex(times).dropna()
                 treated = set(times)
-                before = []
+                before, aligned = [], []
                 for t in times[~pd.Series(times).diff().le(pd.Timedelta("30min")).to_numpy()]:   # first half-hour of each run
                     prev = t - pd.Timedelta("30min")
                     steps = 0
@@ -90,6 +90,8 @@ def leader_transitions(units: pd.DataFrame, supported: pd.DataFrame) -> pd.DataF
                         prev -= pd.Timedelta("30min"); steps += 1
                     if prev in ser.index:
                         before.append(ser[prev])
+                        if t in during.index:
+                            aligned.append((ser[prev], during[t]))      # one (before, first-during) pair per run
                 top_during = during.value_counts(normalize=True).head(3)
                 top_before = pd.Series(before).value_counts(normalize=True).head(3) if before else pd.Series(dtype=float)
                 rows.append({"ic": ic, "name": NAMES[ic], "direction": direction, "GENCONSETID": f,
@@ -97,7 +99,8 @@ def leader_transitions(units: pd.DataFrame, supported: pd.DataFrame) -> pd.DataF
                              "during_share_1": top_during.iloc[0] if len(top_during) else np.nan,
                              "during_top3": "; ".join(f"{k} ({v:.0%})" for k, v in top_during.items()),
                              "before_top3": "; ".join(f"{k} ({v:.0%})" for k, v in top_before.items()),
-                             "leader_changed_share": float(np.mean([b != during.get(t) for t, b in zip(times, before)])) if before else np.nan})
+                             # per-run alignment (execution/nos_constraint_binding_v1 A4); the v1 zip(times, before) was misaligned
+                             "leader_changed_share": float(np.mean([b != a for b, a in aligned])) if aligned else np.nan})
     return pd.DataFrame(rows)
 
 
