@@ -1,6 +1,6 @@
 {
   "report_id": "nos_outage_regime_research_20260924",
-  "built_at": "2026-09-24T07:21:48.026696+08:00",
+  "built_at": "2026-09-24T08:46:37.182033+08:00",
   "theme_version": "1.0",
   "rebuild": "python scripts/build_nos_outage_report.py",
   "window": "(2024-09-01, 2026-09-01]",
@@ -444,8 +444,8 @@
       "sha256": "eaf75e983efcbb460b65b26de573e5e873661b4a4b908c6bb167216f57b1bd1d"
     },
     "downloads\\nos_execution_log.csv": {
-      "bytes": 14593,
-      "sha256": "ecef877b78ab97bb0870f47cc918aa1c06b2e830de1c99e5244f3c722d32b651"
+      "bytes": 16200,
+      "sha256": "39a4402cc665553ff6850a7926b2cc311669554203995eb92d754f770e69e378"
     },
     "downloads\\nos_family_effects.csv": {
       "bytes": 805522,
@@ -516,16 +516,16 @@
       "sha256": "136d82036906a52777814ba25b53f040ecf94c48065eb92748288f9f5da7553e"
     },
     "index.html": {
-      "bytes": 6109649,
-      "sha256": "86ee84770f6ed427c68362edd4bbc798fdfd404b784f4e93ed5e08c02c142201"
+      "bytes": 6111136,
+      "sha256": "0ccd7aa5afcb1d557244102ddceaf715235d61a8026064fd49e5d52d6e4f6f06"
     },
     "METHODOLOGY.md": {
-      "bytes": 17507,
-      "sha256": "e2797f68c9ca795bab31c60c49916b4307bb3cd20362461c0b9e2f10256b44f2"
+      "bytes": 17576,
+      "sha256": "8e61b37148d13846cf7cf63ebe430ad6db6e75f8d30265a1a96c741a57dc7e33"
     },
     "sources\\EXECUTION_LOG.md": {
-      "bytes": 15867,
-      "sha256": "5c08d331d5247eb5f67910ef0281e209528b370a130037db6ff54bf400862b18"
+      "bytes": 17518,
+      "sha256": "87e317eec0d4cefee681310be49c1d6bfacf78861045c2e06a6dee5cdc1e2f75"
     },
     "sources\\pilot_summary.md": {
       "bytes": 2233,
@@ -536,8 +536,8 @@
       "sha256": "34c5d5ac8ad839a245fd4f99971966aa2cd92713ebf5e2a581ca71684274216b"
     },
     "sources\\RESULTS_SUMMARY.md": {
-      "bytes": 3960,
-      "sha256": "bdbf271401ad364922afa0ca6acaac3f77d681be1a47debefae9449d7c3f669b"
+      "bytes": 4097,
+      "sha256": "662774451bd5f2ec03afaabc925248ca47cecb232b290f409f0507d86f27845c"
     }
   },
   "generator_sha256": "54f7e9d06e49f542b2ead4a79faa2d935d569f76bde5d93340f6381348a21e4d",

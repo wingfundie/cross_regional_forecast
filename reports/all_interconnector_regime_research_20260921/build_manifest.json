@@ -1,6 +1,6 @@
 {
   "report_id": "all_interconnector_regime_research_20260921",
-  "built_at": "2026-09-24T07:19:08.575505+08:00",
+  "built_at": "2026-09-24T08:41:46.667219+08:00",
   "inputs": {
     "data\\processed\\targets.parquet": {
       "bytes": 16074351,
@@ -480,6 +480,14 @@
       "bytes": 836077,
       "sha256": "8e9fce046be64358940a675b0552a30e2723d93bdb0e00786222242cca75d2b9"
     },
+    "downloads\\nos_diurnal_profiles_48.csv": {
+      "bytes": 342605,
+      "sha256": "42dc0ff4280ec58439b69e78eb57973610c6a51d41cd05756f335a11523d17c7"
+    },
+    "downloads\\nos_duid_pressure.csv": {
+      "bytes": 383563,
+      "sha256": "969f1c764cc35258613ce3e0239c707982f56e3099ad53dbc36c8669d9af3c22"
+    },
     "downloads\\nos_event_study.csv.gz": {
       "bytes": 3093245,
       "sha256": "eaf75e983efcbb460b65b26de573e5e873661b4a4b908c6bb167216f57b1bd1d"
@@ -487,6 +495,10 @@
     "downloads\\nos_family_effects.csv": {
       "bytes": 693180,
       "sha256": "d60a53c9ff2775a414bcc792eb9682266299a6beea9c9a3126bd15321f37050e"
+    },
+    "downloads\\nos_flow_response.csv": {
+      "bytes": 50434,
+      "sha256": "a186aa0859cdbe08e7b4b0b9792224fb8d7b0432d7b95f2f8f2bf44331857f16"
     },
     "downloads\\nos_k5_electrical.csv": {
       "bytes": 285049,
@@ -503,6 +515,10 @@
     "downloads\\nos_outage_episodes.csv.gz": {
       "bytes": 1996205,
       "sha256": "2b0c4a2592b45292d00a47a8ffe91c39ef1c447f13cf7bc0edefb67642cbaadb"
+    },
+    "downloads\\nos_outage_keys.csv.gz": {
+      "bytes": 1846742,
+      "sha256": "8b45014c7abfd6375887025cd728ed63bb597b31bfb7143dcca803fe6b5c977b"
     },
     "downloads\\nos_outage_lookup.csv": {
       "bytes": 621774,
@@ -536,6 +552,10 @@
       "bytes": 86026,
       "sha256": "aadfc753d113a965f9972339b203913c6a542da85b3c8f8e941567a701fd03e7"
     },
+    "downloads\\nos_system_footprint.csv": {
+      "bytes": 348526,
+      "sha256": "7652b679ff8cb971a6b14dc063e23aee252c5ac7d47d7508f0476889cc4650fc"
+    },
     "downloads\\nos_timing_effects.csv": {
       "bytes": 18171,
       "sha256": "105fc238d69aa9f6b33d8453cc6e5f33a3604d8e604bdc0ca14a393b4576d75e"
@@ -561,24 +581,24 @@
       "sha256": "e945384b80723d5c3cf93a7441a1c046ad9f568d1180c51ecfcc0da2ed66a557"
     },
     "index.html": {
-      "bytes": 9414852,
-      "sha256": "cb22f1a2a3611c9a65132bc899c8567298ceeca0b1d28eefdee81706b8001cf8"
+      "bytes": 9415297,
+      "sha256": "8ce594aa936c7baf3ad22317d42fc600969048f64794ba0dd62fdda3bc1ae855"
     },
     "METHODOLOGY.md": {
-      "bytes": 23457,
-      "sha256": "0b227c9d167a0e59955de0eb24e6e0bbf21fb319a9bff35b84f3ac342dc95678"
+      "bytes": 23723,
+      "sha256": "f6bade29927b6751e3ea8e35ffe3f1090a48447d15879900b0e9ae928fe6e9a9"
     },
     "sources\\noaa_oni_v6_study_context.csv": {
       "bytes": 4505,
       "sha256": "b2e69a3d6a486ec8d8611a41303b4606b88111e3ad06e741a60406852d9da1be"
     },
     "sources\\nos_outage_regime_methodology.md": {
-      "bytes": 17504,
-      "sha256": "086477197be72aa1e48b439cf77a687268a4d736b1dddaf7c89a1f75aa4c34c5"
+      "bytes": 17770,
+      "sha256": "717febd3ddc84e35d7b949f7bd3cc151712632be32068b89f8b264eacac7a9c1"
     },
     "sources\\nos_outage_regime_section.html": {
-      "bytes": 1014015,
-      "sha256": "03dc9162d3baa8175344bd4d581885b9785f162610070d4799cc0fb87b2fee72"
+      "bytes": 1014460,
+      "sha256": "58d9a36083560c81a6505d3aad727cf6fce3d489841ed92e143b2eeea24c62a8"
     }
   },
   "constraint_coverage": [

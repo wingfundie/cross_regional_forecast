@@ -1,6 +1,6 @@
 # Results summary — NOS outage regime research (v1)
 
-Completed 2026-09-24. The report section is **Outage regimes** in `reports/all_interconnector_regime_research_20260921/index.html#outages`. Downloads are prefixed `nos_`, and the manifest is v2 (the v1 manifest is archived as `build_manifest_v1.json`; all 16 v1 outputs are hash-identical).
+Completed 2026-09-24. Comprehensive standalone report: `reports/nos_outage_regime_research_20260924/index.html` (`python scripts/build_nos_outage_report.py`). The report section is **Outage regimes** in `reports/all_interconnector_regime_research_20260921/index.html#outages`. Downloads are prefixed `nos_`, and the manifest is v2 (the v1 manifest is archived as `build_manifest_v1.json`; all 16 v1 outputs are hash-identical).
 
 ## Coverage by connector
 

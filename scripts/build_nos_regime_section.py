@@ -204,6 +204,13 @@ def build() -> dict:
         "nos_booking_states.csv": states, "nos_k5_electrical.csv": k5,
         "nos_substation_crosswalk.csv": pd.read_csv(EXEC / "reference/substation_crosswalk.csv"),
     }
+    # derived report tables (S5b extras), shared with the standalone report
+    if (DATA / "report_tables").exists():
+        rt = {k: pd.read_parquet(DATA / "report_tables" / f"{k}.parquet") for k in ["duid_pressure", "diurnal_48", "footprint", "flow_response"]}
+        fr = rt["flow_response"].drop(columns=["effect_at_limit", "treated_at_limit", "control_at_limit", "ci_lo_at_limit", "ci_hi_at_limit"], errors="ignore")
+        fr = fr.merge(fam[["ic", "direction", "GENCONSETID", "effect_at_limit", "treated_at_limit", "control_at_limit"]], on=["ic", "direction", "GENCONSETID"], how="left")
+        outputs.update({"nos_outage_keys.csv.gz": okeys, "nos_diurnal_profiles_48.csv": rt["diurnal_48"], "nos_flow_response.csv": fr,
+                        "nos_duid_pressure.csv": rt["duid_pressure"], "nos_system_footprint.csv": rt["footprint"]})
     for name, frame in outputs.items():
         target = DL / name
         tmp = target.with_name(target.name + ".tmp")
