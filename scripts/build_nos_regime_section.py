@@ -44,6 +44,19 @@ STATE_COL = {"clear": "#9aa3ad", "booked_only": "#ce9a48", "partial": "#d9c7a3",
 DIR_LABEL = {"forward": "Forward", "reverse": "Reverse"}
 
 
+def safe_replace(tmp, target, attempts: int = 20) -> None:
+    """os.replace with retries: on this host the search indexer briefly locks freshly written report files."""
+    import time
+    for i in range(attempts):
+        try:
+            tmp.replace(target)
+            return
+        except (PermissionError, OSError):
+            if i == attempts - 1:
+                raise
+            time.sleep(1.0)
+
+
 def load(prefix: str) -> pd.DataFrame:
     parts = []
     for ic in rr.IC_ORDER:
@@ -218,7 +231,7 @@ def build() -> dict:
         target = DL / name
         tmp = target.with_name(target.name + ".tmp")
         frame.to_csv(tmp, index=False, compression={"method": "gzip", "mtime": 0} if name.endswith(".gz") else None)
-        tmp.replace(target)
+        safe_replace(tmp, target)
 
     # ---- figures
     figs = []
@@ -493,6 +506,10 @@ def build() -> dict:
         txt += f"{la.asset.nunique()} individual outage assets have supported asset-level entries in the lookup."
         body.append(f'<p><strong>{escape(name)}.</strong> {escape(txt)}</p>')
 
+    extra = constraint_summary(DL)
+    if extra["html"]:
+        body.append(extra["html"])
+    outputs = {**outputs, **{n: None for n in extra["downloads"]}}
     body.append('<p class="callout scope-note"><strong>Limitations.</strong> Outages are scheduled where network operators expect low impact, so these are typical impacts as scheduled. '
                 'The set-to-connector mapping and relevance filter are retrospective. Year-1 outage records are final-state only. Substation coordinates come from an OpenStreetMap name crosswalk (medium confidence), and unmatched '
                 'substations are left blank. Matching falls back to coarser cells when exact matches are unavailable; the rung shares and balance diagnostics are in the download. '
@@ -506,6 +523,49 @@ def build() -> dict:
     inject()
     return {"supported_families": int(sup.drop_duplicates(["ic", "GENCONSETID"]).shape[0]), "lookup_rows": len(lk),
             "downloads": list(outputs), "figures": len(figs)}
+
+
+def constraint_summary(dl: Path) -> dict:
+    """Summary of the constraint-mechanics and outlook campaign (execution/nos_constraint_binding_v1), from cached tables."""
+    t = ROOT / "data" / "nos_binding_v1" / "tables"
+    def cat(pattern):
+        parts = [pd.read_parquet(p) for p in sorted(t.glob(pattern))]
+        parts = [p for p in parts if not ("empty" in p.columns and len(p.columns) == 1)]
+        return pd.concat(parts, ignore_index=True) if parts else pd.DataFrame()
+    sf, bf = cat("setter_family__*.parquet"), cat("binding_family__*.parquet")
+    if sf.empty:
+        return {"html": "", "downloads": []}
+    out = {"nos_setter_family.csv": sf}
+    rows = []
+    for n in ORDER:
+        s = sf[sf.name.eq(n) & sf.tier.eq("supported")]
+        r = {"connector": n, "families": len(s), "setter_outage": s.own_treated.median(), "setter_normal": s.own_control.median()}
+        if len(bf):
+            q = bf[bf.name.eq(n) & bf.tier.eq("supported")]
+            r.update(binding_outage=q.own_treated.median(), binding_normal=q.own_control.median())
+        rows.append(r)
+    tab = pd.DataFrame(rows)
+    cols = ["connector", "families", "setter_outage", "setter_normal"] + (["binding_outage", "binding_normal"] if len(bf) else [])
+    html = ('<h3>Which equations bind and set the limit during outages</h3><p>A follow-on pass (execution/nos_constraint_binding_v1) replays the matched '
+            'comparisons above and measures, for each supported outage family, how often the outage’s own constraint set sets the link’s limit'
+            + (' and binds (published marginal value)' if len(bf) else '') + ' while invoked, against matched outage-free periods. Median shares over supported '
+            'family-directions:</p>' + rr.table_html(tab, cols, {c: pct for c in cols[2:]}, 10))
+    if len(bf):
+        out["nos_binding_family.csv"] = bf
+    live = ROOT / "data" / "nos_binding_v1" / "outlook" / "live" / "latest.json"
+    if live.exists():
+        import json as _json
+        meta = _json.loads(live.read_text())
+        html += (f'<p>A 12-month outlook of the constraints likely to bind for booked NOS outages (snapshot {meta["generated_nem"]}), with its walk-forward '
+                 'backtest, is in the standalone report.</p>')
+    html += ('<p>Full chapter: <a href="../nos_outage_regime_research_20260924/index.html#constraints">standalone NOS report — constraint mechanics</a>'
+             + (' and <a href="../nos_outage_regime_research_20260924/index.html#outlook">12-month outlook</a>' if live.exists() else '') + '.</p>')
+    for name, frame in out.items():
+        target = dl / name
+        tmp = target.with_name(target.name + ".tmp")
+        frame.to_csv(tmp, index=False)
+        safe_replace(tmp, target)
+    return {"html": html, "downloads": list(out)}
 
 
 def methodology_md() -> str:

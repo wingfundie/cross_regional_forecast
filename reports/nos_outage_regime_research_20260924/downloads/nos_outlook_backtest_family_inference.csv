@@ -1,0 +1,2 @@
+inferred_bookings,top1_accuracy,top3_accuracy,bookings_with_any_final_set,top1_accuracy_given_set,top3_accuracy_given_set
+2781,0.07946781733189501,0.09133405249910104,1175,0.18893617021276596,0.21617021276595744

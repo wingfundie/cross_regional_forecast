@@ -43,6 +43,19 @@ IC_COL = {"QNI": "#5696b9", "Directlink": "#8fb9d3", "VNI": "#ce9a48", "Heywood"
 fmt_mw, pct, table = sec.fmt_mw, sec.pct, rr.table_html
 
 
+def safe_replace(tmp, target, attempts: int = 20) -> None:
+    """os.replace with retries: on this host the search indexer briefly locks freshly written report files."""
+    import time
+    for i in range(attempts):
+        try:
+            tmp.replace(target)
+            return
+        except (PermissionError, OSError):
+            if i == attempts - 1:
+                raise
+            time.sleep(1.0)
+
+
 def plot(fig):
     return rr.plot_div(fig)
 
@@ -479,7 +492,7 @@ def build():
     for name, frame in outputs.items():
         target = DL / name; tmp = target.with_name(target.name + ".tmp")
         frame.to_csv(tmp, index=False, compression={"method": "gzip", "mtime": 0} if name.endswith(".gz") else None)
-        tmp.replace(target)
+        safe_replace(tmp, target)
     (OUT / "sources").mkdir(exist_ok=True)
     shutil.copy2(EXEC / "METHODOLOGY.md", OUT / "METHODOLOGY.md")
     for f in ["PLAN.md", "EXECUTION_LOG.md", "RESULTS_SUMMARY.md", "pilot_summary.md"]:
@@ -490,6 +503,7 @@ def build():
     (OUT / "sources" / "constraint_mechanics").mkdir(exist_ok=True)
     for f in ["PLAN.md", "METHODOLOGY.md", "EXECUTION_LOG.md", "RESULTS_SUMMARY.md"]:
         if (EXEC2 / f).exists():
+            (OUT / "sources" / "constraint_mechanics" / f).unlink(missing_ok=True)
             shutil.copy2(EXEC2 / f, OUT / "sources" / "constraint_mechanics" / f)
 
     # ---------------- figures
@@ -837,7 +851,9 @@ def build():
 
     html = render_page("NOS outage effects on NEM interconnectors", "\n".join(b), plotly=True, accent="purple")
     html = "\n".join(line.rstrip() for line in html.splitlines()) + "\n"
-    (OUT / "index.html").write_text(html, encoding="utf-8")
+    target = OUT / "index.html"
+    target.unlink(missing_ok=True)          # overwriting in place intermittently fails on this host (Errno 22)
+    target.write_text(html, encoding="utf-8")
 
     # manifest
     man = {"report_id": REPORT_ID, "built_at": pd.Timestamp.now(tz="Asia/Singapore").isoformat(), "theme_version": VERSION,

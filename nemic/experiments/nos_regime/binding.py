@@ -38,10 +38,13 @@ DL_KEEP = ["SETTLEMENTDATE", "RUNNO", "DUID", "INTERVENTION", "INITIALMW", "TOTA
 STANDING_TABLES = ["SPDINTERCONNECTORCONSTRAINT", "SPDCONNECTIONPOINTCONSTRAINT", "GENCONDATA"]
 
 
-def archive_url(month: pd.Period, table: str) -> str:
+def archive_url(month: pd.Period, table: str, style: str = "archive") -> str:
+    """MMSDM monthly archive; 'archive' naming from 2024-08 on, 'dvd' naming (PUBLIC_DVD_<TABLE>_<YYYYMM>010000.zip) before."""
     y, m = month.year, f"{month.month:02d}"
-    return (f"https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/{y}/MMSDM_{y}_{m}/MMSDM_Historical_Data_SQLLoader/"
-            f"DATA/PUBLIC_ARCHIVE%23{table}%23FILE01%23{y}{m}010000.zip")
+    base = f"https://nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/{y}/MMSDM_{y}_{m}/MMSDM_Historical_Data_SQLLoader/DATA/"
+    if style == "dvd":
+        return base + f"PUBLIC_DVD_{table}_{y}{m}010000.zip"
+    return base + f"PUBLIC_ARCHIVE%23{table}%23FILE01%23{y}{m}010000.zip"
 
 
 def expected_sha(url: str) -> str | None:
@@ -52,7 +55,13 @@ def expected_sha(url: str) -> str | None:
 
 def fetch(month: pd.Period, table: str, sources: list):
     url = archive_url(month, table)
-    path = download_entry({"url": url}, LIMITS, RAW)
+    try:
+        path = download_entry({"url": url}, LIMITS, RAW)
+    except Exception:
+        if month >= pd.Period("2024-08", "M"):
+            raise
+        url = archive_url(month, table, "dvd")
+        path = download_entry({"url": url}, LIMITS, RAW)
     digest = sha256(path)
     exp = expected_sha(url)
     sources.append({"month": str(month), "table": table, "url": url, "bytes": path.stat().st_size, "sha256": digest,
@@ -143,6 +152,11 @@ def build_scope() -> dict:
 # --------------------------------------------------------------------------- B1/B2
 def ic_factors() -> pd.DataFrame:
     f = pd.read_parquet(STAND / "SPDINTERCONNECTORCONSTRAINT.parquet")
+    bf = STAND / "backfill" / "SPDINTERCONNECTORCONSTRAINT.parquet"
+    if bf.exists():
+        extra = pd.read_parquet(bf)
+        if len(extra) and "INTERCONNECTORID" in extra:
+            f = pd.concat([f, extra[f.columns.intersection(extra.columns)]], ignore_index=True).drop_duplicates()
     f = _num(f[f.INTERCONNECTORID.isin(IC)].copy(), ["FACTOR", "VERSIONNO"])
     f["EFFECTIVEDATE"] = pd.to_datetime(f.EFFECTIVEDATE, errors="coerce")
     return (f[["INTERCONNECTORID", "GENCONID", "EFFECTIVEDATE", "VERSIONNO", "FACTOR"]].drop_duplicates()
@@ -214,6 +228,27 @@ def acquire_month(month: pd.Period, scope_ids: set, gen_duids: set, factors, dep
             "binding_rows": int(panel.binding.sum()), "dl_rows": len(dl), "sources": sources}
     write_json(PANEL / f"meta__{month}.json", info)
     return info
+
+
+def refactor_panel() -> dict:
+    """After B0b: re-join link factors (window + back-filled definitions) onto the stored panel rows by exact version.
+    Binding rows are complete; near-binding rows of back-filled equations exist only where they also bound."""
+    factors = ic_factors()
+    changed = 0
+    for m in sorted(PANEL.glob("20*.parquet")):
+        p = pd.read_parquet(m)
+        for ic in IC:
+            fac = factors[factors.INTERCONNECTORID.eq(ic)].drop(columns="INTERCONNECTORID")
+            j = p[["CONSTRAINTID", "EFFECTIVEDATE", "VERSIONNO"]].merge(fac, on=["CONSTRAINTID", "EFFECTIVEDATE", "VERSIONNO"], how="left")
+            a = j.FACTOR.to_numpy(float)
+            before = p[f"factor__{ic}"].notna().sum()
+            p[f"factor__{ic}"] = a.astype("float32")
+            p[f"slack__{ic}"] = ((p.RHS.to_numpy(float) - p.LHS.to_numpy(float)) / np.abs(a)).astype("float32")
+            changed += int(p[f"factor__{ic}"].notna().sum() - before)
+        write_parquet(m, p)
+    global _PANEL_CACHE
+    _PANEL_CACHE = None
+    return {"factor_rows_added": changed}
 
 
 def acquire(months: list[str] | None = None) -> dict:

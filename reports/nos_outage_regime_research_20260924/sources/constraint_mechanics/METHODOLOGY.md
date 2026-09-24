@@ -36,7 +36,7 @@ For layer L, family f, direction d, treated units T and controls C(t):
 
 - `H[t, e]` = share of half-hour t's available intervals in which equation e is active in L.
 - Treated share of e: mean over t ∈ T of `H[t, e]`. Control share: mean over t of the mean of `H[c, e]` over c ∈ C(t).
-- **Own-set share:** the same with e ranging over all member equations of f (any version of the set).
+- **Own-set share:** the share of intervals in which *at least one* member equation of f (any version of the set) is active. It is not the sum of equation shares, because several own equations can bind in the same interval (log E027). The `class_*` columns are sums of equation shares: for the binding layer they are the mean number of binding equations of that class per interval.
 - **Any-active share:** share of intervals with at least one active equation in L (used for the binding footprint).
 - **Differences** are unit-level (treated − control) in percentage points; 95% intervals are day-block bootstrap intervals of the mean (1,000 replicates, NEM date of the interval).
 - **Top equations:** union of the 10 largest by max(treated, control) share and the 10 largest by |difference|. The ratio treated/control is reported alongside; the difference is the headline (Q11).
@@ -52,7 +52,7 @@ For layer L, family f, direction d, treated units T and controls C(t):
 - **Footprint (B5):** any-binding difference on each target link-direction, for families relevant to it and for spillover runs (families relevant elsewhere, v1 spillover matching).
 - **As-known split (B6):** year-2 treated half-hours split by whether a linked outage (or a predecessor it resubmits) was present in the NOS state generated 1, 7 or 14 days earlier. NOS state comes from the half-hourly report change log in the weekly archives; half-hours whose reference time precedes the first archived report are excluded.
 - **Marginal value (Q10):** for own-set binding intervals, median \|MV\|, share above 100 and 1,000 $/MWh, and share above the equation's own P90 \|MV\| over binding intervals outside this family's treated half-hours. Descriptive only; never summed.
-- **Generator-only equations (B0b, B7):** relevant-set members with no definition rows in the window archives were versioned earlier; their definitions are read from the monthly archives of their dispatch version dates. An equation is generator-only when no version has a term for any of the six links. Pressure per DUID is `bᵢ × (Pᵢ[t] − Pᵢ[t − 30 min])` (ENERGY connection-point factors, sign flipped for ≥ constraints), summed per half-hour; treated = family invoked, base = same-month half-hours with the family not invoked.
+- **Generator-only equations (B0b, B7):** 116 relevant-set members had no definition rows in the window archives because they were versioned earlier; their definitions were read from the monthly archives of their dispatch version dates (`PUBLIC_DVD_*` naming before 2024-08). 112 were resolved and **all 112 contain a term for at least one of the six links**; four (2013 versions, never binding in the window) stay unresolved. There are therefore no generator-only equations among the outage sets, and B7 has no subjects: generator pressure on outage equations is the connector-leader pressure already reported (v1 `nos_duid_pressure.csv`). Link factors for the back-filled versions were re-joined onto the binding panel; their near-binding rows exist only where the equation also bound.
 
 ## 6. Evidence gates
 
@@ -88,6 +88,9 @@ For a NOS snapshot generated at `as_of`:
 | DISPATCHLOAD scope | Generator-only DUIDs | All DUIDs (MW only), because generator-only equations were only identifiable after back-filling definitions | E006 |
 | Generator-only definitions | From window archives | Back-filled from archives of their version dates (B0b) | E006 |
 | Pair replay | Actual pairs | Actual and ±7-day placebo pairs | E003/E004 |
+| Pre-window definitions | Window archives only | `PUBLIC_DVD_*` archives of each version month (B0b) | E021–E024 |
+| Generator-only pressure (B7) | Pressure on generator-only equations | None exist after back-fill; reported as a finding | E025 |
+| Own-set share | Sum of equation shares | Share of intervals with any own equation active | E027 |
 
 ## 10. Limitations
 
