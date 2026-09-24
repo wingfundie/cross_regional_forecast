@@ -1,6 +1,6 @@
 {
   "report_id": "nos_outage_regime_research_20260924",
-  "built_at": "2026-09-24T08:46:37.182033+08:00",
+  "built_at": "2026-09-24T17:33:34.042144+08:00",
   "theme_version": "1.0",
   "rebuild": "python scripts/build_nos_outage_report.py",
   "window": "(2024-09-01, 2026-09-01]",
@@ -420,6 +420,174 @@
     "data\\nos_regime_v1\\raw\\osm\\au_power.json": {
       "bytes": 897174,
       "sha256": "72dc25550afdee9e95b77a77615ed91b43db1cdbaf31ea46cec5a1428ffee0c4"
+    },
+    "data\\nos_binding_v1\\tables\\setter_by_regime__N-Q-MNSP1.parquet": {
+      "bytes": 28583,
+      "sha256": "313e7dc578b83bebf76fb0178356e462e4883493efe31e7cf0ede80f778f90a3"
+    },
+    "data\\nos_binding_v1\\tables\\setter_by_regime__NSW1-QLD1.parquet": {
+      "bytes": 43311,
+      "sha256": "67cfd9f352432499126f8e8538fb1865d688ad7770cfd809d920f44dda4cbc57"
+    },
+    "data\\nos_binding_v1\\tables\\setter_by_regime__T-V-MNSP1.parquet": {
+      "bytes": 22698,
+      "sha256": "3c69441464516b6ed2f7956d1ac316e64af3e80d23bcfad468cd5b197dc440f2"
+    },
+    "data\\nos_binding_v1\\tables\\setter_by_regime__V-S-MNSP1.parquet": {
+      "bytes": 86918,
+      "sha256": "b215c0f2d718089c8c5298a6a70365846b293405fb04875376b6fc20eba8e7dc"
+    },
+    "data\\nos_binding_v1\\tables\\setter_by_regime__V-SA.parquet": {
+      "bytes": 65444,
+      "sha256": "b8027208de04a7ca09d3439dcc7f916e2f4fe6d2de23f140c5fca8cdd0056575"
+    },
+    "data\\nos_binding_v1\\tables\\setter_by_regime__VIC1-NSW1.parquet": {
+      "bytes": 76782,
+      "sha256": "0384b85b55424dfa008609cccb1930edff0bfda125680a34ce7f15239d4d3a51"
+    },
+    "data\\nos_binding_v1\\tables\\setter_event_study__N-Q-MNSP1.parquet": {
+      "bytes": 17529,
+      "sha256": "38ffec86a4ba031b2f541d855642f8454ad9938d6a0db77b087a68d52981c350"
+    },
+    "data\\nos_binding_v1\\tables\\setter_event_study__NSW1-QLD1.parquet": {
+      "bytes": 23645,
+      "sha256": "e0bf091b9b52f2048e1723078a4dd87f1f7cd03d99d9a17a447dad749c7a515a"
+    },
+    "data\\nos_binding_v1\\tables\\setter_event_study__T-V-MNSP1.parquet": {
+      "bytes": 15220,
+      "sha256": "a9c065223c591b8700ca930c465c9c2d38bff61b7259d2aaf34f18234153642f"
+    },
+    "data\\nos_binding_v1\\tables\\setter_event_study__V-S-MNSP1.parquet": {
+      "bytes": 44478,
+      "sha256": "0f0f43c3dc61173b3084f34b5ff2be8c5c5c2b3541283ab3570706b5b142f901"
+    },
+    "data\\nos_binding_v1\\tables\\setter_event_study__V-SA.parquet": {
+      "bytes": 34258,
+      "sha256": "867ff11b94a53063e971208788a2ec39e9a447970cf04cb57f2b162c891726cd"
+    },
+    "data\\nos_binding_v1\\tables\\setter_event_study__VIC1-NSW1.parquet": {
+      "bytes": 35674,
+      "sha256": "e832e8c0584625fabb23fa124e39c5309b33909e8420970e7351300261e005e4"
+    },
+    "data\\nos_binding_v1\\tables\\setter_family__N-Q-MNSP1.parquet": {
+      "bytes": 30531,
+      "sha256": "df25784378b81e73473df7b3331470905147117dc975bc98b9778fb34e212a7b"
+    },
+    "data\\nos_binding_v1\\tables\\setter_family__NSW1-QLD1.parquet": {
+      "bytes": 36924,
+      "sha256": "2b1776e9bbd49ae02940a2ce614aeb168ddd5dd07b11aefaa06cc9f1fba8f490"
+    },
+    "data\\nos_binding_v1\\tables\\setter_family__T-V-MNSP1.parquet": {
+      "bytes": 28005,
+      "sha256": "2dcefc64b7799afaa1572958df3962a41cb2a9d42cb7e0eb58c193b63ac590e7"
+    },
+    "data\\nos_binding_v1\\tables\\setter_family__V-S-MNSP1.parquet": {
+      "bytes": 55277,
+      "sha256": "73e37b00b9b81d4f1551965fd4bd53d7455601b65d44bc1c7d5f36370982470b"
+    },
+    "data\\nos_binding_v1\\tables\\setter_family__V-SA.parquet": {
+      "bytes": 46645,
+      "sha256": "ba1870c89ee9df0451083299a8dad2360fa360723a92311affcbf2ec213522f4"
+    },
+    "data\\nos_binding_v1\\tables\\setter_family__VIC1-NSW1.parquet": {
+      "bytes": 50742,
+      "sha256": "474e1fb2e511e515b695bfe000168f6384a9026837f70d38d600896a7ff36a87"
+    },
+    "data\\nos_binding_v1\\tables\\setter_keys__N-Q-MNSP1.parquet": {
+      "bytes": 37824,
+      "sha256": "0064619e3ef423446030af127859f4c54f36091848d0bc22ced0d44b1272a8cc"
+    },
+    "data\\nos_binding_v1\\tables\\setter_keys__NSW1-QLD1.parquet": {
+      "bytes": 52952,
+      "sha256": "bb1681d7da0e5c80f4666e46e6916e67c6cbd4b6b83f6085477ef6b8c956d86e"
+    },
+    "data\\nos_binding_v1\\tables\\setter_keys__T-V-MNSP1.parquet": {
+      "bytes": 32880,
+      "sha256": "720c676caefe48974a34c5152078eec9f2e7bd96fb1a878f5f26641e2af0b915"
+    },
+    "data\\nos_binding_v1\\tables\\setter_keys__V-S-MNSP1.parquet": {
+      "bytes": 75696,
+      "sha256": "3821e4a13740753fd062237d3092255094cbb7810c636ad01bd50dd1c71ce62f"
+    },
+    "data\\nos_binding_v1\\tables\\setter_keys__V-SA.parquet": {
+      "bytes": 68169,
+      "sha256": "8560451278753c4d2b507ca80e04239cdee5b90807ff31d37bddee5b55da2cd6"
+    },
+    "data\\nos_binding_v1\\tables\\setter_keys__VIC1-NSW1.parquet": {
+      "bytes": 69654,
+      "sha256": "2271009fc7c54ec96b8f1966919631807ba79dbdf67a6dc75a39dd4a156586da"
+    },
+    "data\\nos_binding_v1\\tables\\setter_placebo__N-Q-MNSP1.parquet": {
+      "bytes": 7822,
+      "sha256": "0536c7dc4c42c4ea9f434ec5f4ff7e72a6a145d65c423855b84e0996cbe671b3"
+    },
+    "data\\nos_binding_v1\\tables\\setter_placebo__NSW1-QLD1.parquet": {
+      "bytes": 8729,
+      "sha256": "69f24edc8ac73df39777e81aa0e6cff8ebe9091523c92444b7e9e334104b4060"
+    },
+    "data\\nos_binding_v1\\tables\\setter_placebo__T-V-MNSP1.parquet": {
+      "bytes": 7440,
+      "sha256": "d9f400bf2ff6894a8c6d5a6572ba0aa483155e5fdc59b25e36e7d0cd227b9da5"
+    },
+    "data\\nos_binding_v1\\tables\\setter_placebo__V-S-MNSP1.parquet": {
+      "bytes": 11040,
+      "sha256": "92efa86e19911b585d0374eacb906b2aa21eb3e088cd054d0e9af9761d98f272"
+    },
+    "data\\nos_binding_v1\\tables\\setter_placebo__V-SA.parquet": {
+      "bytes": 9960,
+      "sha256": "c311101fa9434f49f0fb317c67760a2ff889096d1823367cb32d5c6f6bfcde23"
+    },
+    "data\\nos_binding_v1\\tables\\setter_placebo__VIC1-NSW1.parquet": {
+      "bytes": 10823,
+      "sha256": "3cc08e1fa7dc1449cb1bac6447e9c63fbc4c0de6e2d56b434fced2f103efb20e"
+    },
+    "data\\nos_binding_v1\\tables\\setter_topk__N-Q-MNSP1.parquet": {
+      "bytes": 33389,
+      "sha256": "f547fd8c747468eef6d53c8e6dec9da1119ad50cc8ef1af7a3ba2a9c7517c193"
+    },
+    "data\\nos_binding_v1\\tables\\setter_topk__NSW1-QLD1.parquet": {
+      "bytes": 57228,
+      "sha256": "57d1fcaa79cc1b9b80d81080b1455f0d8928140c9cf569173656c6d5f081859c"
+    },
+    "data\\nos_binding_v1\\tables\\setter_topk__T-V-MNSP1.parquet": {
+      "bytes": 28477,
+      "sha256": "e4a9bd6e626a4aba665bd7e42d635f1311e01069318ff5ccc4195c459e913881"
+    },
+    "data\\nos_binding_v1\\tables\\setter_topk__V-S-MNSP1.parquet": {
+      "bytes": 126191,
+      "sha256": "f4aa18875f98cdba33d564f56512b323cd218bee6c81a9620ff24c7dacc617b1"
+    },
+    "data\\nos_binding_v1\\tables\\setter_topk__V-SA.parquet": {
+      "bytes": 92947,
+      "sha256": "e9190cf2231eb181fe63b7c8c65684736dc4312c0c79ba60b22f554964ec3507"
+    },
+    "data\\nos_binding_v1\\tables\\setter_topk__VIC1-NSW1.parquet": {
+      "bytes": 101290,
+      "sha256": "ff97e36ee4dfee40a030b1643cc81dcc235d2806fce42748e9951291909b8371"
+    },
+    "data\\nos_binding_v1\\tables\\setter_transitions__N-Q-MNSP1.parquet": {
+      "bytes": 16350,
+      "sha256": "9dd433b90efa10bf34a6887a8997260de249b83a7ecbbb7a2c1df6af3638e0e4"
+    },
+    "data\\nos_binding_v1\\tables\\setter_transitions__NSW1-QLD1.parquet": {
+      "bytes": 22614,
+      "sha256": "3f5831bc97be94f8deaf148310698f168fbf869cef4a306be969f1c92e70f33f"
+    },
+    "data\\nos_binding_v1\\tables\\setter_transitions__T-V-MNSP1.parquet": {
+      "bytes": 12719,
+      "sha256": "08afe57ae842038ffc0dfa42a70d501fd5bfc5ae9ec9113462a816be3dd55e1d"
+    },
+    "data\\nos_binding_v1\\tables\\setter_transitions__V-S-MNSP1.parquet": {
+      "bytes": 46407,
+      "sha256": "5a6a644acb37b4a18d21855eec8b8e5f525235994216af4b073b5148ed503180"
+    },
+    "data\\nos_binding_v1\\tables\\setter_transitions__V-SA.parquet": {
+      "bytes": 37080,
+      "sha256": "30360c6a6d23019d9ac3b046e79ae094ec1e73558c973f49f7f14287c2043e9c"
+    },
+    "data\\nos_binding_v1\\tables\\setter_transitions__VIC1-NSW1.parquet": {
+      "bytes": 38812,
+      "sha256": "0ff0932a83bf297876193051cbe5a18d89747b912cfd55abe60ee027f64b60ba"
     }
   },
   "outputs": {
@@ -430,6 +598,10 @@
     "downloads\\nos_booking_states.csv": {
       "bytes": 836077,
       "sha256": "8e9fce046be64358940a675b0552a30e2723d93bdb0e00786222242cca75d2b9"
+    },
+    "downloads\\nos_constraint_lookup.csv": {
+      "bytes": 197076,
+      "sha256": "d75b36fe7bf143bbccc0a320d3e9dd46965f40db46234b881f2e5daf24a56ce3"
     },
     "downloads\\nos_diurnal_profiles_48.csv": {
       "bytes": 342605,
@@ -464,8 +636,8 @@
       "sha256": "94cb8e8fc81ca5abf2d239cf2a9569f464392852334d605c6cf1fa75602b6c4d"
     },
     "downloads\\nos_leader_transitions.csv": {
-      "bytes": 50615,
-      "sha256": "bb435793a22e6d24e954b2940ed1af0fc5e6f5dc1e219b57b72bec4af45a9d1b"
+      "bytes": 50763,
+      "sha256": "e2d35cdbf06fd8104c3708c3770b172477622d46b1ecd97b3ae72503292a5ccc"
     },
     "downloads\\nos_outage_episodes.csv.gz": {
       "bytes": 1724041,
@@ -486,6 +658,30 @@
     "downloads\\nos_set_relevance.csv": {
       "bytes": 178099,
       "sha256": "46df269d166ae4138fcc4da98de81ab7cdfc185edd5d4e256fae4364e3925e4b"
+    },
+    "downloads\\nos_setter_by_regime.csv": {
+      "bytes": 1569075,
+      "sha256": "b625cb9fbe78e038d3463e9df1d03a6fdcacdfb85abab75d5b912fb10bb6a106"
+    },
+    "downloads\\nos_setter_event_study.csv.gz": {
+      "bytes": 347068,
+      "sha256": "4d90ccfe9a17b7204ebcbe712f2ddf863f0d098b696d7a851741556e203f5511"
+    },
+    "downloads\\nos_setter_family.csv": {
+      "bytes": 305263,
+      "sha256": "1de9fe0c826c8f99fa66e2472d90107fb7b9124c1a6b6217aac55605d174af55"
+    },
+    "downloads\\nos_setter_placebo.csv": {
+      "bytes": 65862,
+      "sha256": "7b85f62c79fa301ee7e34f0e2087a80349cd0ce826480d3f0d22d6e57184a01c"
+    },
+    "downloads\\nos_setter_topk.csv.gz": {
+      "bytes": 364127,
+      "sha256": "d5fccbc36f63ebfd53d1d7e15c03c0e7907389723da4da9d91d99417d2ec1363"
+    },
+    "downloads\\nos_setter_transitions.csv.gz": {
+      "bytes": 105360,
+      "sha256": "cd4c52a04ac8e53ebb567ef9c915b6584cfea4f17b6b10f01f6176928a8fea20"
     },
     "downloads\\nos_spillover.csv": {
       "bytes": 1497780,
@@ -516,12 +712,28 @@
       "sha256": "136d82036906a52777814ba25b53f040ecf94c48065eb92748288f9f5da7553e"
     },
     "index.html": {
-      "bytes": 6111136,
-      "sha256": "0ccd7aa5afcb1d557244102ddceaf715235d61a8026064fd49e5d52d6e4f6f06"
+      "bytes": 6559422,
+      "sha256": "8309a4da3e1c7416fcac1e076b78537c9c174843196a728ca0df5e6412927f26"
     },
     "METHODOLOGY.md": {
-      "bytes": 17576,
-      "sha256": "8e61b37148d13846cf7cf63ebe430ad6db6e75f8d30265a1a96c741a57dc7e33"
+      "bytes": 17773,
+      "sha256": "fa70d28cf80630b7e7f2fa64d8e5e568e0cbd3785e8d449b647a1f06967194e5"
+    },
+    "sources\\constraint_mechanics\\EXECUTION_LOG.md": {
+      "bytes": 5270,
+      "sha256": "0bbeeb8f50e5ecd7772505973edb9810124b10fbfad5f8ce666a0f59ca58ec7b"
+    },
+    "sources\\constraint_mechanics\\METHODOLOGY.md": {
+      "bytes": 11141,
+      "sha256": "74126765904fada232e11dc44c90cd3214a3f97f6e7edde81c7cd35124ded316"
+    },
+    "sources\\constraint_mechanics\\PLAN.md": {
+      "bytes": 23045,
+      "sha256": "420d702066a67e0d6bcd522ff1abe7a7c0d6d54a2211df8f3cd2f81159d62c68"
+    },
+    "sources\\constraint_mechanics\\RESULTS_SUMMARY.md": {
+      "bytes": 2107,
+      "sha256": "b62787a973fc169a0c26587f0dee15236d6710fb3d44cf5563dc4f057d805869"
     },
     "sources\\EXECUTION_LOG.md": {
       "bytes": 17518,
@@ -540,6 +752,6 @@
       "sha256": "662774451bd5f2ec03afaabc925248ca47cecb232b290f409f0507d86f27845c"
     }
   },
-  "generator_sha256": "54f7e9d06e49f542b2ead4a79faa2d935d569f76bde5d93340f6381348a21e4d",
+  "generator_sha256": "8df43862e8bea2bc48250d2acd642fa0c87e27f4b4041a18da50308bad05131e",
   "execution": "execution/nos_outage_regime_v1"
 }

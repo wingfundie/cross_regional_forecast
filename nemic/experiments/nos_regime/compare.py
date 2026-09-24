@@ -24,6 +24,12 @@ MAX_CONTROLS, WINDOW_DAYS, REPS, SEED = 5, 21, 1000, 20260924
 SUBDIV = {"NSW1": "NSW", "VIC1": "VIC", "QLD1": "QLD", "SA1": "SA", "TAS1": "TAS"}
 REGION_OF_IC = {ic: (v["source"], v["sink"]) for ic, v in IC.items()}
 OUT = DATA / "tables"
+# Opt-in hooks for the constraint-mechanics replay (execution/nos_constraint_binding_v1, stage A1).
+# PAIR_SINK: when a list, every run_effect call appends its matched (tp, cp) pairs and a reference to its
+# summary dict (labels are added to that dict by the caller), plus the placebo pairs. FAST: skip bootstrap CIs.
+# Neither changes the matching itself, so v1 results are unaffected.
+PAIR_SINK: list | None = None
+FAST = False
 
 
 # --------------------------------------------------------------------------- panel
@@ -186,6 +192,7 @@ class Context:
         units["other_count"] = cnt_adj[tpos]
         units["time"] = GRID30[tpos]
         units["matched"] = units.n_controls.fillna(0) > 0
+        units.attrs["pairs"] = pairs
         # pool for "before" balance: all eligible controls
         units.attrs["pool"] = pd.DataFrame({c: p[c].to_numpy()[cpos] for c in ["temperature_mean", "vre_difference", "residual_difference", "half_hour"]}
                                            ).assign(other_count=cnt_adj[cpos])
@@ -308,7 +315,10 @@ def episodes_touching(links: pd.DataFrame, family: str, times: pd.DatetimeIndex)
 # --------------------------------------------------------------------------- runs
 def run_effect(ctx: Context, direction: str, treat, removed, ctrl_ok, placebo=True):
     units = ctx.match(direction, treat, removed, ctrl_ok)
-    s = summarize(units)
+    s = summarize(units, ci=not FAST)
+    if PAIR_SINK is not None:
+        PAIR_SINK.append({"ic": ctx.ic, "direction": direction, "pairs": units.attrs.get("pairs") if len(units) else None,
+                          "summary": s})
     if placebo and len(units):
         shifted = np.zeros(len(GRID30), bool)
         tp = np.flatnonzero(treat)
@@ -318,11 +328,13 @@ def run_effect(ctx: Context, direction: str, treat, removed, ctrl_ok, placebo=Tr
             shifted[q] = True
         shifted &= ctrl_ok & ~treat
         pu = ctx.match(direction, shifted, removed, ctrl_ok & ~shifted)
-        ps = summarize(pu)
+        if PAIR_SINK is not None:
+            PAIR_SINK[-1]["placebo_pairs"] = pu.attrs.get("pairs") if len(pu) else None
+        ps = summarize(pu, ci=not FAST)
         s["placebo_n"] = ps.get("n_matched", 0)
         s["placebo_effect_capacity"] = ps.get("effect_capacity", np.nan)
         s["placebo_ci_lo"], s["placebo_ci_hi"] = ps.get("ci_lo_capacity", np.nan), ps.get("ci_hi_capacity", np.nan)
-        s["placebo_clean"] = bool(ps.get("n_matched", 0) >= 2 and ps["ci_lo_capacity"] <= 0 <= ps["ci_hi_capacity"])
+        s["placebo_clean"] = bool(ps.get("n_matched", 0) >= 2 and ps.get("ci_lo_capacity", np.nan) <= 0 <= ps.get("ci_hi_capacity", np.nan))
     if len(units):
         units.attrs.clear()
     return units, s
