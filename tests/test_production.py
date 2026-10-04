@@ -88,6 +88,8 @@ def normalized():
 def test_mapping_asof_and_scenarios():
     out, mapping, frame = normalized()
     assert out.value.iloc[0] == 5000
+    assert out["product"].iloc[0] == "test" and out.availability_evidence.iloc[0] == "measured_receipt"
+    assert out.receipt_completed.iloc[0] == out.received.iloc[0]
     assert asof(out, "2026-01-01T00:00:00+10:00", 24).empty
     assert len(asof(out, "2026-01-01T00:10:00+10:00", 24)) == 1
     with pytest.raises(ValueError, match="Duplicate"):
@@ -97,11 +99,43 @@ def test_mapping_asof_and_scenarios():
     assert changed.value.iloc[0] == 6000 and out.value.iloc[0] == 5000
 
 
+def test_asof_never_mixes_coherent_runs():
+    issue = pd.Timestamp("2026-01-01", tz="Australia/Brisbane")
+    rows = []
+    for run, received, variables in (("old", issue + pd.Timedelta(minutes=5), ("demand", "wind")),
+                                     ("new", issue + pd.Timedelta(minutes=20), ("demand",))):
+        for variable in variables:
+            rows.append(dict(source="provider", product="pasa", coherence_group="regional-run",
+                             run_id=run, issue=issue if run == "old" else issue + pd.Timedelta(minutes=10),
+                             received=received, delivery=issue + pd.Timedelta(hours=1), region="VIC1",
+                             variable=variable, member="central", value=1., interval_minutes=30))
+    selected = asof(pd.DataFrame(rows), issue + pd.Timedelta(minutes=30), 24)
+    assert set(selected.run_id) == {"new"}
+    assert set(selected.variable) == {"demand"}
+
+
+def test_asof_waits_for_atomic_run_completion():
+    issue = pd.Timestamp("2026-01-01", tz="Australia/Brisbane")
+    rows = pd.DataFrame([
+        dict(source="provider", product="pasa", coherence_group="regional-run", run_id="old",
+             issue=issue, received=issue+pd.Timedelta(minutes=5), receipt_completed=issue+pd.Timedelta(minutes=5),
+             delivery=issue+pd.Timedelta(hours=1), region="VIC1", variable="demand", member="central",
+             value=1., interval_minutes=30),
+        dict(source="provider", product="pasa", coherence_group="regional-run", run_id="new",
+             issue=issue+pd.Timedelta(minutes=10), received=issue+pd.Timedelta(minutes=12),
+             receipt_completed=issue+pd.Timedelta(minutes=40), delivery=issue+pd.Timedelta(hours=1),
+             region="VIC1", variable="demand", member="central", value=2., interval_minutes=30),
+    ])
+    selected = asof(rows, issue+pd.Timedelta(minutes=30), 24)
+    assert set(selected.run_id) == {"old"}
+
+
 def test_feature_contract_and_coarse_flag():
     out, _, _ = normalized()
     m = dict(recipe="regional-v1", features=["source_demand", "source_demand_coarse"], target="export")
     f = build(m, "2026-01-01T01:00:00+10:00", "2026-01-01T01:30:00+10:00", "VNI", out)
     assert f.source_demand.iloc[0] == 5000 and f.source_demand_coarse.iloc[0] == 1
+    assert len(f.attrs["input_lineage"]) == 1
     with pytest.raises(ValueError, match="Missing features"):
         build(m, "2026-01-01T02:00:00+10:00", "2026-01-01T02:30:00+10:00", "VNI", out)
 
@@ -166,6 +200,47 @@ def test_evaluation_preserves_missing_predictions():
     result = scorecard(attach_actuals(f, actuals))
     assert result.n.sum() == 1 and result.unscored.sum() == 1
     assert result.mae_mw.iloc[0] == 10
+
+
+def test_outcome_revisions_are_selected_asof():
+    from nemic.production.evaluation import attach_actuals
+    from nemic.production.outcomes import normalize_targets
+    delivery = pd.Timestamp("2026-01-01 00:30")
+    base = pd.DataFrame([{"time": delivery, "ic": "VIC1-NSW1", "n5": 6, "export": 10., "import": 20.,
+                         "export_tight": 9., "import_tight": 19., "flow": 5.}])
+    first = normalize_targets(base, received="2026-01-01T01:00Z", revision_id="r1")
+    revised = normalize_targets(base.assign(export=12.), received="2026-01-02T01:00Z", revision_id="r2")
+    forecasts = pd.DataFrame([dict(connector="VNI", target="export",
+                                   delivery=pd.Timestamp("2026-01-01T00:30:00+10:00"))])
+    out = attach_actuals(forecasts, pd.concat([first, revised]), as_of="2026-01-01T12:00Z")
+    assert out.actual.iloc[0] == 10 and out.revision_id.iloc[0] == "r1"
+    final = attach_actuals(forecasts, pd.concat([first, revised]))
+    assert final.actual.iloc[0] == 12 and final.revision_id.iloc[0] == "r2"
+
+
+def test_evaluation_has_90_day_bands_width_skill_and_calibration_label():
+    from nemic.production.evaluation import scorecard
+    origin = pd.Timestamp("2026-01-01", tz="UTC")
+    f = pd.DataFrame([dict(connector="VNI", target="export", delivery=origin + pd.Timedelta(days=75),
+                           lead=3600, model="a", status="complete", actual=100., forecast_mw=90.,
+                           baseline_mw=80., p10_mw=70., p90_mw=110., p02_5_mw=60., p97_5_mw=120.)])
+    result = scorecard(f)
+    assert str(result.horizon.iloc[0]) == "61–90d"
+    assert result.width_80.iloc[0] == 40
+    assert result.skill_vs_baseline.iloc[0] == .5
+    assert result.calibration_status.iloc[0] == "calibrated"
+
+
+def test_registry_accepts_90_days_but_not_more(tmp_path):
+    p = package(tmp_path, identity="long")
+    manifest = json.loads((p / "manifest.json").read_text())
+    manifest["lead_max"] = 4320
+    write_json(p / "manifest.json", manifest)
+    Registry(tmp_path / "registry-long").register(p)
+    manifest["lead_max"] = 4321
+    write_json(p / "manifest.json", manifest)
+    with pytest.raises(ValueError, match="90 days"):
+        Registry(tmp_path / "registry-too-long").register(p)
 
 
 def test_legacy_import_and_generic_prediction_parity(tmp_path):

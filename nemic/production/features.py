@@ -47,6 +47,7 @@ def build(manifest, origin, delivery, name, inputs, history=None, context=None):
         if inputs.empty:
             raise ValueError("Regional recipe requires forecast inputs")
         selected = asof(inputs, origin, manifest.get("max_age_hours", 48))
+        used_inputs = []
         for side, region in zip(("source", "sink"), CONNECTORS[connector(name)][1:]):
             for variable in ("demand", "wind", "solar", "temperature"):
                 records = selected[(selected.region == region) & (selected.variable == variable)
@@ -58,6 +59,7 @@ def build(manifest, origin, delivery, name, inputs, history=None, context=None):
                 if records.source.nunique() > 1:
                     raise ValueError(f"Ambiguous provider for {region}/{variable}; configure sources")
                 if len(records):
+                    used_inputs.append(records)
                     if records.member.duplicated().any():
                         raise ValueError("Overlapping input intervals")
                     values[f"{side}_{variable}"] = records.value.mean()
@@ -71,6 +73,7 @@ def build(manifest, origin, delivery, name, inputs, history=None, context=None):
                     if source:
                         previous = previous[previous.source == source]
                     if len(previous) and previous.source.nunique() == 1:
+                        used_inputs.append(previous)
                         values[f"{side}_{variable}_ramp"] = records.value.mean() - previous.value.mean()
             if all(f"{side}_{v}" in values for v in ("demand", "wind", "solar")):
                 values[f"{side}_residual"] = values[f"{side}_demand"] - values[f"{side}_wind"] - values[f"{side}_solar"]
@@ -96,6 +99,10 @@ def build(manifest, origin, delivery, name, inputs, history=None, context=None):
     frame = pd.DataFrame([{key: values[key] for key in manifest["features"]}])
     if not np.isfinite(frame.to_numpy(dtype=float)).all():
         raise ValueError("Non-finite engineered features")
+    if manifest["recipe"] == "regional-v1":
+        lineage_columns = [column for column in ("source", "product", "run_id", "issue", "received", "receipt_completed", "availability_evidence") if column in selected]
+        used = pd.concat(used_inputs, ignore_index=True) if used_inputs else selected.iloc[:0]
+        frame.attrs["input_lineage"] = used[lineage_columns].drop_duplicates().to_dict("records") if lineage_columns else []
     return frame
 
 

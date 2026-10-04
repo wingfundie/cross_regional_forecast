@@ -57,9 +57,25 @@ def normalize(frame, mapping):
     if not np.isfinite(out.value).all():
         raise ValueError("Non-finite forecast values")
     out["source"] = mapping["source"]
+    out["product"] = mapping.get("product", mapping["source"])
+    if "run_id" not in out:
+        run_column = mapping.get("run_id_column")
+        out["run_id"] = out[run_column].astype(str) if run_column else out.issue.astype(str)
+    if "coherence_group" not in out:
+        out["coherence_group"] = mapping.get("coherence_group", out["source"] + ":" + out["product"])
+    out["availability_evidence"] = mapping.get("availability_evidence", "measured_receipt")
+    completed_column = mapping.get("receipt_completed_column")
+    if completed_column:
+        if completed_column not in frame:
+            raise ValueError(f"Missing receipt-completed column: {completed_column}")
+        out["receipt_completed"] = timestamps(frame[completed_column], mapping.get("timezone"))
+    else:
+        out["receipt_completed"] = out.groupby(["source", "product", "run_id", "issue"], dropna=False)["received"].transform("max")
+    if (out.receipt_completed < out.received).any():
+        raise ValueError("Run completion precedes a record receipt")
     if "member" not in out:
         out["member"] = "central"
-    keys = ["source", "issue", "received", "delivery", "region", "variable", "member"]
+    keys = ["source", "product", "run_id", "issue", "received", "delivery", "region", "variable", "member"]
     if out.duplicated(keys).any():
         raise ValueError("Duplicate forecast records")
     return out
@@ -69,8 +85,28 @@ def asof(frame, origin, max_age_hours):
     origin = pd.Timestamp(origin)
     if origin.tzinfo is None:
         raise ValueError("Origin must include timezone")
+    required = {"source", "issue", "received", "delivery", "region", "variable", "member"}
+    if required - set(frame):
+        raise ValueError(f"Incomplete input contract: {sorted(required - set(frame))}")
     selected = frame[(frame.issue <= origin) & (frame.received <= origin)].copy()
+    if "receipt_completed" not in selected:
+        selected["receipt_completed"] = selected["received"]
+    selected = selected[selected.receipt_completed <= origin]
     selected = selected[(origin - selected.issue) <= pd.Timedelta(hours=max_age_hours)]
+    if selected.empty:
+        return selected
+    # Schema-v2 inputs choose one complete run per declared coherence group.
+    # Legacy frames remain supported as a single implicit run per source/issue.
+    if "product" not in selected:
+        selected["product"] = selected["source"]
+    if "run_id" not in selected:
+        selected["run_id"] = selected["issue"].astype(str)
+    if "coherence_group" not in selected:
+        selected["coherence_group"] = selected["source"].astype(str) + ":" + selected["product"].astype(str)
+    run_identity = ["coherence_group", "source", "product", "run_id", "issue"]
+    runs = (selected.groupby(run_identity, dropna=False, as_index=False)[["received", "receipt_completed"]].max()
+            .sort_values(["issue", "receipt_completed"]).drop_duplicates("coherence_group", keep="last"))
+    selected = selected.merge(runs[run_identity], on=run_identity, how="inner", validate="many_to_one")
     keys = ["source", "region", "variable", "delivery", "member"]
     return selected.sort_values(["issue", "received"]).drop_duplicates(keys, keep="last")
 
@@ -83,7 +119,7 @@ def archive(frame, folder):
     path.parent.mkdir(parents=True, exist_ok=True)
     if not path.exists():
         frame.to_parquet(path, index=False)
-        write_json(path.with_suffix(".json"), {"sha256": digest(path), "rows": len(frame), "schema": 1})
+        write_json(path.with_suffix(".json"), {"sha256": digest(path), "rows": len(frame), "schema": 2})
     return path
 
 

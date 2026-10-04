@@ -1,0 +1,23 @@
+{
+  "campaign": "qni_vni_longrange_v1",
+  "schema_version": 1,
+  "claim": "historical development using original-vintage publication proxies; prospective confirmation required",
+  "connectors": ["VNI", "QNI"],
+  "targets": ["export_tight", "import_tight", "export", "import", "flow"],
+  "leads_half_hours": [1, 3, 6, 12, 24, 48, 96, 144, 240, 336, 480, 672, 960, 1440, 2160, 2880, 3600, 4320],
+  "daily_issue_hour_nem": 8,
+  "source_generation_cutoff": "2026-06-03T00:00:00+10:00",
+  "shadow_max_source_age_hours": 42,
+  "minimum_train_origins": 60,
+  "selection_origins": 28,
+  "calibration_origins": 28,
+  "evaluation_origins": 56,
+  "initial_model_budget_seconds": 172800,
+  "connector_budgets_seconds": {"VNI": 86400, "QNI": 57600},
+  "reserve_seconds": 14400,
+  "point_improvement_threshold": 0.02,
+  "primary_weighting": {"days_1_7": 0.75, "days_8_14": 0.25},
+  "interval_minimum_coverage": {"80": 0.77, "95": 0.92},
+  "storage": {"additional_bytes": 53687091200, "minimum_free_bytes": 21474836480},
+  "runtime": {"workers": 1, "numerical_threads": 2, "minimum_available_memory_bytes": 2147483648}
+}

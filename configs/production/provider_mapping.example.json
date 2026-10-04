@@ -1,5 +1,10 @@
 {
   "source": "your-provider",
+  "product": "your-product",
+  "coherence_group": "regional-run",
+  "run_id_column": "provider_run_id",
+  "receipt_completed_column": "payload_received_at",
+  "availability_evidence": "measured_receipt",
   "columns": {"issue": "forecast_issued", "received": "received_at", "delivery": "interval_end", "region": "region", "variable": "variable", "value": "forecast"},
   "timezone": "Australia/Brisbane",
   "interval_minutes": 30,

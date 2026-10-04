@@ -1,0 +1,11 @@
+connector,target,status,winner,selection_mae,weighted_primary_skill,primary_improvement_ci_positive,weighted_primary_skill_vs_persistence,primary_persistence_improvement_ci_positive,decision
+VNI,export_tight,completed,calendar,"{'calendar': 358.86376149045157, 'ridge': 419.222696397677, 'boosting': 365.43459473824197}",0.0,False,0.25658450546556577,True,retain_baseline
+VNI,import_tight,completed,boosting,"{'calendar': 238.4984719611304, 'ridge': 332.34400447332564, 'boosting': 234.2124075843692}",-0.012871696580767311,False,0.2931664564569525,True,retain_baseline
+VNI,export,completed,boosting,"{'calendar': 389.1073839366685, 'ridge': 412.8912281795332, 'boosting': 376.86843222202936}",-0.041920588133863707,False,0.29263680802983627,True,retain_baseline
+VNI,import,completed,calendar,"{'calendar': 240.0603711668337, 'ridge': 319.46437017668393, 'boosting': 241.83651347577245}",0.0,False,0.22884242158851317,True,retain_baseline
+VNI,flow,completed,boosting,"{'calendar': 363.9685766389784, 'ridge': 399.7482885801677, 'boosting': 363.22846437657427}",0.03009243061158945,False,0.2232469010709966,False,retain_baseline
+QNI,export_tight,completed,boosting,"{'calendar': 285.39418467882695, 'ridge': 261.67030025704094, 'boosting': 233.72807683680549}",0.17845525707954954,True,-0.42712673013110175,False,retain_baseline
+QNI,import_tight,completed,ridge,"{'calendar': 359.5991629425221, 'ridge': 240.26080881852033, 'boosting': 307.6438171666522}",0.36884958577309435,False,0.0958128308533634,False,retain_baseline
+QNI,export,completed,boosting,"{'calendar': 242.07663679193814, 'ridge': 255.53915537478755, 'boosting': 239.57932475962798}",0.07687771509037833,False,-0.501053118185507,False,retain_baseline
+QNI,import,completed,ridge,"{'calendar': 404.39371000092876, 'ridge': 238.79039571984947, 'boosting': 315.77539729730034}",0.3924714717844483,False,0.12190870645181917,False,retain_baseline
+QNI,flow,completed,ridge,"{'calendar': 406.2544833036253, 'ridge': 309.8188913387154, 'boosting': 366.5487813084471}",0.06472634367093646,False,-0.2625947328475084,False,retain_baseline
