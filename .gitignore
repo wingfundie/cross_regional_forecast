@@ -14,6 +14,7 @@ execution/**/methodology/versions/
 execution/qni_vni_fundamentals_v3/longform_assessments/
 execution/**/*.tmp
 reports/qni_vni_fundamentals_v3/
+reports/qni_vni_clustering_v1/
 results/predictions/
 results/validation_predictions/
 *.log
@@ -28,6 +29,8 @@ results/
 !.env.example
 local_exports/
 .codex-remote-attachments/
+.backpassrc.json
+.lavish/
 reports/all_interconnector_regime_research_20260921/finalization_status.json
 reports/all_interconnector_regime_research_20260921/downloads/constraint_duid_regime_matrix.csv
 reports/all_interconnector_regime_research_20260921/downloads/constraint_family_summary.csv
@@ -35,6 +38,14 @@ reports/all_interconnector_regime_research_20260921/downloads/regime_scatter_sam
 
 # Local visual QA for the published interregional valuation report.
 reports/interregional_valuation_research_20260918/qa/
+reports/interregional_valuation_research_v2/qa/
+reports/nempy_forward_forecast_design_20261004/qa/
+reports/nempy_forward_forecast_visual_ste_20261004/qa/
+
+# Local visual QA captures for research campaigns.
+execution/qni_vni_fundamentals_v3/*_desktop.png
+execution/qni_vni_fundamentals_v3/*_narrow.png
+execution/qni_vni_fundamentals_v3/report_visual_qa.json
 
 # Retain only compact, reproducible forecasting research evidence under docs/data.
 !docs/data/

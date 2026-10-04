@@ -1,0 +1,32 @@
+{
+  "sources": [
+    {
+      "path": "docs/VNI_DIURNAL_NOS_RESULTS.md",
+      "sha256": "1c08ae0323dd5722f8edb2a08159ba327818f08253a2703b96773bc9f4c02c6a"
+    },
+    {
+      "path": "docs/QNI_DIURNAL_NOS_RESULTS.md",
+      "sha256": "3eb8fe8b2eba7722cfa5849957233439385b3f2b3e8c5f4256e7910f7dc4dc6e"
+    },
+    {
+      "path": "execution/nos_constraint_binding_v1/RESULTS_SUMMARY.md",
+      "sha256": "5138774b3dbacfb76a2b30208eec8c4db6506ff75fa85a78b325f093853d1528"
+    },
+    {
+      "path": "reports/nempy_forward_forecast_design_20261004/toy_results.csv",
+      "sha256": "11a70144c784f7a68754dffa3856fe9a5414adf8ad2efb5339f0197cfdb5bdd8"
+    },
+    {
+      "path": "reports/nempy_forward_forecast_design_20261004/Forward_Forecast_with_NEMPy.md",
+      "sha256": "06c4cef2d3f79dee3b2555f6ae2cf7cada65050f2b8a2e6c1f27058555cf291e"
+    },
+    {
+      "path": "reports/nempy_forward_forecast_design_20261004/manifest.json",
+      "sha256": "3dd6fa59ca70b8db52e086c17a7d3f8388c3b7ebf4f6356dd692edd6f89a63c0"
+    }
+  ],
+  "presentation_only": true,
+  "new_market_acquisition": false,
+  "new_model_training": false,
+  "all_source_hashes_unchanged": true
+}

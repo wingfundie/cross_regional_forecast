@@ -1,0 +1,117 @@
+{
+  "status": "passed",
+  "errors": [],
+  "charts": 8,
+  "diagrams": 8,
+  "embedded_csv_downloads": [
+    {
+      "file": "skill.csv",
+      "rows": 16
+    },
+    {
+      "file": "mae.csv",
+      "rows": 16
+    },
+    {
+      "file": "coverage.csv",
+      "rows": 4
+    },
+    {
+      "file": "nos_medians.csv",
+      "rows": 6
+    },
+    {
+      "file": "layer_agreement.csv",
+      "rows": 4
+    },
+    {
+      "file": "nos_limits.csv",
+      "rows": 5
+    },
+    {
+      "file": "toy.csv",
+      "rows": 3
+    },
+    {
+      "file": "geometry.csv",
+      "rows": 101
+    }
+  ],
+  "source_values_match_original": true,
+  "source_hashes_checked": 6,
+  "manifest_hashes_checked": 27,
+  "browser_errors": [],
+  "layouts": [
+    {
+      "name": "desktop",
+      "viewport": [
+        1440,
+        1050
+      ],
+      "dimensions": {
+        "width": 1440,
+        "scroll": 1440
+      }
+    },
+    {
+      "name": "mobile",
+      "viewport": [
+        390,
+        844
+      ],
+      "dimensions": {
+        "width": 390,
+        "scroll": 390
+      }
+    }
+  ],
+  "interactive_cases": [
+    {
+      "rhs": 700,
+      "reference": 600,
+      "outputs": [
+        "400.00 MW",
+        "466.67 MW",
+        "400.00 MW"
+      ]
+    },
+    {
+      "rhs": 850,
+      "reference": 600,
+      "outputs": [
+        "550.00 MW",
+        "566.67 MW",
+        "550.00 MW"
+      ]
+    },
+    {
+      "rhs": 850,
+      "reference": 0,
+      "outputs": [
+        "850.00 MW",
+        "566.67 MW",
+        "566.67 MW"
+      ]
+    },
+    {
+      "rhs": 100,
+      "reference": 1400,
+      "outputs": [
+        "Infeasible",
+        "66.67 MW",
+        "Infeasible"
+      ]
+    }
+  ],
+  "language_structure": "passed",
+  "full_ste_conformity": "unverified; see language_review.json",
+  "visual_review": "Passed: representative desktop and mobile hero, chart, data table, methods, workflow, month-ahead, and interactive example views inspected. Charts use internal horizontal scrolling on narrow screens. No page overflow or clipped prose found.",
+  "offline_validator": "Passed: self-contained dependencies, local links, and anchors.",
+  "repository_tests": {
+    "command": "python -m pytest -q",
+    "passed": 193,
+    "warnings": 12,
+    "elapsed_seconds": 168.07,
+    "warning_note": "Valuation evidence tests emitted numerical conditioning and correlation warnings."
+  }
+}

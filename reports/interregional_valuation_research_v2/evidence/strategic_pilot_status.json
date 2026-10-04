@@ -1,0 +1,25 @@
+{
+  "method": "pilot: 10 highest-separation days per importing region (Sep 2023 - Jun 2026), at most 2 archive months each, energy offers only",
+  "regions": {
+    "NSW1|2024-11": {
+      "direction": "VICNSW",
+      "days": [
+        "2024-11-07",
+        "2024-11-27"
+      ],
+      "rows": 66240
+    },
+    "NSW1|2024-05": "BIDPEROFFER_D not found",
+    "SA1|2024-07": "BIDPEROFFER_D not found",
+    "SA1|2026-01": {
+      "direction": "VICSA",
+      "days": [
+        "2026-01-06",
+        "2026-01-26"
+      ],
+      "rows": 62208
+    },
+    "QLD1|2024-01": "BIDPEROFFER_D not found",
+    "QLD1|2023-12": "BIDPEROFFER_D not found"
+  }
+}

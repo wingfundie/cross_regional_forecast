@@ -1,0 +1,10 @@
+{
+  "name": "interregional-valuation-v2-report-tools",
+  "private": true,
+  "description": "Pinned build-time renderers for the offline v2 report (KaTeX server-side math, Marked markdown).",
+  "type": "module",
+  "dependencies": {
+    "katex": "0.16.22",
+    "marked": "15.0.12"
+  }
+}

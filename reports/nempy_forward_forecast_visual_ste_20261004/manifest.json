@@ -1,0 +1,152 @@
+{
+  "report": "nempy_forward_forecast_visual_ste_20261004",
+  "report_date": "2026-10-04",
+  "built_at": "2026-10-04T04:11:48.600704+00:00",
+  "rebuild": "python scripts/build_nempy_visual_ste_report.py",
+  "charts": 8,
+  "design_diagrams": 8,
+  "interactive_examples": 1,
+  "source_cutoff": "Primarily August 2026; no market-data refresh",
+  "language_status": "Controlled-English draft; full dictionary conformity unverified",
+  "dependencies": {
+    "Markdown": "3.10.3",
+    "matplotlib": "3.10.1",
+    "numpy": "2.2.6",
+    "beautifulsoup4": "4.13.4"
+  },
+  "inputs": [
+    {
+      "path": "scripts/build_nempy_visual_ste_report.py",
+      "sha256": "e69205bbd7e2feade4b8afb95341e1449ed51ecd7fbc551db63ea36492563553"
+    },
+    {
+      "path": "scripts/verify_nempy_visual_ste_report.py",
+      "sha256": "1748925e8181699a09d59486f8ee88682dd59265658b6246e38f9ff2c461ebb9"
+    },
+    {
+      "path": "scripts/report_theme/report_theme.py",
+      "sha256": "31e202b2d6a82f776adff8f485cc93d77b86233f64958bfe5b351cb24b37cc99"
+    },
+    {
+      "path": "scripts/report_theme/report.css",
+      "sha256": "0b8cb66a46d2492315caa18f77f044bc8e0430cb5d13a1dcef1afe9f103c8a06"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "reports/nempy_forward_forecast_visual_ste_20261004/NEMPy_Visual_Report_STE.md",
+      "sha256": "670b1208643bd0b5c47ff62bdbfa5ca06122603dcc15fd803c98c9afa978e6c4",
+      "bytes": 38512
+    },
+    {
+      "path": "reports/nempy_forward_forecast_visual_ste_20261004/index.html",
+      "sha256": "837aabfaef37dac80d66da8adaa73ea13979e27529991521d37ea589f47286d1",
+      "bytes": 721713
+    },
+    {
+      "path": "reports/nempy_forward_forecast_visual_ste_20261004/language_review.json",
+      "sha256": "2ca1ee37a562c8afb023d53201b92dc1a4cf5900f29186e09e9cfdfafce53f3e",
+      "bytes": 1051
+    },
+    {
+      "path": "reports/nempy_forward_forecast_visual_ste_20261004/content_map.json",
+      "sha256": "8784ef08ad1d1579c888590680ecd4a382099a56841f5873c4b92a28c7ddbcfd",
+      "bytes": 945
+    },
+    {
+      "path": "reports/nempy_forward_forecast_visual_ste_20261004/source_audit.json",
+      "sha256": "b041f2ffc06c08ef45de948c7550eeaf59ef415c4177c2167393e4a2d2641601",
+      "bytes": 1187
+    },
+    {
+      "path": "reports/nempy_forward_forecast_visual_ste_20261004/data/coverage.csv",
+      "sha256": "90eb0c987a63cac1c9696c41c5d278cbd9c19002ca8f15e4e739fedc7d9c2a65",
+      "bytes": 347
+    },
+    {
+      "path": "reports/nempy_forward_forecast_visual_ste_20261004/data/geometry.csv",
+      "sha256": "268e78ac35404999282fd8e18842da2ef9622ec1e81af9b487949ff0d2518ea5",
+      "bytes": 3552
+    },
+    {
+      "path": "reports/nempy_forward_forecast_visual_ste_20261004/data/layer_agreement.csv",
+      "sha256": "c2bf107a69019255fefa1c18faacedbb28c2d7181af46fbe54ce9e3fa02539a6",
+      "bytes": 332
+    },
+    {
+      "path": "reports/nempy_forward_forecast_visual_ste_20261004/data/mae.csv",
+      "sha256": "b5f558095ab6afdb54deb301d1a939e2f1d87e187707bf2842d3ef430ef3c27e",
+      "bytes": 1442
+    },
+    {
+      "path": "reports/nempy_forward_forecast_visual_ste_20261004/data/nos_limits.csv",
+      "sha256": "d1b564a44cd645c28070b78a623335b34f061fd9d25114b7de994af38d308d3c",
+      "bytes": 570
+    },
+    {
+      "path": "reports/nempy_forward_forecast_visual_ste_20261004/data/nos_medians.csv",
+      "sha256": "badad4f2f5fb1c0c104154cc038f1ca85e1479b067a313339399ba24da483b9a",
+      "bytes": 535
+    },
+    {
+      "path": "reports/nempy_forward_forecast_visual_ste_20261004/data/research_evidence.json",
+      "sha256": "327761310ef1b87f16cc167cded1510f9f45fc3bd9e827480698d7ab5f8cc405",
+      "bytes": 38923
+    },
+    {
+      "path": "reports/nempy_forward_forecast_visual_ste_20261004/data/skill.csv",
+      "sha256": "b5f558095ab6afdb54deb301d1a939e2f1d87e187707bf2842d3ef430ef3c27e",
+      "bytes": 1442
+    },
+    {
+      "path": "reports/nempy_forward_forecast_visual_ste_20261004/data/technical_terms.csv",
+      "sha256": "66329fd4a093c2a3e6912f6648006a9947eb997fc054c65ca9a97777f593b228",
+      "bytes": 2367
+    },
+    {
+      "path": "reports/nempy_forward_forecast_visual_ste_20261004/data/toy.csv",
+      "sha256": "11a70144c784f7a68754dffa3856fe9a5414adf8ad2efb5339f0197cfdb5bdd8",
+      "bytes": 331
+    },
+    {
+      "path": "reports/nempy_forward_forecast_visual_ste_20261004/figures/coverage.svg",
+      "sha256": "caac0d85c483ddf727ced6081347dc551cb3f3d9869a24df639df7030f1ad15f",
+      "bytes": 44257
+    },
+    {
+      "path": "reports/nempy_forward_forecast_visual_ste_20261004/figures/geometry.svg",
+      "sha256": "8c5d92a42346dfdba13689b3d7c753ff0c0ae5bb8448551ad156d68549ec6c41",
+      "bytes": 62749
+    },
+    {
+      "path": "reports/nempy_forward_forecast_visual_ste_20261004/figures/layer_agreement.svg",
+      "sha256": "ad311ed1dc4926eb47fec359cca9792bc97c5690044c4813a259678db3feee84",
+      "bytes": 38228
+    },
+    {
+      "path": "reports/nempy_forward_forecast_visual_ste_20261004/figures/mae.svg",
+      "sha256": "fb302806635e4f941c72e680cc11280a89220098ce179c8489e07bad8e36f3c7",
+      "bytes": 47560
+    },
+    {
+      "path": "reports/nempy_forward_forecast_visual_ste_20261004/figures/nos_limits.svg",
+      "sha256": "339104492648a8161484c86c388ed9723e1e21e56f049c3d363d1a9714a086f1",
+      "bytes": 55090
+    },
+    {
+      "path": "reports/nempy_forward_forecast_visual_ste_20261004/figures/nos_medians.svg",
+      "sha256": "eff000dd71501cfcdbb6969e0eff015252c392ac899825ef2092a0e095a06f17",
+      "bytes": 50006
+    },
+    {
+      "path": "reports/nempy_forward_forecast_visual_ste_20261004/figures/skill.svg",
+      "sha256": "67d3406bc293f8b729d4bac05c752703e081b59e1ae5aa309c307e72ebf9c71c",
+      "bytes": 56363
+    },
+    {
+      "path": "reports/nempy_forward_forecast_visual_ste_20261004/figures/toy.svg",
+      "sha256": "014c3b14953f7d047ea36c7b147ddb1a60bbfbfb730a3f0d874a720930b0b627",
+      "bytes": 33294
+    }
+  ]
+}

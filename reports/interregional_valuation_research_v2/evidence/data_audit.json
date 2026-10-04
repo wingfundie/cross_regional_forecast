@@ -1,0 +1,123 @@
+{
+  "intervals": 517248,
+  "complete_quarters": 19,
+  "first": "2021-10-01 00:05:00",
+  "last": "2026-09-01 00:00:00",
+  "not_firm_rows": 305,
+  "not_firm_in_complete_quarters": 0,
+  "apcflag_bits": {
+    "apc_binding": 1883,
+    "voll_override": 10,
+    "mpc_binding": 1589,
+    "manual_override": 87,
+    "irlf_scaling": 5201
+  },
+  "suspension_rows": 13524,
+  "suspension_dates": [
+    "2022-02-18",
+    "2022-03-01",
+    "2022-06-15",
+    "2022-06-16",
+    "2022-06-17",
+    "2022-06-18",
+    "2022-06-19",
+    "2022-06-20",
+    "2022-06-21",
+    "2022-06-22",
+    "2022-06-23",
+    "2022-06-24",
+    "2023-03-17",
+    "2023-04-22",
+    "2023-04-23",
+    "2024-09-05",
+    "2026-03-23"
+  ],
+  "suspension_sensitivity": [
+    {
+      "pair": "NSW \u2212 VIC",
+      "max_abs_change": 1.9435907976577482
+    },
+    {
+      "pair": "QLD \u2212 NSW",
+      "max_abs_change": 5.58718053148748
+    },
+    {
+      "pair": "SA \u2212 VIC",
+      "max_abs_change": 3.61179041120743
+    },
+    {
+      "pair": "VIC \u2212 TAS",
+      "max_abs_change": 0.8128457340389481
+    }
+  ],
+  "input_hashes": {
+    "DISPATCHPRICE": {
+      "files": 90,
+      "sha256_of_hashes": "bfc5359973103635e8f3b90f19c75aefef11720c3927d9f3d3526fbf7266ba65"
+    },
+    "DISPATCHINTERCONNECTORRES": {
+      "files": 90,
+      "sha256_of_hashes": "dc5050f6cb1ac840a93c5dc4f0da22b56e702fad955561706da3efe96e4f6802"
+    },
+    "AUCTION": {
+      "files": 42,
+      "sha256_of_hashes": "2ff7486e738b5d8343e0b2ff02bdbdfe45e497b431cced4aafa0436d3bcb4ebf"
+    },
+    "AUCTION_CALENDAR": {
+      "files": 29,
+      "sha256_of_hashes": "de7794d7c93c733341fac9901880539ccf104920cfdd3a9154a65e3e8e99ae7e"
+    },
+    "AUCTION_IC_ALLOCATIONS": {
+      "files": 40,
+      "sha256_of_hashes": "a0f665d1f81d5f761ff42cad1591c699b4f19a4d2ade0c12cc261b518c2c97e8"
+    },
+    "AUCTION_TRANCHE": {
+      "files": 23,
+      "sha256_of_hashes": "f8b1b5591e317919e64fb3a13d659113d327f915767c47b31b7050df8ae7d96b"
+    },
+    "INTERCONNECTORCONSTRAINT": {
+      "files": 59,
+      "sha256_of_hashes": "32155790b24e8debcf3ad3bb83f344938367694c2f6ac2e1b4f3d31f76517a54"
+    },
+    "LOSSFACTORMODEL": {
+      "files": 59,
+      "sha256_of_hashes": "a6a20df808243c915c45ef1c63cab5ffc5e6a170fe8828bfe9f9fdb85c680f36"
+    },
+    "LOSSMODEL": {
+      "files": 59,
+      "sha256_of_hashes": "b2643d0a9615896f89d23ff716731db9c47e43ef26e5f167a1891d4d9a0126f3"
+    },
+    "MARKET_PRICE_THRESHOLDS": {
+      "files": 59,
+      "sha256_of_hashes": "dc357a136f9d1c35fea091822197dfb71010e58b217817e44e753ae8ffbccc99"
+    },
+    "NEGATIVE_RESIDUE": {
+      "files": 25,
+      "sha256_of_hashes": "b2f76f63f652ad4b6eb31cafe0e6a3d72da7f2ef0605d74a7d1c4fab870501e9"
+    },
+    "RESIDUE_CON_FUNDS": {
+      "files": 23,
+      "sha256_of_hashes": "9d86b01fcc7c3fbf897f1337a221adc22b4a1c77b756480aec8d9342ec251023"
+    },
+    "RESIDUE_CONTRACTS": {
+      "files": 42,
+      "sha256_of_hashes": "5b71da2d304b496b81177893fa387c162c10592a14d283978dfce2416c6ac5f2"
+    },
+    "RESIDUE_PRICE_FUNDS_BID": {
+      "files": 21,
+      "sha256_of_hashes": "cc8d9a726467f43f7a8b572b449c9ff2b7c31fc0f4b5f5ce8de6111322e8a6ff"
+    },
+    "RESIDUE_PUBLIC_DATA": {
+      "files": 27,
+      "sha256_of_hashes": "a92bc75c35900f9f4be25cb21bd2f51504c78b539852d4fcd3acadc9a7f26887"
+    },
+    "RESIDUE_TRK": {
+      "files": 27,
+      "sha256_of_hashes": "9d2e72e473c0624ec04024caf8c5ea15c0881972cf7bc4cefe467a89b5bbac8e"
+    },
+    "SETIRSURPLUS": {
+      "files": 59,
+      "sha256_of_hashes": "adc200447eddadb11e56b07c93001653ce90fb8dbf80af071faf60b2202c9229"
+    }
+  }
+}

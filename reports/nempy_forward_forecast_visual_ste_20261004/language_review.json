@@ -1,0 +1,23 @@
+{
+  "target": "ASD-STE100 Issue 9",
+  "status": "Controlled-English draft; full dictionary conformity unverified",
+  "scope": "Visible prose, table cells, labels, and diagram text. Excludes code, equations, source titles, and chart image labels.",
+  "method": "Conservative ordinary-token count; not a full STE grammar or dictionary validator.",
+  "prose_sentence_limit": 20,
+  "sentences_checked": 1830,
+  "max_words": 19,
+  "over_limit": [],
+  "paragraphs_over_six_sentences": [],
+  "contractions": [],
+  "selected_complex_words": [],
+  "technical_terms": 39,
+  "open_checks": [
+    "Complete approved-word, part-of-speech, and approved-meaning review against the full Issue 9 dictionary.",
+    "Independent conformity review; no conformity claim is made."
+  ],
+  "standard_access": "Official public guidance and indexed rule extracts available; direct full PDF access returned HTTP 403.",
+  "sources": [
+    "https://www.asd-ste100.org/STE_faq.html",
+    "https://www.asd-ste100.org/assets/files/ASD-STE100_ISSUE9.pdf"
+  ]
+}

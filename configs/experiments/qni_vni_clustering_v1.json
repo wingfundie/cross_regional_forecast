@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "campaign": "qni_vni_clustering_v1",
+  "root": "data/forecast_experiments",
+  "tracking_root": "execution/qni_vni_clustering_v1",
+  "source_campaign": "data/forecast_experiments/qni_vni_fundamentals_v3",
+  "start": "2025-08-01",
+  "end": "2026-09-01",
+  "seed": 741,
+  "seeds": [741, 1741, 2741],
+  "connectors": [
+    {"id": "VIC1-NSW1", "name": "VNI", "regions": ["VIC1", "NSW1"], "study": "constraint_vni_2y"},
+    {"id": "NSW1-QLD1", "name": "QNI", "regions": ["NSW1", "QLD1"], "study": "constraint_qni_2y"}
+  ],
+  "targets": ["flow", "export_tight", "import_tight"],
+  "leads": [1, 2, 4, 8, 12, 24, 48, 72, 96, 144, 192, 240, 288, 336],
+  "bands": [[1, 12], [13, 48], [49, 144], [145, 336]],
+  "checkpoints": [48, 96, 336],
+  "protocols": ["expanding"],
+  "folds": {"minimum_train_days": 60, "select_days": 14, "calibrate_days": 14, "alert_days": 14, "evaluate_days": 28, "step_days": 28, "maturity_minutes": 30},
+  "clustering": {
+    "methods": ["k1", "kmeans", "gmm_diag"],
+    "k": [1, 2, 3, 4, 6, 8],
+    "maximum_missing_fraction": 0.8,
+    "near_duplicate_correlation": 0.98,
+    "ood_quantile": 0.99,
+    "local_expert_weights": [0.25, 0.5, 0.75, 1.0],
+    "recurring_ari": 0.7,
+    "minimum_train_days_per_regime": 30,
+    "minimum_evaluate_days_per_regime": 14
+  },
+  "generator": {
+    "learned_k": [4, 8],
+    "svd_components": [4, 8],
+    "weak_ic_factor": 0.000001,
+    "extreme_sensitivity": 100.0,
+    "lookback_minutes": 30,
+    "manual_groups": {
+      "VNI": {
+        "snowy_hydro": ["TUMUT3", "UPPTUMUT", "MURRAY"],
+        "solar": ["LIMOSF11", "SUNRSF1", "DARLSF1", "AVLSF1"],
+        "wind": ["MUWAWF1", "KIAMSF1", "STWF1"],
+        "storage_remaining": ["VBB1"]
+      },
+      "QNI": {
+        "snowy_hydro": ["TUMUT3", "UPPTUMUT", "MURRAY"],
+        "new_england_vre": ["NEWENSF1", "NEWENSF2", "METZSF1", "SAPHWF1", "WRWF1"],
+        "queensland_thermal": ["STAN-1", "STAN-2", "STAN1", "STAN2"],
+        "storage_remaining": ["LDBESS1"]
+      }
+    }
+  },
+  "events": {"minimum_lead_minutes": 30, "maximum_lead_minutes": 120, "false_alarms_per_day": 3, "minimum_incidents": 30},
+  "models": {"ridge_alpha": [10.0, 100.0, 1000.0], "boost_leaves": [7, 15], "boost_trees": 150, "logistic_c": [0.01, 0.1, 1.0], "quantiles": [0.025, 0.1, 0.25, 0.5, 0.75, 0.9, 0.975]},
+  "sensitivity": {"publication_delays_minutes": [0, 30, 60], "coal_day_boundaries": ["04:00", "00:00"]},
+  "limits": {"additional_bytes": 50000000000, "min_free_bytes": 20000000000, "workers": 2, "threads": 2, "memory_bytes": 8000000000, "modelling_hours": 48, "batch_hours": 12},
+  "claims": {"primary": "retrospective development using publication proxies", "conditional": "realised-future diagnostic only", "operationally_eligible": false}
+}

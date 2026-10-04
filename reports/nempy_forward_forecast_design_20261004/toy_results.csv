@@ -1,0 +1,4 @@
+case,flow_mw,southern_generation_mw,northern_generation_mw,offer_cost_per_hour,synthetic,nempy_version
+fixed_reference_cap,400.0,400.0,600.0,68000.0,True,3.0.3
+explicit_equation,466.6666666666667,466.6666666666667,533.3333333333333,62666.666666666664,True,3.0.3
+equation_plus_duplicate_cap,400.0,400.0,600.0,68000.0,True,3.0.3

@@ -1,0 +1,67 @@
+{
+  "status": "Dated registry of structural changes that affect SRA and spread valuation. Dates marked \"rule\" or \"data\" are verified from primary text or AEMO tables; items marked \"announced\" are unverified project timelines and must be checked before use.",
+  "items": [
+    {
+      "item": "Loop dispatch representation (EnergyConnect)",
+      "date": "2026-10-01",
+      "basis": "report S07 (AEMO May 2026 reference paper)",
+      "kind": "announced"
+    },
+    {
+      "item": "Loop settlement: AEMC net trade approach",
+      "date": "2026-11-01",
+      "basis": "AEMC ERC0386 final rule 25 Sep 2025; start date per report S07",
+      "kind": "rule"
+    },
+    {
+      "item": "Basslink regulated; VICTAS/TASVIC SRA units",
+      "date": "2026-07-01",
+      "basis": "report S10 (AEMO April 2026 final report)",
+      "kind": "rule"
+    },
+    {
+      "item": "Unit-count changes (all directions)",
+      "date": "see unit_changes",
+      "basis": "AUCTION_IC_ALLOCATIONS (MMSDM)",
+      "kind": "data"
+    },
+    {
+      "item": "Project EnergyConnect stage 2 full transfer capability",
+      "date": "2027 (approx.)",
+      "basis": "public project statements; not verified in this campaign",
+      "kind": "announced"
+    },
+    {
+      "item": "HumeLink",
+      "date": "2026-2027 (approx.)",
+      "basis": "public project statements; not verified",
+      "kind": "announced"
+    },
+    {
+      "item": "VNI West",
+      "date": "after 2029 (approx.)",
+      "basis": "ISP; not verified",
+      "kind": "announced"
+    },
+    {
+      "item": "Marinus Link stage 1",
+      "date": "about 2030 (approx.)",
+      "basis": "public project statements; not verified",
+      "kind": "announced"
+    }
+  ],
+  "unit_changes": [
+    {
+      "direction": "NSWQLD",
+      "effective_quarter": "2027Q2",
+      "max_units": 750,
+      "previous": 550
+    },
+    {
+      "direction": "QLDNSW",
+      "effective_quarter": "2027Q2",
+      "max_units": 1300,
+      "previous": 1200
+    }
+  ]
+}

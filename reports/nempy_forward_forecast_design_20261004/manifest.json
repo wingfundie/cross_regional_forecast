@@ -1,0 +1,76 @@
+{
+  "report": "nempy_forward_forecast_design_20261004",
+  "built_at": "2026-10-04T03:56:28.075203+00:00",
+  "report_date": "2026-10-04",
+  "horizon": "30 minutes through 7 days, separate days 8–30 scenarios",
+  "rebuild": "python scripts/build_nempy_forward_report.py",
+  "status": "research design, not a forecast service",
+  "dependencies": {
+    "nempy": "3.0.3",
+    "mip": "1.16rc0",
+    "pandas": "2.2.3",
+    "Markdown": "3.10.3",
+    "matplotlib": "3.10.1",
+    "beautifulsoup4": "4.13.4"
+  },
+  "inputs": [
+    {
+      "path": "scripts/build_nempy_forward_report.py",
+      "sha256": "78e540ed99b40f9605d1b74d35a8f9369856784c622eab4548cb0490c4c26678"
+    },
+    {
+      "path": "scripts/verify_nempy_forward_report.py",
+      "sha256": "15b7b8291449c602772764f5870daada0f888987139e2e285b6cdca73f3c19b2"
+    },
+    {
+      "path": "scripts/report_theme/report_theme.py",
+      "sha256": "31e202b2d6a82f776adff8f485cc93d77b86233f64958bfe5b351cb24b37cc99"
+    },
+    {
+      "path": "scripts/report_theme/report.css",
+      "sha256": "0b8cb66a46d2492315caa18f77f044bc8e0430cb5d13a1dcef1afe9f103c8a06"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "reports/nempy_forward_forecast_design_20261004/Forward_Forecast_with_NEMPy.md",
+      "sha256": "06c4cef2d3f79dee3b2555f6ae2cf7cada65050f2b8a2e6c1f27058555cf291e",
+      "bytes": 59653
+    },
+    {
+      "path": "reports/nempy_forward_forecast_design_20261004/index.html",
+      "sha256": "b080610b9ce5297c402e75f06311eb3b80a9eb1d316013b9dfedacdad59dfe8c",
+      "bytes": 286063
+    },
+    {
+      "path": "reports/nempy_forward_forecast_design_20261004/evidence.csv",
+      "sha256": "6650ec812ecb6880a560c08c47129679e3a49933602f2de53c32010fef35421d",
+      "bytes": 1880
+    },
+    {
+      "path": "reports/nempy_forward_forecast_design_20261004/toy_results.csv",
+      "sha256": "11a70144c784f7a68754dffa3856fe9a5414adf8ad2efb5339f0197cfdb5bdd8",
+      "bytes": 331
+    },
+    {
+      "path": "reports/nempy_forward_forecast_design_20261004/source_audit.json",
+      "sha256": "cbe3c1d843bdc283189d5ccbef87508ec865bd36b5f25401478b184ad5d384fd",
+      "bytes": 5949
+    },
+    {
+      "path": "reports/nempy_forward_forecast_design_20261004/figures/interval_coverage.png",
+      "sha256": "5e7c12cde90334024afa1826cd4ff6eb9a17f3e47e920804bfc32490da06c898",
+      "bytes": 36738
+    },
+    {
+      "path": "reports/nempy_forward_forecast_design_20261004/figures/limit_skill.png",
+      "sha256": "960b4e00c417b5eceedaf50f35280094ff74d87b8533c21317504648e56f87a5",
+      "bytes": 77332
+    },
+    {
+      "path": "reports/nempy_forward_forecast_design_20261004/figures/toy_comparison.png",
+      "sha256": "2ed5e09f633ae99013de855bb63d5753300e3eba8f1e69d72dbcc17dd6a2502a",
+      "bytes": 40562
+    }
+  ]
+}

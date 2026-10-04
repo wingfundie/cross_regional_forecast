@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "campaign": "interregional_valuation_v2",
+  "data_root": "data/valuation_v2",
+  "tracking_root": "execution/interregional_valuation_v2",
+  "report_root": "reports/interregional_valuation_research_v2",
+  "baseline_report": "reports/interregional_valuation_research_20260918",
+  "time_convention": "fixed NEM time UTC+10, interval-ending five-minute timestamps",
+  "start_exclusive": "2021-10-01 00:00:00",
+  "end_inclusive": "2026-09-01 00:00:00",
+  "v1_window": {"start_exclusive": "2024-09-01 00:00:00", "end_inclusive": "2026-09-01 00:00:00"},
+  "regions": ["NSW1", "QLD1", "SA1", "TAS1", "VIC1"],
+  "cap_strike": 300.0,
+  "pairs": [
+    {"pair": "VIC-NSW", "a": "VIC1", "b": "NSW1", "assets": ["VIC1-NSW1"], "sra_ab": "VICNSW", "sra_ba": "NSWVIC", "loop": true},
+    {"pair": "NSW-QLD", "a": "NSW1", "b": "QLD1", "assets": ["NSW1-QLD1", "N-Q-MNSP1"], "sra_ab": "NSWQLD", "sra_ba": "QLDNSW", "loop": false},
+    {"pair": "VIC-SA", "a": "VIC1", "b": "SA1", "assets": ["V-SA", "V-S-MNSP1"], "sra_ab": "VICSA", "sra_ba": "SAVIC", "loop": true},
+    {"pair": "TAS-VIC", "a": "TAS1", "b": "VIC1", "assets": ["T-V-MNSP1"], "sra_ab": "TASVIC", "sra_ba": "VICTAS", "loop": false, "sra_from": "2026-07-01"}
+  ],
+  "asset_direction": {
+    "VIC1-NSW1": ["VIC1", "NSW1"], "NSW1-QLD1": ["NSW1", "QLD1"], "N-Q-MNSP1": ["NSW1", "QLD1"],
+    "V-SA": ["VIC1", "SA1"], "V-S-MNSP1": ["VIC1", "SA1"], "T-V-MNSP1": ["TAS1", "VIC1"]
+  },
+  "fallback_max_units": {"VICNSW": 1500, "NSWVIC": 1300, "NSWQLD": 550, "QLDNSW": 1200, "VICSA": 880, "SAVIC": 770, "VICTAS": 500, "TASVIC": 500},
+  "loop_settlement_from": "2026-11-01",
+  "loss_share_default": 0.5,
+  "mmsdm_tables": {
+    "backfill": ["DISPATCHPRICE", "DISPATCHINTERCONNECTORRES"],
+    "settlement_and_auction": ["SETIRSURPLUS", "RESIDUE_PUBLIC_DATA", "AUCTION_IC_ALLOCATIONS", "AUCTION_CALENDAR", "AUCTION_TRANCHE", "RESIDUE_CONTRACTS", "RESIDUE_CON_FUNDS", "RESIDUE_PRICE_FUNDS_BID", "RESIDUE_TRK", "AUCTION"],
+    "network_and_settings": ["INTERCONNECTORCONSTRAINT", "LOSSMODEL", "LOSSFACTORMODEL", "MARKET_PRICE_THRESHOLDS"]
+  },
+  "bootstrap": {"replicates": 2000, "block_days": [7, 14], "seed": 20260926},
+  "stress": {"top_weeks": 10, "cvar_alpha": 0.95},
+  "claims": "Research-only valuation evidence. Not a deployed forecast or trading signal."
+}

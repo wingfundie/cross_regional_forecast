@@ -1,0 +1,55 @@
+{
+  "static_checks": "passed",
+  "errors": [],
+  "anchor_count": 32,
+  "table_count": 13,
+  "embedded_chart_count": 3,
+  "verified_manifest_entries": 12,
+  "source_hashes_verified": 24,
+  "browser_layouts": [
+    {
+      "name": "desktop",
+      "viewport": [
+        1440,
+        1000
+      ],
+      "dimensions": {
+        "width": 1440,
+        "scroll": 1440
+      },
+      "screenshots": [
+        "qa/desktop_hero.png",
+        "qa/desktop_chart.png",
+        "qa/desktop_table.png",
+        "qa/desktop_methods.png"
+      ]
+    },
+    {
+      "name": "mobile",
+      "viewport": [
+        390,
+        844
+      ],
+      "dimensions": {
+        "width": 390,
+        "scroll": 390
+      },
+      "screenshots": [
+        "qa/mobile_hero.png",
+        "qa/mobile_chart.png",
+        "qa/mobile_table.png",
+        "qa/mobile_methods.png"
+      ]
+    }
+  ],
+  "browser_errors": [],
+  "visual_review": "Passed: inspected desktop and mobile hero, chart, dense table and methods. Rechecked final chart label. Wide figures and tables scroll locally; no document-wide overflow.",
+  "repository_tests": {
+    "command": "python -m pytest -q",
+    "passed": 193,
+    "warnings": 12,
+    "elapsed_seconds": 168.07,
+    "warning_scope": "Valuation evidence tests: polynomial conditioning and correlation divide warnings."
+  },
+  "offline_validator": "Passed: no external rendering dependencies, missing local links or missing anchors."
+}
