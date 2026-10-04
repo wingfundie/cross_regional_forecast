@@ -1,6 +1,6 @@
 # Portable interconnector forecasting scaffold
 
-This is an **offline-first scaffold**, not a deployed forecasting service. It supports VNI, QNI, Directlink, Heywood, Murraylink and Basslink through explicit connector identities. VNI's existing research bundles can be imported without retraining. Other connectors and horizons require their own compatible fitted packages; registering a connector does not manufacture a model.
+This is an **offline-first scaffold**, not a deployed forecasting service. It supports VNI, QNI, Directlink, Heywood, Murraylink and Basslink through explicit connector identities. VNI's existing research bundles can be imported without retraining. Other connectors and horizons require their own compatible fitted packages; registering a connector does not manufacture a model. Version-two normalized inputs carry product, coherent-run, completed-receipt and availability-evidence fields, and routing supports explicitly trained packages through 90 days.
 
 No commands run automatically. The implementation lives in `nemic/production/`; configuration examples are in `configs/production/`.
 
@@ -56,6 +56,10 @@ Copy `configs/production/provider_mapping.example.json` and replace source colum
 | value | Value converted into the declared canonical units |
 | source/member | Provider identity and ensemble member |
 | interval_minutes | Original source resolution |
+| product/run_id | Product and coherent source-run identity |
+| coherence_group | Records that must be selected from one atomic run |
+| receipt_completed | Time the complete source payload arrived |
+| availability_evidence | Measured receipt or an explicitly named historical proxy |
 
 Mappings define source columns, region/variable aliases, timezone, interval start/end and units. Power accepts MW/GW. Naive timestamps require an explicit timezone. Internally delivery is fixed NEM UTC+10. Receipt-before-issue records, duplicates and non-finite data are rejected.
 
@@ -94,6 +98,14 @@ Training produces fitted weights, parameters, dependencies, hashes, rolling pred
 
 After outcomes arrive, use `evaluate --input forecasts.parquet --actuals actuals.parquet --output new_score_folder`. Actuals must be unique on connector, target and delivery, with an `actual` column. Outputs include scorecards by model, connector, target, horizon and NEM delivery period, interval coverage, and actual-versus-forecast reports. Missing predictions remain in the coverage counts. Feature importance and SHAP are generated for every candidate family, not just the selected estimator.
 
+Revision-aware target snapshots can be normalized with `outcomes --input ... --received ... --revision ... --output ...`. Evaluation selects the latest received revision by default; pass `evaluate --as-of <timestamp>` to reproduce an earlier score vintage. Once-daily next-day low-limit and contraction bulletins use a separate episode contract:
+
+```powershell
+python -m nemic.production risk-score --windows bulletin_windows.parquet --events observed_events.parquet --candidate-thresholds .2 .3 .4 .5 .6 .7 .8 --budget 3 --output local_exports/risk_score
+```
+
+Overlapping low-limit and contraction warnings in the same connector direction share one alert episode. Exposure is counted by fully observable issued bulletin, and false-alert duration includes only unmatched alert episodes.
+
 ## NOS, constraints and AEMO challengers
 
 `constraints.candidates` replays outage revisions/cancellations as of issue time, intersects schedule windows and effective equipment-to-constraint links, and returns scheduled candidate exposure. A candidate is not an invoked or binding constraint.
@@ -120,6 +132,14 @@ python -m nemic.production forecast --registry local_exports/registry --routes m
 The default mode is production and accepts only approved models. Research use requires explicit research mode. Preview validates routing/features without deserializing estimators. Every requested interval has a complete/unavailable status and reason. Half-hour mean and minimum import/export targets are separate. Valid negative limits are preserved. Unsupported models/horizons are never substituted or extrapolated.
 
 `inputs.scenario` applies explicit regional-variable-delivery overrides to a copied input table. Use a non-baseline scenario name; retain the override file and original snapshot. To supply assumptions beyond original coverage, provide a complete scenario input table with explicit provenance. Forecast uncertainty is conditional on those assumptions, not a probability distribution over analyst scenarios.
+
+For NOS inputs, generate immutable standard cases plus an optional locally edited case:
+
+```powershell
+python -m nemic.production outage-scenarios --outages outage_revisions.parquet --origin 2026-09-16T08:00:00+10:00 --edits local_outage_edits.csv --local-name desk_case --output local_exports/outage_cases_20260916
+```
+
+The standard set contains the as-of baseline, a case without planned outages and a case extending planned outages by 24 hours. Local edits require explicit add, update or cancel actions and never alter the source snapshot.
 
 ```python
 from nemic.production import Registry, forecast

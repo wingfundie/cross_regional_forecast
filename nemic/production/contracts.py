@@ -14,6 +14,8 @@ CONNECTORS = {
 TARGETS = ("export", "import", "export_tight", "import_tight", "flow")
 QUANTILES = (.025, .1, .5, .9, .975)
 QCOLS = ("p02_5_mw", "p10_mw", "p50_mw", "p90_mw", "p97_5_mw")
+MAX_FORECAST_DAYS = 90
+MAX_FORECAST_LEAD = MAX_FORECAST_DAYS * 48
 
 
 def connector(value):

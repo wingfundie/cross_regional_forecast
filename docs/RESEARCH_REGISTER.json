@@ -1,0 +1,149 @@
+{
+  "schema": 1,
+  "entries": [
+    {
+      "name": "Six-link conditional backtest",
+      "stack": "original",
+      "evidence": "BACKTEST_REPORT.md",
+      "evidence_exists": true,
+      "evidence_sha256": "9bc46e93214b75bbe40efd51df91528b21ebdca4a1eabe1651dbd248b56b67c8",
+      "claim": "Conditional performance using realised future fundamentals",
+      "status": "completed",
+      "unresolved": [
+        "Live issue-time evaluation",
+        "Interval calibration"
+      ],
+      "reproduce": "python run_pipeline.py"
+    },
+    {
+      "name": "VNI diurnal/NOS v2",
+      "stack": "experiments",
+      "evidence": "docs/VNI_DIURNAL_NOS_RESULTS.md",
+      "evidence_exists": true,
+      "evidence_sha256": "1c08ae0323dd5722f8edb2a08159ba327818f08253a2703b96773bc9f4c02c6a",
+      "claim": "Retrospective rolling development evidence",
+      "status": "completed_research",
+      "unresolved": [
+        "Receipt-time feed",
+        "Prospective confirmation",
+        "Interval calibration"
+      ],
+      "reproduce": "python scripts/run_vni_diurnal_nos_campaign.py"
+    },
+    {
+      "name": "QNI diurnal/NOS v2",
+      "stack": "experiments",
+      "evidence": "docs/QNI_DIURNAL_NOS_RESULTS.md",
+      "evidence_exists": true,
+      "evidence_sha256": "3eb8fe8b2eba7722cfa5849957233439385b3f2b3e8c5f4256e7910f7dc4dc6e",
+      "claim": "Retrospective rolling development evidence",
+      "status": "completed_research",
+      "unresolved": [
+        "Mixed cell skill",
+        "Prospective confirmation",
+        "Interval calibration"
+      ],
+      "reproduce": "python scripts/run_qni_diurnal_nos_campaign.py"
+    },
+    {
+      "name": "QNI/VNI fundamentals v3",
+      "stack": "experiments",
+      "evidence": "reports/qni_vni_fundamentals_v3/index.html",
+      "evidence_exists": true,
+      "evidence_sha256": "78f6edb888fd17993ad89b2d7b8351152aaab49e17677b30c44457c5a6661670",
+      "claim": "Preserved historical report using publication proxies",
+      "status": "report_preserved_ledger_revalidation_required",
+      "unresolved": [
+        "Ledger stage revalidation",
+        "Measured receipt",
+        "Risk gates",
+        "Full lead coverage"
+      ],
+      "reproduce": "python -m nemic.fundamentals status"
+    },
+    {
+      "name": "QNI/VNI clustering v1",
+      "stack": "experiments",
+      "evidence": "reports/qni_vni_clustering_v1/Clustering_Research.html",
+      "evidence_exists": true,
+      "evidence_sha256": "abe96b571cf3f8a48a7e30c02d0b1a9528813ec28c02c2059cbaa9a1d83d0d74",
+      "claim": "Historical development using publication proxies",
+      "status": "completed_report_validated",
+      "unresolved": [
+        "Representative browser layout review",
+        "Prospective confirmation"
+      ],
+      "reproduce": "python -m nemic.experiments.clustering report"
+    },
+    {
+      "name": "NOS outage regimes",
+      "stack": "experiments",
+      "evidence": "execution/nos_outage_regime_v1/RESULTS_SUMMARY.md",
+      "evidence_exists": true,
+      "evidence_sha256": "662774451bd5f2ec03afaabc925248ca47cecb232b290f409f0507d86f27845c",
+      "claim": "Retrospective matched historical associations",
+      "status": "completed_research",
+      "unresolved": [
+        "Measured receipt replay",
+        "Forward incident confirmation"
+      ],
+      "reproduce": "python scripts/run_nos_regime.py --stage compare --tag full"
+    },
+    {
+      "name": "NOS mechanics/outlook",
+      "stack": "experiments",
+      "evidence": "execution/nos_constraint_binding_v1/RESULTS_SUMMARY.md",
+      "evidence_exists": true,
+      "evidence_sha256": "5138774b3dbacfb76a2b30208eec8c4db6506ff75fa85a78b325f093853d1528",
+      "claim": "Retrospective mechanics and historical research outlook",
+      "status": "completed_research",
+      "unresolved": [
+        "Forward booking reliability",
+        "Unsupported-cell calibration"
+      ],
+      "reproduce": "python scripts/run_nos_binding.py --stage D2"
+    },
+    {
+      "name": "Interregional valuation v2",
+      "stack": "valuation",
+      "evidence": "reports/interregional_valuation_research_v2/README.md",
+      "evidence_exists": true,
+      "evidence_sha256": "a2ca92b927fc98f6bdd6bf35e96c83641ef02f26daa7b4c82a43c50340d87fbd",
+      "claim": "Historical settlement, auction and hedge research",
+      "status": "completed_research",
+      "unresolved": [
+        "Issue-time flow regimes",
+        "Automatic futures history",
+        "Prospective valuation"
+      ],
+      "reproduce": "python -m nemic.valuation all"
+    },
+    {
+      "name": "QNI/VNI long-range v1",
+      "stack": "experiments",
+      "evidence": "reports/qni_vni_longrange_v1/Long_Range_Research.html",
+      "evidence_exists": true,
+      "evidence_sha256": "101c4cce6c9e7af741adaf06f2e91061592a4599aba8da6bbe118b75148019d3",
+      "claim": "Original-vintage historical development found no promotable challenger",
+      "status": "completed_research_no_promotion",
+      "unresolved": [
+        "Prospective outcomes and scorecard"
+      ],
+      "reproduce": "python -m nemic.longrange_campaign status"
+    },
+    {
+      "name": "Production scaffold",
+      "stack": "production",
+      "evidence": "docs/PRODUCTION_PIPELINE_GUIDE.md",
+      "evidence_exists": true,
+      "evidence_sha256": "cb37ae61df8d3a907689730a62fae391d97db6021997d0ce609a70601efbf02f",
+      "claim": "Offline provider-neutral routing scaffold",
+      "status": "research_shadow_schedule_active",
+      "unresolved": [
+        "Prospective scorecard",
+        "Explicit model promotion review"
+      ],
+      "reproduce": "python -m nemic.production --help"
+    }
+  ]
+}

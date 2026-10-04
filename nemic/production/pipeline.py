@@ -1,10 +1,11 @@
 """Explicit routing, adapter execution and complete segment-level outcomes."""
 from pathlib import Path
+import json
 import joblib
 import numpy as np
 import pandas as pd
 
-from .contracts import CONNECTORS, QCOLS, TARGETS, connector, safe_path, write_json
+from .contracts import CONNECTORS, MAX_FORECAST_DAYS, QCOLS, TARGETS, connector, safe_path, write_json
 from .features import build
 
 
@@ -42,8 +43,8 @@ def forecast(registry, policy, inputs, *, origin, connectors, days=1, targets=TA
     if origin.tzinfo is None or origin.minute % 30 or origin.second or origin.microsecond:
         raise ValueError("Origin must be timezone-aware and aligned to half an hour")
     origin = origin.tz_convert("Australia/Brisbane")
-    if not 1 <= days <= 30 or int(days) != days:
-        raise ValueError("Days must be an integer between 1 and 30")
+    if not 1 <= days <= MAX_FORECAST_DAYS or int(days) != days:
+        raise ValueError(f"Days must be an integer between 1 and {MAX_FORECAST_DAYS}")
     if not set(targets) <= set(TARGETS):
         raise ValueError("Unknown limit target")
     rows = []
@@ -83,6 +84,7 @@ def forecast(registry, policy, inputs, *, origin, connectors, days=1, targets=TA
                                 raise ValueError("Non-finite prepared features")
                         else:
                             f = build(m, origin, delivery, name, inputs, history, context=context)
+                            row["input_lineage"] = json.dumps(f.attrs.get("input_lineage", []), default=str, sort_keys=True)
                         row.update(model=key, recipe=m["recipe"], eligibility=m["status"],
                                    calibration_version=m.get("calibration_version", "bundle-v1"),
                                    artifact_sha256=m["artifacts"].get("model.joblib"),

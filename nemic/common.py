@@ -23,10 +23,12 @@ def session():
     # Certificate and hostname verification remain enabled.
     if hasattr(ssl, 'enum_certificates'):
         bundle = ROOT / 'certificates.pem'
-        if not bundle.exists():
+        if not bundle.exists() or time.time() - bundle.stat().st_mtime > 7 * 24 * 3600:
             certs = [ssl.DER_cert_to_PEM_cert(c) for store in ['ROOT','CA']
                      for c, enc, trust in ssl.enum_certificates(store) if enc == 'x509_asn']
-            bundle.write_text(Path(certifi.where()).read_text() + '\n' + ''.join(certs))
+            temporary = bundle.with_suffix('.tmp')
+            temporary.write_text(Path(certifi.where()).read_text() + '\n' + ''.join(certs))
+            temporary.replace(bundle)
         s.verify = str(bundle)
     s.headers['User-Agent'] = 'NEM-IC-Research/1.0 (public-data-research; cached requests)'
     return s

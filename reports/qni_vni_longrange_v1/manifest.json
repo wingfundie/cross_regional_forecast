@@ -1,0 +1,59 @@
+{
+  "campaign": "qni_vni_longrange_v1",
+  "claim": "historical development using original-vintage publication proxies; prospective confirmation required",
+  "built_at": "2026-10-04T07:52:28.203723+00:00",
+  "data_cutoff": "2026-06-02 08:00:00+10:00",
+  "rebuild": "python -m nemic.longrange_campaign report",
+  "inputs": [
+    {
+      "path": "configs\\experiments\\qni_vni_longrange_v1.json",
+      "sha256": "77d0cddf76ef9fc2f8978e55ec2a0c4f20e7484bda17b74db6238b1f8fda8918"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_vni_longrange_v1\\prepare_manifest.json",
+      "sha256": "fab288982f3276f0e15b4b82dc44257422baf915021f7b009ec7846044e5cace"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_vni_fundamentals_v3\\sources\\mtpasa_90d\\manifest.json",
+      "sha256": "921d3ff65b0dcbb2ff7b9c21ab294e99abe2e7a61002aa378b682d1e9b27b22a"
+    },
+    {
+      "path": "nemic\\longrange_campaign.py",
+      "sha256": "e69f48e5ae1b6cc24dee27478ad22a6ccf641c8ce8ffe1d79a91f4fb625ccc69"
+    },
+    {
+      "path": "scripts\\report_theme\\report_theme.py",
+      "sha256": "31e202b2d6a82f776adff8f485cc93d77b86233f64958bfe5b351cb24b37cc99"
+    },
+    {
+      "path": "scripts\\report_theme\\report.css",
+      "sha256": "0b8cb66a46d2492315caa18f77f044bc8e0430cb5d13a1dcef1afe9f103c8a06"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_vni_longrange_v1\\results\\QNI\\summary.json",
+      "sha256": "84684046acaa40602575df553bfaee42ac130beb5c5d18ce92e749cb31eaf0a4"
+    },
+    {
+      "path": "data\\forecast_experiments\\qni_vni_longrange_v1\\results\\VNI\\summary.json",
+      "sha256": "5673a2e468c945fcaaabd866d3fc2573a219df2b00c6902bbf68894eff595671"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "reports\\qni_vni_longrange_v1\\Long_Range_Research.html",
+      "sha256": "101c4cce6c9e7af741adaf06f2e91061592a4599aba8da6bbe118b75148019d3"
+    },
+    {
+      "path": "reports\\qni_vni_longrange_v1\\Long_Range_Research.md",
+      "sha256": "037ac347495b4455e9409ee11f04b50a49716b58b53daf21730c631bf16fe44b"
+    },
+    {
+      "path": "reports\\qni_vni_longrange_v1\\downloads\\cell_results.csv",
+      "sha256": "4d5648d7a75738188650f73a595b047b868c9fb079b67b5a4117e43e5c7b7f42"
+    },
+    {
+      "path": "reports\\qni_vni_longrange_v1\\downloads\\band_metrics.csv",
+      "sha256": "ad14f91fc9727c2b0a60a9de3bcc41d16d314504ffb290aeec7b5fd5631316a7"
+    }
+  ]
+}

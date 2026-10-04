@@ -2,7 +2,7 @@
 from pathlib import Path
 import shutil
 
-from .contracts import TARGETS, connector, digest, read_json, safe_path, write_json
+from .contracts import MAX_FORECAST_LEAD, TARGETS, connector, digest, read_json, safe_path, write_json
 
 
 def validate_package(folder):
@@ -15,8 +15,8 @@ def validate_package(folder):
         raise ValueError(f"Incomplete manifest: {sorted(required - manifest.keys())}")
     if manifest["target"] not in TARGETS or manifest["resolution_minutes"] != 30:
         raise ValueError("Unsupported target/resolution")
-    if not 1 <= manifest["lead_min"] <= manifest["lead_max"] <= 1440:
-        raise ValueError("Invalid lead range (half-hours, maximum 30 days)")
+    if not 1 <= manifest["lead_min"] <= manifest["lead_max"] <= MAX_FORECAST_LEAD:
+        raise ValueError("Invalid lead range (half-hours, maximum 90 days)")
     if manifest["status"] not in {"research", "shadow", "approved", "retired"}:
         raise ValueError("Invalid eligibility status")
     if "model.joblib" not in manifest["artifacts"]:
@@ -70,7 +70,7 @@ class Registry:
         occupied = set()
         for route in policy["routes"]:
             name = connector(route["connector"])
-            if route["target"] not in TARGETS or not 1 <= route["lead_min"] <= route["lead_max"] <= 1440:
+            if route["target"] not in TARGETS or not 1 <= route["lead_min"] <= route["lead_max"] <= MAX_FORECAST_LEAD:
                 raise ValueError("Invalid routing target or horizon")
             if not route["models"]:
                 raise ValueError("Route needs primary model")

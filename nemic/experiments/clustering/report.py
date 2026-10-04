@@ -379,7 +379,10 @@ def build_report(config: dict) -> dict:
     if clustered_risk:
         markdown += ["| Connector | Fold | Direction | Recall | Precision | False alerts/day | Recall difference | 95% interval |", "|---|---|---|---:|---:|---:|---:|---|"]
         for row in clustered_risk:
-            markdown.append(f"| {row['connector']} | {row['fold']} | {row['direction']} | {row['recall']:.3f} | {row['precision']:.3f} | {row['false_alerts']:.3f} | {row['recall_delta']:.3f} | [{row['delta_low']:.3f}, {row['delta_high']:.3f}] |")
+            def format_metric(value):
+                return "—" if value is None or not np.isfinite(value) else f"{value:.3f}"
+            interval = f"[{format_metric(row['delta_low'])}, {format_metric(row['delta_high'])}]"
+            markdown.append(f"| {row['connector']} | {row['fold']} | {row['direction']} | {format_metric(row['recall'])} | {format_metric(row['precision'])} | {format_metric(row['false_alerts'])} | {format_metric(row['recall_delta'])} | {interval} |")
     else:
         markdown.append("No contraction-warning comparison has completed yet.")
     markdown += [

@@ -37,6 +37,17 @@ def main():
     p.add_argument("--input", required=True); p.add_argument("--output", required=True)
     p = sub.add_parser("evaluate")
     p.add_argument("--input", required=True); p.add_argument("--actuals", required=True); p.add_argument("--output", required=True)
+    p.add_argument("--as-of")
+    p = sub.add_parser("outcomes")
+    p.add_argument("--input", required=True); p.add_argument("--output", required=True)
+    p.add_argument("--received", required=True); p.add_argument("--revision", required=True)
+    p = sub.add_parser("risk-score")
+    p.add_argument("--windows", required=True); p.add_argument("--events", required=True); p.add_argument("--output", required=True)
+    p.add_argument("--threshold", type=float, default=.5); p.add_argument("--candidate-thresholds", nargs="+", type=float)
+    p.add_argument("--budget", type=float, default=3.)
+    p = sub.add_parser("outage-scenarios")
+    p.add_argument("--outages", required=True); p.add_argument("--origin", required=True); p.add_argument("--output", required=True)
+    p.add_argument("--edits"); p.add_argument("--local-name", default="local")
     for command in ("forecast", "preview"):
         p = sub.add_parser(command)
         p.add_argument("--registry", required=True); p.add_argument("--routes", required=True)
@@ -44,6 +55,7 @@ def main():
         p.add_argument("--connectors", nargs="+", required=True); p.add_argument("--targets", nargs="+", default=["export", "import", "export_tight", "import_tight"])
         p.add_argument("--days", type=int, default=1); p.add_argument("--mode", default="production", choices=["production", "research", "shadow"])
         p.add_argument("--scenario", default="baseline"); p.add_argument("--prepared"); p.add_argument("--history"); p.add_argument("--output", required=True)
+        p.add_argument("--outages"); p.add_argument("--links"); p.add_argument("--aemo"); p.add_argument("--constraint-forecasts")
     args = parser.parse_args()
     if args.command == "demo":
         from .demo import run
@@ -82,13 +94,35 @@ def main():
         inputs, actuals = read_table(args.input), read_table(args.actuals)
         inputs["delivery"] = pd.to_datetime(inputs.delivery, utc=True)
         actuals["delivery"] = pd.to_datetime(actuals.delivery, utc=True)
-        joined = attach_actuals(inputs, actuals)
+        joined = attach_actuals(inputs, actuals, as_of=args.as_of)
         output = Path(args.output)
         output.mkdir(parents=True, exist_ok=False)
         joined.to_parquet(output / "scored_forecasts.parquet", index=False)
         scorecard(joined).to_csv(output / "metrics.csv", index=False)
         from .reports import report
         print(report(joined, output))
+    elif args.command == "outcomes":
+        from .outcomes import normalize_targets
+        result = normalize_targets(read_table(args.input), received=args.received, revision_id=args.revision)
+        output = Path(args.output); output.parent.mkdir(parents=True, exist_ok=True)
+        result.to_parquet(output, index=False); print(output)
+    elif args.command == "risk-score":
+        from .daily_risk import group_windows, score_daily_bulletins, threshold_for_budget
+        windows, events = read_table(args.windows), read_table(args.events)
+        if args.candidate_thresholds:
+            result = threshold_for_budget(windows, events, args.candidate_thresholds, budget=args.budget)
+        else:
+            result = score_daily_bulletins(windows, events, args.threshold, budget=args.budget)
+        output = Path(args.output); output.mkdir(parents=True, exist_ok=False)
+        write_json(output / "metrics.json", result)
+        grouped = group_windows(windows)
+        selected = grouped[grouped.probability >= result.get("threshold", args.threshold)]
+        selected.to_csv(output / "alert_episodes.csv", index=False)
+        print(output / "metrics.json")
+    elif args.command == "outage-scenarios":
+        from .outage_scenarios import write_scenarios
+        edits = read_table(args.edits) if args.edits else None
+        print(write_scenarios(read_table(args.outages), args.origin, args.output, edits, args.local_name))
     else:
         from .pipeline import forecast, save_run
         inputs = read_table(args.input) if args.input else pd.DataFrame()
@@ -103,17 +137,29 @@ def main():
                     if col in table:
                         table[col] = pd.to_datetime(table[col], utc=True)
                 extras[key] = table
+        context = {}
+        for argument, key in (("outages", "outages"), ("links", "links"), ("aemo", "aemo"),
+                              ("constraint_forecasts", "constraint_forecasts")):
+            value = getattr(args, argument)
+            if value:
+                table = read_table(value)
+                for col in ("issue", "received", "delivery", "start", "end", "effective_from", "effective_to"):
+                    if col in table:
+                        table[col] = pd.to_datetime(table[col], utc=True)
+                context[key] = table
         result = forecast(Registry(args.registry), read_json(args.routes), inputs, origin=args.origin,
                           connectors=args.connectors, days=args.days, targets=args.targets, mode=args.mode,
-                          scenario=args.scenario, preview=args.command == "preview", **extras)
+                          scenario=args.scenario, preview=args.command == "preview", context=context or None, **extras)
         if args.command == "preview":
             Path(args.output).parent.mkdir(parents=True, exist_ok=True)
             result.to_csv(args.output, index=False)
         else:
             from .contracts import digest
             provenance = {name: {"path": getattr(args, name), "sha256": digest(getattr(args, name))}
-                          for name in ("input", "prepared", "history") if getattr(args, name)}
-            save_run(result, args.output, {"sources": provenance, "policy": read_json(args.routes), "scenario": args.scenario})
+                          for name in ("input", "prepared", "history", "outages", "links", "aemo", "constraint_forecasts") if getattr(args, name)}
+            save_run(result, args.output, {"sources": provenance, "policy": read_json(args.routes), "scenario": args.scenario,
+                     "requested_origin": args.origin, "execution_completed_utc": pd.Timestamp.now(tz="UTC").isoformat(),
+                     "input_contract_schema": 2})
         print(json.dumps(result.status.value_counts().to_dict()))
 
 
