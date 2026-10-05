@@ -138,7 +138,7 @@
       "evidence_exists": true,
       "evidence_sha256": "cb37ae61df8d3a907689730a62fae391d97db6021997d0ce609a70601efbf02f",
       "claim": "Offline provider-neutral routing scaffold",
-      "status": "research_shadow_schedule_active",
+      "status": "research_shadow_schedules_paused",
       "unresolved": [
         "Prospective scorecard",
         "Explicit model promotion review"

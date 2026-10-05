@@ -47,7 +47,7 @@ def build():
                "Original-vintage historical development found no promotable challenger", "completed_research_no_promotion",
                ["Prospective outcomes and scorecard"], "python -m nemic.longrange_campaign status"),
         _entry("Production scaffold", "production", "docs/PRODUCTION_PIPELINE_GUIDE.md",
-               "Offline provider-neutral routing scaffold", "research_shadow_schedule_active",
+               "Offline provider-neutral routing scaffold", "research_shadow_schedules_paused",
                ["Prospective scorecard", "Explicit model promotion review"], "python -m nemic.production --help"),
     ]
     json_path = ROOT / "docs/RESEARCH_REGISTER.json"

@@ -14,6 +14,8 @@ Read `BUILD_PLAN.md` for the agreed specification and `BACKTEST_REPORT.md` for e
 
 ## Documentation
 
+- [Forward forecasting evidence and verdict � 5 October 2026](reports/forward_forecasting_verdict_20261005/index.html): comprehensive offline report with six charts, all 50 new long-range band results, prior-model comparisons, use restrictions and the path to prospective confirmation. The long-range run samples 18 leads rather than a complete half-hour path; collection and shadow schedules are paused. Rebuild with `python scripts/build_forward_forecasting_verdict.py`.
+
 - [Research evidence register](docs/RESEARCH_REGISTER.md): current status, permitted claims, unresolved gates and reproduction entry points across the original backtest, experiment stack, valuation work and production scaffold.
 - [QNI/VNI long-range improvement campaign](execution/qni_vni_longrange_v1/README.md) and [executed report](reports/qni_vni_longrange_v1/Long_Range_Research.html): a bounded VNI-first/QNI-second comparison using original-vintage MT PASA availability, daily 08:00 NEM origins and separate 1–7, 8–14, 15–30, 31–60 and 61–90 day results. All ten historical cells retained the baseline; output remains research-only pending measured-receipt prospective confirmation.
 

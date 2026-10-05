@@ -1,0 +1,79 @@
+{
+  "built_at": "2026-10-05T02:26:11.756058+00:00",
+  "presentation_date": "2026-10-05",
+  "claim": "Historical development evidence; no operational promotion",
+  "rebuild": "python scripts/build_forward_forecasting_verdict.py",
+  "visual_review": "Desktop/mobile browser layout not verified: local-file browser access was blocked in this session",
+  "dependencies": {
+    "pandas": "2.2.3",
+    "matplotlib": "3.10.1"
+  },
+  "inputs": [
+    {
+      "path": "reports/qni_vni_longrange_v1/downloads/cell_results.csv",
+      "sha256": "4d5648d7a75738188650f73a595b047b868c9fb079b67b5a4117e43e5c7b7f42"
+    },
+    {
+      "path": "reports/qni_vni_longrange_v1/downloads/band_metrics.csv",
+      "sha256": "ad14f91fc9727c2b0a60a9de3bcc41d16d314504ffb290aeec7b5fd5631316a7"
+    },
+    {
+      "path": "configs/experiments/qni_vni_longrange_v1.json",
+      "sha256": "77d0cddf76ef9fc2f8978e55ec2a0c4f20e7484bda17b74db6238b1f8fda8918"
+    },
+    {
+      "path": "docs/RESEARCH_REGISTER.json",
+      "sha256": "bf16fe5002ca68d5ed290629457631b8a1c639713451a214571f9952a2086214"
+    },
+    {
+      "path": "docs/VNI_DIURNAL_NOS_RESULTS.md",
+      "sha256": "1c08ae0323dd5722f8edb2a08159ba327818f08253a2703b96773bc9f4c02c6a"
+    },
+    {
+      "path": "docs/QNI_DIURNAL_NOS_RESULTS.md",
+      "sha256": "3eb8fe8b2eba7722cfa5849957233439385b3f2b3e8c5f4256e7910f7dc4dc6e"
+    },
+    {
+      "path": "reports/qni_vni_longrange_v1/manifest.json",
+      "sha256": "d96cacfc4dcbbe3fd888501b24ad05bc21dd70be81462271f74a98cb2ea9f0c3"
+    },
+    {
+      "path": "execution/qni_vni_longrange_v1/METHODOLOGY.md",
+      "sha256": "b050402eaf594f4f17c90b626ae9836051de85c898aaf92bde00919d4a84dfc9"
+    },
+    {
+      "path": "scripts/build_forward_forecasting_verdict.py",
+      "sha256": "18c7d7c8383a7154540239afe0df479d107c5dee5762ae28a33942e042e9e587"
+    },
+    {
+      "path": "scripts/report_theme/report_theme.py",
+      "sha256": "31e202b2d6a82f776adff8f485cc93d77b86233f64958bfe5b351cb24b37cc99"
+    },
+    {
+      "path": "scripts/report_theme/report.css",
+      "sha256": "0b8cb66a46d2492315caa18f77f044bc8e0430cb5d13a1dcef1afe9f103c8a06"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "reports/forward_forecasting_verdict_20261005/index.html",
+      "sha256": "35458b8cdaacc7ca8c57b77aa68f5f92b445c5450cacee1df47150f59753cbea"
+    },
+    {
+      "path": "reports/forward_forecasting_verdict_20261005/report.md",
+      "sha256": "a554f6de479cd1225ce15b4d5940d65a9a8f545d8a0f16b4a2138f859a10cfa2"
+    },
+    {
+      "path": "reports/forward_forecasting_verdict_20261005/downloads/cell_results.csv",
+      "sha256": "4d5648d7a75738188650f73a595b047b868c9fb079b67b5a4117e43e5c7b7f42"
+    },
+    {
+      "path": "reports/forward_forecasting_verdict_20261005/downloads/band_metrics.csv",
+      "sha256": "ad14f91fc9727c2b0a60a9de3bcc41d16d314504ffb290aeec7b5fd5631316a7"
+    },
+    {
+      "path": "reports/forward_forecasting_verdict_20261005/downloads/earlier_coverage.csv",
+      "sha256": "8985f677e7085147a2252cc3224c9bd177ba46d3f932d78eaff69f33f16ba3ed"
+    }
+  ]
+}
