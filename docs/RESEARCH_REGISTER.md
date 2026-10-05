@@ -13,7 +13,7 @@ This register separates completed computation from demonstrated forecast improve
 | NOS mechanics/outlook | experiments | completed_research | Retrospective mechanics and historical research outlook | `execution/nos_constraint_binding_v1/RESULTS_SUMMARY.md` |
 | Interregional valuation v2 | valuation | completed_research | Historical settlement, auction and hedge research | `reports/interregional_valuation_research_v2/README.md` |
 | QNI/VNI long-range v1 | experiments | completed_research_no_promotion | Original-vintage historical development found no promotable challenger | `reports/qni_vni_longrange_v1/Long_Range_Research.html` |
-| Production scaffold | production | research_shadow_schedule_active | Offline provider-neutral routing scaffold | `docs/PRODUCTION_PIPELINE_GUIDE.md` |
+| Production scaffold | production | research_shadow_schedules_paused | Offline provider-neutral routing scaffold | `docs/PRODUCTION_PIPELINE_GUIDE.md` |
 
 ## Unresolved gates
 
