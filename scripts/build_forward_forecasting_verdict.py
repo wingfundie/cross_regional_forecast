@@ -24,18 +24,32 @@ def chart(fig, title, note, data='downloads/band_metrics.csv'):
     return figure_html('<img style="min-width:760px" alt="'+escape(title)+'" src="data:image/png;base64,'+base64.b64encode(buf.getvalue()).decode()+'">',title,note,data)
 class MarkdownText(HTMLParser):
     def __init__(self):
-        super().__init__(); self.parts=[]; self.href=None
+        super().__init__(); self.parts=[]; self.href=None; self.rows=None; self.row=[]; self.cell=None
     def handle_starttag(self, tag, attrs):
         attrs=dict(attrs)
-        if tag in ['p','li','ol','ul','tr','h3','div','pre']: self.parts.append('\n')
+        if tag=='table': self.rows=[]
+        if tag=='tr': self.row=[]
+        if tag in ['td','th']: self.cell=[]
+        if self.rows is not None: return
+        if tag in ['p','li','ol','ul','h3','div','pre']: self.parts.append('\n\n')
         if tag=='li': self.parts.append('- ')
         if tag=='a': self.href=attrs.get('href'); self.parts.append('[')
         if tag=='img': self.parts.append('[Chart: '+attrs.get('alt','')+' — see HTML edition]')
     def handle_endtag(self, tag):
-        if tag in ['p','li','tr','h3','div','pre']: self.parts.append('\n')
-        if tag in ['td','th']: self.parts.append(' | ')
+        if tag in ['td','th']:
+            self.row.append(''.join(self.cell).strip().replace('|','/')); self.cell=None
+        if tag=='tr': self.rows.append(self.row)
+        if tag=='table':
+            for i,row in enumerate(self.rows):
+                self.parts.append('\n| '+' | '.join(row)+' |')
+                if i==0: self.parts.append('\n|'+'---|'*len(row))
+            self.parts.append('\n\n'); self.rows=None
+        if self.rows is not None: return
+        if tag in ['p','li','h3','div','pre']: self.parts.append('\n\n')
         if tag=='a': self.parts.append(']('+str(self.href)+')')
-    def handle_data(self,data): self.parts.append(data)
+    def handle_data(self,data):
+        if self.cell is not None: self.cell.append(data)
+        elif self.rows is None: self.parts.append(data)
 
 def build():
     OUT.mkdir(parents=True,exist_ok=True); (OUT/'downloads').mkdir(exist_ok=True)
@@ -143,7 +157,7 @@ def build():
     body+=''.join(sections)
     (OUT/'index.html').write_text(render_page('Forward forecasting — evidence and verdict',body,plotly=False),encoding='utf-8')
     md+=['## New cell results','',display.to_markdown(index=False),'','## Full band results','',bands.to_markdown(index=False),'']
-    (OUT/'report.md').write_text('\n'.join(md),encoding='utf-8')
+    (OUT/'report.md').write_text('\n'.join(line.rstrip() for line in '\n'.join(md).splitlines())+'\n',encoding='utf-8')
     artifacts=[OUT/'index.html',OUT/'report.md',OUT/'downloads/cell_results.csv',OUT/'downloads/band_metrics.csv',OUT/'downloads/earlier_coverage.csv']
     inputs += [Path(__file__),ROOT/'scripts/report_theme/report_theme.py',ROOT/'scripts/report_theme/report.css']
     manifest={'built_at':datetime.now(timezone.utc).isoformat(),'presentation_date':'2026-10-05','claim':'Historical development evidence; no operational promotion','rebuild':'python scripts/build_forward_forecasting_verdict.py','visual_review':'Desktop/mobile browser layout not verified: local-file browser access was blocked in this session','dependencies':{'pandas':pd.__version__,'matplotlib':matplotlib.__version__},'inputs':[{'path':str(p.relative_to(ROOT)).replace('\\','/'),'sha256':sha(p)} for p in inputs],'outputs':[{'path':str(p.relative_to(ROOT)).replace('\\','/'),'sha256':sha(p)} for p in artifacts]}

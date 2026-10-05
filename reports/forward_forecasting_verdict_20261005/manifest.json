@@ -1,5 +1,5 @@
 {
-  "built_at": "2026-10-05T02:26:11.756058+00:00",
+  "built_at": "2026-10-05T02:27:10.854112+00:00",
   "presentation_date": "2026-10-05",
   "claim": "Historical development evidence; no operational promotion",
   "rebuild": "python scripts/build_forward_forecasting_verdict.py",
@@ -43,7 +43,7 @@
     },
     {
       "path": "scripts/build_forward_forecasting_verdict.py",
-      "sha256": "18c7d7c8383a7154540239afe0df479d107c5dee5762ae28a33942e042e9e587"
+      "sha256": "a7be28b87d49af8f196c8a72da2f1229cc2ce1e5481eda679a1ed4ebd110eb44"
     },
     {
       "path": "scripts/report_theme/report_theme.py",
@@ -61,7 +61,7 @@
     },
     {
       "path": "reports/forward_forecasting_verdict_20261005/report.md",
-      "sha256": "a554f6de479cd1225ce15b4d5940d65a9a8f545d8a0f16b4a2138f859a10cfa2"
+      "sha256": "aadd2a599d2b9533997f452a242126a32a61752764edf970008afbcd01dfdd9e"
     },
     {
       "path": "reports/forward_forecasting_verdict_20261005/downloads/cell_results.csv",
