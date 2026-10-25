@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "partition_pairs_with_overlap": 0,
+  "overlaps": [],
+  "panel_sha256": "373ab84680153728dd67c8be34499e6fc37277cc20192c84f9176fa34385540e",
+  "manifest_sha256": "183eb679ff98371b8fed3b3b41b08de29adfcab0214c791ddad024a8ef6c56c5",
+  "claim": "Audit of final-state resubmission links; independent of numerical model accuracy"
+}

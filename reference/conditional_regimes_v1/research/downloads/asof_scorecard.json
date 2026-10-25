@@ -1,0 +1,6 @@
+{
+  "eligible_rows": 0,
+  "status": "unavailable_historical_receipt_evidence",
+  "reason": "Retained histories have publication proxies/final-state inputs; no verified six-link historical receipt replay",
+  "collector": "On-demand collection records measured receipt for new requests; future confirmation is a separate evidence gate"
+}

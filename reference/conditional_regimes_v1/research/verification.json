@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "errors": [],
+  "verified": "2026-10-25T03:26:33.114344+00:00",
+  "bundle_id": "conditional-regimes-v1-b3352cb955ecbeb0",
+  "folds": 132,
+  "source_archives": 354,
+  "asof_historical_rows": 0,
+  "production_promoted": false
+}

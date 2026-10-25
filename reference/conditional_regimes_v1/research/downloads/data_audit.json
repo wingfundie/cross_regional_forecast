@@ -1,0 +1,11 @@
+{
+  "rows": 451584,
+  "end": "2026-10-25 00:00:00",
+  "requested_end": "2026-10-25T00:00:00+10:00",
+  "unknown_outage_rows": 13824,
+  "negative_capacities": 81435,
+  "incomplete_targets_excluded": true,
+  "history_claim": "Conditional realised-state research; source archives retrieved today are not historical receipt evidence",
+  "engineering_group_freeze": "2025-09-01 00:00:00",
+  "panel_sha256": "373ab84680153728dd67c8be34499e6fc37277cc20192c84f9176fa34385540e"
+}

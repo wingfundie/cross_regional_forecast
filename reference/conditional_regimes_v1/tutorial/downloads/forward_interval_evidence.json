@@ -1,0 +1,158 @@
+{
+  "connector": "QNI",
+  "direction": "forward",
+  "quarter": 1,
+  "half_hour": 37,
+  "era": "qni_existing",
+  "target": "average",
+  "method": "conditional_table",
+  "conditions": {
+    "connector": "QNI",
+    "direction": "forward",
+    "quarter": 1,
+    "half_hour": 37,
+    "era": "qni_existing",
+    "target": "average",
+    "method": "table",
+    "mode": "scenario",
+    "scenario_name": "warm_nsw_high_qld_residual",
+    "source_temperature": {
+      "min": 25
+    },
+    "sink_residual": {
+      "min": 5000
+    }
+  },
+  "bundle_id": "conditional-regimes-v1-b3352cb955ecbeb0",
+  "baseline": {
+    "p10_mw": -12.604914999999993,
+    "p50_mw": 408.177975,
+    "p90_mw": 665.0054508333334
+  },
+  "relaxed_conditions": [],
+  "information_class": "user_scenario",
+  "scenario_name": "warm_nsw_high_qld_residual",
+  "interpretation": "Conditional AEMO reported dispatch limit; not secure physical capability",
+  "status": "supported_table",
+  "p10_mw": -118.00365033333333,
+  "p50_mw": 289.72516,
+  "p90_mw": 600.481985,
+  "tight_p10_mw": -148.84024799999997,
+  "analogue_days": 69,
+  "exact_days": 69,
+  "outage_episodes": 15,
+  "requested_episode_counts": {},
+  "observation_hours": 34.5,
+  "known_outage_state_share": 1.0,
+  "restricted_share": 0.5217391304347826,
+  "forced_flow_share": 0.14492753623188406,
+  "analogues": [
+    {
+      "time": "2025-01-01 18:30:00",
+      "capacity": 251.75573,
+      "tight_capacity": 221.31393,
+      "active_sets": "N-KC_TX",
+      "active_assets": "KEMPS_CK/TRANS/3L",
+      "episode_ids": "957317"
+    },
+    {
+      "time": "2025-01-04 18:30:00",
+      "capacity": 624.5754483333334,
+      "tight_capacity": 604.85205,
+      "active_sets": "N-KC_TX",
+      "active_assets": "KEMPS_CK/TRANS/3L",
+      "episode_ids": "957317"
+    },
+    {
+      "time": "2025-01-05 18:30:00",
+      "capacity": 618.5312933333333,
+      "tight_capacity": 605.70238,
+      "active_sets": "N-KC_TX",
+      "active_assets": "KEMPS_CK/TRANS/3L",
+      "episode_ids": "957317"
+    },
+    {
+      "time": "2025-01-06 18:30:00",
+      "capacity": 367.5789516666667,
+      "tight_capacity": 349.78615,
+      "active_sets": "N-KC_TX",
+      "active_assets": "KEMPS_CK/TRANS/3L",
+      "episode_ids": "957317"
+    },
+    {
+      "time": "2025-01-13 18:30:00",
+      "capacity": 781.254345,
+      "tight_capacity": 756.67301,
+      "active_sets": "N-KC_TX",
+      "active_assets": "",
+      "episode_ids": ""
+    },
+    {
+      "time": "2025-01-14 18:30:00",
+      "capacity": 711.0462266666667,
+      "tight_capacity": 696.66709,
+      "active_sets": "N-KC_TX",
+      "active_assets": "",
+      "episode_ids": ""
+    },
+    {
+      "time": "2025-01-15 18:30:00",
+      "capacity": 549.3240333333333,
+      "tight_capacity": 494.90223,
+      "active_sets": "N-KC_TX",
+      "active_assets": "",
+      "episode_ids": ""
+    },
+    {
+      "time": "2025-01-21 18:30:00",
+      "capacity": 533.3510883333333,
+      "tight_capacity": 525.93998,
+      "active_sets": "N-KC_TX",
+      "active_assets": "",
+      "episode_ids": ""
+    }
+  ],
+  "stress_examples": [
+    {
+      "time": "2025-02-04 18:30:00",
+      "capacity": -512.5727766666668,
+      "tight_capacity": -686.5325,
+      "active_sets": "Q-X_HATR_TWO",
+      "active_assets": "H18_TRNG/LINE/8868|N/A/CB/88692",
+      "episode_ids": "956053|958104"
+    },
+    {
+      "time": "2025-02-06 18:30:00",
+      "capacity": -492.18847,
+      "tight_capacity": -585.21434,
+      "active_sets": "N-MA_CB172A|Q-HATR|Q-X_HATR_TWO",
+      "active_assets": "H18_TRNG/LINE/8868|N/A/CB/88692",
+      "episode_ids": "956053|958104"
+    },
+    {
+      "time": "2026-02-11 18:30:00",
+      "capacity": -359.67249666666663,
+      "tight_capacity": -424.92438,
+      "active_sets": "Q-LCCP_8859",
+      "active_assets": "",
+      "episode_ids": ""
+    },
+    {
+      "time": "2026-01-10 18:30:00",
+      "capacity": -200.66789833333334,
+      "tight_capacity": -231.61815,
+      "active_sets": "",
+      "active_assets": "",
+      "episode_ids": ""
+    },
+    {
+      "time": "2026-01-31 18:30:00",
+      "capacity": -159.13899166666667,
+      "tight_capacity": -183.36593,
+      "active_sets": "",
+      "active_assets": "",
+      "episode_ids": ""
+    }
+  ],
+  "low_support_reason": null
+}

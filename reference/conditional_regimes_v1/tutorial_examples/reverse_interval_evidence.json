@@ -1,0 +1,158 @@
+{
+  "connector": "QNI",
+  "direction": "reverse",
+  "quarter": 1,
+  "half_hour": 37,
+  "era": "qni_existing",
+  "target": "average",
+  "method": "conditional_table",
+  "conditions": {
+    "connector": "QNI",
+    "direction": "reverse",
+    "quarter": 1,
+    "half_hour": 37,
+    "era": "qni_existing",
+    "target": "average",
+    "method": "table",
+    "mode": "scenario",
+    "scenario_name": "warm_nsw_high_qld_residual",
+    "source_residual": {
+      "min": 5000
+    },
+    "sink_temperature": {
+      "min": 25
+    }
+  },
+  "bundle_id": "conditional-regimes-v1-b3352cb955ecbeb0",
+  "baseline": {
+    "p10_mw": 670.3032400000001,
+    "p50_mw": 1001.9408299999999,
+    "p90_mw": 1157.7731733333335
+  },
+  "relaxed_conditions": [],
+  "information_class": "user_scenario",
+  "scenario_name": "warm_nsw_high_qld_residual",
+  "interpretation": "Conditional AEMO reported dispatch limit; not secure physical capability",
+  "status": "supported_table",
+  "p10_mw": 780.899282,
+  "p50_mw": 1056.657995,
+  "p90_mw": 1192.4356733333334,
+  "tight_p10_mw": 738.3689499999999,
+  "analogue_days": 69,
+  "exact_days": 69,
+  "outage_episodes": 15,
+  "requested_episode_counts": {},
+  "observation_hours": 34.5,
+  "known_outage_state_share": 1.0,
+  "restricted_share": 0.0,
+  "forced_flow_share": 0.0,
+  "analogues": [
+    {
+      "time": "2025-01-01 18:30:00",
+      "capacity": 942.9957066666666,
+      "tight_capacity": 905.25051,
+      "active_sets": "N-KC_TX",
+      "active_assets": "KEMPS_CK/TRANS/3L",
+      "episode_ids": "957317"
+    },
+    {
+      "time": "2025-01-04 18:30:00",
+      "capacity": 1120.4516833333334,
+      "tight_capacity": 1092.06355,
+      "active_sets": "N-KC_TX",
+      "active_assets": "KEMPS_CK/TRANS/3L",
+      "episode_ids": "957317"
+    },
+    {
+      "time": "2025-01-05 18:30:00",
+      "capacity": 1095.74844,
+      "tight_capacity": 1062.94482,
+      "active_sets": "N-KC_TX",
+      "active_assets": "KEMPS_CK/TRANS/3L",
+      "episode_ids": "957317"
+    },
+    {
+      "time": "2025-01-06 18:30:00",
+      "capacity": 1185.1414,
+      "tight_capacity": 1180.0,
+      "active_sets": "N-KC_TX",
+      "active_assets": "KEMPS_CK/TRANS/3L",
+      "episode_ids": "957317"
+    },
+    {
+      "time": "2025-01-13 18:30:00",
+      "capacity": 946.2170866666667,
+      "tight_capacity": 909.4357,
+      "active_sets": "N-KC_TX",
+      "active_assets": "",
+      "episode_ids": ""
+    },
+    {
+      "time": "2025-01-14 18:30:00",
+      "capacity": 989.15485,
+      "tight_capacity": 939.99927,
+      "active_sets": "N-KC_TX",
+      "active_assets": "",
+      "episode_ids": ""
+    },
+    {
+      "time": "2025-01-15 18:30:00",
+      "capacity": 899.1090366666667,
+      "tight_capacity": 890.33619,
+      "active_sets": "N-KC_TX",
+      "active_assets": "",
+      "episode_ids": ""
+    },
+    {
+      "time": "2025-01-21 18:30:00",
+      "capacity": 1149.0907766666667,
+      "tight_capacity": 1141.32004,
+      "active_sets": "N-KC_TX",
+      "active_assets": "",
+      "episode_ids": ""
+    }
+  ],
+  "stress_examples": [
+    {
+      "time": "2025-02-07 18:30:00",
+      "capacity": 498.2845916666667,
+      "tight_capacity": 292.22983,
+      "active_sets": "N-MA_CB172A|N-X_4+17_WG_CLOSE",
+      "active_assets": "AVON/LINE/17",
+      "episode_ids": "959923"
+    },
+    {
+      "time": "2026-01-25 18:30:00",
+      "capacity": 506.2582916666667,
+      "tight_capacity": 191.27394,
+      "active_sets": "",
+      "active_assets": "",
+      "episode_ids": ""
+    },
+    {
+      "time": "2025-02-28 18:30:00",
+      "capacity": 645.2216933333333,
+      "tight_capacity": 562.57147,
+      "active_sets": "N-MA_CB172A",
+      "active_assets": "MACARTHR/CB/172A",
+      "episode_ids": "961815"
+    },
+    {
+      "time": "2025-03-01 18:30:00",
+      "capacity": 698.4661,
+      "tight_capacity": 575.31631,
+      "active_sets": "",
+      "active_assets": "",
+      "episode_ids": ""
+    },
+    {
+      "time": "2026-02-11 18:30:00",
+      "capacity": 728.926075,
+      "tight_capacity": 477.63361,
+      "active_sets": "Q-LCCP_8859",
+      "active_assets": "",
+      "episode_ids": ""
+    }
+  ],
+  "low_support_reason": null
+}

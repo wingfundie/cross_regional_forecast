@@ -1,0 +1,73 @@
+connector,direction,method,control,historical_gate_pass,reasons,production_promotion
+Basslink,forward,additive,analogue,False,overstatement tail worsened; false alert rate worsened,False
+Basslink,forward,analogue,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; overstatement tail worsened; forced_recall worsened; false alert rate worsened,False
+Basslink,forward,boosting,analogue,False,80% interval coverage outside 75–85% convention; overstatement tail worsened; false alert rate worsened,False
+Basslink,forward,no_network,baseline,False,80% interval coverage outside 75–85% convention; overstatement tail worsened,False
+Basslink,forward,no_weather,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; forced_recall worsened; false alert rate worsened,False
+Basslink,forward,unweighted,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; overstatement tail worsened; false alert rate worsened,False
+Basslink,reverse,additive,analogue,False,80% interval coverage outside 75–85% convention; restriction_precision worsened; false alert rate worsened,False
+Basslink,reverse,analogue,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; restriction_precision worsened; forced_recall worsened; false alert rate worsened,False
+Basslink,reverse,boosting,analogue,False,80% interval coverage outside 75–85% convention; restriction_precision worsened; false alert rate worsened,False
+Basslink,reverse,no_network,baseline,False,80% interval coverage outside 75–85% convention,False
+Basslink,reverse,no_weather,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; restriction_precision worsened; forced_recall worsened; false alert rate worsened,False
+Basslink,reverse,unweighted,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; restriction_precision worsened; forced_recall worsened; false alert rate worsened,False
+Directlink,forward,additive,analogue,False,paired point improvement not established; 80% interval coverage outside 75–85% convention; false alert rate worsened,False
+Directlink,forward,analogue,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; restriction_precision worsened; forced_recall worsened; false alert rate worsened,False
+Directlink,forward,boosting,analogue,False,80% interval coverage outside 75–85% convention; false alert rate worsened,False
+Directlink,forward,no_network,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; restriction_precision worsened; false alert rate worsened,False
+Directlink,forward,no_weather,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; restriction_precision worsened; forced_recall worsened; false alert rate worsened,False
+Directlink,forward,unweighted,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; restriction_precision worsened; forced_recall worsened; false alert rate worsened,False
+Directlink,reverse,additive,analogue,False,80% interval coverage outside 75–85% convention; restriction_precision worsened; forced_precision worsened; false alert rate worsened,False
+Directlink,reverse,analogue,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; overstatement tail worsened; restriction_precision worsened; forced_recall worsened; false alert rate worsened,False
+Directlink,reverse,boosting,analogue,False,80% interval coverage outside 75–85% convention; restriction_precision worsened; false alert rate worsened,False
+Directlink,reverse,no_network,baseline,False,paired point improvement not established; 80% interval coverage outside 75–85% convention; restriction_precision worsened,False
+Directlink,reverse,no_weather,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; overstatement tail worsened; restriction_precision worsened; forced_recall worsened; false alert rate worsened,False
+Directlink,reverse,unweighted,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; overstatement tail worsened; restriction_precision worsened; forced_recall worsened; false alert rate worsened,False
+Heywood,forward,additive,analogue,False,false alert rate worsened,False
+Heywood,forward,analogue,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; restriction_precision worsened; forced_recall worsened; false alert rate worsened,False
+Heywood,forward,boosting,analogue,False,false alert rate worsened,False
+Heywood,forward,no_network,baseline,False,paired point improvement not established; 80% interval coverage outside 75–85% convention; false alert rate worsened,False
+Heywood,forward,no_weather,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; restriction_precision worsened; forced_recall worsened; false alert rate worsened,False
+Heywood,forward,unweighted,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; restriction_precision worsened; forced_recall worsened; false alert rate worsened,False
+Heywood,reverse,additive,analogue,False,paired point improvement not established; 80% interval coverage outside 75–85% convention; restriction_precision worsened; false alert rate worsened,False
+Heywood,reverse,analogue,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; restriction_precision worsened; forced_recall worsened; false alert rate worsened,False
+Heywood,reverse,boosting,analogue,False,80% interval coverage outside 75–85% convention; restriction_precision worsened; false alert rate worsened,False
+Heywood,reverse,no_network,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention,False
+Heywood,reverse,no_weather,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; restriction_precision worsened; forced_recall worsened; false alert rate worsened,False
+Heywood,reverse,unweighted,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; restriction_precision worsened; forced_recall worsened; false alert rate worsened,False
+Murraylink,forward,additive,analogue,False,80% interval coverage outside 75–85% convention; false alert rate worsened,False
+Murraylink,forward,analogue,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; restriction_precision worsened; forced_recall worsened; false alert rate worsened,False
+Murraylink,forward,boosting,analogue,False,80% interval coverage outside 75–85% convention; false alert rate worsened,False
+Murraylink,forward,no_network,baseline,False,80% interval coverage outside 75–85% convention; false alert rate worsened,False
+Murraylink,forward,no_weather,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; restriction_precision worsened; forced_recall worsened; false alert rate worsened,False
+Murraylink,forward,unweighted,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; restriction_precision worsened; forced_recall worsened; false alert rate worsened,False
+Murraylink,reverse,additive,analogue,False,restriction_precision worsened; false alert rate worsened,False
+Murraylink,reverse,analogue,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; overstatement tail worsened; restriction_precision worsened; forced_recall worsened; false alert rate worsened,False
+Murraylink,reverse,boosting,analogue,False,restriction_precision worsened; false alert rate worsened,False
+Murraylink,reverse,no_network,baseline,False,80% interval coverage outside 75–85% convention; restriction_precision worsened; false alert rate worsened,False
+Murraylink,reverse,no_weather,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; overstatement tail worsened; restriction_precision worsened; forced_recall worsened; false alert rate worsened,False
+Murraylink,reverse,unweighted,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; overstatement tail worsened; restriction_precision worsened; forced_recall worsened; false alert rate worsened,False
+QNI,forward,additive,analogue,False,paired point improvement not established; 80% interval coverage outside 75–85% convention; false alert rate worsened,False
+QNI,forward,analogue,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; forced_recall worsened; false alert rate worsened,False
+QNI,forward,boosting,analogue,False,paired point improvement not established; 80% interval coverage outside 75–85% convention; false alert rate worsened,False
+QNI,forward,no_network,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; forced_recall worsened; forced_precision worsened; false alert rate worsened,False
+QNI,forward,no_weather,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; forced_recall worsened; false alert rate worsened,False
+QNI,forward,unweighted,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; forced_recall worsened; false alert rate worsened,False
+QNI,reverse,additive,analogue,False,paired point improvement not established; 80% interval coverage outside 75–85% convention; false alert rate worsened,False
+QNI,reverse,analogue,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; false alert rate worsened,False
+QNI,reverse,boosting,analogue,False,paired point improvement not established; 80% interval coverage outside 75–85% convention; false alert rate worsened,False
+QNI,reverse,no_network,baseline,False,80% interval coverage outside 75–85% convention,False
+QNI,reverse,no_weather,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; false alert rate worsened,False
+QNI,reverse,unweighted,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; false alert rate worsened,False
+VNI,forward,additive,analogue,False,80% interval coverage outside 75–85% convention; false alert rate worsened,False
+VNI,forward,analogue,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; overstatement tail worsened; restriction_precision worsened; forced_recall worsened; forced_precision worsened; false alert rate worsened,False
+VNI,forward,boosting,analogue,False,80% interval coverage outside 75–85% convention; false alert rate worsened,False
+VNI,forward,no_network,baseline,False,paired point improvement not established,False
+VNI,forward,no_weather,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; overstatement tail worsened; restriction_precision worsened; forced_recall worsened; forced_precision worsened; false alert rate worsened,False
+VNI,forward,unweighted,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; overstatement tail worsened; restriction_precision worsened; forced_recall worsened; forced_precision worsened; false alert rate worsened,False
+VNI,reverse,additive,analogue,False,80% interval coverage outside 75–85% convention; restriction_precision worsened; false alert rate worsened,False
+VNI,reverse,analogue,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; overstatement tail worsened; false alert rate worsened,False
+VNI,reverse,boosting,analogue,False,80% interval coverage outside 75–85% convention; false alert rate worsened,False
+VNI,reverse,no_network,baseline,False,paired point improvement not established; 80% interval coverage outside 75–85% convention; overstatement tail worsened,False
+VNI,reverse,no_weather,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; overstatement tail worsened; false alert rate worsened,False
+VNI,reverse,unweighted,baseline,False,paired point improvement not established; distributional loss not improved; 80% interval coverage outside 75–85% convention; overstatement tail worsened; false alert rate worsened,False

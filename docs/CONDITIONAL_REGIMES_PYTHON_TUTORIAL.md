@@ -2,7 +2,7 @@
 
 A practical tutorial for `nemic-regimes` version 0.1.0. You supply the calendar quarter, half-hour, direction, compatible network era and measurable assumptions. The package reads a saved historical bundle and returns P10/P50/P90 estimates of **AEMO-reported dispatch limits**, together with matching evidence. It does not calculate maximum secure physical capability or forecast the conditions you leave unspecified.
 
-Repository readers: the `downloads/` links below belong to the generated offline tutorial directory. Built downloads and bundles are kept local. Use `packages/nemic-regimes/examples/tutorial.py` and `docs/CONDITIONAL_REGIMES_DEVELOPMENT.md` in a source checkout; the inference bundle is supplied separately.
+Repository readers: the `downloads/` links below belong to the generated offline tutorial directory. Published copies are under `reference/conditional_regimes_v1/tutorial/`, including the inference bundle and example outputs. Use `packages/nemic-regimes/examples/tutorial.py` and `docs/CONDITIONAL_REGIMES_DEVELOPMENT.md` for source-checkout instructions.
 
 The worked example asks: **at 18:30 in Q1, with warm NSW conditions and high Queensland residual demand, what ranges have been reported for QNI in each direction?** The same physical assumptions are translated correctly when the direction reverses.
 

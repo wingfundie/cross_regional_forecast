@@ -1,0 +1,11 @@
+case,direction,target,method,status,p10_mw,p50_mw,p90_mw,tight_p10_mw,exact_days,analogue_days,outage_episodes,relaxed_conditions
+quarter_reference,forward,average,conditional_table,supported_table,-12.604914999999993,408.177975,665.0054508333334,-43.37576999999998,180,180,24,[]
+conditional_table,forward,average,conditional_table,supported_table,-118.00365033333333,289.72516,600.481985,-148.84024799999997,69,69,15,[]
+tight_target,forward,tight,conditional_table,supported_table,-148.84024799999997,236.43303,590.81669,-148.84024799999997,69,69,15,[]
+weighted_analogue,forward,average,weighted_analogue,supported_analogue,139.89449030166426,494.08180708704157,693.0310473334144,106.68125584939253,97,30,10,[]
+quarter_reference,reverse,average,conditional_table,supported_table,670.3032400000001,1001.9408299999999,1157.7731733333335,568.94389,180,180,24,[]
+conditional_table,reverse,average,conditional_table,supported_table,780.899282,1056.657995,1192.4356733333334,738.3689499999999,69,69,15,[]
+tight_target,reverse,tight,conditional_table,supported_table,738.3689499999999,1009.7,1170.104646,738.3689499999999,69,69,15,[]
+weighted_analogue,reverse,average,weighted_analogue,supported_analogue,749.1574704767919,1027.6165551358501,1161.8412943598012,612.0139272099456,97,30,10,[]
+explicit_model,forward,average,additive,modelled_extrapolation,171.6309851605198,809.1409185381292,822.7624747554996,70.607222971404,164,30,2,[]
+explicit_model,forward,average,boosting,modelled_extrapolation,83.5378207858647,694.4294141060745,842.7530618592613,70.607222971404,164,30,2,[]

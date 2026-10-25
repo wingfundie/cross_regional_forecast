@@ -1,0 +1,23 @@
+condition,units,source,historical_coverage,availability
+temperature_max,C,Public weather; retained reanalysis and explicit issued runs,0.999494895789026,Realised conditional history; dated inputs need separate issue and receipt evidence
+source_temperature,C,Public weather; retained reanalysis and explicit issued runs,0.999494895789026,Realised conditional history; dated inputs need separate issue and receipt evidence
+sink_temperature,C,Public weather; retained reanalysis and explicit issued runs,0.999494895789026,Realised conditional history; dated inputs need separate issue and receipt evidence
+humidity_mean,%,Public weather; retained reanalysis and explicit issued runs,0.999494895789026,Realised conditional history; dated inputs need separate issue and receipt evidence
+source_vre,MW,AEMO regional dispatch,1.0,Realised conditional history; dated inputs need separate issue and receipt evidence
+sink_vre,MW,AEMO regional dispatch,1.0,Realised conditional history; dated inputs need separate issue and receipt evidence
+source_demand,MW,AEMO regional dispatch,1.0,Realised conditional history; dated inputs need separate issue and receipt evidence
+sink_demand,MW,AEMO regional dispatch,1.0,Realised conditional history; dated inputs need separate issue and receipt evidence
+source_residual,MW,AEMO regional dispatch,1.0,Realised conditional history; dated inputs need separate issue and receipt evidence
+sink_residual,MW,AEMO regional dispatch,1.0,Realised conditional history; dated inputs need separate issue and receipt evidence
+vre_difference,MW,AEMO regional dispatch,1.0,Realised conditional history; dated inputs need separate issue and receipt evidence
+residual_difference,MW,AEMO regional dispatch,1.0,Realised conditional history; dated inputs need separate issue and receipt evidence
+source_vre_ramp_1h,MW,AEMO regional dispatch,0.9999468311356869,Realised conditional history; dated inputs need separate issue and receipt evidence
+sink_vre_ramp_1h,MW,AEMO regional dispatch,0.9999468311356869,Realised conditional history; dated inputs need separate issue and receipt evidence
+residual_difference_ramp_1h,MW,AEMO regional dispatch,0.9999468311356869,Realised conditional history; dated inputs need separate issue and receipt evidence
+source_available_generation,MW,AEMO regional dispatch,1.0,Realised conditional history; dated inputs need separate issue and receipt evidence
+sink_available_generation,MW,AEMO regional dispatch,1.0,Realised conditional history; dated inputs need separate issue and receipt evidence
+electrical_positive_mw,MW,AEMO equation factors and DUID dispatch,0.3661983375868425,Realised conditional history; dated inputs need separate issue and receipt evidence
+electrical_negative_mw,MW,AEMO equation factors and DUID dispatch,0.3661983375868425,Realised conditional history; dated inputs need separate issue and receipt evidence
+corridor_wind_ms,m/s,Public weather; retained reanalysis and explicit issued runs,0.999494895789026,Realised conditional history; dated inputs need separate issue and receipt evidence
+corridor_radiation_wm2,W/m2,Public weather; retained reanalysis and explicit issued runs,0.999494895789026,Realised conditional history; dated inputs need separate issue and receipt evidence
+corridor_cloud_pct,%,Public weather; retained reanalysis and explicit issued runs,0.999494895789026,Realised conditional history; dated inputs need separate issue and receipt evidence

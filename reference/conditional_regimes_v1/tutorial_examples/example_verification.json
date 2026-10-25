@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "checks": [
+    "Executed with isolated installed package",
+    "Both model challengers exercised",
+    "Timezone conversion and quarter midnight",
+    "Naive timestamp rejection",
+    "Same regional assumptions in both directions",
+    "Negative quantile preserved",
+    "48 ordered intervals in each profile",
+    "DataFrame missing fields explicitly normalised"
+  ],
+  "script_sha256": "0eaeaef8e6a2ca4a0bad2b83a8d5915cd71c13150e7e2e82d9b7effa74074c9e",
+  "bundle_id": "conditional-regimes-v1-b3352cb955ecbeb0"
+}

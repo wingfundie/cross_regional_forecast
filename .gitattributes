@@ -1,3 +1,11 @@
 # The self-contained report embeds minified Plotly JavaScript and chart data.
 # Treat it as a publication artifact so Git does not attempt a multi-megabyte text diff.
 reports/interregional_valuation_research_20260918/Quarterly_Interregional_Valuation_Research.html -diff
+
+# Explicitly published research snapshot: preserve file hashes across platforms.
+reference/conditional_regimes_v1/** -text -whitespace
+reference/conditional_regimes_v1/**/*.xlsx -diff
+reference/conditional_regimes_v1/**/*.zip -diff
+reference/conditional_regimes_v1/**/*.whl -diff
+reference/conditional_regimes_v1/**/*.png -diff
+reference/conditional_regimes_v1/**/*.html -diff
