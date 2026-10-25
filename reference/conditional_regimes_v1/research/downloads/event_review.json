@@ -1,0 +1,869 @@
+{
+  "window": [
+    "2025-10-25",
+    "2026-10-25"
+  ],
+  "events": [
+    {
+      "id": "nsw_20251125",
+      "start": "2025-11-25",
+      "end": "2025-11-27",
+      "connectors": [
+        "VNI"
+      ],
+      "title": "NSW cloud ramps with changing corridor outages",
+      "url": "https://wattclarity.com.au/articles/2025/11/unpacking-some-of-the-drivers-of-volatility-in-nsw-today-on-wednesday-26th-nov-2025/",
+      "published": "2025-11-26",
+      "classification": "mechanism_candidate",
+      "conditions": [
+        "specific corridor outage",
+        "sink residual demand",
+        "solar ramp",
+        "local generation"
+      ],
+      "sets": [
+        "N-CNLT_07",
+        "N-AVMA_17"
+      ],
+      "interpretation": "Successive days involved different outages; do not encode a single high-demand derating.",
+      "primary": "https://www.aemo.com.au/-/media/files/major-publications/qed/2025/qed-q4-2025.pdf",
+      "access": "reviewed_via_web_research",
+      "primary_status": "access_gap",
+      "numerical_limit_claim": "No numerical adjustment inferred from article alone"
+    },
+    {
+      "id": "vni_sips_20260109",
+      "start": "2026-01-09",
+      "end": "2026-01-10",
+      "connectors": [
+        "VNI"
+      ],
+      "title": "VNI corridor trips and SIPS operation",
+      "url": "https://wattclarity.com.au/articles/2026/01/09jan-vbb-sips-operated/",
+      "published": "2026-01-10",
+      "classification": "mechanism_candidate",
+      "conditions": [
+        "circuit status",
+        "support scheme status",
+        "battery capability"
+      ],
+      "sets": [],
+      "interpretation": "Protection service status requires independent public verification; generic battery output is not proof of armed support.",
+      "notice_ids": [
+        "132651"
+      ],
+      "access": "reviewed_via_web_research",
+      "primary_status": "notice_citation_requires_original_reconciliation",
+      "numerical_limit_claim": "No numerical adjustment inferred from article alone"
+    },
+    {
+      "id": "lightning_20260109",
+      "start": "2026-01-09",
+      "end": "2026-01-10",
+      "connectors": [
+        "VNI",
+        "Heywood"
+      ],
+      "title": "Lightning reclassification negative control",
+      "url": "https://wattclarity.com.au/articles/2026/01/09jan-at-15-35-victoria/",
+      "published": "2026-01-09",
+      "classification": "negative_control",
+      "conditions": [
+        "contingency reclassification",
+        "affected circuit",
+        "synchronous unit configuration"
+      ],
+      "sets": [],
+      "interpretation": "The discussed reclassification was not itself demonstrated as an interconnector setter. Weather alone must not trigger a limit adjustment.",
+      "notice_ids": [
+        "132618"
+      ],
+      "access": "reviewed_via_web_research",
+      "primary_status": "notice_citation_requires_original_reconciliation",
+      "numerical_limit_claim": "No numerical adjustment inferred from article alone"
+    },
+    {
+      "id": "basslink_20260112",
+      "start": "2026-01-12",
+      "end": "2026-01-13",
+      "connectors": [
+        "Basslink"
+      ],
+      "title": "Basslink zero transfers and FCAS context",
+      "url": "https://wattclarity.com.au/articles/2026/01/tas-energy-and-fcas-prices-spike-on-monday-afternoon-12th-january-2026/",
+      "published": "2026-01-12",
+      "classification": "mechanism_candidate",
+      "conditions": [
+        "DC direction transition",
+        "bid availability",
+        "FCAS context"
+      ],
+      "sets": [],
+      "interpretation": "Historical MNSP-era operation is not automatically comparable to regulated-era capacity.",
+      "access": "reviewed_via_web_research",
+      "primary_status": "notice_citation_requires_original_reconciliation",
+      "numerical_limit_claim": "No numerical adjustment inferred from article alone"
+    },
+    {
+      "id": "heat_20260126",
+      "start": "2026-01-26",
+      "end": "2026-01-27",
+      "connectors": [
+        "Heywood",
+        "Murraylink"
+      ],
+      "title": "Persistent SA evening heat",
+      "url": "https://wattclarity.com.au/articles/2026/01/sa-sees-a-long-period-of-sustained-high-prices-near-the-mpc-amid-40c-heat-on-the-evening-of-australia-day-2026/",
+      "published": "2026-01-26",
+      "classification": "background_stress",
+      "conditions": [
+        "temperature",
+        "evening residual demand",
+        "availability"
+      ],
+      "sets": [],
+      "interpretation": "The article documents stress but does not establish a heat-caused transfer-limit derating.",
+      "access": "reviewed_via_web_research",
+      "primary_status": "notice_citation_requires_original_reconciliation",
+      "numerical_limit_claim": "No numerical adjustment inferred from article alone"
+    },
+    {
+      "id": "avon_20260205",
+      "start": "2026-02-05",
+      "end": "2026-02-06",
+      "connectors": [
+        "VNI"
+      ],
+      "title": "Avon\u2013Marulan outage with afternoon solar decline",
+      "url": "https://wattclarity.com.au/articles/2026/02/05feb-nsw-volatility-continues/",
+      "published": "2026-02-05",
+      "classification": "mechanism_candidate",
+      "conditions": [
+        "specific corridor outage",
+        "solar ramp",
+        "sink demand"
+      ],
+      "sets": [
+        "N-AVMN_16"
+      ],
+      "interpretation": "An outage-specific state interacting with time of day and regional balance; effects require dispatch reconciliation.",
+      "access": "reviewed_via_web_research",
+      "primary_status": "notice_citation_requires_original_reconciliation",
+      "numerical_limit_claim": "No numerical adjustment inferred from article alone"
+    },
+    {
+      "id": "x3_20260620",
+      "start": "2026-06-20",
+      "end": "2026-06-25",
+      "connectors": [
+        "Heywood",
+        "Murraylink"
+      ],
+      "title": "X3 derating, generation geography and limited flexibility",
+      "url": "https://wattclarity.com.au/articles/2026/06/still-air-empty-tanks-and-a-hot-joint/",
+      "published": "2026-06-29",
+      "classification": "mechanism_candidate",
+      "conditions": [
+        "equipment derating",
+        "geographic generation",
+        "battery charging/discharging availability",
+        "low wind"
+      ],
+      "sets": [
+        "N-BABU",
+        "N-BU_7118"
+      ],
+      "interpretation": "Joint configuration and generator leverage matter. Storage-energy explanations are distinct from measured charging/discharging.",
+      "primary": "https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/system-operations/congestion-information-resource/statistical-reporting-streams",
+      "access": "reviewed_via_web_research",
+      "primary_status": "access_gap",
+      "numerical_limit_claim": "No numerical adjustment inferred from article alone"
+    },
+    {
+      "id": "basslink_era_20260701",
+      "start": "2026-07-01",
+      "end": "2026-07-02",
+      "connectors": [
+        "Basslink"
+      ],
+      "title": "Basslink regulated transition",
+      "url": "https://wattclarity.com.au/articles/2026/06/basslink-on-track-to-operate-as-regulated-interconnector-from-1-july-2026/",
+      "published": "2026-06-23",
+      "classification": "structural_break",
+      "conditions": [
+        "market era",
+        "capacity-source semantics"
+      ],
+      "sets": [],
+      "interpretation": "Separate regulated and MNSP operating eras before analogy matching.",
+      "primary": "https://www.aemo.com.au/initiatives/major-programs/nem-reform-program/nem-reform-program-initiatives/basslink-determination-participant-support-arrangements",
+      "access": "reviewed_via_web_research",
+      "primary_status": "access_gap",
+      "numerical_limit_claim": "No numerical adjustment inferred from article alone"
+    },
+    {
+      "id": "riverina_20260705",
+      "start": "2026-07-05",
+      "end": "2026-07-06",
+      "connectors": [
+        "VNI",
+        "Murraylink"
+      ],
+      "title": "Riverina battery disconnection direction",
+      "url": "https://wattclarity.com.au/articles/2026/07/05july-aemo-directs-battery-disconnection/",
+      "published": "2026-07-05",
+      "classification": "unproven_limit_hypothesis",
+      "conditions": [
+        "local inverter availability",
+        "system strength intervention"
+      ],
+      "sets": [],
+      "interpretation": "The direction is not by itself evidence of an interconnector-limit effect.",
+      "access": "reviewed_via_web_research",
+      "primary_status": "notice_citation_requires_original_reconciliation",
+      "numerical_limit_claim": "No numerical adjustment inferred from article alone"
+    },
+    {
+      "id": "apd_20260713",
+      "start": "2026-07-13",
+      "end": "2026-07-14",
+      "connectors": [
+        "Basslink"
+      ],
+      "title": "Portland bus outage and FCAS-related set",
+      "url": "https://wattclarity.com.au/articles/2026/07/13july-vic-demand-changes/",
+      "published": "2026-07-13",
+      "classification": "mechanism_candidate",
+      "conditions": [
+        "large load contingency",
+        "specific outage",
+        "FCAS coupling"
+      ],
+      "sets": [
+        "F-I_ML_APD"
+      ],
+      "notice_ids": [
+        "144479"
+      ],
+      "interpretation": "Large-load and FCAS conditions can affect a DC link even without an outage of the cable itself.",
+      "access": "reviewed_via_web_research",
+      "primary_status": "notice_citation_requires_original_reconciliation",
+      "numerical_limit_claim": "No numerical adjustment inferred from article alone"
+    },
+    {
+      "id": "glitch_20260805",
+      "start": "2026-08-05",
+      "end": "2026-08-06",
+      "connectors": [
+        "QNI",
+        "VNI"
+      ],
+      "title": "Apparent metered-flow and demand anomaly",
+      "url": "https://wattclarity.com.au/articles/2026/08/05aug-nsw-marketdemand-gyration/",
+      "published": "2026-08-05",
+      "classification": "data_quality_quarantine",
+      "conditions": [
+        "metering consistency",
+        "demand anomaly"
+      ],
+      "sets": [],
+      "interpretation": "A source-data anomaly is not a physical operating regime; compare results with this day excluded.",
+      "access": "reviewed_via_web_research",
+      "primary_status": "notice_citation_requires_original_reconciliation",
+      "numerical_limit_claim": "No numerical adjustment inferred from article alone"
+    },
+    {
+      "id": "dc_controls_20260815",
+      "start": "2026-08-15",
+      "end": "2026-08-16",
+      "connectors": [
+        "Directlink",
+        "Murraylink"
+      ],
+      "title": "Simultaneous DC control unavailability",
+      "url": "https://wattclarity.com.au/articles/2026/08/15aug-dc-interconnectors/",
+      "published": "2026-08-15",
+      "classification": "mechanism_candidate",
+      "conditions": [
+        "control availability",
+        "simultaneous set invocation"
+      ],
+      "sets": [
+        "I-CTRL_ISSUE_TE",
+        "I-CTRL_ISSUE_ML"
+      ],
+      "notice_ids": [
+        "144802",
+        "144803",
+        "144804",
+        "144805"
+      ],
+      "interpretation": "Control unavailability deserves its own regime; no common cause is assumed from timing alone.",
+      "access": "reviewed_via_web_research",
+      "primary_status": "notice_citation_requires_original_reconciliation",
+      "numerical_limit_claim": "No numerical adjustment inferred from article alone"
+    },
+    {
+      "id": "pec_era_20261001",
+      "start": "2026-10-01",
+      "end": "2026-10-02",
+      "connectors": [
+        "VNI",
+        "Heywood",
+        "Murraylink"
+      ],
+      "title": "PEC market representation change",
+      "url": "https://wattclarity.com.au/articles/2026/10/01oct-pec-golive/",
+      "published": "2026-10-01",
+      "classification": "structural_break",
+      "conditions": [
+        "market era",
+        "loop coupling"
+      ],
+      "sets": [],
+      "interpretation": "Market registration, physical energisation and testing caps are different conditions.",
+      "primary": "https://www.aemo.com.au/initiatives/major-programs/nem-reform-program/nem-reform-program-initiatives/project-energyconnect-market-integration-project/frequently-asked-questions",
+      "access": "reviewed_via_web_research",
+      "primary_status": "access_gap",
+      "numerical_limit_claim": "No numerical adjustment inferred from article alone"
+    },
+    {
+      "id": "pec_20261004",
+      "start": "2026-10-04",
+      "end": "2026-10-05",
+      "connectors": [
+        "VNI",
+        "Heywood",
+        "Murraylink"
+      ],
+      "title": "Southern congestion, SA restriction and AC coupling",
+      "url": "https://wattclarity.com.au/articles/2026/10/loopy-or-not/",
+      "published": "2026-10-06",
+      "classification": "mechanism_candidate",
+      "conditions": [
+        "southern NSW congestion",
+        "SA import security",
+        "geographic VRE",
+        "loop coupling"
+      ],
+      "sets": [],
+      "interpretation": "A binding loop equation couples dispatch; do not automatically label it as the reported limit setter.",
+      "primary": "https://www.aemo.com.au/initiatives/major-programs/nem-reform-program/nem-reform-program-initiatives/project-energyconnect-market-integration-project/frequently-asked-questions",
+      "access": "reviewed_via_web_research",
+      "primary_status": "access_gap",
+      "numerical_limit_claim": "No numerical adjustment inferred from article alone"
+    },
+    {
+      "id": "qni_20261012",
+      "start": "2026-10-12",
+      "end": "2026-10-13",
+      "connectors": [
+        "QNI"
+      ],
+      "title": "Explicit QNI southward restriction",
+      "url": "https://wattclarity.com.au/articles/2026/10/12oct-qni-500mw-reduction/",
+      "published": "2026-10-18",
+      "classification": "mechanism_candidate",
+      "conditions": [
+        "explicit cap",
+        "outage",
+        "FCAS coupling"
+      ],
+      "sets": [
+        "I-QN_500"
+      ],
+      "interpretation": "The reported cap is an event-specific condition, not a universal new QNI reference.",
+      "access": "reviewed_via_web_research",
+      "primary_status": "notice_citation_requires_original_reconciliation",
+      "numerical_limit_claim": "No numerical adjustment inferred from article alone"
+    },
+    {
+      "id": "waratah_20260909",
+      "start": "2026-09-09",
+      "end": "2026-09-10",
+      "connectors": [
+        "VNI",
+        "QNI"
+      ],
+      "title": "Waratah protection-service testing and paired flexibility",
+      "url": "https://wattclarity.com.au/articles/2026/09/waratah-bess-tests-its-full-sips-capacity-on-wednesday-morning-9th-september-2026/",
+      "published": "2026-09-10",
+      "classification": "unproven_limit_hypothesis",
+      "conditions": [
+        "support-service availability",
+        "paired generator flexibility",
+        "transformer status"
+      ],
+      "sets": [],
+      "interpretation": "Testing demonstrates why service configuration can matter; battery output alone does not establish armed service or a numerical interconnector-limit effect.",
+      "access": "reviewed_via_web_research",
+      "primary_status": "notice_citation_requires_original_reconciliation",
+      "numerical_limit_claim": "No numerical adjustment inferred from article alone"
+    },
+    {
+      "id": "pec_pd_20260930",
+      "start": "2026-09-30",
+      "end": "2026-10-01",
+      "connectors": [
+        "VNI",
+        "Heywood",
+        "Murraylink"
+      ],
+      "title": "PEC appears in predispatch before dispatch go-live",
+      "url": "https://wattclarity.com.au/articles/2026/09/30sept-pec-in-predispatch/",
+      "published": "2026-09-30",
+      "classification": "forecast_representation_change",
+      "conditions": [
+        "forecast product",
+        "delivery-time market era",
+        "run vintage"
+      ],
+      "sets": [],
+      "interpretation": "Product and delivery-time mappings can change before the observed dispatch representation. Never join solely on the forecast origin's era.",
+      "access": "reviewed_via_web_research",
+      "primary_status": "notice_citation_requires_original_reconciliation",
+      "numerical_limit_claim": "No numerical adjustment inferred from article alone"
+    },
+    {
+      "id": "heywood_hold_20261002",
+      "start": "2026-10-02",
+      "end": "2026-10-03",
+      "connectors": [
+        "Heywood"
+      ],
+      "title": "Heywood test hold-point release",
+      "url": "https://wattclarity.com.au/articles/2026/10/02oct-heywood/",
+      "published": "2026-10-02",
+      "classification": "mechanism_candidate",
+      "conditions": [
+        "capacity-release testing stage",
+        "explicit constraint-set notice",
+        "direction"
+      ],
+      "sets": [
+        "I-SV_600_TEST"
+      ],
+      "notice_ids": [
+        "145449"
+      ],
+      "interpretation": "A test hold point is a separately dated operating condition. Its announced value is not a universal limit for the quarter.",
+      "access": "reviewed_via_web_research",
+      "primary_status": "notice_citation_requires_original_reconciliation",
+      "numerical_limit_claim": "No numerical adjustment inferred from article alone"
+    },
+    {
+      "id": "pec_forecast_quality_20261009",
+      "start": "2026-10-09",
+      "end": "2026-10-10",
+      "connectors": [
+        "VNI",
+        "Heywood",
+        "Murraylink"
+      ],
+      "title": "A PEC predispatch violation changes between runs",
+      "url": "https://wattclarity.com.au/articles/2026/10/forecast-pec2-targets-temporarily-violate-in-predispatch-runs-on-9th-october-2026/",
+      "published": "2026-10-09",
+      "classification": "forecast_quality_control",
+      "conditions": [
+        "run coherence",
+        "forecast violation",
+        "loop representation"
+      ],
+      "sets": [],
+      "interpretation": "A forecast target outside its reported limit is a quality-control state, not evidence of an increased physical capability.",
+      "access": "reviewed_via_web_research",
+      "primary_status": "notice_citation_requires_original_reconciliation",
+      "numerical_limit_claim": "No numerical adjustment inferred from article alone"
+    },
+    {
+      "id": "murraylink_20261019",
+      "start": "2026-10-19",
+      "end": "2026-10-20",
+      "connectors": [
+        "Murraylink"
+      ],
+      "title": "Murraylink unplanned outage with explicit zero-transfer set",
+      "url": "https://wattclarity.com.au/articles/2026/10/19oct-murraylink-out/",
+      "published": "2026-10-19",
+      "classification": "mechanism_candidate",
+      "conditions": [
+        "DC equipment outage",
+        "zero-transfer invocation",
+        "notice timing"
+      ],
+      "sets": [
+        "I-ML_ZERO"
+      ],
+      "notice_ids": [
+        "145684"
+      ],
+      "interpretation": "A confirmed cable outage differs from reduced regional transfer leverage. Unrelated industrial-action wording in the notice does not establish the outage's cause.",
+      "access": "reviewed_via_web_research",
+      "primary_status": "notice_citation_requires_original_reconciliation",
+      "numerical_limit_claim": "No numerical adjustment inferred from article alone"
+    }
+  ],
+  "access": [
+    {
+      "url": "https://wattclarity.com.au/?s=interconnector&year=2025&monthnum=10",
+      "status": "access_gap",
+      "reason": "403 Client Error: Forbidden for url: https://wattclarity.com.au/?s=interconnector&year=2025&monthnum=10"
+    },
+    {
+      "url": "https://wattclarity.com.au/?s=interconnector&year=2025&monthnum=11",
+      "status": "access_gap",
+      "reason": "403 Client Error: Forbidden for url: https://wattclarity.com.au/?s=interconnector&year=2025&monthnum=11"
+    },
+    {
+      "url": "https://wattclarity.com.au/?s=interconnector&year=2025&monthnum=12",
+      "status": "access_gap",
+      "reason": "403 Client Error: Forbidden for url: https://wattclarity.com.au/?s=interconnector&year=2025&monthnum=12"
+    },
+    {
+      "url": "https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=1",
+      "status": "access_gap",
+      "reason": "403 Client Error: Forbidden for url: https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=1"
+    },
+    {
+      "url": "https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=10",
+      "status": "access_gap",
+      "reason": "403 Client Error: Forbidden for url: https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=10"
+    },
+    {
+      "url": "https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=2",
+      "status": "access_gap",
+      "reason": "403 Client Error: Forbidden for url: https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=2"
+    },
+    {
+      "url": "https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=3",
+      "status": "access_gap",
+      "reason": "403 Client Error: Forbidden for url: https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=3"
+    },
+    {
+      "url": "https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=4",
+      "status": "access_gap",
+      "reason": "403 Client Error: Forbidden for url: https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=4"
+    },
+    {
+      "url": "https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=5",
+      "status": "access_gap",
+      "reason": "403 Client Error: Forbidden for url: https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=5"
+    },
+    {
+      "url": "https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=6",
+      "status": "access_gap",
+      "reason": "403 Client Error: Forbidden for url: https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=6"
+    },
+    {
+      "url": "https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=7",
+      "status": "access_gap",
+      "reason": "403 Client Error: Forbidden for url: https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=7"
+    },
+    {
+      "url": "https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=8",
+      "status": "access_gap",
+      "reason": "403 Client Error: Forbidden for url: https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=8"
+    },
+    {
+      "url": "https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=9",
+      "status": "access_gap",
+      "reason": "403 Client Error: Forbidden for url: https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=9"
+    },
+    {
+      "url": "https://wattclarity.com.au/articles/2025/11/unpacking-some-of-the-drivers-of-volatility-in-nsw-today-on-wednesday-26th-nov-2025/",
+      "status": "reviewed_via_web_research",
+      "source_page_hash": null,
+      "retrieved": "2026-10-25T03:01:51.891375+00:00",
+      "evidence_kind": "Research tool response; hash is not the original page hash",
+      "evidence_file": "web_evidence_2.json",
+      "evidence_sha256": "0a8cdcb60bfb612c4a33a846d9e5b10c8c5d7974377559ec0608a1f943fc26f8"
+    },
+    {
+      "url": "https://wattclarity.com.au/articles/2026/01/09jan-at-15-35-victoria/",
+      "status": "reviewed_via_web_research",
+      "source_page_hash": null,
+      "retrieved": "2026-10-25T03:01:51.891375+00:00",
+      "evidence_kind": "Research tool response; hash is not the original page hash",
+      "evidence_file": "web_evidence_2.json",
+      "evidence_sha256": "0a8cdcb60bfb612c4a33a846d9e5b10c8c5d7974377559ec0608a1f943fc26f8"
+    },
+    {
+      "url": "https://wattclarity.com.au/articles/2026/01/09jan-vbb-sips-operated/",
+      "status": "reviewed_via_web_research",
+      "source_page_hash": null,
+      "retrieved": "2026-10-25T03:01:51.891375+00:00",
+      "evidence_kind": "Research tool response; hash is not the original page hash",
+      "evidence_file": "web_evidence_1.json",
+      "evidence_sha256": "3aee3efc0aab1b2ab3905a25a43c5951659a3c1c18a7c6e687989d9d3f096c55"
+    },
+    {
+      "url": "https://wattclarity.com.au/articles/2026/01/sa-sees-a-long-period-of-sustained-high-prices-near-the-mpc-amid-40c-heat-on-the-evening-of-australia-day-2026/",
+      "status": "reviewed_via_web_research",
+      "source_page_hash": null,
+      "retrieved": "2026-10-25T03:01:51.891375+00:00",
+      "evidence_kind": "Research tool response; hash is not the original page hash",
+      "evidence_file": "web_evidence_2.json",
+      "evidence_sha256": "0a8cdcb60bfb612c4a33a846d9e5b10c8c5d7974377559ec0608a1f943fc26f8"
+    },
+    {
+      "url": "https://wattclarity.com.au/articles/2026/01/tas-energy-and-fcas-prices-spike-on-monday-afternoon-12th-january-2026/",
+      "status": "reviewed_via_web_research",
+      "source_page_hash": null,
+      "retrieved": "2026-10-25T03:01:51.891375+00:00",
+      "evidence_kind": "Research tool response; hash is not the original page hash",
+      "evidence_file": "web_evidence_2.json",
+      "evidence_sha256": "0a8cdcb60bfb612c4a33a846d9e5b10c8c5d7974377559ec0608a1f943fc26f8"
+    },
+    {
+      "url": "https://wattclarity.com.au/articles/2026/02/05feb-nsw-volatility-continues/",
+      "status": "reviewed_via_web_research",
+      "source_page_hash": null,
+      "retrieved": "2026-10-25T03:01:51.891375+00:00",
+      "evidence_kind": "Research tool response; hash is not the original page hash",
+      "evidence_file": "web_evidence_1.json",
+      "evidence_sha256": "3aee3efc0aab1b2ab3905a25a43c5951659a3c1c18a7c6e687989d9d3f096c55"
+    },
+    {
+      "url": "https://wattclarity.com.au/articles/2026/06/basslink-on-track-to-operate-as-regulated-interconnector-from-1-july-2026/",
+      "status": "reviewed_via_web_research",
+      "source_page_hash": null,
+      "retrieved": "2026-10-25T03:01:51.891375+00:00",
+      "evidence_kind": "Research tool response; hash is not the original page hash",
+      "evidence_file": "web_evidence_3.json",
+      "evidence_sha256": "a54b55e272b28423b9979e9c302f65e541d34020ac1f250a0d275661ec35b468"
+    },
+    {
+      "url": "https://wattclarity.com.au/articles/2026/06/still-air-empty-tanks-and-a-hot-joint/",
+      "status": "reviewed_via_web_research",
+      "source_page_hash": null,
+      "retrieved": "2026-10-25T03:01:51.891375+00:00",
+      "evidence_kind": "Research tool response; hash is not the original page hash",
+      "evidence_file": "web_evidence_2.json",
+      "evidence_sha256": "0a8cdcb60bfb612c4a33a846d9e5b10c8c5d7974377559ec0608a1f943fc26f8"
+    },
+    {
+      "url": "https://wattclarity.com.au/articles/2026/07/05july-aemo-directs-battery-disconnection/",
+      "status": "reviewed_via_web_research",
+      "source_page_hash": null,
+      "retrieved": "2026-10-25T03:01:51.891375+00:00",
+      "evidence_kind": "Research tool response; hash is not the original page hash",
+      "evidence_file": "web_evidence_3.json",
+      "evidence_sha256": "a54b55e272b28423b9979e9c302f65e541d34020ac1f250a0d275661ec35b468"
+    },
+    {
+      "url": "https://wattclarity.com.au/articles/2026/07/13july-vic-demand-changes/",
+      "status": "reviewed_via_web_research",
+      "source_page_hash": null,
+      "retrieved": "2026-10-25T03:01:51.891375+00:00",
+      "evidence_kind": "Research tool response; hash is not the original page hash",
+      "evidence_file": "web_evidence_1.json",
+      "evidence_sha256": "3aee3efc0aab1b2ab3905a25a43c5951659a3c1c18a7c6e687989d9d3f096c55"
+    },
+    {
+      "url": "https://wattclarity.com.au/articles/2026/08/05aug-nsw-marketdemand-gyration/",
+      "status": "reviewed_via_web_research",
+      "source_page_hash": null,
+      "retrieved": "2026-10-25T03:01:51.891375+00:00",
+      "evidence_kind": "Research tool response; hash is not the original page hash",
+      "evidence_file": "web_evidence_3.json",
+      "evidence_sha256": "a54b55e272b28423b9979e9c302f65e541d34020ac1f250a0d275661ec35b468"
+    },
+    {
+      "url": "https://wattclarity.com.au/articles/2026/08/15aug-dc-interconnectors/",
+      "status": "reviewed_via_web_research",
+      "source_page_hash": null,
+      "retrieved": "2026-10-25T03:01:51.891375+00:00",
+      "evidence_kind": "Research tool response; hash is not the original page hash",
+      "evidence_file": "web_evidence_1.json",
+      "evidence_sha256": "3aee3efc0aab1b2ab3905a25a43c5951659a3c1c18a7c6e687989d9d3f096c55"
+    },
+    {
+      "url": "https://wattclarity.com.au/articles/2026/09/30sept-pec-in-predispatch/",
+      "status": "reviewed_via_web_research",
+      "source_page_hash": null,
+      "retrieved": "2026-10-25T03:01:51.891375+00:00",
+      "evidence_kind": "Research tool response; hash is not the original page hash",
+      "evidence_file": "web_evidence_4.json",
+      "evidence_sha256": "343dd4fe7b2938b54ebc1b93af62c61e8149f29703fe3c766ca42f1a73255529"
+    },
+    {
+      "url": "https://wattclarity.com.au/articles/2026/09/waratah-bess-tests-its-full-sips-capacity-on-wednesday-morning-9th-september-2026/",
+      "status": "reviewed_via_web_research",
+      "source_page_hash": null,
+      "retrieved": "2026-10-25T03:01:51.891375+00:00",
+      "evidence_kind": "Research tool response; hash is not the original page hash",
+      "evidence_file": "web_evidence_4.json",
+      "evidence_sha256": "343dd4fe7b2938b54ebc1b93af62c61e8149f29703fe3c766ca42f1a73255529"
+    },
+    {
+      "url": "https://wattclarity.com.au/articles/2026/10/01oct-pec-golive/",
+      "status": "reviewed_via_web_research",
+      "source_page_hash": null,
+      "retrieved": "2026-10-25T03:01:51.891375+00:00",
+      "evidence_kind": "Research tool response; hash is not the original page hash",
+      "evidence_file": "web_evidence_3.json",
+      "evidence_sha256": "a54b55e272b28423b9979e9c302f65e541d34020ac1f250a0d275661ec35b468"
+    },
+    {
+      "url": "https://wattclarity.com.au/articles/2026/10/02oct-heywood/",
+      "status": "reviewed_via_web_research",
+      "source_page_hash": null,
+      "retrieved": "2026-10-25T03:01:51.891375+00:00",
+      "evidence_kind": "Research tool response; hash is not the original page hash",
+      "evidence_file": "web_evidence_4.json",
+      "evidence_sha256": "343dd4fe7b2938b54ebc1b93af62c61e8149f29703fe3c766ca42f1a73255529"
+    },
+    {
+      "url": "https://wattclarity.com.au/articles/2026/10/12oct-qni-500mw-reduction/",
+      "status": "reviewed_via_web_research",
+      "source_page_hash": null,
+      "retrieved": "2026-10-25T03:01:51.891375+00:00",
+      "evidence_kind": "Research tool response; hash is not the original page hash",
+      "evidence_file": "web_evidence_1.json",
+      "evidence_sha256": "3aee3efc0aab1b2ab3905a25a43c5951659a3c1c18a7c6e687989d9d3f096c55"
+    },
+    {
+      "url": "https://wattclarity.com.au/articles/2026/10/19oct-murraylink-out/",
+      "status": "reviewed_via_web_research",
+      "source_page_hash": null,
+      "retrieved": "2026-10-25T03:01:51.891375+00:00",
+      "evidence_kind": "Research tool response; hash is not the original page hash",
+      "evidence_file": "web_evidence_4.json",
+      "evidence_sha256": "343dd4fe7b2938b54ebc1b93af62c61e8149f29703fe3c766ca42f1a73255529"
+    },
+    {
+      "url": "https://wattclarity.com.au/articles/2026/10/forecast-pec2-targets-temporarily-violate-in-predispatch-runs-on-9th-october-2026/",
+      "status": "reviewed_via_web_research",
+      "source_page_hash": null,
+      "retrieved": "2026-10-25T03:01:51.891375+00:00",
+      "evidence_kind": "Research tool response; hash is not the original page hash",
+      "evidence_file": "web_evidence_4.json",
+      "evidence_sha256": "343dd4fe7b2938b54ebc1b93af62c61e8149f29703fe3c766ca42f1a73255529"
+    },
+    {
+      "url": "https://wattclarity.com.au/articles/2026/10/loopy-or-not/",
+      "status": "reviewed_via_web_research",
+      "source_page_hash": null,
+      "retrieved": "2026-10-25T03:01:51.891375+00:00",
+      "evidence_kind": "Research tool response; hash is not the original page hash",
+      "evidence_file": "web_evidence_3.json",
+      "evidence_sha256": "a54b55e272b28423b9979e9c302f65e541d34020ac1f250a0d275661ec35b468"
+    },
+    {
+      "url": "https://www.aemo.com.au/-/media/files/major-publications/qed/2025/qed-q4-2025.pdf",
+      "status": "access_gap",
+      "reason": "403 Client Error: Forbidden for url: https://www.aemo.com.au/-/media/files/major-publications/qed/2025/qed-q4-2025.pdf"
+    },
+    {
+      "url": "https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/system-operations/congestion-information-resource/statistical-reporting-streams",
+      "status": "access_gap",
+      "reason": "403 Client Error: Forbidden for url: https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/system-operations/congestion-information-resource/statistical-reporting-streams"
+    },
+    {
+      "url": "https://www.aemo.com.au/initiatives/major-programs/nem-reform-program/nem-reform-program-initiatives/basslink-determination-participant-support-arrangements",
+      "status": "access_gap",
+      "reason": "403 Client Error: Forbidden for url: https://www.aemo.com.au/initiatives/major-programs/nem-reform-program/nem-reform-program-initiatives/basslink-determination-participant-support-arrangements"
+    },
+    {
+      "url": "https://www.aemo.com.au/initiatives/major-programs/nem-reform-program/nem-reform-program-initiatives/project-energyconnect-market-integration-project/frequently-asked-questions",
+      "status": "access_gap",
+      "reason": "403 Client Error: Forbidden for url: https://www.aemo.com.au/initiatives/major-programs/nem-reform-program/nem-reform-program-initiatives/project-energyconnect-market-integration-project/frequently-asked-questions"
+    }
+  ],
+  "monthly_search": [
+    {
+      "month": "2025-10",
+      "query": "interconnector",
+      "url": "https://wattclarity.com.au/?s=interconnector&year=2025&monthnum=10",
+      "status": "access_gap",
+      "reason": "403 Client Error: Forbidden for url: https://wattclarity.com.au/?s=interconnector&year=2025&monthnum=10"
+    },
+    {
+      "month": "2025-11",
+      "query": "interconnector",
+      "url": "https://wattclarity.com.au/?s=interconnector&year=2025&monthnum=11",
+      "status": "access_gap",
+      "reason": "403 Client Error: Forbidden for url: https://wattclarity.com.au/?s=interconnector&year=2025&monthnum=11"
+    },
+    {
+      "month": "2025-12",
+      "query": "interconnector",
+      "url": "https://wattclarity.com.au/?s=interconnector&year=2025&monthnum=12",
+      "status": "access_gap",
+      "reason": "403 Client Error: Forbidden for url: https://wattclarity.com.au/?s=interconnector&year=2025&monthnum=12"
+    },
+    {
+      "month": "2026-01",
+      "query": "interconnector",
+      "url": "https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=1",
+      "status": "access_gap",
+      "reason": "403 Client Error: Forbidden for url: https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=1"
+    },
+    {
+      "month": "2026-02",
+      "query": "interconnector",
+      "url": "https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=2",
+      "status": "access_gap",
+      "reason": "403 Client Error: Forbidden for url: https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=2"
+    },
+    {
+      "month": "2026-03",
+      "query": "interconnector",
+      "url": "https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=3",
+      "status": "access_gap",
+      "reason": "403 Client Error: Forbidden for url: https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=3"
+    },
+    {
+      "month": "2026-04",
+      "query": "interconnector",
+      "url": "https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=4",
+      "status": "access_gap",
+      "reason": "403 Client Error: Forbidden for url: https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=4"
+    },
+    {
+      "month": "2026-05",
+      "query": "interconnector",
+      "url": "https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=5",
+      "status": "access_gap",
+      "reason": "403 Client Error: Forbidden for url: https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=5"
+    },
+    {
+      "month": "2026-06",
+      "query": "interconnector",
+      "url": "https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=6",
+      "status": "access_gap",
+      "reason": "403 Client Error: Forbidden for url: https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=6"
+    },
+    {
+      "month": "2026-07",
+      "query": "interconnector",
+      "url": "https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=7",
+      "status": "access_gap",
+      "reason": "403 Client Error: Forbidden for url: https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=7"
+    },
+    {
+      "month": "2026-08",
+      "query": "interconnector",
+      "url": "https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=8",
+      "status": "access_gap",
+      "reason": "403 Client Error: Forbidden for url: https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=8"
+    },
+    {
+      "month": "2026-09",
+      "query": "interconnector",
+      "url": "https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=9",
+      "status": "access_gap",
+      "reason": "403 Client Error: Forbidden for url: https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=9"
+    },
+    {
+      "month": "2026-10",
+      "query": "interconnector",
+      "url": "https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=10",
+      "status": "access_gap",
+      "reason": "403 Client Error: Forbidden for url: https://wattclarity.com.au/?s=interconnector&year=2026&monthnum=10"
+    }
+  ],
+  "inclusion": "Mechanism-bearing transfer events, structural changes, stress backgrounds, negative controls and data anomalies",
+  "exclusion": "Out-of-window cases, price-only narratives without a transfer hypothesis, duplicate followups and commercial-only content",
+  "completeness": "Bounded twelve-month public search, not a census of all grid incidents; no search hit does not imply no event"
+}

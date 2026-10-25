@@ -1,0 +1,17 @@
+{
+  "connector": "QNI",
+  "direction": "forward",
+  "quarter": 1,
+  "half_hour": 37,
+  "era": "current",
+  "target": "average",
+  "method": "table",
+  "mode": "scenario",
+  "scenario_name": "warm_nsw_high_qld_residual",
+  "source_temperature": {
+    "min": 25
+  },
+  "sink_residual": {
+    "min": 5000
+  }
+}

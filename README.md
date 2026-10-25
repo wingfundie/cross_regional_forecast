@@ -84,3 +84,9 @@ HTTPS verification stays enabled. On Windows, `nemic/common.py` builds a local C
 # Multi-interconnector forecasting scaffold
 
 See [the production pipeline guide](docs/PRODUCTION_PIPELINE_GUIDE.md) for provider mappings, model registration/routing, training, portable saved models, scenarios and offline HTML reports. Start with `python -m nemic.production --help` or the synthetic `demo` command. This scaffold does not deploy or schedule live forecasts.
+
+## Four-quarter conditional interconnector limits
+
+The [conditional-regime campaign guide](execution/conditional_regimes_v1/README.md) documents a separate six-link analogue library: quarter/diurnal references, measurable joint grid conditions, signed limit ranges, restrictive examples and labelled extrapolation. Its portable package is [nemic-regimes](packages/nemic-regimes/README.md); execution, integration, selector/workbook and refresh runbooks live with the campaign. Run `python scripts/run_conditional_regimes.py --stage status` for artifact-backed progress. The approved [complete reference outputs](reference/conditional_regimes_v1/README.md) include the Excel workbook, all CSV exports and offline reports; full campaign data are linked from their versioned release. Working refresh folders remain ignored. This research does not activate production routes or paused schedules.
+
+Read the [Python usage tutorial](docs/CONDITIONAL_REGIMES_PYTHON_TUTORIAL.md) for installation, supported inputs, interval queries, both directions and exports. Rebuild its offline HTML with `python scripts/build_conditional_regimes_tutorial.py` after executing the example script.

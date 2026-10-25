@@ -1,0 +1,99 @@
+{
+  "bundle_id": "conditional-regimes-v1-b3352cb955ecbeb0",
+  "training_cutoff": "2026-10-25 00:00:00",
+  "regional_assumptions": {
+    "NSW1": {
+      "temperature": {
+        "min": 25
+      }
+    },
+    "QLD1": {
+      "residual": {
+        "min": 5000
+      }
+    }
+  },
+  "queries": [
+    {
+      "connector": "QNI",
+      "direction": "forward",
+      "quarter": 1,
+      "half_hour": 37,
+      "era": "current",
+      "target": "average",
+      "method": "table",
+      "mode": "scenario",
+      "scenario_name": "warm_nsw_high_qld_residual",
+      "source_temperature": {
+        "min": 25
+      },
+      "sink_residual": {
+        "min": 5000
+      }
+    },
+    {
+      "connector": "QNI",
+      "direction": "reverse",
+      "quarter": 1,
+      "half_hour": 37,
+      "era": "current",
+      "target": "average",
+      "method": "table",
+      "mode": "scenario",
+      "scenario_name": "warm_nsw_high_qld_residual",
+      "source_residual": {
+        "min": 5000
+      },
+      "sink_temperature": {
+        "min": 25
+      }
+    }
+  ],
+  "directional_results": [
+    {
+      "direction": "forward",
+      "target": "average",
+      "method": "conditional_table",
+      "status": "supported_table",
+      "p10_mw": -118.00365033333333,
+      "p50_mw": 289.72516,
+      "p90_mw": 600.481985,
+      "tight_p10_mw": -148.84024799999997,
+      "exact_days": 69,
+      "analogue_days": 69,
+      "outage_episodes": 15,
+      "relaxed_conditions": []
+    },
+    {
+      "direction": "reverse",
+      "target": "average",
+      "method": "conditional_table",
+      "status": "supported_table",
+      "p10_mw": 780.899282,
+      "p50_mw": 1056.657995,
+      "p90_mw": 1192.4356733333334,
+      "tight_p10_mw": 738.3689499999999,
+      "exact_days": 69,
+      "analogue_days": 69,
+      "outage_episodes": 15,
+      "relaxed_conditions": []
+    }
+  ],
+  "illustrative_p50_bounds": {
+    "lower_signed_flow_mw": -1056.657995,
+    "upper_signed_flow_mw": 289.72516,
+    "interpretation": "Independent directional medians; not a jointly secure or calibrated flow interval"
+  },
+  "models_requested": true,
+  "files": [
+    "both_directions.csv",
+    "forward_interval_evidence.json",
+    "forward_profile.csv",
+    "four_quarter_intervals.json",
+    "method_comparison.csv",
+    "one_interval_conditions.json",
+    "reverse_interval_evidence.json",
+    "reverse_profile.csv",
+    "varying_conditions.csv"
+  ]
+}

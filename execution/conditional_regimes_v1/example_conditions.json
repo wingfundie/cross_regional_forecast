@@ -1,0 +1,8 @@
+{
+  "connector": "VNI",
+  "direction": "forward",
+  "era": "pre_pec_market",
+  "outage_state": "invoked",
+  "sink_residual": {"min": 7000},
+  "scenario_name": "historical_high_nsw_residual"
+}

@@ -1,0 +1,806 @@
+[
+  {
+    "connector": "QNI",
+    "direction": "forward",
+    "quarter": 1,
+    "half_hour": 37,
+    "era": "qni_existing",
+    "target": "average",
+    "method": "conditional_table",
+    "conditions": {
+      "connector": "QNI",
+      "direction": "forward",
+      "quarter": 1,
+      "half_hour": 37,
+      "era": "qni_existing",
+      "target": "average",
+      "method": "table",
+      "mode": "scenario",
+      "scenario_name": "warm_nsw_high_qld_residual",
+      "source_temperature": {
+        "min": 25
+      },
+      "sink_residual": {
+        "min": 5000
+      }
+    },
+    "bundle_id": "conditional-regimes-v1-b3352cb955ecbeb0",
+    "baseline": {
+      "p10_mw": -12.604914999999993,
+      "p50_mw": 408.177975,
+      "p90_mw": 665.0054508333334
+    },
+    "relaxed_conditions": [],
+    "information_class": "user_scenario",
+    "scenario_name": "warm_nsw_high_qld_residual",
+    "interpretation": "Conditional AEMO reported dispatch limit; not secure physical capability",
+    "status": "supported_table",
+    "p10_mw": -118.00365033333333,
+    "p50_mw": 289.72516,
+    "p90_mw": 600.481985,
+    "tight_p10_mw": -148.84024799999997,
+    "analogue_days": 69,
+    "exact_days": 69,
+    "outage_episodes": 15,
+    "requested_episode_counts": {},
+    "observation_hours": 34.5,
+    "known_outage_state_share": 1.0,
+    "restricted_share": 0.5217391304347826,
+    "forced_flow_share": 0.14492753623188406,
+    "analogues": [
+      {
+        "time": "2025-01-01 18:30:00",
+        "capacity": 251.75573,
+        "tight_capacity": 221.31393,
+        "active_sets": "N-KC_TX",
+        "active_assets": "KEMPS_CK/TRANS/3L",
+        "episode_ids": "957317"
+      },
+      {
+        "time": "2025-01-04 18:30:00",
+        "capacity": 624.5754483333334,
+        "tight_capacity": 604.85205,
+        "active_sets": "N-KC_TX",
+        "active_assets": "KEMPS_CK/TRANS/3L",
+        "episode_ids": "957317"
+      },
+      {
+        "time": "2025-01-05 18:30:00",
+        "capacity": 618.5312933333333,
+        "tight_capacity": 605.70238,
+        "active_sets": "N-KC_TX",
+        "active_assets": "KEMPS_CK/TRANS/3L",
+        "episode_ids": "957317"
+      },
+      {
+        "time": "2025-01-06 18:30:00",
+        "capacity": 367.5789516666667,
+        "tight_capacity": 349.78615,
+        "active_sets": "N-KC_TX",
+        "active_assets": "KEMPS_CK/TRANS/3L",
+        "episode_ids": "957317"
+      },
+      {
+        "time": "2025-01-13 18:30:00",
+        "capacity": 781.254345,
+        "tight_capacity": 756.67301,
+        "active_sets": "N-KC_TX",
+        "active_assets": "",
+        "episode_ids": ""
+      },
+      {
+        "time": "2025-01-14 18:30:00",
+        "capacity": 711.0462266666667,
+        "tight_capacity": 696.66709,
+        "active_sets": "N-KC_TX",
+        "active_assets": "",
+        "episode_ids": ""
+      },
+      {
+        "time": "2025-01-15 18:30:00",
+        "capacity": 549.3240333333333,
+        "tight_capacity": 494.90223,
+        "active_sets": "N-KC_TX",
+        "active_assets": "",
+        "episode_ids": ""
+      },
+      {
+        "time": "2025-01-21 18:30:00",
+        "capacity": 533.3510883333333,
+        "tight_capacity": 525.93998,
+        "active_sets": "N-KC_TX",
+        "active_assets": "",
+        "episode_ids": ""
+      }
+    ],
+    "stress_examples": [
+      {
+        "time": "2025-02-04 18:30:00",
+        "capacity": -512.5727766666668,
+        "tight_capacity": -686.5325,
+        "active_sets": "Q-X_HATR_TWO",
+        "active_assets": "H18_TRNG/LINE/8868|N/A/CB/88692",
+        "episode_ids": "956053|958104"
+      },
+      {
+        "time": "2025-02-06 18:30:00",
+        "capacity": -492.18847,
+        "tight_capacity": -585.21434,
+        "active_sets": "N-MA_CB172A|Q-HATR|Q-X_HATR_TWO",
+        "active_assets": "H18_TRNG/LINE/8868|N/A/CB/88692",
+        "episode_ids": "956053|958104"
+      },
+      {
+        "time": "2026-02-11 18:30:00",
+        "capacity": -359.67249666666663,
+        "tight_capacity": -424.92438,
+        "active_sets": "Q-LCCP_8859",
+        "active_assets": "",
+        "episode_ids": ""
+      },
+      {
+        "time": "2026-01-10 18:30:00",
+        "capacity": -200.66789833333334,
+        "tight_capacity": -231.61815,
+        "active_sets": "",
+        "active_assets": "",
+        "episode_ids": ""
+      },
+      {
+        "time": "2026-01-31 18:30:00",
+        "capacity": -159.13899166666667,
+        "tight_capacity": -183.36593,
+        "active_sets": "",
+        "active_assets": "",
+        "episode_ids": ""
+      }
+    ],
+    "low_support_reason": null
+  },
+  {
+    "connector": "QNI",
+    "direction": "reverse",
+    "quarter": 1,
+    "half_hour": 37,
+    "era": "qni_existing",
+    "target": "average",
+    "method": "conditional_table",
+    "conditions": {
+      "connector": "QNI",
+      "direction": "reverse",
+      "quarter": 1,
+      "half_hour": 37,
+      "era": "qni_existing",
+      "target": "average",
+      "method": "table",
+      "mode": "scenario",
+      "scenario_name": "warm_nsw_high_qld_residual",
+      "source_residual": {
+        "min": 5000
+      },
+      "sink_temperature": {
+        "min": 25
+      }
+    },
+    "bundle_id": "conditional-regimes-v1-b3352cb955ecbeb0",
+    "baseline": {
+      "p10_mw": 670.3032400000001,
+      "p50_mw": 1001.9408299999999,
+      "p90_mw": 1157.7731733333335
+    },
+    "relaxed_conditions": [],
+    "information_class": "user_scenario",
+    "scenario_name": "warm_nsw_high_qld_residual",
+    "interpretation": "Conditional AEMO reported dispatch limit; not secure physical capability",
+    "status": "supported_table",
+    "p10_mw": 780.899282,
+    "p50_mw": 1056.657995,
+    "p90_mw": 1192.4356733333334,
+    "tight_p10_mw": 738.3689499999999,
+    "analogue_days": 69,
+    "exact_days": 69,
+    "outage_episodes": 15,
+    "requested_episode_counts": {},
+    "observation_hours": 34.5,
+    "known_outage_state_share": 1.0,
+    "restricted_share": 0.0,
+    "forced_flow_share": 0.0,
+    "analogues": [
+      {
+        "time": "2025-01-01 18:30:00",
+        "capacity": 942.9957066666666,
+        "tight_capacity": 905.25051,
+        "active_sets": "N-KC_TX",
+        "active_assets": "KEMPS_CK/TRANS/3L",
+        "episode_ids": "957317"
+      },
+      {
+        "time": "2025-01-04 18:30:00",
+        "capacity": 1120.4516833333334,
+        "tight_capacity": 1092.06355,
+        "active_sets": "N-KC_TX",
+        "active_assets": "KEMPS_CK/TRANS/3L",
+        "episode_ids": "957317"
+      },
+      {
+        "time": "2025-01-05 18:30:00",
+        "capacity": 1095.74844,
+        "tight_capacity": 1062.94482,
+        "active_sets": "N-KC_TX",
+        "active_assets": "KEMPS_CK/TRANS/3L",
+        "episode_ids": "957317"
+      },
+      {
+        "time": "2025-01-06 18:30:00",
+        "capacity": 1185.1414,
+        "tight_capacity": 1180.0,
+        "active_sets": "N-KC_TX",
+        "active_assets": "KEMPS_CK/TRANS/3L",
+        "episode_ids": "957317"
+      },
+      {
+        "time": "2025-01-13 18:30:00",
+        "capacity": 946.2170866666667,
+        "tight_capacity": 909.4357,
+        "active_sets": "N-KC_TX",
+        "active_assets": "",
+        "episode_ids": ""
+      },
+      {
+        "time": "2025-01-14 18:30:00",
+        "capacity": 989.15485,
+        "tight_capacity": 939.99927,
+        "active_sets": "N-KC_TX",
+        "active_assets": "",
+        "episode_ids": ""
+      },
+      {
+        "time": "2025-01-15 18:30:00",
+        "capacity": 899.1090366666667,
+        "tight_capacity": 890.33619,
+        "active_sets": "N-KC_TX",
+        "active_assets": "",
+        "episode_ids": ""
+      },
+      {
+        "time": "2025-01-21 18:30:00",
+        "capacity": 1149.0907766666667,
+        "tight_capacity": 1141.32004,
+        "active_sets": "N-KC_TX",
+        "active_assets": "",
+        "episode_ids": ""
+      }
+    ],
+    "stress_examples": [
+      {
+        "time": "2025-02-07 18:30:00",
+        "capacity": 498.2845916666667,
+        "tight_capacity": 292.22983,
+        "active_sets": "N-MA_CB172A|N-X_4+17_WG_CLOSE",
+        "active_assets": "AVON/LINE/17",
+        "episode_ids": "959923"
+      },
+      {
+        "time": "2026-01-25 18:30:00",
+        "capacity": 506.2582916666667,
+        "tight_capacity": 191.27394,
+        "active_sets": "",
+        "active_assets": "",
+        "episode_ids": ""
+      },
+      {
+        "time": "2025-02-28 18:30:00",
+        "capacity": 645.2216933333333,
+        "tight_capacity": 562.57147,
+        "active_sets": "N-MA_CB172A",
+        "active_assets": "MACARTHR/CB/172A",
+        "episode_ids": "961815"
+      },
+      {
+        "time": "2025-03-01 18:30:00",
+        "capacity": 698.4661,
+        "tight_capacity": 575.31631,
+        "active_sets": "",
+        "active_assets": "",
+        "episode_ids": ""
+      },
+      {
+        "time": "2026-02-11 18:30:00",
+        "capacity": 728.926075,
+        "tight_capacity": 477.63361,
+        "active_sets": "Q-LCCP_8859",
+        "active_assets": "",
+        "episode_ids": ""
+      }
+    ],
+    "low_support_reason": null
+  },
+  {
+    "connector": "QNI",
+    "direction": "forward",
+    "quarter": 2,
+    "half_hour": 37,
+    "era": "qni_existing",
+    "target": "average",
+    "method": "conditional_table",
+    "conditions": {
+      "connector": "QNI",
+      "direction": "forward",
+      "quarter": 2,
+      "half_hour": 37,
+      "era": "qni_existing",
+      "target": "average",
+      "method": "table",
+      "mode": "scenario",
+      "scenario_name": "warm_nsw_high_qld_residual",
+      "source_temperature": {
+        "min": 25
+      },
+      "sink_residual": {
+        "min": 5000
+      }
+    },
+    "bundle_id": "conditional-regimes-v1-b3352cb955ecbeb0",
+    "baseline": {
+      "p10_mw": -79.23034433333333,
+      "p50_mw": 362.8212125,
+      "p90_mw": 633.5034105000001
+    },
+    "relaxed_conditions": [],
+    "information_class": "user_scenario",
+    "scenario_name": "warm_nsw_high_qld_residual",
+    "interpretation": "Conditional AEMO reported dispatch limit; not secure physical capability",
+    "status": "unavailable",
+    "reason": "No exact conditional-table observations; choose analogue or explicit extrapolation for a broader reference",
+    "p10_mw": null,
+    "p50_mw": null,
+    "p90_mw": null,
+    "analogues": [],
+    "stress_examples": []
+  },
+  {
+    "connector": "QNI",
+    "direction": "reverse",
+    "quarter": 2,
+    "half_hour": 37,
+    "era": "qni_existing",
+    "target": "average",
+    "method": "conditional_table",
+    "conditions": {
+      "connector": "QNI",
+      "direction": "reverse",
+      "quarter": 2,
+      "half_hour": 37,
+      "era": "qni_existing",
+      "target": "average",
+      "method": "table",
+      "mode": "scenario",
+      "scenario_name": "warm_nsw_high_qld_residual",
+      "source_residual": {
+        "min": 5000
+      },
+      "sink_temperature": {
+        "min": 25
+      }
+    },
+    "bundle_id": "conditional-regimes-v1-b3352cb955ecbeb0",
+    "baseline": {
+      "p10_mw": 220.44071783333337,
+      "p50_mw": 1088.877845,
+      "p90_mw": 1196.4671765
+    },
+    "relaxed_conditions": [],
+    "information_class": "user_scenario",
+    "scenario_name": "warm_nsw_high_qld_residual",
+    "interpretation": "Conditional AEMO reported dispatch limit; not secure physical capability",
+    "status": "unavailable",
+    "reason": "No exact conditional-table observations; choose analogue or explicit extrapolation for a broader reference",
+    "p10_mw": null,
+    "p50_mw": null,
+    "p90_mw": null,
+    "analogues": [],
+    "stress_examples": []
+  },
+  {
+    "connector": "QNI",
+    "direction": "forward",
+    "quarter": 3,
+    "half_hour": 37,
+    "era": "qni_existing",
+    "target": "average",
+    "method": "conditional_table",
+    "conditions": {
+      "connector": "QNI",
+      "direction": "forward",
+      "quarter": 3,
+      "half_hour": 37,
+      "era": "qni_existing",
+      "target": "average",
+      "method": "table",
+      "mode": "scenario",
+      "scenario_name": "warm_nsw_high_qld_residual",
+      "source_temperature": {
+        "min": 25
+      },
+      "sink_residual": {
+        "min": 5000
+      }
+    },
+    "bundle_id": "conditional-regimes-v1-b3352cb955ecbeb0",
+    "baseline": {
+      "p10_mw": -13.527059666666657,
+      "p50_mw": 354.72114000000005,
+      "p90_mw": 698.3625460000001
+    },
+    "relaxed_conditions": [],
+    "information_class": "user_scenario",
+    "scenario_name": "warm_nsw_high_qld_residual",
+    "interpretation": "Conditional AEMO reported dispatch limit; not secure physical capability",
+    "status": "unavailable",
+    "reason": "No exact conditional-table observations; choose analogue or explicit extrapolation for a broader reference",
+    "p10_mw": null,
+    "p50_mw": null,
+    "p90_mw": null,
+    "analogues": [],
+    "stress_examples": []
+  },
+  {
+    "connector": "QNI",
+    "direction": "reverse",
+    "quarter": 3,
+    "half_hour": 37,
+    "era": "qni_existing",
+    "target": "average",
+    "method": "conditional_table",
+    "conditions": {
+      "connector": "QNI",
+      "direction": "reverse",
+      "quarter": 3,
+      "half_hour": 37,
+      "era": "qni_existing",
+      "target": "average",
+      "method": "table",
+      "mode": "scenario",
+      "scenario_name": "warm_nsw_high_qld_residual",
+      "source_residual": {
+        "min": 5000
+      },
+      "sink_temperature": {
+        "min": 25
+      }
+    },
+    "bundle_id": "conditional-regimes-v1-b3352cb955ecbeb0",
+    "baseline": {
+      "p10_mw": 470.8647163333334,
+      "p50_mw": 1080.4874833333333,
+      "p90_mw": 1211.6662746666668
+    },
+    "relaxed_conditions": [],
+    "information_class": "user_scenario",
+    "scenario_name": "warm_nsw_high_qld_residual",
+    "interpretation": "Conditional AEMO reported dispatch limit; not secure physical capability",
+    "status": "unavailable",
+    "reason": "No exact conditional-table observations; choose analogue or explicit extrapolation for a broader reference",
+    "p10_mw": null,
+    "p50_mw": null,
+    "p90_mw": null,
+    "analogues": [],
+    "stress_examples": []
+  },
+  {
+    "connector": "QNI",
+    "direction": "forward",
+    "quarter": 4,
+    "half_hour": 37,
+    "era": "qni_existing",
+    "target": "average",
+    "method": "conditional_table",
+    "conditions": {
+      "connector": "QNI",
+      "direction": "forward",
+      "quarter": 4,
+      "half_hour": 37,
+      "era": "qni_existing",
+      "target": "average",
+      "method": "table",
+      "mode": "scenario",
+      "scenario_name": "warm_nsw_high_qld_residual",
+      "source_temperature": {
+        "min": 25
+      },
+      "sink_residual": {
+        "min": 5000
+      }
+    },
+    "bundle_id": "conditional-regimes-v1-b3352cb955ecbeb0",
+    "baseline": {
+      "p10_mw": -88.93896316666667,
+      "p50_mw": 279.57648083333333,
+      "p90_mw": 692.8726710000001
+    },
+    "relaxed_conditions": [],
+    "information_class": "user_scenario",
+    "scenario_name": "warm_nsw_high_qld_residual",
+    "interpretation": "Conditional AEMO reported dispatch limit; not secure physical capability",
+    "status": "supported_table",
+    "p10_mw": -2.6328454999999993,
+    "p50_mw": 241.75950333333333,
+    "p90_mw": 605.032012,
+    "tight_p10_mw": -56.56261,
+    "analogue_days": 44,
+    "exact_days": 44,
+    "outage_episodes": 13,
+    "requested_episode_counts": {},
+    "observation_hours": 22.0,
+    "known_outage_state_share": 1.0,
+    "restricted_share": 0.5909090909090909,
+    "forced_flow_share": 0.11363636363636363,
+    "analogues": [
+      {
+        "time": "2024-11-03 18:30:00",
+        "capacity": -3.8923999999999985,
+        "tight_capacity": -74.06464,
+        "active_sets": "",
+        "active_assets": "",
+        "episode_ids": ""
+      },
+      {
+        "time": "2024-11-06 18:30:00",
+        "capacity": 136.81509333333335,
+        "tight_capacity": 97.94615,
+        "active_sets": "N-KC_TX",
+        "active_assets": "KEMPS_CK/TRANS/2L",
+        "episode_ids": "953672"
+      },
+      {
+        "time": "2024-11-24 18:30:00",
+        "capacity": 326.61330333333336,
+        "tight_capacity": 304.40107,
+        "active_sets": "N-DTSS_11",
+        "active_assets": "DAPTO/BUS/5A1|DAPTO/LINE/11",
+        "episode_ids": "954954|954955"
+      },
+      {
+        "time": "2024-11-25 18:30:00",
+        "capacity": -582.36613,
+        "tight_capacity": -701.31417,
+        "active_sets": "N-DTSS_11",
+        "active_assets": "",
+        "episode_ids": ""
+      },
+      {
+        "time": "2024-11-26 18:30:00",
+        "capacity": 694.840275,
+        "tight_capacity": 646.27244,
+        "active_sets": "N-96L_96R_CB4102|N-DTSS_11|N-X_11_17",
+        "active_assets": "TENTFLD/LINE/96R",
+        "episode_ids": "953500"
+      },
+      {
+        "time": "2024-11-27 18:30:00",
+        "capacity": 664.8972533333334,
+        "tight_capacity": 635.79439,
+        "active_sets": "N-96L_96R_CB4102|N-DTSS_11|N-X_11_17",
+        "active_assets": "TENTFLD/LINE/96R",
+        "episode_ids": "953500"
+      },
+      {
+        "time": "2024-12-02 18:30:00",
+        "capacity": 124.09837333333333,
+        "tight_capacity": 101.59213,
+        "active_sets": "",
+        "active_assets": "",
+        "episode_ids": ""
+      },
+      {
+        "time": "2024-12-05 18:30:00",
+        "capacity": 299.21683333333334,
+        "tight_capacity": 292.35312,
+        "active_sets": "N-KC_TX",
+        "active_assets": "KEMPS_CK/TRANS/3L",
+        "episode_ids": "956819"
+      }
+    ],
+    "stress_examples": [
+      {
+        "time": "2024-11-25 18:30:00",
+        "capacity": -582.36613,
+        "tight_capacity": -701.31417,
+        "active_sets": "N-DTSS_11",
+        "active_assets": "",
+        "episode_ids": ""
+      },
+      {
+        "time": "2025-12-21 18:30:00",
+        "capacity": -411.87146,
+        "tight_capacity": -461.7116,
+        "active_sets": "N-KC_TX",
+        "active_assets": "KEMPS_CK/TRANS/3L",
+        "episode_ids": "983520"
+      },
+      {
+        "time": "2024-12-27 18:30:00",
+        "capacity": -69.37632666666667,
+        "tight_capacity": -146.78327,
+        "active_sets": "N-KC_TX",
+        "active_assets": "KEMPS_CK/TRANS/3L",
+        "episode_ids": "957317"
+      },
+      {
+        "time": "2024-11-03 18:30:00",
+        "capacity": -3.8923999999999985,
+        "tight_capacity": -74.06464,
+        "active_sets": "",
+        "active_assets": "",
+        "episode_ids": ""
+      },
+      {
+        "time": "2025-12-24 18:30:00",
+        "capacity": -2.4928949999999994,
+        "tight_capacity": -47.1845,
+        "active_sets": "",
+        "active_assets": "",
+        "episode_ids": ""
+      }
+    ],
+    "low_support_reason": null
+  },
+  {
+    "connector": "QNI",
+    "direction": "reverse",
+    "quarter": 4,
+    "half_hour": 37,
+    "era": "qni_existing",
+    "target": "average",
+    "method": "conditional_table",
+    "conditions": {
+      "connector": "QNI",
+      "direction": "reverse",
+      "quarter": 4,
+      "half_hour": 37,
+      "era": "qni_existing",
+      "target": "average",
+      "method": "table",
+      "mode": "scenario",
+      "scenario_name": "warm_nsw_high_qld_residual",
+      "source_residual": {
+        "min": 5000
+      },
+      "sink_temperature": {
+        "min": 25
+      }
+    },
+    "bundle_id": "conditional-regimes-v1-b3352cb955ecbeb0",
+    "baseline": {
+      "p10_mw": 243.10014533333333,
+      "p50_mw": 995.3895108333332,
+      "p90_mw": 1166.7032385
+    },
+    "relaxed_conditions": [],
+    "information_class": "user_scenario",
+    "scenario_name": "warm_nsw_high_qld_residual",
+    "interpretation": "Conditional AEMO reported dispatch limit; not secure physical capability",
+    "status": "supported_table",
+    "p10_mw": 805.3952968333333,
+    "p50_mw": 1058.2321841666667,
+    "p90_mw": 1190.4924266666667,
+    "tight_p10_mw": 522.793166,
+    "analogue_days": 44,
+    "exact_days": 44,
+    "outage_episodes": 13,
+    "requested_episode_counts": {},
+    "observation_hours": 22.0,
+    "known_outage_state_share": 1.0,
+    "restricted_share": 0.06818181818181818,
+    "forced_flow_share": 0.0,
+    "analogues": [
+      {
+        "time": "2024-11-03 18:30:00",
+        "capacity": 388.52289,
+        "tight_capacity": 370.10804,
+        "active_sets": "",
+        "active_assets": "",
+        "episode_ids": ""
+      },
+      {
+        "time": "2024-11-06 18:30:00",
+        "capacity": 1078.0,
+        "tight_capacity": 1078.0,
+        "active_sets": "N-KC_TX",
+        "active_assets": "KEMPS_CK/TRANS/2L",
+        "episode_ids": "953672"
+      },
+      {
+        "time": "2024-11-24 18:30:00",
+        "capacity": 1033.4716966666667,
+        "tight_capacity": 994.92503,
+        "active_sets": "N-DTSS_11",
+        "active_assets": "DAPTO/BUS/5A1|DAPTO/LINE/11",
+        "episode_ids": "954954|954955"
+      },
+      {
+        "time": "2024-11-25 18:30:00",
+        "capacity": 1119.3252016666668,
+        "tight_capacity": 1117.48481,
+        "active_sets": "N-DTSS_11",
+        "active_assets": "",
+        "episode_ids": ""
+      },
+      {
+        "time": "2024-11-26 18:30:00",
+        "capacity": 1304.6178400000001,
+        "tight_capacity": 1267.0,
+        "active_sets": "N-96L_96R_CB4102|N-DTSS_11|N-X_11_17",
+        "active_assets": "TENTFLD/LINE/96R",
+        "episode_ids": "953500"
+      },
+      {
+        "time": "2024-11-27 18:30:00",
+        "capacity": 1196.1281516666666,
+        "tight_capacity": 1161.03,
+        "active_sets": "N-96L_96R_CB4102|N-DTSS_11|N-X_11_17",
+        "active_assets": "TENTFLD/LINE/96R",
+        "episode_ids": "953500"
+      },
+      {
+        "time": "2024-12-02 18:30:00",
+        "capacity": 1046.4433333333334,
+        "tight_capacity": 1016.74,
+        "active_sets": "",
+        "active_assets": "",
+        "episode_ids": ""
+      },
+      {
+        "time": "2024-12-05 18:30:00",
+        "capacity": 896.03188,
+        "tight_capacity": 887.9366,
+        "active_sets": "N-KC_TX",
+        "active_assets": "KEMPS_CK/TRANS/3L",
+        "episode_ids": "956819"
+      }
+    ],
+    "stress_examples": [
+      {
+        "time": "2025-10-08 18:30:00",
+        "capacity": 109.76725166666667,
+        "tight_capacity": -67.9722,
+        "active_sets": "Q-BKBM",
+        "active_assets": "H36_BLKW/LINE/275KV_817",
+        "episode_ids": "978281"
+      },
+      {
+        "time": "2025-12-09 18:30:00",
+        "capacity": 245.84016,
+        "tight_capacity": 101.81065,
+        "active_sets": "",
+        "active_assets": "",
+        "episode_ids": ""
+      },
+      {
+        "time": "2024-11-03 18:30:00",
+        "capacity": 388.52289,
+        "tight_capacity": 370.10804,
+        "active_sets": "",
+        "active_assets": "",
+        "episode_ids": ""
+      },
+      {
+        "time": "2025-11-26 18:30:00",
+        "capacity": 707.1991033333334,
+        "tight_capacity": -10.55179,
+        "active_sets": "",
+        "active_assets": "",
+        "episode_ids": ""
+      },
+      {
+        "time": "2025-12-14 18:30:00",
+        "capacity": 816.305985,
+        "tight_capacity": 539.75818,
+        "active_sets": "",
+        "active_assets": "",
+        "episode_ids": ""
+      }
+    ],
+    "low_support_reason": null
+  }
+]

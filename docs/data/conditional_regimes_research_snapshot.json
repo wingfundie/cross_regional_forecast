@@ -1,0 +1,526 @@
+{
+  "schema_version": 1,
+  "scope": "Compact aggregate research evidence; observations and fitted artifacts stay local",
+  "bundle_id": "conditional-regimes-v1-b3352cb955ecbeb0",
+  "as_of": "2026-10-25",
+  "training_cutoff_nem": "2026-10-25 00:00:00",
+  "claim": "conditional research; no live forecast promotion",
+  "connectors": [
+    "QNI",
+    "Directlink",
+    "VNI",
+    "Heywood",
+    "Murraylink",
+    "Basslink"
+  ],
+  "directions": [
+    "forward",
+    "reverse"
+  ],
+  "quarters": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "primary_target": "Complete six-observation half-hour mean of signed reported directional limits",
+  "counts": {
+    "prepared_directional_rows": 451584,
+    "inference_directional_rows": 451392,
+    "catalogue_cells": 33825,
+    "supported_catalogue_cells": 14184,
+    "event_cases": 20,
+    "chronological_folds": 132,
+    "historical_challenger_gates": 72,
+    "historical_gate_passes": 0,
+    "asof_historical_rows": 0,
+    "verified_cached_source_archives": 354
+  },
+  "limitations": [
+    "Conditional realised-state research, not issue-time forecasting skill",
+    "AEMO reported dispatch limits are not maximum secure physical transfer capability",
+    "No challenger passed all calibration/risk gates",
+    "Zero eligible historical measured-receipt replay rows",
+    "Incomplete seasonal history in new PEC/Basslink eras",
+    "Incomplete current-month invocation and electrical-group coverage",
+    "Event review is bounded and records source-access gaps"
+  ],
+  "production_promoted": false,
+  "runtime_versions": {
+    "numpy": "2.2.6",
+    "pandas": "2.2.3",
+    "pyarrow": "21.0.0",
+    "scikit-learn": "1.6.1",
+    "lightgbm": "4.6.0",
+    "scipy": "1.15.2",
+    "python": "3.11.9"
+  },
+  "local_artifact_sha256": {
+    "data/forecast_experiments/conditional_regimes_v1/bundle/manifest.json": "183eb679ff98371b8fed3b3b41b08de29adfcab0214c791ddad024a8ef6c56c5",
+    "data/forecast_experiments/conditional_regimes_v1/quarterly_catalogue.csv": "1d435c4802291f08c488c888e26ac2b3b4323b24e2181cf457ff0348caa1c408",
+    "data/forecast_experiments/conditional_regimes_v1/assessed_scores.csv": "849d37ab0e96fc072f138393e906da20a52d7d867120bfd2e2e29d8557f87421",
+    "data/forecast_experiments/conditional_regimes_v1/assessed_method_gates.csv": "62a79bea8ce8cd1449a6e5d3bb92ded7f69a57cbcb796bac938f5039c9baffc2",
+    "data/forecast_experiments/conditional_regimes_v1/fold_audit.json": "6d0e0ad89b610227a0cbbbbe6599185cbfaa1c0cd1016d64ef959602af464803",
+    "data/forecast_experiments/conditional_regimes_v1/source_manifest.json": "69e0d90c15cb58dfa30b6db531cdccd9a34dd19fbe689e9dbdd01d451ed06127",
+    "reports/conditional_regimes_v1/build_manifest.json": "218a686f6782249ea8d98e4a3c58e230c0c7cea66135e73c262ca1d64f15046d",
+    "reports/conditional_regimes_v1/verification.json": "a5c8589a5a35530473c92ec7a3abfa6734d8347a4fa4634de83b4abd7bd9db58"
+  },
+  "matched_overall_metrics": [
+    {
+      "connector": "Basslink",
+      "direction": "forward",
+      "matched_methods": {
+        "additive": {
+          "n": 9333,
+          "mae": 93.66394065665692,
+          "pinball": 29.86172841327885,
+          "coverage80": 0.7604200150005357,
+          "width80": 296.16282056824207,
+          "p95_overstatement": 187.33132754368225
+        },
+        "analogue": {
+          "n": 9333,
+          "mae": 221.0003851982784,
+          "pinball": 72.62950802765043,
+          "coverage80": 0.5383049394621237,
+          "width80": 334.1575414585829,
+          "p95_overstatement": 175.5237638726608
+        },
+        "baseline": {
+          "n": 9333,
+          "mae": 215.9160425262509,
+          "pinball": 69.75284841698692,
+          "coverage80": 0.6259509268188149,
+          "width80": 403.60772406296655,
+          "p95_overstatement": 164.41666666666669
+        },
+        "boosting": {
+          "n": 9333,
+          "mae": 112.71883579654794,
+          "pinball": 33.589387725677504,
+          "coverage80": 0.7182042215793422,
+          "width80": 298.16639422685927,
+          "p95_overstatement": 219.85199686394796
+        }
+      }
+    },
+    {
+      "connector": "Basslink",
+      "direction": "reverse",
+      "matched_methods": {
+        "additive": {
+          "n": 9333,
+          "mae": 94.2084700368612,
+          "pinball": 30.417013749441697,
+          "coverage80": 0.7360977177756348,
+          "width80": 284.6627501238023,
+          "p95_overstatement": 228.37436699648
+        },
+        "analogue": {
+          "n": 9333,
+          "mae": 213.61713669461108,
+          "pinball": 69.41455420313245,
+          "coverage80": 0.552769741776492,
+          "width80": 342.3155098637307,
+          "p95_overstatement": 427.7402238765415
+        },
+        "baseline": {
+          "n": 9333,
+          "mae": 210.8349150043752,
+          "pinball": 67.27703260873425,
+          "coverage80": 0.6444873031179685,
+          "width80": 412.6658196360941,
+          "p95_overstatement": 422.781587
+        },
+        "boosting": {
+          "n": 9333,
+          "mae": 117.20311779844808,
+          "pinball": 34.61003224436801,
+          "coverage80": 0.746490946105218,
+          "width80": 304.9982521361993,
+          "p95_overstatement": 257.6032635419516
+        }
+      }
+    },
+    {
+      "connector": "Directlink",
+      "direction": "forward",
+      "matched_methods": {
+        "additive": {
+          "n": 11073,
+          "mae": 33.96707947706601,
+          "pinball": 10.82709537862735,
+          "coverage80": 0.7493000993407387,
+          "width80": 91.87121663221002,
+          "p95_overstatement": 105.03479571440312
+        },
+        "analogue": {
+          "n": 11073,
+          "mae": 34.87350402595816,
+          "pinball": 12.900397329124589,
+          "coverage80": 0.5567596857220265,
+          "width80": 68.05232019789825,
+          "p95_overstatement": 110.77686895370051
+        },
+        "baseline": {
+          "n": 11073,
+          "mae": 33.11166679468076,
+          "pinball": 11.024180642379362,
+          "coverage80": 0.7394563352298383,
+          "width80": 99.15853814785213,
+          "p95_overstatement": 105.44716849999998
+        },
+        "boosting": {
+          "n": 11073,
+          "mae": 32.01820581639525,
+          "pinball": 10.57187349564636,
+          "coverage80": 0.7300641199313646,
+          "width80": 87.28500452062677,
+          "p95_overstatement": 101.9495136916932
+        }
+      }
+    },
+    {
+      "connector": "Directlink",
+      "direction": "reverse",
+      "matched_methods": {
+        "additive": {
+          "n": 11073,
+          "mae": 38.87430194089556,
+          "pinball": 12.63489793543678,
+          "coverage80": 0.732954032330895,
+          "width80": 118.3172764408087,
+          "p95_overstatement": 92.40293489809127
+        },
+        "analogue": {
+          "n": 11073,
+          "mae": 42.70633177654611,
+          "pinball": 15.521491161560109,
+          "coverage80": 0.4594057617628466,
+          "width80": 75.68994463619781,
+          "p95_overstatement": 93.16119173133376
+        },
+        "baseline": {
+          "n": 11073,
+          "mae": 38.91651310974141,
+          "pinball": 13.17214740723883,
+          "coverage80": 0.6179897046870767,
+          "width80": 95.35100739334416,
+          "p95_overstatement": 83.598138
+        },
+        "boosting": {
+          "n": 11073,
+          "mae": 37.88894287979932,
+          "pinball": 11.83748190341459,
+          "coverage80": 0.7334055811433215,
+          "width80": 110.16681376955152,
+          "p95_overstatement": 78.58652201590866
+        }
+      }
+    },
+    {
+      "connector": "Heywood",
+      "direction": "forward",
+      "matched_methods": {
+        "additive": {
+          "n": 10416,
+          "mae": 143.40250241307712,
+          "pinball": 44.604762131223545,
+          "coverage80": 0.7642089093701997,
+          "width80": 432.56331187359234,
+          "p95_overstatement": 391.4490096849453
+        },
+        "analogue": {
+          "n": 10416,
+          "mae": 189.96731024267436,
+          "pinball": 68.22049938223186,
+          "coverage80": 0.5879416282642089,
+          "width80": 348.4028988665393,
+          "p95_overstatement": 570.6982122967784
+        },
+        "baseline": {
+          "n": 10416,
+          "mae": 182.04254384160583,
+          "pinball": 59.01709650994837,
+          "coverage80": 0.7716973886328725,
+          "width80": 516.365047014161,
+          "p95_overstatement": 573.3558183333333
+        },
+        "boosting": {
+          "n": 10416,
+          "mae": 139.1995099937475,
+          "pinball": 42.68582373485337,
+          "coverage80": 0.7648809523809523,
+          "width80": 416.7295527237357,
+          "p95_overstatement": 334.6935175196826
+        }
+      }
+    },
+    {
+      "connector": "Heywood",
+      "direction": "reverse",
+      "matched_methods": {
+        "additive": {
+          "n": 10416,
+          "mae": 237.3327513234951,
+          "pinball": 70.21945620068152,
+          "coverage80": 0.7136136712749616,
+          "width80": 610.2141755893513,
+          "p95_overstatement": 518.1445426211474
+        },
+        "analogue": {
+          "n": 10416,
+          "mae": 253.92854054441895,
+          "pinball": 90.41627716926914,
+          "coverage80": 0.5071044546850998,
+          "width80": 426.4541398281152,
+          "p95_overstatement": 651.1309195665436
+        },
+        "baseline": {
+          "n": 10416,
+          "mae": 250.53402627384156,
+          "pinball": 76.97367059259366,
+          "coverage80": 0.6649385560675883,
+          "width80": 569.3121624480287,
+          "p95_overstatement": 635.95578875
+        },
+        "boosting": {
+          "n": 10416,
+          "mae": 229.90221942008523,
+          "pinball": 66.67120693941851,
+          "coverage80": 0.7451036866359447,
+          "width80": 604.7328483184655,
+          "p95_overstatement": 529.2397400575653
+        }
+      }
+    },
+    {
+      "connector": "Murraylink",
+      "direction": "forward",
+      "matched_methods": {
+        "additive": {
+          "n": 9137,
+          "mae": 61.0005638898942,
+          "pinball": 19.14826591010816,
+          "coverage80": 0.7049359746087337,
+          "width80": 164.97616541609491,
+          "p95_overstatement": 178.51859277105729
+        },
+        "analogue": {
+          "n": 9137,
+          "mae": 79.41476710823316,
+          "pinball": 26.133467366437927,
+          "coverage80": 0.6381744555105614,
+          "width80": 181.65686728921813,
+          "p95_overstatement": 234.75726053733092
+        },
+        "baseline": {
+          "n": 9137,
+          "mae": 74.26078159069351,
+          "pinball": 22.40635374770348,
+          "coverage80": 0.7351428258728248,
+          "width80": 200.61738960240416,
+          "p95_overstatement": 256.41812366666665
+        },
+        "boosting": {
+          "n": 9137,
+          "mae": 56.61621615167331,
+          "pinball": 17.60642018293787,
+          "coverage80": 0.6868775309182445,
+          "width80": 149.03851563697805,
+          "p95_overstatement": 168.29875106349706
+        }
+      }
+    },
+    {
+      "connector": "Murraylink",
+      "direction": "reverse",
+      "matched_methods": {
+        "additive": {
+          "n": 9137,
+          "mae": 55.182956198026325,
+          "pinball": 17.135698211291253,
+          "coverage80": 0.7507934770712488,
+          "width80": 171.64354216730578,
+          "p95_overstatement": 130.78538882866292
+        },
+        "analogue": {
+          "n": 9137,
+          "mae": 75.20957708657879,
+          "pinball": 24.7761178307197,
+          "coverage80": 0.5895808252161541,
+          "width80": 168.1043757713173,
+          "p95_overstatement": 158.93386052112797
+        },
+        "baseline": {
+          "n": 9137,
+          "mae": 65.17992712843383,
+          "pinball": 20.301985582795236,
+          "coverage80": 0.6878625369377257,
+          "width80": 196.59221134024665,
+          "p95_overstatement": 144.76206299999993
+        },
+        "boosting": {
+          "n": 9137,
+          "mae": 51.72720891412299,
+          "pinball": 15.657941765751174,
+          "coverage80": 0.7539673853562439,
+          "width80": 163.51226900007015,
+          "p95_overstatement": 127.7392476694062
+        }
+      }
+    },
+    {
+      "connector": "QNI",
+      "direction": "forward",
+      "matched_methods": {
+        "additive": {
+          "n": 11741,
+          "mae": 270.1315892611152,
+          "pinball": 85.03033944800181,
+          "coverage80": 0.5682650540839792,
+          "width80": 502.0934782278324,
+          "p95_overstatement": 558.5669717225582
+        },
+        "analogue": {
+          "n": 11741,
+          "mae": 312.1938963993481,
+          "pinball": 115.0519843024792,
+          "coverage80": 0.4610339834767055,
+          "width80": 456.83955974809567,
+          "p95_overstatement": 659.2321293835246
+        },
+        "baseline": {
+          "n": 11741,
+          "mae": 291.74374187739545,
+          "pinball": 95.49733993932564,
+          "coverage80": 0.5689464270505068,
+          "width80": 577.298305820444,
+          "p95_overstatement": 662.4181133333334
+        },
+        "boosting": {
+          "n": 11741,
+          "mae": 266.3975321784128,
+          "pinball": 84.94037691337559,
+          "coverage80": 0.6085512307299208,
+          "width80": 522.6166145345292,
+          "p95_overstatement": 554.0659369133052
+        }
+      }
+    },
+    {
+      "connector": "QNI",
+      "direction": "reverse",
+      "matched_methods": {
+        "additive": {
+          "n": 11741,
+          "mae": 313.8782593902645,
+          "pinball": 94.41072649407928,
+          "coverage80": 0.5567668852738268,
+          "width80": 609.7892109357734,
+          "p95_overstatement": 493.09324003966026
+        },
+        "analogue": {
+          "n": 11741,
+          "mae": 283.54264007521056,
+          "pinball": 111.00771742137132,
+          "coverage80": 0.518354484285836,
+          "width80": 416.5348889844345,
+          "p95_overstatement": 877.966068098972
+        },
+        "baseline": {
+          "n": 11741,
+          "mae": 255.27056962701928,
+          "pinball": 101.9661689033657,
+          "coverage80": 0.6401499020526361,
+          "width80": 540.5611966520455,
+          "p95_overstatement": 893.9319766666666
+        },
+        "boosting": {
+          "n": 11741,
+          "mae": 305.42187377638976,
+          "pinball": 94.77839190114383,
+          "coverage80": 0.5468869772591772,
+          "width80": 626.3627067054343,
+          "p95_overstatement": 461.4353153414633
+        }
+      }
+    },
+    {
+      "connector": "VNI",
+      "direction": "forward",
+      "matched_methods": {
+        "additive": {
+          "n": 8691,
+          "mae": 246.83069303281067,
+          "pinball": 77.82175546529083,
+          "coverage80": 0.7366240938902313,
+          "width80": 692.9163688889266,
+          "p95_overstatement": 601.4708509588365
+        },
+        "analogue": {
+          "n": 8691,
+          "mae": 353.7931327548375,
+          "pinball": 128.3775901528002,
+          "coverage80": 0.5067311011391095,
+          "width80": 559.8377500701349,
+          "p95_overstatement": 872.8839145604923
+        },
+        "baseline": {
+          "n": 8691,
+          "mae": 266.43745220467537,
+          "pinball": 84.59743652308839,
+          "coverage80": 0.7686112069957427,
+          "width80": 835.0750778162085,
+          "p95_overstatement": 649.5703958333334
+        },
+        "boosting": {
+          "n": 8691,
+          "mae": 238.48000535215996,
+          "pinball": 76.37494576887167,
+          "coverage80": 0.7244275687492808,
+          "width80": 687.1118718306473,
+          "p95_overstatement": 597.0801176081658
+        }
+      }
+    },
+    {
+      "connector": "VNI",
+      "direction": "reverse",
+      "matched_methods": {
+        "additive": {
+          "n": 8691,
+          "mae": 202.07820931752036,
+          "pinball": 64.59361242518467,
+          "coverage80": 0.7431826026924404,
+          "width80": 603.5631659364367,
+          "p95_overstatement": 476.9812282778673
+        },
+        "analogue": {
+          "n": 8691,
+          "mae": 224.44524502728967,
+          "pinball": 79.78130944509661,
+          "coverage80": 0.5552870785870441,
+          "width80": 466.8850402400608,
+          "p95_overstatement": 514.3327376307525
+        },
+        "baseline": {
+          "n": 8691,
+          "mae": 213.04110386856132,
+          "pinball": 67.72928518091896,
+          "coverage80": 0.7567598665285928,
+          "width80": 667.4716603767499,
+          "p95_overstatement": 405.75904750000007
+        },
+        "boosting": {
+          "n": 8691,
+          "mae": 198.6075768644041,
+          "pinball": 62.18834445032574,
+          "coverage80": 0.7380048325854333,
+          "width80": 572.6692639775475,
+          "p95_overstatement": 489.9275659817968
+        }
+      }
+    }
+  ]
+}

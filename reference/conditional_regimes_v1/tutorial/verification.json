@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "verified": "2026-10-25T04:36:34.418343+00:00",
+  "bundle_id": "conditional-regimes-v1-b3352cb955ecbeb0",
+  "checks": [
+    "Executed installed-package tutorial, including both models",
+    "Timezone/direction/batch/negative-limit checks",
+    "Manifest input and output hashes",
+    "Offline anchors and 17 local links",
+    "Desktop/mobile visual review",
+    "266 repository tests passed"
+  ],
+  "tests": {
+    "exit_code": 0,
+    "completed_utc": "2026-10-25T04:33:52.4180966Z"
+  },
+  "html_sha256": "0bd5a2320c2f7aedaed926abbb25f7737e143209c5fcbbb8a830959d52c2cd83"
+}

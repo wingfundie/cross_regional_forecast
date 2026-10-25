@@ -1,0 +1,1224 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="data:,"><meta name="report-theme" content="editorial-html-report/1.0"><title>The grid behind the range</title><style>:root{--ink:#282b30;--muted:#636870;--blue:#4c94df;--teal:#268a87;--accent:#7658c9;--line:#dfe3eb;--panel:#ececf3}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;border-top:5px solid var(--blue);background:#f5f6f9;color:var(--ink);font:16px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+main{max-width:1344px;margin:auto;padding:50px 32px 70px}.eyebrow,.section-kicker{font-size:12px;letter-spacing:.14em;font-weight:750;color:#3977b7}.section-kicker{margin-bottom:10px}
+h1{font-size:clamp(38px,5vw,65px);line-height:1.08;letter-spacing:-.045em;margin:17px 0 22px}h1 span{color:var(--accent)}.dek{font-size:20px;max-width:1080px;color:var(--muted);margin-bottom:26px}.tags{display:flex;gap:9px;flex-wrap:wrap}.tags span{font-size:12px;border:1px solid var(--line);background:white;border-radius:20px;padding:6px 12px}
+nav{display:flex;flex-wrap:wrap;gap:21px;margin:22px 0 30px;padding:18px 0;border-bottom:1px solid var(--line);font-size:14px}a{color:#276bae;text-decoration:none}a:hover{text-decoration:underline}a:focus-visible,summary:focus-visible,select:focus-visible,.table-wrap:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.metric{background:white;border:1px solid var(--line);border-radius:10px;padding:21px;min-width:0}.metric span,.metric small{display:block;color:var(--muted);font-size:12px}.metric strong{font-size:30px;line-height:1.25;letter-spacing:-.035em;display:block;margin:5px 0;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.callout{background:#eaf3f5;border-left:4px solid var(--teal);padding:19px 23px;margin:25px 0;font-size:15px}.scope-note{background:#fff8e8;border-left-color:#c29330}
+section,.section{margin-top:52px;scroll-margin-top:20px}h2{font-size:29px;line-height:1.25;letter-spacing:-.025em;margin:38px 0 16px}h3{font-size:19px;line-height:1.3;margin:25px 0 13px}
+.connector-section{background:white;border:1px solid var(--line);border-radius:10px;padding:28px 30px}.connector-section+.connector-section{margin-top:24px}.connector-section h2{margin-top:5px}.connector-section p{max-width:1120px}.connector-section p strong{color:#1f516f}.connector-section code{white-space:normal}
+.findings{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.finding{background:white;border:1px solid var(--line);border-radius:10px;padding:23px;min-width:0}.finding h3{margin-top:11px}.finding p{margin:0;font-size:14px;color:var(--muted)}.index{font-size:12px;font-weight:750;color:var(--teal)}
+.table-wrap{overflow-x:auto;background:white;border:1px solid var(--line);border-radius:10px;max-width:100%;overscroll-behavior-x:contain;margin:16px 0}table{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap}th,td{padding:12px 14px;text-align:right;border-bottom:1px solid #edf0f4;vertical-align:top}th:first-child,td:first-child{text-align:left}td:first-child{font-weight:600}thead{background:var(--panel);font-size:12px;color:#4f545b}tbody tr:nth-child(even){background:#fafbfc}tbody tr:hover{background:#f0f6fc}
+.small,.note,.meta{font-size:13px;color:var(--muted)}figure{margin:26px 0 8px;background:white;border:1px solid var(--line);border-radius:10px;overflow:hidden}figcaption{display:flex;justify-content:space-between;gap:16px;padding:13px 18px;border-bottom:1px solid #edf0f4;color:var(--muted);font-size:12px;font-weight:650}.figure-links{display:flex;gap:20px;flex-shrink:0}figure img{display:block;width:100%;height:auto}.figure-note{padding:0 18px 13px;margin:0;color:var(--muted);font-size:12px}.chart-scroll{overflow-x:auto}.chart-scroll .plotly-graph-div{min-width:680px;border-top:2px solid var(--blue)}
+.method,details{padding:27px;background:white;border:1px solid var(--line);border-radius:10px}details{margin-top:24px}summary{cursor:pointer;font-weight:650}pre{max-width:100%;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere}li{margin:12px 0}.sources{font-size:14px}.sources a{overflow-wrap:anywhere}footer{margin-top:45px;padding-top:22px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}code{background:#f0f2f7;padding:2px 5px;border-radius:3px;font-size:12px;overflow-wrap:anywhere}
+@media(max-width:900px){main{padding:32px 20px 55px}.metrics{grid-template-columns:repeat(2,1fr)}.findings{grid-template-columns:1fr}.dek{font-size:18px}section,.section{margin-top:40px}nav{gap:14px}}
+@media(max-width:520px){main{padding:28px 15px 45px}.metrics{gap:10px}.metric{padding:15px}.metric strong{font-size:24px}.metric small{font-size:11px}h2{font-size:25px}figcaption{padding:11px 12px;align-items:flex-start}.figure-links{gap:12px}.method,details{padding:20px}.callout{padding:17px 18px}.connector-section{padding:21px 18px}}
+@media print{body{background:white}nav,figcaption a{display:none}main{max-width:none;padding:15px}figure,.metrics,.finding{break-inside:avoid}h2{break-after:avoid}.chart-scroll{overflow:visible}.chart-scroll .plotly-graph-div{min-width:0}}
+</style></head><body><main><header><div class="eyebrow">INTERFLOW · Conditional regimes</div><h1>The grid behind the range<br><span>Conditions, mechanisms and evidence</span></h1><p class="dek">Measured conditions and a twelve-month event review. Historical limit observations through 2026-10-25 00:00:00 NEM time.</p><div class="tags"><span>Research only</span><span>Q1–Q4</span><span>Six links · both directions</span><span>Built 2026-10-25</span></div></header><nav class="section-nav"><a href="index.html">Research centre</a><a href="conditions.html">Conditions & events</a><a href="limits.html">Limits & analogues</a><a href="validation.html">Validation</a></nav><div class="metrics"><article class="metric"><span>Event cases</span><strong>20</strong><small>Includes negative controls and structural changes</small></article><article class="metric"><span>Public conditions</span><strong>22</strong><small>Missing quantities remain unavailable</small></article><article class="metric"><span>Directional rows</span><strong>451,392</strong><small>Complete half-hours in the inference panel</small></article><article class="metric"><span>Current invocation</span><strong>Unknown</strong><small>October dispatch is not an invocation feed</small></article></div><h2 id="1-why-the-earlier-tables-can-miss-the-day">1. Why the earlier tables can miss the day</h2>
+<p>The earlier low/normal/high tables condition on one driver at a time. A broad normal bucket can contain a corridor outage, an intact circuit with high local renewable output, and a low-renewable evening with different available generators. Their median may describe none of these well. This campaign keeps the diurnal reference, then asks which joint conditions change the distribution and whether enough independent history supports that distinction.</p>
+<p>AEMO reported limits are outcomes of dispatch constraints and controllable dispatch choices. They are not equipment ratings or maximum secure transfer capability. Geographic generation and charging can change the feasible dispatch envelope without any change to regional total wind or demand. <a href="https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/system-operations/congestion-information-resource/constraint-faq">AEMO constraint explanation</a>.</p>
+<h2 id="2-what-is-actually-measured">2. What is actually measured</h2>
+<p>The data retain complete six-observation half-hours and signed directional values. Reverse capacity is minus raw IMPORTLIMIT. The primary target is the average; the minimum is retained to reveal restrictions hidden within that average. Missing data are never zero-filled. Calendar quarters use the delivery timestamp in fixed NEM time.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th style="text-align: left;">condition</th>
+<th style="text-align: left;">units</th>
+<th style="text-align: left;">source</th>
+<th style="text-align: right;">historical_coverage</th>
+<th style="text-align: left;">availability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">temperature_max</td>
+<td style="text-align: left;">C</td>
+<td style="text-align: left;">Public weather; retained reanalysis and explicit issued runs</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Realised conditional history; dated inputs need separate issue and receipt evidence</td>
+</tr>
+<tr>
+<td style="text-align: left;">source_temperature</td>
+<td style="text-align: left;">C</td>
+<td style="text-align: left;">Public weather; retained reanalysis and explicit issued runs</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Realised conditional history; dated inputs need separate issue and receipt evidence</td>
+</tr>
+<tr>
+<td style="text-align: left;">sink_temperature</td>
+<td style="text-align: left;">C</td>
+<td style="text-align: left;">Public weather; retained reanalysis and explicit issued runs</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Realised conditional history; dated inputs need separate issue and receipt evidence</td>
+</tr>
+<tr>
+<td style="text-align: left;">humidity_mean</td>
+<td style="text-align: left;">%</td>
+<td style="text-align: left;">Public weather; retained reanalysis and explicit issued runs</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Realised conditional history; dated inputs need separate issue and receipt evidence</td>
+</tr>
+<tr>
+<td style="text-align: left;">source_vre</td>
+<td style="text-align: left;">MW</td>
+<td style="text-align: left;">AEMO regional dispatch</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Realised conditional history; dated inputs need separate issue and receipt evidence</td>
+</tr>
+<tr>
+<td style="text-align: left;">sink_vre</td>
+<td style="text-align: left;">MW</td>
+<td style="text-align: left;">AEMO regional dispatch</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Realised conditional history; dated inputs need separate issue and receipt evidence</td>
+</tr>
+<tr>
+<td style="text-align: left;">source_demand</td>
+<td style="text-align: left;">MW</td>
+<td style="text-align: left;">AEMO regional dispatch</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Realised conditional history; dated inputs need separate issue and receipt evidence</td>
+</tr>
+<tr>
+<td style="text-align: left;">sink_demand</td>
+<td style="text-align: left;">MW</td>
+<td style="text-align: left;">AEMO regional dispatch</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Realised conditional history; dated inputs need separate issue and receipt evidence</td>
+</tr>
+<tr>
+<td style="text-align: left;">source_residual</td>
+<td style="text-align: left;">MW</td>
+<td style="text-align: left;">AEMO regional dispatch</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Realised conditional history; dated inputs need separate issue and receipt evidence</td>
+</tr>
+<tr>
+<td style="text-align: left;">sink_residual</td>
+<td style="text-align: left;">MW</td>
+<td style="text-align: left;">AEMO regional dispatch</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Realised conditional history; dated inputs need separate issue and receipt evidence</td>
+</tr>
+<tr>
+<td style="text-align: left;">vre_difference</td>
+<td style="text-align: left;">MW</td>
+<td style="text-align: left;">AEMO regional dispatch</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Realised conditional history; dated inputs need separate issue and receipt evidence</td>
+</tr>
+<tr>
+<td style="text-align: left;">residual_difference</td>
+<td style="text-align: left;">MW</td>
+<td style="text-align: left;">AEMO regional dispatch</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Realised conditional history; dated inputs need separate issue and receipt evidence</td>
+</tr>
+<tr>
+<td style="text-align: left;">source_vre_ramp_1h</td>
+<td style="text-align: left;">MW</td>
+<td style="text-align: left;">AEMO regional dispatch</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Realised conditional history; dated inputs need separate issue and receipt evidence</td>
+</tr>
+<tr>
+<td style="text-align: left;">sink_vre_ramp_1h</td>
+<td style="text-align: left;">MW</td>
+<td style="text-align: left;">AEMO regional dispatch</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Realised conditional history; dated inputs need separate issue and receipt evidence</td>
+</tr>
+<tr>
+<td style="text-align: left;">residual_difference_ramp_1h</td>
+<td style="text-align: left;">MW</td>
+<td style="text-align: left;">AEMO regional dispatch</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Realised conditional history; dated inputs need separate issue and receipt evidence</td>
+</tr>
+<tr>
+<td style="text-align: left;">source_available_generation</td>
+<td style="text-align: left;">MW</td>
+<td style="text-align: left;">AEMO regional dispatch</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Realised conditional history; dated inputs need separate issue and receipt evidence</td>
+</tr>
+<tr>
+<td style="text-align: left;">sink_available_generation</td>
+<td style="text-align: left;">MW</td>
+<td style="text-align: left;">AEMO regional dispatch</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Realised conditional history; dated inputs need separate issue and receipt evidence</td>
+</tr>
+<tr>
+<td style="text-align: left;">electrical_positive_mw</td>
+<td style="text-align: left;">MW</td>
+<td style="text-align: left;">AEMO equation factors and DUID dispatch</td>
+<td style="text-align: right;">0.37</td>
+<td style="text-align: left;">Realised conditional history; dated inputs need separate issue and receipt evidence</td>
+</tr>
+<tr>
+<td style="text-align: left;">electrical_negative_mw</td>
+<td style="text-align: left;">MW</td>
+<td style="text-align: left;">AEMO equation factors and DUID dispatch</td>
+<td style="text-align: right;">0.37</td>
+<td style="text-align: left;">Realised conditional history; dated inputs need separate issue and receipt evidence</td>
+</tr>
+<tr>
+<td style="text-align: left;">corridor_wind_ms</td>
+<td style="text-align: left;">m/s</td>
+<td style="text-align: left;">Public weather; retained reanalysis and explicit issued runs</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Realised conditional history; dated inputs need separate issue and receipt evidence</td>
+</tr>
+<tr>
+<td style="text-align: left;">corridor_radiation_wm2</td>
+<td style="text-align: left;">W/m2</td>
+<td style="text-align: left;">Public weather; retained reanalysis and explicit issued runs</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Realised conditional history; dated inputs need separate issue and receipt evidence</td>
+</tr>
+<tr>
+<td style="text-align: left;">corridor_cloud_pct</td>
+<td style="text-align: left;">%</td>
+<td style="text-align: left;">Public weather; retained reanalysis and explicit issued runs</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Realised conditional history; dated inputs need separate issue and receipt evidence</td>
+</tr>
+</tbody>
+</table></div>
+<p>Electrical generation groups are constructed from eligible signed equation terms and effective-dated unit mappings at the first training boundary. They are not rankings chosen from evaluation outcomes. Missing unit dispatch makes the aggregate unavailable rather than silently zero. Their current coverage is limited; the data matrix below makes that visible.</p>
+<figure><figcaption>Condition coverage varies by connector and structural era</figcaption><img src="data:image/png;base64,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" alt="Condition coverage varies by connector and structural era" style="width:100%;height:auto"><p class="figure-note">Source: campaign cached evidence. Fixed UTC+10, interval-ending; MW unless labelled otherwise.</p></figure>
+
+<h2 id="3-twelve-month-event-review">3. Twelve-month event review</h2>
+<p>The review window is 25 October 2025–25 October 2026. The 20 registered cases include mechanism candidates, structural breaks, a negative control, forecast quality checks and a data-quality quarantine. Monthly and theme searches are recorded. Direct site downloads were blocked, so article review used the web research tool; cached research responses have separate hashes. This is a bounded public-source review, not a census of every incident. Several articles quote market notices; an original notice not independently retrieved remains a verification gap. Additional September–October examples were added for explanation without changing the frozen evaluated feature set.</p>
+<h3 id="2025-11-25-nsw-cloud-ramps-with-changing-corridor-outages">2025-11-25 — NSW cloud ramps with changing corridor outages</h3>
+<p>Successive days involved different outages; do not encode a single high-demand derating. The measurable candidate conditions are specific corridor outage, sink residual demand, solar ramp, local generation. Classification: <strong>mechanism candidate</strong>. <a href="https://wattclarity.com.au/articles/2025/11/unpacking-some-of-the-drivers-of-volatility-in-nsw-today-on-wednesday-26th-nov-2025/">WattClarity event source</a>. <a href="https://www.aemo.com.au/-/media/files/major-publications/qed/2025/qed-q4-2025.pdf">AEMO corroboration/context</a>.</p>
+<p>Publication date: 2025-11-26. Later commentary supplies research labels and never masquerades as information known before the event.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th style="text-align: left;">connector</th>
+<th style="text-align: left;">direction</th>
+<th style="text-align: right;">rows</th>
+<th style="text-align: right;">median_mw</th>
+<th style="text-align: right;">p10_mw</th>
+<th style="text-align: left;">minimum_mw</th>
+<th style="text-align: right;">forced_share</th>
+<th style="text-align: right;">unknown_invocation_share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">VNI</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">96</td>
+<td style="text-align: right;">299.16</td>
+<td style="text-align: right;">-500.34</td>
+<td style="text-align: left;">-1,700.42</td>
+<td style="text-align: right;">0.36</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">96</td>
+<td style="text-align: right;">783.54</td>
+<td style="text-align: right;">88.28</td>
+<td style="text-align: left;">-362.89</td>
+<td style="text-align: right;">0.02</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="2026-01-09-vni-corridor-trips-and-sips-operation">2026-01-09 — VNI corridor trips and SIPS operation</h3>
+<p>Protection service status requires independent public verification; generic battery output is not proof of armed support. The measurable candidate conditions are circuit status, support scheme status, battery capability. Classification: <strong>mechanism candidate</strong>. <a href="https://wattclarity.com.au/articles/2026/01/09jan-vbb-sips-operated/">WattClarity event source</a>. Original quoted notice reconciliation remains explicit in the evidence register.</p>
+<p>Publication date: 2026-01-10. Later commentary supplies research labels and never masquerades as information known before the event.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th style="text-align: left;">connector</th>
+<th style="text-align: left;">direction</th>
+<th style="text-align: right;">rows</th>
+<th style="text-align: right;">median_mw</th>
+<th style="text-align: right;">p10_mw</th>
+<th style="text-align: right;">minimum_mw</th>
+<th style="text-align: right;">forced_share</th>
+<th style="text-align: right;">unknown_invocation_share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">VNI</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">339.3</td>
+<td style="text-align: right;">46.08</td>
+<td style="text-align: right;">-8.7</td>
+<td style="text-align: right;">0.02</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">223.82</td>
+<td style="text-align: right;">-317.9</td>
+<td style="text-align: right;">-412.08</td>
+<td style="text-align: right;">0.27</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="2026-01-09-lightning-reclassification-negative-control">2026-01-09 — Lightning reclassification negative control</h3>
+<p>The discussed reclassification was not itself demonstrated as an interconnector setter. Weather alone must not trigger a limit adjustment. The measurable candidate conditions are contingency reclassification, affected circuit, synchronous unit configuration. Classification: <strong>negative control</strong>. <a href="https://wattclarity.com.au/articles/2026/01/09jan-at-15-35-victoria/">WattClarity event source</a>. Original quoted notice reconciliation remains explicit in the evidence register.</p>
+<p>Publication date: 2026-01-09. Later commentary supplies research labels and never masquerades as information known before the event.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th style="text-align: left;">connector</th>
+<th style="text-align: left;">direction</th>
+<th style="text-align: right;">rows</th>
+<th style="text-align: right;">median_mw</th>
+<th style="text-align: right;">p10_mw</th>
+<th style="text-align: right;">minimum_mw</th>
+<th style="text-align: right;">forced_share</th>
+<th style="text-align: right;">unknown_invocation_share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">VNI</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">339.3</td>
+<td style="text-align: right;">46.08</td>
+<td style="text-align: right;">-8.7</td>
+<td style="text-align: right;">0.02</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">223.82</td>
+<td style="text-align: right;">-317.9</td>
+<td style="text-align: right;">-412.08</td>
+<td style="text-align: right;">0.27</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">Heywood</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">501.27</td>
+<td style="text-align: right;">22.62</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">Heywood</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">-26.01</td>
+<td style="text-align: right;">-561.17</td>
+<td style="text-align: right;">-630.65</td>
+<td style="text-align: right;">0.67</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="2026-01-12-basslink-zero-transfers-and-fcas-context">2026-01-12 — Basslink zero transfers and FCAS context</h3>
+<p>Historical MNSP-era operation is not automatically comparable to regulated-era capacity. The measurable candidate conditions are DC direction transition, bid availability, FCAS context. Classification: <strong>mechanism candidate</strong>. <a href="https://wattclarity.com.au/articles/2026/01/tas-energy-and-fcas-prices-spike-on-monday-afternoon-12th-january-2026/">WattClarity event source</a>. Original quoted notice reconciliation remains explicit in the evidence register.</p>
+<p>Publication date: 2026-01-12. Later commentary supplies research labels and never masquerades as information known before the event.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th style="text-align: left;">connector</th>
+<th style="text-align: left;">direction</th>
+<th style="text-align: right;">rows</th>
+<th style="text-align: right;">median_mw</th>
+<th style="text-align: right;">p10_mw</th>
+<th style="text-align: right;">minimum_mw</th>
+<th style="text-align: right;">forced_share</th>
+<th style="text-align: right;">unknown_invocation_share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Basslink</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">-153.93</td>
+<td style="text-align: right;">-177.1</td>
+<td style="text-align: right;">-179.75</td>
+<td style="text-align: right;">0.9</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">Basslink</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">302.72</td>
+<td style="text-align: right;">99.58</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="2026-01-26-persistent-sa-evening-heat">2026-01-26 — Persistent SA evening heat</h3>
+<p>The article documents stress but does not establish a heat-caused transfer-limit derating. The measurable candidate conditions are temperature, evening residual demand, availability. Classification: <strong>background stress</strong>. <a href="https://wattclarity.com.au/articles/2026/01/sa-sees-a-long-period-of-sustained-high-prices-near-the-mpc-amid-40c-heat-on-the-evening-of-australia-day-2026/">WattClarity event source</a>. Original quoted notice reconciliation remains explicit in the evidence register.</p>
+<p>Publication date: 2026-01-26. Later commentary supplies research labels and never masquerades as information known before the event.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th style="text-align: left;">connector</th>
+<th style="text-align: left;">direction</th>
+<th style="text-align: right;">rows</th>
+<th style="text-align: right;">median_mw</th>
+<th style="text-align: right;">p10_mw</th>
+<th style="text-align: right;">minimum_mw</th>
+<th style="text-align: right;">forced_share</th>
+<th style="text-align: right;">unknown_invocation_share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Heywood</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">493.31</td>
+<td style="text-align: right;">351.39</td>
+<td style="text-align: right;">169.25</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">Heywood</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">144.94</td>
+<td style="text-align: right;">-177.58</td>
+<td style="text-align: right;">-233.85</td>
+<td style="text-align: right;">0.4</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">Murraylink</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">-2.68</td>
+<td style="text-align: right;">-41.27</td>
+<td style="text-align: right;">-97.84</td>
+<td style="text-align: right;">0.69</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">Murraylink</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">3.92</td>
+<td style="text-align: right;">-0.72</td>
+<td style="text-align: right;">-34.4</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="2026-02-05-avonmarulan-outage-with-afternoon-solar-decline">2026-02-05 — Avon–Marulan outage with afternoon solar decline</h3>
+<p>An outage-specific state interacting with time of day and regional balance; effects require dispatch reconciliation. The measurable candidate conditions are specific corridor outage, solar ramp, sink demand. Classification: <strong>mechanism candidate</strong>. <a href="https://wattclarity.com.au/articles/2026/02/05feb-nsw-volatility-continues/">WattClarity event source</a>. Original quoted notice reconciliation remains explicit in the evidence register.</p>
+<p>Publication date: 2026-02-05. Later commentary supplies research labels and never masquerades as information known before the event.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th style="text-align: left;">connector</th>
+<th style="text-align: left;">direction</th>
+<th style="text-align: right;">rows</th>
+<th style="text-align: right;">median_mw</th>
+<th style="text-align: right;">p10_mw</th>
+<th style="text-align: left;">minimum_mw</th>
+<th style="text-align: right;">forced_share</th>
+<th style="text-align: right;">unknown_invocation_share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">VNI</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">350.14</td>
+<td style="text-align: right;">-167.55</td>
+<td style="text-align: left;">-1,086.10</td>
+<td style="text-align: right;">0.4</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">122.81</td>
+<td style="text-align: right;">-77.61</td>
+<td style="text-align: left;">-161.47</td>
+<td style="text-align: right;">0.25</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="2026-06-20-x3-derating-generation-geography-and-limited-flexibility">2026-06-20 — X3 derating, generation geography and limited flexibility</h3>
+<p>Joint configuration and generator leverage matter. Storage-energy explanations are distinct from measured charging/discharging. The measurable candidate conditions are equipment derating, geographic generation, battery charging/discharging availability, low wind. Classification: <strong>mechanism candidate</strong>. <a href="https://wattclarity.com.au/articles/2026/06/still-air-empty-tanks-and-a-hot-joint/">WattClarity event source</a>. <a href="https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/system-operations/congestion-information-resource/statistical-reporting-streams">AEMO corroboration/context</a>.</p>
+<p>Publication date: 2026-06-29. Later commentary supplies research labels and never masquerades as information known before the event.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th style="text-align: left;">connector</th>
+<th style="text-align: left;">direction</th>
+<th style="text-align: right;">rows</th>
+<th style="text-align: right;">median_mw</th>
+<th style="text-align: right;">p10_mw</th>
+<th style="text-align: right;">minimum_mw</th>
+<th style="text-align: right;">forced_share</th>
+<th style="text-align: right;">unknown_invocation_share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Heywood</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">240</td>
+<td style="text-align: right;">330.44</td>
+<td style="text-align: right;">132.25</td>
+<td style="text-align: right;">-80.96</td>
+<td style="text-align: right;">0.02</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">Heywood</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">240</td>
+<td style="text-align: right;">79.47</td>
+<td style="text-align: right;">-214.1</td>
+<td style="text-align: right;">-288.62</td>
+<td style="text-align: right;">0.25</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">Murraylink</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">240</td>
+<td style="text-align: right;">3.4</td>
+<td style="text-align: right;">-150.65</td>
+<td style="text-align: right;">-244.56</td>
+<td style="text-align: right;">0.47</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">Murraylink</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">240</td>
+<td style="text-align: right;">77</td>
+<td style="text-align: right;">-19.62</td>
+<td style="text-align: right;">-96.33</td>
+<td style="text-align: right;">0.12</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="2026-07-01-basslink-regulated-transition">2026-07-01 — Basslink regulated transition</h3>
+<p>Separate regulated and MNSP operating eras before analogy matching. The measurable candidate conditions are market era, capacity-source semantics. Classification: <strong>structural break</strong>. <a href="https://wattclarity.com.au/articles/2026/06/basslink-on-track-to-operate-as-regulated-interconnector-from-1-july-2026/">WattClarity event source</a>. <a href="https://www.aemo.com.au/initiatives/major-programs/nem-reform-program/nem-reform-program-initiatives/basslink-determination-participant-support-arrangements">AEMO corroboration/context</a>.</p>
+<p>Publication date: 2026-06-23. Later commentary supplies research labels and never masquerades as information known before the event.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th style="text-align: left;">connector</th>
+<th style="text-align: left;">direction</th>
+<th style="text-align: right;">rows</th>
+<th style="text-align: right;">median_mw</th>
+<th style="text-align: right;">p10_mw</th>
+<th style="text-align: right;">minimum_mw</th>
+<th style="text-align: right;">forced_share</th>
+<th style="text-align: right;">unknown_invocation_share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Basslink</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">Basslink</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="2026-07-05-riverina-battery-disconnection-direction">2026-07-05 — Riverina battery disconnection direction</h3>
+<p>The direction is not by itself evidence of an interconnector-limit effect. The measurable candidate conditions are local inverter availability, system strength intervention. Classification: <strong>unproven limit hypothesis</strong>. <a href="https://wattclarity.com.au/articles/2026/07/05july-aemo-directs-battery-disconnection/">WattClarity event source</a>. Original quoted notice reconciliation remains explicit in the evidence register.</p>
+<p>Publication date: 2026-07-05. Later commentary supplies research labels and never masquerades as information known before the event.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th style="text-align: left;">connector</th>
+<th style="text-align: left;">direction</th>
+<th style="text-align: right;">rows</th>
+<th style="text-align: right;">median_mw</th>
+<th style="text-align: right;">p10_mw</th>
+<th style="text-align: right;">minimum_mw</th>
+<th style="text-align: right;">forced_share</th>
+<th style="text-align: right;">unknown_invocation_share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">VNI</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">564.7</td>
+<td style="text-align: right;">-401.07</td>
+<td style="text-align: right;">-449.56</td>
+<td style="text-align: right;">0.27</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">415.68</td>
+<td style="text-align: right;">184.15</td>
+<td style="text-align: right;">150.19</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">Murraylink</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">127.75</td>
+<td style="text-align: right;">101.85</td>
+<td style="text-align: right;">25.48</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">Murraylink</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">32.25</td>
+<td style="text-align: right;">-130.79</td>
+<td style="text-align: right;">-156.4</td>
+<td style="text-align: right;">0.42</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="2026-07-13-portland-bus-outage-and-fcas-related-set">2026-07-13 — Portland bus outage and FCAS-related set</h3>
+<p>Large-load and FCAS conditions can affect a DC link even without an outage of the cable itself. The measurable candidate conditions are large load contingency, specific outage, FCAS coupling. Classification: <strong>mechanism candidate</strong>. <a href="https://wattclarity.com.au/articles/2026/07/13july-vic-demand-changes/">WattClarity event source</a>. Original quoted notice reconciliation remains explicit in the evidence register.</p>
+<p>Publication date: 2026-07-13. Later commentary supplies research labels and never masquerades as information known before the event.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th style="text-align: left;">connector</th>
+<th style="text-align: left;">direction</th>
+<th style="text-align: right;">rows</th>
+<th style="text-align: right;">median_mw</th>
+<th style="text-align: right;">p10_mw</th>
+<th style="text-align: right;">minimum_mw</th>
+<th style="text-align: right;">forced_share</th>
+<th style="text-align: right;">unknown_invocation_share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Basslink</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">-122.05</td>
+<td style="text-align: right;">-186.51</td>
+<td style="text-align: right;">-280.28</td>
+<td style="text-align: right;">0.62</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">Basslink</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">251.94</td>
+<td style="text-align: right;">-346.47</td>
+<td style="text-align: right;">-394.71</td>
+<td style="text-align: right;">0.31</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="2026-08-05-apparent-metered-flow-and-demand-anomaly">2026-08-05 — Apparent metered-flow and demand anomaly</h3>
+<p>A source-data anomaly is not a physical operating regime; compare results with this day excluded. The measurable candidate conditions are metering consistency, demand anomaly. Classification: <strong>data quality quarantine</strong>. <a href="https://wattclarity.com.au/articles/2026/08/05aug-nsw-marketdemand-gyration/">WattClarity event source</a>. Original quoted notice reconciliation remains explicit in the evidence register.</p>
+<p>Publication date: 2026-08-05. Later commentary supplies research labels and never masquerades as information known before the event.</p>
+<h3 id="2026-08-15-simultaneous-dc-control-unavailability">2026-08-15 — Simultaneous DC control unavailability</h3>
+<p>Control unavailability deserves its own regime; no common cause is assumed from timing alone. The measurable candidate conditions are control availability, simultaneous set invocation. Classification: <strong>mechanism candidate</strong>. <a href="https://wattclarity.com.au/articles/2026/08/15aug-dc-interconnectors/">WattClarity event source</a>. Original quoted notice reconciliation remains explicit in the evidence register.</p>
+<p>Publication date: 2026-08-15. Later commentary supplies research labels and never masquerades as information known before the event.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th style="text-align: left;">connector</th>
+<th style="text-align: left;">direction</th>
+<th style="text-align: right;">rows</th>
+<th style="text-align: right;">median_mw</th>
+<th style="text-align: right;">p10_mw</th>
+<th style="text-align: right;">minimum_mw</th>
+<th style="text-align: right;">forced_share</th>
+<th style="text-align: right;">unknown_invocation_share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Directlink</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">50.74</td>
+<td style="text-align: right;">3.46</td>
+<td style="text-align: right;">-33.62</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">Directlink</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">104.18</td>
+<td style="text-align: right;">-39.37</td>
+<td style="text-align: right;">-84</td>
+<td style="text-align: right;">0.19</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">Murraylink</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">139</td>
+<td style="text-align: right;">77.67</td>
+<td style="text-align: right;">59</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">Murraylink</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">9.92</td>
+<td style="text-align: right;">-149.23</td>
+<td style="text-align: right;">-161.03</td>
+<td style="text-align: right;">0.48</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="2026-10-01-pec-market-representation-change">2026-10-01 — PEC market representation change</h3>
+<p>Market registration, physical energisation and testing caps are different conditions. The measurable candidate conditions are market era, loop coupling. Classification: <strong>structural break</strong>. <a href="https://wattclarity.com.au/articles/2026/10/01oct-pec-golive/">WattClarity event source</a>. <a href="https://www.aemo.com.au/initiatives/major-programs/nem-reform-program/nem-reform-program-initiatives/project-energyconnect-market-integration-project/frequently-asked-questions">AEMO corroboration/context</a>.</p>
+<p>Publication date: 2026-10-01. Later commentary supplies research labels and never masquerades as information known before the event.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th style="text-align: left;">connector</th>
+<th style="text-align: left;">direction</th>
+<th style="text-align: right;">rows</th>
+<th style="text-align: right;">median_mw</th>
+<th style="text-align: right;">p10_mw</th>
+<th style="text-align: right;">minimum_mw</th>
+<th style="text-align: right;">forced_share</th>
+<th style="text-align: right;">unknown_invocation_share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">VNI</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">720.94</td>
+<td style="text-align: right;">235.14</td>
+<td style="text-align: right;">-35.2</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">0.98</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">305.05</td>
+<td style="text-align: right;">224.53</td>
+<td style="text-align: right;">160.18</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.98</td>
+</tr>
+<tr>
+<td style="text-align: left;">Heywood</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">600</td>
+<td style="text-align: right;">580.43</td>
+<td style="text-align: right;">377.18</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.98</td>
+</tr>
+<tr>
+<td style="text-align: left;">Heywood</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">538.25</td>
+<td style="text-align: right;">453.41</td>
+<td style="text-align: right;">395.39</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.98</td>
+</tr>
+<tr>
+<td style="text-align: left;">Murraylink</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">120.75</td>
+<td style="text-align: right;">82.85</td>
+<td style="text-align: right;">61.33</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.98</td>
+</tr>
+<tr>
+<td style="text-align: left;">Murraylink</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">36.92</td>
+<td style="text-align: right;">-18.92</td>
+<td style="text-align: right;">-117.19</td>
+<td style="text-align: right;">0.15</td>
+<td style="text-align: right;">0.98</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="2026-10-04-southern-congestion-sa-restriction-and-ac-coupling">2026-10-04 — Southern congestion, SA restriction and AC coupling</h3>
+<p>A binding loop equation couples dispatch; do not automatically label it as the reported limit setter. The measurable candidate conditions are southern NSW congestion, SA import security, geographic VRE, loop coupling. Classification: <strong>mechanism candidate</strong>. <a href="https://wattclarity.com.au/articles/2026/10/loopy-or-not/">WattClarity event source</a>. <a href="https://www.aemo.com.au/initiatives/major-programs/nem-reform-program/nem-reform-program-initiatives/project-energyconnect-market-integration-project/frequently-asked-questions">AEMO corroboration/context</a>.</p>
+<p>Publication date: 2026-10-06. Later commentary supplies research labels and never masquerades as information known before the event.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th style="text-align: left;">connector</th>
+<th style="text-align: left;">direction</th>
+<th style="text-align: right;">rows</th>
+<th style="text-align: right;">median_mw</th>
+<th style="text-align: right;">p10_mw</th>
+<th style="text-align: right;">minimum_mw</th>
+<th style="text-align: right;">forced_share</th>
+<th style="text-align: right;">unknown_invocation_share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">VNI</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">317.02</td>
+<td style="text-align: right;">-290.27</td>
+<td style="text-align: right;">-348.92</td>
+<td style="text-align: right;">0.27</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">536.6</td>
+<td style="text-align: right;">293.4</td>
+<td style="text-align: right;">265.91</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td style="text-align: left;">Heywood</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">544.57</td>
+<td style="text-align: right;">248.43</td>
+<td style="text-align: right;">209.39</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td style="text-align: left;">Heywood</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">559.93</td>
+<td style="text-align: right;">360.42</td>
+<td style="text-align: right;">337.14</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td style="text-align: left;">Murraylink</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">135.87</td>
+<td style="text-align: right;">119.39</td>
+<td style="text-align: right;">113.5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td style="text-align: left;">Murraylink</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">10.25</td>
+<td style="text-align: right;">-139.75</td>
+<td style="text-align: right;">-150.42</td>
+<td style="text-align: right;">0.46</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="2026-10-12-explicit-qni-southward-restriction">2026-10-12 — Explicit QNI southward restriction</h3>
+<p>The reported cap is an event-specific condition, not a universal new QNI reference. The measurable candidate conditions are explicit cap, outage, FCAS coupling. Classification: <strong>mechanism candidate</strong>. <a href="https://wattclarity.com.au/articles/2026/10/12oct-qni-500mw-reduction/">WattClarity event source</a>. Original quoted notice reconciliation remains explicit in the evidence register.</p>
+<p>Publication date: 2026-10-18. Later commentary supplies research labels and never masquerades as information known before the event.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th style="text-align: left;">connector</th>
+<th style="text-align: left;">direction</th>
+<th style="text-align: right;">rows</th>
+<th style="text-align: left;">median_mw</th>
+<th style="text-align: right;">p10_mw</th>
+<th style="text-align: right;">minimum_mw</th>
+<th style="text-align: right;">forced_share</th>
+<th style="text-align: right;">unknown_invocation_share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">QNI</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: left;">363.83</td>
+<td style="text-align: right;">57.78</td>
+<td style="text-align: right;">-47.19</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td style="text-align: left;">QNI</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: left;">1,063.40</td>
+<td style="text-align: right;">456.75</td>
+<td style="text-align: right;">354.83</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="2026-09-09-waratah-protection-service-testing-and-paired-flexibility">2026-09-09 — Waratah protection-service testing and paired flexibility</h3>
+<p>Testing demonstrates why service configuration can matter; battery output alone does not establish armed service or a numerical interconnector-limit effect. The measurable candidate conditions are support-service availability, paired generator flexibility, transformer status. Classification: <strong>unproven limit hypothesis</strong>. <a href="https://wattclarity.com.au/articles/2026/09/waratah-bess-tests-its-full-sips-capacity-on-wednesday-morning-9th-september-2026/">WattClarity event source</a>. Original quoted notice reconciliation remains explicit in the evidence register.</p>
+<p>Publication date: 2026-09-10. Later commentary supplies research labels and never masquerades as information known before the event.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th style="text-align: left;">connector</th>
+<th style="text-align: left;">direction</th>
+<th style="text-align: right;">rows</th>
+<th style="text-align: left;">median_mw</th>
+<th style="text-align: right;">p10_mw</th>
+<th style="text-align: right;">minimum_mw</th>
+<th style="text-align: right;">forced_share</th>
+<th style="text-align: right;">unknown_invocation_share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">VNI</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: left;">581.70</td>
+<td style="text-align: right;">521.97</td>
+<td style="text-align: right;">252.83</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: left;">280.09</td>
+<td style="text-align: right;">110.99</td>
+<td style="text-align: right;">-113.97</td>
+<td style="text-align: right;">0.02</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">QNI</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: left;">644.48</td>
+<td style="text-align: right;">540.11</td>
+<td style="text-align: right;">421.07</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">QNI</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: left;">1,078.00</td>
+<td style="text-align: right;">478.66</td>
+<td style="text-align: right;">409.67</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="2026-09-30-pec-appears-in-predispatch-before-dispatch-go-live">2026-09-30 — PEC appears in predispatch before dispatch go-live</h3>
+<p>Product and delivery-time mappings can change before the observed dispatch representation. Never join solely on the forecast origin's era. The measurable candidate conditions are forecast product, delivery-time market era, run vintage. Classification: <strong>forecast representation change</strong>. <a href="https://wattclarity.com.au/articles/2026/09/30sept-pec-in-predispatch/">WattClarity event source</a>. Original quoted notice reconciliation remains explicit in the evidence register.</p>
+<p>Publication date: 2026-09-30. Later commentary supplies research labels and never masquerades as information known before the event.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th style="text-align: left;">connector</th>
+<th style="text-align: left;">direction</th>
+<th style="text-align: right;">rows</th>
+<th style="text-align: right;">median_mw</th>
+<th style="text-align: right;">p10_mw</th>
+<th style="text-align: right;">minimum_mw</th>
+<th style="text-align: right;">forced_share</th>
+<th style="text-align: right;">unknown_invocation_share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">VNI</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">547.41</td>
+<td style="text-align: right;">-228.81</td>
+<td style="text-align: right;">-281.12</td>
+<td style="text-align: right;">0.31</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">450.98</td>
+<td style="text-align: right;">227.08</td>
+<td style="text-align: right;">181.21</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">Heywood</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">554.13</td>
+<td style="text-align: right;">401.43</td>
+<td style="text-align: right;">81.33</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">Heywood</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">468.08</td>
+<td style="text-align: right;">-126.24</td>
+<td style="text-align: right;">-322.41</td>
+<td style="text-align: right;">0.19</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">Murraylink</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">164.33</td>
+<td style="text-align: right;">118</td>
+<td style="text-align: right;">26.24</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">Murraylink</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">-85.47</td>
+<td style="text-align: right;">-178.83</td>
+<td style="text-align: right;">-185.12</td>
+<td style="text-align: right;">0.81</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="2026-10-02-heywood-test-hold-point-release">2026-10-02 — Heywood test hold-point release</h3>
+<p>A test hold point is a separately dated operating condition. Its announced value is not a universal limit for the quarter. The measurable candidate conditions are capacity-release testing stage, explicit constraint-set notice, direction. Classification: <strong>mechanism candidate</strong>. <a href="https://wattclarity.com.au/articles/2026/10/02oct-heywood/">WattClarity event source</a>. Original quoted notice reconciliation remains explicit in the evidence register.</p>
+<p>Publication date: 2026-10-02. Later commentary supplies research labels and never masquerades as information known before the event.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th style="text-align: left;">connector</th>
+<th style="text-align: left;">direction</th>
+<th style="text-align: right;">rows</th>
+<th style="text-align: right;">median_mw</th>
+<th style="text-align: right;">p10_mw</th>
+<th style="text-align: right;">minimum_mw</th>
+<th style="text-align: right;">forced_share</th>
+<th style="text-align: right;">unknown_invocation_share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Heywood</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">451.23</td>
+<td style="text-align: right;">-510.4</td>
+<td style="text-align: right;">-547.43</td>
+<td style="text-align: right;">0.33</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td style="text-align: left;">Heywood</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">548.66</td>
+<td style="text-align: right;">487.08</td>
+<td style="text-align: right;">454.65</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="2026-10-09-a-pec-predispatch-violation-changes-between-runs">2026-10-09 — A PEC predispatch violation changes between runs</h3>
+<p>A forecast target outside its reported limit is a quality-control state, not evidence of an increased physical capability. The measurable candidate conditions are run coherence, forecast violation, loop representation. Classification: <strong>forecast quality control</strong>. <a href="https://wattclarity.com.au/articles/2026/10/forecast-pec2-targets-temporarily-violate-in-predispatch-runs-on-9th-october-2026/">WattClarity event source</a>. Original quoted notice reconciliation remains explicit in the evidence register.</p>
+<p>Publication date: 2026-10-09. Later commentary supplies research labels and never masquerades as information known before the event.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th style="text-align: left;">connector</th>
+<th style="text-align: left;">direction</th>
+<th style="text-align: right;">rows</th>
+<th style="text-align: right;">median_mw</th>
+<th style="text-align: right;">p10_mw</th>
+<th style="text-align: right;">minimum_mw</th>
+<th style="text-align: right;">forced_share</th>
+<th style="text-align: right;">unknown_invocation_share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">VNI</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">565.42</td>
+<td style="text-align: right;">-195.64</td>
+<td style="text-align: right;">-334.73</td>
+<td style="text-align: right;">0.33</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td style="text-align: left;">VNI</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">803.52</td>
+<td style="text-align: right;">562.79</td>
+<td style="text-align: right;">466.23</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td style="text-align: left;">Heywood</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">449.94</td>
+<td style="text-align: right;">193.99</td>
+<td style="text-align: right;">-167.95</td>
+<td style="text-align: right;">0.04</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td style="text-align: left;">Heywood</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">588.27</td>
+<td style="text-align: right;">511.56</td>
+<td style="text-align: right;">326.52</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td style="text-align: left;">Murraylink</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">167.4</td>
+<td style="text-align: right;">123.51</td>
+<td style="text-align: right;">60.62</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td style="text-align: left;">Murraylink</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">-90.17</td>
+<td style="text-align: right;">-177.8</td>
+<td style="text-align: right;">-183.13</td>
+<td style="text-align: right;">0.9</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="2026-10-19-murraylink-unplanned-outage-with-explicit-zero-transfer-set">2026-10-19 — Murraylink unplanned outage with explicit zero-transfer set</h3>
+<p>A confirmed cable outage differs from reduced regional transfer leverage. Unrelated industrial-action wording in the notice does not establish the outage's cause. The measurable candidate conditions are DC equipment outage, zero-transfer invocation, notice timing. Classification: <strong>mechanism candidate</strong>. <a href="https://wattclarity.com.au/articles/2026/10/19oct-murraylink-out/">WattClarity event source</a>. Original quoted notice reconciliation remains explicit in the evidence register.</p>
+<p>Publication date: 2026-10-19. Later commentary supplies research labels and never masquerades as information known before the event.</p>
+<div class="table-wrap" tabindex="0"><table>
+<thead>
+<tr>
+<th style="text-align: left;">connector</th>
+<th style="text-align: left;">direction</th>
+<th style="text-align: right;">rows</th>
+<th style="text-align: right;">median_mw</th>
+<th style="text-align: right;">p10_mw</th>
+<th style="text-align: right;">minimum_mw</th>
+<th style="text-align: right;">forced_share</th>
+<th style="text-align: right;">unknown_invocation_share</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Murraylink</td>
+<td style="text-align: left;">forward</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">163.27</td>
+<td style="text-align: right;">93.38</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td style="text-align: left;">Murraylink</td>
+<td style="text-align: left;">reverse</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">-90.83</td>
+<td style="text-align: right;">-167.38</td>
+<td style="text-align: right;">-181.39</td>
+<td style="text-align: right;">0.98</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="4-distinguish-mechanisms-from-coincident-stress">4. Distinguish mechanisms from coincident stress</h2>
+<p>Low wind and high prices do not by themselves identify a transfer restriction. The June SA case motivates the combination of equipment status and electrically relevant flexibility. The January lightning case guards against coding weather as a confirmed reclassification. The August DC-control case motivates explicit control availability. The August metering anomaly is quarantined from the primary panel rather than learned as a recurring physical state.</p>
+<p>The PEC market representation change and Basslink transition are compatibility boundaries. Market registration, physical commissioning and individual outage states remain distinct. A binding loop equation is coupling context and is not automatically the reported limit setter. <a href="https://www.aemo.com.au/initiatives/major-programs/nem-reform-program/nem-reform-program-initiatives/project-energyconnect-market-integration-project/frequently-asked-questions">AEMO PEC FAQ</a>.</p>
+<h2 id="5-limits-of-automatic-condition-selection">5. Limits of automatic condition selection</h2>
+<p>The local collector can retrieve current observed AEMO regional conditions and an explicit coherent public weather run. Applying current dispatch to another delivery period is a scenario assumption. Historical source files retrieved now do not provide historical measured receipts. Battery stored energy, complete current-month invocation and unverified protection status remain unavailable. The historical as-of scorecard therefore contains zero eligible rows; it does not inherit accuracy from the conditional experiment.</p>
+<h2 id="evidence-and-reproduction">Evidence and reproduction</h2>
+<p><a href="downloads/condition_dictionary.csv">Condition dictionary</a> · <a href="downloads/feature_coverage.csv">Feature coverage</a> · <a href="downloads/event_review.json">Event register</a> · <a href="downloads/source_manifest.json">Source manifest</a> · <a href="downloads/METHODOLOGY.md">Methodology</a></p></main></body></html>

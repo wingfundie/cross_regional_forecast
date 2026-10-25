@@ -1,0 +1,21 @@
+connector,direction,era,start,end,rows,days
+Basslink,forward,mnsp,2024-09-01 00:30:00,2026-06-30 23:30:00,32063,668
+Basslink,forward,regulated,2026-07-01 00:00:00,2026-10-25 00:00:00,5569,117
+Basslink,reverse,mnsp,2024-09-01 00:30:00,2026-06-30 23:30:00,32063,668
+Basslink,reverse,regulated,2026-07-01 00:00:00,2026-10-25 00:00:00,5569,117
+Directlink,forward,qni_existing,2024-09-01 00:30:00,2026-10-25 00:00:00,37632,785
+Directlink,reverse,qni_existing,2024-09-01 00:30:00,2026-10-25 00:00:00,37632,785
+Heywood,forward,pec_market,2026-10-01 00:00:00,2026-10-25 00:00:00,1153,25
+Heywood,forward,pre_pec_market,2024-09-01 00:30:00,2026-09-30 23:30:00,36479,760
+Heywood,reverse,pec_market,2026-10-01 00:00:00,2026-10-25 00:00:00,1153,25
+Heywood,reverse,pre_pec_market,2024-09-01 00:30:00,2026-09-30 23:30:00,36479,760
+Murraylink,forward,pec_market,2026-10-01 00:00:00,2026-10-25 00:00:00,1153,25
+Murraylink,forward,pre_pec_market,2024-09-01 00:30:00,2026-09-30 23:30:00,36479,760
+Murraylink,reverse,pec_market,2026-10-01 00:00:00,2026-10-25 00:00:00,1153,25
+Murraylink,reverse,pre_pec_market,2024-09-01 00:30:00,2026-09-30 23:30:00,36479,760
+QNI,forward,qni_existing,2024-09-01 00:30:00,2026-10-25 00:00:00,37632,785
+QNI,reverse,qni_existing,2024-09-01 00:30:00,2026-10-25 00:00:00,37632,785
+VNI,forward,pec_market,2026-10-01 00:00:00,2026-10-25 00:00:00,1153,25
+VNI,forward,pre_pec_market,2024-09-01 00:30:00,2026-09-30 23:30:00,36479,760
+VNI,reverse,pec_market,2026-10-01 00:00:00,2026-10-25 00:00:00,1153,25
+VNI,reverse,pre_pec_market,2024-09-01 00:30:00,2026-09-30 23:30:00,36479,760

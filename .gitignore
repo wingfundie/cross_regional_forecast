@@ -60,3 +60,13 @@ docs/data/*
 !docs/data/forecast_experiment_research_build.json
 !docs/data/limit_forecast_research_snapshot.json
 !docs/data/limit_forecast_research_build.json
+!docs/data/conditional_regimes_research_snapshot.json
+
+# Local conditional-regime observations, models, exports and visual evidence.
+reports/conditional_regimes_v1/
+reports/conditional_regimes_tutorial/
+outputs/conditional_regimes_v1_20261025/
+packages/nemic-regimes/build/
+packages/nemic-regimes/dist/
+packages/nemic-regimes/src/*.egg-info/
+node_modules/
