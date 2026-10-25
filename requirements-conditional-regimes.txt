@@ -1,0 +1,6 @@
+# Full local research/report environment. Inference-only users install the package.
+-r requirements.txt
+-r packages/nemic-regimes/requirements-bundle-v1.txt
+matplotlib>=3.9,<4
+tabulate>=0.9,<1
+pytest>=8,<10
