@@ -14,6 +14,12 @@ Read `BUILD_PLAN.md` for the agreed specification and `BACKTEST_REPORT.md` for e
 
 ## Documentation
 
+- [EnergyConnect directional-limit study](execution/pec_limits_v1/README.md) covers the separate `NSW1-SA1` dispatch record, constraint and outage evidence, issue-time evaluation, and an offline scenario tool.
+
+- [Rebid Mistress - 10 October 2026](rebid_mistress/README.md): isolated NSW/QLD/VIC coal, gas and battery energy-rebid forensics, accepted/effective offer reconciliation, observed response, physical portfolio comparisons and an offline evidence explorer. Generated data and reports remain local.
+
+- [Transmission-line outage risk campaign](execution/line_outage_risk_v1/README.md): asset-specific congestion and regional-price research for up to 50 lines, including Capital-Canberra line 6 and Dapto-Marulan line 8. Includes direct asset/set audits, native five-minute prices, chronological controlled comparisons, ten deep dives and a provenance-gated booking outlook. Run `python scripts/run_line_outage_research.py --stage all`; generated reports and interval evidence remain local.
+
 - [Forward forecasting evidence and verdict — 5 October 2026](reports/forward_forecasting_verdict_20261005/index.html): comprehensive offline report with six charts, all 50 new long-range band results, prior-model comparisons, use restrictions and the path to prospective confirmation. The long-range run samples 18 leads rather than a complete half-hour path; collection and shadow schedules are paused. Rebuild with `python scripts/build_forward_forecasting_verdict.py`.
 
 - [Research evidence register](docs/RESEARCH_REGISTER.md): current status, permitted claims, unresolved gates and reproduction entry points across the original backtest, experiment stack, valuation work and production scaffold.

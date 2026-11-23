@@ -1,0 +1,33 @@
+{
+  "reviewed_date": "2026-10-09",
+  "notes": [
+    {
+      "asset": "CANBERRA/LINE/6",
+      "title": "Transgrid line 3W project assessment",
+      "url": "https://www.transgrid.com.au/media/lyyhe0tk/transgrid-pacr-managing-safety-and-environmental-risks-on-line-3w.pdf",
+      "text": "The original Canberra–Kangaroo Valley circuit was divided when Capital Wind Farm connected: the Canberra–Capital section retained number 6 and the Capital–Kangaroo Valley section became 3W. This makes line 6 part of a wider southern NSW path, rather than simply an isolated wind-farm connection. The configuration of 3W and other Canberra supplies is consequential when evaluating its outage.",
+      "claim_boundary": "Historical documented connectivity; verify switching and later network changes for each 2024–2026 event."
+    },
+    {
+      "asset": "CANBERRA/LINE/6",
+      "title": "AEMO NSW/Victoria separation report, 4 January 2020",
+      "url": "https://www.aemo.com.au/-/media/files/electricity/nem/market_notices_and_events/power_system_incident_reports/2020/final-report-nsw-and-victoria-separation-event-4-jan-2020.pdf?la=en",
+      "text": "AEMO's 2020 incident analysis illustrates the interaction among Canberra supplies numbered 01, 07, 09, 6 and 3W. Under the studied concurrent outages, remaining supplies and local wind generation determined vulnerability to islanding, voltage depression and loading of the remaining line. It demonstrates why an individual line's risk depends on the configuration already in service and the next credible contingency.",
+      "claim_boundary": "Explanatory incident outside the estimation window; its numerical studies are not transferred to current outages."
+    },
+    {
+      "asset": "DAPTO/LINE/8",
+      "title": "AEMO Transgrid line 8 project assessment",
+      "url": "https://www.aemo.com.au/consultations/current-and-closed-consultations/transgrid-pacr-managing-the-risk-of-corrosion-on-line-8",
+      "text": "AEMO's project summary identifies line 8 as a single-circuit 330 kV connection between Marulan and Dapto. The equipment identity therefore refers to an internal NSW transmission route. Its interconnector consequences arise through network security and coupled dispatch equations, not because line 8 is itself an interstate interconnector.",
+      "claim_boundary": "Asset identity and route; actual outage effects require the separate event evidence."
+    },
+    {
+      "asset": "DAPTO/LINE/8",
+      "title": "AEMO constraint implementation worked example",
+      "url": "https://www.aemo.com.au/-/media/files/stakeholder_consultation/consultations/nem-consultations/2023/constraints-implementation-guidelines/final-constraint-implementation-guidelines-v3.pdf?rev=f5937427f33246ffa7494ef396ecc8d7&sc_lang=en",
+      "text": "AEMO's worked implementation example includes the Marulan–Dapto line rating, subregional demand terms, generation terms and an operating margin in a security equation. This illustrates how the same physical line can enter a limit that changes with conditions elsewhere. The report's event reconstructions use the native equation versions and observed RHS/LHS, rather than copying coefficients from that illustrative example.",
+      "claim_boundary": "Educational formulation example; the cited document's publication version must not be treated as the historical dispatch version."
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "recorded_utc": "2026-10-09T13:04:28.708275+00:00",
+  "full_suite": {
+    "passed": 220,
+    "warnings": 12,
+    "seconds": 198.54,
+    "command": "python -m pytest -q",
+    "log": "execution/line_outage_risk_v1/pytest.log",
+    "log_sha256": "c470b243e6f7d6ce939f8f0bd13680f9acb13b3a800a036d9e2128a828b472e1"
+  },
+  "focused_suite": {
+    "passed": 13,
+    "seconds": 3.44,
+    "command": "python -m pytest tests/test_line_outage_research.py -q"
+  },
+  "source_hashes_at_recording": {
+    "nemic\\experiments\\line_outages\\acquire.py": "a94132f1eb6e78ff9d073f9e7e3f996bbd5313356b3047aecdfbc1ea167afbfd",
+    "nemic\\experiments\\line_outages\\analysis.py": "1aacce16bea6419fa08bbfb697f3118b96d5b3275bc4c522101a0de775149760",
+    "nemic\\experiments\\line_outages\\core.py": "554cd1300b3f8780da13d58df87270f500ba4483617a27829eeaf0de20f4e5a4",
+    "nemic\\experiments\\line_outages\\data.py": "e2edc65c716b798a6fb0e7c539db3fba3a4298aad3a3d5ba27a0ee09c3e36168",
+    "nemic\\experiments\\line_outages\\mechanics.py": "718948d04eb3b5015fb267df15de3d6d58db42efaa61f45fdab6e289a253e21c",
+    "nemic\\experiments\\line_outages\\offers.py": "2536df5827e25c56ffa5a3abc3d2c362e5cef1137101fa6faf32322c2e6a5629",
+    "nemic\\experiments\\line_outages\\outlook.py": "8b683a41ee3eec1b691f51ddade47b81a23246bae5892895e165eea553aa5ce4",
+    "nemic\\experiments\\line_outages\\report.py": "025d39ec8ea3d58f6e69bd8d5745175aae37e582bcc18244259c008f3e57dba4",
+    "nemic\\experiments\\line_outages\\__init__.py": "74847ecb9e43e7a1c8f314e6a1a442afe967a2babdeed9cd28ed10d3d3439467",
+    "tests\\test_line_outage_research.py": "d174bf1ce4843b74979ebc81d92a4a0b18ac28a844ac4e4175c5aa4ae537c01e",
+    "scripts\\run_line_outage_research.py": "b3525a2788ea6ec6b8eb2a8b07779b028f1be67036c959d320ab86058aeead81",
+    "scripts\\verify_line_outage_report.py": "c0c9b8050d21a56c5feb2ef08c1f9c591c0e1f97be9cf95ca40abb34db665031"
+  },
+  "warnings": "Existing valuation polyfit conditioning and NumPy divide warnings."
+}

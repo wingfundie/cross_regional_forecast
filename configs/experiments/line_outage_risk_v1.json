@@ -1,0 +1,23 @@
+{
+  "experiment_id": "line_outage_risk_v1",
+  "window_start": "2024-09-01 00:00",
+  "selection_end": "2025-09-01 00:00",
+  "window_end": "2026-09-01 00:00",
+  "mandatory_assets": ["CANBERRA/LINE/6", "DAPTO/LINE/8"],
+  "max_assets": 50,
+  "deep_dives": 10,
+  "minimum_voltage_kv": 110,
+  "match_days": 21,
+  "max_controls": 5,
+  "minimum_episodes": 5,
+  "minimum_treated_hours": 24,
+  "minimum_match_rate": 0.6,
+  "maximum_smd": 0.2,
+  "bootstrap_replicates": 1000,
+  "seed": 20261009,
+  "price_thresholds": [300, 1000, 0, -100],
+  "outlook_horizon_days": 365,
+  "limits": {"download_file_bytes": 900000000, "minimum_free_bytes": 4000000000},
+  "data_dir": "data/line_outage_risk_v1",
+  "report_dir": "reports/line_outage_risk_v1"
+}

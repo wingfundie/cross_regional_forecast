@@ -1,0 +1,147 @@
+{
+  "status": "complete",
+  "completed_utc": "2026-10-09T13:04:28.708275+00:00",
+  "meaning": "Public-data research campaign and report verification complete; no price-effect or live-forecast promotion.",
+  "stages": {
+    "audit": "complete",
+    "panel": "complete",
+    "select": "complete",
+    "compare": "complete",
+    "supplement": "complete",
+    "outlook": "complete",
+    "mechanics": "complete",
+    "setters": "complete",
+    "events": "complete",
+    "offers": "complete",
+    "report": "complete",
+    "validate": "complete"
+  },
+  "summaries": {
+    "audit": {
+      "resolved_lines": 1151,
+      "verified_events": 5362,
+      "line6_events": 2
+    },
+    "compare": {
+      "price_tests": 3500,
+      "displayable": 0,
+      "confirmed_movement_tests": 0,
+      "network_associations": 3600
+    },
+    "events": {
+      "event_summaries": 631,
+      "selected_cases": 29,
+      "deep_dive_assets": 10,
+      "generation_state_records": 6821
+    },
+    "mechanics": {
+      "direct_asset_set_links": 688,
+      "equation_links": 7375,
+      "binding_event_equations": 2622,
+      "unresolved_definition_links": 1144
+    },
+    "offers": {
+      "archives_parsed": 40,
+      "archives_unavailable": 0,
+      "offer_rows": 1796966,
+      "unit_case_summaries": 488
+    },
+    "outlook": {
+      "current_bookings": 69,
+      "historical_booking_replays": 659,
+      "conditional_price_probe_rows": 249,
+      "snapshot": "PUBLIC_NETWORK_20261009213008_0000000542035668.zip",
+      "probabilities_published": 0,
+      "outlook_mode": "conditional mechanism assessment"
+    },
+    "panel": {
+      "regions": [
+        {
+          "region": "NSW1",
+          "expected": 210240,
+          "prices": 210240,
+          "drivers": 210240,
+          "complete_days": 730
+        },
+        {
+          "region": "QLD1",
+          "expected": 210240,
+          "prices": 210240,
+          "drivers": 210240,
+          "complete_days": 730
+        },
+        {
+          "region": "VIC1",
+          "expected": 210240,
+          "prices": 210240,
+          "drivers": 210240,
+          "complete_days": 730
+        },
+        {
+          "region": "SA1",
+          "expected": 210240,
+          "prices": 210240,
+          "drivers": 210240,
+          "complete_days": 730
+        },
+        {
+          "region": "TAS1",
+          "expected": 210240,
+          "prices": 210240,
+          "drivers": 210240,
+          "complete_days": 730
+        }
+      ],
+      "interconnectors": 6,
+      "native_interval_minutes": 5
+    },
+    "report": {
+      "profiles": 50,
+      "deep_dives": 10,
+      "report_bytes": 12221231,
+      "confirmed_price_tests": 0
+    },
+    "select": {
+      "profiles": 50,
+      "deep_dives": 10,
+      "regions": {
+        "NSW1": 20,
+        "QLD1": 9,
+        "SA1": 6,
+        "TAS1": 8,
+        "VIC1": 7
+      }
+    },
+    "setters": {
+      "event_link_direction_rows": 7572,
+      "membership_unresolved_rows": 4128
+    },
+    "supplement": {
+      "families": 124,
+      "member_equations": 1370,
+      "previously_unscoped_equations": 560,
+      "supplement_dispatch_rows": 1682417
+    },
+    "validate": {
+      "passed": true,
+      "failures": [],
+      "profile_count": 50,
+      "anchors": 72,
+      "offline_dependencies": true,
+      "visual_browser_verification": "passed",
+      "checked_utc": "2026-10-09T13:02:30.307482+00:00"
+    }
+  },
+  "report_manifest_sha256": "a4f3b7aaf7ea0d8cc7231e1c8ea3db6103f1500666b0141e5b991004485e2ae2",
+  "html_sha256": "97ef9298b6697b882abce87cc5f6181ce9c0eb1454ed9c1acb9330ac97abda01",
+  "markdown_sha256": "f6539213320b5ef6854befb414a648186b8713b7f1afc85e8a15b8392ebcb620",
+  "report_qa_sha256": "c686d7b24c0a57d44148e33ef6dbd22e948009ece902620fd69b8e66b21bbb09",
+  "test_evidence_sha256": "626f48049e9c3e787c57e5c4fd26d1db7668e9cbba5e589c5bf26bedd8561668",
+  "evidence_gates": {
+    "independent_price_attribution": "withheld",
+    "current_price_probabilities": "withheld",
+    "dispatch_stack_counterfactual": "withheld",
+    "AC_security_simulation": "outside agreed scope"
+  },
+  "publication": "No commit, push, PR or deployment requested or performed."
+}

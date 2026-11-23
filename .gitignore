@@ -70,3 +70,7 @@ packages/nemic-regimes/build/
 packages/nemic-regimes/dist/
 packages/nemic-regimes/src/*.egg-info/
 node_modules/
+
+# Local task inputs and line outage reports.
+.codex-attachments/
+reports/line_outage_risk_v1/

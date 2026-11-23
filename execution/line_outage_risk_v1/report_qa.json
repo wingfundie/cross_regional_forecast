@@ -1,0 +1,52 @@
+{
+  "passed": true,
+  "html_sha256": "97ef9298b6697b882abce87cc5f6181ce9c0eb1454ed9c1acb9330ac97abda01",
+  "offline": true,
+  "viewports": [
+    {
+      "viewport": "desktop",
+      "width": 1440,
+      "height": 1000,
+      "document_overflow": false,
+      "rendered_charts": 13,
+      "search_one_line": true
+    },
+    {
+      "viewport": "mobile",
+      "width": 390,
+      "height": 844,
+      "document_overflow": false,
+      "rendered_charts": 13,
+      "search_one_line": true
+    }
+  ],
+  "browser_errors": [],
+  "screenshots": {
+    "reports\\line_outage_risk_v1\\qa\\desktop_hero.png": "b1c2d92d7e26a54e2c4425b436d707131ed28383184ce7623b4bad6fc69b9504",
+    "reports\\line_outage_risk_v1\\qa\\desktop_chart.png": "2edb66bc9f8009ada6ba704749e5f9ec5300017e9e0172da4c4035b7bda86198",
+    "reports\\line_outage_risk_v1\\qa\\desktop_evidence.png": "a58da3bbeb72087884bc8ba1f7163c599aead46153ef4ae4d3d77178284ff4a3",
+    "reports\\line_outage_risk_v1\\qa\\desktop_matching.png": "1cfeafa077a0ff71bc4cecd98d1580d89f0643f7fbae88c3c0be4e0330fca17b",
+    "reports\\line_outage_risk_v1\\qa\\desktop_subplot.png": "3295ff71851d9b34602521b17d849d05bd8882084f3a5f155668d37098df920c",
+    "reports\\line_outage_risk_v1\\qa\\desktop_route.png": "fbea6dd15aeafe757f70e4a1f6e4d582af9ba0b39e873f86688440d455fe3f75",
+    "reports\\line_outage_risk_v1\\qa\\desktop_line6.png": "09104963d894ddd32af74d1b16164d4c43cf11694dca5f327f10db58b9f7a7c1",
+    "reports\\line_outage_risk_v1\\qa\\desktop_methods.png": "aa2d8d61d1e5c8b8befdd59b9c3f6c6a09cd185dee5765c387892873db08cc43",
+    "reports\\line_outage_risk_v1\\qa\\desktop_dense_table.png": "fc0114b57e7ffaa0ddfb9119ee5c7c7cb7366bb2383a5b6ab2a65fb8a41c2de1",
+    "reports\\line_outage_risk_v1\\qa\\mobile_hero.png": "351da862b6b47a3327bd853bfc82ec4bb1449cf43d7b90e59f6d4ed7db9ad660",
+    "reports\\line_outage_risk_v1\\qa\\mobile_chart.png": "668ced0f085be5d9e93e99321712a1fe63a4394e630d3482434c96f550a1130d",
+    "reports\\line_outage_risk_v1\\qa\\mobile_evidence.png": "8e237e5e527d40492b932554d5f8fb16a4390b2cba1cb78d08eb7488d692a346",
+    "reports\\line_outage_risk_v1\\qa\\mobile_matching.png": "39523622975a7ecd4d324e8a92e25f8afdf3651deaea812fd4e99366b5fb624f",
+    "reports\\line_outage_risk_v1\\qa\\mobile_subplot.png": "ccd12cf839c576dcbd760acbc5d0b937703f56d70774287649e5de677af79c8a",
+    "reports\\line_outage_risk_v1\\qa\\mobile_route.png": "533dd47e45fbd6bdb52de4bf904f57649cb0525b430587b2bdaacaa08b4f2864",
+    "reports\\line_outage_risk_v1\\qa\\mobile_line6.png": "46cbc77cf190f9531f6da1818b5a2bd4fb3bf73e8e538aa235be6179fc22b7c1",
+    "reports\\line_outage_risk_v1\\qa\\mobile_methods.png": "dca60ac23ae92e376c48d17d2e35a6a9a082c737a41130ffb56ace9e8eb03267",
+    "reports\\line_outage_risk_v1\\qa\\mobile_dense_table.png": "92255d273cbb35a94a0ce502c50eda24f71d61782522955ffd8080ecfa1a6634",
+    "reports\\line_outage_risk_v1\\qa\\mobile_chart_right.png": "9bb7f13b87f5308123755444dacb74872215e2c1d603e3ec6c851b4d8722d199",
+    "reports\\line_outage_risk_v1\\qa\\mobile_subplot_right.png": "750f2fd96e1dc0ca9ec5533068bb1d09b0f256cba9a94a4fd6365a084663e870",
+    "reports\\line_outage_risk_v1\\qa\\mobile_route_right.png": "71bf8561b4f5200fea1de846b6f134027b0355b4fa05ceaffa895ca785b7b660",
+    "reports\\line_outage_risk_v1\\qa\\mobile_dense_table_right.png": "0b6d635e46c11ee8e5ca109f4120b5aef7fe085e4e957aa860de55a1aebcf9ea"
+  },
+  "visual_inspection": true,
+  "browser_version": "153.0.8010.12",
+  "script_sha256": "c0c9b8050d21a56c5feb2ef08c1f9c591c0e1f97be9cf95ca40abb34db665031",
+  "rendered_utc": "2026-10-09T12:59:14.184241+00:00"
+}
