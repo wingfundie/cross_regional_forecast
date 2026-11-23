@@ -1,0 +1,3 @@
+direction,intervals,reported_setter_rows,dispatch_version_rows,exact_definition_rows,exact_factor_rows,active_set_rows,reconstructable_rows,within_1_mw,reconstruction_mae_mw,reconstruction_bias_mw,leader_rows,leader_agrees,leader_mae_mw
+nsw_sa,15264,15264,15264,12664,12664,8636,12664,12664,1.3011054073036109e-06,1.3913720989052137e-07,15264,2489,110.24214284067008
+sa_nsw,15264,15264,15264,14673,14673,8299,14673,14673,2.3445895749968176e-06,3.409266812036709e-07,15264,3486,68.08530250405006

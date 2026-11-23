@@ -1,0 +1,12 @@
+{
+  "first_nem_day": "2026-10-01",
+  "last_nem_day": "2026-11-22",
+  "source_report_sha256": "11c082ff8319d05f6b871320e462f48d4fab75690477bfbfc71f107bcb3b52e4",
+  "aggregate_sha256": {
+    "coverage.csv": "1a40f4738b545b5e929747c98076e0e89599b6e1aa44db8a690f8b9e0cbcf520",
+    "forecast_scores_overall.csv": "5a5de212b7286254c0209653bf2ac069c13b1284ac8c72b1bdb92ea2f274b62e",
+    "reconstruction_summary.csv": "354ee274f76fec8f1cb3b94bf6fe5dafddd84edd516c7fcf8240b71dbc101476",
+    "restriction_thresholds.csv": "96b6bb032d61dfd2bab43e97587847b3b26a0fd9d1e2d4e91458fde1507914a4"
+  },
+  "aggregate_line_endings": "LF"
+}

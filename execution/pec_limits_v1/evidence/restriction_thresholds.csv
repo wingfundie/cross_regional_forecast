@@ -1,0 +1,17 @@
+target,direction,aggregation,delivery_period,threshold_mw,n,days,history_end
+nsw_sa_tight,nsw_sa,tight,evening,0.0,140,14,2026-10-15
+nsw_sa_tight,nsw_sa,tight,morning,0.0,84,14,2026-10-15
+nsw_sa_tight,nsw_sa,tight,overnight,0.0,251,14,2026-10-15
+nsw_sa_tight,nsw_sa,tight,solar,0.0,196,14,2026-10-15
+nsw_sa_mean,nsw_sa,mean,evening,0.0,140,14,2026-10-15
+nsw_sa_mean,nsw_sa,mean,morning,0.0,84,14,2026-10-15
+nsw_sa_mean,nsw_sa,mean,overnight,0.0,251,14,2026-10-15
+nsw_sa_mean,nsw_sa,mean,solar,0.0,196,14,2026-10-15
+sa_nsw_tight,sa_nsw,tight,evening,-83.868167,140,14,2026-10-15
+sa_nsw_tight,sa_nsw,tight,morning,-150.00002,84,14,2026-10-15
+sa_nsw_tight,sa_nsw,tight,overnight,0.0,251,14,2026-10-15
+sa_nsw_tight,sa_nsw,tight,solar,-124.74574,196,14,2026-10-15
+sa_nsw_mean,sa_nsw,mean,evening,-43.933483,140,14,2026-10-15
+sa_nsw_mean,sa_nsw,mean,morning,-137.13333283333333,84,14,2026-10-15
+sa_nsw_mean,sa_nsw,mean,overnight,0.0,251,14,2026-10-15
+sa_nsw_mean,sa_nsw,mean,solar,-96.4676675,196,14,2026-10-15

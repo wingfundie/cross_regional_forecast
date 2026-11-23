@@ -1,0 +1,7 @@
+-r requirements.txt
+beautifulsoup4>=4.12
+markdown>=3.6
+plotly>=5.20,<7
+psutil>=5.9
+tabulate>=0.9
+playwright>=1.45
