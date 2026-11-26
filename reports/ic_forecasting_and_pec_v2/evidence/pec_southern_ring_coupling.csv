@@ -1,0 +1,14 @@
+direction,ring_category,intervals_5m,share_pct,top_equations
+NSW -> SA (forward),PEC Commissioning / Test Cap,6899,45.197851153039835,"NS_150_DYN_TEST (4,997), NS_350_DYN_TEST (1,466)"
+NSW -> SA (forward),VNI / Southern NSW Ring,2040,13.364779874213836,"N^^N_NIL_LTWG (2,017), N>>NIL_BUTX_BUTX_LV (23)"
+NSW -> SA (forward),Heywood / VIC-SA Ring,1948,12.762054507337526,"V_S_6CGH_SA_UFLS (1,631), V_S_6CGH_ROCOF (317)"
+NSW -> SA (forward),PEC Zero-Transfer Lock,1686,11.04559748427673,"NS_ZERO (1,686)"
+NSW -> SA (forward),SA Internal Thermal,1386,9.080188679245284,"S>>BWMP_TWPA_TPRS (620), S>>NIL_TWPA_TPRS (320)"
+NSW -> SA (forward),Other Generic Constraint,722,4.730083857442348,"NS_100_DYN (150), NS_100 (133)"
+NSW -> SA (forward),Negative Residue Management (NRM),583,3.8194444444444446,NRM_NSW1_SA1 (583)
+SA -> NSW (reverse),PEC Commissioning / Test Cap,6733,44.1103249475891,"SN_150_DYN_TEST (4,126), SN_350_DYN_TEST (2,428)"
+SA -> NSW (reverse),VNI / Southern NSW Ring,4763,31.204140461215932,"N>>NIL_060_051 (1,365), N>>6CGH_060_051 (1,343)"
+SA -> NSW (reverse),PEC Zero-Transfer Lock,1771,11.602463312368974,"SN_ZERO (1,771)"
+SA -> NSW (reverse),Heywood / VIC-SA Ring,1037,6.793763102725367,"V^^V_6CGH_KGTS (681), V^^V_NIL_KGTS (302)"
+SA -> NSW (reverse),Other Generic Constraint,876,5.738993710691824,"V>>N_NIL_65_051 (225), S:VN_700_TEST (143)"
+SA -> NSW (reverse),Negative Residue Management (NRM),84,0.550314465408805,NRM_SA1_NSW1 (84)
