@@ -1,0 +1,3 @@
+direction,effective_quarter,previous_max_units,new_max_units,unit_increase_pct,mechanical_per_unit_dilution_pct,pre_tranches,post_tranches,mean_price_pre_2026q2_2027q1,mean_price_post_2027q2_plus,mean_price_2026q2_only,mean_price_2027_2028q2
+NSWQLD,2027Q2,550,750,36.36363636,-26.66666667,45,45,7980.533556,6051.352889,4568.761667,3407.917143
+QLDNSW,2027Q2,1200,1300,8.333333333,-7.692307692,45,45,25997.02289,24928.67578,32196.06667,30041.73357

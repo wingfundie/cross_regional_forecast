@@ -1,0 +1,73 @@
+direction,quarter,factor,multiplier,ex_ante_value_per_unit
+VICNSW,2026Q2,Spread volatility (severity) multiplier,0.5,15307.40181
+VICNSW,2026Q2,Spike frequency multiplier,0.5,17153.28654
+VICNSW,2026Q2,Spread volatility (severity) multiplier,0.75,16075.86199
+VICNSW,2026Q2,Spike frequency multiplier,0.75,17181.90005
+VICNSW,2026Q2,Spread volatility (severity) multiplier,1,17210.66174
+VICNSW,2026Q2,Spike frequency multiplier,1,17210.66174
+VICNSW,2026Q2,Spread volatility (severity) multiplier,1.25,18564.54519
+VICNSW,2026Q2,Spike frequency multiplier,1.25,17239.57083
+VICNSW,2026Q2,Spread volatility (severity) multiplier,1.5,20049.8713
+VICNSW,2026Q2,Spike frequency multiplier,1.5,17268.62651
+VICNSW,2026Q2,Spread volatility (severity) multiplier,2,23240.92229
+VICNSW,2026Q2,Spike frequency multiplier,2,17327.17427
+NSWVIC,2026Q2,Spread volatility (severity) multiplier,0.5,7806.614314
+NSWVIC,2026Q2,Spike frequency multiplier,0.5,15836.89872
+NSWVIC,2026Q2,Spread volatility (severity) multiplier,0.75,11795.9844
+NSWVIC,2026Q2,Spike frequency multiplier,0.75,15884.35072
+NSWVIC,2026Q2,Spread volatility (severity) multiplier,1,15932.22135
+NSWVIC,2026Q2,Spike frequency multiplier,1,15932.22135
+NSWVIC,2026Q2,Spread volatility (severity) multiplier,1.25,20133.88499
+NSWVIC,2026Q2,Spike frequency multiplier,1.25,15980.50826
+NSWVIC,2026Q2,Spread volatility (severity) multiplier,1.5,24369.85147
+NSWVIC,2026Q2,Spike frequency multiplier,1.5,16029.20896
+NSWVIC,2026Q2,Spread volatility (severity) multiplier,2,32894.73163
+NSWVIC,2026Q2,Spike frequency multiplier,2,16127.84098
+NSWQLD,2026Q2,Spread volatility (severity) multiplier,0.5,1993.199931
+NSWQLD,2026Q2,Spike frequency multiplier,0.5,2345.190955
+NSWQLD,2026Q2,Spread volatility (severity) multiplier,0.75,2145.501929
+NSWQLD,2026Q2,Spike frequency multiplier,0.75,2346.645338
+NSWQLD,2026Q2,Spread volatility (severity) multiplier,1,2348.109395
+NSWQLD,2026Q2,Spike frequency multiplier,1,2348.109395
+NSWQLD,2026Q2,Spread volatility (severity) multiplier,1.25,2577.320566
+NSWQLD,2026Q2,Spike frequency multiplier,1.25,2349.583052
+NSWQLD,2026Q2,Spread volatility (severity) multiplier,1.5,2821.645998
+NSWQLD,2026Q2,Spike frequency multiplier,1.5,2351.066236
+NSWQLD,2026Q2,Spread volatility (severity) multiplier,2,3334.833026
+NSWQLD,2026Q2,Spike frequency multiplier,2,2354.06088
+QLDNSW,2026Q2,Spread volatility (severity) multiplier,0.5,54959.75295
+QLDNSW,2026Q2,Spike frequency multiplier,0.5,86947.68152
+QLDNSW,2026Q2,Spread volatility (severity) multiplier,0.75,72696.27567
+QLDNSW,2026Q2,Spike frequency multiplier,0.75,88877.62767
+QLDNSW,2026Q2,Spread volatility (severity) multiplier,1,90839.45232
+QLDNSW,2026Q2,Spike frequency multiplier,1,90839.45232
+QLDNSW,2026Q2,Spread volatility (severity) multiplier,1.25,109182.0925
+QLDNSW,2026Q2,Spike frequency multiplier,1.25,92833.06757
+QLDNSW,2026Q2,Spread volatility (severity) multiplier,1.5,127634.5977
+QLDNSW,2026Q2,Spike frequency multiplier,1.5,94858.36631
+QLDNSW,2026Q2,Spread volatility (severity) multiplier,2,164714.6914
+QLDNSW,2026Q2,Spike frequency multiplier,2,99003.49125
+VICSA,2026Q2,Spread volatility (severity) multiplier,0.5,20288.22194
+VICSA,2026Q2,Spike frequency multiplier,0.5,29672.40057
+VICSA,2026Q2,Spread volatility (severity) multiplier,0.75,25560.8381
+VICSA,2026Q2,Spike frequency multiplier,0.75,30373.07329
+VICSA,2026Q2,Spread volatility (severity) multiplier,1,31088.86398
+VICSA,2026Q2,Spike frequency multiplier,1,31088.86398
+VICSA,2026Q2,Spread volatility (severity) multiplier,1.25,36733.90535
+VICSA,2026Q2,Spike frequency multiplier,1.25,31819.70011
+VICSA,2026Q2,Spread volatility (severity) multiplier,1.5,42441.00594
+VICSA,2026Q2,Spike frequency multiplier,1.5,32565.4932
+VICSA,2026Q2,Spread volatility (severity) multiplier,2,53951.6384
+VICSA,2026Q2,Spike frequency multiplier,2,34101.51844
+SAVIC,2026Q2,Spread volatility (severity) multiplier,0.5,3854.58606
+SAVIC,2026Q2,Spike frequency multiplier,0.5,5379.298407
+SAVIC,2026Q2,Spread volatility (severity) multiplier,0.75,4670.691229
+SAVIC,2026Q2,Spike frequency multiplier,0.75,5464.589695
+SAVIC,2026Q2,Spread volatility (severity) multiplier,1,5551.951359
+SAVIC,2026Q2,Spike frequency multiplier,1,5551.951359
+SAVIC,2026Q2,Spread volatility (severity) multiplier,1.25,6461.610526
+SAVIC,2026Q2,Spike frequency multiplier,1.25,5641.352581
+SAVIC,2026Q2,Spread volatility (severity) multiplier,1.5,7385.991529
+SAVIC,2026Q2,Spike frequency multiplier,1.5,5732.759298
+SAVIC,2026Q2,Spread volatility (severity) multiplier,2,9257.312705
+SAVIC,2026Q2,Spike frequency multiplier,2,5921.437861

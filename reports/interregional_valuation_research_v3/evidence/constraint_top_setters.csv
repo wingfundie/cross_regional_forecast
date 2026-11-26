@@ -1,0 +1,49 @@
+pair,setter,contribution,intervals,family,network_state
+NSW − VIC,V^^N_NIL_1,3.827983222,28556,voltage stability,system normal
+NSW − VIC,N^^N_NIL_3,3.816043308,24312,voltage stability,system normal
+NSW − VIC,N::N_CTYS_2,2.772658497,743,transient stability,outage/other
+NSW − VIC,N>>NIL_970_051,2.15333604,10202,thermal,system normal
+NSW − VIC,N^^V_NIL_1,-1.301266529,11360,voltage stability,system normal
+NSW − VIC,N^^N_NIL_WGLT,1.155229585,12353,voltage stability,system normal
+NSW − VIC,N::N_UTRV_2,1.143387061,4261,transient stability,outage/other
+NSW − VIC,N>>NIL_990_051,1.00773676,4152,thermal,system normal
+NSW − VIC,N::N_DTKV_2,0.9940329709,1179,transient stability,outage/other
+NSW − VIC,N^^V_CTMN_1,-0.9487551044,6078,voltage stability,outage/other
+NSW − VIC,V^^N_MNYS_1,0.9184740143,6781,voltage stability,outage/other
+NSW − VIC,N>>BDBU_970_051,0.907594784,4512,thermal,outage/other
+QLD − NSW,N^^Q_LS_VC_B1,3.635995499,4015,voltage stability,outage/other
+QLD − NSW,N>>NIL_964_84_S,-2.800488751,22655,thermal,system normal
+QLD − NSW,N>>NIL_33_34,2.273899088,6956,thermal,system normal
+QLD − NSW,N^^Q_NIL_B1,1.481363825,5490,voltage stability,system normal
+QLD − NSW,F_Q++86_L6,-1.420473719,3394,interconnector limit,outage/other
+QLD − NSW,F_Q++86_L5,-1.348537167,807,interconnector limit,outage/other
+QLD − NSW,QN+RAISE_NIL,-1.164265271,1679,other,system normal
+QLD − NSW,N^^Q_NIL_A,0.9589279919,2142,voltage stability,system normal
+QLD − NSW,N>>NIL_85_86_S,-0.7318324156,4247,thermal,system normal
+QLD − NSW,N>>NIL_86_85_S,-0.6808113475,4247,thermal,system normal
+QLD − NSW,N^^Q_LS_SVC_KPP_1,0.6094142119,3567,voltage stability,outage/other
+QLD − NSW,Q^^NIL_QNI_SRAR,-0.5780030222,3299,voltage stability,system normal
+SA − VIC,V::S_SETB_TBSE_2,3.418870405,4831,transient stability,outage/other
+SA − VIC,VS_600_TEST,2.65068239,7487,interconnector limit,outage/other
+SA − VIC,VS_050_DYN,2.094696742,1679,interconnector limit,outage/other
+SA − VIC,V:S_600_HY_TEST,1.968304544,6386,other,outage/other
+SA − VIC,VS_050,1.921553287,2418,interconnector limit,outage/other
+SA − VIC,V:S_600_HY_TEST_DYN,1.608829601,3884,other,outage/other
+SA − VIC,V_VS_LB_HY_50,1.294064785,1450,interconnector limit,outage/other
+SA − VIC,V_VS_LB_CAN_50,0.7692337666,810,interconnector limit,outage/other
+SA − VIC,CA_SYDS_594882A3_1,0.7109168226,345,interconnector limit,outage/other
+SA − VIC,V^^V_NIL_KGTS,-0.6492780031,7107,voltage stability,system normal
+SA − VIC,SA_TBTU_A,0.6244306125,1245,interconnector limit,outage/other
+SA − VIC,V::S_NIL_MAXG_1,0.52501908,1708,transient stability,system normal
+VIC − TAS,V_T_NIL_FCSPS,-3.494004716,30564,interconnector limit,system normal
+VIC − TAS,F_MAIN++APD_TL_L5,-2.321649489,38669,interconnector limit,outage/other
+VIC − TAS,F_MAIN++NIL_MG_R6,1.57534227,26581,interconnector limit,system normal
+VIC − TAS,none,-1.40995627,165734,other,outage/other
+VIC − TAS,F_MAIN++NIL_MG_R5,1.388215939,22354,interconnector limit,system normal
+VIC − TAS,F_MAIN++APD_TL_L60,-1.157040949,18675,interconnector limit,outage/other
+VIC − TAS,F_MAIN++BIP_ML_L1,-0.8441385272,10639,interconnector limit,outage/other
+VIC − TAS,F_MAIN++LREG_0210,-0.8123408095,14821,interconnector limit,outage/other
+VIC − TAS,F_MAIN++APD_TL_L6,-0.6045730454,6733,interconnector limit,outage/other
+VIC − TAS,F_T++NIL_ML_RECL_L6,-0.5658033401,6098,interconnector limit,system normal
+VIC − TAS,F_MAIN++NIL_MG_R60,0.5153912694,13639,interconnector limit,system normal
+VIC − TAS,T_BLINK_TV_BID,0.4814519147,5056,interconnector limit,outage/other

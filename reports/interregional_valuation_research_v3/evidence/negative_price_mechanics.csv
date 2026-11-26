@@ -1,0 +1,4 @@
+pair,from_region,neg_from_intervals,neg_from_share_pct,solar_export_intervals,mean_spread_when_from_neg,mean_loss_term_when_from_neg,mean_loss_term_when_from_nonneg,loss_inversion_share_pct,residue_share_during_neg_from_pct
+NSW − VIC,VIC1,102921,20.60926086,69372,86.30728377,-2.982048959,5.658855066,85.01957812,34.04582969
+QLD − NSW,NSW1,36618,7.33251634,2709,16.54740252,1.110216364,-2.824578677,30.21464853,12.43479121
+SA − VIC,VIC1,102921,20.60926086,3622,-0.04902429533,2.109152617,2.981207661,25.34565346,5.856175815
