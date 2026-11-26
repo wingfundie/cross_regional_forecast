@@ -1,0 +1,34 @@
+{
+  "editorial_standard": "virtual-barrels-analysis",
+  "output": "Outage_Risk_Handbook_v2.html",
+  "output_sha256": "b717f5cda7bc910c14a1c3d92916b3765d4f1d8e55834d8da749bc7cb884f98f",
+  "bytes": 6271321,
+  "chapters_and_appendices": 11,
+  "katex_formulas": 118,
+  "inline_plotly_exhibits": 10,
+  "diagrams": 3,
+  "directory_widgets": 3,
+  "words_md": 11991,
+  "hash_convention": "SHA-256 of file bytes with CRLF normalised to LF for text files",
+  "evidence_sha256": {
+    "headline_numbers.json": "6ee1bb0dbd8958ae1fdc6ebf5973b8af4113031c5f83538340a0d3cfa0fc6a81",
+    "line_50_directory.csv": "6cbc5a29e37e8bb4ff23e101d3bef5df6217b25a4d1f9ba35c1e22614969bf38",
+    "line_corridor_pooled_risk.csv": "04c47e6fbe441b5c64f6b2e82847a9f11e0a3517b03c183e6346bfdb2e791bd7",
+    "line_deep_dives_6_8.csv": "394e59f4aa6e155e6d4d46fd15c66bed661f8abad62e1aa9418d3c18ee0b18a0",
+    "nos_booking_reliability_summary.csv": "c82cedeed3beee23f2fb8e7c98a9d2f4a6a77a58dd47e4d5340cbe10eb28a511",
+    "nos_economic_effects.csv": "21bd1299a8fe428a262c2fd39b92aabe0e217a25bc23aa23f76cc794fa6c522b",
+    "nos_live_outlook_calibrated.csv": "d4abb12abaa0df795d443fa9dd0875898f0198d9ef5b5a81eaa5d5e3fdb8898e",
+    "nos_n11_superadditivity.csv": "3192ceabe4d0ce822ed10e10f1124b793df2788e06310d49369a3d1729bd5899",
+    "nos_outlook_calibration.csv": "e79bf0c7ae0289784af7b2db0eb7153593d05a5a1975403e571b02b334a1d128",
+    "nos_reliability_curves.csv": "39c031d0a4bea45c127e650109a14d7b6e83c95d31ac773dfe8d68c09f8bfea2"
+  },
+  "code_sha256": {
+    "nemic/experiments/outage_risk_v2.py": "4f051df670f9c2b22ad720fe6faee712b332a4e89e03c7e3ecdaa5df3034d01d",
+    "nemic/experiments/vb_report_kit.py": "f460481c336cc257aabdb2238211a67748a875b887f6cdb9583f5f05b5b0f716"
+  },
+  "dependencies": {
+    "plotly": "6.2.0",
+    "katex": "0.16.22",
+    "marked": "15.0.12"
+  }
+}
