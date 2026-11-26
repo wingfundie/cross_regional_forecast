@@ -1,0 +1,30 @@
+{
+  "campaign": "outage_risk_handbook_v2",
+  "study_window": {
+    "start_nem": "2024-09-01 00:05:00",
+    "end_nem": "2026-08-31 23:55:00",
+    "timezone": "UTC+10"
+  },
+  "inputs": {
+    "nos_pairs_dir": "data/nos_binding_v1",
+    "nos_outlook_scored": "data/nos_binding_v1/outlook/backtest_scored.parquet",
+    "nos_outlook_live_csv_gz": "reports/nos_outage_regime_research_20260924/downloads/nos_outlook_outages.csv.gz",
+    "nos_downloads_dir": "reports/nos_outage_regime_research_20260924/downloads",
+    "nos_family_coverage": "data/nos_regime_v1/family_coverage_30min.parquet",
+    "line_downloads_dir": "reports/line_outage_risk_v1/downloads",
+    "prices_parquet": "data/valuation_v2/panel/prices.parquet",
+    "interconnectors_parquet": "data/valuation_v2/panel/interconnectors.parquet",
+    "settlement_parquet": "data/valuation_v2/settlement/directional_5min.parquet"
+  },
+  "parameters": {
+    "min_matched_hh_c7a": 24,
+    "min_overlap_hh_c8": 24,
+    "min_standalone_hh_c8": 24,
+    "bootstrap_iters": 150,
+    "bootstrap_block_days": 7,
+    "seed": 42
+  },
+  "outputs": {
+    "evidence_dir": "reports/outage_risk_handbook_v2/evidence"
+  }
+}
