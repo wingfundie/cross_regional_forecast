@@ -1,0 +1,7 @@
+# Six-Link Constraint Pressure, Generator Influence, and Contraction Atlas (v2)
+
+## Executive Overview and Reader Guide
+
+This flagship edition consolidates two full years of native five-minute constraint-equation telemetry across all six interconnectors of the Australian National Electricity Market (1 September 2024 to 31 August 2026, fixed NEM time UTC+10) into a single mechanical and economic reference. It brings Directlink, Murraylink, and Basslink to full analytical parity with VNI, QNI, and Heywood; closes the megawatts-without-dollars disconnect through tight-headroom congestion-rent weighting and shadow-rent constraint valuation; audits the root causes of envelope reconstruction error; decomposes all 44,185 sharp 30-minute contractions into equation switches, left-hand-side generator ramps, and right-hand-side shifts; isolates five-minute utility battery impulses; and maps the complete six-by-six cross-link cascade matrix alongside negative-residue clamping attribution.
+
+Readers should treat every reported interconnector export and import limit as an endogenous dispatch-solution output rather than maximum secure physical transfer capability, and interpret fixed-equation generator sensitivities as mechanical linear-programme decompositions rather than independent causal treatment effects. Three companion standalone Event Atlases v2 covering VNI, QNI, and Heywood retain full five-minute forensic case windows at 67% to 72% smaller file size.

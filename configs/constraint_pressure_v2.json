@@ -1,0 +1,19 @@
+{
+  "version": "2.0",
+  "window_start": "2024-09-01 00:00:00",
+  "window_end": "2026-08-31 23:55:00",
+  "links": [
+    {"slug": "vni", "name": "VNI", "ic_id": "VIC1-NSW1", "from_region": "VIC1", "to_region": "NSW1", "sra_fwd": "VICNSW", "sra_rev": "NSWVIC", "fwd_label": "VIC -> NSW", "rev_label": "NSW -> VIC"},
+    {"slug": "qni", "name": "QNI", "ic_id": "NSW1-QLD1", "from_region": "NSW1", "to_region": "QLD1", "sra_fwd": "NSWQLD", "sra_rev": "QLDNSW", "fwd_label": "NSW -> QLD", "rev_label": "QLD -> NSW"},
+    {"slug": "vsa", "name": "Heywood", "ic_id": "V-SA", "from_region": "VIC1", "to_region": "SA1", "sra_fwd": "VICSA", "sra_rev": "SAVIC", "fwd_label": "VIC -> SA", "rev_label": "SA -> VIC"},
+    {"slug": "directlink", "name": "Directlink", "ic_id": "N-Q-MNSP1", "from_region": "NSW1", "to_region": "QLD1", "sra_fwd": "NSWQLD", "sra_rev": "QLDNSW", "fwd_label": "NSW -> QLD", "rev_label": "QLD -> NSW"},
+    {"slug": "murraylink", "name": "Murraylink", "ic_id": "V-S-MNSP1", "from_region": "VIC1", "to_region": "SA1", "sra_fwd": "VICSA", "sra_rev": "SAVIC", "fwd_label": "VIC -> SA", "rev_label": "SA -> VIC"},
+    {"slug": "basslink", "name": "Basslink", "ic_id": "T-V-MNSP1", "from_region": "TAS1", "to_region": "VIC1", "sra_fwd": "TASVIC", "sra_rev": "VICTAS", "fwd_label": "TAS -> VIC", "rev_label": "VIC -> TAS"}
+  ],
+  "headroom_tight_mw": 50.0,
+  "scarcity_threshold_aud": 300.0,
+  "cascade_window_minutes": 30,
+  "bootstrap_replicates": 400,
+  "bootstrap_seed": 20261127,
+  "output_dir": "reports/constraint_pressure_atlas_v2"
+}
