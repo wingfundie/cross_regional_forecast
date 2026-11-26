@@ -1,0 +1,38 @@
+{
+  "version": "2.0-compressed",
+  "atlases": [
+    {
+      "slug": "vni",
+      "html": "vni_event_atlas_v2.html",
+      "md": "VNI_Event_Atlas_v2.md",
+      "legacy_mb": 26.64,
+      "new_mb": 7.36,
+      "reduction_pct": 72.4,
+      "cases": 103,
+      "html_sha256": "487a00372471cfb7d850838a2c3329f61190b3e6eabbb7c21d5c845948f91266",
+      "md_sha256": "04d7c94f3f5be1ee0b09271b60d384f0764f7f72c2d95499d6694f0e2366e75c"
+    },
+    {
+      "slug": "qni",
+      "html": "qni_event_atlas_v2.html",
+      "md": "QNI_Event_Atlas_v2.md",
+      "legacy_mb": 25.04,
+      "new_mb": 7.04,
+      "reduction_pct": 71.9,
+      "cases": 105,
+      "html_sha256": "6228b67596adebe77db2a1edd63ebe7649d62f4f7f0e5c44748d71ca1bc675ef",
+      "md_sha256": "1fa0560699b5444f8651b82c939ab1be23d4ac83bd7ffa1f2ede33adfdcd55ca"
+    },
+    {
+      "slug": "vsa",
+      "html": "vsa_event_atlas_v2.html",
+      "md": "VSA_Event_Atlas_v2.md",
+      "legacy_mb": 20.09,
+      "new_mb": 6.7,
+      "reduction_pct": 66.7,
+      "cases": 86,
+      "html_sha256": "27bf1f4c50b66e074a68a414f3a4f9c6b6b4225a4d27caf6785fc6fda5987069",
+      "md_sha256": "a7a2435115f9001be31a88a474052a905a33800bb48fb22a41e275084ca353f2"
+    }
+  ]
+}

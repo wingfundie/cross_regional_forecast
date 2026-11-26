@@ -1,0 +1,36 @@
+{
+  "editorial_standard": "virtual-barrels-analysis",
+  "output": "Constraint_Pressure_Atlas_v2.html",
+  "output_sha256": "30d83cfe39f2b7d2875f805725ecae45f3115bf22bc3c1864879ac05b7376ddd",
+  "bytes": 6072512,
+  "chapters_and_appendices": 13,
+  "katex_formulas": 169,
+  "inline_plotly_exhibits": 12,
+  "diagrams": 3,
+  "directory_widgets": 2,
+  "words_md": 17337,
+  "hash_convention": "SHA-256 of file bytes with CRLF normalised to LF for text files",
+  "evidence_sha256": {
+    "bess_ramp_signature.csv": "d85f01f46ab977b51d15320a78f97b583532d239fbc4cedfc45ca5dece2bc739",
+    "constraint_economic_influence.csv": "e6825241e21bb6a72ae509788b1777143b7c0199c0da43312774f55cc8b31ad4",
+    "contraction_lhs_rhs_switch.csv": "36420664cb0f9ee349b00501c63d7af62edef3b83b90918240f8701ac9989ae4",
+    "cross_link_cascades.csv": "6f1ce6506593bc2215eb36917b9cd378c673ef1a325a4c658b6da32d57fda64e",
+    "diurnal_seasonal_ci_profiles.csv": "d7d86bef0ed7c10f28a4aa5823fdb4452fb8cec4a12bff027d708f24a138ac9a",
+    "duid_economic_influence.csv": "7d736f7231a8ddf3860daac2ae3277daeb2cd70ab7cb9e227043b069b1e89350",
+    "headline_numbers.json": "c748ae18216801fe2ea49616f1caea47359341377a8efaeea1cdb5dba8839d3b",
+    "nrm_clamping_attribution.csv": "84ae3d25a97c92d62413b46bbd455b85df1b51f544ff134cf81bbaf5b69fce47",
+    "parallel_link_cobinding.csv": "2cb9ced00d62a409dae38bdfe0996decf7e2de30b10400cf22650eac0c790247",
+    "reconstruction_mae_audit.csv": "3cda33f569aee77e11aa9cdb7d6f22fa630b2b4f4885b0c89f81a2e25b9b58c1",
+    "six_link_parity_summary.csv": "16d660c65dd0ccaad691b4f2e7fba1e2ae6732b696c1d7264617bf73a1830862"
+  },
+  "code_sha256": {
+    "nemic/experiments/constraint_pressure_v2.py": "5fedcd52e39f00465587cba68b5019e9e1223000dca8f5205bd1d6795b79ed22",
+    "nemic/experiments/event_atlas_v2.py": "7a6eafd0c0e1555733200b85d06e5b0327b7493b382c5a26b092207b50993edd",
+    "nemic/experiments/vb_report_kit.py": "f460481c336cc257aabdb2238211a67748a875b887f6cdb9583f5f05b5b0f716"
+  },
+  "dependencies": {
+    "plotly": "6.2.0",
+    "katex": "0.16.22",
+    "marked": "15.0.12"
+  }
+}

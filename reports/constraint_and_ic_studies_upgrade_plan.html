@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Constraint Pressure &amp; Interconnector Studies · Upgrade Plan | IC Flow Forecasting</title>
+<style>
+:root{
+  --navy:#244e78;--deep:#073c64;--ink:#30343a;--muted:#616b75;--line:#b9c2ca;
+  --blue:#4c94df;--pale:#edf3f7;--soft:#f6f9fb;--gold:#b08b42;--teal:#268a87;
+  --crimson:#b44d5e;--purple:#7658c9;--green:#3f7d3a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{margin:0;background:#ffffff;color:var(--ink);font-family:'Segoe UI',Arial,sans-serif;font-size:15.5px;line-height:1.65}
+main{max-width:1320px;margin:0 auto;padding:0 48px 64px}
+a{color:var(--deep);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:#3a7fae}
+code{font-family:Consolas,'Courier New',monospace;background:#eef3f7;padding:2px 5px;border-radius:2px;font-size:12.5px;color:#173d5d}
+button{font:inherit;cursor:pointer;background:#fff;border:1px solid #9caebe;color:var(--deep);padding:7px 14px;border-radius:2px;font-size:13px}
+button:hover{background:#edf4f9}
+button.primary{background:var(--navy);color:#fff;border-color:var(--navy)}
+button.primary:hover{background:var(--deep)}
+
+.masthead{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:86px;color:var(--deep)}
+.brand{display:flex;gap:14px;align-items:center}
+.brand strong{font-size:24px;line-height:1.05;letter-spacing:-0.8px;font-family:Georgia,serif;font-weight:400;color:#678eb0}
+.brand span{border-left:1px solid #7d99b3;padding-left:14px;line-height:1.2;font-size:16px}
+.dateline{text-align:right;font-size:12.5px;line-height:1.5;color:var(--muted)}
+
+.hero-band{background:var(--navy);color:#fff;margin:0 -48px;padding:32px 48px 30px}
+.hero-band .eyebrow{font-size:14px;font-weight:700;letter-spacing:.04em;margin:0 0 8px;color:#d6e6f4}
+.hero-band h1{font-family:'Arial Narrow','Aptos Narrow','Segoe UI',sans-serif;font-weight:350;font-size:38px;line-height:1.14;letter-spacing:-.5px;margin:0 0 12px;max-width:1080px}
+.hero-band p{margin:0;max-width:960px;font-size:15px;color:#e4eff7;line-height:1.55}
+
+.topnav{display:flex;gap:18px;flex-wrap:wrap;align-items:center;padding:14px 0;border-bottom:1px solid var(--line);font-size:12px;text-transform:uppercase;letter-spacing:.055em}
+.topnav a{text-decoration:none;font-weight:600}
+.topnav .nav-right{margin-left:auto;font-size:11.5px;text-transform:none;letter-spacing:0;color:var(--muted)}
+
+.kpi-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-bottom:1px solid var(--line);margin:0 0 28px}
+.kpi{padding:18px 18px 18px 0;border-right:1px solid #d5dce2;padding-left:18px}
+.kpi:first-child{padding-left:0}
+.kpi:last-child{border-right:0}
+.kpi span{display:block;font-size:12px;color:var(--muted);font-weight:500}
+.kpi strong{display:block;font-size:28px;font-weight:500;color:var(--deep);font-variant-numeric:tabular-nums;margin:3px 0}
+.kpi small{display:block;font-size:11.5px;color:#69737b;line-height:1.45}
+
+section{margin:34px 0 42px;padding-top:20px;border-top:2px solid var(--navy)}
+section.first-sec{border-top:0;padding-top:4px;margin-top:18px}
+.sec-kicker{font-size:11px;letter-spacing:.13em;font-weight:700;text-transform:uppercase;color:#497194;margin-bottom:4px}
+h2{font-family:'Arial Narrow','Segoe UI',sans-serif;font-size:28px;font-weight:600;color:var(--deep);margin:0 0 10px;letter-spacing:-.3px}
+h3{font-size:17px;font-weight:650;color:#27445b;margin:22px 0 8px}
+p{margin:0 0 13px}
+ul,ol{padding-left:22px;margin:8px 0 16px}
+li{margin:5px 0}
+
+.callout{margin:18px 0 22px;padding:14px 18px;background:var(--soft);border-left:3px solid var(--navy);font-size:14px;line-height:1.6}
+.callout.teal{border-left-color:var(--teal);background:#f3f9f9}
+.callout.gold{border-left-color:var(--gold);background:#fbf8f1}
+.callout.crimson{border-left-color:var(--crimson);background:#fcf5f6}
+.callout-title{display:block;font-size:11px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--deep);margin-bottom:5px}
+.callout.teal .callout-title{color:var(--teal)}
+.callout.gold .callout-title{color:#8a6a28}
+.callout.crimson .callout-title{color:var(--crimson)}
+
+.table-wrap{max-width:100%;overflow-x:auto;margin:16px 0 20px}
+table{border-collapse:collapse;width:100%;font-size:12.5px;line-height:1.5}
+th,td{padding:8px 10px;border-bottom:1px solid #d4dce2;text-align:left;vertical-align:top}
+thead th{background:var(--pale);color:#274f6e;font-weight:650;border-top:1px solid #b2c1ce;white-space:nowrap}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tbody tr:hover{background:#fafcfe}
+
+.pill{display:inline-block;padding:2px 7px;border-radius:2px;font-size:11px;font-weight:650;white-space:nowrap}
+.pill.high{background:#fbe9ec;color:#93293a}
+.pill.med{background:#fbf2df;color:#7e5c15}
+.pill.low{background:#e8f4f3;color:#1b6865}
+.pill.tierA{background:#e6f0f8;color:#184a77}
+.pill.tierB{background:#f0edf7;color:#523a97}
+.pill.done{background:#e8f3e8;color:#2e652a}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:16px 0}
+.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:16px 0}
+.card{border:1px solid #cfd9e2;border-top:3px solid var(--navy);padding:16px 18px;background:#fff}
+.card.teal{border-top-color:var(--teal)}
+.card.gold{border-top-color:var(--gold)}
+.card.crimson{border-top-color:var(--crimson)}
+.card.purple{border-top-color:var(--purple)}
+.card h4{margin:0 0 8px;font-size:15.5px;color:var(--deep)}
+.card p{font-size:13.5px;margin:0 0 8px}
+.card p:last-child,.card ul:last-child{margin-bottom:0}
+.card ul{font-size:13px;padding-left:18px}
+
+.bar-wrap{display:flex;align-items:center;gap:8px;min-width:130px}
+.bar-track{flex:1;height:10px;background:#e8edf1;border-radius:1px;overflow:hidden}
+.bar-fill{height:100%;background:var(--navy)}
+.bar-fill.bad{background:var(--crimson)}
+.bar-fill.warn{background:var(--gold)}
+.bar-fill.ok{background:var(--teal)}
+
+.arch-flow{display:grid;grid-template-columns:1fr 26px 1fr 26px 1fr;gap:8px;align-items:stretch;background:#f4f7f9;padding:18px;border-top:1px solid #798f9f;border-bottom:1px solid #c3cbd2;margin:18px 0}
+.arch-col{background:#fff;border-top:3px solid var(--navy);padding:14px}
+.arch-col.mid{border-top-color:var(--teal)}
+.arch-col.out{border-top-color:var(--gold)}
+.arch-col h4{margin:0 0 8px;font-size:14px;color:var(--deep)}
+.arch-col span{display:block;font-size:12px;line-height:1.45;padding:6px 0;border-top:1px solid #e6ebef;color:#4a5864}
+.arch-arrow{align-self:center;text-align:center;color:#5c7a93;font-size:22px;font-weight:700}
+
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 16px}
+.filter-btn{padding:5px 12px;font-size:12px;border:1px solid #b5c3ce;background:#fff;color:var(--deep)}
+.filter-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+.upgrade-card{border:1px solid #d1dbe3;border-left:4px solid var(--navy);padding:15px 18px;margin:0 0 14px;background:#fff}
+.upgrade-card[data-tier="B"]{border-left-color:var(--purple)}
+.upgrade-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.upgrade-head h4{margin:0;font-size:15.5px;color:var(--deep)}
+.upgrade-meta{font-size:12px;color:var(--muted);margin-bottom:8px}
+.upgrade-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:14px;font-size:13px;border-top:1px solid #e7edf2;padding-top:10px}
+.upgrade-grid b{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#4c6d89;margin-bottom:3px}
+
+.decision-box{border:1px solid #c6d2dc;background:#fafcfe;padding:18px 20px;margin:0 0 16px}
+.decision-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:10px;flex-wrap:wrap}
+.decision-top h4{margin:0;font-size:15.5px;color:var(--deep)}
+.rec-tag{font-size:11px;background:#e6f0f8;color:var(--deep);padding:2px 8px;font-weight:650}
+.opt-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.opt-grid.three{grid-template-columns:1fr 1fr 1fr}
+.opt-card{display:flex;gap:10px;align-items:flex-start;border:1px solid #cfd9e2;background:#fff;padding:12px 14px;cursor:pointer}
+.opt-card.selected{border-color:var(--navy);background:#f1f6fb;box-shadow:inset 0 0 0 1px var(--navy)}
+.opt-card input{margin-top:3px;flex-shrink:0}
+.opt-card strong{display:block;font-size:13.5px;color:var(--deep);margin-bottom:4px}
+.opt-card span{display:block;font-size:12.5px;color:#4f5d69;line-height:1.45}
+
+.summary-box{background:#f3f7fa;border:1px solid #b8c7d4;border-top:3px solid var(--navy);padding:18px 20px;margin-top:20px}
+.summary-box pre{margin:10px 0 12px;background:#fff;border:1px solid #cfd9e2;padding:14px;font-size:12.5px;line-height:1.55;white-space:pre-wrap;font-family:Consolas,monospace;color:#1d3549}
+.copy-status{font-size:12px;color:var(--teal);margin-left:10px;font-weight:600}
+
+footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+@media(max-width:960px){
+  main{padding:0 22px 48px}
+  .hero-band{margin:0 -22px;padding:24px 22px}
+  .kpi-strip{grid-template-columns:1fr 1fr}
+  .grid-2,.grid-3,.upgrade-grid,.opt-grid,.opt-grid.three,.arch-flow{grid-template-columns:1fr}
+  .arch-arrow{transform:rotate(90deg);padding:2px 0}
+}
+</style>
+</head>
+<body>
+<main id="top">
+  <div class="masthead">
+    <div class="brand">
+      <strong>IC Flow<br>Forecasting</strong>
+      <span>Constraint &amp; Grid<br>Research Audit</span>
+    </div>
+    <div class="dateline">
+      Upgrade Proposal · Virtual Barrels &amp; Analytical Expansion<br>
+      Audit Date: 26 November 2026 · Local Repository Review
+    </div>
+  </div>
+
+  <div class="hero-band">
+    <div class="eyebrow">Portfolio Upgrade Plan · Constraint Pressure, Outage Regimes &amp; Interconnector Studies</div>
+    <h1>Elevating the constraint-pressure and interconnector research suite with Virtual Barrels editorial discipline and economic-grid analytics</h1>
+    <p>An evidence-backed audit of all seven constraint-pressure, outage-regime, event-atlas, EnergyConnect, and interconnector forecasting report families (18 HTML documents and 15 Markdown companions) alongside a concrete blueprint to close their biggest usability and analytical blind spots using datasets already stored locally in this repository.</p>
+  </div>
+
+  <nav class="topnav" aria-label="Plan navigation">
+    <a href="#sec-audit">1. Portfolio Audit</a>
+    <a href="#sec-gaps">2. Structural Gaps</a>
+    <a href="#sec-vb">3. Virtual Barrels Method</a>
+    <a href="#sec-tierA">4. Analytical Upgrades (C1–C10)</a>
+    <a href="#sec-consolidation">5. Consolidation Blueprint</a>
+    <a href="#sec-roadmap">6. Execution Waves</a>
+    <a href="#sec-checklist">7. Scoping Checklist</a>
+    <span class="nav-right">Offline HTML · Zero external dependencies</span>
+  </nav>
+
+  <div class="kpi-strip">
+    <div class="kpi">
+      <span>HTML reports audited</span>
+      <strong>18 files</strong>
+      <small>7 distinct constraint &amp; IC study families (total 126 MB of static HTML)</small>
+    </div>
+    <div class="kpi">
+      <span>Median prose share (flagship HTMLs)</span>
+      <strong>10%–16%</strong>
+      <small>Down to 3% in Clustering and 5% in NOS Outages (95% raw table text)</small>
+    </div>
+    <div class="kpi">
+      <span>Unpublished 2-year local datasets</span>
+      <strong>3 links</strong>
+      <small>Basslink, Directlink &amp; Murraylink 2y constraint archives sit ready on disk</small>
+    </div>
+    <div class="kpi">
+      <span>Locally computable upgrades</span>
+      <strong>10 Tier A</strong>
+      <small>Price-weighted pressure, QNI/VSA MAE audit, calibrated NOS outlook, PEC loop bridge</small>
+    </div>
+  </div>
+
+  <!-- SECTION 1: PORTFOLIO AUDIT -->
+  <section id="sec-audit" class="first-sec">
+    <div class="sec-kicker">Section 01 · Quantitative Repository Audit</div>
+    <h2>Where the current constraint-pressure and interconnector reports stand today</h2>
+    <p>Applying the same automated audit we used on <code>interregional_valuation_research_v2</code> across the rest of the repository reveals a sharp contrast. The underlying engineering work is remarkably rigorous: 24-month five-minute constraint reconstructions, 405,120 matched outage half-hours, 1.28 million binding equation-intervals, and strict embargo leakage gates. Yet the <em>presentation layer</em> and the <em>economic translation layer</em> have lagged far behind the computation. Several flagship reports dump 75,000 to 124,000 words of unpaginated HTML table cells beside just 300 to 8,000 words of narrative, stack up to seven consecutive charts with zero prose between them, omit KaTeX formulas completely, and evaluate physical MW limits completely blind to regional prices, marginal values, and SRA dollars.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Report family &amp; primary artifact</th>
+            <th class="num">Size</th>
+            <th class="num">Prose words</th>
+            <th class="num">Table words</th>
+            <th>Prose share</th>
+            <th class="num">Figs / Max run</th>
+            <th class="num">Em-dashes / Raw codes</th>
+            <th>Core editorial &amp; analytical verdict</th>
+            <th>Upgrade ROI</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1. Six-Link Diurnal &amp; Constraint Pressure</strong><br><code>all_interconnector_regime_research_20260921/index.html</code></td>
+            <td class="num">9.42 MB</td>
+            <td class="num">8,323</td>
+            <td class="num">75,290</td>
+            <td><div class="bar-wrap"><div class="bar-track"><div class="bar-fill bad" style="width:10%"></div></div><span>10%</span></div></td>
+            <td class="num">31 / <strong>6</strong></td>
+            <td class="num">1,702 / 41 files</td>
+            <td>Explicitly excludes prices ("prices are outside scope"); no statistical CIs on P20/P80 bins; 6 consecutive bare charts; raw CSV refs.</td>
+            <td><span class="pill high">Very High</span></td>
+          </tr>
+          <tr>
+            <td><strong>2. NOS Outage Regimes &amp; Binding Outlook</strong><br><code>nos_outage_regime_research_20260924/index.html</code></td>
+            <td class="num">7.35 MB</td>
+            <td class="num">6,032</td>
+            <td class="num">123,871</td>
+            <td><div class="bar-wrap"><div class="bar-track"><div class="bar-fill bad" style="width:5%"></div></div><span>5%</span></div></td>
+            <td class="num">48 / <strong>7</strong></td>
+            <td class="num">981 / 9 MMS + 67 files</td>
+            <td>95% giant HTML tables; 7 consecutive charts; outlook beats baseline in only 23/96 cells (36% pred vs 15% realised); zero $/MWh or SRA translation.</td>
+            <td><span class="pill high">Very High</span></td>
+          </tr>
+          <tr>
+            <td><strong>3. Two-Year Constraint Studies (VNI / QNI / V-SA)</strong><br><code>docs/html/{vni,qni,vsa}_2y_constraint_study.html</code></td>
+            <td class="num">14.4 MB<br><small>(3 × 4.8)</small></td>
+            <td class="num">1,745<br><small>(each)</small></td>
+            <td class="num">1,627<br><small>(each)</small></td>
+            <td><div class="bar-wrap"><div class="bar-track"><div class="bar-fill ok" style="width:48%"></div></div><span>48%</span></div></td>
+            <td class="num">7 / 2</td>
+            <td class="num">0 / 18 files ea.</td>
+            <td>3 copy-paste templates; Directlink, Murraylink &amp; Basslink omitted despite local 2y data; QNI (411 MW) &amp; V-SA (127 MW) reconstruction MAE undiagnosed; unweighted DUID ranks.</td>
+            <td><span class="pill high">Very High</span></td>
+          </tr>
+          <tr>
+            <td><strong>4. Sharp-Contraction Event Atlases (VNI / QNI / V-SA)</strong><br><code>docs/html/{vni,qni,vsa}_event_atlas.html</code></td>
+            <td class="num"><strong>71.8 MB</strong><br><small>(20–27 ea.)</small></td>
+            <td class="num">697<br><small>(each)</small></td>
+            <td class="num">329<br><small>(each)</small></td>
+            <td><div class="bar-wrap"><div class="bar-track"><div class="bar-fill warn" style="width:57%"></div></div><span>57%</span></div></td>
+            <td class="num">5 / <strong>3</strong></td>
+            <td class="num">0 / snake_case MD</td>
+            <td>Extreme 20–26.6 MB browser bloat; Markdown companions print raw <code>net_mw</code> headers and <code>-5.68434e-14</code> scientific notation; only 91 cases decomposed; no cross-link cascades.</td>
+            <td><span class="pill high">High</span></td>
+          </tr>
+          <tr>
+            <td><strong>5. Transmission-Line Outage Risk Atlas (50 Lines)</strong><br><code>reports/line_outage_risk_v1/index.html</code></td>
+            <td class="num">12.22 MB</td>
+            <td class="num">19,665</td>
+            <td class="num">100,273</td>
+            <td><div class="bar-wrap"><div class="bar-track"><div class="bar-fill bad" style="width:16%"></div></div><span>16%</span></div></td>
+            <td class="num">14 / <strong>3</strong></td>
+            <td class="num">948 / 32 MMS + 30 files</td>
+            <td>338 HTML tables; <strong>0 of 500</strong> regional price tests pass display gates due to sparse per-line samples (e.g. Line 6 n=2); needs hierarchical corridor pooling + MV outcomes.</td>
+            <td><span class="pill high">High</span></td>
+          </tr>
+          <tr>
+            <td><strong>6. EnergyConnect Directional-Limit Study</strong><br><code>local_exports/pec_limits_v1/index.html</code></td>
+            <td class="num">0.92 MB</td>
+            <td class="num">2,661</td>
+            <td class="num">13,138</td>
+            <td><div class="bar-wrap"><div class="bar-track"><div class="bar-fill bad" style="width:17%"></div></div><span>17%</span></div></td>
+            <td class="num">3 / 1</td>
+            <td class="num">0 / 0</td>
+            <td>Clean early telemetry, but isolated in <code>local_exports/</code> with only 3 figures and zero connection to the AEMC ERC0386 loop settlement engine in v3 valuation.</td>
+            <td><span class="pill med">Medium-High</span></td>
+          </tr>
+          <tr>
+            <td><strong>7. IC Forecasting, Clustering &amp; Verdict Suite</strong><br><code>Clustering_Research.html</code>, <code>forward_forecasting_verdict</code>, <code>qni_vni_expanded_forecast_research.html</code></td>
+            <td class="num">3.89 MB<br><small>(4 HTMLs)</small></td>
+            <td class="num">326 to<br>14,072</td>
+            <td class="num">up to<br>10,920</td>
+            <td><div class="bar-wrap"><div class="bar-track"><div class="bar-fill bad" style="width:3%"></div></div><span>3% (Clust.)</span></div></td>
+            <td class="num">0–6 / 1</td>
+            <td class="num">5 / 23 files</td>
+            <td>Clustering HTML has only 326 prose words (3%); 14k-word and 10k-word forecast research docs have <strong>zero charts</strong>; no unified cross-stack takeaway.</td>
+            <td><span class="pill med">Medium</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout teal">
+      <span class="callout-title">Key Context · Why This Differs From a Pure Cosmetic Facelift</span>
+      Notice that across all 18 HTML files, <strong>zero</strong> use KaTeX math rendering (constraint inequalities like <code>aF + sum(b_i P_i) + Z &lt;= RHS</code> are rendered as plain text or code blocks), and the two largest operational reports (Six-Link Constraint Pressure and NOS Outage Regimes) are 89% to 95% raw HTML tables. Meanwhile, the v3 valuation pipeline we just merged proved how dramatically clearer and more usable an analytical report becomes when physical mechanisms, KaTeX equations, curated inline Plotly charts, and economic consequences sit inside one mechanics-first narrative.
+    </div>
+  </section>
+
+  <!-- SECTION 2: THREE STRUCTURAL GAPS -->
+  <section id="sec-gaps">
+    <div class="sec-kicker">Section 02 · Root-Cause Diagnosis</div>
+    <h2>Three structural blind spots limiting usability across the constraint and IC studies</h2>
+    <p>Reading the methodology files and results summaries side-by-side exposes three recurring analytical limitations that cut across every single report family above. Fixing these three issues yields far more practical value for a trading or quant workflow than simply polishing prose.</p>
+
+    <div class="grid-3">
+      <div class="card crimson">
+        <h4>1. The "MW-Without-Dollars" Disconnect</h4>
+        <p>The Six-Link Regime report explicitly declares <em>"prices are outside scope"</em>, the three Two-Year Constraint Studies rank generators purely by unweighted <code>sum(|-b/a × ΔMW|)</code> across all 210,240 intervals, and the NOS Outage report stops at MW capacity changes and raw median marginal value ($35.7/MWh).</p>
+        <p><strong>Operational failure mode:</strong> A solar farm ramping 100 MW while VNI has 450 MW of unused headroom and a $0/MWh spread accumulates the same mechanical exposure score as Tumut 3 or Victorian Big Battery tightening a binding constraint during a $5,000/MWh evening spike. None of the constraint studies tell a desk which outages or generators actually create price separation or destroy SRA firmness.</p>
+      </div>
+      <div class="card gold">
+        <h4>2. Unexplained Error &amp; Calibration Cliffs</h4>
+        <p>Three major quantitative anomalies sit documented in results tables without diagnostic resolution:</p>
+        <ul>
+          <li><strong>Reconstruction MAE explosion:</strong> VNI reconciles at <code>7.1 / 22.6 MW</code> (92.1% version match), whereas V-SA jumps 18× to <code>126.8 / 130.0 MW</code> (79.7%) and QNI jumps 58× to <code>410.6 / 248.9 MW</code> (65.3%, upper setter match 12%–32%).</li>
+          <li><strong>NOS outlook over-prediction:</strong> Beats baseline in only 23 of 96 cells; top predicted bin averages <strong>36%</strong> binding vs <strong>15%</strong> realised.</li>
+          <li><strong>Line-outage zero displayable tests:</strong> <strong>0 of 500</strong> asset-level price tests pass display gates because per-line event counts are tiny (Line 6 has n = 2).</li>
+        </ul>
+      </div>
+      <div class="card purple">
+        <h4>3. Fragmented Templates &amp; Stranded Local Data</h4>
+        <p>The suite currently splits tightly connected grid physics across 18 separate HTML files totaling 126 MB, including three copy-paste 2-year constraint studies and three 20–27 MB Event Atlases with fewer than 700 words of prose each.</p>
+        <p><strong>Stranded assets already on disk:</strong> Full 24-month constraint archives for <code>Basslink</code>, <code>Directlink</code>, and <code>Murraylink</code> already exist under <code>data/constraint_*_2y/</code>, yet none of those three connectors have a 2-year constraint study or contraction attribution. Likewise, observed EnergyConnect commissioning telemetry sits isolated in <code>data/pec_limits_v1/</code> rather than feeding the AEMC loop valuation model.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: VIRTUAL BARRELS METHODOLOGY -->
+  <section id="sec-vb">
+    <div class="sec-kicker">Section 03 · Editorial &amp; Engineering Standard</div>
+    <h2>Applying the <code>virtual-barrels-analysis</code> methodology to physical grid reports</h2>
+    <p>Just as we transformed <code>interregional_valuation_research_v2</code> into Version 3, applying the Virtual Barrels standard to the constraint-pressure and IC studies is not merely stylistic smoothing. It enforces a strict separation between <strong>narrative reasoning</strong> (which belongs inline in clean prose, equations, and curated charts) and <strong>bulk lookup tables</strong> (which belong in compact, searchable interactive controls and downloadable CSVs).</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Virtual Barrels principle</th>
+            <th>Current defect across constraint / IC reports</th>
+            <th>Target upgraded standard (matching Valuation v3)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Mechanics-first chapter order</strong></td>
+            <td>Reports jump straight into dense summary tables (NOS: 5% prose; Clustering: 3% prose) before explaining how generic constraints, LHS sensitivities, RHS shifts, and binding marginal values physically determine flows and prices.</td>
+            <td>Restructure each flagship report into sequential Parts: (I) Grid &amp; Equation Plumbing, (II) Empirical Constraint &amp; Contraction Structure, (III) Economic / Price / SRA Translation, and (IV) Calibrated Outlook &amp; Modelling Spec.</td>
+          </tr>
+          <tr>
+            <td><strong>Narrative-to-table balance &amp; lookup slimming</strong></td>
+            <td>NOS embeds 123,871 words of raw HTML tables; Line Outages embeds 338 tables (100k words); Event Atlases weigh 20–27 MB each from unoptimized inline JSON blobs.</td>
+            <td>Cap inline prose tables to top-10/15 executive summaries (raising prose share to 55%–70%), move full 50-line / 410-family / 230-DUID directories into one paginated client-side searchable lookup + embedded CSV downloads, and compress Event Atlas JSON by ~75% using columnar arrays.</td>
+          </tr>
+          <tr>
+            <td><strong>Inline charts &amp; ≤2 consecutive figures</strong></td>
+            <td>Six-Link Regime stacks 6 bare figures; NOS stacks 7 bare figures; Event Atlases stack 3; Forecast Research docs have 0 charts across 24,500 words.</td>
+            <td>Weave every Plotly chart inline inside its analytical subsection, strictly enforce max 2 consecutive exhibits without prose, lead every paragraph with the physical takeaway (zero robotic "Chart X shows"), and render on pure <code>#ffffff</code> white canvases.</td>
+          </tr>
+          <tr>
+            <td><strong>Clean domain language &amp; KaTeX math</strong></td>
+            <td>Raw MMS table names (<code>DISPATCHCONSTRAINT</code>, <code>SPDINTERCONNECTORCONSTRAINT</code>, <code>EXPORTLIMIT</code>), raw filenames (<code>nos_binding_asknown.csv</code>), snake_case headers (<code>net_mw</code>, <code>switch_composite_mw</code>), scientific noise (<code>-5.68434e-14</code>), and 3,600+ em-dashes; zero KaTeX math across all 18 files.</td>
+            <td>Relocate all MMS schemas, file lineage, and rebuild commands into Technical Appendix B; render every constraint-envelope, DUID sensitivity (<i>s<sub>i</sub></i> = &minus;<i>b<sub>i</sub></i>/<i>a</i>), and shrinkage formula in server-side KaTeX; enforce automated <code>lint_virtual_barrels.py --strict-emdash</code> with 0 errors and 0 warnings.</td>
+          </tr>
+          <tr>
+            <td><strong>Evidence hierarchy &amp; epistemic honesty</strong></td>
+            <td>Strong caveats exist in footnotes, but headline rankings mix mechanical associations, non-binding moves, and uncalibrated outlook probabilities together.</td>
+            <td>Use colour-coded Virtual Barrels callouts (<code>TAKEAWAY</code>, <code>CONTEXT</code>, <code>WARNING</code>) to separate mechanical equation accounting, matched observational contrasts, and calibrated out-of-sample forecasts, backed by automated Playwright desktop/mobile QA.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SECTION 4: ANALYTICAL UPGRADES C1-C10 -->
+  <section id="sec-tierA">
+    <div class="sec-kicker">Section 04 · Concrete Analytical Additions</div>
+    <h2>Ten locally computable upgrades (Tier A) plus external-data extensions (Tier B)</h2>
+    <p>Every Tier A upgrade below has been verified against existing local archives in <code>data/</code> (<code>constraint_*_2y/</code>, <code>nos_binding_v1/</code>, <code>nos_regime_v1/</code>, <code>line_outage_risk_v1/</code>, <code>pec_limits_v1/</code>, <code>event_*_2y/</code>, <code>valuation_v2/</code>, and <code>tables/DISPATCHPRICE</code>). Zero new NEMWEB bulk downloads are required to execute C1 through C10.</p>
+
+    <div class="filter-bar" role="group" aria-label="Filter upgrades">
+      <button type="button" class="filter-btn active" data-filter="all">All Upgrades (13)</button>
+      <button type="button" class="filter-btn" data-filter="A">Tier A · Local Data Only (10)</button>
+      <button type="button" class="filter-btn" data-filter="B">Tier B · External Data Later (3)</button>
+      <button type="button" class="filter-btn" data-filter="econ">Economic / Price Bridge</button>
+      <button type="button" class="filter-btn" data-filter="physics">Grid Physics &amp; Diagnostics</button>
+      <button type="button" class="filter-btn" data-filter="outlook">Calibration &amp; Outlooks</button>
+    </div>
+
+    <div id="upgradeList">
+      <div class="upgrade-card" data-tier="A" data-cat="econ">
+        <div class="upgrade-head">
+          <h4>C1. Binding-Weighted &amp; Congestion-Rent-Weighted Generator and Constraint Influence</h4>
+          <div><span class="pill tierA">Tier A · Local Data</span> <span class="pill high">Highest Impact</span></div>
+        </div>
+        <div class="upgrade-meta">Applies to: <strong>Six-Link Constraint Pressure</strong>, <strong>VNI/QNI/V-SA 2-Year Studies</strong> · Local inputs: <code>data/constraint_*_2y</code> + <code>data/tables/DISPATCHPRICE</code> + <code>data/valuation_v2</code></div>
+        <div class="upgrade-grid">
+          <div><b>What is missing today</b>DUIDs and constraints are ranked by raw <code>sum(|-b/a × ΔMW|)</code> across all intervals, treating harmless 400 MW-headroom midday moves identically to scarcity-interval tightening.</div>
+          <div><b>Exact computation to add</b>Split every DUID and constraint into 3 tiers: (1) All-interval mechanical exposure, (2) Tight-headroom (&lt;50 MW) / binding-only (<code>|MV| &gt; 0</code>) exposure, and (3) Economic congestion-rent exposure (<code>|MV| × |s_i ΔMW|</code> and <code>ΔLimit × Spread</code>, plus SRA firmness-loss attribution).</div>
+          <div><b>Decision payoff</b>Immediately distinguishes noise solar farms from true market-moving units (<code>TUMUT3</code>, <code>VBB1</code>, <code>MURRAY</code>, <code>KESSB1</code>, <code>LDBESS1</code>) that actually drive regional price separation and SRA cashflow erosion.</div>
+        </div>
+      </div>
+
+      <div class="upgrade-card" data-tier="A" data-cat="physics">
+        <div class="upgrade-head">
+          <h4>C2. Six-Link Constraint Parity: Build the Missing 2-Year Studies for Basslink, Directlink &amp; Murraylink</h4>
+          <div><span class="pill tierA">Tier A · Local Data</span> <span class="pill high">High Impact</span></div>
+        </div>
+        <div class="upgrade-meta">Applies to: <strong>Two-Year Constraint Studies</strong> &amp; <strong>Six-Link Regime Report</strong> · Local inputs: <code>data/constraint_basslink_2y</code>, <code>data/constraint_directlink_2y</code>, <code>data/constraint_murraylink_2y</code> (already downloaded)</div>
+        <div class="upgrade-grid">
+          <div><b>What is missing today</b>Only VNI, QNI, and Heywood (V-SA) have full 2-year constraint, contraction, and DUID-pressure studies. The three HVDC links are absent from deep constraint attribution.</div>
+          <div><b>Exact computation to add</b>Run the exact same 24-month envelope, contraction-onset, setter-vs-leader, and DUID-pressure pipeline on the already-retained Basslink, Directlink, and Murraylink archives, plus parallel-link co-binding audits (<code>QNI + Directlink</code>, <code>Heywood + Murraylink</code>).</div>
+          <div><b>Decision payoff</b>Critical for 2026–2028 markets: Basslink is transitioning to regulated <code>VICTAS</code>/<code>TASVIC</code> SRAs, while Directlink and Murraylink pool directly into <code>QLDNSW</code>/<code>VICSA</code> settlement residue.</div>
+        </div>
+      </div>
+
+      <div class="upgrade-card" data-tier="A" data-cat="physics">
+        <div class="upgrade-head">
+          <h4>C3. Root-Cause Audit of QNI (411 MW) and V-SA (127 MW) Envelope Reconstruction Errors</h4>
+          <div><span class="pill tierA">Tier A · Local Data</span> <span class="pill high">High Impact</span></div>
+        </div>
+        <div class="upgrade-meta">Applies to: <strong>QNI &amp; V-SA 2-Year Constraint Studies</strong> · Local inputs: <code>data/constraint_qni_2y</code>, <code>data/constraint_vsa_2y</code>, <code>data/constraint_vni_2y</code></div>
+        <div class="upgrade-grid">
+          <div><b>What is missing today</b>VNI achieves <code>7.1 / 22.6 MW</code> MAE (92.1% version match), while V-SA has <code>126.8 / 130.0 MW</code> MAE (79.7%) and QNI has <code>410.6 / 248.9 MW</code> MAE (65.3%, upper setter match 12%–32%) with no diagnosis of why.</div>
+          <div><b>Exact computation to add</b>Decompose reconstruction residuals by (a) exact-version vs fallback rows, (b) constraint type (thermal, voltage, transient, ROCOF/UFLS, <code>#R</code> ramp/discretionary sets), (c) missing pre-window standing equations, and (d) dynamic interconnector FCAS/inertia ceilings.</div>
+          <div><b>Decision payoff</b>Gives forecast and risk teams an exact reliability map, separating high-fidelity constraints suitable for feature engineering from fallback/FCAS regimes that must be quarantined.</div>
+        </div>
+      </div>
+
+      <div class="upgrade-card" data-tier="A" data-cat="physics">
+        <div class="upgrade-head">
+          <h4>C4. Full-Population LHS-Ramp vs. RHS-Shift vs. Equation-Switch Decomposition</h4>
+          <div><span class="pill tierA">Tier A · Local Data</span> <span class="pill high">High Impact</span></div>
+        </div>
+        <div class="upgrade-meta">Applies to: <strong>Two-Year Constraint Studies</strong> &amp; <strong>Event Atlases</strong> · Local inputs: <code>data/constraint_*_2y/months</code> + <code>data/event_*_2y</code></div>
+        <div class="upgrade-grid">
+          <div><b>What is missing today</b>Only ~91 selected cases per Event Atlas decompose limit drops into generator ramp vs switch composite. Across the remaining ~22,000 contraction episodes, all drops are naively reported beside LHS DUID rankings.</div>
+          <div><b>Exact computation to add</b>For every 30-minute sharp contraction across all 6 links, compute the exact additive split: (1) Same-equation LHS generator ramp (<code>Σ s_i ΔP_i</code>), (2) Same-equation RHS / dynamic-rating / Z-term step, and (3) Active-leader equation switch (e.g., outage set invocation or <code>#R</code> ramp lock).</div>
+          <div><b>Decision payoff</b>Answers the single most practical operational question: what percentage of sudden limit contractions are predictable from generator schedules vs exogenous RHS/outage switches?</div>
+        </div>
+      </div>
+
+      <div class="upgrade-card" data-tier="A" data-cat="physics">
+        <div class="upgrade-head">
+          <h4>C5. Utility BESS &amp; Inverter Fast-Ramp Pressure Signature (5-Min vs. 30-Min)</h4>
+          <div><span class="pill tierA">Tier A · Local Data</span> <span class="pill med">Medium-High</span></div>
+        </div>
+        <div class="upgrade-meta">Applies to: <strong>Constraint Pressure</strong> &amp; <strong>Event Atlases</strong> · Local inputs: <code>data/constraint_*_2y</code> + <code>DUDETAILSUMMARY</code> technology classes</div>
+        <div class="upgrade-grid">
+          <div><b>What is missing today</b>Grid-scale batteries (<code>VBB1</code>, <code>KESSB1</code>, <code>BLYTHB1</code>, <code>LDBESS1</code>, <code>RIVNB2</code>) already appear in top-15 contraction lists with extreme P95 impacts (VBB1: 2,385 MW), but are pooled with slow thermal and solar units over 30-minute windows.</div>
+          <div><b>Exact computation to add</b>Tag DUIDs by fuel/technology (BESS, hydro, coal, gas, wind, solar) and measure both 5-minute impulse ramps and 30-minute sustained ramps, isolating BESS charge-to-discharge flip intervals (e.g. evening peak reversals) that trigger instantaneous stability or ROCOF contractions.</div>
+          <div><b>Decision payoff</b>Captures the fastest-growing source of intraday interconnector volatility in the 2025–2028 NEM, crucial for both short-term limit forecasting and evening-ramp scarcity valuation.</div>
+        </div>
+      </div>
+
+      <div class="upgrade-card" data-tier="A" data-cat="physics">
+        <div class="upgrade-head">
+          <h4>C6. Cross-Link Contagion Cascades &amp; NRM Auto-Clamping Links</h4>
+          <div><span class="pill tierA">Tier A · Local Data</span> <span class="pill med">Medium-High</span></div>
+        </div>
+        <div class="upgrade-meta">Applies to: <strong>Six-Link Constraint Pressure</strong> &amp; <strong>Event Atlases</strong> · Local inputs: <code>data/constraint_*_2y</code> + <code>data/valuation_v2</code> counter-price / NRM flags</div>
+        <div class="upgrade-grid">
+          <div><b>What is missing today</b>VNI, QNI, and V-SA contractions are analysed in separate single-link silos, and forced-negative limits are not cross-tabulated against AEMO's automated Negative Residue Management (<code>-$100k</code>) clamping intervals.</div>
+          <div><b>Exact computation to add</b>Compute a 6×6 conditional cascade matrix <code>P(Link B contracts within ±30m | Link A contracts)</code> by direction, plus the exact fraction of forced-direction contractions on VNI/QNI/V-SA driven by NRM auto-clamping (<code>I_6F</code> / NRM constraints) vs thermal loop flows.</div>
+          <div><b>Decision payoff</b>Directly links physical constraint cascades to multi-corridor portfolio tail risk and explains why southern-loop links co-contract during high solar midday hours.</div>
+        </div>
+      </div>
+
+      <div class="upgrade-card" data-tier="A" data-cat="econ outlook">
+        <div class="upgrade-head">
+          <h4>C7. NOS Outage Economic Impact ($/MWh &amp; SRA $/day) + Calibrated Binding Outlook</h4>
+          <div><span class="pill tierA">Tier A · Local Data</span> <span class="pill high">Highest Impact</span></div>
+        </div>
+        <div class="upgrade-meta">Applies to: <strong>NOS Outage Regimes &amp; Binding Outlook</strong> · Local inputs: <code>data/nos_binding_v1</code>, <code>data/nos_regime_v1</code>, <code>data/nos_binding_v1/nos_weeks</code>, <code>data/valuation_v2</code></div>
+        <div class="upgrade-grid">
+          <div><b>What is missing today</b>(1) Outage effects stop at MW drops, never quantifying matched regional spread (<code>$/MWh</code>) or SRA residue (<code>$/day</code>, <code>$/unit</code>) impact. (2) The live outlook severely over-predicts binding (<code>36%</code> predicted vs <code>15%</code> realised; only 23/96 cells beat baseline).</div>
+          <div><b>Exact computation to add</b>(1) Attach matched-pair spread and settled SRA residue changes to every supported outage family (e.g. QNI <code>N-ARSR_8E</code>, <code>N-ARDM_8C</code>, VNI <code>N-DTKV_18_WG_CLOSE</code>). (2) Apply chronological Empirical-Bayes shrinkage + isotonic probability calibration + weekly-snapshot cancellation hazard rates (<code>nos_weeks/</code>) to re-score all 96 backtest cells.</div>
+          <div><b>Decision payoff</b>Converts NOS outages into a calibrated, dollar-denominated forward calendar, fixing the <code>36% → 15%</code> over-prediction bias and directly feeding Stage 2–3 valuation inputs.</div>
+        </div>
+      </div>
+
+      <div class="upgrade-card" data-tier="A" data-cat="outlook">
+        <div class="upgrade-head">
+          <h4>C8. N-1-1 Concurrent-Outage Super-Additivity Analysis</h4>
+          <div><span class="pill tierA">Tier A · Local Data</span> <span class="pill med">Medium-High</span></div>
+        </div>
+        <div class="upgrade-meta">Applies to: <strong>NOS Outage Regimes</strong> &amp; <strong>Line Outage Risk</strong> · Local inputs: <code>data/nos_regime_v1/family_coverage_30min.parquet</code> + <code>data/nos_binding_v1/outlook</code></div>
+        <div class="upgrade-grid">
+          <div><b>What is missing today</b>Both outage studies match controlling for the <em>count</em> of other active families and flag 1,337 overlapping outlook rows, but never test whether concurrent outages compound non-linearly.</div>
+          <div><b>Exact computation to add</b>Compare realised limit drops, forced-flow shares, and binding marginal values during paired overlapping families <code>(A + B)</code> against the sum of standalone matched effects <code>effect(A) + effect(B)</code>, isolating super-additive corridor pairs.</div>
+          <div><b>Decision payoff</b>Identifies the rare overlapping maintenance windows that create disproportionate transfer collapses and high-impact congestion spikes, vital for outage-calendar risk screening.</div>
+        </div>
+      </div>
+
+      <div class="upgrade-card" data-tier="A" data-cat="econ outlook">
+        <div class="upgrade-head">
+          <h4>C9. Hierarchical Corridor Pooling &amp; Congestion-Rent Outcomes for Line Outage Risk</h4>
+          <div><span class="pill tierA">Tier A · Local Data</span> <span class="pill high">High Impact</span></div>
+        </div>
+        <div class="upgrade-meta">Applies to: <strong>Transmission-Line Outage Risk Atlas (50 Lines)</strong> · Local inputs: <code>data/line_outage_risk_v1/</code> (63 local parquet/json tables)</div>
+        <div class="upgrade-grid">
+          <div><b>What is missing today</b>Evaluating 50 lines individually against noisy regional RRP resulted in <strong>0 of 500</strong> tests passing display gates (e.g. Capital–Canberra Line 6 has only n = 2 events), making the 12.2 MB atlas largely inconclusive for trading decisions.</div>
+          <div><b>Exact computation to add</b>Pool electrically related lines into corridor/constraint-set archetypes (e.g., Snowy–Southern NSW 330 kV ring, Northern NSW QNI feeders, Western VIC 220/500 kV) using hierarchical Empirical-Bayes partial pooling, and evaluate continuous binding marginal value (<code>|MV|</code>) + regional spread widening alongside raw RRP.</div>
+          <div><b>Decision payoff</b>Preserves full statistical rigor and falsification gates while lifting effective sample sizes enough to produce statistically supported, actionable corridor-level outage risk profiles.</div>
+        </div>
+      </div>
+
+      <div class="upgrade-card" data-tier="A" data-cat="econ physics">
+        <div class="upgrade-head">
+          <h4>C10. Observed EnergyConnect Commissioning Telemetry → AEMC Loop Valuation Bridge</h4>
+          <div><span class="pill tierA">Tier A · Local Data</span> <span class="pill high">High Impact</span></div>
+        </div>
+        <div class="upgrade-meta">Applies to: <strong>EnergyConnect Study (<code>pec_limits_v1</code>)</strong> &amp; <strong>Valuation v3 Link</strong> · Local inputs: <code>data/pec_limits_v1/</code> + <code>nemic/valuation/v3_analytics.py</code></div>
+        <div class="upgrade-grid">
+          <div><b>What is missing today</b><code>pec_limits_v1</code> documents actual observed <code>NSW1-SA1</code> commissioning limits and constraint setters, while Valuation v3 used stylised 150 MW / 800 MW parametric stresses, the two studies never talk to each other.</div>
+          <div><b>Exact computation to add</b>Feed observed EnergyConnect directional envelopes, configuration step-changes, and binding constraint patterns from <code>data/pec_limits_v1</code> directly into the AEMC ERC0386 loop calculator and evaluate southern-ring limit coupling (<code>VNI</code> + <code>Heywood</code> + <code>PEC</code>).</div>
+          <div><b>Decision payoff</b>Replaces stylised commissioning assumptions with real AEMO dispatch evidence on how <code>NSW1-SA1</code> actually constrains and interacts with Victorian pass-through flows.</div>
+        </div>
+      </div>
+
+      <!-- TIER B -->
+      <div class="upgrade-card" data-tier="B" data-cat="physics">
+        <div class="upgrade-head">
+          <h4>B1. Dynamic Line Rating (DLR) &amp; Station-Level Weather Telemetry Integration</h4>
+          <div><span class="pill tierB">Tier B · External Data</span> <span class="pill low">Future Phase</span></div>
+        </div>
+        <div class="upgrade-meta">Applies to: <strong>Constraint Studies &amp; Event Atlases</strong> · External dependency: BOM measured station weather + TNSP DLR telemetry</div>
+        <div class="upgrade-grid">
+          <div><b>Current boundary</b>Current studies use hourly weather reanalysis and treat RHS thermal shifts as unexplained residuals.</div>
+          <div><b>Future addition</b>Join real-time ambient wind speed and temperature along critical 330/500 kV corridors to explain dynamic RHS thermal rating contractions.</div>
+          <div><b>Status</b>Explicitly document as Tier B boundary until licensed/automated station feeds are acquired.</div>
+        </div>
+      </div>
+
+      <div class="upgrade-card" data-tier="B" data-cat="outlook">
+        <div class="upgrade-head">
+          <h4>B2. Multi-Year Historical Weekly NOS Snapshot Revision Archive (Pre-Year 2)</h4>
+          <div><span class="pill tierB">Tier B · External Data</span> <span class="pill low">Future Phase</span></div>
+        </div>
+        <div class="upgrade-meta">Applies to: <strong>NOS Outage Outlook &amp; Line Outage Risk</strong> · External dependency: Historical NEMWEB NOS weekly zips before Sep 2025</div>
+        <div class="upgrade-grid">
+          <div><b>Current boundary</b>Year 1 relies on final-state MMSDM outage truth (creating the ~100% booked-to-invoked tautology); only Year 2 has weekly revision snapshots.</div>
+          <div><b>Future addition</b>Extend true as-known revision replay across 3+ full seasonal cycles so out-of-sample outage booking calibration has independent multi-year support.</div>
+          <div><b>Status</b>Use Year-2 weekly snapshots now (Upgrade C7) and log prospective weekly snapshots going forward.</div>
+        </div>
+      </div>
+
+      <div class="upgrade-card" data-tier="B" data-cat="physics">
+        <div class="upgrade-head">
+          <h4>B3. Nodal AC/DC Security-Constrained Counterfactual Dispatch (Nempy / Full Topology)</h4>
+          <div><span class="pill tierB">Tier B · External / Compute</span> <span class="pill low">Future Phase</span></div>
+        </div>
+        <div class="upgrade-meta">Applies to: <strong>Line Outage Risk</strong> &amp; <strong>EnergyConnect Stage 2 (800 MW)</strong> · Dependency: Nempy full-grid calibration + historical bid stacks</div>
+        <div class="upgrade-grid">
+          <div><b>Current boundary</b>All current attribution is observational or mechanical (fixed dispatch); full counterfactual re-dispatch under N-1/N-1-1 outages is out of scope.</div>
+          <div><b>Future addition</b>Couple the Stage 3 valuation Nempy dispatch module with the top 10 corridor outage families and Stage 2 800 MW EnergyConnect thermal limits.</div>
+          <div><b>Status</b>Align directly with Stage 3 of Valuation v3 Chapter 12 so both stacks share one dispatch engine.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: CONSOLIDATION ARCHITECTURE -->
+  <section id="sec-consolidation">
+    <div class="sec-kicker">Section 05 · Consolidation &amp; Usability Blueprint</div>
+    <h2>From 18 fragmented HTML files (126 MB) to three cohesive, readable flagship reports</h2>
+    <p>Right now, answering a single practical desk question such as <em>"Which generators and booked outages threaten VNI northward capacity next month, and how much does that move NSW−VIC spreads?"</em> forces you to open five separate HTML files across three directories (<code>all_interconnector_regime_research</code>, <code>vni_2y_constraint_study</code>, <code>vni_event_atlas</code> at 26.6 MB, <code>nos_outage_regime_research</code>, and <code>line_outage_risk_v1</code>). Consolidating the suite into <strong>three purpose-built Virtual Barrels flagship editions</strong>, while keeping all prior folders untouched as frozen historical baselines, eliminates copy-paste duplication and cuts total HTML weight by over 70%.</p>
+
+    <div class="arch-flow">
+      <div class="arch-col">
+        <h4>Current Fragmented Suite (18 HTMLs · 126 MB)</h4>
+        <span>Six-Link Regime Report (9.4 MB, 10% prose, no prices)</span>
+        <span>VNI / QNI / V-SA 2y Constraint Studies (3 × 4.8 MB boilerplate)</span>
+        <span>VNI / QNI / V-SA Event Atlases (71.8 MB total, 700 prose words)</span>
+        <span>NOS Outage &amp; Binding Report (7.4 MB, 5% prose, 7 bare figs)</span>
+        <span>Line Outage Risk Atlas (12.2 MB, 338 tables, 0/500 price gates)</span>
+        <span>PEC Limits (<code>local_exports/</code>) + Clustering (3% prose) + Forecast Docs (0 figs)</span>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-col mid">
+        <h4>Shared Analytics &amp; Build Harness (v2 Standard)</h4>
+        <span>Economic bridge: join local <code>DISPATCHPRICE</code> + settled SRA ledger</span>
+        <span>6-link constraint engine (adds Basslink, Directlink, Murraylink)</span>
+        <span>RHS/LHS/Switch splitter + BESS 5-min impulse detector</span>
+        <span>Empirical-Bayes hierarchical pooling + isotonic outlook calibration</span>
+        <span>Columnar JSON compression (~75% smaller Event Explorer)</span>
+        <span>Automated <code>lint_virtual_barrels.py</code> + KaTeX + Playwright QA</span>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-col out">
+        <h4>Proposed Three Flagship Editions (~22 MB Total)</h4>
+        <span><strong>Edition A:</strong> <em>NEM Six-Link Constraint Pressure, Generator Influence &amp; Contraction Atlas (v2)</em>: merges 6-link regimes + all 6 two-year constraint studies + slim interactive Contraction Explorer (C1–C6)</span>
+        <span><strong>Edition B:</strong> <em>NEM Transmission Outage Risk, Constraint Binding &amp; Calibrated Outlook Handbook (v2)</em>: merges NOS Outage Regimes + Line Outage Risk with $/MWh &amp; SRA impact + calibrated outlook (C7–C9)</span>
+        <span><strong>Edition C:</strong> <em>EnergyConnect &amp; Interconnector Forecasting Synthesis (v2)</em>: merges PEC limits + Forward Forecast Verdict + Clustering + Expanded Forecast Research with visuals &amp; loop bridge (C10)</span>
+      </div>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <h4>Flagship A · Six-Link Constraint &amp; Contraction Atlas</h4>
+        <p><strong>Replaces / Synthesises:</strong> <code>all_interconnector_regime_research</code> + 3 Two-Year Constraint Studies + 3 Event Atlases (+ adds Directlink, Murraylink, Basslink).</p>
+        <ul>
+          <li><strong>Part I:</strong> Constraint equations in KaTeX, signed envelope math, and QNI (411 MW) / V-SA (127 MW) MAE audit (C3).</li>
+          <li><strong>Part II:</strong> Six-link diurnal, seasonal, ENSO &amp; weather regimes with formal confidence intervals.</li>
+          <li><strong>Part III:</strong> Economic &amp; binding-weighted generator influence (C1), BESS 5-min ramp signatures (C5), LHS vs RHS vs Switch split (C4), and 6×6 cascade/NRM matrix (C6).</li>
+          <li><strong>Interactive Lab:</strong> Slim (&lt;6 MB) 6-link Contraction &amp; DUID Explorer replacing 71.8 MB of bloated single-link atlases.</li>
+        </ul>
+      </div>
+      <div class="card teal">
+        <h4>Flagship B · Outage Risk &amp; Calibrated Outlook Handbook</h4>
+        <p><strong>Replaces / Synthesises:</strong> <code>nos_outage_regime_research_20260924</code> + <code>line_outage_risk_v1</code>.</p>
+        <ul>
+          <li><strong>Part I:</strong> Grid-to-price outage mechanics, equipment-to-set lineage, and invoked vs binding vs limit-setting separation.</li>
+          <li><strong>Part II:</strong> Matched MW, regional spread (<code>$/MWh</code>), and SRA residue (<code>$/day</code>) impacts by outage family (C7) + N-1-1 overlapping outage compounding (C8).</li>
+          <li><strong>Part III:</strong> Hierarchical corridor-pooled line risk profiles turning 0/500 sparse tests into statistically supported corridor benchmarks (C9), plus Capital–Canberra Line 6 and Dapto–Marulan Line 8 deep dives.</li>
+          <li><strong>Interactive Lab:</strong> Searchable Asset/Family/Corridor Lookup + Calibrated 90-Day &amp; 12-Month Outage Calendar (fixing 36% → 15% bias).</li>
+        </ul>
+      </div>
+      <div class="card gold">
+        <h4>Flagship C · EnergyConnect &amp; Forecasting Synthesis</h4>
+        <p><strong>Replaces / Synthesises:</strong> <code>pec_limits_v1</code> + <code>forward_forecasting_verdict_20261005</code> + <code>qni_vni_clustering_v1</code> + <code>qni_vni_expanded_forecast_research</code>.</p>
+        <ul>
+          <li><strong>Part I:</strong> Observed EnergyConnect commissioning envelopes, configurations, and southern-ring coupling.</li>
+          <li><strong>Part II:</strong> Direct PEC commissioning telemetry fed into the v3 AEMC ERC0386 loop settlement calculator (C10).</li>
+          <li><strong>Part III:</strong> Visual, readable synthesis of the forecasting &amp; clustering experiments (replacing 326-word table dumps and zero-chart 14k-word text walls) with clear model-promotion gates and practical forecasting rules.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: EXECUTION WAVES -->
+  <section id="sec-roadmap">
+    <div class="sec-kicker">Section 06 · Recommended Rollout Sequence</div>
+    <h2>Staged execution waves (preserve all prior folders as frozen baselines)</h2>
+    <p>Rather than attempting all three flagship editions in one monolithic run, executing in three clean waves lets you review each finished HTML report, verify its data and prose lint gates, and merge cleanly to <code>origin/codex/nem-forecast-lab</code> after each wave.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Wave</th>
+            <th>Deliverable</th>
+            <th>Tier A modules built</th>
+            <th>Key verification gates</th>
+            <th>Why this order</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Wave 1</strong><br><span class="pill high">Recommended First</span></td>
+            <td><strong>Flagship A:</strong> Six-Link Constraint Pressure, Generator Influence &amp; Contraction Atlas (<code>reports/constraint_pressure_atlas_v2/</code>)</td>
+            <td>C1 (price/rent-weighted DUIDs), C2 (add Basslink/Directlink/Murraylink 2y), C3 (QNI/VSA MAE audit), C4 (LHS/RHS/Switch), C5 (BESS 5-min signature), C6 (6×6 cascades + NRM)</td>
+            <td>All 6 links reconciled; 0 raw MMS codes in prose; <code>lint_virtual_barrels.py --strict-emdash</code> pass; Playwright desktop/mobile QA; HTML &lt; 10 MB; <code>pytest -q</code> pass.</td>
+            <td>Directly bridges physical constraint mechanics into the v3 valuation work we just finished, and unlocks the 3 stranded 2-year HVDC datasets already on disk.</td>
+          </tr>
+          <tr>
+            <td><strong>Wave 2</strong><br><span class="pill med">High Desk Value</span></td>
+            <td><strong>Flagship B:</strong> Outage Risk, Constraint Binding &amp; Calibrated Outlook Handbook (<code>reports/outage_risk_handbook_v2/</code>)</td>
+            <td>C7 (NOS $/MWh &amp; SRA impact + isotonic/EB outlook calibration), C8 (N-1-1 compounding), C9 (hierarchical corridor pooling for 50 lines)</td>
+            <td>Backtest Brier skill improvement over 23/96 baseline; reliability curve calibration check; paginated lookup replacing 338 static tables; Virtual Barrels lint + Playwright QA.</td>
+            <td>Fixes the two biggest analytical bottlenecks in the outage stack (36% → 15% outlook over-prediction and 0/500 displayable line-outage price tests) and adds live dollar sizing.</td>
+          </tr>
+          <tr>
+            <td><strong>Wave 3</strong><br><span class="pill low">Synthesis</span></td>
+            <td><strong>Flagship C:</strong> EnergyConnect &amp; IC Forecasting Synthesis (<code>reports/ic_forecasting_and_pec_v2/</code>)</td>
+            <td>C10 (observed PEC commissioning → ERC0386 loop settlement bridge) + visual/KaTeX rewrite of Clustering, Verdict &amp; Expanded Forecast docs</td>
+            <td>PEC telemetry reconciled against <code>data/pec_limits_v1</code>; stack-isolation rules preserved per <code>AGENTS.md</code>; Virtual Barrels lint + Playwright QA + full <code>pytest -q</code>.</td>
+            <td>Closes the loop between observed EnergyConnect limits, the loop settlement engine, and the repository's forward-forecasting verdict.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout gold">
+      <span class="callout-title">Architecture Guardrail (Repository Memory Compliance)</span>
+      Per <code>AGENTS.md</code>, all three upgrades will strictly keep the repository's three model stacks distinct (original six-link conditional backtest, <code>nemic.experiments</code> diurnal/NOS/constraint research, and <code>nemic.production</code> scaffold), preserve every prior report folder and SHA-256 manifest untouched, never commit raw NEMWEB archives or temporary parquets, and explicitly label retrospective mechanical attributions versus calibrated out-of-sample forecasts.
+    </div>
+  </section>
+
+  <!-- SECTION 7: INTERACTIVE SCOPING CHECKLIST -->
+  <section id="sec-checklist">
+    <div class="sec-kicker">Section 07 · Your Assessment &amp; Approval Checklist</div>
+    <h2>Six scoping decisions to confirm before execution</h2>
+    <p>Select your preferred option for each decision below. Your choices dynamically build the copyable execution brief at the bottom so you can confirm or adjust the scope in one reply.</p>
+
+    <div class="decision-box" data-decision="wave">
+      <div class="decision-top">
+        <h4>1. Target Scope &amp; Execution Order</h4>
+        <span class="rec-tag">Recommended: Option A</span>
+      </div>
+      <div class="opt-grid three">
+        <label class="opt-card selected">
+          <input type="radio" name="wave" value="Option A: Start with Wave 1 (Six-Link Constraint Pressure, Generator Influence &amp; Contraction Atlas v2) first, then Wave 2 &amp; Wave 3 sequentially" checked>
+          <div>
+            <strong>Option A · Wave 1 First (Recommended)</strong>
+            <span>Execute Wave 1 (Six-Link Constraint &amp; Contraction Atlas v2 with C1–C6) end-to-end, verify &amp; merge first, then proceed to Wave 2 (Outages) and Wave 3 (PEC &amp; Forecasting).</span>
+          </div>
+        </label>
+        <label class="opt-card">
+          <input type="radio" name="wave" value="Option B: Start with Wave 2 (Outage Risk, Constraint Binding &amp; Calibrated Outlook Handbook v2) first">
+          <div>
+            <strong>Option B · Wave 2 First (Outages)</strong>
+            <span>Prioritise fixing the NOS outlook calibration (36%→15%), adding $/MWh &amp; SRA outage impacts, and pooling the 50-line atlas first (C7–C9).</span>
+          </div>
+        </label>
+        <label class="opt-card">
+          <input type="radio" name="wave" value="Option C: Execute all three waves (Flagship A, B, and C) continuously in one /goal campaign">
+          <div>
+            <strong>Option C · All Three Waves End-to-End</strong>
+            <span>Run Waves 1, 2, and 3 continuously in one full campaign, publishing all three flagship Virtual Barrels editions and merging everything cleanly to GitHub.</span>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <div class="decision-box" data-decision="consolidation">
+      <div class="decision-top">
+        <h4>2. Report Consolidation vs. Individual Rewrites</h4>
+        <span class="rec-tag">Recommended: Option A</span>
+      </div>
+      <div class="opt-grid">
+        <label class="opt-card selected">
+          <input type="radio" name="consolidation" value="Option A: Consolidate into 3 new flagship v2 folders (preserving all existing report folders untouched)" checked>
+          <div>
+            <strong>Option A · Consolidate Into 3 Flagship Editions (Recommended)</strong>
+            <span>Merge overlapping single-link studies and atlases into 3 cohesive, searchable HTML/MD flagship reports while keeping all existing folders untouched as frozen v1 baselines.</span>
+          </div>
+        </label>
+        <label class="opt-card">
+          <input type="radio" name="consolidation" value="Option B: Keep every existing report separate and create v2 versions of each individual report">
+          <div>
+            <strong>Option B · Keep Individual Reports Separate</strong>
+            <span>Rewrite each report separately in parallel v2 folders (e.g. separate VNI/QNI/V-SA/Basslink/Directlink/Murraylink constraint reports + separate NOS &amp; Line Outage reports).</span>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <div class="decision-box" data-decision="analytics">
+      <div class="decision-top">
+        <h4>3. Analytical Expansion Depth (Tier A Local Upgrades C1–C10)</h4>
+        <span class="rec-tag">Recommended: Option A</span>
+      </div>
+      <div class="opt-grid">
+        <label class="opt-card selected">
+          <input type="radio" name="analytics" value="Option A: Compute all relevant Tier A local-data upgrades (C1–C10: price/rent-weighted DUIDs, 6-link parity, QNI/VSA MAE audit, LHS/RHS/Switch split, BESS 5-min signature, cascades/NRM, NOS $/MWh &amp; calibrated outlook, N-1-1 compounding, corridor pooling, PEC-to-loop bridge)" checked>
+          <div>
+            <strong>Option A · Full Tier A Local-Data Upgrades (Recommended)</strong>
+            <span>Compute all new analytics from existing local archives (C1–C6 in Wave 1, C7–C9 in Wave 2, C10 in Wave 3) backed by unit tests and audited CSVs.</span>
+          </div>
+        </label>
+        <label class="opt-card">
+          <input type="radio" name="analytics" value="Option B: Editorial Virtual Barrels rewrite &amp; chart/table cleanup only on existing cached CSVs (no new analytics)">
+          <div>
+            <strong>Option B · Virtual Barrels Rewrite &amp; Cleanup Only</strong>
+            <span>Keep existing computed CSVs unchanged; focus solely on mechanics-first prose, KaTeX, inline charts, table slimming, and Event Atlas compression.</span>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <div class="decision-box" data-decision="atlas">
+      <div class="decision-top">
+        <h4>4. Handling the 71.8 MB Sharp-Contraction Event Atlases</h4>
+        <span class="rec-tag">Recommended: Option A</span>
+      </div>
+      <div class="opt-grid">
+        <label class="opt-card selected">
+          <input type="radio" name="atlas" value="Option A: Compress into a lightweight (&lt;6 MB) 6-link interactive Contraction &amp; DUID Explorer embedded inside Flagship A using columnar JSON" checked>
+          <div>
+            <strong>Option A · Lightweight Embedded 6-Link Explorer (Recommended)</strong>
+            <span>Replace three 20–27 MB HTML files with one fast, columnar-JSON interactive explorer embedded inside Flagship A (full episode tables kept in downloadable CSVs).</span>
+          </div>
+        </label>
+        <label class="opt-card">
+          <input type="radio" name="atlas" value="Option B: Keep standalone per-link Event Atlas HTMLs, but compress JSON and rewrite prose companions to Virtual Barrels standard">
+          <div>
+            <strong>Option B · Keep Standalone Compressed Event Atlases</strong>
+            <span>Maintain separate per-link interactive atlas HTMLs, stripping bloated whitespace/keys, fixing snake_case/scientific-notation Markdown tables, and adding narrative case summaries.</span>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <div class="decision-box" data-decision="depth">
+      <div class="decision-top">
+        <h4>5. Narrative Depth &amp; Desk-Usability Style</h4>
+        <span class="rec-tag">Recommended: Option A</span>
+      </div>
+      <div class="opt-grid">
+        <label class="opt-card selected">
+          <input type="radio" name="depth" value="Option A: Comprehensive desk + quant Virtual Barrels narrative (10,000–15,000 words per flagship, full physical mechanics, worked constraint examples, and trading/modelling implications)" checked>
+          <div>
+            <strong>Option A · Comprehensive Mechanics-First Handbook (Recommended)</strong>
+            <span>Match Valuation v3's institutional depth (10,000–15,000 words per flagship), dual Desk/Quant reading paths, KaTeX equations, and concrete worked examples of real binding episodes.</span>
+          </div>
+        </label>
+        <label class="opt-card">
+          <input type="radio" name="depth" value="Option B: Concise executive-briefing style (4,000–6,000 words per flagship focused on key charts, rankings, and action checklists)">
+          <div>
+            <strong>Option B · Concise Executive Briefing</strong>
+            <span>Shorter, punchier 4,000–6,000 word narrative emphasising top-line exhibits, searchable lookup tables, and operational checklists.</span>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <div class="decision-box" data-decision="git">
+      <div class="decision-top">
+        <h4>6. Git Publication &amp; Repository Integration</h4>
+        <span class="rec-tag">Recommended: Option A</span>
+      </div>
+      <div class="opt-grid">
+        <label class="opt-card selected">
+          <input type="radio" name="git" value="Option A: Keep local until review, then push &amp; merge cleanly into origin/codex/nem-forecast-lab when approved" checked>
+          <div>
+            <strong>Option A · Build &amp; Verify Locally First, Then Publish on Sign-Off</strong>
+            <span>Run full pytest, Virtual Barrels lint, and Playwright visual QA locally so you can inspect the HTML before pushing and merging to GitHub.</span>
+          </div>
+        </label>
+        <label class="opt-card">
+          <input type="radio" name="git" value="Option B: Auto-publish &amp; merge each completed wave cleanly to origin/codex/nem-forecast-lab (same workflow as Valuation v3)">
+          <div>
+            <strong>Option B · End-to-End Build, Verify, Push &amp; Merge</strong>
+            <span>Same autonomous workflow as Valuation v3: run all checks, update README.md, commit via clean worktree, and push/merge to <code>origin/codex/nem-forecast-lab</code>.</span>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <div class="summary-box">
+      <div class="sec-kicker" style="margin-bottom:4px">Copyable Execution Brief</div>
+      <strong>Review your selections below, then copy and reply to start execution:</strong>
+      <pre id="briefOutput"></pre>
+      <button type="button" class="primary" id="copyBtn">Copy execution brief</button>
+      <button type="button" id="resetBtn">Reset to recommended defaults</button>
+      <span id="copyStatus" class="copy-status"></span>
+    </div>
+  </section>
+
+  <footer>
+    <span>IC Flow Forecasting · Constraint Pressure &amp; Interconnector Research Upgrade Plan</span>
+    <span>Audited against local repository state · 26 November 2026</span>
+  </footer>
+</main>
+
+<script>
+'use strict';
+// Filter buttons for C1-C10 & B1-B3
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    document.querySelectorAll('.upgrade-card').forEach(card => {
+      const show = f === 'all' || card.dataset.tier === f || (card.dataset.cat || '').split(' ').includes(f);
+      card.style.display = show ? '' : 'none';
+    });
+  });
+});
+
+// Scoping checklist live brief generator
+function updateBrief() {
+  const names = ['wave', 'consolidation', 'analytics', 'atlas', 'depth', 'git'];
+  const labels = [
+    '1. Scope & Order',
+    '2. Consolidation',
+    '3. Analytical Depth',
+    '4. Event Atlases',
+    '5. Narrative Depth',
+    '6. Git Publication'
+  ];
+  const lines = ['Approved scoping decisions for the Constraint Pressure & Interconnector Studies Upgrade Plan:'];
+  names.forEach((n, i) => {
+    const checked = document.querySelector('input[name="' + n + '"]:checked');
+    document.querySelectorAll('input[name="' + n + '"]').forEach(inp => {
+      inp.closest('.opt-card').classList.toggle('selected', inp.checked);
+    });
+    if (checked) lines.push('- ' + labels[i] + ': ' + checked.value);
+  });
+  document.getElementById('briefOutput').textContent = lines.join('\n');
+}
+
+document.querySelectorAll('#sec-checklist input[type="radio"]').forEach(inp => {
+  inp.addEventListener('change', updateBrief);
+});
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  document.querySelectorAll('.decision-box').forEach(box => {
+    const first = box.querySelector('input[type="radio"]');
+    if (first) first.checked = true;
+  });
+  updateBrief();
+  document.getElementById('copyStatus').textContent = 'Reset to recommended options.';
+});
+
+document.getElementById('copyBtn').addEventListener('click', () => {
+  const txt = document.getElementById('briefOutput').textContent;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(txt).then(() => {
+      document.getElementById('copyStatus').textContent = 'Copied to clipboard.';
+    }).catch(() => {
+      document.getElementById('copyStatus').textContent = 'Select and copy the text box manually.';
+    });
+  } else {
+    document.getElementById('copyStatus').textContent = 'Select and copy the text box manually.';
+  }
+});
+
+updateBrief();
+</script>
+</body>
+</html>
