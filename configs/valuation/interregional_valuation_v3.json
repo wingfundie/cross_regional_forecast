@@ -1,0 +1,38 @@
+{
+  "schema_version": 2,
+  "campaign": "interregional_valuation_v3",
+  "data_root": "data/valuation_v2",
+  "tracking_root": "execution/interregional_valuation_v3",
+  "v2_report_root": "reports/interregional_valuation_research_v2",
+  "report_root": "reports/interregional_valuation_research_v3",
+  "baseline_report": "reports/interregional_valuation_research_20260918",
+  "time_convention": "fixed NEM time UTC+10, interval-ending five-minute timestamps",
+  "start_exclusive": "2021-10-01 00:00:00",
+  "end_inclusive": "2026-09-01 00:00:00",
+  "v1_window": {
+    "start_exclusive": "2024-09-01 00:00:00",
+    "end_inclusive": "2026-09-01 00:00:00"
+  },
+  "regions": ["NSW1", "QLD1", "SA1", "TAS1", "VIC1"],
+  "cap_strike": 300.0,
+  "apc_cap_fy27": 600.0,
+  "cpt_intervals": 2016,
+  "indicative_loop_units": {
+    "NSWSA": 800,
+    "SANSW": 800
+  },
+  "carry_rates_pa": [0.05, 0.08, 0.12],
+  "pec_parametric_mw": [0, 150, 800],
+  "pec_compression_factors": [0.0, 0.2, 0.4],
+  "slippage_order_sizes": [25, 50, 100],
+  "bootstrap": {
+    "replicates": 2000,
+    "block_days": [7, 14],
+    "seed": 20260926
+  },
+  "stress": {
+    "top_weeks": 10,
+    "cvar_alpha": 0.95
+  },
+  "claims": "Research-only valuation evidence. Not a deployed forecast or trading signal."
+}

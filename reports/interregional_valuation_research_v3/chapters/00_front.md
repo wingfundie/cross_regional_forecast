@@ -1,0 +1,20 @@
+# Valuing interregional spreads and settlement residue units in the NEM
+
+## Executive overview and analytical scope
+
+This research report examines how interregional electricity price spreads and Settlements Residue Auction (SRA) units are valued, priced, and hedged in Australia's National Electricity Market (NEM). Version 3 supersedes the version 2 archive by reorganising the analysis in first-principles order, resolving legacy carry-overs from the initial September 2026 design note, and integrating nine new empirical studies built directly from the repository's five-minute market panel, settled residue ledgers, auction bid stacks, and constraint archives.
+
+- **Market and time convention:** Australian National Electricity Market, aligned strictly to fixed NEM time (UTC+10) using interval-ending five-minute timestamps across all five mainland and Tasmanian regions.
+- **Empirical window:** {{intervals}} five-minute intervals spanning October 2021 to June 2026 ({{complete_quarters}} complete calendar quarters from {{first_quarter}} through {{last_quarter}}), capturing the entire post-five-minute-settlement era.
+- **Units and sign convention:** Wholesale energy prices, regional spreads, and cap payouts are expressed in AUD per MWh; SRA clearing prices and realised distributions are expressed in AUD per unit per delivery quarter. A positive spread always indicates that the destination region settled at a higher price than the origin region.
+- **Reproducibility guarantee:** Every statistic in this document is injected directly from the audited summary ledger at build time, with zero manually transcribed figures.
+
+> [!TAKEAWAY] Core Empirical Conclusions for the Desk and Quant Team
+> Across {{auction_tranches}} delivered auction tranches, SRA holders received {{auction_ratio}} times the clearing price on a units-sold-weighted basis (95% quarter-cluster interval {{auction_ratio_lo}} to {{auction_ratio_hi}}), and that discount persists outside the 2022 energy crisis at {{auc_ratio_ex_2022_crisis}} ({{auc_lo_ex_2022_crisis}} to {{auc_hi_ex_2022_crisis}}). Clearing prices nonetheless outperform simple historical rules out of sample, indicating a persistent risk, capital, and regime premium rather than participant ignorance. Against a 1 MW flat futures spread, hedge firmness varies sharply by corridor: northward VNI units hedge sub-$300 energy congestion reasonably well but fail during New South Wales scarcity, whereas northward QNI units retain firmness under stress. From November 2026 onward, the AEMC net-trade loop rule and the 2027 Q2 QNI unit expansion structurally reprice forward categories even before physical EnergyConnect dispatch changes take hold.
+
+To serve both commercial trading review and quantitative system implementation without forcing either audience through irrelevant detours, the document is organised into four sequential parts plus three technical reference appendices:
+
+1. Part I (Chapters 1 to 3): Physical and institutional settlement plumbing, covering contract definitions, exact price accounting, pre-loop asset pooling, and the November 2026 loop and Basslink regime breaks.
+2. Part II (Chapters 4 to 6): Baseline empirical structure across nineteen complete quarters, including moving-block uncertainty, statutory cap and cumulative-price-threshold interactions, diurnal operating regimes, loss-versus-congestion shares, counter-price flows, and binding constraint attribution.
+3. Part III (Chapters 7 to 9): Market valuation and hedging evidence, evaluating auction clearing prices, term-structure drift, credit-support carry, weekly and quarterly hedge replication, two-instrument SRA-plus-cap frontiers, walk-forward benchmarks, and an interactive desk workbench.
+4. Part IV (Chapters 10 to 12): Complete implementation blueprint, documenting the five-layer system architecture, four-time-axis data contracts, an exhaustive paper-by-paper literature synthesis translated into modelling choices, explicit dual entropy-pooling mathematics, and validation acceptance gates.

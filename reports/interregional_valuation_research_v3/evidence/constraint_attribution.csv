@@ -1,0 +1,817 @@
+pair,quarter,family,network_state,contribution,intervals
+NSW − VIC,2021Q4,coupled/none,coupled/none,-0.007358427194,11546
+NSW − VIC,2021Q4,interconnector limit,outage/other,0.4537943357,59
+NSW − VIC,2021Q4,manual/ramp,other,0.346750554,197
+NSW − VIC,2021Q4,negative residue management,system normal,-0.07068681131,14
+NSW − VIC,2021Q4,thermal,outage/other,1.750211026,751
+NSW − VIC,2021Q4,thermal,system normal,1.323873439,573
+NSW − VIC,2021Q4,transient stability,outage/other,4.64782046,1825
+NSW − VIC,2021Q4,transient stability,system normal,0.06617754852,31
+NSW − VIC,2021Q4,voltage stability,outage/other,6.386117832,3398
+NSW − VIC,2021Q4,voltage stability,system normal,17.4737422,8102
+NSW − VIC,2022Q1,coupled/none,coupled/none,-0.008253920897,13036
+NSW − VIC,2022Q1,interconnector limit,outage/other,-0.04859786265,2
+NSW − VIC,2022Q1,manual/ramp,other,0.1061736494,78
+NSW − VIC,2022Q1,negative residue management,system normal,-2.651636252,23
+NSW − VIC,2022Q1,thermal,outage/other,1.416808993,365
+NSW − VIC,2022Q1,thermal,system normal,-0.1330523526,489
+NSW − VIC,2022Q1,transient stability,outage/other,8.969797777,2904
+NSW − VIC,2022Q1,transient stability,system normal,0.2562040883,244
+NSW − VIC,2022Q1,voltage stability,outage/other,2.312545431,1371
+NSW − VIC,2022Q1,voltage stability,system normal,18.37028037,7408
+NSW − VIC,2022Q2,coupled/none,coupled/none,1.095430736,16187
+NSW − VIC,2022Q2,interconnector limit,outage/other,0.1588072814,16
+NSW − VIC,2022Q2,manual/ramp,other,0.7537805405,117
+NSW − VIC,2022Q2,negative residue management,system normal,0.03306493464,27
+NSW − VIC,2022Q2,other,outage/other,-0.003633001735,3
+NSW − VIC,2022Q2,thermal,outage/other,6.721558901,1145
+NSW − VIC,2022Q2,thermal,system normal,3.537770821,594
+NSW − VIC,2022Q2,transient stability,outage/other,32.74988235,3438
+NSW − VIC,2022Q2,voltage stability,outage/other,1.98143325,1219
+NSW − VIC,2022Q2,voltage stability,system normal,15.39156486,3462
+NSW − VIC,2022Q3,coupled/none,coupled/none,-0.05632505451,16778
+NSW − VIC,2022Q3,interconnector limit,outage/other,0.02197926717,13
+NSW − VIC,2022Q3,manual/ramp,other,0.6760854257,92
+NSW − VIC,2022Q3,negative residue management,system normal,0.6227305222,10
+NSW − VIC,2022Q3,thermal,outage/other,-0.1315603631,48
+NSW − VIC,2022Q3,thermal,system normal,2.571031747,921
+NSW − VIC,2022Q3,transient stability,outage/other,12.24431891,2056
+NSW − VIC,2022Q3,transient stability,system normal,-0.000712433975,1
+NSW − VIC,2022Q3,voltage stability,outage/other,2.748316292,3102
+NSW − VIC,2022Q3,voltage stability,system normal,11.75841273,3475
+NSW − VIC,2022Q4,coupled/none,coupled/none,0.03492043331,13191
+NSW − VIC,2022Q4,manual/ramp,other,0.1328935373,49
+NSW − VIC,2022Q4,negative residue management,system normal,-0.003245895041,2
+NSW − VIC,2022Q4,thermal,outage/other,0.5047097565,147
+NSW − VIC,2022Q4,thermal,system normal,3.827175631,1244
+NSW − VIC,2022Q4,transient stability,outage/other,25.65694266,5307
+NSW − VIC,2022Q4,voltage stability,outage/other,-1.133997856,594
+NSW − VIC,2022Q4,voltage stability,system normal,19.95992858,5962
+NSW − VIC,2023Q1,coupled/none,coupled/none,-0.02373725878,13746
+NSW − VIC,2023Q1,interconnector limit,outage/other,0.1177945216,24
+NSW − VIC,2023Q1,manual/ramp,other,0.06373738901,26
+NSW − VIC,2023Q1,negative residue management,system normal,-0.0844643879,32
+NSW − VIC,2023Q1,thermal,outage/other,1.120513321,220
+NSW − VIC,2023Q1,thermal,system normal,15.53938124,2474
+NSW − VIC,2023Q1,transient stability,outage/other,9.061456779,2405
+NSW − VIC,2023Q1,voltage stability,outage/other,-1.350894293,1333
+NSW − VIC,2023Q1,voltage stability,system normal,18.52915836,5660
+NSW − VIC,2023Q2,coupled/none,coupled/none,0.03911775963,15661
+NSW − VIC,2023Q2,manual/ramp,other,0.1814059545,84
+NSW − VIC,2023Q2,negative residue management,system normal,0.004214455193,15
+NSW − VIC,2023Q2,thermal,outage/other,0.4167173951,125
+NSW − VIC,2023Q2,thermal,system normal,2.355951344,786
+NSW − VIC,2023Q2,transient stability,outage/other,20.96059028,1631
+NSW − VIC,2023Q2,transient stability,system normal,2.155662662,906
+NSW − VIC,2023Q2,voltage stability,outage/other,10.13566505,4099
+NSW − VIC,2023Q2,voltage stability,system normal,7.450128019,2901
+NSW − VIC,2023Q3,coupled/none,coupled/none,-0.01021549435,15064
+NSW − VIC,2023Q3,manual/ramp,other,0.2019850678,99
+NSW − VIC,2023Q3,negative residue management,system normal,-0.008167781061,4
+NSW − VIC,2023Q3,thermal,outage/other,0.7226143623,271
+NSW − VIC,2023Q3,thermal,system normal,7.329952658,2835
+NSW − VIC,2023Q3,transient stability,outage/other,1.88182478,254
+NSW − VIC,2023Q3,transient stability,system normal,2.797901058,1400
+NSW − VIC,2023Q3,voltage stability,outage/other,2.305391873,1246
+NSW − VIC,2023Q3,voltage stability,system normal,12.09704943,5323
+NSW − VIC,2023Q4,coupled/none,coupled/none,-0.006107820431,13372
+NSW − VIC,2023Q4,interconnector limit,outage/other,0.05125942566,31
+NSW − VIC,2023Q4,manual/ramp,other,0.123162941,92
+NSW − VIC,2023Q4,negative residue management,system normal,-0.04135405955,26
+NSW − VIC,2023Q4,thermal,outage/other,1.877903649,960
+NSW − VIC,2023Q4,thermal,system normal,24.67295875,6324
+NSW − VIC,2023Q4,transient stability,outage/other,1.747852585,530
+NSW − VIC,2023Q4,transient stability,system normal,1.401129801,1109
+NSW − VIC,2023Q4,voltage stability,outage/other,0.7949002529,526
+NSW − VIC,2023Q4,voltage stability,system normal,6.227210036,3526
+NSW − VIC,2024Q1,coupled/none,coupled/none,-0.006465526831,13397
+NSW − VIC,2024Q1,interconnector limit,outage/other,2.454191124,21
+NSW − VIC,2024Q1,manual/ramp,other,0.005418018526,10
+NSW − VIC,2024Q1,negative residue management,system normal,-3.146524711,40
+NSW − VIC,2024Q1,thermal,outage/other,0.3673937832,352
+NSW − VIC,2024Q1,thermal,system normal,25.06846892,7941
+NSW − VIC,2024Q1,transient stability,outage/other,1.232413549,694
+NSW − VIC,2024Q1,transient stability,system normal,1.468730948,1014
+NSW − VIC,2024Q1,voltage stability,outage/other,0.1934326607,339
+NSW − VIC,2024Q1,voltage stability,system normal,4.666007445,2400
+NSW − VIC,2024Q2,coupled/none,coupled/none,-0.02727569133,16387
+NSW − VIC,2024Q2,manual/ramp,other,0.09073859588,31
+NSW − VIC,2024Q2,negative residue management,system normal,-0.02497769494,12
+NSW − VIC,2024Q2,thermal,outage/other,0.3048893657,83
+NSW − VIC,2024Q2,thermal,system normal,1.360324453,781
+NSW − VIC,2024Q2,transient stability,outage/other,49.70858985,516
+NSW − VIC,2024Q2,transient stability,system normal,0.5671876371,274
+NSW − VIC,2024Q2,voltage stability,outage/other,-10.41361382,5658
+NSW − VIC,2024Q2,voltage stability,system normal,0.7922969699,2466
+NSW − VIC,2024Q3,coupled/none,coupled/none,-0.01086768417,12403
+NSW − VIC,2024Q3,manual/ramp,other,0.244817546,138
+NSW − VIC,2024Q3,negative residue management,system normal,-0.1250735437,21
+NSW − VIC,2024Q3,other,outage/other,-0.0003098414855,5
+NSW − VIC,2024Q3,thermal,outage/other,2.385336539,672
+NSW − VIC,2024Q3,thermal,system normal,2.318253293,1257
+NSW − VIC,2024Q3,transient stability,outage/other,5.478538157,1386
+NSW − VIC,2024Q3,transient stability,system normal,1.521886595,718
+NSW − VIC,2024Q3,voltage stability,outage/other,1.836134981,4993
+NSW − VIC,2024Q3,voltage stability,system normal,0.5139172114,4903
+NSW − VIC,2024Q4,coupled/none,coupled/none,-0.01084753843,11540
+NSW − VIC,2024Q4,interconnector limit,outage/other,-0.07877449099,17
+NSW − VIC,2024Q4,manual/ramp,other,0.1393286059,70
+NSW − VIC,2024Q4,negative residue management,system normal,-0.1026801442,31
+NSW − VIC,2024Q4,thermal,outage/other,37.65125675,6112
+NSW − VIC,2024Q4,thermal,system normal,19.87076992,1949
+NSW − VIC,2024Q4,transient stability,outage/other,24.54519707,1624
+NSW − VIC,2024Q4,transient stability,system normal,0.6797524931,301
+NSW − VIC,2024Q4,voltage stability,outage/other,6.209514355,3382
+NSW − VIC,2024Q4,voltage stability,system normal,2.914067692,1470
+NSW − VIC,2025Q1,coupled/none,coupled/none,-0.008280252478,12018
+NSW − VIC,2025Q1,interconnector limit,outage/other,0.1052198876,319
+NSW − VIC,2025Q1,manual/ramp,other,0.05883367303,145
+NSW − VIC,2025Q1,negative residue management,system normal,-0.05027587159,23
+NSW − VIC,2025Q1,thermal,outage/other,4.899846466,1442
+NSW − VIC,2025Q1,thermal,system normal,7.849116741,3202
+NSW − VIC,2025Q1,transient stability,outage/other,14.36483512,1972
+NSW − VIC,2025Q1,transient stability,system normal,0.8153317169,460
+NSW − VIC,2025Q1,voltage stability,outage/other,-2.116892185,3612
+NSW − VIC,2025Q1,voltage stability,system normal,0.9459177646,2727
+NSW − VIC,2025Q2,coupled/none,coupled/none,-0.009326116942,15532
+NSW − VIC,2025Q2,interconnector limit,outage/other,-0.05178058428,85
+NSW − VIC,2025Q2,manual/ramp,other,0.1988944579,63
+NSW − VIC,2025Q2,negative residue management,system normal,-0.01989274441,18
+NSW − VIC,2025Q2,thermal,outage/other,4.132271538,213
+NSW − VIC,2025Q2,thermal,system normal,1.100889725,1018
+NSW − VIC,2025Q2,transient stability,outage/other,13.39085277,1762
+NSW − VIC,2025Q2,transient stability,system normal,0.5686350249,348
+NSW − VIC,2025Q2,voltage stability,outage/other,-0.09923743558,3337
+NSW − VIC,2025Q2,voltage stability,system normal,-0.2015758416,3832
+NSW − VIC,2025Q3,coupled/none,coupled/none,-0.01185878185,14600
+NSW − VIC,2025Q3,interconnector limit,outage/other,0.001721776392,102
+NSW − VIC,2025Q3,manual/ramp,other,0.359454094,228
+NSW − VIC,2025Q3,negative residue management,system normal,0.1039623563,69
+NSW − VIC,2025Q3,thermal,outage/other,0.6434848134,438
+NSW − VIC,2025Q3,thermal,system normal,0.8664364463,804
+NSW − VIC,2025Q3,transient stability,outage/other,2.854244395,1346
+NSW − VIC,2025Q3,transient stability,system normal,0.8598905727,515
+NSW − VIC,2025Q3,voltage stability,outage/other,-0.6271175865,3521
+NSW − VIC,2025Q3,voltage stability,system normal,4.067038564,4873
+NSW − VIC,2025Q4,coupled/none,coupled/none,-0.00778846026,12169
+NSW − VIC,2025Q4,interconnector limit,outage/other,-0.1732782768,401
+NSW − VIC,2025Q4,manual/ramp,other,0.232071356,137
+NSW − VIC,2025Q4,negative residue management,system normal,-0.06150059167,16
+NSW − VIC,2025Q4,thermal,outage/other,4.114190783,219
+NSW − VIC,2025Q4,thermal,system normal,11.87234123,3226
+NSW − VIC,2025Q4,transient stability,outage/other,6.250218435,1291
+NSW − VIC,2025Q4,transient stability,system normal,3.059983955,1527
+NSW − VIC,2025Q4,voltage stability,outage/other,0.2834392711,800
+NSW − VIC,2025Q4,voltage stability,system normal,9.294256403,6710
+NSW − VIC,2026Q1,coupled/none,coupled/none,0.04515594798,12403
+NSW − VIC,2026Q1,interconnector limit,outage/other,0.02201496404,52
+NSW − VIC,2026Q1,manual/ramp,other,0.05789851575,35
+NSW − VIC,2026Q1,negative residue management,system normal,-0.4123022078,49
+NSW − VIC,2026Q1,thermal,outage/other,10.53860296,379
+NSW − VIC,2026Q1,thermal,system normal,-0.7632688221,366
+NSW − VIC,2026Q1,transient stability,outage/other,5.640115006,3091
+NSW − VIC,2026Q1,transient stability,system normal,0.9767184674,749
+NSW − VIC,2026Q1,voltage stability,outage/other,0.3432080702,1028
+NSW − VIC,2026Q1,voltage stability,system normal,10.81409272,7768
+NSW − VIC,2026Q2,coupled/none,coupled/none,-0.01336100438,13403
+NSW − VIC,2026Q2,manual/ramp,other,0.1487909665,196
+NSW − VIC,2026Q2,negative residue management,system normal,-0.0833014391,49
+NSW − VIC,2026Q2,thermal,outage/other,0.04981986029,141
+NSW − VIC,2026Q2,thermal,system normal,-0.02495628927,60
+NSW − VIC,2026Q2,transient stability,outage/other,3.558435123,1941
+NSW − VIC,2026Q2,transient stability,system normal,2.515963575,1381
+NSW − VIC,2026Q2,voltage stability,outage/other,-0.5679938471,1376
+NSW − VIC,2026Q2,voltage stability,system normal,10.53151217,7661
+NSW − VIC,2026Q3,coupled/none,coupled/none,-0.02114571761,9049
+NSW − VIC,2026Q3,manual/ramp,other,0.489437274,221
+NSW − VIC,2026Q3,negative residue management,system normal,0.01701381634,11
+NSW − VIC,2026Q3,thermal,outage/other,0.01641553577,18
+NSW − VIC,2026Q3,thermal,system normal,0.03889069938,220
+NSW − VIC,2026Q3,transient stability,outage/other,5.236038328,1841
+NSW − VIC,2026Q3,transient stability,system normal,3.540766026,1384
+NSW − VIC,2026Q3,voltage stability,outage/other,-2.227761501,1847
+NSW − VIC,2026Q3,voltage stability,system normal,4.805745294,3265
+QLD − NSW,2021Q4,coupled/none,coupled/none,-0.01406177523,17988
+QLD − NSW,2021Q4,interconnector limit,outage/other,3.735822861,2807
+QLD − NSW,2021Q4,manual/ramp,other,-0.00502629058,112
+QLD − NSW,2021Q4,negative residue management,system normal,-0.2707768084,84
+QLD − NSW,2021Q4,other,outage/other,-0.002311652095,11
+QLD − NSW,2021Q4,thermal,outage/other,1.229417781,813
+QLD − NSW,2021Q4,thermal,system normal,0.01995243496,43
+QLD − NSW,2021Q4,transient stability,outage/other,-0.003228195598,66
+QLD − NSW,2021Q4,transient stability,system normal,0.01155081041,35
+QLD − NSW,2021Q4,voltage stability,outage/other,6.361910974,2002
+QLD − NSW,2021Q4,voltage stability,system normal,21.47521717,2535
+QLD − NSW,2022Q1,coupled/none,coupled/none,11.49631813,16618
+QLD − NSW,2022Q1,interconnector limit,outage/other,-1.592763634,993
+QLD − NSW,2022Q1,manual/ramp,other,-0.008939527654,112
+QLD − NSW,2022Q1,negative residue management,system normal,0.5187899979,28
+QLD − NSW,2022Q1,thermal,outage/other,0.5445018551,466
+QLD − NSW,2022Q1,thermal,system normal,0.07092455866,41
+QLD − NSW,2022Q1,transient stability,outage/other,-0.009180747958,6
+QLD − NSW,2022Q1,transient stability,system normal,-0.02082237278,34
+QLD − NSW,2022Q1,voltage stability,outage/other,20.3301253,2437
+QLD − NSW,2022Q1,voltage stability,system normal,26.67658416,5185
+QLD − NSW,2022Q2,coupled/none,coupled/none,-3.254488313,21400
+QLD − NSW,2022Q2,interconnector limit,outage/other,-2.243808943,974
+QLD − NSW,2022Q2,manual/ramp,other,-0.07974092804,46
+QLD − NSW,2022Q2,negative residue management,system normal,-3.476601314,219
+QLD − NSW,2022Q2,other,outage/other,0.007183463523,52
+QLD − NSW,2022Q2,thermal,outage/other,0.414859003,327
+QLD − NSW,2022Q2,thermal,system normal,-0.1537634437,103
+QLD − NSW,2022Q2,transient stability,outage/other,-0.0737666364,38
+QLD − NSW,2022Q2,transient stability,system normal,-0.03295289706,49
+QLD − NSW,2022Q2,voltage stability,outage/other,37.05057529,1780
+QLD − NSW,2022Q2,voltage stability,system normal,-2.807486079,1220
+QLD − NSW,2022Q3,coupled/none,coupled/none,-0.05931696049,20280
+QLD − NSW,2022Q3,interconnector limit,outage/other,-2.023194323,1100
+QLD − NSW,2022Q3,interconnector limit,system normal,-0.05482643141,8
+QLD − NSW,2022Q3,manual/ramp,other,-0.1354767745,26
+QLD − NSW,2022Q3,negative residue management,system normal,-0.8736985588,23
+QLD − NSW,2022Q3,other,outage/other,-0.2216264827,53
+QLD − NSW,2022Q3,thermal,outage/other,-1.881285466,1326
+QLD − NSW,2022Q3,thermal,system normal,-0.3400727888,312
+QLD − NSW,2022Q3,transient stability,outage/other,-0.8706595325,136
+QLD − NSW,2022Q3,transient stability,system normal,-0.01014111808,4
+QLD − NSW,2022Q3,voltage stability,outage/other,24.97863635,1288
+QLD − NSW,2022Q3,voltage stability,system normal,-8.439327333,1940
+QLD − NSW,2022Q4,coupled/none,coupled/none,-0.03504221236,21778
+QLD − NSW,2022Q4,interconnector limit,outage/other,3.829722891,1069
+QLD − NSW,2022Q4,other,outage/other,-0.004951106607,6
+QLD − NSW,2022Q4,thermal,outage/other,0.915701643,2292
+QLD − NSW,2022Q4,thermal,system normal,-1.533511166,1260
+QLD − NSW,2022Q4,transient stability,outage/other,-0.7997909056,34
+QLD − NSW,2022Q4,voltage stability,outage/other,0.03018581958,14
+QLD − NSW,2022Q4,voltage stability,system normal,-0.08019577557,43
+QLD − NSW,2023Q1,coupled/none,coupled/none,0.05239168014,21183
+QLD − NSW,2023Q1,interconnector limit,outage/other,-0.9098679716,477
+QLD − NSW,2023Q1,interconnector limit,system normal,-4.29079724e-05,2
+QLD − NSW,2023Q1,manual/ramp,other,-0.0005026736685,19
+QLD − NSW,2023Q1,negative residue management,system normal,0.05455149369,36
+QLD − NSW,2023Q1,other,outage/other,-0.003189696438,4
+QLD − NSW,2023Q1,thermal,outage/other,0.8761336751,1683
+QLD − NSW,2023Q1,thermal,system normal,-0.9321661899,1756
+QLD − NSW,2023Q1,transient stability,outage/other,1.643413961,346
+QLD − NSW,2023Q1,transient stability,system normal,0.0003554227758,1
+QLD − NSW,2023Q1,voltage stability,outage/other,2.700225534,386
+QLD − NSW,2023Q1,voltage stability,system normal,-0.006476341751,27
+QLD − NSW,2023Q2,coupled/none,coupled/none,0.009994579023,20755
+QLD − NSW,2023Q2,interconnector limit,outage/other,-1.03912972,375
+QLD − NSW,2023Q2,interconnector limit,system normal,-5.223058226e-05,1
+QLD − NSW,2023Q2,manual/ramp,other,-0.02081816348,64
+QLD − NSW,2023Q2,other,outage/other,-0.435351975,178
+QLD − NSW,2023Q2,thermal,outage/other,-0.2768665032,148
+QLD − NSW,2023Q2,thermal,system normal,-4.739711152,3762
+QLD − NSW,2023Q2,transient stability,outage/other,0.1699087454,171
+QLD − NSW,2023Q2,transient stability,system normal,0.05647553223,82
+QLD − NSW,2023Q2,voltage stability,outage/other,2.362368523,672
+QLD − NSW,2023Q3,coupled/none,coupled/none,-0.01429155314,20752
+QLD − NSW,2023Q3,interconnector limit,outage/other,-3.066960593,814
+QLD − NSW,2023Q3,interconnector limit,system normal,-0.02202192356,10
+QLD − NSW,2023Q3,manual/ramp,other,-0.07770610371,34
+QLD − NSW,2023Q3,other,outage/other,-0.2378346705,123
+QLD − NSW,2023Q3,thermal,outage/other,0.009563335926,4
+QLD − NSW,2023Q3,thermal,system normal,-8.518175007,4458
+QLD − NSW,2023Q3,transient stability,outage/other,0.07736322269,33
+QLD − NSW,2023Q3,transient stability,system normal,0.004881228434,2
+QLD − NSW,2023Q3,voltage stability,outage/other,0.6066153816,266
+QLD − NSW,2023Q4,coupled/none,coupled/none,-0.01285594675,19896
+QLD − NSW,2023Q4,interconnector limit,outage/other,0.2095109718,410
+QLD − NSW,2023Q4,interconnector limit,system normal,-0.001584390964,3
+QLD − NSW,2023Q4,manual/ramp,other,0.1216616803,62
+QLD − NSW,2023Q4,other,outage/other,-0.1384980637,55
+QLD − NSW,2023Q4,thermal,outage/other,-2.729478976,1506
+QLD − NSW,2023Q4,thermal,system normal,-1.399744939,2851
+QLD − NSW,2023Q4,transient stability,outage/other,1.720169367,610
+QLD − NSW,2023Q4,transient stability,system normal,0.3702996406,213
+QLD − NSW,2023Q4,voltage stability,outage/other,3.71935832,890
+QLD − NSW,2024Q1,coupled/none,coupled/none,-0.01610558551,19489
+QLD − NSW,2024Q1,interconnector limit,outage/other,0.7240252493,427
+QLD − NSW,2024Q1,interconnector limit,system normal,-1.196707124e-05,1
+QLD − NSW,2024Q1,manual/ramp,other,-0.0007922482207,9
+QLD − NSW,2024Q1,other,outage/other,-0.4993072824,1
+QLD − NSW,2024Q1,thermal,outage/other,2.394418654,220
+QLD − NSW,2024Q1,thermal,system normal,19.48420883,3567
+QLD − NSW,2024Q1,transient stability,outage/other,1.012881334,301
+QLD − NSW,2024Q1,transient stability,system normal,0.6982647622,415
+QLD − NSW,2024Q1,voltage stability,outage/other,3.556473763,1765
+QLD − NSW,2024Q1,voltage stability,system normal,0.0185850316,13
+QLD − NSW,2024Q2,coupled/none,coupled/none,-0.02838513413,19220
+QLD − NSW,2024Q2,interconnector limit,outage/other,-50.5174219,2821
+QLD − NSW,2024Q2,interconnector limit,system normal,-0.007503956324,12
+QLD − NSW,2024Q2,manual/ramp,other,-0.03039969662,17
+QLD − NSW,2024Q2,other,outage/other,-2.942300468,580
+QLD − NSW,2024Q2,thermal,outage/other,-1.33218158,386
+QLD − NSW,2024Q2,thermal,system normal,-6.164697109,2807
+QLD − NSW,2024Q2,transient stability,outage/other,0.1723516503,174
+QLD − NSW,2024Q2,transient stability,system normal,0.001702971921,3
+QLD − NSW,2024Q2,voltage stability,outage/other,0.1037007044,123
+QLD − NSW,2024Q2,voltage stability,system normal,-1.58588202,65
+QLD − NSW,2024Q3,coupled/none,coupled/none,-0.0173568,19822
+QLD − NSW,2024Q3,interconnector limit,outage/other,-1.714782816,1137
+QLD − NSW,2024Q3,interconnector limit,system normal,-1.59551843e-05,1
+QLD − NSW,2024Q3,manual/ramp,other,-0.0199089719,33
+QLD − NSW,2024Q3,negative residue management,system normal,-0.01413039744,7
+QLD − NSW,2024Q3,other,outage/other,-0.2247506351,119
+QLD − NSW,2024Q3,thermal,outage/other,-0.1814435659,512
+QLD − NSW,2024Q3,thermal,system normal,-14.08670767,3241
+QLD − NSW,2024Q3,transient stability,outage/other,0.8925846342,620
+QLD − NSW,2024Q3,transient stability,system normal,0.7035725294,50
+QLD − NSW,2024Q3,voltage stability,outage/other,0.2403945697,922
+QLD − NSW,2024Q3,voltage stability,system normal,-1.759579056,32
+QLD − NSW,2024Q4,coupled/none,coupled/none,-0.02075192121,15718
+QLD − NSW,2024Q4,interconnector limit,outage/other,-8.513126611,3997
+QLD − NSW,2024Q4,interconnector limit,system normal,-0.001529442152,16
+QLD − NSW,2024Q4,manual/ramp,other,0.2401623336,111
+QLD − NSW,2024Q4,negative residue management,system normal,-0.03351444541,20
+QLD − NSW,2024Q4,other,outage/other,0.0002516843653,3
+QLD − NSW,2024Q4,thermal,outage/other,0.5541480763,410
+QLD − NSW,2024Q4,thermal,system normal,-11.72484449,2461
+QLD − NSW,2024Q4,transient stability,outage/other,0.243086467,720
+QLD − NSW,2024Q4,transient stability,system normal,0.07511249573,27
+QLD − NSW,2024Q4,voltage stability,outage/other,5.112213219,2906
+QLD − NSW,2024Q4,voltage stability,system normal,-1.606143106,107
+QLD − NSW,2025Q1,coupled/none,coupled/none,-0.01810758343,20556
+QLD − NSW,2025Q1,interconnector limit,outage/other,-2.764315016,829
+QLD − NSW,2025Q1,interconnector limit,system normal,-0.0004798914876,12
+QLD − NSW,2025Q1,manual/ramp,other,0.1419561267,100
+QLD − NSW,2025Q1,negative residue management,system normal,8.52029155,23
+QLD − NSW,2025Q1,other,outage/other,-0.001559049853,2
+QLD − NSW,2025Q1,thermal,outage/other,-0.5891820479,345
+QLD − NSW,2025Q1,thermal,system normal,-2.573983629,2572
+QLD − NSW,2025Q1,transient stability,outage/other,-0.7411272723,632
+QLD − NSW,2025Q1,transient stability,system normal,0.381653424,210
+QLD − NSW,2025Q1,voltage stability,outage/other,1.836259195,433
+QLD − NSW,2025Q1,voltage stability,system normal,-2.739865661,206
+QLD − NSW,2025Q2,coupled/none,coupled/none,-0.01588864135,21807
+QLD − NSW,2025Q2,interconnector limit,outage/other,-6.920823415,386
+QLD − NSW,2025Q2,manual/ramp,other,-0.003238096013,30
+QLD − NSW,2025Q2,other,outage/other,-0.2074947351,77
+QLD − NSW,2025Q2,other,system normal,-19.27676385,762
+QLD − NSW,2025Q2,thermal,outage/other,-0.2450658969,83
+QLD − NSW,2025Q2,thermal,system normal,-3.528034976,2314
+QLD − NSW,2025Q2,transient stability,outage/other,-0.344942353,113
+QLD − NSW,2025Q2,transient stability,system normal,0.2068036136,200
+QLD − NSW,2025Q2,voltage stability,outage/other,-0.1306254725,92
+QLD − NSW,2025Q2,voltage stability,system normal,-0.3180883847,344
+QLD − NSW,2025Q3,coupled/none,coupled/none,-0.0206214547,16588
+QLD − NSW,2025Q3,interconnector limit,outage/other,-5.077037643,3776
+QLD − NSW,2025Q3,manual/ramp,other,-0.0924878892,111
+QLD − NSW,2025Q3,negative residue management,system normal,-0.06648463412,8
+QLD − NSW,2025Q3,other,outage/other,-0.8697823993,378
+QLD − NSW,2025Q3,other,system normal,-1.257567746,599
+QLD − NSW,2025Q3,thermal,outage/other,-0.0978439784,290
+QLD − NSW,2025Q3,thermal,system normal,-5.085752191,3737
+QLD − NSW,2025Q3,transient stability,outage/other,0.5473894742,595
+QLD − NSW,2025Q3,transient stability,system normal,0.03398761783,73
+QLD − NSW,2025Q3,voltage stability,outage/other,0.1388619814,83
+QLD − NSW,2025Q3,voltage stability,system normal,-0.7967434712,258
+QLD − NSW,2025Q4,coupled/none,coupled/none,-0.0138594551,15326
+QLD − NSW,2025Q4,interconnector limit,outage/other,-7.242803022,6131
+QLD − NSW,2025Q4,manual/ramp,other,0.06189731318,73
+QLD − NSW,2025Q4,negative residue management,system normal,0.1114468842,8
+QLD − NSW,2025Q4,other,outage/other,-0.000188794535,3
+QLD − NSW,2025Q4,other,system normal,-2.380169275,307
+QLD − NSW,2025Q4,thermal,outage/other,-1.824506576,158
+QLD − NSW,2025Q4,thermal,system normal,-6.960491212,2453
+QLD − NSW,2025Q4,transient stability,outage/other,1.820723892,1362
+QLD − NSW,2025Q4,transient stability,system normal,0.7107663732,383
+QLD − NSW,2025Q4,voltage stability,outage/other,0.3061144932,146
+QLD − NSW,2025Q4,voltage stability,system normal,0.3290964631,146
+QLD − NSW,2026Q1,coupled/none,coupled/none,-0.01968202663,17024
+QLD − NSW,2026Q1,interconnector limit,outage/other,-0.8734402076,3274
+QLD − NSW,2026Q1,interconnector limit,system normal,-0.05061683823,33
+QLD − NSW,2026Q1,manual/ramp,other,0.05548192402,36
+QLD − NSW,2026Q1,negative residue management,system normal,0.02682007107,17
+QLD − NSW,2026Q1,other,outage/other,-4.42095582,530
+QLD − NSW,2026Q1,other,system normal,-0.02403458031,10
+QLD − NSW,2026Q1,thermal,outage/other,-2.83029403,253
+QLD − NSW,2026Q1,thermal,system normal,-1.667013604,3072
+QLD − NSW,2026Q1,transient stability,outage/other,2.213648377,468
+QLD − NSW,2026Q1,transient stability,system normal,0.8984579015,697
+QLD − NSW,2026Q1,voltage stability,outage/other,0.09175677124,111
+QLD − NSW,2026Q1,voltage stability,system normal,0.5349633619,395
+QLD − NSW,2026Q2,coupled/none,coupled/none,-0.01289031401,9638
+QLD − NSW,2026Q2,interconnector limit,outage/other,-5.163996241,11786
+QLD − NSW,2026Q2,interconnector limit,system normal,-6.724582355e-05,9
+QLD − NSW,2026Q2,manual/ramp,other,0.04375937969,89
+QLD − NSW,2026Q2,other,outage/other,-0.5730516449,511
+QLD − NSW,2026Q2,thermal,outage/other,0.6235572867,487
+QLD − NSW,2026Q2,thermal,system normal,-0.9753027901,1861
+QLD − NSW,2026Q2,transient stability,outage/other,1.488523493,1634
+QLD − NSW,2026Q2,transient stability,system normal,0.01383911043,22
+QLD − NSW,2026Q2,voltage stability,outage/other,0.07798820299,20
+QLD − NSW,2026Q2,voltage stability,system normal,-0.07597675717,151
+QLD − NSW,2026Q3,coupled/none,coupled/none,-0.02631122301,12900
+QLD − NSW,2026Q3,interconnector limit,outage/other,-0.5218777089,294
+QLD − NSW,2026Q3,interconnector limit,system normal,-0.06180818942,142
+QLD − NSW,2026Q3,manual/ramp,other,-0.112256606,63
+QLD − NSW,2026Q3,other,outage/other,-0.9286334065,397
+QLD − NSW,2026Q3,thermal,outage/other,-1.564283201,1025
+QLD − NSW,2026Q3,thermal,system normal,-4.068436203,2426
+QLD − NSW,2026Q3,transient stability,outage/other,-0.01921716541,40
+QLD − NSW,2026Q3,transient stability,system normal,0.02787010461,12
+QLD − NSW,2026Q3,voltage stability,outage/other,0.08032939671,86
+QLD − NSW,2026Q3,voltage stability,system normal,-0.2344688048,471
+SA − VIC,2021Q4,coupled/none,coupled/none,-0.01002157638,20035
+SA − VIC,2021Q4,interconnector limit,outage/other,-1.004124693,1540
+SA − VIC,2021Q4,interconnector limit,system normal,1.642805143,69
+SA − VIC,2021Q4,manual/ramp,other,0.1555359618,196
+SA − VIC,2021Q4,other,outage/other,2.110680924,3134
+SA − VIC,2021Q4,thermal,outage/other,0.09300056544,53
+SA − VIC,2021Q4,thermal,system normal,-0.05543482322,34
+SA − VIC,2021Q4,transient stability,outage/other,1.305668222,1091
+SA − VIC,2021Q4,transient stability,system normal,2.544385957,229
+SA − VIC,2021Q4,voltage stability,outage/other,2.587721329,115
+SA − VIC,2022Q1,coupled/none,coupled/none,-0.0319516784,19595
+SA − VIC,2022Q1,interconnector limit,outage/other,0.2983982772,909
+SA − VIC,2022Q1,interconnector limit,system normal,0.1306082184,81
+SA − VIC,2022Q1,manual/ramp,other,-0.02889581341,85
+SA − VIC,2022Q1,other,outage/other,-0.2516487991,2011
+SA − VIC,2022Q1,thermal,outage/other,-0.01378456963,38
+SA − VIC,2022Q1,thermal,system normal,-0.06336498836,213
+SA − VIC,2022Q1,transient stability,outage/other,8.420067373,2461
+SA − VIC,2022Q1,transient stability,system normal,1.822779948,506
+SA − VIC,2022Q1,voltage stability,outage/other,0.06598681892,21
+SA − VIC,2022Q2,coupled/none,coupled/none,2.607512203,19155
+SA − VIC,2022Q2,interconnector limit,outage/other,12.50186805,1711
+SA − VIC,2022Q2,interconnector limit,system normal,1.122396384,10
+SA − VIC,2022Q2,manual/ramp,other,3.003864191,127
+SA − VIC,2022Q2,negative residue management,system normal,-0.93262637,32
+SA − VIC,2022Q2,other,outage/other,4.379483439,1340
+SA − VIC,2022Q2,thermal,outage/other,1.653231642,317
+SA − VIC,2022Q2,thermal,system normal,0.2145461415,65
+SA − VIC,2022Q2,transient stability,outage/other,0.5843302598,3359
+SA − VIC,2022Q2,transient stability,system normal,0.2752134151,66
+SA − VIC,2022Q2,voltage stability,outage/other,1.03448281,26
+SA − VIC,2022Q3,coupled/none,coupled/none,-0.0745379005,18670
+SA − VIC,2022Q3,interconnector limit,outage/other,25.76735919,3211
+SA − VIC,2022Q3,interconnector limit,system normal,1.127798352,79
+SA − VIC,2022Q3,manual/ramp,other,3.13815163,281
+SA − VIC,2022Q3,negative residue management,system normal,-0.01261620769,11
+SA − VIC,2022Q3,other,outage/other,0.1905275596,1337
+SA − VIC,2022Q3,thermal,outage/other,-0.05077785436,32
+SA − VIC,2022Q3,thermal,system normal,-0.00927999519,30
+SA − VIC,2022Q3,transient stability,outage/other,4.186150351,2339
+SA − VIC,2022Q3,transient stability,system normal,4.975805678,234
+SA − VIC,2022Q3,voltage stability,outage/other,0.4275103475,126
+SA − VIC,2022Q3,voltage stability,system normal,-0.4241712626,146
+SA − VIC,2022Q4,coupled/none,coupled/none,-0.02443175993,17296
+SA − VIC,2022Q4,interconnector limit,outage/other,-3.288137627,3334
+SA − VIC,2022Q4,interconnector limit,system normal,0.5672004004,79
+SA − VIC,2022Q4,manual/ramp,other,-0.1664055843,89
+SA − VIC,2022Q4,negative residue management,system normal,0.4762060931,10
+SA − VIC,2022Q4,other,outage/other,-2.956228196,2208
+SA − VIC,2022Q4,thermal,outage/other,-0.2657463589,62
+SA − VIC,2022Q4,transient stability,outage/other,2.626657881,3097
+SA − VIC,2022Q4,transient stability,system normal,1.546373052,146
+SA − VIC,2022Q4,voltage stability,outage/other,-0.9232525695,104
+SA − VIC,2022Q4,voltage stability,system normal,-0.151207521,71
+SA − VIC,2023Q1,coupled/none,coupled/none,-0.0004307961015,21381
+SA − VIC,2023Q1,interconnector limit,outage/other,-1.396336709,852
+SA − VIC,2023Q1,interconnector limit,system normal,0.001601063123,6
+SA − VIC,2023Q1,manual/ramp,other,0.001107289797,3
+SA − VIC,2023Q1,other,outage/other,9.338461222,1767
+SA − VIC,2023Q1,thermal,outage/other,-0.03552128936,22
+SA − VIC,2023Q1,thermal,system normal,-0.0501395242,10
+SA − VIC,2023Q1,transient stability,outage/other,0.4974606315,1390
+SA − VIC,2023Q1,transient stability,system normal,3.430067435,358
+SA − VIC,2023Q1,voltage stability,outage/other,0.06015973274,5
+SA − VIC,2023Q1,voltage stability,system normal,-0.1610173176,126
+SA − VIC,2023Q2,coupled/none,coupled/none,0.1822864058,17920
+SA − VIC,2023Q2,interconnector limit,outage/other,23.52625206,3502
+SA − VIC,2023Q2,interconnector limit,system normal,0.140148147,28
+SA − VIC,2023Q2,manual/ramp,other,1.268918018,170
+SA − VIC,2023Q2,other,outage/other,4.500060242,2002
+SA − VIC,2023Q2,thermal,outage/other,-0.3422326535,320
+SA − VIC,2023Q2,thermal,system normal,0.007453269127,7
+SA − VIC,2023Q2,transient stability,outage/other,0.6911927499,607
+SA − VIC,2023Q2,transient stability,system normal,0.4498342926,946
+SA − VIC,2023Q2,voltage stability,outage/other,0.04413099063,34
+SA − VIC,2023Q2,voltage stability,system normal,-0.7431148466,672
+SA − VIC,2023Q3,coupled/none,coupled/none,-0.01530653784,17909
+SA − VIC,2023Q3,interconnector limit,outage/other,3.21344792,332
+SA − VIC,2023Q3,interconnector limit,system normal,0.8965428876,193
+SA − VIC,2023Q3,manual/ramp,other,1.669567617,100
+SA − VIC,2023Q3,other,outage/other,6.255146901,2961
+SA − VIC,2023Q3,thermal,outage/other,0.1093654758,29
+SA − VIC,2023Q3,thermal,system normal,-0.2236115377,211
+SA − VIC,2023Q3,transient stability,outage/other,25.26071295,1843
+SA − VIC,2023Q3,transient stability,system normal,1.030693024,1152
+SA − VIC,2023Q3,voltage stability,outage/other,0.1374065681,967
+SA − VIC,2023Q3,voltage stability,system normal,-1.180929756,799
+SA − VIC,2023Q4,coupled/none,coupled/none,-0.01321820824,20701
+SA − VIC,2023Q4,interconnector limit,outage/other,1.117108803,493
+SA − VIC,2023Q4,interconnector limit,system normal,0.2769990025,128
+SA − VIC,2023Q4,manual/ramp,other,0.2975739297,163
+SA − VIC,2023Q4,other,outage/other,-2.469360738,2074
+SA − VIC,2023Q4,thermal,outage/other,-0.279938622,175
+SA − VIC,2023Q4,transient stability,outage/other,5.955830083,601
+SA − VIC,2023Q4,transient stability,system normal,0.6121432066,1187
+SA − VIC,2023Q4,voltage stability,outage/other,-0.3040170308,368
+SA − VIC,2023Q4,voltage stability,system normal,-1.160530338,606
+SA − VIC,2024Q1,coupled/none,coupled/none,-0.01362476935,19418
+SA − VIC,2024Q1,interconnector limit,outage/other,0.224167213,545
+SA − VIC,2024Q1,interconnector limit,system normal,0.4971245554,257
+SA − VIC,2024Q1,negative residue management,system normal,-3.459394187,155
+SA − VIC,2024Q1,other,outage/other,1.615769414,2048
+SA − VIC,2024Q1,thermal,outage/other,6.597099339,1060
+SA − VIC,2024Q1,thermal,system normal,-7.227600578,209
+SA − VIC,2024Q1,transient stability,outage/other,-0.2195507992,594
+SA − VIC,2024Q1,transient stability,system normal,1.563578763,1314
+SA − VIC,2024Q1,voltage stability,outage/other,0.8092827742,540
+SA − VIC,2024Q1,voltage stability,system normal,-0.1101357037,68
+SA − VIC,2024Q2,coupled/none,coupled/none,-0.0403370896,20773
+SA − VIC,2024Q2,interconnector limit,outage/other,2.475840195,2332
+SA − VIC,2024Q2,manual/ramp,other,0.2995621125,193
+SA − VIC,2024Q2,other,outage/other,1.320093826,1186
+SA − VIC,2024Q2,thermal,outage/other,-0.7095253113,1097
+SA − VIC,2024Q2,thermal,system normal,-0.02823266174,14
+SA − VIC,2024Q2,transient stability,outage/other,0.05802318264,38
+SA − VIC,2024Q2,transient stability,system normal,0.09642080745,278
+SA − VIC,2024Q2,voltage stability,outage/other,3.660943223e-05,1
+SA − VIC,2024Q2,voltage stability,system normal,-0.2961846102,296
+SA − VIC,2024Q3,coupled/none,coupled/none,-0.01183985547,16612
+SA − VIC,2024Q3,interconnector limit,outage/other,36.16933767,3052
+SA − VIC,2024Q3,interconnector limit,system normal,0.3029387084,215
+SA − VIC,2024Q3,manual/ramp,other,0.4606310771,201
+SA − VIC,2024Q3,other,outage/other,17.19629178,2961
+SA − VIC,2024Q3,thermal,outage/other,-0.1042260103,590
+SA − VIC,2024Q3,thermal,system normal,1.438142986,332
+SA − VIC,2024Q3,transient stability,outage/other,0.437105914,574
+SA − VIC,2024Q3,transient stability,system normal,0.2500325222,644
+SA − VIC,2024Q3,voltage stability,outage/other,-0.009950288909,33
+SA − VIC,2024Q3,voltage stability,system normal,-1.555016851,1282
+SA − VIC,2024Q4,coupled/none,coupled/none,-0.009565796383,19690
+SA − VIC,2024Q4,interconnector limit,outage/other,2.920010175,296
+SA − VIC,2024Q4,interconnector limit,system normal,0.1968447773,137
+SA − VIC,2024Q4,manual/ramp,other,0.1085100251,58
+SA − VIC,2024Q4,negative residue management,system normal,-0.3903735927,60
+SA − VIC,2024Q4,other,outage/other,0.002266963385,2269
+SA − VIC,2024Q4,thermal,outage/other,-0.4390025777,1253
+SA − VIC,2024Q4,thermal,system normal,0.06402966844,185
+SA − VIC,2024Q4,transient stability,outage/other,1.712217135,518
+SA − VIC,2024Q4,transient stability,system normal,0.2157985719,271
+SA − VIC,2024Q4,voltage stability,outage/other,1.301041086,967
+SA − VIC,2024Q4,voltage stability,system normal,-1.023392292,792
+SA − VIC,2025Q1,coupled/none,coupled/none,-0.01061065567,17686
+SA − VIC,2025Q1,interconnector limit,outage/other,-0.8380378411,1277
+SA − VIC,2025Q1,interconnector limit,system normal,0.00966949712,11
+SA − VIC,2025Q1,manual/ramp,other,0.4080758856,77
+SA − VIC,2025Q1,negative residue management,system normal,3.247246242,677
+SA − VIC,2025Q1,other,outage/other,2.396691453,1621
+SA − VIC,2025Q1,thermal,outage/other,0.2303849264,320
+SA − VIC,2025Q1,thermal,system normal,2.193707735,581
+SA − VIC,2025Q1,transient stability,outage/other,1.06122097,577
+SA − VIC,2025Q1,transient stability,system normal,0.231573051,559
+SA − VIC,2025Q1,voltage stability,outage/other,-0.08299841484,68
+SA − VIC,2025Q1,voltage stability,system normal,-5.671240406,2466
+SA − VIC,2025Q2,coupled/none,coupled/none,-0.008622002927,18776
+SA − VIC,2025Q2,interconnector limit,outage/other,2.661449663,2909
+SA − VIC,2025Q2,interconnector limit,system normal,0.06720802885,51
+SA − VIC,2025Q2,manual/ramp,other,0.1186021982,92
+SA − VIC,2025Q2,negative residue management,system normal,-0.0643078494,87
+SA − VIC,2025Q2,other,outage/other,1.261014042,924
+SA − VIC,2025Q2,thermal,outage/other,0.3001860669,598
+SA − VIC,2025Q2,thermal,system normal,-1.687560899,1281
+SA − VIC,2025Q2,transient stability,outage/other,0.12683226,323
+SA − VIC,2025Q2,transient stability,system normal,0.2509481915,305
+SA − VIC,2025Q2,voltage stability,outage/other,0.01450157275,33
+SA − VIC,2025Q2,voltage stability,system normal,-1.398955483,829
+SA − VIC,2025Q3,coupled/none,coupled/none,-0.01027714407,11983
+SA − VIC,2025Q3,interconnector limit,outage/other,3.986273124,7271
+SA − VIC,2025Q3,interconnector limit,system normal,0.394261851,244
+SA − VIC,2025Q3,manual/ramp,other,0.2646771787,274
+SA − VIC,2025Q3,negative residue management,system normal,-0.04108733257,79
+SA − VIC,2025Q3,other,outage/other,0.03697817719,43
+SA − VIC,2025Q3,thermal,outage/other,0.5069077766,298
+SA − VIC,2025Q3,thermal,system normal,-1.136228567,1257
+SA − VIC,2025Q3,transient stability,outage/other,24.0721848,2960
+SA − VIC,2025Q3,transient stability,system normal,0.7332505217,393
+SA − VIC,2025Q3,voltage stability,outage/other,-0.1475488611,177
+SA − VIC,2025Q3,voltage stability,system normal,-1.40649241,1517
+SA − VIC,2025Q4,coupled/none,coupled/none,-0.009062824125,14640
+SA − VIC,2025Q4,interconnector limit,outage/other,1.416607602,5046
+SA − VIC,2025Q4,interconnector limit,system normal,1.806970752,845
+SA − VIC,2025Q4,manual/ramp,other,0.221985801,131
+SA − VIC,2025Q4,negative residue management,system normal,-0.4573554185,205
+SA − VIC,2025Q4,other,outage/other,0.01176570143,80
+SA − VIC,2025Q4,thermal,outage/other,-0.05842140816,126
+SA − VIC,2025Q4,thermal,system normal,-0.3385353154,571
+SA − VIC,2025Q4,transient stability,outage/other,0.1459798245,85
+SA − VIC,2025Q4,transient stability,system normal,1.013391363,1413
+SA − VIC,2025Q4,voltage stability,system normal,-4.847855059,3354
+SA − VIC,2026Q1,coupled/none,coupled/none,0.04617350985,11965
+SA − VIC,2026Q1,interconnector limit,outage/other,40.25513008,6824
+SA − VIC,2026Q1,interconnector limit,system normal,0.1675982418,477
+SA − VIC,2026Q1,manual/ramp,other,0.6084456428,57
+SA − VIC,2026Q1,negative residue management,system normal,-1.526497678,761
+SA − VIC,2026Q1,other,outage/other,0.2890335032,310
+SA − VIC,2026Q1,thermal,outage/other,-0.1531125962,40
+SA − VIC,2026Q1,thermal,system normal,-0.3853827123,91
+SA − VIC,2026Q1,transient stability,outage/other,4.216877798,2479
+SA − VIC,2026Q1,transient stability,system normal,1.544097049,1099
+SA − VIC,2026Q1,voltage stability,outage/other,0.08848520355,118
+SA − VIC,2026Q1,voltage stability,system normal,-2.792704258,1699
+SA − VIC,2026Q2,coupled/none,coupled/none,-0.004599591301,15278
+SA − VIC,2026Q2,interconnector limit,outage/other,23.57791711,6799
+SA − VIC,2026Q2,interconnector limit,system normal,0.7697750207,613
+SA − VIC,2026Q2,manual/ramp,other,0.2051369703,167
+SA − VIC,2026Q2,other,outage/other,-0.01025288722,68
+SA − VIC,2026Q2,thermal,outage/other,1.246887987,674
+SA − VIC,2026Q2,thermal,system normal,-0.1488533049,107
+SA − VIC,2026Q2,transient stability,outage/other,1.933680489,1281
+SA − VIC,2026Q2,transient stability,system normal,1.236888901,1054
+SA − VIC,2026Q2,voltage stability,outage/other,-0.0005762377889,15
+SA − VIC,2026Q2,voltage stability,system normal,-0.07646663196,152
+SA − VIC,2026Q3,coupled/none,coupled/none,-0.003742032688,8830
+SA − VIC,2026Q3,interconnector limit,outage/other,6.727256412,4908
+SA − VIC,2026Q3,interconnector limit,system normal,-0.07444390287,102
+SA − VIC,2026Q3,manual/ramp,other,0.4887826815,190
+SA − VIC,2026Q3,negative residue management,system normal,-0.1407032685,75
+SA − VIC,2026Q3,other,outage/other,-0.314457226,193
+SA − VIC,2026Q3,thermal,outage/other,0.009963282057,33
+SA − VIC,2026Q3,thermal,system normal,-0.4304787543,242
+SA − VIC,2026Q3,transient stability,outage/other,9.480454222,1917
+SA − VIC,2026Q3,transient stability,system normal,1.30901586,1156
+SA − VIC,2026Q3,voltage stability,outage/other,-0.2135410326,175
+SA − VIC,2026Q3,voltage stability,system normal,-0.02065064102,35
+VIC − TAS,2021Q4,coupled/none,coupled/none,0.06667124305,7601
+VIC − TAS,2021Q4,interconnector limit,outage/other,-4.714408162,8384
+VIC − TAS,2021Q4,interconnector limit,system normal,3.28918167,9502
+VIC − TAS,2021Q4,manual/ramp,other,-0.06424512482,67
+VIC − TAS,2021Q4,other,system normal,-0.004250826058,133
+VIC − TAS,2021Q4,thermal,system normal,-0.008544030676,26
+VIC − TAS,2021Q4,transient stability,outage/other,-0.5129656154,686
+VIC − TAS,2021Q4,transient stability,system normal,-0.04174528235,59
+VIC − TAS,2021Q4,voltage stability,outage/other,0.01049381944,38
+VIC − TAS,2022Q1,coupled/none,coupled/none,0.1976767455,5779
+VIC − TAS,2022Q1,interconnector limit,outage/other,-11.54675985,8935
+VIC − TAS,2022Q1,interconnector limit,system normal,2.980070238,8839
+VIC − TAS,2022Q1,manual/ramp,other,0.01098941632,29
+VIC − TAS,2022Q1,other,system normal,-0.4307684414,264
+VIC − TAS,2022Q1,thermal,system normal,-0.03771859491,215
+VIC − TAS,2022Q1,transient stability,outage/other,-2.359510945,1627
+VIC − TAS,2022Q1,transient stability,system normal,-0.07703835828,232
+VIC − TAS,2022Q2,coupled/none,coupled/none,-7.722159987,7612
+VIC − TAS,2022Q2,interconnector limit,outage/other,4.907596806,8467
+VIC − TAS,2022Q2,interconnector limit,system normal,7.543494835,7718
+VIC − TAS,2022Q2,manual/ramp,other,-0.03784117939,30
+VIC − TAS,2022Q2,other,system normal,0.2394329669,98
+VIC − TAS,2022Q2,thermal,system normal,0.02392300977,37
+VIC − TAS,2022Q2,transient stability,outage/other,-3.423499232,2244
+VIC − TAS,2022Q2,transient stability,system normal,-0.0005371821675,2
+VIC − TAS,2022Q3,coupled/none,coupled/none,0.6739999726,10601
+VIC − TAS,2022Q3,interconnector limit,outage/other,-3.793781747,7544
+VIC − TAS,2022Q3,interconnector limit,system normal,0.1685651166,6301
+VIC − TAS,2022Q3,manual/ramp,other,-0.1021761572,36
+VIC − TAS,2022Q3,other,system normal,0.1402606144,16
+VIC − TAS,2022Q3,thermal,outage/other,0.004785150166,20
+VIC − TAS,2022Q3,thermal,system normal,-0.1010524352,133
+VIC − TAS,2022Q3,transient stability,outage/other,-3.664229201,1126
+VIC − TAS,2022Q3,transient stability,system normal,-2.301834066,719
+VIC − TAS,2022Q4,coupled/none,coupled/none,0.5145374472,6110
+VIC − TAS,2022Q4,interconnector limit,outage/other,-22.60345808,14007
+VIC − TAS,2022Q4,interconnector limit,system normal,-2.176560158,4325
+VIC − TAS,2022Q4,manual/ramp,other,-0.01706509694,19
+VIC − TAS,2022Q4,other,outage/other,-0.2721922971,112
+VIC − TAS,2022Q4,other,system normal,0.07556474612,19
+VIC − TAS,2022Q4,thermal,system normal,-0.003149816401,3
+VIC − TAS,2022Q4,transient stability,outage/other,-11.14201672,1887
+VIC − TAS,2022Q4,transient stability,system normal,-0.007190221598,14
+VIC − TAS,2023Q1,coupled/none,coupled/none,0.4663349894,5983
+VIC − TAS,2023Q1,interconnector limit,outage/other,-16.07707579,10721
+VIC − TAS,2023Q1,interconnector limit,system normal,-2.26028595,7587
+VIC − TAS,2023Q1,manual/ramp,other,0.1028584988,54
+VIC − TAS,2023Q1,other,outage/other,0.04954519557,34
+VIC − TAS,2023Q1,other,system normal,0.05111476488,26
+VIC − TAS,2023Q1,thermal,system normal,0.008970402454,15
+VIC − TAS,2023Q1,transient stability,outage/other,-2.6893154,1500
+VIC − TAS,2023Q2,coupled/none,coupled/none,1.848147444,5422
+VIC − TAS,2023Q2,interconnector limit,outage/other,-0.7769542473,7178
+VIC − TAS,2023Q2,interconnector limit,system normal,24.20977955,11934
+VIC − TAS,2023Q2,manual/ramp,other,-0.0350579556,36
+VIC − TAS,2023Q2,other,system normal,0.09279448927,50
+VIC − TAS,2023Q2,thermal,system normal,-0.2700692456,160
+VIC − TAS,2023Q2,transient stability,outage/other,-1.529281064,725
+VIC − TAS,2023Q2,transient stability,system normal,-0.4834497378,703
+VIC − TAS,2023Q3,coupled/none,coupled/none,0.7455660028,4577
+VIC − TAS,2023Q3,interconnector limit,outage/other,-0.2745425353,6731
+VIC − TAS,2023Q3,interconnector limit,system normal,17.31721889,13664
+VIC − TAS,2023Q3,manual/ramp,other,-0.02369340432,20
+VIC − TAS,2023Q3,other,outage/other,-0.003631661209,3
+VIC − TAS,2023Q3,other,system normal,0.2747880828,239
+VIC − TAS,2023Q3,thermal,outage/other,0.1385467938,36
+VIC − TAS,2023Q3,thermal,system normal,0.01987319441,396
+VIC − TAS,2023Q3,transient stability,outage/other,-0.07201614497,98
+VIC − TAS,2023Q3,transient stability,system normal,-0.4311263571,731
+VIC − TAS,2023Q3,voltage stability,outage/other,0.00186605548,1
+VIC − TAS,2023Q4,coupled/none,coupled/none,0.3003937492,4643
+VIC − TAS,2023Q4,interconnector limit,outage/other,-19.59642089,13569
+VIC − TAS,2023Q4,interconnector limit,system normal,-1.244151101,6517
+VIC − TAS,2023Q4,manual/ramp,other,-0.1235389785,108
+VIC − TAS,2023Q4,other,outage/other,-0.109761103,46
+VIC − TAS,2023Q4,other,system normal,-0.1785994964,76
+VIC − TAS,2023Q4,thermal,system normal,-0.00643889314,11
+VIC − TAS,2023Q4,transient stability,outage/other,-0.3258076017,458
+VIC − TAS,2023Q4,transient stability,system normal,-0.8699449253,1049
+VIC − TAS,2023Q4,voltage stability,outage/other,0.01846705834,19
+VIC − TAS,2024Q1,coupled/none,coupled/none,2.155587681,4816
+VIC − TAS,2024Q1,interconnector limit,outage/other,-17.07354787,13962
+VIC − TAS,2024Q1,interconnector limit,system normal,0.6133317459,5350
+VIC − TAS,2024Q1,manual/ramp,other,-1.118756456,29
+VIC − TAS,2024Q1,other,outage/other,-0.09777470301,88
+VIC − TAS,2024Q1,other,system normal,0.4859260652,159
+VIC − TAS,2024Q1,thermal,system normal,3.465394001,162
+VIC − TAS,2024Q1,transient stability,outage/other,-0.7439710564,667
+VIC − TAS,2024Q1,transient stability,system normal,-0.6874118836,975
+VIC − TAS,2024Q2,coupled/none,coupled/none,2.554347326,7338
+VIC − TAS,2024Q2,interconnector limit,outage/other,-8.368342696,8696
+VIC − TAS,2024Q2,interconnector limit,system normal,6.97796154,9705
+VIC − TAS,2024Q2,manual/ramp,other,-0.5930425962,35
+VIC − TAS,2024Q2,other,outage/other,-0.1819249234,87
+VIC − TAS,2024Q2,other,system normal,0.2097194029,78
+VIC − TAS,2024Q2,transient stability,outage/other,-0.5222637397,21
+VIC − TAS,2024Q2,transient stability,system normal,-0.4143828333,248
+VIC − TAS,2024Q3,coupled/none,coupled/none,0.4940241989,6839
+VIC − TAS,2024Q3,interconnector limit,outage/other,-8.187062225,7996
+VIC − TAS,2024Q3,interconnector limit,system normal,4.866409843,9188
+VIC − TAS,2024Q3,manual/ramp,other,-0.1213079403,58
+VIC − TAS,2024Q3,other,outage/other,-0.8500134983,500
+VIC − TAS,2024Q3,other,system normal,1.015869995,619
+VIC − TAS,2024Q3,thermal,system normal,0.1545371895,210
+VIC − TAS,2024Q3,transient stability,outage/other,-0.7670233572,534
+VIC − TAS,2024Q3,transient stability,system normal,-0.544626545,552
+VIC − TAS,2024Q4,coupled/none,coupled/none,0.3219190975,7218
+VIC − TAS,2024Q4,interconnector limit,outage/other,-13.21444549,5949
+VIC − TAS,2024Q4,interconnector limit,system normal,-13.16952872,10764
+VIC − TAS,2024Q4,manual/ramp,other,-0.07661959833,44
+VIC − TAS,2024Q4,other,outage/other,-0.3098104071,179
+VIC − TAS,2024Q4,other,system normal,-0.01866063901,1331
+VIC − TAS,2024Q4,thermal,system normal,0.3151732548,128
+VIC − TAS,2024Q4,transient stability,outage/other,-1.522036767,589
+VIC − TAS,2024Q4,transient stability,system normal,-0.179872542,233
+VIC − TAS,2024Q4,voltage stability,outage/other,0.1504317023,61
+VIC − TAS,2025Q1,coupled/none,coupled/none,0.3544945074,3894
+VIC − TAS,2025Q1,interconnector limit,outage/other,-9.626517236,4750
+VIC − TAS,2025Q1,interconnector limit,system normal,-35.28285716,15904
+VIC − TAS,2025Q1,manual/ramp,other,-0.1066211154,60
+VIC − TAS,2025Q1,other,outage/other,-0.4230339765,207
+VIC − TAS,2025Q1,other,system normal,0.3099808284,360
+VIC − TAS,2025Q1,thermal,system normal,0.2423056943,113
+VIC − TAS,2025Q1,transient stability,outage/other,-0.9296747045,428
+VIC − TAS,2025Q1,transient stability,system normal,-0.495334795,181
+VIC − TAS,2025Q1,voltage stability,outage/other,0.05162102019,23
+VIC − TAS,2025Q2,coupled/none,coupled/none,8.97532109,5901
+VIC − TAS,2025Q2,interconnector limit,outage/other,-3.500685865,4872
+VIC − TAS,2025Q2,interconnector limit,system normal,-5.338769472,14060
+VIC − TAS,2025Q2,manual/ramp,other,-0.06304883683,92
+VIC − TAS,2025Q2,other,outage/other,-0.1160188478,160
+VIC − TAS,2025Q2,other,system normal,0.2185621154,195
+VIC − TAS,2025Q2,thermal,system normal,0.03652628106,225
+VIC − TAS,2025Q2,transient stability,outage/other,-1.083232527,497
+VIC − TAS,2025Q2,transient stability,system normal,-0.2368963766,206
+VIC − TAS,2025Q3,coupled/none,coupled/none,-4.647513003,15008
+VIC − TAS,2025Q3,interconnector limit,outage/other,-1.79462001,3086
+VIC − TAS,2025Q3,interconnector limit,system normal,-3.835172991,5955
+VIC − TAS,2025Q3,manual/ramp,other,-0.1527111635,125
+VIC − TAS,2025Q3,other,system normal,0.03113205207,161
+VIC − TAS,2025Q3,thermal,system normal,-0.2710720563,677
+VIC − TAS,2025Q3,transient stability,outage/other,-1.402747493,968
+VIC − TAS,2025Q3,transient stability,system normal,-0.8166060689,516
+VIC − TAS,2025Q4,coupled/none,coupled/none,-4.71433478,15212
+VIC − TAS,2025Q4,interconnector limit,outage/other,3.25531089,3165
+VIC − TAS,2025Q4,interconnector limit,system normal,-2.07003515,6609
+VIC − TAS,2025Q4,manual/ramp,other,0.01970213179,71
+VIC − TAS,2025Q4,other,outage/other,-0.02301143736,7
+VIC − TAS,2025Q4,other,system normal,0.04925408217,14
+VIC − TAS,2025Q4,thermal,system normal,0.06064490363,40
+VIC − TAS,2025Q4,transient stability,outage/other,-0.106657992,38
+VIC − TAS,2025Q4,transient stability,system normal,-0.7543423978,1340
+VIC − TAS,2026Q1,coupled/none,coupled/none,-17.60040336,13553
+VIC − TAS,2026Q1,interconnector limit,outage/other,-6.084822251,2149
+VIC − TAS,2026Q1,interconnector limit,system normal,-22.43978546,8610
+VIC − TAS,2026Q1,manual/ramp,other,-0.0504310822,21
+VIC − TAS,2026Q1,other,system normal,0.006729705749,2
+VIC − TAS,2026Q1,transient stability,outage/other,-2.547701162,965
+VIC − TAS,2026Q1,transient stability,system normal,-1.324332043,620
+VIC − TAS,2026Q2,coupled/none,coupled/none,-12.92431929,17095
+VIC − TAS,2026Q2,interconnector limit,outage/other,-2.000070521,1930
+VIC − TAS,2026Q2,interconnector limit,system normal,-9.512267694,5075
+VIC − TAS,2026Q2,manual/ramp,other,-0.06910045657,69
+VIC − TAS,2026Q2,other,system normal,0.005948171006,4
+VIC − TAS,2026Q2,thermal,outage/other,-0.00256081785,1
+VIC − TAS,2026Q2,thermal,system normal,-0.003390992415,2
+VIC − TAS,2026Q2,transient stability,outage/other,-1.829594328,737
+VIC − TAS,2026Q2,transient stability,system normal,-3.294377767,1295
+VIC − TAS,2026Q3,coupled/none,coupled/none,-0.001726297414,11105
+VIC − TAS,2026Q3,interconnector limit,outage/other,-2.774868387,1309
+VIC − TAS,2026Q3,interconnector limit,system normal,0.04782809169,3023
+VIC − TAS,2026Q3,manual/ramp,other,-0.1580267027,137
+VIC − TAS,2026Q3,negative residue management,system normal,0.01404017246,20
+VIC − TAS,2026Q3,other,outage/other,-0.003989912354,3
+VIC − TAS,2026Q3,other,system normal,0.03470646823,42
+VIC − TAS,2026Q3,thermal,system normal,0.1921277517,226
+VIC − TAS,2026Q3,transient stability,outage/other,-0.8876375216,830
+VIC − TAS,2026Q3,transient stability,system normal,-1.250471998,1153
+VIC − TAS,2026Q3,voltage stability,outage/other,0.01849955121,8

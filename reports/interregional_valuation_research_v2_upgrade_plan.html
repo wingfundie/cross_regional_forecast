@@ -1,0 +1,1224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Upgrade Plan (v2 to v3) | Interregional Valuation Research</title>
+<style>
+:root{
+  --navy:#244e78;
+  --deep:#073c64;
+  --ink:#30343a;
+  --muted:#616b75;
+  --line:#b9c2ca;
+  --soft:#e2e8ed;
+  --bg-tint:#f3f6f8;
+  --accent:#244e78;
+  --blue:#83b6d9;
+  --gold:#b08b42;
+  --teal:#268a87;
+  --purple:#7658c9;
+  --crimson:#b44d5e;
+  --green:#3d7a4a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:28px}
+body{background:#fff;color:var(--ink);margin:0;border:0;font-family:'Segoe UI',Arial,sans-serif;font-size:15.5px;line-height:1.65}
+main{max-width:1336px;margin:auto;padding:0 52px 60px}
+a{color:var(--deep);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:#3a7fae}
+button,input,select{font:inherit}
+button{cursor:pointer;background:#fff;border:1px solid #9caebe;color:var(--deep);padding:7px 12px;border-radius:2px;font-size:12.5px}
+button:hover{background:#edf4f9}
+button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible{outline:3px solid #c18a30;outline-offset:3px}
+code{font-family:Consolas,'Courier New',monospace;background:#eef3f7;padding:2px 5px;border-radius:2px;font-size:12px;color:#1d3b54;overflow-wrap:anywhere}
+
+/* Masthead & Hero (exact v2 institutional styling) */
+.masthead{display:flex;align-items:center;justify-content:space-between;gap:25px;min-height:96px;color:var(--deep)}
+.brand{display:flex;gap:15px;align-items:center}
+.brand strong{font-size:25px;line-height:1.05;letter-spacing:-1px;font-family:Georgia,serif;font-weight:normal;color:#678eb0}
+.brand span{border-left:1px solid #7d99b3;padding-left:15px;line-height:1.18;font-size:17px}
+.dateline{text-align:right;font-size:13px;line-height:1.5;color:var(--deep)}
+
+.hero-band{background:var(--navy);color:#fff;margin:0 -52px;padding:34px 52px 32px}
+.hero-band .eyebrow{font-size:16px;font-weight:700;color:#dceaf5;letter-spacing:.02em;margin:0 0 9px}
+.hero-band h1{font-family:'Arial Narrow','Aptos Narrow','Segoe UI',sans-serif;font-weight:350;font-size:41px;line-height:1.13;letter-spacing:-.7px;margin:0;max-width:1120px}
+.hero-band h1 span{color:#fff}
+.hero-sub{margin:13px 0 0;max-width:980px;font-size:15px;line-height:1.55;color:#d6e4f0}
+
+/* Top Navigation */
+.topnav{display:flex;gap:16px;flex-wrap:wrap;align-items:center;padding:14px 0;border-bottom:1px solid var(--line);font-size:11.5px;text-transform:uppercase;letter-spacing:.055em}
+.topnav a{text-decoration:none;color:var(--deep)}
+.topnav a:hover{text-decoration:underline}
+.topnav button{margin-left:auto;font-size:11px;padding:5px 10px;text-transform:none;letter-spacing:0}
+
+/* Front Matter Grid */
+.front{display:grid;grid-template-columns:minmax(0,1fr) 268px;gap:52px;margin:30px 0 34px}
+.summary-points{list-style-type:square;padding-left:21px;margin:0}
+.summary-points li{padding-left:6px;margin-bottom:14px}
+.summary-points li::marker{color:#6d7175;font-size:14px}
+.summary-points strong{font-weight:650;color:#1b2c3b}
+.research-note{font-size:12px;line-height:1.58;border-left:1px solid #c7d1d9;padding-left:21px;color:#5f6972}
+.research-note h3{font-size:15px;margin:0 0 10px;color:var(--deep)}
+.research-note p{margin:0 0 15px}
+.research-note strong{color:var(--deep);font-weight:650}
+
+/* 4-Column Metric Strip */
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin:18px 0 30px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.metric{padding:17px 18px 18px;background:#fff;border-right:1px solid #d5dce2;min-width:0}
+.metric:first-child{padding-left:0}
+.metric:last-child{border-right:0}
+.metric span{display:block;font-size:12px;color:#5b6770;font-weight:500;line-height:1.4}
+.metric strong{display:block;font-size:28px;font-weight:500;line-height:1.35;color:var(--deep);font-variant-numeric:tabular-nums;margin:4px 0}
+.metric small{display:block;font-size:11px;color:#69737b;line-height:1.45}
+
+/* Main Reading Layout with Sticky Rail */
+.plan-layout{display:grid;grid-template-columns:minmax(0,1fr) 246px;gap:46px;align-items:start}
+.plan-body{min-width:0}
+.plan-rail{position:sticky;top:20px;max-height:calc(100vh - 40px);overflow-y:auto;padding:0 6px 20px 0;scrollbar-width:thin}
+.rail-label{font-size:11.5px;font-weight:700;color:var(--deep);text-transform:uppercase;letter-spacing:.08em;margin:3px 0 12px}
+.toc{display:grid;gap:0}
+.toc a{font-size:11.5px;line-height:1.45;padding:7px 0 7px 12px;border-left:2px solid #e2e8ed;text-decoration:none;color:#597086}
+.toc a:hover,.toc a.active{border-color:var(--navy);background:#eff4f8;color:var(--deep);font-weight:600}
+.rail-box{margin-top:18px;padding:13px 14px;background:var(--bg-tint);border-top:2px solid var(--navy);font-size:11.5px;line-height:1.5;color:#4a5864}
+.rail-box strong{display:block;color:var(--deep);margin-bottom:5px;font-size:12px}
+
+/* Sections */
+.plan-section{padding:28px 0 26px;border-top:2px solid var(--navy);margin:0 0 12px;scroll-margin-top:20px}
+.section-kicker{font-size:11px;letter-spacing:.13em;color:#51718e;font-weight:700;text-transform:uppercase;margin-bottom:6px}
+.plan-section h2{font-family:'Arial Narrow','Segoe UI',sans-serif;font-size:26px;line-height:1.25;font-weight:650;margin:0 0 12px;color:#1f384c;letter-spacing:-.3px}
+.plan-section h3{font-size:16.5px;font-weight:650;color:var(--deep);margin:24px 0 10px}
+.section-dek{font-size:14.5px;color:#55616b;max-width:920px;margin:0 0 18px;line-height:1.58}
+.plan-section p{margin:0 0 14px}
+.plan-section ul,.plan-section ol{padding-left:22px;margin:10px 0 16px}
+.plan-section li{margin:6px 0}
+
+/* Virtual Barrels Callouts (styled in exact v2 palette) */
+.vb-callout{margin:18px 0;padding:13px 16px;background:#f6f9fb;border-left:3px solid var(--navy);font-size:14px;line-height:1.58}
+.vb-callout.context{border-left-color:var(--teal);background:#f3f9f9}
+.vb-callout.takeaway{border-left-color:var(--gold);background:#fbf8f1}
+.vb-callout.risk{border-left-color:var(--crimson);background:#fcf5f6}
+.vb-callout-title{display:block;font-size:11px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--deep);margin-bottom:5px}
+.vb-callout.context .vb-callout-title{color:var(--teal)}
+.vb-callout.takeaway .vb-callout-title{color:#8a6a28}
+.vb-callout.risk .vb-callout-title{color:var(--crimson)}
+.vb-callout p:last-child,.vb-callout ul:last-child{margin-bottom:0}
+
+/* Tables */
+.table-wrap{max-width:100%;overflow-x:auto;margin:14px 0 20px;border-top:1px solid #b2c1ce}
+.table-wrap table{border-collapse:collapse;width:100%;font-size:12.5px;line-height:1.5;border:0}
+.table-wrap th,.table-wrap td{padding:9px 11px;border-bottom:1px solid #d8e0e6;text-align:left;vertical-align:top}
+.table-wrap thead th{background:#edf3f7;color:#274f6e;font-weight:650;white-space:nowrap}
+.table-wrap tbody tr:hover{background:#f7fafc}
+.num{text-align:right!important;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* Badges & Tags */
+.tag{display:inline-block;font-size:10.5px;font-weight:650;padding:2px 7px;border-radius:2px;letter-spacing:.02em;white-space:nowrap}
+.tag-high{background:#f8e6e9;color:#8c2f3e}
+.tag-med{background:#f6eedc;color:#7a581c}
+.tag-low{background:#e7f2f9;color:#1e4d73}
+.tag-keep{background:#e6f4ea;color:#266335}
+.tag-merge{background:#eee9fa;color:#513996}
+.tag-retire{background:#f5e6e8;color:#8f3140}
+.tag-new{background:#e3f3f2;color:#1b6663}
+
+/* Diagram Panels (exact v2 institutional classes) */
+.mechanism-panel{margin:22px 0;border-top:1px solid #798f9f;border-bottom:1px solid #c3cbd2;padding:0 0 11px;break-inside:avoid}
+.diagram-caption{padding:10px 0 9px;font-size:14px;font-weight:650;color:#303b45}
+.mechanism-flow{display:grid;grid-template-columns:1fr 30px 1fr 30px 1fr 30px 1fr;gap:8px;align-items:stretch;background:#f4f7f9;padding:16px}
+.mechanism-column{background:#fff;border-top:3px solid #83b6d9;padding:13px 13px 10px;min-width:0}
+.mechanism-column.col-gold{border-top-color:var(--gold)}
+.mechanism-column.col-purple{border-top-color:var(--purple)}
+.mechanism-column.col-deep{border-top-color:var(--deep)}
+.mechanism-column.col-teal{border-top-color:var(--teal)}
+.mechanism-column h4{font-size:13.5px;color:var(--deep);margin:0 0 8px}
+.mechanism-column span{display:block;font-size:11.5px;line-height:1.42;padding:6px 0;border-top:1px solid #e5eaee;color:#4a5964}
+.flow-arrow{align-self:center;text-align:center;color:#66839a;font-size:22px}
+.figure-note{font-size:11.5px;line-height:1.48;color:#66717b;margin:0;padding:9px 0 0;border-top:1px solid #c3cbd2}
+
+/* Architecture Grid */
+.architecture-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;background:#f4f7f9;padding:16px;margin:16px 0}
+.architecture-flow article{background:#fff;border-top:3px solid var(--navy);padding:14px;min-width:0}
+.architecture-flow article.part2{border-top-color:var(--teal)}
+.architecture-flow article.part3{border-top-color:var(--gold)}
+.architecture-flow article.part4{border-top-color:var(--purple)}
+.architecture-flow b{font-size:10.5px;color:#4a7aa5;letter-spacing:.09em;text-transform:uppercase}
+.architecture-flow h4{font-size:14px;color:var(--deep);margin:6px 0 7px;line-height:1.3}
+.architecture-flow p{font-size:11.5px;line-height:1.48;color:#55626c;margin:0 0 8px}
+.architecture-flow .ch-list{font-size:11px;color:#304556;border-top:1px solid #e6ecf0;padding-top:7px;line-height:1.5}
+
+/* Filter Bar */
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;background:var(--bg-tint);padding:11px 14px;margin:12px 0 14px}
+.filter-bar span{font-size:12px;color:#4a5e6e;font-weight:600;margin-right:4px}
+.filter-btn{padding:5px 10px;font-size:11.5px;border:1px solid #b5c4d0;background:#fff;color:var(--deep)}
+.filter-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.filter-count{margin-left:auto;font-size:12px;color:var(--deep);font-weight:600}
+
+/* Gap Cards */
+.gap-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0 20px}
+.gap-card{border:1px solid #cdd7df;border-top:3px solid var(--navy);padding:14px 16px;background:#fff}
+.gap-card.tier-b{border-top-color:var(--purple)}
+.gap-card-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:6px}
+.gap-card h4{margin:0;font-size:14px;color:var(--deep);line-height:1.3}
+.gap-card p{font-size:12.5px;line-height:1.52;margin:0 0 8px;color:#3d4852}
+.gap-card .gap-meta{font-size:11px;color:#5a6975;border-top:1px solid #e5ebf0;padding-top:7px;line-height:1.45}
+
+/* Before / After Specimen Cards */
+.specimen-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:16px 0 22px}
+.specimen-card{border:1px solid #cbd5dd;background:#fff;padding:16px 18px}
+.specimen-card.before{border-top:3px solid var(--crimson);background:#fdfafa}
+.specimen-card.after{border-top:3px solid var(--teal);background:#f9fcfc}
+.specimen-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.specimen-card.before .specimen-label{color:var(--crimson)}
+.specimen-card.after .specimen-label{color:var(--teal)}
+.specimen-card p{font-size:13.5px;line-height:1.6;margin:0 0 10px}
+.specimen-card p:last-child{margin-bottom:0}
+.specimen-meta{font-size:11px;color:#64707a;border-top:1px solid #e1e7ec;padding-top:8px;margin-top:10px}
+
+/* Style Swatches */
+.swatch-row{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin:14px 0 18px}
+.swatch{border:1px solid #d2dbe2;padding:9px 10px;font-size:11px;background:#fff}
+.swatch-bar{height:22px;margin-bottom:6px;border-radius:1px}
+.swatch strong{display:block;color:var(--deep);font-size:11.5px}
+.swatch span{color:#616c76;font-family:Consolas,monospace;font-size:10.5px}
+
+/* Roadmap Stepper (exact v2 institutional styling) */
+.roadmap{display:grid;grid-template-columns:repeat(5,1fr);counter-reset:stage;list-style:none;margin:14px 0 10px;padding:20px 0 9px}
+.roadmap li{position:relative;margin:0;padding:23px 14px 0;border-top:3px solid #83b6d9;min-width:0}
+.roadmap li::before{counter-increment:stage;content:counter(stage);position:absolute;top:-14px;left:12px;width:25px;height:25px;border-radius:50%;display:grid;place-items:center;background:var(--deep);color:#fff;font-size:11px;font-weight:700}
+.roadmap li:not(:last-child)::after{content:'→';position:absolute;right:-7px;top:-18px;color:#6d879a;font-size:17px;z-index:1}
+.roadmap b{display:block;color:var(--deep);font-size:13px;margin-bottom:6px}
+.roadmap span{display:block;font-size:11.5px;line-height:1.45;color:#55636e}
+
+/* Decision Assessment Cards */
+.decision-list{display:grid;gap:14px;margin:16px 0}
+.decision-card{border:1px solid #c7d3dc;border-left:4px solid var(--navy);padding:15px 18px;background:#fff}
+.decision-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:8px}
+.decision-head h4{margin:0;font-size:15px;color:var(--deep)}
+.decision-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+.opt-label{display:flex;gap:9px;align-items:flex-start;padding:10px 12px;border:1px solid #d5dfe7;background:#f9fbfc;cursor:pointer;font-size:12.5px;line-height:1.48}
+.opt-label:has(input:checked){border-color:var(--navy);background:#eef5fa}
+.opt-label input{margin-top:3px;flex-shrink:0}
+.opt-label strong{display:block;color:var(--deep);margin-bottom:2px}
+.decision-summary{margin-top:16px;padding:14px 16px;background:#eff5f9;border-top:2px solid var(--deep);font-size:13px}
+.decision-summary pre{margin:8px 0 0;background:#fff;border:1px solid #cdd8e0;padding:10px 12px;font-size:11.5px;white-space:pre-wrap;color:#1d3b54}
+
+/* Footer */
+.footer{margin-top:28px;padding-top:18px;border-top:1px solid #adb9c4;font-size:11.5px;color:#6c7680;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.back-top{position:fixed;right:19px;bottom:18px;background:#fff;border:1px solid #b9c7d2;border-radius:2px;padding:6px 10px;font-size:12px;text-decoration:none;z-index:2}
+
+/* Responsive */
+@media(max-width:1060px){
+  main{padding:0 28px 44px}
+  .hero-band{margin:0 -28px;padding:28px}
+  .plan-layout{grid-template-columns:1fr}
+  .plan-rail{position:static;max-height:none;order:-1;background:#f7f9fb;border:1px solid #cfdae2;padding:14px;margin-bottom:18px}
+  .toc{grid-template-columns:repeat(3,1fr);gap:0 12px}
+  .architecture-flow{grid-template-columns:1fr 1fr}
+  .swatch-row{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:760px){
+  main{padding:0 18px 32px}
+  .hero-band{margin:0 -18px;padding:24px 18px}
+  .hero-band h1{font-size:30px}
+  .front{grid-template-columns:1fr;gap:18px}
+  .research-note{border-left:0;border-top:1px solid #c7d1d9;padding:15px 0 0}
+  .metrics{grid-template-columns:1fr 1fr}
+  .metric{padding:13px 12px;border-bottom:1px solid #d5dce2}
+  .metric:nth-child(2){border-right:0}
+  .metric:nth-child(3),.metric:nth-child(4){border-bottom:0}
+  .specimen-grid,.decision-options,.architecture-flow,.gap-grid{grid-template-columns:1fr}
+  .mechanism-flow{grid-template-columns:1fr}
+  .flow-arrow{transform:rotate(90deg);height:22px;line-height:22px}
+  .roadmap{grid-template-columns:1fr;padding-left:10px}
+  .roadmap li{border-top:0;border-left:3px solid #83b6d9;padding:8px 10px 18px 28px}
+  .roadmap li::before{top:4px;left:-14px}
+  .roadmap li:not(:last-child)::after{content:'↓';left:-7px;right:auto;top:auto;bottom:-5px}
+  .toc{grid-template-columns:1fr 1fr}
+}
+@media print{
+  body{font-size:10pt}
+  main{max-width:none;padding:0}
+  .hero-band{margin:0;padding:18px;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  .topnav,.plan-rail,.back-top,.filter-bar,button{display:none!important}
+  .plan-layout{display:block}
+  .plan-section{break-inside:avoid-page}
+  .specimen-card,.decision-card,.mechanism-panel,.gap-card{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<main>
+
+<div id="top" class="masthead">
+  <div class="brand">
+    <strong>IC Flow<br>Forecasting</strong>
+    <span>Electricity<br>Research</span>
+  </div>
+  <div class="dateline">
+    Upgrade Plan (Expanded) · Version 2 to Version 3<br>
+    Editorial Standard: Virtual Barrels Analysis
+  </div>
+</div>
+
+<div class="hero-band">
+  <div class="eyebrow">Report Restructuring, Valuation Depth &amp; Implementation Plan</div>
+  <h1>Rewriting the Interregional Valuation Report: <span>mechanics-first analysis, closed analytical gaps, and institutional styling</span></h1>
+  <p class="hero-sub">A complete blueprint to audit, deepen, consolidate, and rewrite <code>interregional_valuation_research_v2</code> using the <code>virtual-barrels-analysis</code> methodology, preserving the exact institutional visual identity while closing 13 substantive valuation gaps and 4 code-level methodological issues uncovered across <code>nemic/valuation/</code>.</p>
+</div>
+
+<nav class="topnav" aria-label="Plan navigation">
+  <a href="#audit">Audit</a>
+  <a href="#gaps">Missing Analysis</a>
+  <a href="#architecture">Architecture</a>
+  <a href="#mapping">Chapter Map</a>
+  <a href="#exhibits">Exhibits &amp; CSS</a>
+  <a href="#editorial">Editorial Rules</a>
+  <a href="#specimens">Before / After</a>
+  <a href="#pipeline">Build &amp; Spec</a>
+  <a href="#roadmap">Roadmap</a>
+  <a href="#decisions">Decisions</a>
+  <button id="printPlan" type="button">Print / save PDF</button>
+</nav>
+
+<div class="front">
+  <div>
+    <ul class="summary-points">
+      <li><strong>Eliminate the 56.3% verbatim version 1 splice.</strong> Automated inspection of <code>research_report.md</code> shows 8,674 of 15,399 words come from 18 unedited version 1 includes, leaving direct contradictions in the text (Chapter 26 still states the panel holds only seven complete quarters, and Chapter 29 states exact SRA settlement is not yet implemented).</li>
+      <li><strong>Close 9 locally computable valuation gaps plus 4 code-level blind spots.</strong> Auditing <code>nemic/valuation/*.py</code> and <code>evidence/*.csv</code> uncovered critical omissions: SRA payoffs are never decomposed into loss vs. energy-congestion vs. scarcity dollars; auction premia are never tested ex-2022 crisis or adjusted for credit-support lockup; loop hedge effectiveness and 3-way loop haircut attribution are missing; walk-forward scores pool all 6 directions and silently drop 720 tranches; and the option benchmark peeks at test-quarter flow regimes.</li>
+      <li><strong>Dissolve the split between the chart gallery and the research text.</strong> Version 2 places 39 exhibits in a top wall with five 3-chart stacks and buries 37 chapters in bottom accordions. Version 3 consolidates into 12 cohesive chapters across four parts (Plumbing, Empirical Structure, Market Valuation, Implementation Blueprint) with every exhibit woven inline beneath its causal prose.</li>
+      <li><strong>Preserve the exact institutional styling while upgrading implementation usability.</strong> All <code>institutional.css</code> colors, typography, KaTeX typesetting, and auto-bound numbers remain intact. All 35 raw filenames and MMS codes move out of prose into Technical Appendix B, while Part IV adds concrete engineering specs, worked entropy-pooling math, and Stage 2–5 build gates.</li>
+    </ul>
+  </div>
+  <aside class="research-note">
+    <h3>Planning brief</h3>
+    <p><strong>Audited baseline</strong><br><code>interregional_valuation_research_v2</code> (8.83 MB HTML, 37 chapters, 15,399 words, 39 exhibits) plus all 14 modules in <code>nemic/valuation/</code>.</p>
+    <p><strong>Analytical gaps found</strong><br>9 high-value analyses computable immediately from local data; 4 deeper structural/external extensions; 4 subtle bugs/omissions in existing valuation scripts.</p>
+    <p><strong>Target skill &amp; styling</strong><br><code>virtual-barrels-analysis</code> voice and workflow rendered in the exact <code>institutional.css</code> visual system.</p>
+    <p><strong>Baseline safety</strong><br>Zero edits made to <code>v2</code>; all hashes remain intact pending your decision.</p>
+  </aside>
+</div>
+
+<div class="metrics" aria-label="Headline structural and analytical transformation metrics">
+  <article class="metric">
+    <span>Report structure</span>
+    <strong>37 → 12</strong>
+    <small>Chapters unified into 4 logical parts plus 3 clean appendices</small>
+  </article>
+  <article class="metric">
+    <span>Verbatim v1 carry-over</span>
+    <strong>56.3% → 0%</strong>
+    <small>8,674 spliced v1 words rewritten with zero contradictions</small>
+  </article>
+  <article class="metric">
+    <span>New valuation depth</span>
+    <strong>9 + 4</strong>
+    <small>9 local-data analytical upgrades + 4 structural/external specs</small>
+  </article>
+  <article class="metric">
+    <span>Code leaks &amp; script bugs</span>
+    <strong>35 / 4 → 0</strong>
+    <small>35 prose code leaks relocated; 4 subtle valuation script flaws fixed</small>
+  </article>
+</div>
+
+<div class="plan-layout">
+  <div class="plan-body">
+
+    <!-- SECTION 1: STRUCTURAL & EDITORIAL AUDIT -->
+    <section id="audit" class="plan-section">
+      <div class="section-kicker">Section 01 · Structural &amp; Editorial Audit of Version 2</div>
+      <h2>What holds version 2 back from being readable and implementable</h2>
+      <p class="section-dek">Version 2 solved the core empirical deficits from version 1: it built a reconciled five-minute settlement ledger, joined 1,332 public auction tranches to realised payoffs, measured weekly hedge firmness, and implemented the November 2026 loop rule. Its presentation and narrative structure, however, remain bolted onto version 1 rather than engineered for a reader who wants to understand and implement valuation.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Defect category</th>
+              <th>Measured finding in v2</th>
+              <th>Impact on readability &amp; implementation</th>
+              <th>Severity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Verbatim v1 splicing &amp; contradictions</strong></td>
+              <td>18 <code>include_v1</code> blocks contribute 8,674 of 15,399 words (56.3%). Chapter 26 still claims the panel holds only 7 complete quarters; Chapter 29 states no exact SRA settlement engine is implemented; Chapters 2 and 9 repeat formulas in plain text right below KaTeX blocks.</td>
+              <td>Undermines trust and blurs the boundary between what is already built in <code>nemic/valuation/</code> and what remains to build.</td>
+              <td><span class="tag tag-high">Critical</span></td>
+            </tr>
+            <tr>
+              <td><strong>Gallery vs. text split</strong></td>
+              <td>All 27 new Plotly charts sit above the narrative with a generic one-line link (<code>Method, formulas and caveats: the corresponding chapter</code>). Five sections (<code>auctions</code>, <code>hedging</code>, <code>uncertainty</code>, <code>counterprice</code>, <code>valuation</code>) stack 3 bare charts consecutively without prose.</td>
+              <td>Breaks causal reading flow and directly violates the Virtual Barrels rule placing every exhibit beneath the paragraph that explains its mechanism.</td>
+              <td><span class="tag tag-high">Critical</span></td>
+            </tr>
+            <tr>
+              <td><strong>Chapter fragmentation</strong></td>
+              <td>37 chapters total; 6 chapters contain fewer than 150 words (Ch. 10: 150w, Ch. 13: 126w, Ch. 15: 90w, Ch. 16: 96w, Ch. 24: 134w, Ch. 32: 102w). Ordering follows the peer-review checklist rather than physical-to-financial logic.</td>
+              <td>Creates heavy sidebar friction and forces readers to assemble valuation workflows across 14 non-adjacent chapters.</td>
+              <td><span class="tag tag-high">High</span></td>
+            </tr>
+            <tr>
+              <td><strong>Code &amp; raw table leakage</strong></td>
+              <td>35 distinct backticked tokens leak into body prose: 12 file/glob references (<code>sra_unit_registry.csv</code>, <code>make_figures.py</code>, <code>review.md</code>) and 23 raw MMS table or flag codes (<code>SETIRSURPLUS</code>, <code>FROMREGIONLOSSSHARE</code>, <code>PRICE_STATUS = FIRM</code>).</td>
+              <td>Clutters analytical narrative with database internals; fails the Virtual Barrels zero-code-leakage check.</td>
+              <td><span class="tag tag-med">Medium</span></td>
+            </tr>
+            <tr>
+              <td><strong>Chart &amp; label hygiene</strong></td>
+              <td>Exhibit N23 prints snake_case Python keys (<code>market_clearing_price</code>, <code>trailing_4q</code>) on the y-axis. Static Figure 1 duplicates Interactive Exhibit 1 with mismatched colors. Exhibits N6–N7 render two empty boxes. Exhibit N13 duplicates Exhibit 8.</td>
+              <td>Adds visual bloat and reduces institutional polish without adding information.</td>
+              <td><span class="tag tag-med">Medium</span></td>
+            </tr>
+            <tr>
+              <td><strong>Prose polish &amp; chronology drift</strong></td>
+              <td>3 robotic figure-leading sentences (<code>Exhibit N12 turns...</code>, <code>Exhibit N13 shows...</code>, <code>Exhibit N24 shows...</code>); mixed quarter labels (9 compact <code>2024Q4</code> vs. 8 spaced <code>2024 Q4</code>); zero structured mechanism callouts.</td>
+              <td>Reduces scannability and prevents clean passage of <code>lint_virtual_barrels.py</code>.</td>
+              <td><span class="tag tag-low">Low</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="vb-callout context">
+        <span class="vb-callout-title">Context · Preserving Version 2's Strengths</span>
+        <p>Version 2's prose tone is already calm and restrained: zero non-LaTeX exclamation marks appear in body text (the sole <code>!</code> is TeX spacing <code>\!</code>), zero hype words appear in analysis (the single match on <code>wild</code> is author surname <em>Wild, P.</em> in citation R8), and the two em-dashes are empty table cells. Every headline statistic is auto-populated from audited CSVs, and the offline Playwright suite passes with zero errors. The rewrite keeps all of those engineering foundations.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 2: DEEP ANALYTICAL & VALUATION GAPS -->
+    <section id="gaps" class="plan-section">
+      <div class="section-kicker">Section 02 · Missing Valuation Analysis &amp; Analytical Depth Audit</div>
+      <h2>What is missing or too shallow to truly understand and implement valuation</h2>
+      <p class="section-dek">Beyond structure and prose, a line-by-line review of <code>nemic/valuation/*.py</code> and <code>evidence/*.csv</code> uncovered substantive gaps in how valuation works, several high-value results already sitting unused in local CSVs, and four subtle methodological defects in the current valuation scripts.</p>
+
+      <div class="vb-callout risk">
+        <span class="vb-callout-title">Code &amp; Methodological Audit · Four Subtle Defects Found in <code>nemic/valuation/</code></span>
+        <ul>
+          <li><strong>In-sample flow-regime peek in the spread-option benchmark (<code>valuation_tests.py</code> lines 110–115):</strong> <code>option_benchmark()</code> estimates regime parameters on the prior four quarters, then evaluates out-of-sample payoffs using <code>test.reg</code>, which is the <em>realised future flow-direction regime</em> of the test quarter rather than a prior-quarter regime frequency distribution. This understates out-of-sample error and must be corrected to an ex-ante regime distribution.</li>
+          <li><strong>Undisclosed 4-day sample collapse in the strategic pilot (<code>strategic_pilot_status.json</code>):</strong> Four of the six targeted region-months failed with <code>BIDPEROFFER_D not found</code> (NSW May 2024, SA July 2024, QLD Dec 2023 and Jan 2024). Chapter 16 reports "1,152 intervals" without stating that the entire pilot rests on just <strong>two calendar days in NSW, two in SA, and zero in QLD</strong>.</li>
+          <li><strong>Silent 54% sample drop in walk-forward scoring (<code>valuation_tests.py</code> line 53):</strong> Requiring <code>len(hist) &gt;= 4</code> drops 720 of 1,332 delivered tranches without reporting the remaining auction-date range, and pools all six directions into one unweighted dollar MAE where $28k QLDNSW units swamp $4k NSWVIC units.</li>
+          <li><strong>Unused Cumulative Price Threshold in MPC rescaling (<code>evidence.py</code> lines 182–196):</strong> <code>mpc_normalised()</code> loads <code>ADMINISTERED_PRICE_THRESHOLD</code> from AEMO tables and never applies it. Scaling historical cap-binding intervals up to $23,200/MWh linearly without simulating the rolling 7-day CPT breach and $600/MWh administered-price cap overstates the scarcity uplift of higher statutory caps.</li>
+        </ul>
+      </div>
+
+      <h3>Tier A · Nine High-Value Valuation Upgrades Computable Immediately from Local Data</h3>
+      <p>Every analysis below can be computed directly from the 517,248-interval five-minute panel, settled residue tables, auction bid stacks, and constraint archives already sitting in the repository, requiring zero external data purchases.</p>
+
+      <div class="gap-grid">
+        <article class="gap-card">
+          <div class="gap-card-head"><h4>A1 · SRA Dollar-Payoff Decomposition ($/unit)</h4><span class="tag tag-high">Core Gap</span></div>
+          <p>Chapter 3 splits <em>price spreads ($/MWh)</em> into loss vs. congestion and energy vs. scarcity, and Chapter 5 describes attributing SRA payouts in theory, yet v2 never computes the split on actual <strong>SRA dollar payoffs ($/unit)</strong>. Without knowing what share of VICNSW's $25,642/unit comes from coupled loss surplus vs. sub-$300 energy congestion vs. &gt;$300 scarcity congestion (via both state attribution and fixed-flow clipped counterfactuals), a quant cannot calibrate which driver actually pays unit holders.</p>
+          <div class="gap-meta"><strong>Target chapter:</strong> Ch. 2 &amp; Ch. 5 · <strong>Data:</strong> Local <code>settlement.py</code> + <code>panel.py</code></div>
+        </article>
+
+        <article class="gap-card">
+          <div class="gap-card-head"><h4>A2 · Auction Discount: Ex-2022 Regime Split, T1→T12 Drift &amp; Credit-Support Carry</h4><span class="tag tag-high">Core Gap</span></div>
+          <p>The 1.51× realised-to-price ratio and 1.85× 9–12q horizon slope are never tested excluding the 2022 energy crisis (when 2020–2021 far tranches were surprised by the coal/gas shock). Nor does v2 trace tranche-by-tranche price convergence (T1 to T12 for the same delivery quarter) or quantify the <strong>capital / credit-support lockup</strong> between auction date and payment date (up to 3 years ahead, vs. the 49-day cash lag reported in Ch. 15).</p>
+          <div class="gap-meta"><strong>Target chapter:</strong> Ch. 7 · <strong>Data:</strong> Local <code>auction_vs_realised.csv</code> &amp; <code>auction_panel.csv</code></div>
+        </article>
+
+        <article class="gap-card">
+          <div class="gap-card-head"><h4>A3 · Loop Rule: 3-Way Haircut Waterfall, Loop Hedge Firmness &amp; Parametric EnergyConnect</h4><span class="tag tag-high">Core Gap</span></div>
+          <p>Chapter 12 reports only aggregate pool changes (-24% VICNSW, -58% SAVIC) with NSW–SA flow fixed at zero. It never decomposes the haircut into (a) VIC pass-through reallocation vs. (b) negative-loop netting vs. (c) secondary netting; never computes <strong>post-loop hedge effectiveness</strong> (how VICNSW, VICSA, NSWSA, and SANSW hedge spreads after Nov 2026); never shows quarterly haircut stability; and omits a parametric 150 MW / 800 MW EnergyConnect transfer sensitivity.</p>
+          <div class="gap-meta"><strong>Target chapter:</strong> Ch. 3 &amp; Ch. 8 · <strong>Data:</strong> Local <code>loop.net_trade</code> diagnostics + <code>hedging()</code></div>
+        </article>
+
+        <article class="gap-card">
+          <div class="gap-card-head"><h4>A4 · Quarterly Hedge Basis, Energy-vs-Cap Replication &amp; Two-Instrument Frontier</h4><span class="tag tag-high">Core Gap</span></div>
+          <p>Hedge ratios are tested only weekly against a two-sided flat spread using SRA units alone. Valuation requires: (1) <strong>quarterly settlement-horizon R²</strong> (removing intra-quarter timing noise); (2) testing SRA units separately against the <strong>capped-energy spread</strong> vs. the <strong>$300 cap spread</strong> (separating energy-hedging power from tail failure); and (3) a <strong>two-instrument frontier (SRA units + Destination $300 Cap)</strong> to show how combining a cap repairs VICNSW's 0.15 MW stress collapse.</p>
+          <div class="gap-meta"><strong>Target chapter:</strong> Ch. 8 · <strong>Data:</strong> Local 5-min panel + settled ledger</div>
+        </article>
+
+        <article class="gap-card">
+          <div class="gap-card-head"><h4>A5 · Diurnal Residue Regimes &amp; Negative-Price Loss Inversion</h4><span class="tag tag-med">Depth Gap</span></div>
+          <p><code>diurnal_profile.csv</code> already computes hourly residue and negative-price shares, yet v2 only plots mean spread in two sentences. Splitting SRA dollars across <strong>Solar Midday (09:00–15:00)</strong>, <strong>Evening Ramp (16:00–21:00)</strong>, and <strong>Overnight</strong> clarifies whether a link earns repeatable midday solar-export congestion or volatile evening scarcity, and demonstrates how negative exporting prices invert the marginal loss factor term.</p>
+          <div class="gap-meta"><strong>Target chapter:</strong> Ch. 4 &amp; Ch. 5 · <strong>Data:</strong> Already in <code>diurnal_profile.csv</code></div>
+        </article>
+
+        <article class="gap-card">
+          <div class="gap-card-head"><h4>A6 · Disaggregated Walk-Forward Scoring &amp; Smarter Frozen Baselines</h4><span class="tag tag-med">Depth Gap</span></div>
+          <p>Replace the pooled 612-tranche MAE with direction-by-horizon scorecards (in both $/unit and % of mean payoff), disclose the truncated auction dates explicitly, and add three stronger ex-ante benchmarks: (a) <strong>debiased clearing price</strong> (adjusting for trailing horizon premium), (b) <strong>MPC-rescaled seasonal baseline</strong>, and (c) <strong>outage-plan-augmented baseline</strong> using the pre-auction NOS signal already proven in Ch. 11.</p>
+          <div class="gap-meta"><strong>Target chapter:</strong> Ch. 9 · <strong>Data:</strong> Local <code>walk_forward_forecasts.csv</code> + <code>outage_plan_predictive.csv</code></div>
+        </article>
+
+        <article class="gap-card">
+          <div class="gap-card-head"><h4>A7 · Live Catalysts: Top Constraints, 2027 Q2 QNI Dilution, Basslink Backcast &amp; Bid Slippage</h4><span class="tag tag-med">Depth Gap</span></div>
+          <p>Surface four high-impact operational realities currently hidden in CSVs: (1) the <strong>top named binding constraints</strong> per link from <code>constraint_top_setters.csv</code> (e.g., <code>V^^N_NIL_1</code> = $3.83/MWh); (2) exact <strong>2027 Q2 unit-count dilution</strong> (<code>NSWQLD</code> 550→750 cuts per-unit share by -26.7%; <code>QLDNSW</code> 1,200→1,300 cuts by -7.7%) and whether live 2027 Q2 tranches price it; (3) a caveated <strong>pro-forma regulated Basslink residue backcast</strong> for the new VICTAS/TASVIC units; and (4) <strong>bid-stack price impact</strong> of a 50–100 unit desk order from <code>auction_bid_curve_latest.csv</code>.</p>
+          <div class="gap-meta"><strong>Target chapter:</strong> Ch. 3, Ch. 6 &amp; Ch. 7 · <strong>Data:</strong> Local CSVs + <code>scenario_registry.json</code></div>
+        </article>
+
+        <article class="gap-card">
+          <div class="gap-card-head"><h4>A8 · MPC × Cumulative Price Threshold (CPT) Interaction</h4><span class="tag tag-med">Depth Gap</span></div>
+          <p>Upgrade FY2027 cap rescaling to simulate the rolling 7-day (2,016-interval) CPT ceiling alongside the $23,200/MWh MPC and $600/MWh administered-price cap. Show where higher MPC triggers administered pricing earlier, capping extreme multi-day scarcity episodes rather than scaling them linearly.</p>
+          <div class="gap-meta"><strong>Target chapter:</strong> Ch. 4 · <strong>Data:</strong> Local 5-min prices + <code>MARKET_PRICE_THRESHOLDS</code></div>
+        </article>
+
+        <article class="gap-card">
+          <div class="gap-card-head"><h4>A9 · Reconciliation Diagnostics, Option Greeks &amp; Strategic Pilot Honesty</h4><span class="tag tag-med">Rigor Gap</span></div>
+          <p>(1) Diagnose QNI southbound's 42% metered-vs-settled discrepancy (Terranora parallel-link metering and small sign-reversal intervals) with a quarterly waterfall; (2) plot the already-computed <strong>Vega and spike-frequency Greeks</strong> in <code>option_sensitivity.csv</code> after fixing the ex-ante flow-regime bug; and (3) either expand the <code>BIDPEROFFER_D</code> strategic pilot to &ge;20 days across NSW, SA, and QLD or honestly demote the 4-day pilot to a brief scoping note.</p>
+          <div class="gap-meta"><strong>Target chapter:</strong> Ch. 2, Ch. 6 &amp; Ch. 9 · <strong>Data:</strong> Local <code>sra_reconciliation.csv</code>, <code>option_sensitivity.csv</code></div>
+        </article>
+      </div>
+
+      <h3>Tier B · Four Deeper Structural &amp; External Specifications (For Full Production Valuation)</h3>
+      <p>These four areas either require external market quotes (AER/ASX) or move beyond historical descriptive analytics into the mathematical and software mechanics needed to implement Stages 2 to 5.</p>
+
+      <div class="gap-grid">
+        <article class="gap-card tier-b">
+          <div class="gap-card-head"><h4>B1 · Worked Mathematical Spec for Entropy Pooling &amp; Stage 2 Models</h4><span class="tag tag-merge">Implementation Spec</span></div>
+          <p>Chapter 23 prints Meucci's KL-divergence objective in three lines without showing how to implement it. Version 3 will provide the explicit dual Lagrange-multiplier solver, handling of bid-ask inequality bands, effective scenario count (<code>N_eff</code>) failure thresholds, and exact Stage 2 model specs (7-day spatial weather-block sampling, clipped-energy GAM/GBDT features, and 4-state semi-Markov spike hazard + GPD tail calibration).</p>
+          <div class="gap-meta"><strong>Target chapter:</strong> Ch. 11 &amp; Appendix A · <strong>Dependency:</strong> None (pure engineering specification)</div>
+        </article>
+
+        <article class="gap-card tier-b">
+          <div class="gap-card-head"><h4>B2 · Execution Cashflow, Credit Support &amp; Settlement Revision Waterfall</h4><span class="tag tag-merge">Market Plumbing</span></div>
+          <p>Map the full practical cashflow lifecycle of an SRA unit vs. an ASX spread: auction clearing → prudential/credit support posting → quarterly payment instalment → weekly residue receipts (21-day lag) → 20-week and 30-week settlement revisions → ASX daily variation-margin path risk. Flag manual verification of the $10/unit minimum distribution clause and April 2026 fee rules.</p>
+          <div class="gap-meta"><strong>Target chapter:</strong> Ch. 2, Ch. 7 &amp; Ch. 10 · <strong>Dependency:</strong> Manual PDF check for SRA Rules clause</div>
+        </article>
+
+        <article class="gap-card tier-b">
+          <div class="gap-card-head"><h4>B3 · Futures &amp; $300 Cap Relative-Value Parity (AER / ASX Leg)</h4><span class="tag tag-merge">External Data</span></div>
+          <p>Complete the empirical comparison once AER base-futures exports (or licensed ASX base + $300 cap histories) are placed in <code>data/external/aer_futures/</code>: ex-post base and cap premia by region/season, four-leg capped-energy bid-ask replication cost, and per-MW-equivalent SRA discount vs. futures spread premium.</p>
+          <div class="gap-meta"><strong>Target chapter:</strong> Ch. 8 &amp; Ch. 9 · <strong>Dependency:</strong> Manual AER CSV export / ASX license</div>
+        </article>
+
+        <article class="gap-card tier-b">
+          <div class="gap-card-head"><h4>B4 · Post-EnergyConnect Structural Dispatch &amp; Storage Depletion Spec</h4><span class="tag tag-merge">Stage 3 Challenger</span></div>
+          <p>Specify how a structural dispatch challenger (e.g., Nempy) moves beyond fixed-dispatch counterfactuals to co-optimise EnergyConnect loop flows, whole-loop NRM auto-clamping, multi-hour battery state-of-charge depletion under imperfect foresight, and forced thermal outage coincidence.</p>
+          <div class="gap-meta"><strong>Target chapter:</strong> Ch. 11 &amp; Ch. 12 · <strong>Dependency:</strong> Stage 3 implementation phase</div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECTION 3: TARGET ARCHITECTURE -->
+    <section id="architecture" class="plan-section">
+      <div class="section-kicker">Section 03 · Target v3 Architecture</div>
+      <h2>A four-part, mechanics-first architecture built for reading and implementation</h2>
+      <p class="section-dek">The Virtual Barrels workflow frames physical and institutional plumbing before interpreting prices, then layers empirical baselines, marginal edge cases, and forward implementation. Version 3 organizes the entire analysis into four logical parts and three technical appendices, with a crisp executive front page for fast desk scanning.</p>
+
+      <div class="mechanism-panel">
+        <div class="diagram-caption">Structural shift: from version 2's split gallery-and-accordion layout to version 3's unified narrative</div>
+        <div class="mechanism-flow">
+          <div class="mechanism-column">
+            <h4>Current v2 layout</h4>
+            <span>Top: 13 bare chart sections + 4 interactive bands</span>
+            <span>Middle: 5 stacked 3-chart walls with no prose</span>
+            <span>Bottom: 37 collapsed text chapters (56% v1)</span>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="mechanism-column col-gold">
+            <h4>Analytical &amp; editorial fix</h4>
+            <span>Remove all 18 verbatim v1 splice blocks</span>
+            <span>Add 9 local-data valuation upgrades (A1–A9)</span>
+            <span>Fix 4 script defects &amp; relocate 35 code leaks</span>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="mechanism-column col-teal">
+            <h4>Inline exhibit weaving</h4>
+            <span>Insert <code>{{exhibit:id}}</code> inside chapters</span>
+            <span>Max 2 charts before connective prose</span>
+            <span>Embed Workbench inside Chapter 9</span>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="mechanism-column col-deep">
+            <h4>Target v3 deliverable</h4>
+            <span>4 Parts, 12 chapters, 3 clean appendices</span>
+            <span>Plumbing → Evidence → Valuation → Build</span>
+            <span>Lint-gated, offline HTML in v2 CSS</span>
+          </div>
+        </div>
+        <p class="figure-note">All frozen v2 files stay untouched if built in a fresh <code>interregional_valuation_research_v3/</code> folder. Tier A analytical upgrades run purely on existing local AEMO archives.</p>
+      </div>
+
+      <div class="architecture-flow">
+        <article>
+          <b>Part I · Plumbing</b>
+          <h4>Contracts, Flows &amp; Settlement Rules</h4>
+          <p>Establishes what spreads and SRA units physically and contractually pay, including pre-loop ledger, loop rules, cashflow timing, and unit dilution.</p>
+          <div class="ch-list">
+            Ch. 1 · Instruments &amp; Price Accounting<br>
+            Ch. 2 · Flows, Losses &amp; Pre-Loop Ledger<br>
+            Ch. 3 · Loop Regime, Dilution &amp; Basslink
+          </div>
+        </article>
+        <article class="part2">
+          <b>Part II · Empirical Structure</b>
+          <h4>Spreads, Fragility &amp; Physical Mechanisms</h4>
+          <p>Documents 19 quarters of spreads, MPC×CPT ceilings, diurnal residue splits, loss vs. congestion dollars, top constraints, and outage signals.</p>
+          <div class="ch-list">
+            Ch. 4 · 19-Quarter Baseline, CPT &amp; Diurnal<br>
+            Ch. 5 · Loss, Congestion &amp; Flow Dependence<br>
+            Ch. 6 · Counter-Price, Constraints &amp; Triggers
+          </div>
+        </article>
+        <article class="part3">
+          <b>Part III · Market Valuation</b>
+          <h4>Auctions, Hedging &amp; Benchmarks</h4>
+          <p>Tests auction premia ex-2022, T1→T12 drift, credit-support carry, weekly/quarterly &amp; SRA+Cap hedging, disaggregated walk-forward skill, and Greeks.</p>
+          <div class="ch-list">
+            Ch. 7 · Auction Premia, Drift &amp; Slippage<br>
+            Ch. 8 · Hedging: SRA, Loop &amp; Cap Mixes<br>
+            Ch. 9 · Benchmarks, Greeks &amp; Workbench
+          </div>
+        </article>
+        <article class="part4">
+          <b>Part IV · Implementation</b>
+          <h4>System Design, Models &amp; Build Gates</h4>
+          <p>Translates all mechanics into build-ready engineering contracts, explicit entropy-pooling and Stage 2–3 math, and acceptance gates.</p>
+          <div class="ch-list">
+            Ch. 10 · 5-Layer Architecture &amp; Contracts<br>
+            Ch. 11 · Modelling Playbook (P, Q* &amp; CVaR)<br>
+            Ch. 12 · Validation Gates &amp; Staged Build Plan
+          </div>
+        </article>
+      </div>
+
+      <h3>Dual-Track Navigation &amp; Three Focused Appendices</h3>
+      <p>The executive front page opens with four quantified Virtual Barrels takeaways plus two explicit reading paths: a <strong>Desk Path</strong> (Front Matter → Chapters 2, 3, 7, 8, 9) and an <strong>Implementation Path</strong> (Chapters 1, 2, 3, 10, 11, 12 + Appendices A and B).</p>
+      <ul>
+        <li><strong>Appendix A · Mathematical &amp; Formula Reference:</strong> Consolidated KaTeX reference covering every identity (including SRA dollar decomposition, loop net-trade, CPT truncation, dual entropy pooling, and CVaR), cross-linked to the implementing Python module.</li>
+        <li><strong>Appendix B · Technical Schema, AEMO Table Mapping &amp; Reproducibility:</strong> Clean engineering reference housing all 35 relocated internal identifiers (MMS table names, APCFLAG bitmasks, local CSV schemas, fallback unit counts, and exact CLI rebuild/test commands).</li>
+        <li><strong>Appendix C · Sources, Evidence Hierarchy &amp; Audit Trail:</strong> Reorganizes all 55 citations into Virtual Barrels Tier 1 (Official Rules &amp; Primary Telemetry), Tier 2 (Peer-Reviewed &amp; Institutional Research), and Tier 3 (Practitioner Notes), followed by a compact v1 → v2 → v3 audit changelog.</li>
+      </ul>
+    </section>
+
+    <!-- SECTION 4: CHAPTER CONSOLIDATION MAP -->
+    <section id="mapping" class="plan-section">
+      <div class="section-kicker">Section 04 · Complete Content Mapping</div>
+      <h2>How all 37 version 2 chapters and 13 analytical upgrades map into version 3</h2>
+      <p class="section-dek">No verified empirical result or citation is dropped. Redundant version 1 carry-overs and micro-chapters are merged while the 9 Tier A analyses and 4 Tier B specifications plug directly into the chapters where a reader needs them.</p>
+
+      <div class="filter-bar" role="region" aria-label="Filter chapter mapping by target part">
+        <span>Filter by target part:</span>
+        <button class="filter-btn active" data-filter="all" type="button">All (15)</button>
+        <button class="filter-btn" data-filter="Part I" type="button">Part I · Plumbing</button>
+        <button class="filter-btn" data-filter="Part II" type="button">Part II · Evidence</button>
+        <button class="filter-btn" data-filter="Part III" type="button">Part III · Valuation</button>
+        <button class="filter-btn" data-filter="Part IV" type="button">Part IV · Implementation</button>
+        <button class="filter-btn" data-filter="Appendices" type="button">Appendices</button>
+        <span class="filter-count" id="mapCount">Showing 15 target units</span>
+      </div>
+
+      <div class="table-wrap">
+        <table id="chapterMapTable">
+          <thead>
+            <tr>
+              <th>Target v3 Unit</th>
+              <th>Absorbed v2 Chapters</th>
+              <th>New Depth Added (A1–B4)</th>
+              <th>Woven Inline Exhibits</th>
+              <th class="num">Target Words</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-part="Part I">
+              <td><strong>Ch. 1 · Instruments &amp; Exact Accounting</strong></td>
+              <td>Intro, Ch. 1, Ch. 2, Ch. 3</td>
+              <td>Removes v1 Ch. 2.1 duplication; tightens ASX leg-sign &amp; 2×2 accounting callout</td>
+              <td>Interactive Payoff Geometry (Ex. 6), 2×2 Accounting Callout</td>
+              <td class="num">850</td>
+            </tr>
+            <tr data-part="Part I">
+              <td><strong>Ch. 2 · Flows, Losses &amp; Pre-Loop Ledger</strong></td>
+              <td>Ch. 5 (pre-loop), Ch. 6</td>
+              <td><strong>A1</strong> SRA $/unit decomposition; <strong>A9</strong> QNI southbound 42% diagnosis; <strong>B2</strong> cashflow &amp; revision timeline</td>
+              <td>Diagram D4, Ex. N1, Ex. N2, New Ex. V1 (SRA $/unit split)</td>
+              <td class="num">1,000</td>
+            </tr>
+            <tr data-part="Part I">
+              <td><strong>Ch. 3 · Loop Regime, Dilution &amp; Basslink</strong></td>
+              <td>Ch. 5 (loop/Basslink), Ch. 12</td>
+              <td><strong>A3</strong> 3-way loop waterfall &amp; parametric 150/800 MW PEC; <strong>A7</strong> 2027 Q2 QNI dilution &amp; pro-forma Basslink backcast</td>
+              <td>Diagram D5, Ex. N20, New Ex. V2 (Loop 3-way waterfall &amp; quarterly drift)</td>
+              <td class="num">950</td>
+            </tr>
+            <tr data-part="Part II">
+              <td><strong>Ch. 4 · 19-Quarter Baseline, CPT &amp; Diurnal</strong></td>
+              <td>Ch. 4, Ch. 13</td>
+              <td><strong>A5</strong> Solar midday vs. evening ramp residue split; <strong>A8</strong> MPC × 7-day CPT truncation; retires Fig. 1 &amp; dup. N13</td>
+              <td>Interactive Explorer (Ex. 1–4, 8), Ex. N14, N15, N16, N21 (with CPT), N22 (expanded)</td>
+              <td class="num">1,050</td>
+            </tr>
+            <tr data-part="Part II">
+              <td><strong>Ch. 5 · Loss, Congestion &amp; Flow Dependence</strong></td>
+              <td>Ch. 9, Ch. 10</td>
+              <td><strong>A1</strong> Futures vs. SRA loss-surplus comparison; <strong>A5</strong> negative-price loss-sign inversion; removes v1 Ch. 9.1 repeat</td>
+              <td>Ex. N8 (2×2 bars), Ex. N9 (MLF curve), Ex. 9 (Ungated flow–spread bridge)</td>
+              <td class="num">800</td>
+            </tr>
+            <tr data-part="Part II">
+              <td><strong>Ch. 6 · Counter-Price, Constraints &amp; Triggers</strong></td>
+              <td>Ch. 11, Ch. 16, Ch. 17</td>
+              <td><strong>A7</strong> Top named binding constraints table; <strong>A9</strong> honest 4-day pilot scope fix (or expanded 20-day bid study)</td>
+              <td>Diagram D1, Ex. N17, N18, N19, Top-Setters Table, Ex. N27 (scoped/expanded)</td>
+              <td class="num">1,050</td>
+            </tr>
+            <tr data-part="Part III">
+              <td><strong>Ch. 7 · Auction Premia, Drift &amp; Slippage</strong></td>
+              <td>Ch. 7, Ch. 15</td>
+              <td><strong>A2</strong> Ex-2022 sensitivity, T1→T12 convergence &amp; credit-support carry; <strong>A7</strong> 50–100 unit bid-stack slippage; <strong>B2</strong> fee/margin drag</td>
+              <td>Ex. N3, Ex. N4 (with ex-2022 line), Ex. N5, Ex. N26, New Ex. V3 (T1→T12 drift)</td>
+              <td class="num">950</td>
+            </tr>
+            <tr data-part="Part III">
+              <td><strong>Ch. 8 · Hedging: SRA, Loop &amp; Cap Mixes</strong></td>
+              <td>Ch. 8, Ch. 24</td>
+              <td><strong>A3</strong> Post-loop hedge ratios; <strong>A4</strong> quarterly R², energy-vs-cap hedging &amp; SRA+Cap 2-instrument frontier; <strong>B3</strong> conditional AER callout</td>
+              <td>Ex. N10, Ex. N11 (pre vs. post-loop), Ex. N12 (upgraded with SRA+Cap frontier)</td>
+              <td class="num">950</td>
+            </tr>
+            <tr data-part="Part III">
+              <td><strong>Ch. 9 · Benchmarks, Greeks &amp; Workbench</strong></td>
+              <td>Ch. 14, Ch. 23 (implied hours), Ch. 27</td>
+              <td><strong>A6</strong> Direction×horizon walk-forward + 3 smarter baselines; <strong>A9</strong> ex-ante option fix + Vega/frequency Greeks chart</td>
+              <td>Ex. N23 (clean labels + breakdown), Ex. N24, Ex. N25 (fixed), New Ex. V4 (Greeks), Workbench</td>
+              <td class="num">950</td>
+            </tr>
+            <tr data-part="Part IV">
+              <td><strong>Ch. 10 · 5-Layer Architecture &amp; Contracts</strong></td>
+              <td>Ch. 19, Ch. 25, Ch. 29</td>
+              <td>Resolves v1 Ch. 29 conflict; built-vs-unbuilt module inventory; 4-axis vintage schema; <strong>B2</strong> settlement rule dispatcher</td>
+              <td>Diagram D2 (5-Layer Architecture), Built vs. Unbuilt Module Matrix</td>
+              <td class="num">900</td>
+            </tr>
+            <tr data-part="Part IV">
+              <td><strong>Ch. 11 · Modelling Playbook (P, Q* &amp; CVaR)</strong></td>
+              <td>Ch. 18, Ch. 20, Ch. 21, Ch. 22, Ch. 23, Ch. 28</td>
+              <td><strong>B1</strong> Explicit dual entropy-pooling math + Stage 2 feature/tail specs; <strong>B4</strong> Stage 3 EnergyConnect &amp; storage depletion spec</td>
+              <td>Model Progression Ladder, Dual Entropy-Pooling Spec Box, Portfolio CVaR Spec</td>
+              <td class="num">1,200</td>
+            </tr>
+            <tr data-part="Part IV">
+              <td><strong>Ch. 12 · Validation Gates &amp; Staged Build Plan</strong></td>
+              <td>Ch. 26, Ch. 30, Ch. 31, Ch. 32</td>
+              <td>Fixes v1 Ch. 26 7-quarter contradiction; frozen auction-origin backtest spec; 6 ablations; decision-sheet schema &amp; limits</td>
+              <td>Diagram D3 (5-Stage Roadmap), Acceptance Gate Matrix, Decision-Sheet Template</td>
+              <td class="num">900</td>
+            </tr>
+            <tr data-part="Appendices">
+              <td><strong>Appendix A · Formula Reference</strong></td>
+              <td>Appendix A</td>
+              <td>Adds SRA $/unit split, CPT trigger, dual entropy pooling, and code-module cross-links</td>
+              <td>Consolidated KaTeX equation table</td>
+              <td class="num">350</td>
+            </tr>
+            <tr data-part="Appendices">
+              <td><strong>Appendix B · Technical Schema &amp; Reproducibility</strong></td>
+              <td>Relocated codes from Ch. 4–32 + README</td>
+              <td>Centralizes all 35 backticked filenames, MMS table codes, APCFLAG bitmasks, and exact CLI rebuild/pytest/QA commands</td>
+              <td>MMS Table Mapping, CLI Rebuild Block, Manifest Summary</td>
+              <td class="num">500</td>
+            </tr>
+            <tr data-part="Appendices">
+              <td><strong>Appendix C · Sources &amp; Review Changelog</strong></td>
+              <td>Ch. 33, Appendix B, Appendix C</td>
+              <td>Groups 55 sources into Virtual Barrels Tier 1/2/3 + Local Evidence; compact v1→v2→v3 audit log</td>
+              <td>Tiered Source Register + Compact Audit Table</td>
+              <td class="num">1,200</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 5: EXHIBITS & STYLING -->
+    <section id="exhibits" class="plan-section">
+      <div class="section-kicker">Section 05 · Exhibit Triage &amp; Visual Styling Contract</div>
+      <h2>Curating exhibits, adding four high-signal visuals, and keeping exact v2 styling</h2>
+      <p class="section-dek">Redundant and empty slots are retired while four targeted new exhibits (V1–V4) visualize the Tier A valuation upgrades. Every exhibit renders on a pure white <code>#ffffff</code> canvas inside the chapter that explains its mechanism.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Exhibit group</th>
+              <th>IDs</th>
+              <th>Disposition</th>
+              <th>Placement &amp; visual cleanup</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Core Ledger &amp; Auctions</strong></td>
+              <td>N1–N5, N26</td>
+              <td><span class="tag tag-keep">Keep Inline</span></td>
+              <td>N1–N2 in Ch. 2; N3–N5 &amp; N26 split across prose in Ch. 7 (max 2 charts before prose). Add ex-2022 overlay to N4 and 1-line <code>Units · Oct 2021–Jun 2026</code> subtitles.</td>
+            </tr>
+            <tr>
+              <td><strong>Hedging &amp; Benchmarks</strong></td>
+              <td>N10–N12, N20, N23–N25</td>
+              <td><span class="tag tag-keep">Upgrade Inline</span></td>
+              <td>N20 in Ch. 3; N10–N12 in Ch. 8 (add post-loop comparison to N11 and SRA+Cap curve to N12); N23–N25 in Ch. 9 with clean English y-axis labels on N23 and fixed ex-ante regime distribution on N25.</td>
+            </tr>
+            <tr>
+              <td><strong>Four New Valuation Exhibits</strong></td>
+              <td>V1, V2, V3, V4</td>
+              <td><span class="tag tag-new">New (Tier A)</span></td>
+              <td><strong>V1:</strong> SRA $/unit decomposition (loss surplus vs. energy vs. scarcity congestion, Ch. 2). <strong>V2:</strong> Loop 3-way haircut waterfall &amp; quarterly drift (Ch. 3). <strong>V3:</strong> T1→T12 tranche convergence &amp; credit-carry curve (Ch. 7). <strong>V4:</strong> Option Vega &amp; spike-frequency Greeks from <code>option_sensitivity.csv</code> (Ch. 9).</td>
+            </tr>
+            <tr>
+              <td><strong>Interactive Explorer &amp; Workbench</strong></td>
+              <td>Ex. 1–9, Workbench</td>
+              <td><span class="tag tag-keep">Embed Inline</span></td>
+              <td>Explorer (Ex. 1–4, 7–8) inside Ch. 4 defaulting to flagship <code>VIC → NSW · 2026 Q2</code>; Ex. 9 in Ch. 5; Workbench + Payoff Geometry in Ch. 9 beside worked example (plus top-nav jump links).</td>
+            </tr>
+            <tr>
+              <td><strong>Redundant &amp; Empty Slots</strong></td>
+              <td>Static Fig. 1, N13, N6–N7</td>
+              <td><span class="tag tag-retire">Retire / Conditional</span></td>
+              <td>Drop static matplotlib Fig. 1 (mismatched colors, duplicates Ex. 1) and N13 (duplicates Ex. 8). Replace empty N6–N7 boxes with one conditional <code>[!CONTEXT]</code> callout that auto-upgrades when AER CSVs are supplied.</td>
+            </tr>
+            <tr>
+              <td><strong>Structural Diagrams</strong></td>
+              <td>D1–D5</td>
+              <td><span class="tag tag-keep">Relocate Inline</span></td>
+              <td>D4 in Ch. 2, D5 in Ch. 3, D1 in Ch. 6, D2 in Ch. 10, D3 in Ch. 12.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Same-Styling Preservation Contract</h3>
+      <p>Every visual token from <code>institutional.css</code> is preserved verbatim, and the legacy <code>#ececf3</code> tinted plot background in <code>report_theme.py</code> is replaced with pure white <code>#ffffff</code> so static and interactive charts match the document canvas identically.</p>
+
+      <div class="swatch-row" aria-label="Preserved institutional color palette">
+        <div class="swatch"><div class="swatch-bar" style="background:#244e78"></div><strong>Primary Navy</strong><span>#244e78</span></div>
+        <div class="swatch"><div class="swatch-bar" style="background:#073c64"></div><strong>Deep Ink / Scarcity</strong><span>#073c64</span></div>
+        <div class="swatch"><div class="swatch-bar" style="background:#83b6d9"></div><strong>Energy Blue</strong><span>#83b6d9</span></div>
+        <div class="swatch"><div class="swatch-bar" style="background:#b08b42"></div><strong>Total / Gold</strong><span>#b08b42</span></div>
+        <div class="swatch"><div class="swatch-bar" style="background:#268a87"></div><strong>Context Teal</strong><span>#268a87</span></div>
+        <div class="swatch"><div class="swatch-bar" style="background:#b44d5e"></div><strong>Stress Crimson</strong><span>#b44d5e</span></div>
+      </div>
+
+      <ul>
+        <li><strong>Preserved layout tokens:</strong> Georgia serif masthead, Arial Narrow headings, Segoe UI body text, 1336px max-width grid, 4-column hairline metric strip, sticky right-hand TOC rail with live search, tabular numeric tables, and print/mobile breakpoints.</li>
+        <li><strong>Minimal additive CSS:</strong> Semantic <code>.vb-callout</code> boxes (<code>[!MECHANISM]</code>, <code>[!CONTEXT]</code>, <code>[!TAKEAWAY]</code>), inline narrative figure wrappers, and Part IV implementation spec cards matching the existing <code>.mechanism-panel</code> visual grammar.</li>
+      </ul>
+    </section>
+
+    <!-- SECTION 6: VIRTUAL BARRELS EDITORIAL RULES -->
+    <section id="editorial" class="plan-section">
+      <div class="section-kicker">Section 06 · Editorial &amp; Quality Enforcement</div>
+      <h2>Virtual Barrels writing standards and automated lint gates</h2>
+      <p class="section-dek">Every chapter is authored strictly against the <code>virtual-barrels-analysis</code> skill and verified automatically before publication.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Virtual Barrels Rule</th>
+              <th>Operational Standard for v3</th>
+              <th>Automated Gate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1. Plumbing Before Prices</strong></td>
+              <td>Explain dispatch rules, loss factors, pooling, CPT ceilings, and constraints before citing spreads, ratios, or returns.</td>
+              <td>Four-part outline order verified across Ch. 1–12</td>
+            </tr>
+            <tr>
+              <td><strong>2. Quantified Calm</strong></td>
+              <td>Zero exclamation marks in prose, zero banned hype or desk slang, target 0 em-dashes (prefer commas, colons, parentheses, or crisp sentences).</td>
+              <td><code>lint_virtual_barrels.py --strict-emdash</code> (stripping math <code>\!</code> and App. C author surnames)</td>
+            </tr>
+            <tr>
+              <td><strong>3. Natural Exhibit Integration</strong></td>
+              <td>Zero sentence-leading chart narration (<code>Exhibit N12 turns...</code>, <code>Figure 1 shows...</code>). Explain the mechanism in prose; place the exhibit right below.</td>
+              <td>Extended regex covering <code>Exhibit N\d+</code>/<code>V\d+</code> + DOM check for zero 3+ consecutive bare figures</td>
+            </tr>
+            <tr>
+              <td><strong>4. Zero Code Leakage in Prose</strong></td>
+              <td>Zero filenames (<code>.csv</code>, <code>.json</code>, <code>.py</code>, <code>.md</code>) and zero backticked MMS table/field codes in Chapters 1–12. All technical identifiers live in Appendix B.</td>
+              <td>Zero backticked file/table tokens in Ch. 1–12 Markdown source</td>
+            </tr>
+            <tr>
+              <td><strong>5. Plain-English Chronology &amp; Labels</strong></td>
+              <td>Uniform spaced quarters (<code>2024 Q4</code>) or clean spans (<code>October 2021–June 2026</code>); full season names; human-readable Plotly axis labels (zero snake_case).</td>
+              <td>Custom check in <code>qa_report.cjs</code> scanning Plotly trace/axis strings and Markdown text</td>
+            </tr>
+            <tr>
+              <td><strong>6. Exact Evidence Binding</strong></td>
+              <td>Every statistic binds to <code>evidence/headline_numbers.json</code> via template tokens so prose cannot drift from computed CSVs.</td>
+              <td>Build fails on any unfilled <code>{{token}}</code> or reconciliation test failure</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 7: BEFORE / AFTER SPECIMENS -->
+    <section id="specimens" class="plan-section">
+      <div class="section-kicker">Section 07 · Concrete Rewrite Specimens</div>
+      <h2>Before and after: how Virtual Barrels prose and deeper valuation mechanics combine</h2>
+      <p class="section-dek">Three representative passages from version 2 paired with their planned version 3 Virtual Barrels rewrites.</p>
+
+      <h3>Specimen 1 · Removing code leakage &amp; framing settlement plumbing first (Ch. 6 → v3 Ch. 2)</h3>
+      <div class="specimen-grid">
+        <div class="specimen-card before">
+          <div class="specimen-label"><span>Current v2 prose</span><span>Lines 185–197</span></div>
+          <p>Here &theta;<sub>Q</sub> is the unit proportion for the delivery quarter, from AEMO's <code>AUCTION_IC_ALLOCATIONS</code> table (for example, one VICNSW unit is 1/1,500 of the pool). For 56 early quarter-directions the table predates the download window, so the published maximum units are used.</p>
+          <p>AEMO publishes settled residue per interconnector, region and interval (<code>SETIRSURPLUS</code>). The residue sits in the exporting region's row.</p>
+          <div class="specimen-meta">Issues: Raw MMS table names in narrative; mechanical tone; omits the $/unit energy vs. scarcity vs. loss breakdown.</div>
+        </div>
+        <div class="specimen-card after">
+          <div class="specimen-label"><span>Target v3 Virtual Barrels prose</span><span>Part I · Ch. 2</span></div>
+          <p>Under pre-loop NEM settlement rules, a directional interconnector pools its regulated physical assets (such as Heywood with Murraylink, or QNI with Terranora) and accrues residue each five-minute interval from metered regional flows and dated inter-regional loss shares. Only positive intervals enter the distributable pool; negative intervals are recovered separately from the importing region's transmission network.</p>
+          <p>Each SRA unit entitles its holder to a contractual fraction of that quarterly pool under AEMO's dated unit-allocation register (1/1,500 per VICNSW unit, with published maximum unit counts covering 56 early quarter-directions prior to the archived register window). Metered reconstructions reconcile within 0.03% on northbound VNI and -0.09% on northbound QNI, allowing the settled pool to be decomposed cleanly into coupled loss surplus, sub-$300 energy congestion, and scarcity congestion dollars per unit.</p>
+          <div class="specimen-meta">Improvements: Plumbing first; zero code leaks (relocated to App. B); leads straight into new Exhibit V1 ($/unit decomposition).</div>
+        </div>
+      </div>
+
+      <h3>Specimen 2 · Eliminating robotic chart narration &amp; deepening hedge mechanics (Ch. 8 → v3 Ch. 8)</h3>
+      <div class="specimen-grid">
+        <div class="specimen-card before">
+          <div class="specimen-label"><span>Current v2 prose</span><span>Lines 348–356</span></div>
+          <p>The mechanism is visible in the flows. When NSW is above $300, mean northward VNI flow is 364 MW, against 391 MW otherwise: the interconnector does not deliver more when it matters.</p>
+          <p>Exhibit N12 turns this into a cost–risk frontier. A desk short 1 MW of spread buys units at each quarter's clearing price.</p>
+          <div class="specimen-meta">Issues: Robotic chart-leading sentence; detached from top gallery; omits quarterly R², post-loop hedge firmness, and SRA+Cap replication.</div>
+        </div>
+        <div class="specimen-card after">
+          <div class="specimen-label"><span>Target v3 Virtual Barrels prose</span><span>Part III · Ch. 8</span></div>
+          <p>Hedge firmness diverges across interconnectors because physical transfer limits respond differently to destination-region scarcity. When New South Wales prices exceed $300/MWh, mean northward VNI flow drops from 391 MW to 364 MW as thermal, voltage, and transient-stability limits bind. One VICNSW unit replicates 0.41 MW of flat spread across all 256 weeks, but only 0.15 MW-equivalent during the ten highest-spread weeks. Separating the underlying exposure clarifies why: VICNSW units hedge the sub-$300 capped-energy spread far more reliably than the $300 cap tail.</p>
+          <p>Pairing VICNSW units with a fractional New South Wales $300 cap shifts the 95% CVaR cost-risk frontier sharply inward compared with an SRA-only hedge, while re-evaluating the same portfolio under post-November 2026 net-trade loop allocations shows how pass-through reallocation alters required unit counts.</p>
+          <div class="specimen-meta">Improvements: Exact causal chain; introduces inline Exhibits N10–N12 with SRA+Cap and post-loop upgrades; zero robotic narration.</div>
+        </div>
+      </div>
+
+      <h3>Specimen 3 · Replacing contradictory v1 text with a buildable engineering spec (Ch. 26 &amp; 29 → v3 Ch. 10 &amp; 12)</h3>
+      <div class="specimen-grid">
+        <div class="specimen-card before">
+          <div class="specimen-label"><span>Current v2 prose (contradictory v1 splice)</span><span>Lines 791 &amp; 855</span></div>
+          <p>The current two-year local price panel supplies only seven complete quarters... The new descriptive script and CSVs in this report folder can seed the event and payoff layer. They do not change any production model, fetch market quotes or implement exact SRA settlement.</p>
+          <div class="specimen-meta">Issues: Directly contradicts v2's 19-quarter panel and reconciled settlement engine; unusable as an engineering handoff.</div>
+        </div>
+        <div class="specimen-card after">
+          <div class="specimen-label"><span>Target v3 Virtual Barrels prose + Spec Block</span><span>Part IV · Ch. 10 &amp; 12</span></div>
+          <p>Stage 1 (the 19-quarter five-minute panel, reconciled pre-loop settlement ledger, and AEMC net-trade loop calculator) and the auction leg of Stage 4 are complete and unit-tested inside the valuation package. Three bounded engineering deliverables remain for live quarterly valuation: Stage 2 (calibrated quarter-horizon energy and joint-spike scenario generation), Stage 3 (structural storage, outage, and post-EnergyConnect dispatch sensitivities), and Stage 4b/5 (timestamped base-and-cap futures ingestion, dual entropy pooling, and frozen prospective scoring).</p>
+          <div class="specimen-meta">Improvements: Zero contradictions; explicit built-vs-remaining worklist tied directly to validation acceptance gates.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 8: IMPLEMENTATION BLUEPRINT & PIPELINE -->
+    <section id="pipeline" class="plan-section">
+      <div class="section-kicker">Section 08 · Implementation Usability &amp; Build Pipeline</div>
+      <h2>Making Part IV directly buildable and upgrading the report pipeline</h2>
+      <p class="section-dek">Part IV serves as an unambiguous engineering blueprint, while the report pipeline upgrades to modular chapters, inline exhibit weaving, and automated Virtual Barrels linting.</p>
+
+      <h3>What Part IV Will Specify for Your Implementation</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Implementation Pillar</th>
+              <th>Already Built (<code>nemic/valuation/</code>)</th>
+              <th>Actionable v3 Engineering Spec to Document</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1. Data &amp; Vintage Contracts</strong></td>
+              <td><code>acquire.py</code>, <code>panel.py</code>, <code>config.py</code> (5-min prices, flows, losses, auctions)</td>
+              <td>4-axis timestamp schema (<code>delivery_end</code>, <code>issue_time</code>, <code>receipt_time</code>, <code>revision_time</code>), as-of join rules, and AER/ASX quote contract.</td>
+            </tr>
+            <tr>
+              <td><strong>2. Settlement &amp; Rule Registry</strong></td>
+              <td><code>settlement.py</code>, <code>loop.py</code>, <code>sra_unit_registry.csv</code>, <code>scenario_registry.json</code></td>
+              <td>Effective-dated dispatcher (Pre-loop vs. Oct 2026 dispatch vs. Nov 2026 net-trade loop vs. Basslink Jul 2026), unit-dilution table (QNI 2027 Q2), and fee/credit-support cashflow schedule.</td>
+            </tr>
+            <tr>
+              <td><strong>3. Quarter Scenario &amp; Price Models</strong></td>
+              <td><code>valuation_tests.py</code> (walk-forward baselines &amp; Bachelier option benchmark)</td>
+              <td>Concrete Stage 2 build spec: 7-day spatial weather blocks, clipped-energy GAM/GBDT features, 4-state semi-Markov spike hazard + duration + GPD tail respecting delivery-year MPC × CPT ceilings.</td>
+            </tr>
+            <tr>
+              <td><strong>4. Calibration &amp; Portfolio Sizing</strong></td>
+              <td><code>market.py</code> (auction premia, weekly CVaR frontier)</td>
+              <td>Explicit dual entropy-pooling optimization algorithm (calibrate to base + cap quotes, hold SRA prices out, monitor <code>N_eff</code>) and multi-instrument CVaR hedge solver (SRA + Base + Cap).</td>
+            </tr>
+            <tr>
+              <td><strong>5. Validation &amp; Acceptance Gates</strong></td>
+              <td><code>tests/test_valuation_*.py</code> (settlement &amp; evidence tests)</td>
+              <td>Frozen auction-origin backtest harness (direction × horizon), beating clearing-price MAE plus debiased/outage baselines, 6 paired ablations, and go/no-go readiness checklist.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Code &amp; Build Pipeline Upgrades (v2 → v3)</h3>
+      <ul>
+        <li><strong>Extend <code>nemic/valuation/</code> cleanly for Tier A analyses:</strong> Add non-breaking calculation helpers (SRA $/unit split, ex-2022 + T1→T12 auction drift, 3-way loop waterfall + loop hedging, quarterly &amp; SRA+Cap hedge frontier, CPT-aware MPC normalization, disaggregated walk-forward + 3 smarter baselines, ex-ante option benchmark fix, pro-forma Basslink backcast, and bid-stack slippage) with unit tests in <code>tests/test_valuation_*.py</code>.</li>
+        <li><strong>Modular chapter sources:</strong> Replace <code>research_report.template.md</code> and all 18 <code>{{include_v1}}</code> calls with ordered Markdown files (<code>chapters/00_front.md</code> through <code>12_validation.md</code> + <code>appendices/A–C</code>) keeping 100% numeric templating from <code>evidence/headline_numbers.json</code>.</li>
+        <li><strong>Inline exhibit &amp; callout directives:</strong> Extend <code>convert_markdown.mjs</code> and <code>build_html.py</code> to support <code>{{exhibit:id}}</code>, <code>{{diagram:id}}</code>, <code>{{interactive:id}}</code>, and <code>&gt; [!MECHANISM]</code> / <code>[!CONTEXT]</code> / <code>[!TAKEAWAY]</code> callouts natively.</li>
+        <li><strong>Unified automated QA:</strong> Wire <code>lint_virtual_barrels.py --strict-emdash</code> (with math/citation exclusions), snake_case Plotly label checks, consecutive-exhibit checks, Playwright desktop/mobile/print verification, and normalized SHA-256 manifest generation into one reproducible build pass.</li>
+      </ul>
+    </section>
+
+    <!-- SECTION 9: EXECUTION ROADMAP -->
+    <section id="roadmap" class="plan-section">
+      <div class="section-kicker">Section 09 · Execution Sequence</div>
+      <h2>Five-phase build roadmap and verification gates</h2>
+      <p class="section-dek">Tier A analytical upgrades run quickly against the already-cached local parquet tables, followed by chart hygiene, full Virtual Barrels narrative rewriting, and automated verification.</p>
+
+      <ol class="roadmap">
+        <li>
+          <b>1. Tier A Analytics &amp; Fixes</b>
+          <span>Implement approved Tier A calculations (A1–A9) and fix the 4 subtle script defects in <code>nemic/valuation/</code>; add regression tests and regenerate <code>evidence/</code>.</span>
+        </li>
+        <li>
+          <b>2. Harness &amp; Chart Hygiene</b>
+          <span>Scaffold target folder (leaving v2 frozen); add inline exhibit and callout directives; clean N23 labels, add 1-line subtitles, enforce <code>#ffffff</code> canvas, and add Exhibits V1–V4.</span>
+        </li>
+        <li>
+          <b>3. Rewrite Parts I–III</b>
+          <span>Draft Chapters 1–9 from scratch in Virtual Barrels voice, binding every number to <code>headline_numbers.json</code>, weaving exhibits inline, and removing all prose code leaks.</span>
+        </li>
+        <li>
+          <b>4. Write Part IV &amp; Apps</b>
+          <span>Author Chapters 10–12 engineering runbook (worked entropy pooling, Stage 2–5 contracts, acceptance gates) and Appendices A–C (formulas, MMS schemas, tiered sources).</span>
+        </li>
+        <li>
+          <b>5. Lint, QA &amp; Sign-Off</b>
+          <span>Run Virtual Barrels lint (exit 0), <code>python -m pytest -q</code>, offline build, Playwright desktop/mobile/print QA, visual PNG inspection, and manifest hashing.</span>
+        </li>
+      </ol>
+
+      <div class="vb-callout takeaway">
+        <span class="vb-callout-title">Takeaway · Six-Gate Completion Standard</span>
+        <p>Version 3 is declared complete only when all six gates pass: (1) zero unfilled numeric tokens against <code>headline_numbers.json</code>; (2) zero KaTeX errors; (3) Virtual Barrels prose lint exits 0 with zero code leaks in Chapters 1–12; (4) zero 3+ consecutive bare exhibits and zero snake_case chart labels; (5) Playwright confirms zero console errors, zero external requests, and zero horizontal overflow at 1440px and 390px; and (6) <code>python -m pytest -q</code> passes including new tests for Tier A analytics and script fixes.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 10: DECISIONS FOR USER ASSESSMENT -->
+    <section id="decisions" class="plan-section">
+      <div class="section-kicker">Section 10 · Your Assessment Checklist</div>
+      <h2>Seven scoping decisions to confirm before execution</h2>
+      <p class="section-dek">Review and select your preferred option for each decision below. Your choices populate the copyable summary block at the bottom so you can approve or tweak the scope in one reply.</p>
+
+      <div class="decision-list">
+        <div class="decision-card">
+          <div class="decision-head">
+            <h4>1. Analytical Depth Scope (Tier A Local Upgrades + Script Fixes)</h4>
+            <span class="tag tag-new">Recommended: Option A</span>
+          </div>
+          <div class="decision-options">
+            <label class="opt-label">
+              <input type="radio" name="d1" value="Compute all 9 Tier A local-data upgrades (A1-A9) + fix all 4 valuation script defects" checked>
+              <div><strong>Option A · Full Tier A analytical upgrade + bug fixes (Recommended)</strong>Run all 9 locally computable analyses (SRA $/unit split, ex-2022 &amp; T1→T12 drift, 3-way loop waterfall &amp; loop hedging, quarterly + SRA+Cap frontier, CPT-aware MPC, diurnal residue, disaggregated walk-forward, 2027 Q2 dilution &amp; Basslink backcast) and fix the 4 script flaws.</div>
+            </label>
+            <label class="opt-label">
+              <input type="radio" name="d1" value="Rewrite report structure & prose only on frozen v2 CSVs (no new calculations)">
+              <div><strong>Option B · Prose &amp; structure rewrite only on existing v2 CSVs</strong>Leave <code>nemic/valuation/</code> untouched and only rewrite/restructure the report using existing v2 CSVs (documenting Tier A items as future work).</div>
+            </label>
+          </div>
+        </div>
+
+        <div class="decision-card">
+          <div class="decision-head">
+            <h4>2. Output Folder &amp; Manifest Preservation</h4>
+            <span class="tag tag-new">Recommended: Option A</span>
+          </div>
+          <div class="decision-options">
+            <label class="opt-label">
+              <input type="radio" name="d2" value="Create new reports/interregional_valuation_research_v3/ (keep v2 frozen)" checked>
+              <div><strong>Option A · New v3 folder (Recommended)</strong>Create <code>reports/interregional_valuation_research_v3/</code> so <code>interregional_valuation_research_v2/</code> and its SHA-256 manifest remain untouched as the prior baseline.</div>
+            </label>
+            <label class="opt-label">
+              <input type="radio" name="d2" value="Rewrite interregional_valuation_research_v2/ in place">
+              <div><strong>Option B · Rewrite v2 in place</strong>Update files directly inside <code>interregional_valuation_research_v2/</code> and regenerate its manifest.</div>
+            </label>
+          </div>
+        </div>
+
+        <div class="decision-card">
+          <div class="decision-head">
+            <h4>3. Strategic Behaviour Pilot (Currently Only 4 Calendar Days)</h4>
+            <span class="tag tag-new">Recommended: Option A</span>
+          </div>
+          <div class="decision-options">
+            <label class="opt-label">
+              <input type="radio" name="d3" value="Demote 4-day bid-stack pilot to a transparently caveated note in Ch. 6 / App. B (fast, honest)" checked>
+              <div><strong>Option A · Transparently scope &amp; demote 4-day pilot (Recommended)</strong>Keep the existing 4-day NSW/SA offer-steepness result clearly labeled as an exploratory two-day-per-region diagnostic in Ch. 6 rather than overclaiming from missing archive months.</div>
+            </label>
+            <label class="opt-label">
+              <input type="radio" name="d3" value="Expand strategic_pilot() to >=20 separation days across NSW, SA & QLD (requires NEMWEB bid downloads)">
+              <div><strong>Option B · Expand pilot to 20+ days across NSW, SA &amp; QLD</strong>Fix missing <code>BIDPEROFFER_D</code> archive months and re-run across a statistically meaningful multi-season separation sample (heavier download/compute).</div>
+            </label>
+          </div>
+        </div>
+
+        <div class="decision-card">
+          <div class="decision-head">
+            <h4>4. Exhibit Consolidation &amp; New Visuals (V1–V4)</h4>
+            <span class="tag tag-new">Recommended: Option A</span>
+          </div>
+          <div class="decision-options">
+            <label class="opt-label">
+              <input type="radio" name="d4" value="Retire duplicate Fig. 1 & N13, make N6-N7 conditional callout, add new Exhibits V1-V4 inline" checked>
+              <div><strong>Option A · Curate inline + add Exhibits V1–V4 (Recommended)</strong>Drop duplicate Fig. 1 and N13, convert empty N6–N7 boxes to a conditional callout, weave all surviving exhibits inline, and add V1–V4 for the new valuation analytics.</div>
+            </label>
+            <label class="opt-label">
+              <input type="radio" name="d4" value="Retain all 39 v2 exhibit slots verbatim, woven inline">
+              <div><strong>Option B · Keep all 39 v2 slots verbatim</strong>Keep every v2 chart slot (including Fig. 1, N13, and empty N6–N7 boxes) while moving them inline into chapters.</div>
+            </label>
+          </div>
+        </div>
+
+        <div class="decision-card">
+          <div class="decision-head">
+            <h4>5. Narrative Length &amp; Academic Literature Compression</h4>
+            <span class="tag tag-new">Recommended: Option A</span>
+          </div>
+          <div class="decision-options">
+            <label class="opt-label">
+              <input type="radio" name="d5" value="Crisp 10,000-11,500 words across 12 chapters (distill literature into concrete model choices)" checked>
+              <div><strong>Option A · Crisp 10,000–11,500 words (Recommended)</strong>Distill the 1,112-word academic literature review into concrete Part IV engineering choices while retaining all 55 citations in Appendix C. Cuts filler while adding Tier A/B valuation depth.</div>
+            </label>
+            <label class="opt-label">
+              <input type="radio" name="d5" value="Preserve exhaustive ~15,000+ word paper-by-paper literature prose">
+              <div><strong>Option B · Exhaustive paper-by-paper review</strong>Rewrite the entire 15,000+ word narrative while retaining standalone summaries of every academic paper in the main body.</div>
+            </label>
+          </div>
+        </div>
+
+        <div class="decision-card">
+          <div class="decision-head">
+            <h4>6. Depth of Part IV Implementation Runbook (Including Dual Entropy Pooling)</h4>
+            <span class="tag tag-new">Recommended: Option A</span>
+          </div>
+          <div class="decision-options">
+            <label class="opt-label">
+              <input type="radio" name="d6" value="Full build-ready engineering spec (4-axis schemas, dual entropy-pooling math, Stage 2-5 contracts & gates)" checked>
+              <div><strong>Option A · Build-ready engineering spec (Recommended)</strong>Include concrete module I/O contracts, 4-time-axis vintage schemas, explicit dual entropy-pooling math, Stage 2–3 modeling recipes, and go/no-go acceptance gates tied to <code>nemic/valuation/</code>.</div>
+            </label>
+            <label class="opt-label">
+              <input type="radio" name="d6" value="High-level conceptual architecture summary only">
+              <div><strong>Option B · Conceptual architecture only</strong>Keep Part IV at a research-roadmap level without explicit schemas or optimization algorithms.</div>
+            </label>
+          </div>
+        </div>
+
+        <div class="decision-card">
+          <div class="decision-head">
+            <h4>7. Interactive Explorer &amp; Workbench Placement</h4>
+            <span class="tag tag-new">Recommended: Option A</span>
+          </div>
+          <div class="decision-options">
+            <label class="opt-label">
+              <input type="radio" name="d7" value="Embed Historical Explorer in Ch. 4 and Valuation Workbench in Ch. 9 (plus topnav quick-links)" checked>
+              <div><strong>Option A · Contextual inline placement (Recommended)</strong>Place the Historical Explorer inside Chapter 4 and the Valuation Workbench inside Chapter 9 beside the worked example, with top-nav jump links for instant access.</div>
+            </label>
+            <label class="opt-label">
+              <input type="radio" name="d7" value="Keep interactive tools pinned in a dedicated top Interactive Labs band above Part I">
+              <div><strong>Option B · Pin interactive tools at top</strong>Keep the Historical Explorer and Valuation Workbench in a dedicated top band, and weave static/Plotly exhibits inline across Parts I–IV.</div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="decision-summary">
+        <strong>Selected Upgrade Configuration (ready to confirm):</strong>
+        <pre id="decisionOutput"></pre>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- STICKY READING RAIL -->
+  <aside class="plan-rail" aria-label="Plan outline">
+    <div class="rail-label">Upgrade Plan Outline</div>
+    <nav class="toc">
+      <a href="#audit">01 · Structural &amp; Prose Audit</a>
+      <a href="#gaps">02 · Missing Valuation Analysis</a>
+      <a href="#architecture">03 · Target 4-Part Architecture</a>
+      <a href="#mapping">04 · 37-to-12 Chapter Map</a>
+      <a href="#exhibits">05 · Exhibits &amp; Styling Contract</a>
+      <a href="#editorial">06 · Virtual Barrels Rules</a>
+      <a href="#specimens">07 · Before / After Specimens</a>
+      <a href="#pipeline">08 · Part IV Spec &amp; Pipeline</a>
+      <a href="#roadmap">09 · 5-Phase Build Roadmap</a>
+      <a href="#decisions">10 · Assessment Decisions (7)</a>
+    </nav>
+    <div class="rail-box">
+      <strong>Deep Code Audit Included</strong>
+      Inspected <code>settlement.py</code>, <code>loop.py</code>, <code>market.py</code>, <code>mechanisms.py</code>, <code>evidence.py</code>, <code>valuation_tests.py</code>, and all core <code>evidence/*.csv</code> outputs.
+    </div>
+    <div class="rail-box">
+      <strong>Source Skill Audited</strong>
+      <code>virtual-barrels-analysis</code> (<code>SKILL.md</code>, voice guide, sourcing guide, and automated linter).
+    </div>
+    <div class="rail-box">
+      <strong>Baseline Untouched</strong>
+      Zero files inside <code>interregional_valuation_research_v2/</code> have been altered.
+    </div>
+  </aside>
+</div>
+
+<footer class="footer">
+  <span>IC Flow Forecasting · Electricity Research · Report Upgrade Plan (v2 → v3, Expanded with Analytical Gap Audit)</span>
+  <span>Prepared for assessment prior to execution · Self-contained offline HTML</span>
+</footer>
+
+<a class="back-top" href="#top" aria-label="Back to top">↑ Top</a>
+
+</main>
+<script>
+'use strict';
+(function(){
+  var printBtn = document.getElementById('printPlan');
+  if (printBtn) printBtn.addEventListener('click', function(){ window.print(); });
+
+  var btns = Array.prototype.slice.call(document.querySelectorAll('.filter-btn'));
+  var rows = Array.prototype.slice.call(document.querySelectorAll('#chapterMapTable tbody tr'));
+  var countEl = document.getElementById('mapCount');
+  btns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      btns.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var f = btn.getAttribute('data-filter');
+      var shown = 0;
+      rows.forEach(function(r){
+        var match = f === 'all' || r.getAttribute('data-part') === f;
+        r.style.display = match ? '' : 'none';
+        if (match) shown += 1;
+      });
+      if (countEl) countEl.textContent = 'Showing ' + shown + ' target unit' + (shown === 1 ? '' : 's');
+    });
+  });
+
+  var out = document.getElementById('decisionOutput');
+  function updateDecisions(){
+    var picks = ['d1','d2','d3','d4','d5','d6','d7'].map(function(name, idx){
+      var el = document.querySelector('input[name="' + name + '"]:checked');
+      return (idx + 1) + '. ' + (el ? el.value : '');
+    });
+    if (out) out.textContent = picks.join('\n');
+  }
+  Array.prototype.slice.call(document.querySelectorAll('.decision-card input[type="radio"]')).forEach(function(inp){
+    inp.addEventListener('change', updateDecisions);
+  });
+  updateDecisions();
+
+  var tocLinks = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+  var sections = Array.prototype.slice.call(document.querySelectorAll('.plan-section[id]'));
+  if ('IntersectionObserver' in window && sections.length){
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){
+          tocLinks.forEach(function(a){
+            a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id);
+          });
+        }
+      });
+    }, {rootMargin: '-12% 0px -70% 0px'});
+    sections.forEach(function(s){ obs.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>
