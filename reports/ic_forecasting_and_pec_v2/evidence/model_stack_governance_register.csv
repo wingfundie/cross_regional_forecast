@@ -1,0 +1,11 @@
+workstream,stack,status,evidence_exists,permitted_claim,unresolved_gate
+Six-link conditional backtest,original,completed,True,Conditional performance using realised future fundamentals,"['Live issue-time evaluation', 'Interval calibration']"
+VNI diurnal/NOS v2,experiments,completed_research,True,Retrospective rolling development evidence,"['Receipt-time feed', 'Prospective confirmation', 'Interval calibration']"
+QNI diurnal/NOS v2,experiments,completed_research,True,Retrospective rolling development evidence,"['Mixed cell skill', 'Prospective confirmation', 'Interval calibration']"
+QNI/VNI fundamentals v3,experiments,report_preserved_ledger_revalidation_required,True,Preserved historical report using publication proxies,"['Ledger stage revalidation', 'Measured receipt', 'Risk gates', 'Full lead coverage']"
+QNI/VNI clustering v1,experiments,completed_report_validated,True,Historical development using publication proxies,"['Representative browser layout review', 'Prospective confirmation']"
+NOS outage regimes,experiments,completed_research,True,Retrospective matched historical associations,"['Measured receipt replay', 'Forward incident confirmation']"
+NOS mechanics/outlook,experiments,completed_research,True,Retrospective mechanics and historical research outlook,"['Forward booking reliability', 'Unsupported-cell calibration']"
+Interregional valuation v2,valuation,completed_research,True,"Historical settlement, auction and hedge research","['Issue-time flow regimes', 'Automatic futures history', 'Prospective valuation']"
+QNI/VNI long-range v1,experiments,completed_research_no_promotion,True,Original-vintage historical development found no promotable challenger,['Prospective outcomes and scorecard']
+Production scaffold,production,research_shadow_schedules_paused,True,Offline provider-neutral routing scaffold,"['Prospective scorecard', 'Explicit model promotion review']"

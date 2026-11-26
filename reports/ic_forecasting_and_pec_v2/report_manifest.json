@@ -1,0 +1,35 @@
+{
+  "editorial_standard": "virtual-barrels-analysis",
+  "output": "IC_Forecasting_and_PEC_v2.html",
+  "output_sha256": "68bb7da76af7ed5a5e93046f0e8d8b417bbeadf8ea2d5d508a8d1d29eee5edc2",
+  "bytes": 5518830,
+  "chapters_and_appendices": 10,
+  "katex_formulas": 89,
+  "inline_plotly_exhibits": 10,
+  "diagrams": 3,
+  "directory_widgets": 2,
+  "words_md": 11537,
+  "hash_convention": "SHA-256 of file bytes with CRLF normalised to LF for text files",
+  "evidence_sha256": {
+    "clustering_stability_summary.csv": "86e1debeee4ade868d3e82bd8c129cfba84a45fcb152f86aee9fc8e758003842",
+    "clustering_vs_controls.csv": "d341039ba1bb137da8c7e20e19a2e1e5cce69fcae1a9c3df8d0a358e8a3be6aa",
+    "headline_numbers.json": "cc713902d8c8956c8ad23c32ba6878cbb4e0320178efbe5574de3e03f91c660e",
+    "longrange_band_verdict.csv": "6c04f21bd2cd994b6e6b4aa0d0a7aa50deb3a6ab51f875c9aee2534159a75fb1",
+    "longrange_cell_decisions.csv": "f71ccaa856ee69928cee46b1ae5664fade91f33c831b541c88b34275143e6312",
+    "model_stack_governance_register.csv": "59e072e8a84654c27dbc549b885b45e5179fe9664d4e039b1442306eb942990c",
+    "pec_issue_time_forecast_scores.csv": "cafbc5665688131087ed828eae30c9cbaed8c8da5b3c20ef9fb71ad72ef6f5f2",
+    "pec_loop_settlement_bridge.csv": "4918cb3407a521a069b62044b78f38933ad944593781ee170e57560e81d9e713",
+    "pec_observed_configs.csv": "0e731f515f152770b6dce9aba5db97ea95bdcce1423599611b0eddd7a6cd8d97",
+    "pec_southern_ring_coupling.csv": "c6992c2e8daf5ee56224331667b3451f350028975faf76c16432adf4986994c8"
+  },
+  "code_sha256": {
+    "nemic/experiments/ic_forecasting_pec_v2.py": "250cf222746feec7fb29776630df3d209145fa432529e50c3587fa44aba18707",
+    "nemic/valuation/loop.py": "351591f6f790dc8c0c8fb527b1d43811a08ebcc16979638c09dcc24661d512f2",
+    "nemic/experiments/vb_report_kit.py": "f460481c336cc257aabdb2238211a67748a875b887f6cdb9583f5f05b5b0f716"
+  },
+  "dependencies": {
+    "plotly": "6.2.0",
+    "katex": "0.16.22",
+    "marked": "15.0.12"
+  }
+}

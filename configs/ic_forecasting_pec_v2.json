@@ -1,0 +1,26 @@
+{
+  "campaign": "ic_forecasting_and_pec_v2",
+  "study_window": {
+    "pec_observed_start": "2026-10-01 00:05:00",
+    "pec_observed_end": "2026-11-23 00:00:00",
+    "loop_panel_start": "2024-09-01 00:05:00",
+    "loop_panel_end": "2026-08-31 23:55:00",
+    "timezone": "UTC+10"
+  },
+  "inputs": {
+    "pec_dispatch_ic": "data/pec_limits_v1/dispatch_interconnectorres.parquet",
+    "pec_half_hour": "data/pec_limits_v1/half_hour.parquet",
+    "pec_predispatch": "data/pec_limits_v1/forecast_rows_predispatch.parquet",
+    "pec_stpasa": "data/pec_limits_v1/forecast_rows_stpasa.parquet",
+    "prices_parquet": "data/valuation_v2/panel/prices.parquet",
+    "interconnectors_parquet": "data/valuation_v2/panel/interconnectors.parquet",
+    "verdict_band_metrics": "reports/forward_forecasting_verdict_20261005/downloads/band_metrics.csv",
+    "verdict_cell_results": "reports/forward_forecasting_verdict_20261005/downloads/cell_results.csv",
+    "cluster_effects": "reports/qni_vni_clustering_v1/downloads/forecast_effects.csv",
+    "cluster_stability": "reports/qni_vni_clustering_v1/downloads/state_stability.csv",
+    "research_register": "docs/RESEARCH_REGISTER.json"
+  },
+  "outputs": {
+    "evidence_dir": "reports/ic_forecasting_and_pec_v2/evidence"
+  }
+}
