@@ -1,0 +1,15 @@
+product,method,n,economic_bind,economic_episodes,confirmed_bind,missed_bind,uncertain_bind,false_alert,uncertain,clear,band,band_covered,issued_economic_true_positive,issued_economic_false_positive,issued_economic_false_negative
+P5MIN,RHS persistence,72.0,7.0,3.0,0.0,0.0,7.0,0.0,23.0,49.0,241.97244999999987,47.0,7.0,11.0,0.0
+P5MIN,clock RHS profile,72.0,7.0,3.0,0.0,0.0,7.0,0.0,23.0,49.0,257.53841466666677,41.0,7.0,11.0,0.0
+P5MIN,issued AEMO RHS,72.0,7.0,3.0,0.0,0.0,7.0,0.0,25.0,47.0,260.30934,54.0,7.0,11.0,0.0
+P5MIN,issued flow and local load with total demand,72.0,7.0,3.0,0.0,0.0,7.0,0.0,25.0,47.0,260.30949385145664,54.0,7.0,11.0,0.0
+P5MIN,"issued flow, local load and adjusted regional demand",72.0,7.0,3.0,0.0,0.0,7.0,0.0,21.0,51.0,231.8989890626358,43.0,7.0,11.0,0.0
+P5MIN,regional forecast change from observed RHS,72.0,7.0,3.0,0.0,0.0,7.0,0.0,23.0,49.0,243.95776405234687,52.0,7.0,11.0,0.0
+P5MIN,regional forecast with clock flow and fixed load share,72.0,7.0,3.0,0.0,0.0,7.0,0.0,23.0,49.0,244.3111596635515,54.0,7.0,11.0,0.0
+PREDISPATCHIS,RHS persistence,72.0,7.0,3.0,0.0,7.0,0.0,0.0,0.0,72.0,696.07492,38.0,0.0,0.0,7.0
+PREDISPATCHIS,clock RHS profile,72.0,7.0,3.0,0.0,7.0,0.0,0.0,0.0,72.0,707.1969446666667,38.0,0.0,0.0,7.0
+PREDISPATCHIS,issued AEMO RHS,72.0,7.0,3.0,0.0,7.0,0.0,0.0,0.0,72.0,697.61322,39.0,0.0,0.0,7.0
+PREDISPATCHIS,issued flow and local load with total demand,72.0,7.0,3.0,0.0,7.0,0.0,0.0,0.0,72.0,697.0443751111111,39.0,0.0,0.0,7.0
+PREDISPATCHIS,"issued flow, local load and adjusted regional demand",72.0,7.0,3.0,0.0,7.0,0.0,0.0,0.0,72.0,672.0555764444446,37.0,0.0,0.0,7.0
+PREDISPATCHIS,regional forecast change from observed RHS,72.0,7.0,3.0,0.0,7.0,0.0,0.0,0.0,72.0,724.7321697928962,42.0,0.0,0.0,7.0
+PREDISPATCHIS,regional forecast with clock flow and fixed load share,72.0,7.0,3.0,0.0,7.0,0.0,0.0,0.0,72.0,697.118872278317,41.0,0.0,0.0,7.0

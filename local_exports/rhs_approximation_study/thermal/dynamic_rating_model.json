@@ -1,0 +1,20 @@
+{
+  "coefficients": {
+    "intercept": 802.9838436581639,
+    "temperature_2m": -14.903140328491997,
+    "wind_speed_10m": 4.654482105852087
+  },
+  "selected_from_training_only": "VRAT15_RCWE",
+  "training_cases": 168,
+  "evaluation_cases": 72,
+  "native_heldout_range": [
+    324.140625,
+    448.125
+  ],
+  "static_bounds": [
+    134,
+    519
+  ],
+  "train_median": 384.251953125,
+  "envelope_native_coverage": 72
+}

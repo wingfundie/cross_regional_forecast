@@ -1,0 +1,29 @@
+{
+  "case": {
+    "url": "https://www.nemweb.com.au/Data_Archive/Wholesale_Electricity/NEMDE/2026/NEMDE_2026_02/NEMDE_Market_Data/NEMDE_Files/NemSpdOutputs_20260204_loaded.zip",
+    "member": "NEMSPDOutputs_2026020400100.loaded",
+    "member_sha256": "992178629f852f66ec3c851216b925bdc78b535e20cd6db022d3f03df683144b",
+    "bytes": 554778,
+    "slice_sha256": "90c13a9c2e1b551b8047effc4050e370a012cb4031b1c149aada5519e96073b3",
+    "member_bytes": 11639428
+  },
+  "ems": {
+    "url": "https://www.nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2026/MMSDM_2026_02/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23EMSMASTER%23FILE01%23202602010000.zip",
+    "member": "PUBLIC_ARCHIVE#EMSMASTER#FILE01#202602010000.CSV",
+    "rows": 6006,
+    "bytes": 124810,
+    "sha256": "6b09dc945e93d49ba2857fdf53027b4db2e994b027c113b549adbd8de3a94587"
+  },
+  "dispatchis": {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/DispatchIS_Reports/PUBLIC_DISPATCHIS_20260204.zip",
+    "sha256": "80fbde6d4208eeded383acf162b19d353a75d980e4b9561da845880155e2d375",
+    "bytes": 5313594,
+    "member": "PUBLIC_DISPATCHIS_202602040405_0000000501819405.zip",
+    "inner_member": "PUBLIC_DISPATCHIS_202602040405_0000000501819405.CSV",
+    "member_sha256": "67809a381257fc8ee4c751f780ae2ef987de3fb7e4515bad36aa6009297d174f",
+    "header_generated_nem": "2026-02-04T04:00:11+10:00"
+  },
+  "implementation": "https://aemo.com.au/-/media/files/stakeholder_consultation/consultations/nem-consultations/2023/constraints-implementation-guidelines/final-constraint-implementation-guidelines-v3.pdf",
+  "public_ratings": "https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/data-nem/network-data/transmission-equipment-ratings",
+  "table_publication": "https://tech-specs.docs.public.aemo.com.au/Content/TSP_TechnicalSpecificationPortal/EMMSDMTableTriggers.htm"
+}

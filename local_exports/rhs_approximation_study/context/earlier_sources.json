@@ -1,0 +1,156 @@
+[
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/DispatchIS_Reports/PUBLIC_DISPATCHIS_20260209.zip",
+    "archive_sha256": "89fdd6cadcde999872107b2bc5b3b3dbf604de90b45681cd7b8e5bbb8e2a8223",
+    "bytes": 5275555
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/DispatchIS_Reports/PUBLIC_DISPATCHIS_20260212.zip",
+    "archive_sha256": "7ded65949aaf8c2e1f42a67810753b7d11db4a0135cba9f5ece11f13e2186981",
+    "bytes": 5600678
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/DispatchIS_Reports/PUBLIC_DISPATCHIS_20260210.zip",
+    "archive_sha256": "fdfc94d1fb735140e2536c9e09dadd5d8dc0c39d64087e69c50038ddb582b39b",
+    "bytes": 5388123
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/DispatchIS_Reports/PUBLIC_DISPATCHIS_20260211.zip",
+    "archive_sha256": "18aae82c44085d1097fc9cbfd9141e189a3385939819df58e829acd0a7ad0aef",
+    "bytes": 5574541
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/DispatchIS_Reports/PUBLIC_DISPATCHIS_20260213.zip",
+    "archive_sha256": "94cbf1d6b9f677594383b94d50eb4ea9839874ce02563c5431a192e181b71766",
+    "bytes": 5581256
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/DispatchIS_Reports/PUBLIC_DISPATCHIS_20260215.zip",
+    "archive_sha256": "11062984e6f806b9ee2c5ab7da24a85ad735efe381d0e797bda5aa4cd99ad554",
+    "bytes": 5435512
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/DispatchIS_Reports/PUBLIC_DISPATCHIS_20260214.zip",
+    "archive_sha256": "4d452128848184c987fef3de27a47788cfa15a2ae93c7a2e701b5afbc2912259",
+    "bytes": 5494057
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/DispatchIS_Reports/PUBLIC_DISPATCHIS_20260219.zip",
+    "archive_sha256": "0b2262980e9c9cc3d4a1075aac39ba2b1d24633eb030e3fdbba83a6bfe73c1d5",
+    "bytes": 5371817
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/DispatchIS_Reports/PUBLIC_DISPATCHIS_20260220.zip",
+    "archive_sha256": "682916ae29a55fa32c7ea8d16427aac53770ee1961a9ced99d8b3b4561d71067",
+    "bytes": 5308617
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/DispatchIS_Reports/PUBLIC_DISPATCHIS_20260222.zip",
+    "archive_sha256": "7cd9ac7509e4536175ea8cbc3de539a5d7c7425386cc2189f909ba31ae2af0c9",
+    "bytes": 5330156
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/P5_Reports/PUBLIC_P5MIN_20260219.zip",
+    "member": "PUBLIC_P5MIN_202602191005_20260219100110.zip",
+    "member_sha256": "c093c86d72bb484632864c68669df2ce7284f0d728a971e23ea146660147b029",
+    "member_modified": "2026-02-19T10:01:18"
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/P5_Reports/PUBLIC_P5MIN_20260219.zip",
+    "member": "PUBLIC_P5MIN_202602190935_20260219093100.zip",
+    "member_sha256": "028461ac8a1890fecf8ec9df0d2bfe91740d9ce4b4a93610b87355208721ec95",
+    "member_modified": "2026-02-19T09:31:06"
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/P5_Reports/PUBLIC_P5MIN_20260219.zip",
+    "member": "PUBLIC_P5MIN_202602191035_20260219103122.zip",
+    "member_sha256": "ebc37ff751d102abc1105a9e3730b8c94c8ebe3503c8556f9e66df6a498d3cf9",
+    "member_modified": "2026-02-19T10:31:28"
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/P5_Reports/PUBLIC_P5MIN_20260219.zip",
+    "member": "PUBLIC_P5MIN_202602191105_20260219110106.zip",
+    "member_sha256": "82ae7f70d595e5a34b9be47a5140712201d3eb1f058316db67a47fb28bdd3ce9",
+    "member_modified": "2026-02-19T11:01:12"
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/PredispatchIS_Reports/PUBLIC_PREDISPATCHIS_20260215_20260221.zip",
+    "member": "PUBLIC_PREDISPATCHIS_202602181630_20260218160216.zip",
+    "member_sha256": "ee7789f1457ab1664717512cc8d143e2933cfd8956ee1c5960026e94921b48f8",
+    "member_modified": "2026-02-18T16:02:36"
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/PredispatchIS_Reports/PUBLIC_PREDISPATCHIS_20260215_20260221.zip",
+    "member": "PUBLIC_PREDISPATCHIS_202602191630_20260219160153.zip",
+    "member_sha256": "00843f6bbf3c0b79e76f43fb9e0c7698f72836ec387dbd18c2a714db0e643af3",
+    "member_modified": "2026-02-19T16:02:16"
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/P5_Reports/PUBLIC_P5MIN_20260220.zip",
+    "member": "PUBLIC_P5MIN_202602200935_20260220093039.zip",
+    "member_sha256": "1d0d60d7a3f1bef56bcc99860e6ece59a2e807b240ae4072dde46187827f60d5",
+    "member_modified": "2026-02-20T09:30:46"
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/P5_Reports/PUBLIC_P5MIN_20260220.zip",
+    "member": "PUBLIC_P5MIN_202602201005_20260220100037.zip",
+    "member_sha256": "2280c4d4d0e21cac7885d8784e3cd1daae8bf08929af38980cf9b39141367be3",
+    "member_modified": "2026-02-20T10:00:46"
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/P5_Reports/PUBLIC_P5MIN_20260220.zip",
+    "member": "PUBLIC_P5MIN_202602201035_20260220103037.zip",
+    "member_sha256": "71352ebc4c7f174696c22e4c55eb83d709a4e332f9fd3261c936d06ac7c17f85",
+    "member_modified": "2026-02-20T10:30:42"
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/P5_Reports/PUBLIC_P5MIN_20260220.zip",
+    "member": "PUBLIC_P5MIN_202602201105_20260220110038.zip",
+    "member_sha256": "0fd446c6e8d89586c378aee5c3d189fb79e3b1d58f8fd09697a5f169f3abb59a",
+    "member_modified": "2026-02-20T11:00:46"
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/PredispatchIS_Reports/PUBLIC_PREDISPATCHIS_20260215_20260221.zip",
+    "member": "PUBLIC_PREDISPATCHIS_202602211630_20260221160153.zip",
+    "member_sha256": "a03c68a9cf8bd138786437e42bcef120bf7b69bbb603c5628187012eb4c58932",
+    "member_modified": "2026-02-21T16:02:12"
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/P5_Reports/PUBLIC_P5MIN_20260222.zip",
+    "member": "PUBLIC_P5MIN_202602220935_20260222093131.zip",
+    "member_sha256": "9a80f06c59fb42d65ef5dff321f97ebb2be40543551af423cc7facc31a59e970",
+    "member_modified": "2026-02-22T09:31:40"
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/P5_Reports/PUBLIC_P5MIN_20260222.zip",
+    "member": "PUBLIC_P5MIN_202602221035_20260222103141.zip",
+    "member_sha256": "38f4a603858dd88b0f3e4222eca97c60d4653f5b2c994a1226c36f7be1bc4d2e",
+    "member_modified": "2026-02-22T10:31:48"
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/P5_Reports/PUBLIC_P5MIN_20260222.zip",
+    "member": "PUBLIC_P5MIN_202602221005_20260222100100.zip",
+    "member_sha256": "055c7e61c8952c108ddf9bcf8c42a37dbad51c0980248add00a10b9f4126953f",
+    "member_modified": "2026-02-22T10:01:08"
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/P5_Reports/PUBLIC_P5MIN_20260222.zip",
+    "member": "PUBLIC_P5MIN_202602221105_20260222110138.zip",
+    "member_sha256": "e3266d9c37373855365ada26dc7d747370fbbcf21bedf327daeb4c916212c109",
+    "member_modified": "2026-02-22T11:01:46"
+  },
+  {
+    "url": "https://www.abs.gov.au/statistics/people/population/regional-population/2023-24/32180DS0004_2001-24.xlsx",
+    "sha256": "457d65ac0bf15fe9da4c669fc54b84b976e2c42e5cd5f96f2e5bdb6717f04c8c",
+    "table": "Table 2"
+  },
+  {
+    "url": "https://www.abs.gov.au/statistics/people/population/regional-population/2023-24/32180DS0003_2001-24.xlsx",
+    "sha256": "1c643093f2381e46ba2d9375b0841b2db3868d3e96f2a8c2e1ed1930cd921f7f",
+    "table": "Table 5"
+  },
+  {
+    "url": "https://www.nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2024/MMSDM_2024_07/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_DVD_GENERICCONSTRAINTRHS_202407010000.zip",
+    "sha256": "7f3e55fb9362ae2e09367749b1a83141ec1a82d9590d1276bb2fae8a2633ef5c"
+  }
+]

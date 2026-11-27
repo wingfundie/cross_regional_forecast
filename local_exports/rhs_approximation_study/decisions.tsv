@@ -1,0 +1,10 @@
+decision	reason	evidence or result
+Use two historical cohorts	Compare the earlier morning sample with a different set of hours and dates without conflating them	local/predictions.csv and flows/rhs_predictions.csv
+Use AEMO regional forecasts as stand-ins	The user's forecast vintages were unavailable	local/forecast_inputs.csv
+Freeze profiles before evaluation	A forecast must be reproducible at its historical origin	local/run_local.py and flows/study.py
+Retain point and sign definitions	Population is geographic and the constraint consumes electrical measurements	local/definitions.csv and context/sydney_sources.csv
+Test public unit SCADA against INITIALMW	Metered output and scheduled output are different potential inputs	local/unit_crosscheck.csv
+Keep regional demand adjustments explicit	Regional TOTALDEMAND excludes some equation-relevant scheduled loads	flows/regional_semantics.csv
+Use discrete status scenarios	A regime change can dominate the error of a stable-state benchmark	states/status_predictions.csv
+Separate full-RHS and binding forecasts	Issued LHS and equation invocation affect proximity and economic alerts	flows/binding_scores.csv and thermal/binding.csv
+Run compact samples and retain evidence	Respect 5 GB allowance and allow recomputation without broad archive downloads	manifest.json

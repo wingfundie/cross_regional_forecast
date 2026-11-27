@@ -1,0 +1,20 @@
+{
+  "local_score_groups": 126,
+  "qni_score_groups": 14,
+  "interconnector_score_groups": 48,
+  "thermal_score_groups": 10,
+  "state_score_groups": 48,
+  "outage_score_groups": 4,
+  "desktop": {
+    "width": 1365,
+    "height": 900,
+    "offline_figures": 2,
+    "sections": 10
+  },
+  "mobile": {
+    "width": 390,
+    "height": 844,
+    "offline_figures": 2,
+    "sections": 10
+  }
+}

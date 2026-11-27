@@ -1,0 +1,46 @@
+spd_type,spd_id,description,group,referenced_in_snapshot
+A,ARMIDALE_LOAD,Sum of the load on the Armidale 132/66 kV transformers plus flow from Armidale on 965 and 96N,NSW1,False
+A,ARTX_SUM_LOAD,Sum of the load on each of the Armidale 330/132 kV transformers,NSW1,True
+A,CANBERRA_TX_LOAD,Load on 330/132kV transformers at Canberra,NSW1,True
+A,CAPRAL_LOAD_1,MW load of Capral Potline #1,NSW1,False
+A,CAPRAL_LOAD_2,MW load of Capral Potline #2,NSW1,False
+A,CAPRAL_LOAD_3,MW load of Capral Potline #3,NSW1,False
+A,COFFS_LOAD,Load on the 132/66 kV transformers at Coffs Harbour,NSW1,False
+A,CONDONG_LOAD,Condong generation/load MW flow,NSW1,False
+A,JIND_TOT_TR_MW,Jindera total transformer load MW,NSW1,False
+A,KOOLKHAN_LOAD,Load on the 132/66 kV transformers at Koolkhan,NSW1,False
+A,LISMORE_AREA_LOAD,Lismore Area Load (summation of Lismore 330/132kV Transformers - Directlink flow),NSW1,True
+A,LISM_MULL_LOAD_SUM,"Sum of the flows out of Lismore 330 kV sub on 9W1, 9U8, 9U9 - Directlink flow",NSW1,True
+A,MUSWELL_LOAD,Sum of load on the 132 kV side of each of the Muswellbrook 330/132 kV transformers,NSW1,True
+A,MW_BRKNHIL_NS,"Underlying customer load at Broken Hill, minus the output of the local non-scheduled gas turbines. Calculated as X2 line flow MW into Broken Hill plus Broken Hill Solar Farm Output",NSW1,False
+A,MW_DU_1L,MW flow on Dunoon 1 load,NSW1,False
+A,MW_DU_2L,MW flow on Dunoon 2 load,NSW1,False
+A,MW_JINDABYN,Total Jindabyn pump load in MW,NSW1,True
+A,MW_MB_1H,MW flow on Mullumbimby 1H load,NSW1,False
+A,MW_MB_2H,MW flow on Mullumbimby 2H load,NSW1,False
+A,MW_MUL_8505,Mullumbimby 66kV Load,NSW1,False
+A,NSW1,Measured NSW MW Load,NSW1,False
+A,NSW1_PLUS_NSWIND,Sum of NSW scheduled regional load plus non-scheduled wind generation,NSW1,False
+A,NSW_STH_AREA_MW, MW NSW South area load (i.e. NSW South-West load - Broken Hill Load + Canberra Load),NSW1,True
+A,NSW_SW_AREA_MW,"Summated MW loads at Yass, Wagga, Jindera, Darlington Pt & Broken Hill",NSW1,True
+A,N_CANBERRA_LOAD,Canberra load,NSW1,True
+A,N_CENTRALWEST_LOAD,NSW - Central West load,NSW1,True
+A,N_NORTHNSW_LOAD,Northern NSW load,NSW1,True
+A,N_SYDNEY_LOAD,"Sydney, Wollongong and Newcastle load",NSW1,True
+A,TAM_LOAD,Sum of the load on the 132 kV side on each of the 330/132 kV transformers at Tamworth,NSW1,True
+A,TERRANORA_LOAD,Terranora area load,NSW1,True
+A,TOMAGO_LOAD,Total Tomago potlines load,NSW1,False
+A,TOMAGO_POT_1,Tomago Potlines Load 1 ,NSW1,False
+A,TOMAGO_POT_2,Tomago Potlines Load 2 ,NSW1,False
+A,TOMAGO_POT_3,Tomago Potlines Load 3 ,NSW1,False
+A,TOMAGO_POT_4,Tomago Potlines Load 4 ,NSW1,False
+T,ASNBRL1.NRTBORA1,BORAL AGG LOAD NSW1,NSW1,False
+T,ASNENC1.NRTENOC1,AGG INTERRUP LOAD N1,NSW1,False
+T,BHBL1.NBKB2B,Broken Hill Battery 50 MW (Load mode),NSW1,False
+T,CAPBES1L.NQBB4C,Capital battery 125.4 MW (Load mode),NSW1,False
+T,CAPBES1L.NQBC2C,Capital battery 125.4 MW (Load mode),NSW1,False
+T,DPNTBL1.NRDP2D,Darlington Point  Battery (Load Mode) 25 MW,NSW1,False
+T,QBYNBL1.NQBB2Q,Queanbeyan BESS (Load component),NSW1,False
+T,RESS1BL.NRBB2R,60 MW Riverina Battery 1  (Load Mode),NSW1,False
+T,RIVNBL2.NRB22R,Riverina Battery 2 (Load Mode) 65 MW,NSW1,False
+T,WALGRVL1.NSWB2W,Wallgrove Battery  - Load component,NSW1,False

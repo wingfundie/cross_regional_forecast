@@ -1,0 +1,42 @@
+[
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/Dispatch_SCADA/PUBLIC_DISPATCHSCADA_20260215.zip",
+    "bytes": 1167817,
+    "sha256": "01a047e3e0f32f782a2ff70b3318a6dde7ed7286e9bdb3db0573919ab4b61bdf"
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/Dispatch_SCADA/PUBLIC_DISPATCHSCADA_20260216.zip",
+    "bytes": 1182444,
+    "sha256": "c528d87d474d4780ca60fe3900176035b032c98dba2d58817e4f398308043943"
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/Dispatch_SCADA/PUBLIC_DISPATCHSCADA_20260217.zip",
+    "bytes": 1179881,
+    "sha256": "792bb38f4d537c9cc2d91298a1e4eba04f59c203984dcbe21ab2c2f647639717"
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/Dispatch_SCADA/PUBLIC_DISPATCHSCADA_20260218.zip",
+    "bytes": 1170090,
+    "sha256": "e8e5bca2d1ebf9f6746a8912ff6298a8f0793110506042fb79034d9442627ffc"
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/Dispatch_SCADA/PUBLIC_DISPATCHSCADA_20260219.zip",
+    "bytes": 1168879,
+    "sha256": "aaae5543ee2d04563ad52c439a3f8c3b668df22479db47853d954b94b15c6c03"
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/Dispatch_SCADA/PUBLIC_DISPATCHSCADA_20260220.zip",
+    "bytes": 1174389,
+    "sha256": "8830a2ade455b5640d180a1db0e1effdc56e574c7c33d4f7689a30cc53b33da5"
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/Dispatch_SCADA/PUBLIC_DISPATCHSCADA_20260221.zip",
+    "bytes": 1170659,
+    "sha256": "b87374f04e782ce4ec96485336b70b214c3b2695773503ca81727f58ad64736c"
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/Dispatch_SCADA/PUBLIC_DISPATCHSCADA_20260222.zip",
+    "bytes": 1179996,
+    "sha256": "71843b9749133e5edf3ad0f49230446c710519070cc8cfd059ec12f796ade585"
+  }
+]

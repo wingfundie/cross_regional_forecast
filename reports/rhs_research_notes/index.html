@@ -1,0 +1,894 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NEM constraint research</title><style>body{max-width:880px;margin:auto;padding:32px 20px 64px;background:white;color:#20313b;font:17px/1.65 Georgia,serif}h1,h2,h3,nav,th{font-family:Arial,sans-serif}h1{line-height:1.12;font-size:clamp(30px,5vw,47px)}h2{margin-top:2em;font-size:23px}a{color:#195968;overflow-wrap:anywhere}section{border-top:2px solid #43696c;margin-top:45px;padding-top:18px}.scroll{max-width:100%;overflow:auto}table{border-collapse:collapse;font:14px/1.4 Arial,sans-serif}td,th{padding:8px;text-align:left;border-bottom:1px solid #cad5d6}th{background:#f1f5f4}li{margin-bottom:8px}nav{font-size:14px}</style><body><h1>NEM constraint research</h1><p>February 2026 · Fixed NEM time (UTC+10)</p><nav><ol><li><a href="#replay">Reconstructing a dispatch limit</a></li><li><a href="#inventory">Public coverage of constraint inputs</a></li><li><a href="#case-guide">Three dispatch equations and their measurement boundaries</a></li><li><a href="#sydney">The electrical boundary behind Sydney demand</a></li><li><a href="#regional">Allocating regional demand to a local load</a></li><li><a href="#flows">Initial flows and the NSW–Queensland stability limit</a></li><li><a href="#thermal">Terminal loading and the Bango thermal limit</a></li><li><a href="#states">Switch position, outage schedules and dispatch state</a></li><li><a href="#forward">Which inputs support a forward constraint calculation?</a></li></ol></nav><section id="replay"><h1>Reconstructing a dispatch limit</h1>
+<ul>
+<li>Three equations supplied 216 independent five-minute comparisons in February 2026.</li>
+<li>The largest absolute discrepancy was 0.00000547 MW.</li>
+<li>The NSW–Queensland equation carried an economic bind in 28 of its 72 observations.</li>
+</ul>
+<p>A dispatch limit belongs to a particular version of an equation and to the state accepted by the dispatch engine. Reconstruction starts with the invoked set, the dispatch run and the interval end. A plausible reading from the same asset can give a different answer if it refers to another instant.</p>
+<p>The Sydney monitor gives a simple control. A one MW change in load passes through one for one. The NSW–Queensland stability equation combines regional demand with a signed local flow inside a squared term. Across 24 intervals, substituting the earlier public Terranora reading produced 1.02 MW mean absolute RHS error. A NSW demand share produced 2.89 MW. The other terms were observed in both comparisons.</p>
+<p>Economic binding requires the dispatch solution. The weighted injections on the left-hand side determine proximity to the limit, while the marginal value measures the effect of relaxing it. Historical replay establishes the arithmetic. Forward use also requires evidence of when each input became available.</p>
+<h3>Which inputs are public?</h3>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Access question</th>
+<th>What the evidence supports</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Are the dispatch formulations public?</td>
+<td>The public case supplies the versioned program, its operations, defaults and shared terms for this period.</td>
+</tr>
+<tr>
+<td>Are historical values present?</td>
+<td>The input register identifies values and quality flags for this case. Regional selection, switch runs and missing trader inputs can require additional work.</td>
+</tr>
+<tr>
+<td>Are live equivalents public?</td>
+<td>DispatchIS exposes selected monitors after the run. Equipment ratings also have a public AEMO product. Matching the exact sensor, rating level, run and timestamp is necessary before assuming equivalence.</td>
+</tr>
+<tr>
+<td>How much does the snapshot route cover?</td>
+<td>41 monitor inversions agreed within half a published increment and 2 more within one increment. The register also identifies multi-input and nonlinear monitors.</td>
+</tr>
+</tbody>
+</table></div>
+<h3>The three independent replays</h3>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th style="text-align: left;">Equation</th>
+<th style="text-align: left;">Rows</th>
+<th style="text-align: left;">Calculated</th>
+<th style="text-align: left;">Mean error MW</th>
+<th style="text-align: left;">Max error MW</th>
+<th style="text-align: left;">Economic bind intervals</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">DATASNAP_DFS_NSYD</td>
+<td style="text-align: left;">72</td>
+<td style="text-align: left;">72</td>
+<td style="text-align: left;">0.00000277</td>
+<td style="text-align: left;">0.00000547</td>
+<td style="text-align: left;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">N::Q_NIL_KC</td>
+<td style="text-align: left;">72</td>
+<td style="text-align: left;">72</td>
+<td style="text-align: left;">0.00000246</td>
+<td style="text-align: left;">0.00000516</td>
+<td style="text-align: left;">28</td>
+</tr>
+<tr>
+<td style="text-align: left;">T^V_NIL_9</td>
+<td style="text-align: left;">72</td>
+<td style="text-align: left;">72</td>
+<td style="text-align: left;">0.00000000</td>
+<td style="text-align: left;">0.00000000</td>
+<td style="text-align: left;">0</td>
+</tr>
+</tbody>
+</table></div>
+<h3>How much error reaches the RHS?</h3>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th style="text-align: left;">Equation</th>
+<th style="text-align: left;">Public proxy</th>
+<th style="text-align: left;">Rows</th>
+<th style="text-align: left;">Input MAE MW</th>
+<th style="text-align: left;">RHS bias MW</th>
+<th style="text-align: left;">RHS MAE MW</th>
+<th style="text-align: left;">Max MW</th>
+<th style="text-align: left;">Band ±MW</th>
+<th style="text-align: left;">In band</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">DATASNAP_DFS_NSYD</td>
+<td style="text-align: left;">Prior public snapshot</td>
+<td style="text-align: left;">24</td>
+<td style="text-align: left;">38.15</td>
+<td style="text-align: left;">+12.88</td>
+<td style="text-align: left;">38.15</td>
+<td style="text-align: left;">79.90</td>
+<td style="text-align: left;">137.40</td>
+<td style="text-align: left;">24/24</td>
+</tr>
+<tr>
+<td style="text-align: left;">DATASNAP_DFS_NSYD</td>
+<td style="text-align: left;">NSW demand share</td>
+<td style="text-align: left;">24</td>
+<td style="text-align: left;">412.27</td>
+<td style="text-align: left;">-412.27</td>
+<td style="text-align: left;">412.27</td>
+<td style="text-align: left;">550.95</td>
+<td style="text-align: left;">290.91</td>
+<td style="text-align: left;">0/24</td>
+</tr>
+<tr>
+<td style="text-align: left;">N::Q_NIL_KC</td>
+<td style="text-align: left;">Prior public snapshot</td>
+<td style="text-align: left;">24</td>
+<td style="text-align: left;">1.39</td>
+<td style="text-align: left;">-0.42</td>
+<td style="text-align: left;">1.02</td>
+<td style="text-align: left;">3.73</td>
+<td style="text-align: left;">2.58</td>
+<td style="text-align: left;">22/24</td>
+</tr>
+<tr>
+<td style="text-align: left;">N::Q_NIL_KC</td>
+<td style="text-align: left;">NSW demand share</td>
+<td style="text-align: left;">24</td>
+<td style="text-align: left;">3.86</td>
+<td style="text-align: left;">-2.09</td>
+<td style="text-align: left;">2.89</td>
+<td style="text-align: left;">6.71</td>
+<td style="text-align: left;">27.28</td>
+<td style="text-align: left;">24/24</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Does the proxy change a binding decision?</h3>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th style="text-align: left;">Proxy</th>
+<th style="text-align: left;">Clear</th>
+<th style="text-align: left;">At risk</th>
+<th style="text-align: left;">Uncertain</th>
+<th style="text-align: left;">Missed bind intervals</th>
+<th style="text-align: left;">False alerts</th>
+<th style="text-align: left;">Binds uncertain</th>
+<th style="text-align: left;">Unbanded flips</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Prior public snapshot</td>
+<td style="text-align: left;">17</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr>
+<td style="text-align: left;">NSW demand share</td>
+<td style="text-align: left;">17</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">0</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Timing, limits and reproducibility</h3>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Sampled equation</th>
+<th>Historical replay</th>
+<th>Exact inputs by interval start</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sydney demand monitor</td>
+<td>Direct analog plus constant</td>
+<td>Prior monitor is available on the producer timeline. Same-run monitor arrives after the cutoff.</td>
+</tr>
+<tr>
+<td>NSW–Queensland stability</td>
+<td>Exact local load, initial flow and derived regional inputs</td>
+<td>Prior local load is measurable. The full current flow and regional input bundle has no demonstrated public receipt by the cutoff.</td>
+</tr>
+<tr>
+<td>George Town status</td>
+<td>Exact effective timer state from case XML</td>
+<td>Current timer and changes of state have no verified independent public source at the cutoff.</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Sources and evidence</h2>
+<ul>
+<li><a href="../rhs_replay/study.md">February 2026 research record, method and supporting tables</a></li>
+<li><a href="https://www.aemo.com.au/-/media/files/electricity/nem/it-systems-and-change/nemde-queue/nemde_queue_users_guide.pdf">AEMO guide to NEMDE files</a></li>
+<li><a href="https://www.nemweb.com.au/Reports/ARCHIVE/DispatchIS_Reports/">AEMO public DispatchIS archive</a></li>
+<li><a href="https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/data-nem/network-data/transmission-equipment-ratings">AEMO transmission equipment ratings</a></li>
+<li><a href="https://tapr.transgrid.com.au/transgrid_bsp_data/Sydney%20West%20132%20kV%20historical%20BSP%20load.xlsx">Sydney West transformer workbook</a></li>
+</ul></section><section id="inventory"><h1>Public coverage of constraint inputs</h1>
+<ul>
+<li>The 4 February 2026 dispatch case invoked 1,125 equations, including 117 static limits.</li>
+<li>The audited formulations referenced 2,206 distinct external inputs.</li>
+<li>For 744 of 1,008 dynamic equations, every external input had a candidate historical source.</li>
+</ul>
+<p>A meter can enter many limits through a shared expression. Resolving each expression before counting the meters measures the acquisition task. Counting equations with a candidate reading for every term instead measures potential replay coverage. One unresolved meter can affect several limits simultaneously.</p>
+<p>Public monitors offer another route when their expression contains one measurement, a known coefficient and a fixed offset. Of 54 loaded monitors, 43 permitted that inversion. Forty-one matched the independent case reading within half a published increment. The remaining two matched within one increment. An equation with multiple unknown inputs generally admits several solutions.</p>
+<p>The other 264 dynamic equations had at least one unresolved input or choice of component or switch run. Retain the typed identifier, effective version, measurement quality and default condition for each entry. This inventory documents visibility after one dispatch run. Forecast coverage depends on the publication schedule for each changing quantity.</p>
+<h2>Sources and evidence</h2>
+<ul>
+<li><a href="../rhs_replay/inventory/README.md">February 2026 research record, method and supporting tables</a></li>
+<li><a href="https://aemo.com.au/-/media/files/stakeholder_consultation/consultations/nem-consultations/2023/constraints-implementation-guidelines/final-constraint-implementation-guidelines-v3.pdf">AEMO implementation guidelines, version 3 of 20 April 2023</a></li>
+<li><a href="https://www.nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2026/MMSDM_2026_02/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23EMSMASTER%23FILE01%23202602010000.zip">February EMSMASTER</a></li>
+<li><a href="https://www.nemweb.com.au/Reports/ARCHIVE/DispatchIS_Reports/PUBLIC_DISPATCHIS_20260204.zip">DispatchIS day archive</a></li>
+<li><a href="https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/data-nem/network-data/transmission-equipment-ratings">AEMO equipment ratings</a></li>
+</ul></section><section id="case-guide"><h1>Three dispatch equations and their measurement boundaries</h1>
+<ul>
+<li>Each equation was checked against 72 native dispatch observations.</li>
+<li>The Sydney monitor adds a fixed 10,000 MW to area demand.</li>
+<li>The two George Town timer states are separated by 244 MW.</li>
+</ul>
+<p>For Sydney, subtracting the offset recovers the electrical load covering Sydney, Wollongong and Newcastle. All 72 sensor values carried a replacement flag and permission for dispatch use. Reconstructing the calculation requires the accepted reading even where another telemetry stream appears fresher.</p>
+<p>For the NSW–Queensland stability limit, let N and Q denote the equation-specific regional demands, d the signed Terranora load and i the initial signed Directlink flow, all in MW. The limit in MW is 1,383 − 0.001(i + d)² − 0.0239N + 0.0524Q − 0.6394d. Reversing flow changes the interaction with local demand. Align the two readings to the same interval start before applying the coefficients.</p>
+<p>At George Town the limit is 594 MW less 244 MW times the binary timer state. When that state is unresolved, retain both feasible values, 350 and 594 MW. Their midpoint describes neither operating branch.</p>
+<h2>Sources and evidence</h2>
+<ul>
+<li><a href="../rhs_replay/cases/case_guide.md">February 2026 research record, method and supporting tables</a></li>
+<li><a href="https://www.aemo.com.au/-/media/Files/Electricity/NEM/Security_and_Reliability/Power_System_Ops/Procedures/SO_OP_3706%20Failure-of-Market-or-Market-Systems.pdf">AEMO dispatch fallback procedure</a></li>
+<li><a href="https://www.aemo.com.au/news/-/media/Files/Electricity/NEM/Security_and_Reliability/Dispatch/Policy_and_Process/Demand-terms-in-EMMS-Data-Model.pdf">AEMO demand terms, table 4</a></li>
+<li><a href="https://www.nemweb.com.au/Data_Archive/Wholesale_Electricity/NEMDE/2026/NEMDE_2026_02/NEMDE_Market_Data/NEMDE_Files/">AEMO February NEMDE files</a></li>
+</ul></section><section id="sydney"><h1>The electrical boundary behind Sydney demand</h1>
+<ul>
+<li>The public Sydney demand monitor spans three urban areas.</li>
+<li>Sydney West publishes a separate half-hour bulk supply point trace.</li>
+<li>The site's median recorded value moved from −689.21 in June 2025 to +15.41 in July, in workbook units.</li>
+</ul>
+<p>An electrical load area follows its supply circuits. Population districts follow administrative boundaries. A bulk supply point measures a third quantity, the net flow across its transformers. Specify which of these quantities the equation consumes before fitting the allocation.</p>
+<p>Transgrid identifies Sydney West and West Liverpool as supply paths into the Western Sydney growth area. The Sydney West workbook therefore covers only part of a possible boundary. Its change in sign and magnitude also limits comparisons across June and July. The cause remains unresolved.</p>
+<p>A later site-level diagnostic fitted seven February 2026 training dates and evaluated twelve subsequent half-hours. Previous-afternoon error for a clock-specific electrical share ranged from 2.95 to 3.10 in workbook units under two possible timestamp alignments. A historical clock mean recorded 3.72 to 4.00. The workbook carried a September 2026 update. These results establish retrospective fit to one site. A live forecast of the wider area still requires a dated meter boundary and evidence of timely publication.</p>
+<h2>Sources and evidence</h2>
+<ul>
+<li><a href="../rhs_replay/sydney_sources.md">February 2026 research record, method and supporting tables</a></li>
+<li><a href="../../local_exports/rhs_approximation_study/local/sydney_west_scores.csv">February site diagnostic, both interval alignments</a></li>
+<li><a href="https://www.nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2026/MMSDM_2026_02/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23EMSMASTER%23FILE01%23202602010000.zip">February EMSMASTER ZIP</a></li>
+<li><a href="https://tapr.transgrid.com.au/transgrid_bsp_data/Sydney%20West%20132%20kV%20historical%20BSP%20load.xlsx">Direct workbook</a></li>
+<li><a href="https://tapr.transgrid.com.au/transgrid_historical_load_trace_data/Line%2030%20historical%20load%20trace.xlsx">Direct workbook</a></li>
+<li><a href="https://www.ausgrid.com.au/about-us/about-ausgrid/research-data-sets/distribution-zone-substation-data">Ausgrid data and timing</a></li>
+</ul></section><section id="regional"><h1>Allocating regional demand to a local load</h1>
+<ul>
+<li>Twelve half-hours on 19, 20 and 22 February 2026 formed the morning evaluation.</li>
+<li>For broad Sydney, population allocation recorded 411.6 MW previous-afternoon mean absolute error.</li>
+<li>The issued local forecasts recorded errors of 295.1 MW for Sydney and 8.9 MW for Terranora.</li>
+</ul>
+<p>Population allocation gives each resident the same implicit share of regional electricity demand. Its 66.97% weight is fixed through the day. A historical electrical share can vary with delivery time and day type, allowing the local mix of residential load, industrial consumption and embedded generation to influence the estimate.</p>
+<p>For Sydney, a clock and day-type share reduced previous-afternoon error to 333.4 MW. A fixed electrical share recorded 380.1 MW. For Terranora, seven of twelve realised half-hours had negative net load. Multiplying positive regional demand by a positive population share misses that operating state altogether.</p>
+<p>Benchmark against the issued local monitor wherever its electrical boundary matches. With regional demand alone, fit the share on earlier readings and preserve its sign. These results use AEMO regional vintages and seven training mornings. An alternative provider's forecast errors will also enter the local estimate.</p>
+<h3>Day-ahead results</h3>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th style="text-align: left;">method</th>
+<th style="text-align: right;">Sydney-area load</th>
+<th style="text-align: right;">Terranora load</th>
+<th style="text-align: right;">Network RHS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Population share</td>
+<td style="text-align: right;">411.6</td>
+<td style="text-align: right;">–</td>
+<td style="text-align: right;">–</td>
+</tr>
+<tr>
+<td style="text-align: left;">Fixed historical share</td>
+<td style="text-align: right;">380.1</td>
+<td style="text-align: right;">20.7</td>
+<td style="text-align: right;">52.9</td>
+</tr>
+<tr>
+<td style="text-align: left;">Clock and day-type share</td>
+<td style="text-align: right;">333.4</td>
+<td style="text-align: right;">22.7</td>
+<td style="text-align: right;">56.0</td>
+</tr>
+<tr>
+<td style="text-align: left;">Clock and day-type level</td>
+<td style="text-align: right;">438.3</td>
+<td style="text-align: right;">20.5</td>
+<td style="text-align: right;">27.4</td>
+</tr>
+<tr>
+<td style="text-align: left;">Latest public reading</td>
+<td style="text-align: right;">1858.4</td>
+<td style="text-align: right;">21.3</td>
+<td style="text-align: right;">15.5</td>
+</tr>
+<tr>
+<td style="text-align: left;">Latest reading plus regional change</td>
+<td style="text-align: right;">426.1</td>
+<td style="text-align: right;">18.5</td>
+<td style="text-align: right;">51.2</td>
+</tr>
+<tr>
+<td style="text-align: left;">Issued AEMO</td>
+<td style="text-align: right;">295.1</td>
+<td style="text-align: right;">8.9</td>
+<td style="text-align: right;">36.5</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Short-horizon results</h3>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th style="text-align: left;">method</th>
+<th style="text-align: right;">Sydney-area load</th>
+<th style="text-align: right;">Terranora load</th>
+<th style="text-align: right;">Network RHS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Population share</td>
+<td style="text-align: right;">164.1</td>
+<td style="text-align: right;">–</td>
+<td style="text-align: right;">–</td>
+</tr>
+<tr>
+<td style="text-align: left;">Fixed historical share</td>
+<td style="text-align: right;">122.4</td>
+<td style="text-align: right;">19.9</td>
+<td style="text-align: right;">33.7</td>
+</tr>
+<tr>
+<td style="text-align: left;">Clock and day-type share</td>
+<td style="text-align: right;">139.0</td>
+<td style="text-align: right;">21.2</td>
+<td style="text-align: right;">36.2</td>
+</tr>
+<tr>
+<td style="text-align: left;">Clock and day-type level</td>
+<td style="text-align: right;">438.3</td>
+<td style="text-align: right;">20.5</td>
+<td style="text-align: right;">27.4</td>
+</tr>
+<tr>
+<td style="text-align: left;">Latest public reading</td>
+<td style="text-align: right;">183.6</td>
+<td style="text-align: right;">4.8</td>
+<td style="text-align: right;">11.1</td>
+</tr>
+<tr>
+<td style="text-align: left;">Latest reading plus regional change</td>
+<td style="text-align: right;">144.6</td>
+<td style="text-align: right;">4.6</td>
+<td style="text-align: right;">10.1</td>
+</tr>
+<tr>
+<td style="text-align: left;">Issued AEMO</td>
+<td style="text-align: right;">154.6</td>
+<td style="text-align: right;">5.1</td>
+<td style="text-align: right;">27.9</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Sources and evidence</h2>
+<ul>
+<li><a href="../../local_exports/rhs_forward_feb26/brief.md">February 2026 research record, method and supporting tables</a></li>
+<li><a href="https://www.abs.gov.au/statistics/people/population/regional-population/2023-24">ABS source released March 2025</a></li>
+<li><a href="https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/data-nem/market-management-system-mms-data/pre-dispatch">AEMO predispatch files</a></li>
+<li><a href="https://dapr.endeavourenergy.com.au/">Endeavour planning data</a></li>
+<li><a href="https://cer.gov.au/markets/reports-and-data/small-scale-installation-postcode-data">CER postcode solar data</a></li>
+</ul></section><section id="flows"><h1>Initial flows and the NSW–Queensland stability limit</h1>
+<ul>
+<li>Six interconnectors were evaluated on 72 five-minute deliveries per horizon on 19, 20 and 22 February 2026.</li>
+<li>Adding three earlier pump readings reduced short-lead RHS error from 27.92 to 11.44 MW.</li>
+<li>The short-lead issued marginal value detected seven binding intervals and produced eleven false alerts.</li>
+</ul>
+<p>The initial flow entering a dispatch expression is measured at the start of the interval. An issued target describes where dispatch expects flow to move. The preceding delivery target from the same forecast vintage is a plausible starting estimate. For Directlink it recorded 23.7 MW short-lead error, against 13.9 MW for carrying the meter reading.</p>
+<p>The regional demand definition also matters. At delivery, adding three measured pump loads to public regional demand reduced stability-limit error from 22.18 to 2.12 MW with other terms observed. At issue the future pump readings were unknown. Carrying their earlier values helped at short leads and offered little improvement the previous afternoon.</p>
+<p>The previous-afternoon issued forecast missed all seven economic binds. Those intervals occurred in three episodes on one morning. Evaluate headroom using an issued left-hand side, and retain the event dates alongside interval counts when judging alert reliability.</p>
+<h3>Signed interconnector flow</h3>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th style="text-align: left;">Signed link</th>
+<th style="text-align: right;">Short carry</th>
+<th style="text-align: right;">Short clock</th>
+<th style="text-align: right;">Short issued</th>
+<th style="text-align: right;">Day carry</th>
+<th style="text-align: right;">Day clock</th>
+<th style="text-align: right;">Day prior target</th>
+<th style="text-align: right;">Day ramp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">N-Q-MNSP1</td>
+<td style="text-align: right;">13.9</td>
+<td style="text-align: right;">41.9</td>
+<td style="text-align: right;">23.7</td>
+<td style="text-align: right;">63.8</td>
+<td style="text-align: right;">41.9</td>
+<td style="text-align: right;">57.2</td>
+<td style="text-align: right;">58.0</td>
+</tr>
+<tr>
+<td style="text-align: left;">NSW1-QLD1</td>
+<td style="text-align: right;">149.4</td>
+<td style="text-align: right;">642.1</td>
+<td style="text-align: right;">202.9</td>
+<td style="text-align: right;">245.5</td>
+<td style="text-align: right;">642.1</td>
+<td style="text-align: right;">413.0</td>
+<td style="text-align: right;">414.1</td>
+</tr>
+<tr>
+<td style="text-align: left;">T-V-MNSP1</td>
+<td style="text-align: right;">35.9</td>
+<td style="text-align: right;">86.8</td>
+<td style="text-align: right;">34.7</td>
+<td style="text-align: right;">48.3</td>
+<td style="text-align: right;">86.8</td>
+<td style="text-align: right;">61.2</td>
+<td style="text-align: right;">59.7</td>
+</tr>
+<tr>
+<td style="text-align: left;">V-S-MNSP1</td>
+<td style="text-align: right;">14.4</td>
+<td style="text-align: right;">17.2</td>
+<td style="text-align: right;">22.7</td>
+<td style="text-align: right;">25.1</td>
+<td style="text-align: right;">17.2</td>
+<td style="text-align: right;">7.9</td>
+<td style="text-align: right;">7.4</td>
+</tr>
+<tr>
+<td style="text-align: left;">V-SA</td>
+<td style="text-align: right;">70.6</td>
+<td style="text-align: right;">222.4</td>
+<td style="text-align: right;">189.4</td>
+<td style="text-align: right;">198.9</td>
+<td style="text-align: right;">222.4</td>
+<td style="text-align: right;">228.4</td>
+<td style="text-align: right;">226.9</td>
+</tr>
+<tr>
+<td style="text-align: left;">VIC1-NSW1</td>
+<td style="text-align: right;">118.5</td>
+<td style="text-align: right;">101.1</td>
+<td style="text-align: right;">244.6</td>
+<td style="text-align: right;">146.4</td>
+<td style="text-align: right;">101.1</td>
+<td style="text-align: right;">380.8</td>
+<td style="text-align: right;">386.4</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Regional demand semantics and full NSW–Queensland RHS</h3>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th style="text-align: left;">method</th>
+<th style="text-align: right;">Short MAE</th>
+<th style="text-align: right;">Day-ahead MAE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">RHS persistence</td>
+<td style="text-align: right;">12.21</td>
+<td style="text-align: right;">15.79</td>
+</tr>
+<tr>
+<td style="text-align: left;">clock RHS profile</td>
+<td style="text-align: right;">27.54</td>
+<td style="text-align: right;">27.54</td>
+</tr>
+<tr>
+<td style="text-align: left;">issued AEMO RHS</td>
+<td style="text-align: right;">27.92</td>
+<td style="text-align: right;">36.48</td>
+</tr>
+<tr>
+<td style="text-align: left;">Issued flow and local load + total demand plus three prior pump readings</td>
+<td style="text-align: right;">11.44</td>
+<td style="text-align: right;">36.50</td>
+</tr>
+<tr>
+<td style="text-align: left;">Issued flow and local load + total demand only</td>
+<td style="text-align: right;">27.92</td>
+<td style="text-align: right;">36.50</td>
+</tr>
+<tr>
+<td style="text-align: left;">Issued flow and local load + total demand plus all issued dispatchable load</td>
+<td style="text-align: right;">19.06</td>
+<td style="text-align: right;">12.06</td>
+</tr>
+<tr>
+<td style="text-align: left;">regional forecast change from observed RHS</td>
+<td style="text-align: right;">10.95</td>
+<td style="text-align: right;">51.23</td>
+</tr>
+<tr>
+<td style="text-align: left;">regional forecast with clock flow and fixed load share</td>
+<td style="text-align: right;">34.67</td>
+<td style="text-align: right;">53.90</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Sources and evidence</h2>
+<ul>
+<li><a href="../../local_exports/rhs_approximation_study/flows/report.md">February 2026 research record, method and supporting tables</a></li>
+<li><a href="https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/data-nem/market-management-system-mms-data/pre-dispatch">AEMO predispatch</a></li>
+<li><a href="https://www.nemweb.com.au/Reports/ARCHIVE/DispatchIS_Reports/">Public DispatchIS</a></li>
+<li><a href="https://www.nemweb.com.au/Reports/ARCHIVE/Dispatch_SCADA/">Public unit SCADA</a></li>
+</ul></section><section id="thermal"><h1>Terminal loading and the Bango thermal limit</h1>
+<ul>
+<li>Six dispatch inputs reproduced 240 Bango limits within 0.00000050 MW.</li>
+<li>Substituting the 146 MVA fallback for the applied 125 MVA rating raised the calculated RHS by 25.14 MW.</li>
+<li>Across twelve held-out half-hours, the issued previous-afternoon RHS recorded 6.95 MW mean absolute error.</li>
+</ul>
+<p>Bango's equation takes the margin between the applicable rating and measured apparent power at the nominated terminal, deducts a fixed allowance, and adds four weighted trader injections. One additional MVA of rating lifts the limit by 1.197 MW with other terms fixed. One additional MVA of terminal loading lowers it by the same amount. A farm and its export line can move together, so their errors also need a joint test.</p>
+<p>The public standing record identified the summer-day rating before the evaluation. At short leads, updating recent public observations with regional changes recorded 3.68 MW error against 4.00 MW for persistence. Using a forecast left-hand side, persistence nevertheless detected four of seven binding intervals with two false alerts. A small improvement in average RHS error need not improve the event decision.</p>
+<p>For the dynamic Red Cliffs–Wemen rating, a training median recorded 32.45 MVA error against 52.42 MVA for a temperature-based static lookup and 66.10 MVA for a temperature and wind regression. The comparison covers three February mornings. The public fallback curve remains useful for testing an alternative operating assumption.</p>
+<h3>Bango thermal limit, terminal loading and renewable units</h3>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Forecast of Bango dispatch RHS</th>
+<th style="text-align: right;">P5MIN half-hour MAE, MW</th>
+<th style="text-align: right;">Previous-afternoon half-hour MAE, MW</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Carry forward latest published Bango dispatch RHS</td>
+<td style="text-align: right;">4.00</td>
+<td style="text-align: right;">36.79</td>
+</tr>
+<tr>
+<td>Move latest state by issued regional changes</td>
+<td style="text-align: right;">3.68</td>
+<td style="text-align: right;">22.41</td>
+</tr>
+<tr>
+<td>Allocate issued NSW wind and solar by historical plant shares, model line loading</td>
+<td style="text-align: right;">10.85</td>
+<td style="text-align: right;">14.26</td>
+</tr>
+<tr>
+<td>Historical average for matching half-hour</td>
+<td style="text-align: right;">11.03</td>
+<td style="text-align: right;">11.03</td>
+</tr>
+<tr>
+<td>AEMO issued constraint RHS</td>
+<td style="text-align: right;">7.20</td>
+<td style="text-align: right;">6.95</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Bango thermal limit, terminal loading and renewable units</h3>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Input and unit</th>
+<th style="text-align: right;">Recent state, short MAE</th>
+<th style="text-align: right;">Regional generation shares, short MAE</th>
+<th style="text-align: right;">Regional generation shares, previous-afternoon MAE</th>
+<th style="text-align: right;">Matching clock, previous-afternoon MAE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bango terminal apparent power, MVA</td>
+<td style="text-align: right;">6.09</td>
+<td style="text-align: right;">20.51</td>
+<td style="text-align: right;">25.04</td>
+<td style="text-align: right;">37.00</td>
+</tr>
+<tr>
+<td>BANGOWF1 wind initial MW</td>
+<td style="text-align: right;">4.39</td>
+<td style="text-align: right;">13.90</td>
+<td style="text-align: right;">19.89</td>
+<td style="text-align: right;">36.37</td>
+</tr>
+<tr>
+<td>GOONSF1 solar initial MW</td>
+<td style="text-align: right;">4.13</td>
+<td style="text-align: right;">13.65</td>
+<td style="text-align: right;">12.75</td>
+<td style="text-align: right;">11.10</td>
+</tr>
+<tr>
+<td>JEMALNG1 solar initial MW</td>
+<td style="text-align: right;">3.68</td>
+<td style="text-align: right;">10.43</td>
+<td style="text-align: right;">10.87</td>
+<td style="text-align: right;">14.19</td>
+</tr>
+<tr>
+<td>PARSF1 solar initial MW</td>
+<td style="text-align: right;">3.10</td>
+<td style="text-align: right;">10.18</td>
+<td style="text-align: right;">9.51</td>
+<td style="text-align: right;">8.26</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Equipment ratings that can and cannot be fixed in advance</h3>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Dynamic Red Cliffs rating estimate</th>
+<th style="text-align: right;">MAE, MVA across 12 held-out half-hours</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Median rating across 28 training half-hours, 384.25 MVA</td>
+<td style="text-align: right;">32.45</td>
+</tr>
+<tr>
+<td>Public 25°C static fallback, 374 MVA</td>
+<td style="text-align: right;">35.87</td>
+</tr>
+<tr>
+<td>Historical matching half-hour</td>
+<td style="text-align: right;">44.43</td>
+</tr>
+<tr>
+<td>Apply forecast air temperature to public static curve, round up to next 5°C</td>
+<td style="text-align: right;">52.42</td>
+</tr>
+<tr>
+<td>Fit rating to forecast temperature and wind speed on earlier dates</td>
+<td style="text-align: right;">66.10</td>
+</tr>
+</tbody>
+</table></div>
+<p><img alt="Red Cliffs–Wemen rating error" style="width:100%;height:auto" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABBQAAAHQCAYAAAARXjmZAAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjEwLjEsIGh0dHBzOi8vbWF0cGxvdGxpYi5vcmcvc2/+5QAAAAlwSFlzAAAWTQAAFk0BANFIaAAAcg1JREFUeJzt3QeYE1XYsOGDIGJXEMWKDRQFC/Yu9oaiiGLF+tk7ir0rih2woYgVu6LYG/Yu9oqIBXtFUbGR/3rO989+2exkN8OW7C7PfV1xMZkkU5LMnPe85z0tcrlcLkiSJEmSJGUwQ5aFJUmSJEmSYEBBkiRJkiRlZkBBkiRJkiRlZkBBkiRJkiRlZkBBaoZ23nnneJMkSZKk+tKq3l5ZUtl88MEH5V4FSZIkSc2cGQqSJEmSJCkzAwqSJEmSJCkzAwqSJEmSJCkzAwqSJEmSJCkzAwqSJEmSJCkzAwqSJEmSJCkzAwqSJEmSJCkzAwqSJEmSJCkzAwqSJEmSJCkzAwqSJEmSJCkzAwqSJEmSJCkzAwqSJEmSJCkzAwqSJEmSJCkzAwqSJEmSJCkzAwqSJEmSJCkzAwqSJEmSJCkzAwqSJEmSJCmzVtmfIqkpGDfxy9Dj0GPKvRqS1OiNGTyo3KsgSVKTZIaCJEmSJEnKzICCJEmSJEnKzICCJEmSJEnKzICCJEmSJEnKzICCJEmSJEnKzICCJEmSJEnKzICCJEmSJEnKzICCJEmSJEnKzICCJEmSJEnKzICCJEmSJEnKzICCJEmSJEnKzICCJEmSJEnKzICCJEmSJEnKzICCJEmSJEnKzICCJEmSJEnKzICCJEmSJEnKzICCJEmSJEnKzICCJEmSJEnKzICCJEmSJEnKzICCJEmSJEnKzICCJElSiQYMGBA23HDDsPDCC4eZZ545tG3bNqy44orhtNNOCz/++GOlZceNGxcGDRoUNtpoo7DIIouE1q1bh/bt24fNNtss3HvvvZnfe9FFFw0tWrRIvXXo0KEOt1KSpNK0KnE5lQEXCOutt1548skna/U6e+yxR7juuuvChAkT4sWIpm2fffrpp2GxxRYL/fr1C9dee225V1GSVAYXXXRR6N69e9h4443DvPPOG37//ffw4osvhlNPPTUMGzYsPP/886Fjx45x2ZNOOinceuutYamllgqbbLJJDCZwXrn77rvDww8/HPr37x/OO++8zOtwyimnVLlvttlmq5PtkyQpCwMKNTTosxgxYkRsiEqSpObp119/DW3atKly/wknnBDOPvvscNZZZ8XAAjbddNMYNFh55ZUrLfvOO++EtdZaK5x//vlhp512igGKLAheSJLUGBhQyNgDQM/0Z599FnupC3v7V1hhhTp9//fffz/MMssstX6dgQMHhmOPPTYsuOCCdbJe0yv2H8dkzjnnLPeqSJLKJC2YgB122CEGFBjmkNhzzz1Tl+3atWvYcccdw1VXXRXGjBmTOaAgSVJjYUAhYw8Aww8IKJCJsP7669fr+y+99NJ18jrzzz9/vKl2Zpxxxjo7JpKk5mX06NHx7/LLL1/yOQWtWmW/FGMYxSeffBKDGwQnuB5JXk+SpIZkUcY6wsmcIRKc4C+55JJ4gudE36tXr/j4pEmT4jjJDTbYICy00EIVhZl69uwZx1um4fUKgxYEObifTAl6NXh89tlnD3PMMUfYcsstYw96IYIfPIcaAAn+nbz+Dz/8EP7nf/4nBh1mmmmmsOyyy8bhG2n++uuvuA6LL754XJaaAieeeGK8P219i8l//2+//TbstddeYb755guzzjprWHPNNcMzzzwTl2Ns6tFHHx3Ho/J+yyyzTLj99tuLvu6dd94Zi19RJIvlO3XqFLMzSFFN89hjj4V11lknvi/P4Xh98MEH1a5z4bCWjz76KL4HKa0cU96X9d1nn33C559/nhqUSl6H1+zbt2+YZ5554ueF17jvvvtK2oeSpPJhuALnwyOOOCKeR6iXQDCBoQ814ZqA89UMM8wQaytkxXnj+OOPD0ceeWR8/hJLLBHPZ5IkNTQzFOrYoYceGp577rnYuOdGYx809LnIWHfddeP9c889d2xsUuX5wQcfjH+32GKLkt+HRuc999wTNt9887D//vuH9957LzzwwAPhlVdeif+mgVqKX375JY7jJMCx/fbbx8AADXYa+FzoMLQjkcvlQu/evcP9998fllxyyXDwwQeHf/75JwY33n333WnYW//3/jTmd9lllzBx4sRwxx13xHGnFLnad999w2+//Ra22WabGBS4+eabY5oo1bVXX331Sq914IEHhssvvzwGbLbddtu4j3mNc889N+4bjktyPMD78Fr06pCqypAGllljjTXCcsstV/I23HXXXeGKK64IPXr0iMEQ9iX745prrok9Vq+9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goxkh1Ls77fffgtvvfVWzBh9+umnQ58+fSqW97iU12233Rb3LR0JBOLyeWxqx4CCJGm6cdNNN4WjjjoqziJw1113VQx9UPnQQKJnnBlq7r777jBhwoQ4a0rS+6eGwdSPzOSw++67x5mC1LgwuwOzacw333wx/bpr165xJpsjjzwypmGffvrp5V7F6c7UqVMrerCZPYiZg5hxo1u3bvG3jFkfmHo1bfiDyjfcgUCc6pYBBakZSCKnSYS1UHL/XHPN1aDrpXQer/K4/vrrY2NpwQUXjBd5TMOWz+NSXkwd2atXr5id8PPPP4fddtut4jGPTf3bddddY1bC4MGDS36Ox6X8qHcBsnsSHpeGkew/st0KzycEfTbddNOKqVXhcSkfhitQA4EgzxZbbFHlcY9N7RhQkJqBpZZaKv5lnGqacePGVTvOVQ3L41WengnGhnfs2DGmoS655JJVlvG4NA6LLLJIHKPKmFayF2o6Nv/++2/MaqCXkEKAmjZjx46N6fNcMFNgLrmRag+KzfH/BH0SfmfKLxkaxDCIhN+XhpHs52KNzLnnnrti7H7+8h6XxlOMMeGxqR0DClIz0KNHj/iXwotJCl6C8XzPPfdcjJavvvrqZVpD5SNtFQ899FCVxyj4wwmNhq8nrrpBxW1SHAkiEEwo7ElKeFwa10wD+bNwVHdsOKbMYrPmmmuGmWaaqYHXtPngQjvtRmE5LLfccvH/N95444rn+J0pv2T2pvx97PelYVDkmiDbe++9V+XaC++88078S0E/eFzKY8qUKeGGG26IgQR+w9J4bGqpltNOSmokNtlkkzhP7uDBgyvdf8QRR8T799tvv7Kt2/RmzJgxcZ/vuOOOqY8z93GXLl3iMvfcc0/F/f/9919u++23j/cPHDiwAde4+Tr77LPj/lxmmWVyX3/9dbXLelwazocffpj75ZdfqtzPvj7++OPjvl511VUr7p80aVJunnnmybVu3Tr3yiuvVNz/559/5tZYY424/M0339xg6z89GTFiRNy/AwYMqPKY35mG8d577+UmT55c5f4JEybkllxyybifzzrrrIr7/b40nK233jruzwsvvLDS/Q8//HCuRYsWubnmmqvit87jUh7XX3993LdbbbVV0WU8NrXTgv/UNighqfzGjx8fo6dUHaagFinDL730UhgzZkxMN2XsWLt27cq9ms3WqFGj4g2kaTMOnJ7w9dZbr2KZa6+9tuLfHBsi4swhznzvpHlTwZtp89Zaa634byPhtXPdddfFYQ70IB144IGpVetJVT388MMr/t/j0jCY0eG4446LRczoveO3iaKM1LagZ5t6CuxrCs8l7rnnntC7d+84RRtT57Vt2zYWQmNoBMeKCt4ca9UtfrcY9kDBxnPOOafK435n6t+pp54aLrjggpgtQsbH7LPPHs/5999/f+x9ZUw4RQBbt25d8Ry/Lw2DYUJce33xxRcxY4F6CqTHcz3A/r3lllvicUh4XBreOuusE2uMsJ979uxZdDmPTS3UMiAhqRH54osvcnvuuWeuQ4cOuRlnnDG3yCKL5A477LDcTz/9VO5Va/ZOOeWUGMGu7lbo3XffzfXp06ciKt6pU6fcySefnPvjjz/Ksg3T4zHp2LFjled5XOrf22+/nTvooINyyy+/fK5du3a5li1b5uaYY47cyiuvHPf1Dz/8kPq8559/Prf55pvHXr82bdrkunbtGnsG6SlXw2coJPzO1K8nn3wy17dv31znzp1zc845Z65Vq1ZxX2+00Ua56667Ljd16tTU5/l9aRjfffdd7uCDD47XXFx78ZvWq1ev3EsvvZS6vMelYbN7+P1aaKGFStq/HptpY4aCJEmSJEnKzKKMkiRJkiQpMwMKkiRJkiQpMwMKkiRJkiQpMwMKkiRJkiQpMwMKkiRJkiQpMwMKkiRJkiQpMwMKkiRJkiQpMwMKkiRJkiQpMwMKkiRJkiQpMwMKkiRJkiQpMwMKkiRJkiQpMwMKkqRG58knnwwtWrQIe+yxR2gMTj311Lg+rJcalxtuuCEem2eeeSY0Vbfddlvchsceeyw0Zddee23cDr4vUlPD+aa+f+eT7wh/Cz366KNh7bXXDm3bto3LrL/++mVfX6kUBhQkqYFxAcBthhlmCOPHjy+63MYbb1yx7BVXXNGg66jpI1DS1P3+++/h2GOPDZtuumlYZ511Kj226KKLVnx/nnjiiaKvse+++1Ysx2th3Lhx8f87dOgQ/vnnn2rX4d13343LLrLIImHq1KmVHrvkkksqXvull14q+hp9+vQJyy+/fDjiiCPCf//9FxriM1jd7Y033qjXdZieffnll2Ho0KFhyy23DIsvvnho06ZNmHvuucN6660XrrvuupDL5Yo+94UXXojPo8E588wzh+WWWy5cfPHFqZ+ZN998M5x22mnxe7HggguG1q1bh/nnnz9st9124emnn652HSdNmhROPvnk+PqzzTZbmGOOOULXrl3DfvvtV+P3oTbef//9cMopp4Rtttkmfp+Sz+OUKVNSl2ddRo0aFb/D3bp1C3POOWfcL126dAn9+/cP33//fWgqPv3007D11luHd955J+yyyy5xP3ieUFPRqtwrIEnTo1atWoV///03XH311WHgwIFVHv/kk0/C448/XrGcpKpomH311Vdh5MiRRZfhO3TVVVeFDTbYoMpjkydPDrfcckuV71mnTp1Cjx49wpgxY8Lo0aNjI6wYXht77713DBLmGzZsWGwQ0Ujk36uttlrqa7DMcccdF/r27Ru3Zbfddgv1rWPHjkUbLARSVD+GDBkSzj333Nhgpgeaxj6f4bvuuisej/vvvz9mrBS65557Qu/evWMAYscdd4xBBT6bBKGee+65cPvtt1dansY/QawVVlghNlRpbNNg53XuvvvuuB4HH3xwlff54IMPwiabbBIDHxtttFHYfPPNY8OdBi/rdcEFF4QZZ5yxXvbNww8/HE4//fTQsmXL+B1kW4sFE0BAftttt41BBPblZpttFv7+++8YQGQ9b7rpppi5tOSSS4bGjuwktpVAQhLYlJoKAwqSVAbt2rULiy22WEx7POOMM2KDJt/w4cNjI6Rnz57x4k9SZfTKXnbZZbGXd9111y263FZbbRW/Qz/++GP83uW7+eabY1CBRknh9+x//ud/YkCBgEGxgMJff/0Vh1zQACKgkI+GzHvvvRd23nnn8Oyzz4Zbb701XHTRRbG3Nw29snPNNVe49NJLGySgQAaHQxMa3qqrrhobvDSACSQlzj777BhwIjBAcCH/M/frr7/GXng+Z2SYrLzyyvF+zh0Eyu64444YGCMgleBzR8bDUkstVen9eW8yeo466qiw/fbbVwoe/fHHHzH48Ntvv8Ugxeqrr17puQTdWIf6QvBijTXWiJkRBAn4jH722WdFl5999tnD4MGDYyCGfyfIFCKgQsD+yCOPDPfee29o7AgqwWCemiKHPEhSmXCB+M0338RepsKLthEjRsQLTy6sakpLJRV1lllmiRdUjL8s7KkCvTb05m6xxRaxZ3KmmWaKabYbbrhhuO+++1JfP0kZZ3242KXHiOctvPDCYcCAAfE1S/XRRx/FXhcuhNu3bx9fh/XYZ599wueff17tc2mUcZFLj9yss84aU3jTxpqzPvS6rbTSSrHhyAUpvYBcpHKBXoi07h122CHMN998MR2Y7aJROGHChJK2iR676oYvJONbWQ403uj1Bhf6+SnmheNpaciyzewr1o19deCBB8bPS1Z33nln7Glk/7HfOY4cCxopxY45DWXWl2V5/8MPP7ykx0GDh7RsjgHvR4Ofx9PSj/PHANMwX2WVVeIxple1Jow35rPDMcxvmKV9z1jf66+/vspjBAsWWGCBuL6FaNCx/x955JGin1H27U8//RQ/YwsttFClx8hIAJ+pfv36xeEZ9JgWQ29sr169Yq8ywygaCz5zHL+kx5jfDXqwyaCqDg1Sfl8IoHBjH40dO7ZofRK+Aw888EAMDrE875M/RKNY8KOwYV7b37u0zzbZIzzG9zYNvfo8zu9vTfhc8TtQuM58Dg844ICK738+AgZ8fwgYJMEEcDzOPPPM+O/LL7+80nMOPfTQKsEEEIDg/dlHHKN8DK1juA9Zc4XBBBD4ru67VlusL0EVfrtLQXbHIYccUimYADKFGO6Rti9LxT7nHMy5ld9O9j1ZG4Vee+21cNhhh8UhSyzHMeGzQ+YIvw01ST7fZCZgzz33rDgvZKmNUOr6JhmQvA+/WXzGOQfyO/rWW29lrh+UVuuhpu80uO7hvMTnnu8nw3HWWmuteK2hpseAgiSVCWmrXAglKdMJUl6//vrr2BAqhgsFGl/0UHHxQG/MTjvtFBvDXBgUXnxzYcNFDz1P1Gag14YeURrVZEFceeWVRd+Lni4a6jTkueDlYm/QoEHxPUtFg56LVRrtrCcXgcsss0y45ppr4nZMnDgx9Xlsz5prrhmDJ7wfKb+vvPJK7GGjMVfYOOUimrRRxqDSEODCmQZ9YUDhwQcfjBfM9EpzMcR4Wy4IWR8CEvUxhpz3oWEJ3osLyOSW34AmHZqLfi72aYSxHYwJpsFAY6LYvkpDEIJeyA8//DD2wrPfuXjkPWj88HlIw36mQcwx5/0LGybFHqdHkHXn4pPPFZ8zjjm1BKpb9/PPPz9mBBB8YB3ThicUSoJKNTXi+AwsscQScd0Kx5jzWeLCOq3XlQttjhe9nWQMpUm+u6x74feNC3was7x/Ejgp/K4X4oI6CZY0Bm+//Xb8bNILzD4kRZ6gB/uN3xG+L2kIinAM+a3gOXxfCcxwrJ5//vnU5xAIJYhGo4PfGX6fplVtfu/SPtv89tBILfa85P79998/1EYylKAwYy2pAUJKfyEaazQi2a8EQ2rzPgy34XNKY5TfXn5zCC4QCCPDpykpto2lIPNp1113jUGmgw46KAbtyTCiAVy4j/lOkx3C54TfEj67NI6pbcG5q9hvbIL34BxADQ3wOU3OCzxW1+tLUI9zHMGxFVdcMZ77ODdxLiSYw/e0rhT7TvP9SupFEPQjW4bvpfWimrCcJKlB8dM733zzxX/vt99+uRlmmCH32WefVTy+5ZZb5mabbbbcb7/9ljvllFPi8pdffnml19hwww1zLVq0yI0cObLS/ZMmTcqtuOKK8bE33nij4v4pU6bkvvjiiyrr8ssvv+SWXXbZ3Nxzz537448/Kj3WsWPH+N7du3fP/fjjjxX3T548ObfEEkvE9f76669L2uaJEyfGdSj08MMPx9dhP+QbM2ZMfG9u/fv3r/TYiy++mGvZsmWubdu2cR8l28E2r7TSSrl//vmnyvt8//33ldZ/nnnmie/7xBNPVFru6quvju/ZtWvX3NSpUyvuT44D65WYMGFCvK9fv36p28z9PM5yhdtV7DlPPfVU3I7VV1899/PPP1d67Prrr4/P3W677XKluOGGG+Ly2267bZVje8YZZ8THjjzyyNRj3q1bt0r7rJTHP//881zr1q1zs846a+6dd96p9NiJJ54Yn8dnO20fzTLLLLnXX389l8Vqq60Wn/vNN9+kPp6s659//pkbOHBg/Pezzz5b8fhBBx0U9/Unn3ySGzFiRHx8wIABlV7jo48+issstNBCuX///bfKYzwn7bGLLrooPnbyySdX3LfeeuvF+15++eWi28R3Njlmpfr4449z77//fu73338vafnkM8j+4XNdeHvwwQfjcmxT586dczPNNFPuySefrPQaX331VdzumWeeOfftt99W3J/sR25Dhw6t9Jw77rgj3r/UUkulfrfYz8l7p60vy6VJ9mu+2vzeFfvs89nl8TfffLPS/Xy+eL127dql/saVit8tfnd4j4ceeqjSYyuvvHK8/9VXX019LtvE4++9916N7/Ppp5/GY8p37qeffqq4/++//861atUqN++88+bOPffc+BubHEtufK+HDx9e8vbweeRzyedzWuV/h7NKvvN9+/Yt+TnJ79Hss8+ee+uttyo9ttNOO8XHbr311ir7s/D7n38uYT3yJd8R/uZLvgeF99fl+vK9W2aZZeL91157baXlH3300fgdbN++faXfkrRzXz4e4zuYti3FvtNcU3CuSPvtTvvuqfEzoCBJZQwocIGYf7HMRTAXcvvuu2/8/7SAAhcO1TU67rnnnvj40UcfXdL6XHDBBXF5GrNpF3NcaBSiocRjo0ePztUWF/CLLbZYaiNizjnnzP36669VnpNcLN14440VgRT+f4011qjUWEnDc1i2T58+qY9zscPjzz//fIMHFAgWpDVaEgSL+Hyk7ZO07WDZ/GBQggtggio0HtKO+ahRo1Jfs7rHzzzzzKKfOxoECyywQHz8yy+/rLKPDj/88FxW888/f9y+Ysc7vzFC4IvGUrLfaUzONddcuY033jj+f7GAAjbYYIP42H333VfpfrazMGiQ6NKlS7yYHj9+fMV9XMCz/D777FN0m7jAZhkCY6VKtrPYBX+h/GBd2u2www6Ly917773x/4844ojU17nkkkvi45deemnFfcl+XHLJJXP//fdflefw/SwM7CTfrV69elW7vlkCCrX5vSv22b///vvj4wceeGCl+6+77rp4/1FHHZWrDfZ7WtANnTp1io+NGzcu9blrrrlmld+sNHzuCVay7HnnnZf62eM7xe20006L56MffvghNo4JcvOZfvzxxzMHrho6oPDCCy/k2rRpk5tjjjkqfQdrkvwenXDCCVUeI/ic5Tjzu8T79+jRo94DCqWuL9877ltllVWqPf/kd1TUJqBQ7DvNuYmAVtq5SU2TRRklqYxIPSTtkNThk046KaZWU2yuuuEOybhXxsCnjStOxqpT0Tsf47LPO++8OGUYQyoKq2cXG2+ZP2Y3QRo7fv7555K2k+sO0mYZU0mqOc/Ln+qM9PI03bt3rzI+FqSHUlDv9ddfj8MbGJ9JyiTjMqk7wThl0qsp8MW0Z/mScdzF0upJE2UZbjy/IXFsSdFliEZa3QfSV9lv1KTgs1MMxdXYNwyHIV09DfucQmBpxQoZi1udtMer26+MK+Z4UCWe9WLcbJb3S8N6U7m+lDHdFDrj88H7M/yCqeZ++eWXar9nCYYzkHLOkImk1gJV70kZJg2eOiCFxRj57vEZZQhHgqEnpP+THn3hhRemfq45Xvjhhx9CfWP9qhujnfzOUD8i7XeGsfZpvzNguEDhjBfJezL1IZ+BZHhHbT4D1ZnW37ti68FwA47njTfeGId8UesjGe7AZzDLELBCDCvgc7nsssvGWiL1gZoJDId78cUX4zA20szzJVOe8vvCtlCfJ0EdEH5TGFKWDMlqrBimQyFWtoMhHPnfwVJlOefxW8BngO819X4Ynpc/fWyxz1kpOF8mNXgSDE8orFlQ6vqWcu7jvMNyDE2srWLfJc7ZfP4Y9sjQT4btMDyEoSJqmgwoSFKZ0ahhrDu1EwgsML6eugLFJGNZKYpWXWE0qtcnuIjkIoICixQmY/wijXAu+hlXzFRixcbfUnm+UDIuNW3+8zSMYWZMKRcMjKemmFZSeIuLpmKVvBnvX939XLwlGDNKA4KLSKYeS8bR0pBkCrFkPGrynGLVtJOLGhqcDY1jyzFKCoqVcmzTcBFJEIfXK+W1CgMKNVUaT3u8Nvt1Wiqb8/mpbkq5tO8Z44RpEBKMouBiKeP0qT3BshTzo0Ah68r35bvvvovjf5ML98Lx9IXFOmmA0qDjO85nNK0B+ueff1ZsW6kKGxx1JfmdoVZJYb2Smj6LWb63ibqsbl+b37ti68FzOWYUpOXzQyCJxiu1C3gPCvFNi7POOiuceOKJMRBKXZD8wnUJAmfF9lv+/Wm/1WBbCWjxGWasPb+5hYG45D2Sz3wh7iOg8PLLL5e0XTR6/7cDu+EQrKZRTN0CapikFVstRZZzHg1iflcIXPB7wueHIoPgnFdqXYs0HKennnqqyv2FAYVS17ehz33F3ofrgXnnnTfW6GBWmyToTV0jgmuF26fGz4CCJJUZ0XoKI1FMiaJ1XLBWJ7nwo5HMibkUVAKnsULF68KTNSdwLrDrCw0vLhgoFMXFd2HPLBfnxXz77bfV3p9/EUwjjF41bvS801NMw40eF3orufgnwJA8p9iMCfRmFr52mqQHlkZLmmm5KOM96UlMm4Eh6+ugW7duqZW7a1JTr3/a47XZr9NSOZ4LUnrJCSqQAVETAlnM+nHOOefE79nRRx9dNDMmH8sQHCBYxewrVPyvqRgjKNDGLQ1FydICCkkjnm0rt+Q4EUwoNm1mXXxva/oMTMv3rDa/d9V9Fump5/eFoBEBhdoWYySQQECBbCOK4SUZKoUo+Pfqq6+mZiaxXyigSAMyrTeezAIKaVLoc6+99oqf3bTsEQo7Ehz74osvUhuoSaAjCXo1NkmxXtaP45tWwLKucUwIJhDEoNBvfgFIshTIZKmNLLM8lGJafqOr+/7VdI6r7rtEYIsb5zoCgEztyWeTQsQEhjp37lziVqkxcJYHSSozes7o5aCRw0UdAYbqJGn4NJhL9fHHH8eL1bTIf1oPSF1iiiourphqrjCYwDbzeDGkXqZVyU7WmeEiaUipZ59yYcn+YpYD0lGTYRTVTSeWVFSvbkhB/gU2F+CFuPgirbtQMptAscwO1pXt5YKqNhjmQQCH6ewaIn2+pv1KL12SQp8sV1vJlKpsYym4MKZBmMw0UThUoToEDrg4ZtgDjTcaZ3zGSK3OxzAItpWZEXivtBvZOXyumW6uULItpUybWd+m5Xcm8eyzz1ZK+y71e5v1e0aPK43shvq9I5OHLBMakuwXsl3ohaXBnhXBYIIJ9MqSaVYsmJCfov7QQw9VeYwhHQQNSBlPesYT/JbQQOPzShYcn9+0YEKChjGovl8ouW+xxRYLjQ3HgiwRgrFk+jVEMCH5nIEMmMLZJMjkaGzBl5rOfUnGY/65r7rvH0Gcurj+4dqAaV4ZBkGAmOCMmhYDCpLUCJCiT08HF4w19YxzsmcsMo1lIvppaaVcZDP2OUG6P72nhb3V1Gx4+OGHQ31KhhrQyMhvSJMqTRp6sZ7HpMGQDF/In5KOsfBc6CQp69SNSOuJp3GX9KIQrAEX/zQM6EnmYrwwxZTGAmOZ0+Zhz0dwhOkcaSiT/ZDgeDDMIH//J5KhBWmPIck4oQGbNsUiF1vsx1Jwccb4XnrJ0+ZDp7HBvqwr9DbRm88UZoWNfHqFGUvMEIHC+gnTKmks0rtVKmoYJN+zLD1gSy65ZJz+keAXU0lyjOntLZxukswDkJFD4y3txvz0+cvmS7aF9yo3GklsN9O40XuYhqBZ2nSCZI6QzpyPTAfqJ9DbTuO3VEsvvXT8TaTuRX7PKr8bTOuY1mirz987GuZgjDm/TwSJskxNyGeHKfQuuuiiOHacxn5Nv/kMV5hnnnniOH1+n/J/D8hyAK+Zj989pszkN47fFVLLa8oEIkuOgANZPEktnuR9TjjhhIrtbkxoBBNAYNv4XjdkfYfk3FaYSUBWHvuyseF7xzmLYAfBsMJAOtl8fM7yh4IxlWTy3eF8kiBQTZbXtOC90q5bku93cq5W0+GQB0lqBBZaaKF4KxWp/PTI0PAcMmRIbPzSw0WjjfR+LvRpOJHiDS68uZCmMB49bFzAcmFK45SL1SRNuz7Qg8e85lwM0/NKbwQX4lxIk6rOfYxrTkNxN4ImXABRxI3to1YCFyM0yJKCi9xPrye98vRck7r7+++/x22mccPc8skYZ8ayEzjgPnrk+EuqMI0PerdI973++utLSsNneArp8Ml+5bUJMNCbQ4O38EKTxhTrRo8amSg0ammU0nhjvWlIklrP67K+NMBZNxpNBCFoHHARW2x/5WO96Ann87HEEkvEdGCeS0ODcfe8FseChlpd6NixY2xI07ChSBj7g2PPMBd6hfl8FzYya4PAUPK5LjXlnO/ItPQmgyEKXAhz7NKKMbI/CaTQAOZzW8zuu+8ejj/++DjUh2FL+UVD2RZ67GgIlhvDg/gN4TNCA4OGBT2crC+fb35jyPzhb2ENDj5rNGLpaeRzzXeQxgrDkmiYZBniwnoQhKEwJN9xxvLzfHpZ+R2g5kxhRk99/t7xW8t6sN18DgqHvdSEAClBGoJv7NPzzz+/yjJ8T/NrcPCZIBjFbxW/K/ye8lkm0MMxYJvIyMrHfiJgyPeO4GdaYc3CAn8Eq0855ZR447eU3yV+o5PfURqkxxxzTKgvNFIZ/pf//yDwnATv+N5xXMG2kyVEwIO/1KDgVojPQ7H6ErVBrSPOS3y22TesF8N6+NzzW19XwdO6wveGLCrOe/wOEZhnWNz48eNjwI/PJOe+/AY9hRU5L/F943ed5xKs41zJNci0ZNMxhIpzJd8lPuusF+d4fls5V/GdVRNT7mkmJGl6njayJmnTRiYmT56cO+ecc+Ic5UzpxdziTLPFVHiDBw+uNMc4mOJxtdVWi8syHSPLMXVasWmskim70hR7TjHMa3388cfnllhiibiezGHP9GtMSZY27Vv+9IrvvvturmfPnnGaP+a9X3vttatMZfnzzz/nTj/99DhF14ILLhjnuGZKRKZTu+qqq+Ic74Vee+21XO/eveO820wpyLSGe+yxR+o0Y9VNncV0gMwfz3syFz1TWn7++eep00Ym77vRRhvFY8A0bGn7kWnPmD+dbZlxxhlzbdu2je/BPiuc7q4mzAO+9dZbx88cr8X2Mv1k//79c2PHji35mJfyOJhWbrPNNsvNPffc8f0WXXTR3CGHHJI653iyj0qd8rAQU6fyHmlzl2eZcq66aSMTf//9d/xMsRzbV2jnnXeOjzEtYU2YspRlhw0bVnHfBx98EO87+OCDc/Up+W4VTvVWDPuWaemY3pWp3vgOLr744vE7yXSCTEVYuB/5vjBFHd9Hfm+4bbrppnGa3EKlTJfHFHxMc8h0lBzvDh065Pbff/847VyxaSPr8veu0NChQ4tO8ViT5DNf3a3YsWFayM033zz+FjItIr8JF154YZwGtlCyPdXdik3Feeedd+bWWWed3Oyzzx5/r5dZZpk4LeyUKVNy9SmZire6W/5xq2kK1ORW+BtcTHW/R8WmCeYzeMABB8T9zb7iu3HcccfFcx73FU6bWR/TRmZZXzD9KPdzzkvOCdtvv33u9ddfT32fX375JX7f+N5xnuvcuXPu3HPPjZ+76qaNLLYtXM/w282+4jeF7ye/LzyPawI1PS34T7mDGpIkSVmRQk/PIFPZ1WfPaUOgF560dGp9MNRAjRfZKmRIMU1tYR0NSZreGFCQJElNFmO6GT5DscTCop9NBUN2CCIwXOTCCy8s9+qoGswgw7Fiij2GAVRX5FCSpgfWUJAkSU0WNScYX07BRMbTN0XUtDj22GPDYYcdVu5VUTV1awggUAuGmibUQjCYIElmKEiSJEnVonghhTeZ9vOQQw5p8kNsJKmuGFCQJEmSJEmZmaslSZIkSZIyM6AgSZIkSZIyM6AgSZIkSZIyM6AgSZIkSZIyM6AgSZIkSZJCVv8PaX4EtkGkQKsAAAAASUVORK5CYII=" /></p>
+<h2>Sources and evidence</h2>
+<ul>
+<li><a href="../../local_exports/rhs_approximation_study/thermal/report.md">February 2026 research record, method and supporting tables</a></li>
+<li><a href="https://www.nemweb.com.au/Data_Archive/Wholesale_Electricity/MMSDM/2025/MMSDM_2025_12/MMSDM_Historical_Data_SQLLoader/DATA/PUBLIC_ARCHIVE%23GENERICCONSTRAINTRHS%23FILE01%23202512010000.zip">AEMO effective-dated equation table</a></li>
+<li><a href="https://markets-portal-help.docs.public.aemo.com.au/Content/IntermittentGen/Forecasts.htm">AEMO intermittent generation forecast access</a></li>
+<li><a href="https://www.nemweb.com.au/Reports/ARCHIVE/Network/PUBLIC_NETWORK_20260213.zip">Archived public network standing data</a></li>
+<li><a href="https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/data-nem/network-data/transmission-equipment-ratings/alternative-value-application-ratings">AEMO seasonal and temperature application rules</a></li>
+</ul></section><section id="states"><h1>Switch position, outage schedules and dispatch state</h1>
+<ul>
+<li>The evaluation covered 641 binary signals at twelve delivery times on 19, 20 and 22 February 2026.</li>
+<li>Short-lead state persistence was 95.7% accurate overall and 63.7% accurate on the 59 signals that varied.</li>
+<li>The issued outage schedule recovered 97.8% of linked-set activations at both leads.</li>
+</ul>
+<p>An outage schedule can identify the sets expected to apply while leaving individual switches and timers unresolved. At the previous-afternoon horizon the schedule identified 182 active set-intervals, produced 18 false positives and missed four. Carrying the prior case produced 72 false positives and missed 22. The comparison covers the sets linked to the available outage information at origin.</p>
+<p>Among signals that varied, previous-afternoon persistence accuracy fell to 51.7%. At George Town, the previous-afternoon published limit selected 594 MW throughout the sample while dispatch used 350 MW. The full discrepancy came from the branch choice.</p>
+<p>For Basslink, zero preceding transfer occurred alongside full directional offers in seven training observations. An idle link therefore gives insufficient information about its availability. Carry separate offer and direction scenarios. For voltage and reactive load, benchmark each measurement against its own clock profile and prior public reading before introducing regional demand.</p>
+<h3>What to inject</h3>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Input and estimator</th>
+<th style="text-align: right;">About 59 min</th>
+<th style="text-align: right;">Previous afternoon</th>
+<th>Recommendation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tasmania BU_SH1_LINE_220KV, prior case / clock / nearest demand (kV)</td>
+<td style="text-align: right;">0.64 / 0.85 / 0.90</td>
+<td style="text-align: right;">0.71 / 0.85 / 0.96</td>
+<td>Carry the same bus's latest available same-clock value. Test tap settings, reactive resources and local topology if issued.</td>
+</tr>
+<tr>
+<td>Victoria APDLOAD_MVAR, prior case / clock / nearest demand (MVAr)</td>
+<td style="text-align: right;">3.33 / 2.67 / 2.47</td>
+<td style="text-align: right;">4.93 / 2.67 / 2.93</td>
+<td>Start with clock and preserve sign. Regional demand helped the short lead by 0.20 MVAr and lost 0.26 at the long lead. Test local MW and power factor by operating mode if available.</td>
+</tr>
+<tr>
+<td>BL_PREVDI_TARGET, latest dispatch target / issued flow / clock (MW)</td>
+<td style="text-align: right;">34.58 / 35.89 / 122.74</td>
+<td style="text-align: right;">46.07 / 58.45 / 122.74</td>
+<td>Anchor to the freshest published target. Propagate each simulated dispatch target into the next five-minute step.</td>
+</tr>
+<tr>
+<td>Basslink TAS1 offer M, prior case / clock (MW)</td>
+<td style="text-align: right;">119.5 / 119.5</td>
+<td style="text-align: right;">239.0 / 119.5</td>
+<td>Use entitled directional offers if available and bracket the missing offer with full, derated and zero cases.</td>
+</tr>
+<tr>
+<td>Basslink VIC1 offer N, prior case / clock (MW)</td>
+<td style="text-align: right;">148.5 / 148.5</td>
+<td style="text-align: right;">297.0 / 148.5</td>
+<td>Keep an independent directional offer. A dispatch limit or forecast flow can differ from the offer.</td>
+</tr>
+<tr>
+<td>Basslink winning switch status, prior case / clock / issued-flow class (errors out of 12)</td>
+<td style="text-align: right;">3 / 3 / 2</td>
+<td style="text-align: right;">6 / 3 / 3</td>
+<td>Evaluate both switch runs and use a range where they disagree materially.</td>
+</tr>
+<tr>
+<td>Mortlake inertia, prior case / clock / plant-output proxy (source units)</td>
+<td style="text-align: right;">0 / 0 / 0</td>
+<td style="text-align: right;">0 / 0 / 0</td>
+<td>Supply individual future synchronous states and compatible inertia coefficients. Held-out labels were all zero.</td>
+</tr>
+<tr>
+<td>T^V_NIL_9, last dispatch RHS / issued equation RHS (MW)</td>
+<td style="text-align: right;">0 / 0</td>
+<td style="text-align: right;">0 / 244</td>
+<td>Verify the timer branch and process-specific equation before injecting an inferred state.</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Predicting activation from the issued outage schedule</h3>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Lead and method</th>
+<th style="text-align: right;">Set-intervals</th>
+<th style="text-align: right;">True / false positives</th>
+<th style="text-align: right;">Missed activations</th>
+<th style="text-align: right;">Precision / recall</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>About 59 minutes, NOS</td>
+<td style="text-align: right;">2,476</td>
+<td style="text-align: right;">182 / 6</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">96.8% / 97.8%</td>
+</tr>
+<tr>
+<td>About 59 minutes, prior case</td>
+<td style="text-align: right;">2,476</td>
+<td style="text-align: right;">168 / 62</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">73.0% / 90.3%</td>
+</tr>
+<tr>
+<td>Previous afternoon, NOS</td>
+<td style="text-align: right;">2,472</td>
+<td style="text-align: right;">182 / 18</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">91.0% / 97.8%</td>
+</tr>
+<tr>
+<td>Previous afternoon, prior case</td>
+<td style="text-align: right;">2,472</td>
+<td style="text-align: right;">164 / 72</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">69.5% / 88.2%</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Sources and evidence</h2>
+<ul>
+<li><a href="../../local_exports/rhs_approximation_study/states/report.md">February 2026 research record, method and supporting tables</a></li>
+<li><a href="https://www.aemo.com.au/-/media/files/electricity/nem/it-systems-and-change/nemde-queue/nemde_queue_users_guide.pdf?la=en">AEMO NEMDE Queue Users' Guide, p. 20</a></li>
+<li><a href="https://visualisations.aemo.com.au/aemo/nemweb/mmsdatamodelreport/electricity/mms%20data%20model%20report_files/MMS_24.htm">AEMO MNSP bid data</a></li>
+<li><a href="https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/data-nem/network-data/network-outage-schedule">AEMO Network Outage Schedule</a></li>
+</ul></section><section id="forward"><h1>Which inputs support a forward constraint calculation?</h1>
+<ul>
+<li>In a second February 2026 sample, broad Sydney day-ahead error was 420.4 MW for population and 280.7 MW for a clock-specific electrical share.</li>
+<li>At Bango a 5 MW error budget allows about 4.2 MVA of rating error with other terms fixed.</li>
+<li>The previous-afternoon QNI forecast missed seven economic binds across 72 dispatch intervals.</li>
+</ul>
+<p>A regional demand forecast determines one part of the future dispatch state. The same NSW demand can coexist with different pump schedules, local solar output, interconnector transfers and switch positions. A useful forward estimate starts with the terms that can materially change the limit and assigns each an observable baseline or a stated scenario.</p>
+<p>On 23, 25 and 28 February, starting from measured Sydney-area load and applying its historical share of the regional demand change reduced previous-afternoon error to 215.7 MW. The issued monitor recorded 377.8 MW on those dates but beat the electrical share in the earlier morning cohort. Delivery hour and forecast origin matter. For statewide rooftop solar, the issued previous-afternoon forecast recorded 217.8 MW error against 443.1 MW for a historical clock mean.</p>
+<p>Plant behaviour depends on the asset. For the active battery in the sample, a historical clock profile recorded 52.6 MW previous-afternoon error against 105.7 MW for idle dispatch. The other battery remained close to idle. When offers or stored energy are unavailable, propagate feasible charge, idle and discharge paths through the equation.</p>
+<p>Start with the effective equation version and recent public RHS. Replace an input when its plausible error can change the decision. Score the complete expression on coherent forecast vintages against persistence and the published RHS. A binding call also requires invocation and a forecast of weighted injections. The evaluations used AEMO regional runs as a substitute for the user's forecasts. They leave seasonal accuracy, longer horizons and actual client receipt times open.</p>
+<h2>Choosing an input by operating condition</h2>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Input</th>
+<th>First source</th>
+<th>Regional fallback</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Constants and shared equations</td>
+<td>Resolve dated coefficients and recursively expand the applicable RHS</td>
+<td>Use the exact definition</td>
+</tr>
+<tr>
+<td>Local load</td>
+<td>Decode the matching issued monitor and verify its definition</td>
+<td>Fit local/region shares by delivery clock or regress on regional demand and rooftop PV using historical electrical labels</td>
+</tr>
+<tr>
+<td>Regional demand</td>
+<td>Reconcile regional demand and eligible scheduled loads against historical case inputs</td>
+<td>Forecast eligible pumps separately or specify off and running schedules</td>
+</tr>
+<tr>
+<td>Initial interconnector flow</td>
+<td>Latest public metered flow or preceding target from the same forecast vintage</td>
+<td>Use a signed clock/day-type baseline by link and scenario-test flow changes</td>
+</tr>
+<tr>
+<td>Wind and solar trader MW</td>
+<td>Latest signed SCADA or previously issued plant path where accessible</td>
+<td>Use plant share of issued regional cleared generation or anchor plus regional change</td>
+</tr>
+<tr>
+<td>Scheduled plant and pumping</td>
+<td>Last observed unit state with public dated availability and outage schedule where available</td>
+<td>Use unit clock/start/stop scenarios with ramp and capacity bounds</td>
+</tr>
+<tr>
+<td>Storage</td>
+<td>Latest unit MW and available state of charge with issue-time availability</td>
+<td>Clock by unit plus idle/charge/discharge scenarios within power and energy limits</td>
+</tr>
+<tr>
+<td>Rooftop solar</td>
+<td>Use issued AEMO regional rooftop PV mean</td>
+<td>Fit a local PV response or use installed-PV shares as an untested scenario</td>
+</tr>
+<tr>
+<td>Thermal rating</td>
+<td>Match the public standing rating and class to the equipment and confirm whether it is dynamic</td>
+<td>Compare last rating and seasonal/clock rating and apply a weather scenario</td>
+</tr>
+<tr>
+<td>Branch loading</td>
+<td>Earlier terminal measurements or electrically matched state estimate</td>
+<td>Fit a local relationship to regional dispatch and flows with topology fixed</td>
+</tr>
+<tr>
+<td>Voltage and reactive power</td>
+<td>Earlier point or published monitor with the same definition</td>
+<td>Use local clock/regime baselines and high/low reactive and voltage scenarios</td>
+</tr>
+<tr>
+<td>Inertia and system strength</td>
+<td>Use the last published aggregate or sum eligible committed units with documented constants</td>
+<td>Scenario-test likely unit combinations and synchronous condensers</td>
+</tr>
+<tr>
+<td>Statuses and protection timers</td>
+<td>Apply known switch logic with the latest public state and announced changes</td>
+<td>Run discrete topology and timer scenarios</td>
+</tr>
+<tr>
+<td>Entered settings and overrides</td>
+<td>Use dated public entered forecast or a verified matching monitor</td>
+<td>Carry last valid entry within its effective window and stress plausible alternatives</td>
+</tr>
+<tr>
+<td>Basslink directional offers and mode</td>
+<td>Use previously public directional offers and an issued flow direction as a switch proxy</td>
+<td>Model outages and operating direction as joint scenarios</td>
+</tr>
+<tr>
+<td>Previous-period references</td>
+<td>Seed from earlier public result and recursively roll a consistent forecast path</td>
+<td>Carry or clock benchmark and stress the first forecast step</td>
+</tr>
+<tr>
+<td>Invocation and economic binding</td>
+<td>Use issue-time set or outage information and matched public constraint solution</td>
+<td>Run active and inactive scenarios plus a joint LHS/RHS range</td>
+</tr>
+</tbody>
+</table></div>
+<p><img alt="Sydney-area previous-afternoon load error" style="width:100%;height:auto" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABBQAAAHQCAYAAAARXjmZAAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjEwLjEsIGh0dHBzOi8vbWF0cGxvdGxpYi5vcmcvc2/+5QAAAAlwSFlzAAAWTQAAFk0BANFIaAAAbPRJREFUeJzt3QWUVVXbwPGNKCBigdiKit2ir9iKiR0YqNiBhYqiYOdrJ3Z3t9iFiYFivyZiYAd26/3Wf6915jtz5tzhnulh/r+1roM3T91zz372s5/drlQqlYIkSZIkSVIBkxV5siRJkiRJEgwoSJIkSZKkwgwoSJIkSZKkwgwoSJIkSZKkwgwoSArbbLNNvEmSJElSpSav+JmSJllvv/12cy+CJEmSpFbGDAVJkiRJklSYAQVJkiRJklSYAQVJkiRJklSYAQVJkiRJklSYAQVJkiRJklSYAQVJkiRJklSYAQVJkiRJklSYAQVJkiRJklSYAQVJkiRJklSYAQVJkiRJklSYAQVJkiRJklSYAQVJkiRJklSYAQVJkiRJklSYAQVJkiRJklSYAQVJkiRJklSYAQVJkiRJklSYAQVJkiRJklTY5MVfImlS9N74T0OffQ9u7sWQJEnSJGbk8FOaexHUSMxQkCRJkiRJhRlQkCRJkiRJhRlQkCRJkiRJhRlQkCRJkiRJhRlQkCRJkiRJhRlQkCRJkiRJhRlQkCRJkiRJhRlQkCRJkiRJhRlQkCRJkiRJhRlQkCRJkiRJhRlQkCRJkiRJhRlQkCRJkiRJhRlQkCRJkiRJhRlQkCRJkiRJhRlQkCRJkiRJhRlQkCRJkiRJhRlQkCRJkiRJhRlQkCRJkiRJhRlQkCRJkiRJhRlQkCRJkiRJhRlQkCRJkiRJhRlQkCRJkiRJhRlQkCRJkiRJhRlQkCRJkiRJhRlQkCRJkiRJhRlQkCRJkiRJhRlQkCRJkiRJhRlQkCRJkiRJhRlQkCRJkiS1OE888URo3759aNeuXRg2bFiNxz/99NNw7rnnhvXXXz/MM888oVOnTmH66acPq666arjqqqtCqVQq+97PPvtsfF3Xrl3DlFNOGRZffPFw1llnhX/++adRl3lSY0ChjTv66KPjwf7444836uesttpq8XNaow8//DAuO+sgSZIkqfH98MMPYfvttw+dO3cu+5xzzjknDBo0KLzxxhth5ZVXDgcccEDYeOONw8svvxx23HHHsNVWW+W+7q677orPp/G/6aabhn322Sf8+eefYfDgwaF///6NusyTGgMK9UAjM32bbLLJYkRspZVWChdddFG9o1utSRIwoPEtSZIkSfVBI//nn38Ohx56aNnnLLvssuGxxx6LbRAyEk444YRw5ZVXhrfffjvMPvvs4ZZbbgm33357tdf8+OOPYbfddotZBHSqXnbZZeHUU08Nr7zySlh++eXDrbfeGm688cZGW+ZJzeTNvQCTgqOOOir+/fvvv8PYsWPDHXfcEZ555pnwyCOPxINYIVx99dXh119/be7FkCRJktTC0Ya69tprw/XXXx/++OOPss/bbLPNcu+fddZZw5577hkOO+ywMHLkyGrPI2Dw9ddfx0yCZZZZpup+hkscf/zxYY011ggXXHBB4UyFWypc5kmNAYUGGjaQ9vrrr4fevXvHg/Wpp56K6TRt3ZxzztnciyBJkiSphfvss8/CHnvsETbffPOw9dZbx4yDuphiiini38knr97kJaMBffv2rfGaVVZZJQ5XGDVqVAwKdOzYsUmXuTVyyEMjWGyxxarG2z///PNV93/55Zdh3333jQVDODi7desWNthgg/Dkk0/WeA/SbxhCwNif//3vf2GjjTaKBUOmmmqqGKAg+6FoPYQidQDuvPPOMGDAgDD//PPHz+TWq1ev3EIlvC/jjzD33HNXDQGZa665JlpDgUIpl156aVhuueXC1FNPHb/ASy21VDj99NPDX3/9VeP5vCfvQzYIKU3zzTdf3JZzzDFHGDp0aBz7VKmvvvoqHHzwwWHBBReM6zfNNNPE99tmm23Cq6++mvuab775Juy+++5hlllmiZ+7yCKLhCuuuKLG81gOCsSst956oUePHvG5DIch4nnPPffkvneybpy82JcsS4cOHcL+++9f9Zz3338/7LrrrlXv2b179zjua8yYMRWvtyRJktQS0Tag/UMwgCyBuqKtQIZ0XuDgnXfeiX9p52QRfKA9w+s/+OCDJl3m1soMhUaSVBRNGtEfffRRrK0wfvz4WHWUAiGff/55uPnmm8P9998fx+5wIGaNGzcurLDCCmGJJZYIAwcOjJVMec0666wT//br169Rlp+KpNSEINNittlmiwVGiOZRqOSFF16IqTzpIR9E4VjH/fbbL0w33XTx/uRvbXbYYYdwzTXXxM/Yaaed4hdxxIgRYciQIeGhhx4K9957b42oImj0k/2x7rrrxkDAfffdF0455ZQYJMhr4Gcx/ILtyhAVGvkEdvDJJ5/EYM3qq68et3na999/H1ZcccXYyCf6SMOf1Kadd945bivWJfHdd9/FbcFnrLXWWrHhz/5m3TbccMNw4YUXxv2Zh31KgICTH8ECTmpg+1Nk5vfff4/LS8CB44FxYRxDFJfhuJAkSZJaI4osPvzww7Fzc4YZZqjz+9CWoFAjszhkr49p12DaaafNfW1yP9f+TbnMrZUBhUbw2muvVWUJ0CAHKTAEE+h5Tmou4MADD4zP4fE111wzFg9JI3uBLwSFQhJ77713bNjSU84XpEuXLg2+DjTke/bsWe2+f//9Nzb6ifaRaUFWAVgn1peAAr3p6cyE2tx0000xmMAULQQHCAzgxBNPjIECAgpkRLD+WQQC3nzzzZi1gf/+978xAMCy8fqZZ5651s9+9NFH43vQ6Ocz0sjA+Omnn2q8hqyFXXbZJRbcpIgLWF+W/+STT64WUCAbge2R3Z+cwNh3hxxySBy3xRQ1WR9//HE8htInJF635ZZbxmAGWS8LL7xw1WNvvfVWLEjDviEAVVtqFlkmeShc077L1GVfJ0mSJDUmrmnJOOYamU60uqItcPbZZ8dMYtoarWGZWzOHPDQAGtTcDj/88NhzTuOOXmR6sclKoBf5gQceiI1LGpLZ4REUDKG3O++AJ0J25JFHVruPAASNS3rB6ZVuDNlgAuiFpwEOGvv1xVCH5EufBBNAo/nMM8+M/77kkktyX0sDPgkmgCEL2267bQx6vPjiixUvQ16DnmBBXnYFwzHOOOOMqmACaNgTIOBkQkXXBI36bDAh2Z9kNEyYMCGMHj06d5mOO+64GtFNAiXffvttDEalgwlYaKGFYqVaMiAIlEiSJEmtDcOtuQYePnx4nd+DTkZmWKDDj2KMdPKVy0BIMhWykvsrybYe0ADL3NqZodAAjjnmmKrhDTSMqRbKwUUjD8n49iRdPovMBBqqeePg6VGmtkAWwyZuuOGGOMcqDemGRuOVrAiGEjB+6Jdffqn2OEGS+krWt0+fPjUe4yQw44wzhnfffTc21LNZGOmKrAnqKIDG+sSw/RhmQWCCAATpUAxPYHvnDbEAQwzSgY+8z00vJxkUbEOyTGjsE2SqZBsSkMpi1hCQuZAtApoeC0Zgg7oN5ZSrtcB6vze+/vtUkiRJqovkOrVcQ57rdm5kAjC8IIvOXQIKSy+9dOz8THc+pi2wwALx+p92Bs9No3YCGb+0B6h719jLPCkwoNCA9RLKSaJc5dLwKfBXbpzOTDPNlPua5P5ykbX6YDn+85//xC8TjVtSePhC8sXiMVKIGmIqFJadCGFelkCyXaiJwPOyAYW8L20SCMgWjcxDYIChAwSD7r777qoil7wvGQRkCZCRMLHPLPe5zz33XKzDwEmJGg0U1eQzyfJgjlsyS8ptw7zjhAAPqLVRm3SWhCRJktRaMLQ4z3vvvRc76OhwpI1CAfesAw44IGY4MySbzPBy9RHANfp1110Xn8eMDGl8DrXWmO2hkhkedqnHMk8qDCg0geSA/uKLL3Ifp/c6/bw0ZobIk9yffg2NVdCIzaq0qEgyFIFgAun12d7wZ599NgYUGgLLzrCN3377LTeoUNt2aQhkKFx88cWxJgI9/NSBoFgi2SJkG1x++eV1fm/msGW9SLXKzqzBEI/ahqrkzYaRbIOXXnqpbB0ESZIkqbVKhkNnUfydxjk11k466aQaHbt77bVXvIYnCEAduInVl2NYOnUPbrzxxjBo0KCqzGeyiclyAEPS0wgyUOeMAvLpoeGX1mGZJzUGFJpAEpEibZ3pBLPDHpJx79mUmySNhgKB2WEPyTSN6WhXMkaImQqyyo3Xz8PUhMibQSL53KykrkAl2QEJGsZkBtCQ58uWRlVWshOYzqUxik5mG/BMHcmN4SPMyHDHHXfUK6DANiSrI2+aznLbsDbLL798uO2222LxSgMKkiRJUgjHHntsDCbQvqLO3GmnnVbjORSMT8+mR9YwgQDaOlyr9+/fP163k7VMJyMBB2bkS2OWO4ZpM3X7hx9+2CTr1lpYlLEJUJyP2RiY5YGpDdMYZ898paTUUHchi3R/vihppOozZSQBhHQ10WRGCdLi//rrr6r7v/nmm3DQQQdVvLzJLA3JTBUJ6jXQu56nW7du8S+Ru0olKUIUTkmn6rPspC1h1113DY2B7Z6XMcLQAj4/O9yhKLYh2RfUPEhj3zz44IOF348ZHNjfDMUgSySL6OzTTz8dA1aSJElSW0BWNbgGpnYZw5mzN7IFsmhD0VFHVgOddkz9SPYBmcpkLuRlDCufGQpNhMgZRRmPOOKI8Nhjj8XxPaT0ExggvYbU+6S4X9rKK68cZzogKsbrKeTHdIs0IHlNuveeegdEzkizJ3WHYo80akn9YRw/0x5WgpoJfCGZEpH3ohgh44DuueeesNlmm8XPz1prrbXCLbfcEgtREu0jo4KaA/vss0/ZzyEaOGLEiHD99dfHmQs23XTT+EXmPoqksMyDBw8OjYG5YpmOkp5/siCoSUGAgaEIzBSRnY2jKLYdgQNm+WBGDoYsUPyFRj9Rz1tvvbXQ+xE15WS3ySabxOKRjP1iKhy2FxkpBJkI5jBUI6/wpyRJktQakV2QzjBII1iQFzCoBO0ACtBXgkyGidXNq3SZJzUGFJoIPdaMf6fyKA1mGpYEA5ht4OCDD85NjQfVRQlGDBs2LGYyUMiPwh7UNyBgkEWqPs+liui5554bP5eG84EHHhijbZWYddZZY8SO92E5aRgzHOD888+Pn5kXUCDbgIYtwQEKotDLT0pQbQEFMFUmkUF67kk9ojFPA59MDqaoLDfjQn2RMUIDnPVkf5AJQlCBxvq+++4bAyT10bdv3/i+1FJgezEkhIAPARpmzSgaUADBotdffz2cfvrpsYjMqFGj4vaheCUnRMZn5c1CIUmSJEmNoV2pSKhFTYbhBjQgd9hhhzpH3aRKJdNGLtN/h+ZeFEmSJE1iRg6vPuxbkw5rKEiSJEmSpMIMKEiSJEmSpMIMKEiSJEmSpMIsythCFa0kKkmSJElSUzJDQZIkSZIkFWZAQZIkSZIkFWZAQZIkSZIkFWZAQZIkSZIkFWZAQZIkSZIkFWZAQZIkSZIkFWZAQZIkSZIkFWZAQZIkSZIkFWZAQZIkSZIkFWZAQZIkSZIkFWZAQZIkSZIkFWZAQZIkSZIkFWZAQZIkSZIkFWZAQZIkSZIkFWZAQZIkSZIkFWZAQZIkSZIkFWZAQZIkSZIkFWZAQZIkSZIkFWZAQZIkSZIkFWZAQZIkSZIkFWZAQZIkSZIkFWZAQZIkSZIkFWZAQZIkSZIkFWZAQZIkSZIkFWZAQZIkSZIkFdauVCqVir9M0qSkV69e8e+YMWOae1EkSZIktRJmKEiSJEmSpMIMKEiSJEmSpMIMKEiSJEmSpMIMKEiSJEmSpMIMKEiSJEmSpMIMKEiSJEmSpMIMKEiSJEmSpMIMKEiSJEmSpMIMKEiSJEmSpMIMKEiSJEmSpMIMKEiSJEmSpMIMKEiSJEmSpMIMKEiSJEmSpMIMKEiSJEmSpMIMKEiSJEmSpMIMKEiSJEmSpMIMKEiSJEmSpMIMKEiSJEmSpMImL/4SSZOi98Z/Gvrse3BzL4YkSVKrN3L4Kc29CFKTMENBkiRJkiQVZkBBkiRJkiQVZkBBkiRJkiQVZkBBkiRJkiQVZkBBkiRJkiQVZkBBkiRJkiQVZkBBkiRJkiQVZkBBkiRJkiQVZkBBkiRJkiQVZkBBkiRJkiQVZkBBkiRJkiQVZkBBkiRJkiQVZkBBkiRJkiQVZkBBkiRJkiQVZkBBkiRJkiQVZkBBkiRJkiQVZkBBkiRJkiQVZkBBkiRJkiQVZkBBkiRJkiQVZkBBkiRJkiQVZkBBkiRJkiQVZkBBkiRJkiQVZkBBkiRJkiQVZkBBkiRJkiQVZkBBkiRJkiQVZkBBkiRJkiQVZkBBkiRJkiQVZkBBkiRJkiQVZkBBkiRJkprJ0KFDwxprrBHmmGOOMOWUU4auXbuGpZZaKhxzzDHh22+/rfbcHXfcMbRr167WG++VNtdcc030Nccdd1zFy/vjjz+GE044IS7j9NNPH6addtqw6KKLhkMOOSR8+eWXDbZd1DpM3twLoHxHH310PImMHDkyrLbaahN9PieXq666KowbNy6eNFqiK6+8Muy0007hiiuuiMs7KSq63yRJktS2nXnmmaFXr15hrbXWCjPOOGP45ZdfwnPPPRevKy+++OIwatSo0KNHj/jcTTbZpOy1/jXXXBM++OCDsO6661a7f//99w/ff/99jeeXSqUYGPj7779rvKacH374ISy77LLh3XffjcucBDieeuqpcNJJJ8Xr/RdffDHMNttsddoWan1aVUCBgzU5+KXW4sMPPwxzzz13WHXVVcPjjz/e3IsjSZKkFoQe/06dOtW4/7DDDosN/v/+978xsJAEFLhlETA45ZRTQocOHWp03BFQyPPggw/GYAKZBssss0xFy8pyEEzYbrvtwtVXX13tsV122SVcfvnl4bzzzovLrbbBIQ9SA9pnn33CW2+9FSO3kiRJ0sTkBROw5ZZbxr/vvffeRN+D7ITffvstbLbZZmGGGWao6HOTIMXAgQMrXlYyILDhhhvWeGzjjTeOf7/++uuK30+tnwEFqQFxAl9wwQVD586dm3tRJEmS1IqNGDEi/l1iiSUm+txLLrkk/t19990rem9qHfD+Xbp0Cdtss03Fy7TIIovEv/fee2+Nx+655574d80116z4/dT6TRIBBb4MHLizzjpr6NixY5hlllnCiiuuWCPV5quvvgoHH3xwbPBNNdVUYZpppgnzzTdf/BK9+uqrVc8jLZ3hFYxbysPY+GT4RRZj5zfaaKPQvXv3mHLEeKe99torfPHFF7nPf+mll0Lfvn3D1FNPHZeH9Xj22WdDQ7r99ttDnz59YsEUIqALLbRQOPLII8PPP/+c+/wJEyaEI444Iiy22GJV24lCK0OGDImPpZd9v/32iyc5isfw3mzPwYMHh++++67ey832ZzszFuvhhx8OK6+8cjzpsW2pxZCMBXv55ZfDBhtsEJeBx9n+DDMoF1XltbPPPnvcPzPNNFOM/r722ms1nsvnJsfBK6+8EtZff/0w3XTTxWABwxcYz1ZumZOhDbwHwx3wxBNPVCt+kz2+iuyn5Bhkfc4+++y4f3hNXgqcJEmSWr7TTjstXh9yLc11L9fjXGcz9KE2tB1ef/31MP/888dryUowNOGvv/4KW2+9dWyHVGrXXXcNK6ywQqzd9p///CcccMAB4cADDwy9e/cO1157bTjqqKPCVlttVfH7qfVrVTUUyqXqkKZDw5BGJYVMvvnmm/C///0vXHjhheHQQw+Nz/v111/jwT927NhY+ZTn4pNPPgmPPPJIWH311SuK/tXm5JNPDsOGDYsNWxqfM888c2yoXnDBBeHuu++OxVVoyCZokBJA+OOPP2J6Eo1xnk9jkeVpCDRIqdrKMvXv3z82iGmccx/LRAGV9EmEoo6ciD766KM4nipJgSLVivFQAwYMiNVck0joHXfcERvXrMe///4bgwxnnXVWuP/++8Po0aMLnaDKYTnvu+++GChgKMGjjz4aG+osI2PK+Gy218477xyef/75GGCioc22nGyy/4+ZjRkzJu57ismwfwiYcDzQkOc1d911V1h77bVrfD6FZRiTtvzyy8eT6Mcffxxuu+22+F4EGhZYYIGyy77kkkvGoAuNfoJL6TFt6aKNRfdTYt999w3PPPNMXB9uDbG9JUmS1DwBhfQsCRRKpJg5nWmVDF3YbbfdKvoc6tFdeumlhTIaEnRgPfbYYzGQcP7558fr5AQdW8mwB7UdrT6gcNFFF8WeZjIMCCqkEVhI0Ail8UjjjgZv2j///BN++umnei3Hk08+GadKWW655WJjmgZhekzT9ttvHz+bhmjyRaYBzFinW2+9NfTr16/q+TTcGYtfXwQwaJBSZfWFF16IGRygAisNWwqpsMznnntu1Wu23Xbb2FA/9thjY1Q0jYyAySf//0OG17Ks7du3r/a8yy67LDa8eYwAS32RPsX2Zdvizz//DEsvvXTMBqERzXok24/tysmXIjMECZKTGvdTPIZ1IBixww47VL0/ASUCCQRLyGzIDlcgpSs7MwXH3R577BEDBZxMawsoUAiH51GRNy/rpS77KUF2BrdKZ/agGm+et99+O7TvYjBCkiSpuSQZzWRV0/HI9R/XknQukQ2Qh46ym2++ObcYYzlc+9L5xnVhpcUYE0xjyXU3nbdkJHANPcUUU4Snn346tnXogKPDsdJZI9T6TRJDHmjkciBn5RUkYW7XLBrE6QBAXdBgpNFKQzP7XjRk6e2nBzwJXHCSeOedd2LWRDqYgD333DPMO++8ob5o2IMsjaSRClLl6XFnW9C4Jt0JZBeQMkXPfV5qFevFkIIEPe7ZYAIIlDBM4qGHHgoNgSEpSTABnDCTIjWLL754te3HuiXjwMgeSLC9OfFxMk4HE0CGw6abbhoLyLCPshg+kz1Bs44cdwQAmno/pTGEp6VOEypJkqTiyLimt58OMoYb05Yoh0Y9mdh1KcZYNDsBDG9gGC/vQUck2RO0Ecj+puOUzOuG6BhV69HqMxQ4kDmwF1544TheZ5VVVomNdOoopJGWTw8wwxJIzaFnm+cRmUv3utcVaee8D+nz3LL4cpEJwTQr9K6Tfp8sVxZp+iuttFJ4//3367VMyWfkDZ8gm4PAAQ1ilokCK/SUg0hjeqhAOTRwCaDceOONsbFOhJRhD4lPP/00NASCMVnJ/s17LGmUjx8/vqJtkQQV2G88j7FkaXmRWwJYbMN0TYmm2k9pRWeTSD4ri+/Be+MbZn9JkiSp/uacc85YU4tOMrIXGE5drhhjpTM1kP1AB1rRYozZwosM/c0im4Kh0WQ/kMnQrVu3wu+v1qfVBxQYv0MUjzoFpNgPHz483k+P9oknnlg1Tp0ec8bXH3PMMTFtiFQfEFGjt5mU8/pU5udLwzyuvH9tkgJ7NL6RHaaRKHd/Ecln5J180o3ypLhh8pfASyUI4JDSNM8888ShBXwORTHBsBKCKA2BIoVZSRCotsfSPfpFt0VauewVPocgUX3VZ9nKvUaSJEmt32effRb/5nWA0rZh2DfFGNO1uWrDMF6ukcm+rUvtLYYeg8ze7Ot///33qmxsMorVNkwSQx4Y+06GADMLkBq09957x55Yxu7Qq5ugoUx6zueffx7eeuutGIQgbf+MM86olpqT9M4TIMiT17CjYcuXimEPtd2SjISkIZwuvJJW7v4iks8oN8ME2yH9vKThXElmAVkeBBPo2WfoBicnAjjUCKDAYHKyaSmKbovWsmzlZhuRJElSy0dbJelcSiPrlyHIZBSQkZo3nKHo0IV0McaJZTRw/UmNrXRNOjD7BJjNIduxRhuA9hPLa6HwtmOSCCgkyEIgXZ/idQyDIEpGgcS8RhhTR1JUj+r59KrTOE4ksxgwA0QWX/h0kCJBARIicunpJyspjscYpLwTCIVN6iv5DIoXZnFyeuONN+K0kMksBUmdAmofpIcu5EmGYzDzQjZiSno+xSZbktq2RVK0EwxHaWhJnYly2QxF95MkSZImDcxkRsbpWmutFQMDFGIke5rZ30444YSYiZ3U20r78ccfw0033RTbMdn6YOUwOwPX8Fx7Tuyal+VguEW2KDj1veiEpHYD05bTKUsBcoYIn3rqqfGaNckYV9vQ6gMKfDGItmUlvb3JMIY333wztweYoQqk/aSHOxBsoDf4zjvvrPYaIm58YfIaywy9ACeC9Nj9BMGNdJCA+g00ECkWmMz8kCBzor71E8DJCJyM0uvB9ho6dGgs4MIJKCloyYmF5WIeW6ZjzAumJEM2kkKAjz/+eI0GMBkiLQ3rxUmRYAcnwOwxRP0EIr+NMdUNASqCWHkBqrrsJ0mSJE0ayPbdZZdd4hACrkdplNM2YCpxevypU0bDPeu6664Lv/zySyws3hTFGBPU86IDda+99optI2o40HahTcV6MPtY79696/z+an1afQ0FKpoSCaN3nUYuDTcajWQe9OzZs2o2gIcffjgMGTIkZhIwzogaBTTeKEpCbzxRuAQNt8GDB8f0fYr+8UXlfelBppG3xBJL1MhE6NOnTzwB0AAkorjeeuvF2gIEHz7++OM47SHLl8w8wPsRbSQayTKyHrzutddei8vat2/f8MADD9Rr27CurBdDETgRbbHFFjFQwvszJIRifzyWRmObMVicwAiosF5gyk2GkxAAoeAKsyUw+wEnPhrrFJFkmAYZIQRK0rMVtARs76uuuiqetJnCk+l1WH/Wi5M247yYnrE+dTTKoegN+4Jtt+GGG8aoMMcYBUS51WU/SZIkqfXj2i9vavCJYVY4bkWQ0cCtEswwxq1csUhq10mTREDhpJNOiin6NNRpgNNQ4yBnXM+gQYOqxp2vs846sWFPoGHEiBGxt52gAo3hfffdNzbs02hQE6hgFgPGGlGllOlb6Lmn8Z+HgAUNa6aQTD6H8UM0rpmNgiKGaTTIeR7jo1h2bkT06PWn8V7fgELS601QhBMVkUwKJc4999zxMwl+ZMc38RiN2NNOOy0OA+F1pFKxTUlpSjITSOOnuOXhhx8eU7VIbaJGxa677hrvY9aNloYgCFNjHn/88bGxzvYlZYv9yvYgUNJYrrnmmjgMh/3N9iKIxTFKQKEu+0mSJEmSmlu7Ut54AUltSjJt5DL9KxuDJ0mSpPJGDj+luRdBahKtvoaCJEmSJElqegYUJEmSJElSYQYUJEmSJElSYQYUJEmSJElSYQYUJEmSJElSYQYUJEmSJElSYQYUJEmSJElSYQYUJEmSJElSYQYUJEmSJElSYQYUJEmSJElSYQYUJEmSJElSYQYUJEmSJElSYQYUJEmSJElSYQYUJEmSJElSYQYUJEmSJElSYQYUJEmSJElSYQYUJEmSJElSYQYUJEmSJElSYQYUJEmSJElSYQYUJEmSJElSYQYUJEmSJElSYQYUJEmSJElSYQYUJEmSJElSYQYUJEmSJElSYQYUJEmSJElSYQYUJEmSJElSYQYUJEmSJElSYQYUJEmSJElSYQYUJEmSJElSYe1KpVKp+MskTUp69eoV/44ZM6a5F0WSJElSK2GGgiRJkiRJKsyAgiRJkiRJKsyAgiRJkiRJKsyAgiRJkiRJKsyAgiRJkiRJKsyAgiRJkiRJKsyAgiRJkiRJKsyAgiRJkiRJKsyAgiRJkiRJKsyAgiRJkiRJKsyAgiRJkiRJKsyAgiRJkiRJKsyAgiRJkiRJKsyAgiRJkiRJKsyAgiRJkiRJKsyAgiRJkiRJKsyAgiRJkiRJKmzy4i+RNCl6b/ynoc++Bzf3YkiS1OhGDj+luRdBkiYJZihIkiRJkqTCDChIkiRJkqTCDChIkiRJkqTCDChIkiRJkqTCDChIkiRJkqTCDChIkiRJkqTCDChIkiRJkqTCDChIkiRJkqTCDChIkiRJkqTCDChIkiRJkqTCDChIkiRJkqTCDChIkiRJkqTCDChIkiRJkqTCDChIkiRJkqTCDChIkiRJkqTCDChIkiRJkqTCDChIkiRJkqTCDChIkiRJkqTCDChIkiRJkqTCDChIkiRJkqTCDChIkiRJkqTCDChIkiRJkqTCDChIkiRJkqTCDChIkiRJkqTCDChIkiRJkqTCDChIkiRJkqTCDChIkiRJkqTCDChIkiRJkqTCDChIkiRJGd9++2247LLLQr9+/cL8888fOnfuHKaZZprQu3fvcPbZZ4e//vqrxmv++eefcN1114VVVlklzDLLLPE18803X9h+++3Da6+9Vvaznn322bD++uuHrl27himnnDIsvvji4ayzzorvV6krr7wytGvXrtZb+/bt67w9JClPmwsofPjhh/GEuuOOOzbZZz7++ONN/pktUfJDx9+shx9+OKy00krxh5TnrLbaavF+/vL/LWG5jz766GZdDkmS1HRuueWWsOuuu4ann3469OrVK+y3335hq622iteS+++/f1h99dXDH3/8Ue0122yzTRgwYED44IMPwiabbBIGDRoUFlhggRhkWGaZZcIDDzxQ43PuuuuusPLKK4cnnngibLrppmGfffYJf/75Zxg8eHDo379/xcu75JJLhqOOOir3xrJi3XXXbYAtI0n/b/IwCXjnnXfC+eefH0aOHBk+/vjj8Ouvv8aG6VJLLRU23njjsN1224WpppqquRdTZfDDvNFGG4WOHTvGfdWtW7cw11xzNfdiSZKkNoyshDvvvDNssMEG1Xr2Tz/99LDqqqvGQMN5550XDjjggHj/6NGjw8033xwWXHDB8OKLL1a79rzmmmtilsKxxx4b+vbtW3X/jz/+GHbbbbf4/nRAEXTAcccdF4MAt956a7jxxhsrCiwQUOCWZ/nll49/d99993psEUmaBDMUOOEuvPDCYfjw4TGtjJP1QQcdFE/+Y8eODXvuuWdYYoklmnsxFUKMur/11lvxb9ojjzwSfv/99zBs2LBwzjnnxEyAJJvj6quvjq+RJElqSjTo6ZjKDhNg2APXmqAzK0FWQvK6bEcW74Ovv/662v0EDLiPgEESTECnTp3C8ccfH/99wQUX1Gs9Xn/99fDcc8+F2WabLQ6rkKSG1KozFE444YRw5JFHhtlnnz1GhJPoazaV/vDDD2+W5VN10047bbxlffbZZ/HvzDPPXOOxOeecs0mWTZIkqVJT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4utWXHHF0u+//17jNXfeeWepffv28XU777xzaciQIfH45DWbb755I6+hWqILLrgg7v8ZZ5wxHm/Dhg0r7brrrvH/uX+llVaqcSx57KkhcPz07t27tNNOO8XfzH322afqOJp11llLH374Yb2PoXPPPTc+3q1bt9Jee+1V2n///Uuzzz57vO/AAw9sojVVS/X999+X5pxzzvi7yzHBcZjHc56akgEFqY1ae+2144/E8OHDq90/ePDgeP/AgQObbdnUOjz22GOld999t/Tvv/+WRo4cWWtA4e+//y4ttNBC8Tl33XVX1f3//PNPqV+/fvH+E088sdprfvjhh1L37t1LHTp0KI0ePbrq/t9++620/PLLx9fccMMNjbiGaokeffTReOHLMZU9XpZccsl4XJx++ulV93vsqaGw//Mceuih8ZjYbbfd6nUMjRs3rtSxY8dS165d478T3333Xalnz57xNaNGjWqUdVPrMGDAgHh8nHDCCWUDCp7z1NQMKEht0Pvvvx9/HOaaa674A5P2448/xuh0586dSz///HOzLaNal4kFFGgE8vgqq6ySmy3DYz169IjBicRll10W799+++0LvZ/aruuuuy4eFxtssEHVfR57amyvvPJKPCZWW221eh1DRxxxRLz/yCOPrPGa2t5PbcPNN98cj4Hrr7++dMUVV5QNKHjOU1OzhoLUBo0cOTL+XXvttcNkk1U/DUw99dRhxRVXDL/++mt47rnnmmkJNal57LHH4t++ffvWeGyeeeaJY+E/+uij8MEHH1T0mlVWWSWOnR81alT4448/GnXZ1XpMMcUU8e/kk09edZ/HnhrbiBEj4t8llliiXsdQba9Zd911qz1Hbctnn30W9thjj7D55puHrbfeutbnes5TUzOgILVB77zzTvzLj0qe+eabL/599913m3S5NOmqyzFX22toMM4999zh77//rnZRpLaNYo3Zi2KPPTW00047LRx99NFh8ODBsSjtEUccEYMJhx12WL2OodpeM8sss4SpppoqFlMm4K+2g4zyHXfcMQZML7jggok+33Oemtr/h/AltRk//PBD/EsF6TzJ/d9//32TLpcmXXU55jxOVQSVyB988MFYdX/nnXeuut9jT40RUPjyyy+rZQ9cccUVoXv37o1+3P3yyy/xefQYq20455xzwsMPPxzuvPPOMMMMM0z0+Z7z1NTMUJAkSa3addddFw488MA4Be7tt99eNfRBagxffPFF7DUmqHDHHXeEcePGhSWXXDKMHj26uRdNkximfmS60u233z5svPHGzb04Ui4DClIblESak4h0VnL/dNNN16TLpUlXXY45j1NV4uqrr44X27PNNlucn32uueaq9rjHnhrLjDPOGDbZZJOYGTNhwoSw3XbbNclxV64XWZOeAQMGxKyE4cOHV/waz3lqagYUpDZogQUWqLVGwnvvvVfr+DupKY652l7DWE56BRnbSZEptU0XX3xxHFvco0eP8OSTT4Z55523xnM89tTY5pxzzrDQQgvFcehkL9T1GKrtNZ9//nkc7jD77LM73KENGTNmTKybQUO+Xbt2VbeddtopPn7yySfH/yewlfCcp6ZmQEFqg/r06RP/PvTQQ+Hff/+t9thPP/0UnnnmmXjBstxyyzXTEmpSs/rqq8e/DzzwQI3HKPLERQyNwvTFSm2vofFIYbIVVlghdOzYsVGXXS3T2WefHQYOHBiDCBwP2cyEhMeemqoKf3qGkbocQ7W95v7776/2HLUNu+yyS+6NmRew+OKLx/9fa621ql7jOU9NrsknqpTUIqy99tpxXuHhw4dXu3/w4MHx/oEDBzbbsqn1GTlyZDxuttpqq9zH//7779JCCy0Un3PXXXdV3f/PP/+UNt9883j/iSeeWO01P/zwQ2mGGWYodejQoTR69Oiq+3/77bfS8ssvH19zww03NOJaqaU64YQT4v5feOGFS59//nmtz/XYU0N45513St9//32N+zmODj300HhMLLvssvU6hj744INSx44dS127di2NGzeu6v7vvvuu1LNnz/iaUaNGNdo6qvW44oor4vEwdOjQGo95zlNTa8d/mj6MIam5jR07Nkabv/rqq1joh3TN559/PowcOTKmwTHfcLdu3Zp7MdWCUXGaG0jzZRwxvcSrrrpq1XOuvPLKqn9zfNEL8tdff8W5tEkTfvTRR8OLL74YVlxxxfjvbO/HXXfdFfr16xc6deoU+vfvH7p27RruvvvumFrMe9x8880x3VNtx1VXXRWHObDf99prr9yq56QH77///lX/77GnhphF5JBDDgkrrbRSnEKP30eKMlK3g15f6ilwHC266KL1OobOPffcMGjQoPj+W221VejQoUO49dZbY9o7hUeZYULit5VhDxRsPOmkk2o87jlPTarJQxiSWoxPPvmktNNOO5Vmnnnm0hRTTFGac845S/vtt1/sDZEm5qijjoq9FrXdst58883SFltsUdUTMt9885WOPPLI0q+//lr2c+iRW3fddUvTTTddqVOnTqVFF120dMYZZ8ReGLU9lRx3PXr0qPE6jz3Vx+uvv17ae++9S0sssUSpW7dupfbt25emmWaa0jLLLBOPo2+++abBjqF77rmntMoqq5S6dOlS6ty5c/yMK6+8shHXTpNShkLCc56aihkKkiRJkiSpMIsySpIkSZKkwgwoSJIkSZKkwgwoSJIkSZKkwgwoSJIkSZKkwgwoSJIkSZKkwgwoSJIkSZKkwgwoSJIkSZKkwgwoSJIkSZKkwgwoSJIkSZKkwgwoSJIkSZKkwgwoSJIkSZKkwgwoSJJarccffzy0a9cu7LjjjqElOProo+PysFxqWa655pq4b5566qnQ0q233nqhZ8+e4Y8//git2WqrrRa3+YcfftjciyIVxrE711xzNcl3JOuvv/4KxxxzTJh//vlDp06d4nOuvPLKZl9eKY8BBUlqobg44DbZZJOFsWPHln3eWmutVfXcCy+8sEmXUW0jUNLa/fLLL2HYsGFhnXXWCSuvvHK1x7gAT74/jz32WNn32G233aqex3slNtpoo3jfiBEjcl+39NJLx8c33njj3McvueSS+Pjuu+9edd/xxx8fxo0bF84666zQ2DjGkvXKuy255JKNvgxt2TPPPBOPp969e4eZZpopdOjQIcw555xhwIAB4dVXXy37un/++SecffbZYfHFFw9TTjll6Nq1awxEjRo1Krdxeuedd8ZjeLHFFgvTTjttfM1CCy0UhgwZEr7++utal3HMmDFhm222CbPPPnvo2LFjXM5VV101XH311aEx3XrrrWHQoEHxOzvNNNPE47F///5ln//pp5+Gc889N6y//vphnnnmiQ3x6aefPi7rVVddFUqlUmgtTj/99BignnrqqcMBBxwQjjrqKL+LarEmb+4FkCSVN/nkk4e///47XHrppeHEE0+s8fgHH3wQHn300arnSaqJRsZnn30Wrr/++rLP4TtE43711Vev8djPP/8cbrzxxtzv2RprrBGDCQQjNtxww2qPfffdd+GVV16JDaEnnngiNgLbt29f7Tl8f7HmmmtW3derV68Y/DjhhBPC3nvvHbp06RIaGwGPvAbLzDPP3Oif3Zb169cvNugJKGy11VaxEUwD/rrrrgs33XRTuOWWW8Imm2xS7TU0jLfeeuv42AILLBD22WefeKzx/FVWWSXcdttt1QJYBKQ33XTTGESgR7xv377hzz//jMcsDVc+i8ydeeedN/e7s99++8WGOQ312WabLX7WG2+8Ee67776w/fbbN9q2IbBGUIXjn2DG22+/XevzzznnnHDyySfHgAzrybLyvb/99ttj4Ozee+8NN998c2gN7rnnnviXZfY7qBavJElqkThFzzTTTKXllluuNPPMM5f++uuvGs859NBD4/M23XTT+PeCCy4otSUjR46M673DDjuUWoKjjjoqLg/LNSmtV2v2999/l+acc87SPPPMU/r3339rPN6jR4+4rTfZZJNSx44dS998802N51x88cXVvmdDhw6teuz111+P9y222GI1XnfbbbfFx7bccsv49/nnn6/2OMsz44wzltq1a1f66quvqj12ww03NMl3mmOMz7niiisa/L1XXXXV+N7jxo1r8PeeVJx44omlTz75pMb9V111Vdx2M8wwQ+mPP/6o9tj1118fH1thhRVKv/32W9X9L7zwQqlDhw6l7t27l3788ceq+8ePH18aPnx4tfvwzz//lHbdddf4XhtuuGGNZXjwwQfjsbn22mvXeC3+/PPPUmN67LHHSu+++278niTnxK222qrs8/m+8Zrs9/zTTz8tzT777PH1PKdSPJ/zQ2NKviNZc889d+79zb28Uh6HPEhSC0ea6hdffFEjpZqe0iuuuCIsu+yyMe21nB9++CEceeSRYdFFFw2dO3eOKZQrrbRS7N3KoteKHilSZ3v06BHTW+mZohc26THJSlLGWR56VOebb774ujnmmCMMHTo0vmel3n333Zj+u8wyy4Tu3bvH92E5dt111/Dxxx/X+tr//e9/Mf2c1N+pppoqpsk+8sgjuetITxap6N26dYu9dvRorbvuurEnK4se5i233LIqHZn12mWXXWJKeiUYP17b8IUk5TwZZ06aa58+feK/SdNNp59nx9COHDkyrjPbimVjW+21117xeCmKXk16ydl+bHf2I/vixx9/LLvPGePP8vJcPn///fev6PFkWAc9nuwDPo8UZR7PS79OthGvoRbCf/7zn7iPK0kBfvjhh+Oxwz7MG6uc/p6xvHlp3GQuzDrrrHF5s/hecWzQY/vVV19Ve4weYDISSFdOZyMkktfw/WUfptErTW/1ZZddFlqSuhxz//77bzjttNNibzrrxHfowAMPDD/99FON507s2Ml+Xyr5rhU9r6SHHL3zzjthiy22iK9j+NlLL70Ul58UfDJX8vBZvJ7MsonhufS+Z9Hzz7p/88034fXXX6/22AUXXFDVg8/2TPC9IMuB7xDDBRL01DN0gHN/GuvDOP1kv2YddNBB8fxIZk/2tZhiiilCY+I8yDao7Xubttlmm8XXZJ/Pd3fPPfcsu56VDJliW/A7wbFDJgeZEHlDKDhHk3XC+Yxtx3Gy4oorVjw8JDm+k9+X5NxfpDZCkeUFv3tsN4bCcDwxFIZrhrzjm+Uotyyse97v1MS+05wHOJaT4ThkpMw999xxf1qPqHVwyIMktXBcIPLDS6OGtNUEqZCff/55OPbYY8P48ePLjinlQuG9996LDWzqLXCxwWtpYNHQ4Qc+QSor6a0rrLBCfC4X0XwGwQzSuanRMHDgwNzPYowtabM0zLmIIh32lFNOiQ0mAh+V4MKGz2CZWQYuOt58881w+eWXx2XgYj7v4puLL56/xBJLxOVjvUltJW2cv1zgpS/YbrjhhrDwwguHbbfdNjZMSYt94YUX4udzEZO4//774zYnVZ37KZT32muvxeW54447YoOxoce1kqpLw4hgAuuTTndOfxYXiDRGCADQ0CUtlmWjsXH33XeH5557Lndb5aFByOt4PutLEInX8xnsR8Z55zUo2K6kZ5NCzeu4CKzkcRpa1AzggpvG2iyzzBLHfjMmnO3K5+UtO41SGuU0aAlyVRKsSoJKBNFqwzHH/mXZBg8eXHU/KdejR48Ohx12WI3hCgmGSXBMcTykx3izrASuONa4qOf/DznkkGqPg3XJ4sKe17Jd+F6yn5tbXY85zl9PP/10POfQYOB7dcYZZ8T7nnzyydjoKXpsFVHX88r7778fhyLQwNpuu+1icI3vAcEnzp00tNO1L5J6BZzvOAcyLKE+kgY7Q20Sv//+ezwmCA5n64GA8y9BN47FnXbaqU6fkQS72Lecf9jfvB/7I6mrwbYkINFalFvPiWF/8jvCbwTbltdTj4LvAfsiCRYmCFwsssgicegJ57Vvv/02nkN32GGHOGSDoHtt2N40wKmfQmdA8v7TTTddoywvgYPjjjsu7mPOXXwOQVju4zvNb3reub8u8r7TBDn4f45pOkd23nnn+P3kN5zP5vzNb6JauNy8BUlSixnygIEDB5Ymm2yy0kcffVT1+Prrr1/q0qVL6aeffqpKtc+mR6+xxhoxZZUU2bQffvihtNRSS8XHXnnllar7f//999z02++//760yCKLlKaffvrSr7/+mpsy3qtXr9K3335bdf/PP/9c6tmzZ1zuzz//vKJ1JjWXZchLveV92A5pSRostyFDhlR77Lnnniu1b9++1LVr17iNkvVgnZdeeuncISRff/11teUn3ZjPJY027dJLL42fueiii1ZLr80b8kC6d23DF5KU83Ra+MSGPDzxxBNxPRgOM2HChGqPXX311fG1m222WakS11xzTVU6f3bfHnfccfGxAw44IHefk+af3maVPP7xxx/HtOypppqq9MYbb1R77PDDD4+v49jO20adO3cuvfzyy6UievfuHV/7xRdf5D6eLCup46Sf8++nn3666vG99947busPPvggDgvIDnlIHw+kjyc+++yzeN+wYcPi/++2226lTp06VUtR32CDDeJz7r333txl23///ePjd911V0Xr+ssvv5Teeuut0vvvv1+qVLJtN95443j8Zm/Jd7cux1ySzt2tW7dq5y6GofB5PHbCCScUOrbyvi8T+67V57zCsLIs9u0UU0wRz3lZN954Y3wdx019PPvss/F9SNVneyX4ziTnnjyjR4+Ojy+77LIVfU5yzPfv37/a/Zdffnm8f/fddy+tvPLKVdsjubF/3nvvvYrXh23GsZm3TytRyZCHcjjXs714/QMPPFDx65J1XXfddaudG7/88svStNNOG2/ZYR953z2GrKy++urx9yj7+1puyEPyPSii6PImx9hss80Wh4Uk+E3bfvvtc49jlqvcsIrk/JgdPlXbd/q1116rOv9ksRx5Q9DU8hhQkKRWEFB48cUX4/9zgQ8uSrg4oZGCvIBC8kNNQzEPjRQeP+iggypantNPPz0+n4ZF3sXCww8/XOM1Rx55ZHxsxIgRpfriYoRxpXkXmVwo5Y3x3XrrrePj1157bVUghf9ffvnlc8fTp/EanrvFFlvkPk5jgsdHjRrV5AEFGm48/uqrr+Y+TrCI4yNvm+StB89NB4MSNGQIqjDOP2+f33nnnbnvWdvjxx9/fNnjjsb2rLPOGh9PX+Am24gGdlGzzDJLXL9y+zsdUKDxPPnkk1dtdy7K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" /></p>
+<h2>Sources and evidence</h2>
+<ul>
+<li><a href="../../local_exports/rhs_approximation_study/report.md">February 2026 research record, method and supporting tables</a></li>
+<li><a href="https://www.abs.gov.au/statistics/people/population/regional-population/2023-24">ABS population release</a></li>
+<li><a href="https://tapr.transgrid.com.au/">Transgrid data portal</a></li>
+<li><a href="https://www.transgrid.com.au/media/wwpo0dlu/transgrid-pacr_macarthur.pdf">Western Sydney supply diagram</a></li>
+<li><a href="https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/data-nem/market-management-system-mms-data/pre-dispatch">AEMO predispatch</a></li>
+</ul></section></body></html>

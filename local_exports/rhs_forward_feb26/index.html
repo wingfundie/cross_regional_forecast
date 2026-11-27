@@ -1,0 +1,134 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Forward RHS from regional forecasts</title><style>html{background:#f3f5f6;color:#172e38;font:16px/1.55 system-ui}main{max-width:960px;margin:auto;padding:clamp(16px,4vw,64px);background:white}h1{font-size:clamp(32px,5vw,52px);line-height:1.1}h2{margin-top:1.8em;color:#165866}li{margin:.7em 0}a{color:#08688a}code{overflow-wrap:anywhere}.scroll{overflow:auto}table{min-width:600px;border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}td,th{padding:.5em;border-bottom:1px solid #d9e3e6}th{background:#eaf1f2}td:first-child,th:first-child{text-align:left}</style><main><h1>Forward constraint RHS from regional demand forecasts</h1>
+<h2>Finding</h2>
+<p>Regional demand can drive a local-load estimate and a conditional network RHS. Current public predispatch files also contain local demand forecasts for two named inputs. For a custom regional forecast, these offer an electrical starting point. Population is a fallback where a matching load history or issued local forecast is missing.</p>
+<h2>Day-ahead results</h2>
+<p>Mean absolute error in MW across 12 half-hours. The three previous-afternoon forecasts were generated about 16:02 NEM time and the delivery half-hours ended between 10:30 and 12:00 the next day. Leads were 18.5–20 hours to interval end.</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th style="text-align: left;">method</th>
+<th style="text-align: right;">Sydney-area load</th>
+<th style="text-align: right;">Terranora load</th>
+<th style="text-align: right;">Network RHS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Population share</td>
+<td style="text-align: right;">411.6</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">—</td>
+</tr>
+<tr>
+<td style="text-align: left;">Fixed historical share</td>
+<td style="text-align: right;">380.1</td>
+<td style="text-align: right;">20.7</td>
+<td style="text-align: right;">52.9</td>
+</tr>
+<tr>
+<td style="text-align: left;">Clock and day-type share</td>
+<td style="text-align: right;">333.4</td>
+<td style="text-align: right;">22.7</td>
+<td style="text-align: right;">56.0</td>
+</tr>
+<tr>
+<td style="text-align: left;">Clock and day-type level</td>
+<td style="text-align: right;">438.3</td>
+<td style="text-align: right;">20.5</td>
+<td style="text-align: right;">27.4</td>
+</tr>
+<tr>
+<td style="text-align: left;">Latest public reading</td>
+<td style="text-align: right;">1858.4</td>
+<td style="text-align: right;">21.3</td>
+<td style="text-align: right;">15.5</td>
+</tr>
+<tr>
+<td style="text-align: left;">Latest reading plus regional change</td>
+<td style="text-align: right;">426.1</td>
+<td style="text-align: right;">18.5</td>
+<td style="text-align: right;">51.2</td>
+</tr>
+<tr>
+<td style="text-align: left;">Issued AEMO</td>
+<td style="text-align: right;">295.1</td>
+<td style="text-align: right;">8.9</td>
+<td style="text-align: right;">36.5</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Short-horizon results</h2>
+<p>Mean absolute error in MW on the same deliveries. The 12 P5MIN runs were generated 34–60 minutes before the native five-minute delivery endpoints (rounded). Each group of six predictions came from one coherent run. Scores below use half-hour averages.</p>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th style="text-align: left;">method</th>
+<th style="text-align: right;">Sydney-area load</th>
+<th style="text-align: right;">Terranora load</th>
+<th style="text-align: right;">Network RHS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Population share</td>
+<td style="text-align: right;">164.1</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">—</td>
+</tr>
+<tr>
+<td style="text-align: left;">Fixed historical share</td>
+<td style="text-align: right;">122.4</td>
+<td style="text-align: right;">19.9</td>
+<td style="text-align: right;">33.7</td>
+</tr>
+<tr>
+<td style="text-align: left;">Clock and day-type share</td>
+<td style="text-align: right;">139.0</td>
+<td style="text-align: right;">21.2</td>
+<td style="text-align: right;">36.2</td>
+</tr>
+<tr>
+<td style="text-align: left;">Clock and day-type level</td>
+<td style="text-align: right;">438.3</td>
+<td style="text-align: right;">20.5</td>
+<td style="text-align: right;">27.4</td>
+</tr>
+<tr>
+<td style="text-align: left;">Latest public reading</td>
+<td style="text-align: right;">183.6</td>
+<td style="text-align: right;">4.8</td>
+<td style="text-align: right;">11.1</td>
+</tr>
+<tr>
+<td style="text-align: left;">Latest reading plus regional change</td>
+<td style="text-align: right;">144.6</td>
+<td style="text-align: right;">4.6</td>
+<td style="text-align: right;">10.1</td>
+</tr>
+<tr>
+<td style="text-align: left;">Issued AEMO</td>
+<td style="text-align: right;">154.6</td>
+<td style="text-align: right;">5.1</td>
+<td style="text-align: right;">27.9</td>
+</tr>
+</tbody>
+</table></div>
+<h2>How the comparisons were made</h2>
+<ul>
+<li>Training used the seven prior mornings of 9–15 February 2026. Evaluation used 19, 20 and 22 February. Four complete six-interval blocks were scored on each morning, in fixed NEM time. The 19th revisits a previously identified congestion day. This is an exploratory targeted sample.</li>
+<li>NSW and Queensland forecast inputs are the contemporary AEMO run's TOTALDEMAND. The fixed share is the ratio of total historical local MW to historical NSW MW over the calibration mornings. The matched share and matched level use the same delivery half-hour and weekday/weekend class, with five weekday or two weekend training dates. The fixed share is morning-specific. Additional calibration seasons and hours would be needed for whole-day use.</li>
+<li>The population benchmark uses June 2024 ABS Significant Urban Areas: Sydney 5,143,256, Newcastle–Maitland 534,033, and Wollongong 318,258. The denominator is the NSW and ACT resident population (8,953,169), an approximate geography for NSW1. The fraction is 66.97%. This proxy deliberately tests a geographic approximation to the AEMO three-city signal. No Western Sydney-only electrical boundary was assumed. <a href="https://www.abs.gov.au/statistics/people/population/regional-population/2023-24">ABS source released March 2025</a></li>
+<li>Actuals are averages of the six five-minute dispatch RHS values or decoded monitor observations. For the 19th, both load readings and the network RHS were independently cross-checked against the earlier NEMDE replay. The 20th and 22nd use the published monitor signal as reference. These are effective quantities in the market solution.</li>
+<li>The previous-reading alternatives use an original public file created before the forecast was issued. The change method adds the training share times the forecast change in NSW demand to the earlier measured local load. Its network variant anchors to the previously observed RHS, applies the nonlinear formula change, holds interconnector flow at its observed value and treats forecast regional MW changes as approximate R-term changes. It uses no future local reading, flow or LHS.</li>
+<li>For the full N::Q_NIL_KC RHS under regional-only inputs, the fixed-share and matched-share methods use the estimated Terranora load, the average signed initial flow from corresponding training intervals, and forecast NSW and Queensland TOTALDEMAND as approximations for their constraint R terms. Forecasts of scheduled load and network topology were not supplied. Expected flow, the definition of regional demand and local-load error all contribute to full RHS error. The matched-level and previous-reading benchmarks use earlier observed RHS values directly. The issued AEMO comparator uses the same original run as the regional inputs.</li>
+<li>Each source file has a creation stamp and archived file time. Both precede the delivery interval. The original recipient's download time is unknown. Three February mornings cannot establish year-round accuracy, binding precision or a prediction interval. Half-hour average error can hide a five-minute binding event.</li>
+</ul>
+<h2>How to drive a calculator</h2>
+<ol>
+<li>Match the dispatch or predispatch version, scope and typed input. In the verified predispatch monitors, <code>DATASNAP_DFS_NSYD.RHS − 10000</code> gives the effective entered <code>N_SYDNEY</code> value and <code>DATASNAP_TE_967_1.RHS − 10000</code> gives <code>N_TERRANORA</code>. Preserve the run, delivery interval and version. Each formula has a fallback default. Use the published constraint RHS itself as the benchmark for the unmodified equation. <a href="https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/data-nem/market-management-system-mms-data/pre-dispatch">AEMO predispatch files</a> · <a href="monitor_definitions.csv">Verified program terms</a></li>
+<li>Where there is no issued local series, estimate a historical electrical load share by delivery period, weekday/weekend and season. Keep a simpler fixed share as the benchmark. Near dispatch, test the last local reading plus a forecast regional change against persistence. Negative local net flow is possible: Terranora averaged below zero in seven of the twelve evaluated half-hours.</li>
+<li>When using your own regional forecast with an AEMO base case, try local scenario = AEMO local forecast + historical local response × (your regional forecast − AEMO regional forecast). Fit the response to historical <em>changes</em> at matched hours and backtest it. This proposed scenario adjustment was not scored with a private forecast. Use a common regional demand definition and forecast vintage.</li>
+<li>For a new Western Sydney footprint, use mapped customer connections or population as starting weights for the residential component. Add commercial profiles, explicit large sites and embedded generation to model net draw. Use mapped feeder/substation load to calibrate. Match electrical boundaries before aggregating and check for overlapping meters. A regional forecast already net of rooftop PV requires care to avoid subtracting the same solar generation twice. <a href="https://dapr.endeavourenergy.com.au/">Endeavour planning data</a> · <a href="https://cer.gov.au/markets/reports-and-data/small-scale-installation-postcode-data">CER postcode solar data</a></li>
+<li>For a missing switch or outage state, evaluate separate state-specific RHS values. For a missing continuous flow or rating, use a historical range conditional on comparable grid conditions. Evaluate the complete equation for each coherent scenario, including nonlinear terms. At longer horizons use held-out forecast residuals by lead and delivery period for calibrated ranges. A binding assessment also requires an invoked equation and a forecast of signed LHS headroom. The results above score RHS and local load only.</li>
+</ol>
+<p><a href="issued_forecasts.csv">Issued forecast rows</a> · <a href="observations.csv">Dispatch observations</a> · <a href="predictions.csv">Forecast-by-forecast comparisons</a> · <a href="metrics.csv">Bias, MAE and maximum errors</a> · <a href="sources.json">Source hashes</a> · <a href="origin_sources.json">Prior reading hashes</a> · <a href="study.py">Reproduction script</a></p></main></html>
