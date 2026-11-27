@@ -1,0 +1,52 @@
+{
+  "interval": "2026-02-04T04:05:00+10:00",
+  "cutoff": "2026-02-04T04:00:00+10:00",
+  "loaded_formulations": 1126,
+  "active_in_period": 1125,
+  "excluded_loaded": [
+    "S_WDR_NO_SCADA"
+  ],
+  "shared_loaded": 170,
+  "shared_used": 170,
+  "formulations": {
+    "static": 117,
+    "dynamic": 1008
+  },
+  "external_input_count": 2206,
+  "by_spd_type": {
+    "E": 397,
+    "A": 731,
+    "I": 6,
+    "T": 424,
+    "N": 1,
+    "W": 1,
+    "S": 641,
+    "M": 1,
+    "R": 4
+  },
+  "program_terms": 27044,
+  "historical_input_status": {
+    "case_entered_value": 397,
+    "observed": 1378,
+    "case_initial_mw": 418,
+    "case_offer_value": 2,
+    "switch_run_selection_required": 1,
+    "unresolved": 6,
+    "derived_inputs_joint_rhs_check": 2,
+    "regional_components_require_selection": 2
+  },
+  "historical_equation_status": {
+    "case_static_constant": 117,
+    "case_inputs_located": 744,
+    "some_inputs_unresolved": 264
+  },
+  "datasnap": {
+    "within_one_published_increment": 2,
+    "verified_after_run": 41,
+    "multiple_or_no_leaves": 3,
+    "complex_program": 8
+  },
+  "generated_nem": "2026-02-04T04:00:11+10:00",
+  "missing_references": [],
+  "external_input_equation_pairs": 24282
+}

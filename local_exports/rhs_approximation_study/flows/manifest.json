@@ -1,0 +1,113 @@
+{
+  "files": {
+    "binding_scores.csv": {
+      "bytes": 1895,
+      "sha256": "2d20e30ff6b52f7151ecc4eaf71940487aabc56014c3fd36fc0612c7449c84d2"
+    },
+    "flow_only_rhs_effect.csv": {
+      "bytes": 139826,
+      "sha256": "66fd7c5b3f7c0321fe47ea175cfc7c6c4bec82513f4a62dec07d4246b05d9fe5"
+    },
+    "flow_predictions.csv": {
+      "bytes": 1319674,
+      "sha256": "9fbf36d6b484303c3a6c14c04aeca27a58332f4eb71049adce49c8fcb1f65267"
+    },
+    "flow_scores.csv": {
+      "bytes": 4278,
+      "sha256": "0bbba4ee20f598ae799c24f4dfc4864d8ffbee932f9667e9da76a431b08ae71b"
+    },
+    "injection_scenarios.csv": {
+      "bytes": 70610,
+      "sha256": "1f19937a362fe2e12ae0f517b077eb943215739c824b3de510dc7d885ac1dc8b"
+    },
+    "issued_values.csv": {
+      "bytes": 55392,
+      "sha256": "f1f5923a4b18fbb4faadaecb65ada61b1a1853e36b5d0b9af759ecb4fa6d05e5"
+    },
+    "load_bridge.py": {
+      "bytes": 4589,
+      "sha256": "ca8988b269af6912d882e4bce9f406beffd45983dfe57c030a174a0acdae9dfc"
+    },
+    "load_scada.csv": {
+      "bytes": 27487,
+      "sha256": "e70371fd5f2afde3445b294f77b58147fef39eadb32446e11630e74571cda98b"
+    },
+    "load_scada_sources.json": {
+      "bytes": 1779,
+      "sha256": "d509b477896bc35d8084a0e8c8a8cdc56cf1324b61d28c6fd3e89e59dd70a27e"
+    },
+    "period_start_flow_scores.csv": {
+      "bytes": 4259,
+      "sha256": "83ddd07ed379512f32d518ff88f5239003092a887218c44fa2d50d739160b0f7"
+    },
+    "public_dispatch.csv": {
+      "bytes": 121388,
+      "sha256": "4d03dacb1e59f74a54a240c820c58a93adcc85b8bef4582542856967b08713fb"
+    },
+    "regional_case_crosscheck.csv": {
+      "bytes": 11684,
+      "sha256": "8f29590ca772d0d5a0bbb9250d0b02ca8d22c88a570913cb29af3442729d31f7"
+    },
+    "regional_semantics.csv": {
+      "bytes": 41280,
+      "sha256": "f9584a26da1b543fa7a0533b3bfb2db32a893e46bfe3096448fed035ef377763"
+    },
+    "report.md": {
+      "bytes": 8973,
+      "sha256": "cdce08e82ff104f265ffc28dfb19dcc5ffdeb136406ed60346bd672103e0355f"
+    },
+    "report.py": {
+      "bytes": 12004,
+      "sha256": "dd5ece22c5c007a1e7aa1390f17d808576a5f6397cc02716786783be44dfcd16"
+    },
+    "rhs_predictions.csv": {
+      "bytes": 595822,
+      "sha256": "7d12e2830cce101a58038f5dfdee0e15fdd5da72c8f151f551fa6e4a4efc23ca"
+    },
+    "rhs_scores.csv": {
+      "bytes": 1542,
+      "sha256": "eabf2123ccbe32b039655590c9a06c9baaa0b29b77fcd60043f1013b57d82a00"
+    },
+    "scheduled_load_predictions.csv": {
+      "bytes": 92088,
+      "sha256": "f1c851ecee49fcf610920964819c4eb195e6ae887c8cc390cf97e03a214ecd89"
+    },
+    "scheduled_load_scores.csv": {
+      "bytes": 168,
+      "sha256": "53660cdf85a7389be841ef4d90dcb1d455e2e6097417ecbe2161a03232890492"
+    },
+    "sources.json": {
+      "bytes": 10905,
+      "sha256": "5d375c5a052244f7bf566aca45544735eee1d1ae5f6d40a4e37e8c2450cdf3e3"
+    },
+    "study.py": {
+      "bytes": 12254,
+      "sha256": "3ba2013ad8dceec17f7810ce193b41d22c3c8a4bd1ba5c64c51bfff3644fa5d5"
+    }
+  },
+  "dependencies": {
+    "local_exports\\rhs_forward_feb26\\study.py": "2ad588af1d9eeafec97d64fd184c6a3a955c703cc7902a0681e6b6921c06fde5",
+    "reports\\rhs_replay\\cases\\regional_validation.csv": "699d1a1dc0b0b346d3d72214d04fbc2fcee1bbc14a8bb136cc747ffbae569ec7"
+  },
+  "rebuild": "python study.py --download; python load_bridge.py --download; python report.py (omit --download for cached execution)",
+  "train_days": [
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "calibration_days": [
+    16,
+    17
+  ],
+  "test_days": [
+    19,
+    20,
+    22
+  ],
+  "input_time": "Fixed NEM time UTC+10; interval ending",
+  "retained_bytes_excluding_manifest_and_python_cache": 2537897
+}

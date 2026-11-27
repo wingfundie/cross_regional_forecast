@@ -1,0 +1,8 @@
+ts	phase	decision	why	evidence	result
+2026-11-26T10:17:35.715057+00:00	baseline	Use independent loaded case inputs	Earlier pilot starts from the solved RHS.	../../docs/CONSTRAINT_FEATURE_PILOT.md	New replay necessary
+2026-11-26T10:17:35.715057+00:00	mapping	Retain three distinct Sydney boundaries	The archived dictionary and transformer workbook identify different measurements.	sydney_sources.csv	No verified Western Sydney-wide meter sum
+2026-11-26T10:17:35.715057+00:00	windows	Select on economic stress before accessing proxy errors	Sparse congestion in the simple Terranora direct-limit equation would not test the decision near binding.	cases/replay.csv	Network equation N::Q_NIL_KC selected
+2026-11-26T10:17:35.715057+00:00	timing	Use the preceding public DispatchIS monitor as the second proxy	Its formula identifies the local input while the original file time documents the preceding issue.	proxies/prior_public_reports.csv	72 prior-public inputs aligned
+2026-11-26T10:24:07.889484+00:00	regional input	Rebuild R and retain FixedDemand as a comparison	Stress windows separated the scheduled-load definitions.	cases/regional_demand_components.csv	Network RHS reconciles within 0.000006 MW
+2026-11-26T10:24:07.889484+00:00	evaluation	Keep the near-binding verdict inconclusive	No confirmed alert in three held-out episodes.	proxies/metrics.csv	All seven binding intervals uncertain
+2026-11-26T10:24:07.889484+00:00	verification	Check the repository suite and offline report	Check arithmetic, application compatibility and rendering separately.	manifest.json	284 tests passed with 12 warnings; offline checks recorded separately

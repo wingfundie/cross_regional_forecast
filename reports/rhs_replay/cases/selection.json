@@ -1,0 +1,28 @@
+{
+  "equations": [
+    "DATASNAP_DFS_NSYD",
+    "N::Q_NIL_KC",
+    "T^V_NIL_9"
+  ],
+  "windows": [
+    {
+      "window": "W1",
+      "first": "2026-02-01T04:05:00+10:00",
+      "intervals": 24,
+      "reason": "First complete NEMDE market-day two-hour block in February, before first N::Q_NIL_KC economic bind."
+    },
+    {
+      "window": "W2",
+      "first": "2026-02-15T12:05:00+10:00",
+      "intervals": 24,
+      "reason": "Largest binding count in a mixed two-hour block before the final event day; excludes the 24/24 binding block."
+    },
+    {
+      "window": "W3",
+      "first": "2026-02-19T10:05:00+10:00",
+      "intervals": 24,
+      "reason": "Final February date with a N::Q_NIL_KC economic bind. Select the two-hour block containing the event."
+    }
+  ],
+  "screening": "Historical marginal values for run 1 intervention 0 only; two-hour blocks aligned to even NEM clock hours. This event-enriched sample cannot estimate event prevalence."
+}

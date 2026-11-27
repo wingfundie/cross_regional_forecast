@@ -1,0 +1,119 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Switch position, outage schedules and dispatch state</title><style>body{max-width:880px;margin:auto;padding:32px 20px 64px;background:white;color:#20313b;font:17px/1.65 Georgia,serif}h1,h2,h3,nav,th{font-family:Arial,sans-serif}h1{line-height:1.12;font-size:clamp(30px,5vw,47px)}h2{margin-top:2em;font-size:23px}a{color:#195968;overflow-wrap:anywhere}section{border-top:2px solid #43696c;margin-top:45px;padding-top:18px}.scroll{max-width:100%;overflow:auto}table{border-collapse:collapse;font:14px/1.4 Arial,sans-serif}td,th{padding:8px;text-align:left;border-bottom:1px solid #cad5d6}th{background:#f1f5f4}li{margin-bottom:8px}nav{font-size:14px}</style><body><nav><a href="index.html">Research collection</a></nav><h1>Switch position, outage schedules and dispatch state</h1>
+<ul>
+<li>The evaluation covered 641 binary signals at twelve delivery times on 19, 20 and 22 February 2026.</li>
+<li>Short-lead state persistence was 95.7% accurate overall and 63.7% accurate on the 59 signals that varied.</li>
+<li>The issued outage schedule recovered 97.8% of linked-set activations at both leads.</li>
+</ul>
+<p>An outage schedule can identify the sets expected to apply while leaving individual switches and timers unresolved. At the previous-afternoon horizon the schedule identified 182 active set-intervals, produced 18 false positives and missed four. Carrying the prior case produced 72 false positives and missed 22. The comparison covers the sets linked to the available outage information at origin.</p>
+<p>Among signals that varied, previous-afternoon persistence accuracy fell to 51.7%. At George Town, the previous-afternoon published limit selected 594 MW throughout the sample while dispatch used 350 MW. The full discrepancy came from the branch choice.</p>
+<p>For Basslink, zero preceding transfer occurred alongside full directional offers in seven training observations. An idle link therefore gives insufficient information about its availability. Carry separate offer and direction scenarios. For voltage and reactive load, benchmark each measurement against its own clock profile and prior public reading before introducing regional demand.</p>
+<h3>What to inject</h3>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Input and estimator</th>
+<th style="text-align: right;">About 59 min</th>
+<th style="text-align: right;">Previous afternoon</th>
+<th>Recommendation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tasmania BU_SH1_LINE_220KV, prior case / clock / nearest demand (kV)</td>
+<td style="text-align: right;">0.64 / 0.85 / 0.90</td>
+<td style="text-align: right;">0.71 / 0.85 / 0.96</td>
+<td>Carry the same bus's latest available same-clock value. Test tap settings, reactive resources and local topology if issued.</td>
+</tr>
+<tr>
+<td>Victoria APDLOAD_MVAR, prior case / clock / nearest demand (MVAr)</td>
+<td style="text-align: right;">3.33 / 2.67 / 2.47</td>
+<td style="text-align: right;">4.93 / 2.67 / 2.93</td>
+<td>Start with clock and preserve sign. Regional demand helped the short lead by 0.20 MVAr and lost 0.26 at the long lead. Test local MW and power factor by operating mode if available.</td>
+</tr>
+<tr>
+<td>BL_PREVDI_TARGET, latest dispatch target / issued flow / clock (MW)</td>
+<td style="text-align: right;">34.58 / 35.89 / 122.74</td>
+<td style="text-align: right;">46.07 / 58.45 / 122.74</td>
+<td>Anchor to the freshest published target. Propagate each simulated dispatch target into the next five-minute step.</td>
+</tr>
+<tr>
+<td>Basslink TAS1 offer M, prior case / clock (MW)</td>
+<td style="text-align: right;">119.5 / 119.5</td>
+<td style="text-align: right;">239.0 / 119.5</td>
+<td>Use entitled directional offers if available and bracket the missing offer with full, derated and zero cases.</td>
+</tr>
+<tr>
+<td>Basslink VIC1 offer N, prior case / clock (MW)</td>
+<td style="text-align: right;">148.5 / 148.5</td>
+<td style="text-align: right;">297.0 / 148.5</td>
+<td>Keep an independent directional offer. A dispatch limit or forecast flow can differ from the offer.</td>
+</tr>
+<tr>
+<td>Basslink winning switch status, prior case / clock / issued-flow class (errors out of 12)</td>
+<td style="text-align: right;">3 / 3 / 2</td>
+<td style="text-align: right;">6 / 3 / 3</td>
+<td>Evaluate both switch runs and use a range where they disagree materially.</td>
+</tr>
+<tr>
+<td>Mortlake inertia, prior case / clock / plant-output proxy (source units)</td>
+<td style="text-align: right;">0 / 0 / 0</td>
+<td style="text-align: right;">0 / 0 / 0</td>
+<td>Supply individual future synchronous states and compatible inertia coefficients. Held-out labels were all zero.</td>
+</tr>
+<tr>
+<td>T^V_NIL_9, last dispatch RHS / issued equation RHS (MW)</td>
+<td style="text-align: right;">0 / 0</td>
+<td style="text-align: right;">0 / 244</td>
+<td>Verify the timer branch and process-specific equation before injecting an inferred state.</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Predicting activation from the issued outage schedule</h3>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Lead and method</th>
+<th style="text-align: right;">Set-intervals</th>
+<th style="text-align: right;">True / false positives</th>
+<th style="text-align: right;">Missed activations</th>
+<th style="text-align: right;">Precision / recall</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>About 59 minutes, NOS</td>
+<td style="text-align: right;">2,476</td>
+<td style="text-align: right;">182 / 6</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">96.8% / 97.8%</td>
+</tr>
+<tr>
+<td>About 59 minutes, prior case</td>
+<td style="text-align: right;">2,476</td>
+<td style="text-align: right;">168 / 62</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">73.0% / 90.3%</td>
+</tr>
+<tr>
+<td>Previous afternoon, NOS</td>
+<td style="text-align: right;">2,472</td>
+<td style="text-align: right;">182 / 18</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">91.0% / 97.8%</td>
+</tr>
+<tr>
+<td>Previous afternoon, prior case</td>
+<td style="text-align: right;">2,472</td>
+<td style="text-align: right;">164 / 72</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">69.5% / 88.2%</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Sources and evidence</h2>
+<ul>
+<li><a href="../../local_exports/rhs_approximation_study/states/report.md">February 2026 research record, method and supporting tables</a></li>
+<li><a href="https://www.aemo.com.au/-/media/files/electricity/nem/it-systems-and-change/nemde-queue/nemde_queue_users_guide.pdf?la=en">AEMO NEMDE Queue Users' Guide, p. 20</a></li>
+<li><a href="https://visualisations.aemo.com.au/aemo/nemweb/mmsdatamodelreport/electricity/mms%20data%20model%20report_files/MMS_24.htm">AEMO MNSP bid data</a></li>
+<li><a href="https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/data-nem/network-data/network-outage-schedule">AEMO Network Outage Schedule</a></li>
+</ul></body></html>

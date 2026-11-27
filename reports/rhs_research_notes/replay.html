@@ -1,0 +1,209 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Reconstructing a dispatch limit</title><style>body{max-width:880px;margin:auto;padding:32px 20px 64px;background:white;color:#20313b;font:17px/1.65 Georgia,serif}h1,h2,h3,nav,th{font-family:Arial,sans-serif}h1{line-height:1.12;font-size:clamp(30px,5vw,47px)}h2{margin-top:2em;font-size:23px}a{color:#195968;overflow-wrap:anywhere}section{border-top:2px solid #43696c;margin-top:45px;padding-top:18px}.scroll{max-width:100%;overflow:auto}table{border-collapse:collapse;font:14px/1.4 Arial,sans-serif}td,th{padding:8px;text-align:left;border-bottom:1px solid #cad5d6}th{background:#f1f5f4}li{margin-bottom:8px}nav{font-size:14px}</style><body><nav><a href="index.html">Research collection</a></nav><h1>Reconstructing a dispatch limit</h1>
+<ul>
+<li>Three equations supplied 216 independent five-minute comparisons in February 2026.</li>
+<li>The largest absolute discrepancy was 0.00000547 MW.</li>
+<li>The NSW–Queensland equation carried an economic bind in 28 of its 72 observations.</li>
+</ul>
+<p>A dispatch limit belongs to a particular version of an equation and to the state accepted by the dispatch engine. Reconstruction starts with the invoked set, the dispatch run and the interval end. A plausible reading from the same asset can give a different answer if it refers to another instant.</p>
+<p>The Sydney monitor gives a simple control. A one MW change in load passes through one for one. The NSW–Queensland stability equation combines regional demand with a signed local flow inside a squared term. Across 24 intervals, substituting the earlier public Terranora reading produced 1.02 MW mean absolute RHS error. A NSW demand share produced 2.89 MW. The other terms were observed in both comparisons.</p>
+<p>Economic binding requires the dispatch solution. The weighted injections on the left-hand side determine proximity to the limit, while the marginal value measures the effect of relaxing it. Historical replay establishes the arithmetic. Forward use also requires evidence of when each input became available.</p>
+<h3>Which inputs are public?</h3>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Access question</th>
+<th>What the evidence supports</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Are the dispatch formulations public?</td>
+<td>The public case supplies the versioned program, its operations, defaults and shared terms for this period.</td>
+</tr>
+<tr>
+<td>Are historical values present?</td>
+<td>The input register identifies values and quality flags for this case. Regional selection, switch runs and missing trader inputs can require additional work.</td>
+</tr>
+<tr>
+<td>Are live equivalents public?</td>
+<td>DispatchIS exposes selected monitors after the run. Equipment ratings also have a public AEMO product. Matching the exact sensor, rating level, run and timestamp is necessary before assuming equivalence.</td>
+</tr>
+<tr>
+<td>How much does the snapshot route cover?</td>
+<td>41 monitor inversions agreed within half a published increment and 2 more within one increment. The register also identifies multi-input and nonlinear monitors.</td>
+</tr>
+</tbody>
+</table></div>
+<h3>The three independent replays</h3>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th style="text-align: left;">Equation</th>
+<th style="text-align: left;">Rows</th>
+<th style="text-align: left;">Calculated</th>
+<th style="text-align: left;">Mean error MW</th>
+<th style="text-align: left;">Max error MW</th>
+<th style="text-align: left;">Economic bind intervals</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">DATASNAP_DFS_NSYD</td>
+<td style="text-align: left;">72</td>
+<td style="text-align: left;">72</td>
+<td style="text-align: left;">0.00000277</td>
+<td style="text-align: left;">0.00000547</td>
+<td style="text-align: left;">0</td>
+</tr>
+<tr>
+<td style="text-align: left;">N::Q_NIL_KC</td>
+<td style="text-align: left;">72</td>
+<td style="text-align: left;">72</td>
+<td style="text-align: left;">0.00000246</td>
+<td style="text-align: left;">0.00000516</td>
+<td style="text-align: left;">28</td>
+</tr>
+<tr>
+<td style="text-align: left;">T^V_NIL_9</td>
+<td style="text-align: left;">72</td>
+<td style="text-align: left;">72</td>
+<td style="text-align: left;">0.00000000</td>
+<td style="text-align: left;">0.00000000</td>
+<td style="text-align: left;">0</td>
+</tr>
+</tbody>
+</table></div>
+<h3>How much error reaches the RHS?</h3>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th style="text-align: left;">Equation</th>
+<th style="text-align: left;">Public proxy</th>
+<th style="text-align: left;">Rows</th>
+<th style="text-align: left;">Input MAE MW</th>
+<th style="text-align: left;">RHS bias MW</th>
+<th style="text-align: left;">RHS MAE MW</th>
+<th style="text-align: left;">Max MW</th>
+<th style="text-align: left;">Band ±MW</th>
+<th style="text-align: left;">In band</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">DATASNAP_DFS_NSYD</td>
+<td style="text-align: left;">Prior public snapshot</td>
+<td style="text-align: left;">24</td>
+<td style="text-align: left;">38.15</td>
+<td style="text-align: left;">+12.88</td>
+<td style="text-align: left;">38.15</td>
+<td style="text-align: left;">79.90</td>
+<td style="text-align: left;">137.40</td>
+<td style="text-align: left;">24/24</td>
+</tr>
+<tr>
+<td style="text-align: left;">DATASNAP_DFS_NSYD</td>
+<td style="text-align: left;">NSW demand share</td>
+<td style="text-align: left;">24</td>
+<td style="text-align: left;">412.27</td>
+<td style="text-align: left;">-412.27</td>
+<td style="text-align: left;">412.27</td>
+<td style="text-align: left;">550.95</td>
+<td style="text-align: left;">290.91</td>
+<td style="text-align: left;">0/24</td>
+</tr>
+<tr>
+<td style="text-align: left;">N::Q_NIL_KC</td>
+<td style="text-align: left;">Prior public snapshot</td>
+<td style="text-align: left;">24</td>
+<td style="text-align: left;">1.39</td>
+<td style="text-align: left;">-0.42</td>
+<td style="text-align: left;">1.02</td>
+<td style="text-align: left;">3.73</td>
+<td style="text-align: left;">2.58</td>
+<td style="text-align: left;">22/24</td>
+</tr>
+<tr>
+<td style="text-align: left;">N::Q_NIL_KC</td>
+<td style="text-align: left;">NSW demand share</td>
+<td style="text-align: left;">24</td>
+<td style="text-align: left;">3.86</td>
+<td style="text-align: left;">-2.09</td>
+<td style="text-align: left;">2.89</td>
+<td style="text-align: left;">6.71</td>
+<td style="text-align: left;">27.28</td>
+<td style="text-align: left;">24/24</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Does the proxy change a binding decision?</h3>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th style="text-align: left;">Proxy</th>
+<th style="text-align: left;">Clear</th>
+<th style="text-align: left;">At risk</th>
+<th style="text-align: left;">Uncertain</th>
+<th style="text-align: left;">Missed bind intervals</th>
+<th style="text-align: left;">False alerts</th>
+<th style="text-align: left;">Binds uncertain</th>
+<th style="text-align: left;">Unbanded flips</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Prior public snapshot</td>
+<td style="text-align: left;">17</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr>
+<td style="text-align: left;">NSW demand share</td>
+<td style="text-align: left;">17</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">0</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Timing, limits and reproducibility</h3>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th>Sampled equation</th>
+<th>Historical replay</th>
+<th>Exact inputs by interval start</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sydney demand monitor</td>
+<td>Direct analog plus constant</td>
+<td>Prior monitor is available on the producer timeline. Same-run monitor arrives after the cutoff.</td>
+</tr>
+<tr>
+<td>NSW–Queensland stability</td>
+<td>Exact local load, initial flow and derived regional inputs</td>
+<td>Prior local load is measurable. The full current flow and regional input bundle has no demonstrated public receipt by the cutoff.</td>
+</tr>
+<tr>
+<td>George Town status</td>
+<td>Exact effective timer state from case XML</td>
+<td>Current timer and changes of state have no verified independent public source at the cutoff.</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Sources and evidence</h2>
+<ul>
+<li><a href="../rhs_replay/study.md">February 2026 research record, method and supporting tables</a></li>
+<li><a href="https://www.aemo.com.au/-/media/files/electricity/nem/it-systems-and-change/nemde-queue/nemde_queue_users_guide.pdf">AEMO guide to NEMDE files</a></li>
+<li><a href="https://www.nemweb.com.au/Reports/ARCHIVE/DispatchIS_Reports/">AEMO public DispatchIS archive</a></li>
+<li><a href="https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/data-nem/network-data/transmission-equipment-ratings">AEMO transmission equipment ratings</a></li>
+<li><a href="https://tapr.transgrid.com.au/transgrid_bsp_data/Sydney%20West%20132%20kV%20historical%20BSP%20load.xlsx">Sydney West transformer workbook</a></li>
+</ul></body></html>

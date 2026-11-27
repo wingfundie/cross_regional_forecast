@@ -1,0 +1,127 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Allocating regional demand to a local load</title><style>body{max-width:880px;margin:auto;padding:32px 20px 64px;background:white;color:#20313b;font:17px/1.65 Georgia,serif}h1,h2,h3,nav,th{font-family:Arial,sans-serif}h1{line-height:1.12;font-size:clamp(30px,5vw,47px)}h2{margin-top:2em;font-size:23px}a{color:#195968;overflow-wrap:anywhere}section{border-top:2px solid #43696c;margin-top:45px;padding-top:18px}.scroll{max-width:100%;overflow:auto}table{border-collapse:collapse;font:14px/1.4 Arial,sans-serif}td,th{padding:8px;text-align:left;border-bottom:1px solid #cad5d6}th{background:#f1f5f4}li{margin-bottom:8px}nav{font-size:14px}</style><body><nav><a href="index.html">Research collection</a></nav><h1>Allocating regional demand to a local load</h1>
+<ul>
+<li>Twelve half-hours on 19, 20 and 22 February 2026 formed the morning evaluation.</li>
+<li>For broad Sydney, population allocation recorded 411.6 MW previous-afternoon mean absolute error.</li>
+<li>The issued local forecasts recorded errors of 295.1 MW for Sydney and 8.9 MW for Terranora.</li>
+</ul>
+<p>Population allocation gives each resident the same implicit share of regional electricity demand. Its 66.97% weight is fixed through the day. A historical electrical share can vary with delivery time and day type, allowing the local mix of residential load, industrial consumption and embedded generation to influence the estimate.</p>
+<p>For Sydney, a clock and day-type share reduced previous-afternoon error to 333.4 MW. A fixed electrical share recorded 380.1 MW. For Terranora, seven of twelve realised half-hours had negative net load. Multiplying positive regional demand by a positive population share misses that operating state altogether.</p>
+<p>Benchmark against the issued local monitor wherever its electrical boundary matches. With regional demand alone, fit the share on earlier readings and preserve its sign. These results use AEMO regional vintages and seven training mornings. An alternative provider's forecast errors will also enter the local estimate.</p>
+<h3>Day-ahead results</h3>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th style="text-align: left;">method</th>
+<th style="text-align: right;">Sydney-area load</th>
+<th style="text-align: right;">Terranora load</th>
+<th style="text-align: right;">Network RHS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Population share</td>
+<td style="text-align: right;">411.6</td>
+<td style="text-align: right;">–</td>
+<td style="text-align: right;">–</td>
+</tr>
+<tr>
+<td style="text-align: left;">Fixed historical share</td>
+<td style="text-align: right;">380.1</td>
+<td style="text-align: right;">20.7</td>
+<td style="text-align: right;">52.9</td>
+</tr>
+<tr>
+<td style="text-align: left;">Clock and day-type share</td>
+<td style="text-align: right;">333.4</td>
+<td style="text-align: right;">22.7</td>
+<td style="text-align: right;">56.0</td>
+</tr>
+<tr>
+<td style="text-align: left;">Clock and day-type level</td>
+<td style="text-align: right;">438.3</td>
+<td style="text-align: right;">20.5</td>
+<td style="text-align: right;">27.4</td>
+</tr>
+<tr>
+<td style="text-align: left;">Latest public reading</td>
+<td style="text-align: right;">1858.4</td>
+<td style="text-align: right;">21.3</td>
+<td style="text-align: right;">15.5</td>
+</tr>
+<tr>
+<td style="text-align: left;">Latest reading plus regional change</td>
+<td style="text-align: right;">426.1</td>
+<td style="text-align: right;">18.5</td>
+<td style="text-align: right;">51.2</td>
+</tr>
+<tr>
+<td style="text-align: left;">Issued AEMO</td>
+<td style="text-align: right;">295.1</td>
+<td style="text-align: right;">8.9</td>
+<td style="text-align: right;">36.5</td>
+</tr>
+</tbody>
+</table></div>
+<h3>Short-horizon results</h3>
+<div class="scroll"><table>
+<thead>
+<tr>
+<th style="text-align: left;">method</th>
+<th style="text-align: right;">Sydney-area load</th>
+<th style="text-align: right;">Terranora load</th>
+<th style="text-align: right;">Network RHS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Population share</td>
+<td style="text-align: right;">164.1</td>
+<td style="text-align: right;">–</td>
+<td style="text-align: right;">–</td>
+</tr>
+<tr>
+<td style="text-align: left;">Fixed historical share</td>
+<td style="text-align: right;">122.4</td>
+<td style="text-align: right;">19.9</td>
+<td style="text-align: right;">33.7</td>
+</tr>
+<tr>
+<td style="text-align: left;">Clock and day-type share</td>
+<td style="text-align: right;">139.0</td>
+<td style="text-align: right;">21.2</td>
+<td style="text-align: right;">36.2</td>
+</tr>
+<tr>
+<td style="text-align: left;">Clock and day-type level</td>
+<td style="text-align: right;">438.3</td>
+<td style="text-align: right;">20.5</td>
+<td style="text-align: right;">27.4</td>
+</tr>
+<tr>
+<td style="text-align: left;">Latest public reading</td>
+<td style="text-align: right;">183.6</td>
+<td style="text-align: right;">4.8</td>
+<td style="text-align: right;">11.1</td>
+</tr>
+<tr>
+<td style="text-align: left;">Latest reading plus regional change</td>
+<td style="text-align: right;">144.6</td>
+<td style="text-align: right;">4.6</td>
+<td style="text-align: right;">10.1</td>
+</tr>
+<tr>
+<td style="text-align: left;">Issued AEMO</td>
+<td style="text-align: right;">154.6</td>
+<td style="text-align: right;">5.1</td>
+<td style="text-align: right;">27.9</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Sources and evidence</h2>
+<ul>
+<li><a href="../../local_exports/rhs_forward_feb26/brief.md">February 2026 research record, method and supporting tables</a></li>
+<li><a href="https://www.abs.gov.au/statistics/people/population/regional-population/2023-24">ABS source released March 2025</a></li>
+<li><a href="https://www.aemo.com.au/energy-systems/electricity/national-electricity-market-nem/data-nem/market-management-system-mms-data/pre-dispatch">AEMO predispatch files</a></li>
+<li><a href="https://dapr.endeavourenergy.com.au/">Endeavour planning data</a></li>
+<li><a href="https://cer.gov.au/markets/reports-and-data/small-scale-installation-postcode-data">CER postcode solar data</a></li>
+</ul></body></html>

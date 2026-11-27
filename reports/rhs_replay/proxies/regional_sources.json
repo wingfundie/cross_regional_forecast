@@ -1,0 +1,20 @@
+[
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/DispatchIS_Reports/PUBLIC_DISPATCHIS_20260201.zip",
+    "bytes": 5518634,
+    "sha256": "2d397769e3af0a7b32701bdec82e2de136cb70cb977826773dab5dd077e4e5d8",
+    "retrieved_utc": "2026-11-26T10:12:56.276146+00:00"
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/DispatchIS_Reports/PUBLIC_DISPATCHIS_20260215.zip",
+    "bytes": 5435512,
+    "sha256": "11062984e6f806b9ee2c5ab7da24a85ad735efe381d0e797bda5aa4cd99ad554",
+    "retrieved_utc": "2026-11-26T10:12:59.147860+00:00"
+  },
+  {
+    "url": "https://www.nemweb.com.au/Reports/ARCHIVE/DispatchIS_Reports/PUBLIC_DISPATCHIS_20260219.zip",
+    "bytes": 5371817,
+    "sha256": "0b2262980e9c9cc3d4a1075aac39ba2b1d24633eb030e3fdbba83a6bfe73c1d5",
+    "retrieved_utc": "2026-11-26T10:13:02.102176+00:00"
+  }
+]

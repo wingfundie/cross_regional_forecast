@@ -1,0 +1,13 @@
+alignment,kind,method,n,mae
+Workbook label at period end,P5MIN,Clock electrical share,12,2.8198243020334854
+Workbook label at period end,P5MIN,Clock mean,12,4.000856791235281
+Workbook label at period end,P5MIN,Fixed electrical share,12,3.2998840089420693
+Workbook label at period end,PREDISPATCHIS,Clock electrical share,12,3.095447856672401
+Workbook label at period end,PREDISPATCHIS,Clock mean,12,4.000856791235281
+Workbook label at period end,PREDISPATCHIS,Fixed electrical share,12,3.587738022880328
+Workbook label at period start,P5MIN,Clock electrical share,12,2.784424123152462
+Workbook label at period start,P5MIN,Clock mean,12,3.71939187404216
+Workbook label at period start,P5MIN,Fixed electrical share,12,3.0821890313533196
+Workbook label at period start,PREDISPATCHIS,Clock electrical share,12,2.9509681562721735
+Workbook label at period start,PREDISPATCHIS,Clock mean,12,3.71939187404216
+Workbook label at period start,PREDISPATCHIS,Fixed electrical share,12,3.3375881265178244

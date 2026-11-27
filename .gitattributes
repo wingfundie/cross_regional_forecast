@@ -9,3 +9,9 @@ reference/conditional_regimes_v1/**/*.zip -diff
 reference/conditional_regimes_v1/**/*.whl -diff
 reference/conditional_regimes_v1/**/*.png -diff
 reference/conditional_regimes_v1/**/*.html -diff
+
+# Preserve the downloaded evidence checksums and the published report manifests.
+reports/rhs_research_notes/** -text
+reports/rhs_replay/** -text
+local_exports/rhs_forward_feb26/** -text
+local_exports/rhs_approximation_study/** -text

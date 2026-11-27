@@ -1,0 +1,4 @@
+region,calculated_fixed_demand,reference_fixed_demand,fixed_demand_absolute_difference,components,within_0_005_mw,calculated_rhs_term,rhs_check_equation,calculated_rhs,reference_rhs,absolute_rhs_difference,rhs_term_validation
+NSW1,6561.172098877303,6561.17,0.0020988773030694574,72,True,6561.172098877303,N::Q_NIL_KC,1525.8157714909448,1525.81577,1.4909448964317562e-06,joint equation replay
+QLD1,5853.778651707062,5853.78,0.001348292938018858,40,True,5853.778651707062,N::Q_NIL_KC,1525.8157714909448,1525.81577,1.4909448964317562e-06,joint equation replay
+SA1,1360.9933532308519,1360.99,0.003353230851871558,71,True,1360.9933532308519,,,,,untested

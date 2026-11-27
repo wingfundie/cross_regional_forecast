@@ -1,0 +1,100 @@
+replay|Reconstructing a dispatch limit|reports/rhs_replay/study.md
+Three equations supplied 216 independent five-minute comparisons in February 2026.
+The largest absolute discrepancy was 0.00000547 MW.
+The NSW–Queensland equation carried an economic bind in 28 of its 72 observations.
+
+A dispatch limit belongs to a particular version of an equation and to the state accepted by the dispatch engine. Reconstruction starts with the invoked set, the dispatch run and the interval end. A plausible reading from the same asset can give a different answer if it refers to another instant.
+
+The Sydney monitor gives a simple control. A one MW change in load passes through one for one. The NSW–Queensland stability equation combines regional demand with a signed local flow inside a squared term. Across 24 intervals, substituting the earlier public Terranora reading produced 1.02 MW mean absolute RHS error. A NSW demand share produced 2.89 MW. The other terms were observed in both comparisons.
+
+Economic binding requires the dispatch solution. The weighted injections on the left-hand side determine proximity to the limit, while the marginal value measures the effect of relaxing it. Historical replay establishes the arithmetic. Forward use also requires evidence of when each input became available.
+===
+inventory|Public coverage of constraint inputs|reports/rhs_replay/inventory/README.md
+The 4 February 2026 dispatch case invoked 1,125 equations, including 117 static limits.
+The audited formulations referenced 2,206 distinct external inputs.
+For 744 of 1,008 dynamic equations, every external input had a candidate historical source.
+
+A meter can enter many limits through a shared expression. Resolving each expression before counting the meters measures the acquisition task. Counting equations with a candidate reading for every term instead measures potential replay coverage. One unresolved meter can affect several limits simultaneously.
+
+Public monitors offer another route when their expression contains one measurement, a known coefficient and a fixed offset. Of 54 loaded monitors, 43 permitted that inversion. Forty-one matched the independent case reading within half a published increment. The remaining two matched within one increment. An equation with multiple unknown inputs generally admits several solutions.
+
+The other 264 dynamic equations had at least one unresolved input or choice of component or switch run. Retain the typed identifier, effective version, measurement quality and default condition for each entry. This inventory documents visibility after one dispatch run. Forecast coverage depends on the publication schedule for each changing quantity.
+===
+case-guide|Three dispatch equations and their measurement boundaries|reports/rhs_replay/cases/case_guide.md
+Each equation was checked against 72 native dispatch observations.
+The Sydney monitor adds a fixed 10,000 MW to area demand.
+The two George Town timer states are separated by 244 MW.
+
+For Sydney, subtracting the offset recovers the electrical load covering Sydney, Wollongong and Newcastle. All 72 sensor values carried a replacement flag and permission for dispatch use. Reconstructing the calculation requires the accepted reading even where another telemetry stream appears fresher.
+
+For the NSW–Queensland stability limit, let N and Q denote the equation-specific regional demands, d the signed Terranora load and i the initial signed Directlink flow, all in MW. The limit in MW is 1,383 − 0.001(i + d)² − 0.0239N + 0.0524Q − 0.6394d. Reversing flow changes the interaction with local demand. Align the two readings to the same interval start before applying the coefficients.
+
+At George Town the limit is 594 MW less 244 MW times the binary timer state. When that state is unresolved, retain both feasible values, 350 and 594 MW. Their midpoint describes neither operating branch.
+===
+sydney|The electrical boundary behind Sydney demand|reports/rhs_replay/sydney_sources.md
+The public Sydney demand monitor spans three urban areas.
+Sydney West publishes a separate half-hour bulk supply point trace.
+The site's median recorded value moved from −689.21 in June 2025 to +15.41 in July, in workbook units.
+
+An electrical load area follows its supply circuits. Population districts follow administrative boundaries. A bulk supply point measures a third quantity, the net flow across its transformers. Specify which of these quantities the equation consumes before fitting the allocation.
+
+Transgrid identifies Sydney West and West Liverpool as supply paths into the Western Sydney growth area. The Sydney West workbook therefore covers only part of a possible boundary. Its change in sign and magnitude also limits comparisons across June and July. The cause remains unresolved.
+
+A later site-level diagnostic fitted seven February 2026 training dates and evaluated twelve subsequent half-hours. Previous-afternoon error for a clock-specific electrical share ranged from 2.95 to 3.10 in workbook units under two possible timestamp alignments. A historical clock mean recorded 3.72 to 4.00. The workbook carried a September 2026 update. These results establish retrospective fit to one site. A live forecast of the wider area still requires a dated meter boundary and evidence of timely publication.
+===
+regional|Allocating regional demand to a local load|local_exports/rhs_forward_feb26/brief.md
+Twelve half-hours on 19, 20 and 22 February 2026 formed the morning evaluation.
+For broad Sydney, population allocation recorded 411.6 MW previous-afternoon mean absolute error.
+The issued local forecasts recorded errors of 295.1 MW for Sydney and 8.9 MW for Terranora.
+
+Population allocation gives each resident the same implicit share of regional electricity demand. Its 66.97% weight is fixed through the day. A historical electrical share can vary with delivery time and day type, allowing the local mix of residential load, industrial consumption and embedded generation to influence the estimate.
+
+For Sydney, a clock and day-type share reduced previous-afternoon error to 333.4 MW. A fixed electrical share recorded 380.1 MW. For Terranora, seven of twelve realised half-hours had negative net load. Multiplying positive regional demand by a positive population share misses that operating state altogether.
+
+Benchmark against the issued local monitor wherever its electrical boundary matches. With regional demand alone, fit the share on earlier readings and preserve its sign. These results use AEMO regional vintages and seven training mornings. An alternative provider's forecast errors will also enter the local estimate.
+===
+flows|Initial flows and the NSW–Queensland stability limit|local_exports/rhs_approximation_study/flows/report.md
+Six interconnectors were evaluated on 72 five-minute deliveries per horizon on 19, 20 and 22 February 2026.
+Adding three earlier pump readings reduced short-lead RHS error from 27.92 to 11.44 MW.
+The short-lead issued marginal value detected seven binding intervals and produced eleven false alerts.
+
+The initial flow entering a dispatch expression is measured at the start of the interval. An issued target describes where dispatch expects flow to move. The preceding delivery target from the same forecast vintage is a plausible starting estimate. For Directlink it recorded 23.7 MW short-lead error, against 13.9 MW for carrying the meter reading.
+
+The regional demand definition also matters. At delivery, adding three measured pump loads to public regional demand reduced stability-limit error from 22.18 to 2.12 MW with other terms observed. At issue the future pump readings were unknown. Carrying their earlier values helped at short leads and offered little improvement the previous afternoon.
+
+The previous-afternoon issued forecast missed all seven economic binds. Those intervals occurred in three episodes on one morning. Evaluate headroom using an issued left-hand side, and retain the event dates alongside interval counts when judging alert reliability.
+===
+thermal|Terminal loading and the Bango thermal limit|local_exports/rhs_approximation_study/thermal/report.md
+Six dispatch inputs reproduced 240 Bango limits within 0.00000050 MW.
+Substituting the 146 MVA fallback for the applied 125 MVA rating raised the calculated RHS by 25.14 MW.
+Across twelve held-out half-hours, the issued previous-afternoon RHS recorded 6.95 MW mean absolute error.
+
+Bango's equation takes the margin between the applicable rating and measured apparent power at the nominated terminal, deducts a fixed allowance, and adds four weighted trader injections. One additional MVA of rating lifts the limit by 1.197 MW with other terms fixed. One additional MVA of terminal loading lowers it by the same amount. A farm and its export line can move together, so their errors also need a joint test.
+
+The public standing record identified the summer-day rating before the evaluation. At short leads, updating recent public observations with regional changes recorded 3.68 MW error against 4.00 MW for persistence. Using a forecast left-hand side, persistence nevertheless detected four of seven binding intervals with two false alerts. A small improvement in average RHS error need not improve the event decision.
+
+For the dynamic Red Cliffs–Wemen rating, a training median recorded 32.45 MVA error against 52.42 MVA for a temperature-based static lookup and 66.10 MVA for a temperature and wind regression. The comparison covers three February mornings. The public fallback curve remains useful for testing an alternative operating assumption.
+===
+states|Switch position, outage schedules and dispatch state|local_exports/rhs_approximation_study/states/report.md
+The evaluation covered 641 binary signals at twelve delivery times on 19, 20 and 22 February 2026.
+Short-lead state persistence was 95.7% accurate overall and 63.7% accurate on the 59 signals that varied.
+The issued outage schedule recovered 97.8% of linked-set activations at both leads.
+
+An outage schedule can identify the sets expected to apply while leaving individual switches and timers unresolved. At the previous-afternoon horizon the schedule identified 182 active set-intervals, produced 18 false positives and missed four. Carrying the prior case produced 72 false positives and missed 22. The comparison covers the sets linked to the available outage information at origin.
+
+Among signals that varied, previous-afternoon persistence accuracy fell to 51.7%. At George Town, the previous-afternoon published limit selected 594 MW throughout the sample while dispatch used 350 MW. The full discrepancy came from the branch choice.
+
+For Basslink, zero preceding transfer occurred alongside full directional offers in seven training observations. An idle link therefore gives insufficient information about its availability. Carry separate offer and direction scenarios. For voltage and reactive load, benchmark each measurement against its own clock profile and prior public reading before introducing regional demand.
+===
+forward|Which inputs support a forward constraint calculation?|local_exports/rhs_approximation_study/report.md
+In a second February 2026 sample, broad Sydney day-ahead error was 420.4 MW for population and 280.7 MW for a clock-specific electrical share.
+At Bango a 5 MW error budget allows about 4.2 MVA of rating error with other terms fixed.
+The previous-afternoon QNI forecast missed seven economic binds across 72 dispatch intervals.
+
+A regional demand forecast determines one part of the future dispatch state. The same NSW demand can coexist with different pump schedules, local solar output, interconnector transfers and switch positions. A useful forward estimate starts with the terms that can materially change the limit and assigns each an observable baseline or a stated scenario.
+
+On 23, 25 and 28 February, starting from measured Sydney-area load and applying its historical share of the regional demand change reduced previous-afternoon error to 215.7 MW. The issued monitor recorded 377.8 MW on those dates but beat the electrical share in the earlier morning cohort. Delivery hour and forecast origin matter. For statewide rooftop solar, the issued previous-afternoon forecast recorded 217.8 MW error against 443.1 MW for a historical clock mean.
+
+Plant behaviour depends on the asset. For the active battery in the sample, a historical clock profile recorded 52.6 MW previous-afternoon error against 105.7 MW for idle dispatch. The other battery remained close to idle. When offers or stored energy are unavailable, propagate feasible charge, idle and discharge paths through the equation.
+
+Start with the effective equation version and recent public RHS. Replace an input when its plausible error can change the decision. Score the complete expression on coherent forecast vintages against persistence and the published RHS. A binding call also requires invocation and a forecast of weighted injections. The evaluations used AEMO regional runs as a substitute for the user's forecasts. They leave seasonal accuracy, longer horizons and actual client receipt times open.

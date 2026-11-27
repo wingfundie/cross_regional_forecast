@@ -1,0 +1,3 @@
+equation,point,recovered_observations,snapshot_max_abs_mw,nsw_share,regional_fit_window,uncertainty_window,holdout
+DATASNAP_DFS_NSYD,N_SYDNEY_LOAD,72,5.468749805004336e-06,0.5861901680639588,W1,W2,W3
+N::Q_NIL_KC,TERRANORA_LOAD,72,3.0517585258849067e-06,0.0017058379412253604,W1,W2,W3
