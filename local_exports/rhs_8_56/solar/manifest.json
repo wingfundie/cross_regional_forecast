@@ -1,0 +1,74 @@
+{
+  "files": {
+    "case_replays.csv": {
+      "bytes": 37402,
+      "sha256": "f983767f23172147c9639ec5881674e668c76e0308fb44ba6b9612c88ba21dd4"
+    },
+    "chapter.py": {
+      "bytes": 9705,
+      "sha256": "ebf4c753eea8a8c0a5e4e7d0781d1b985f778ae066cd8497ebd06f56e47c922a"
+    },
+    "full_forecast.csv": {
+      "bytes": 182418,
+      "sha256": "2425932c87ac2bbc3acee380a54bba2766dea7dc3017fb517b667e5efdf15141"
+    },
+    "full_forecast.py": {
+      "bytes": 4695,
+      "sha256": "049cc6c877ffb9da19c3dc67042d9032f293b6dce729f93224c1d21517d5c0b2"
+    },
+    "full_halfhours.csv": {
+      "bytes": 19717,
+      "sha256": "fc166b8c1687264e8df9c15a9c29eb70a2b0bb588e2903fc6f00ef74d1550b16"
+    },
+    "full_scores.csv": {
+      "bytes": 1412,
+      "sha256": "65cdadcbf7b7929391985cc066995a24e0bdfe44472e7e477c74e3e2cc1bc4b6"
+    },
+    "issued_coverage.csv": {
+      "bytes": 3145,
+      "sha256": "740a646e6b8a4c6cf6d0da604f97e8ddaec9c121bd3e084f57705b224cb14aa7"
+    },
+    "long_solar.py": {
+      "bytes": 8352,
+      "sha256": "fd6500f0c7360d28d842069f906cd8d88636c0c0d88855a70164e01f40f551f7"
+    },
+    "original_sa_readings.csv": {
+      "bytes": 871558,
+      "sha256": "309059bba283224faf47213ae0f86cd2576217058d6fc9377d3dab46c6cde225"
+    },
+    "prior_states.csv": {
+      "bytes": 127462,
+      "sha256": "a42e69ddd02d124691f12174b2db64b003b82cfea454ffe9edb99f9baf3f47b4"
+    },
+    "pv_metrics.csv": {
+      "bytes": 7870,
+      "sha256": "dfcf1096f55bdfcbc917cd3526b79e185fde193f7f1e990beb14bd727f506e98"
+    },
+    "pv_predictions.csv": {
+      "bytes": 405086,
+      "sha256": "685db8d4093eb6d23e54a34dd5ae0464fa74c41f9fbef2752f5fc9ee5b6b203c"
+    },
+    "replay.py": {
+      "bytes": 4822,
+      "sha256": "8b645ff4e269ca605a51c678fe60d168772419fb8160d0d3b2bef7424e0c3448"
+    },
+    "report.md": {
+      "bytes": 9028,
+      "sha256": "797bf4c8580abac8d5c14a92fb9bcd1cea12c82da14016834354ecaa532cce7d"
+    },
+    "rhs_pv_substitution.csv": {
+      "bytes": 127014,
+      "sha256": "3a5b32ce052517ac6f3e72633b88039eafa83442186cce9d20d2ccfa0a02f9b3"
+    },
+    "source_hashes.json": {
+      "bytes": 10311,
+      "sha256": "ce48a017da6a7c48fadb84dbad8a414a2e9505a273890190ffa30ded9b2ac5f0"
+    }
+  },
+  "inputs": "public archive headers and ZIP member modification times used as proxies for original availability; no historical client receipt",
+  "verified": {
+    "case_rows": 72,
+    "full_forecast_rows": 1080,
+    "pre_origin_case_rows": 216
+  }
+}

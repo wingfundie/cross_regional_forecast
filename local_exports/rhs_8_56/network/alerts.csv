@@ -1,0 +1,145 @@
+link,lead,method,partition,cutoff,n,days,event_days,positives,tp,fp,fn
+qni,10,carry last published archive,routine,0.1,192,4,1,2,0,0,2
+qni,10,carry last published archive,routine,0.25,192,4,1,2,0,0,2
+qni,10,carry last published archive,routine,0.5,192,4,1,2,0,0,2
+qni,10,carry last published archive,stress,0.1,48,1,1,18,0,0,18
+qni,10,carry last published archive,stress,0.25,48,1,1,18,0,0,18
+qni,10,carry last published archive,stress,0.5,48,1,1,18,0,0,18
+qni,10,clock equation,routine,0.1,192,4,1,2,2,54,0
+qni,10,clock equation,routine,0.25,192,4,1,2,2,54,0
+qni,10,clock equation,routine,0.5,192,4,1,2,1,23,1
+qni,10,clock equation,stress,0.1,48,1,1,18,14,0,4
+qni,10,clock equation,stress,0.25,48,1,1,18,14,0,4
+qni,10,clock equation,stress,0.5,48,1,1,18,6,0,12
+qni,10,issued demand,routine,0.1,192,4,1,2,2,43,0
+qni,10,issued demand,routine,0.25,192,4,1,2,2,43,0
+qni,10,issued demand,routine,0.5,192,4,1,2,2,30,0
+qni,10,issued demand,stress,0.1,48,1,1,18,13,0,5
+qni,10,issued demand,stress,0.25,48,1,1,18,13,0,5
+qni,10,issued demand,stress,0.5,48,1,1,18,8,0,10
+qni,10,last original DispatchIS,routine,0.1,192,4,1,2,0,0,2
+qni,10,last original DispatchIS,routine,0.25,192,4,1,2,0,0,2
+qni,10,last original DispatchIS,routine,0.5,192,4,1,2,0,0,2
+qni,10,last original DispatchIS,stress,0.1,48,1,1,18,0,0,18
+qni,10,last original DispatchIS,stress,0.25,48,1,1,18,0,0,18
+qni,10,last original DispatchIS,stress,0.5,48,1,1,18,0,0,18
+qni,21,carry last published archive,routine,0.1,192,4,1,2,0,0,2
+qni,21,carry last published archive,routine,0.25,192,4,1,2,0,0,2
+qni,21,carry last published archive,routine,0.5,192,4,1,2,0,0,2
+qni,21,carry last published archive,stress,0.1,48,1,1,18,0,0,18
+qni,21,carry last published archive,stress,0.25,48,1,1,18,0,0,18
+qni,21,carry last published archive,stress,0.5,48,1,1,18,0,0,18
+qni,21,clock equation,routine,0.1,192,4,1,2,2,54,0
+qni,21,clock equation,routine,0.25,192,4,1,2,2,54,0
+qni,21,clock equation,routine,0.5,192,4,1,2,1,23,1
+qni,21,clock equation,stress,0.1,48,1,1,18,14,0,4
+qni,21,clock equation,stress,0.25,48,1,1,18,14,0,4
+qni,21,clock equation,stress,0.5,48,1,1,18,6,0,12
+qni,21,issued demand,routine,0.1,192,4,1,2,2,43,0
+qni,21,issued demand,routine,0.25,192,4,1,2,2,43,0
+qni,21,issued demand,routine,0.5,192,4,1,2,2,30,0
+qni,21,issued demand,stress,0.1,48,1,1,18,13,0,5
+qni,21,issued demand,stress,0.25,48,1,1,18,13,0,5
+qni,21,issued demand,stress,0.5,48,1,1,18,8,0,10
+qni,21,last original DispatchIS,routine,0.1,192,4,1,2,0,0,2
+qni,21,last original DispatchIS,routine,0.25,192,4,1,2,0,0,2
+qni,21,last original DispatchIS,routine,0.5,192,4,1,2,0,0,2
+qni,21,last original DispatchIS,stress,0.1,48,1,1,18,0,0,18
+qni,21,last original DispatchIS,stress,0.25,48,1,1,18,0,0,18
+qni,21,last original DispatchIS,stress,0.5,48,1,1,18,0,0,18
+qni,42,carry last published archive,routine,0.1,192,4,1,2,0,0,2
+qni,42,carry last published archive,routine,0.25,192,4,1,2,0,0,2
+qni,42,carry last published archive,routine,0.5,192,4,1,2,0,0,2
+qni,42,carry last published archive,stress,0.1,48,1,1,18,0,0,18
+qni,42,carry last published archive,stress,0.25,48,1,1,18,0,0,18
+qni,42,carry last published archive,stress,0.5,48,1,1,18,0,0,18
+qni,42,clock equation,routine,0.1,192,4,1,2,2,54,0
+qni,42,clock equation,routine,0.25,192,4,1,2,2,54,0
+qni,42,clock equation,routine,0.5,192,4,1,2,1,23,1
+qni,42,clock equation,stress,0.1,48,1,1,18,14,0,4
+qni,42,clock equation,stress,0.25,48,1,1,18,14,0,4
+qni,42,clock equation,stress,0.5,48,1,1,18,6,0,12
+qni,42,issued demand,routine,0.1,192,4,1,2,2,43,0
+qni,42,issued demand,routine,0.25,192,4,1,2,2,43,0
+qni,42,issued demand,routine,0.5,192,4,1,2,2,30,0
+qni,42,issued demand,stress,0.1,48,1,1,18,13,0,5
+qni,42,issued demand,stress,0.25,48,1,1,18,13,0,5
+qni,42,issued demand,stress,0.5,48,1,1,18,8,0,10
+qni,42,last original DispatchIS,routine,0.1,192,4,1,2,0,0,2
+qni,42,last original DispatchIS,routine,0.25,192,4,1,2,0,0,2
+qni,42,last original DispatchIS,routine,0.5,192,4,1,2,0,0,2
+qni,42,last original DispatchIS,stress,0.1,48,1,1,18,0,0,18
+qni,42,last original DispatchIS,stress,0.25,48,1,1,18,0,0,18
+qni,42,last original DispatchIS,stress,0.5,48,1,1,18,0,0,18
+vni,10,carry last published archive,routine,0.1,192,4,1,17,0,0,17
+vni,10,carry last published archive,routine,0.25,192,4,1,17,0,0,17
+vni,10,carry last published archive,routine,0.5,192,4,1,17,0,0,17
+vni,10,carry last published archive,stress,0.1,48,1,1,12,0,0,12
+vni,10,carry last published archive,stress,0.25,48,1,1,12,0,0,12
+vni,10,carry last published archive,stress,0.5,48,1,1,12,0,0,12
+vni,10,clock equation,routine,0.1,192,4,1,17,2,14,15
+vni,10,clock equation,routine,0.25,192,4,1,17,0,0,17
+vni,10,clock equation,routine,0.5,192,4,1,17,0,0,17
+vni,10,clock equation,stress,0.1,48,1,1,12,0,4,12
+vni,10,clock equation,stress,0.25,48,1,1,12,0,0,12
+vni,10,clock equation,stress,0.5,48,1,1,12,0,0,12
+vni,10,issued demand,routine,0.1,192,4,1,17,0,5,17
+vni,10,issued demand,routine,0.25,192,4,1,17,0,5,17
+vni,10,issued demand,routine,0.5,192,4,1,17,0,0,17
+vni,10,issued demand,stress,0.1,48,1,1,12,0,1,12
+vni,10,issued demand,stress,0.25,48,1,1,12,0,1,12
+vni,10,issued demand,stress,0.5,48,1,1,12,0,0,12
+vni,10,last original DispatchIS,routine,0.1,192,4,1,17,0,0,17
+vni,10,last original DispatchIS,routine,0.25,192,4,1,17,0,0,17
+vni,10,last original DispatchIS,routine,0.5,192,4,1,17,0,0,17
+vni,10,last original DispatchIS,stress,0.1,48,1,1,12,0,0,12
+vni,10,last original DispatchIS,stress,0.25,48,1,1,12,0,0,12
+vni,10,last original DispatchIS,stress,0.5,48,1,1,12,0,0,12
+vni,21,carry last published archive,routine,0.1,192,4,1,17,0,0,17
+vni,21,carry last published archive,routine,0.25,192,4,1,17,0,0,17
+vni,21,carry last published archive,routine,0.5,192,4,1,17,0,0,17
+vni,21,carry last published archive,stress,0.1,48,1,1,12,0,0,12
+vni,21,carry last published archive,stress,0.25,48,1,1,12,0,0,12
+vni,21,carry last published archive,stress,0.5,48,1,1,12,0,0,12
+vni,21,clock equation,routine,0.1,192,4,1,17,2,14,15
+vni,21,clock equation,routine,0.25,192,4,1,17,0,0,17
+vni,21,clock equation,routine,0.5,192,4,1,17,0,0,17
+vni,21,clock equation,stress,0.1,48,1,1,12,0,4,12
+vni,21,clock equation,stress,0.25,48,1,1,12,0,0,12
+vni,21,clock equation,stress,0.5,48,1,1,12,0,0,12
+vni,21,issued demand,routine,0.1,192,4,1,17,0,5,17
+vni,21,issued demand,routine,0.25,192,4,1,17,0,5,17
+vni,21,issued demand,routine,0.5,192,4,1,17,0,0,17
+vni,21,issued demand,stress,0.1,48,1,1,12,0,1,12
+vni,21,issued demand,stress,0.25,48,1,1,12,0,1,12
+vni,21,issued demand,stress,0.5,48,1,1,12,0,0,12
+vni,21,last original DispatchIS,routine,0.1,192,4,1,17,0,0,17
+vni,21,last original DispatchIS,routine,0.25,192,4,1,17,0,0,17
+vni,21,last original DispatchIS,routine,0.5,192,4,1,17,0,0,17
+vni,21,last original DispatchIS,stress,0.1,48,1,1,12,0,0,12
+vni,21,last original DispatchIS,stress,0.25,48,1,1,12,0,0,12
+vni,21,last original DispatchIS,stress,0.5,48,1,1,12,0,0,12
+vni,42,carry last published archive,routine,0.1,192,4,1,17,0,144,17
+vni,42,carry last published archive,routine,0.25,192,4,1,17,0,144,17
+vni,42,carry last published archive,routine,0.5,192,4,1,17,0,144,17
+vni,42,carry last published archive,stress,0.1,48,1,1,12,12,36,0
+vni,42,carry last published archive,stress,0.25,48,1,1,12,12,36,0
+vni,42,carry last published archive,stress,0.5,48,1,1,12,12,36,0
+vni,42,clock equation,routine,0.1,192,4,1,17,2,14,15
+vni,42,clock equation,routine,0.25,192,4,1,17,0,0,17
+vni,42,clock equation,routine,0.5,192,4,1,17,0,0,17
+vni,42,clock equation,stress,0.1,48,1,1,12,0,4,12
+vni,42,clock equation,stress,0.25,48,1,1,12,0,0,12
+vni,42,clock equation,stress,0.5,48,1,1,12,0,0,12
+vni,42,issued demand,routine,0.1,192,4,1,17,0,5,17
+vni,42,issued demand,routine,0.25,192,4,1,17,0,5,17
+vni,42,issued demand,routine,0.5,192,4,1,17,0,0,17
+vni,42,issued demand,stress,0.1,48,1,1,12,0,1,12
+vni,42,issued demand,stress,0.25,48,1,1,12,0,1,12
+vni,42,issued demand,stress,0.5,48,1,1,12,0,0,12
+vni,42,last original DispatchIS,routine,0.1,192,4,1,17,0,0,17
+vni,42,last original DispatchIS,routine,0.25,192,4,1,17,0,0,17
+vni,42,last original DispatchIS,routine,0.5,192,4,1,17,0,0,17
+vni,42,last original DispatchIS,stress,0.1,48,1,1,12,0,0,12
+vni,42,last original DispatchIS,stress,0.25,48,1,1,12,0,0,12
+vni,42,last original DispatchIS,stress,0.5,48,1,1,12,0,0,12
