@@ -1,0 +1,116 @@
+[
+  {
+    "month": "202509",
+    "sha256": "05190bc90f4c692da56fb4c13ac924f523dc93d1a53c58e95962c9fc1a9a4c12",
+    "original_header": [
+      "C",
+      "SETP.WORLD",
+      "DVD_DISPATCHCONSTRAINT",
+      "AEMO",
+      "PUBLIC",
+      "2025/10/08",
+      "08:56:29",
+      "001759877789594",
+      "MONTHLY_ARCHIVE",
+      "001759877789594"
+    ],
+    "rows": 34560,
+    "available": "2025-10-08 08:56:29",
+    "source": "data\\line_outage_risk_v1\\raw\\supplements\\PUBLIC_ARCHIVE#DISPATCHCONSTRAINT#FILE01#202509010000.zip"
+  },
+  {
+    "month": "202510",
+    "sha256": "167081759abe5050ba4ba8bec739ffd3c3bbe0c2750349f4d073a62006d9fc57",
+    "original_header": [
+      "C",
+      "SETP.WORLD",
+      "DVD_DISPATCHCONSTRAINT",
+      "AEMO",
+      "PUBLIC",
+      "2025/11/18",
+      "16:38:08",
+      "001763447888173",
+      "MONTHLY_ARCHIVE",
+      "001763447888173"
+    ],
+    "rows": 35712,
+    "available": "2025-11-18 16:38:08",
+    "source": "data\\line_outage_risk_v1\\raw\\supplements\\PUBLIC_ARCHIVE#DISPATCHCONSTRAINT#FILE01#202510010000.zip"
+  },
+  {
+    "month": "202511",
+    "sha256": "55b90367a856334a6c737bc0afd09d721d9e80dfa1fed6080b2feb331e36fd77",
+    "original_header": [
+      "C",
+      "SETP.WORLD",
+      "DVD_DISPATCHCONSTRAINT",
+      "AEMO",
+      "PUBLIC",
+      "2025/12/08",
+      "12:05:38",
+      "001765159538238",
+      "MONTHLY_ARCHIVE",
+      "001765159538238"
+    ],
+    "rows": 34560,
+    "available": "2025-12-08 12:05:38",
+    "source": "data\\line_outage_risk_v1\\raw\\supplements\\PUBLIC_ARCHIVE#DISPATCHCONSTRAINT#FILE01#202511010000.zip"
+  },
+  {
+    "month": "202512",
+    "sha256": "c19b9951bede1072a5d170854174cbf5d7a0746d5470089c92ba5ca7ca8cc0c8",
+    "original_header": [
+      "C",
+      "SETP.WORLD",
+      "DVD_DISPATCHCONSTRAINT",
+      "AEMO",
+      "PUBLIC",
+      "2026/01/12",
+      "08:39:49",
+      "001768171189883",
+      "MONTHLY_ARCHIVE",
+      "001768171189883"
+    ],
+    "rows": 35712,
+    "available": "2026-01-12 08:39:49",
+    "source": "data\\line_outage_risk_v1\\raw\\supplements\\PUBLIC_ARCHIVE#DISPATCHCONSTRAINT#FILE01#202512010000.zip"
+  },
+  {
+    "month": "202601",
+    "sha256": "e9b7759e3620cda930cb181f6dfe9de9fdfdd5a4286a2af7561dbabab3c231bf",
+    "original_header": [
+      "C",
+      "SETP.WORLD",
+      "DVD_DISPATCHCONSTRAINT",
+      "AEMO",
+      "PUBLIC",
+      "2026/02/09",
+      "15:38:41",
+      "001770615521393",
+      "MONTHLY_ARCHIVE",
+      "001770615521393"
+    ],
+    "rows": 35712,
+    "available": "2026-02-09 15:38:41",
+    "source": "data\\line_outage_risk_v1\\raw\\supplements\\PUBLIC_ARCHIVE#DISPATCHCONSTRAINT#FILE01#202601010000.zip"
+  },
+  {
+    "month": "202602",
+    "sha256": "f50581aea07ec6eae49cea0cab8b7199adff207802da26a9efa15923dd4765b2",
+    "original_header": [
+      "C",
+      "SETP.WORLD",
+      "DVD_DISPATCHCONSTRAINT",
+      "AEMO",
+      "PUBLIC",
+      "2026/03/09",
+      "09:23:20",
+      "001773012200309",
+      "MONTHLY_ARCHIVE",
+      "001773012200309"
+    ],
+    "rows": 32256,
+    "available": "2026-03-09 09:23:20",
+    "source": "data\\line_outage_risk_v1\\raw\\supplements\\PUBLIC_ARCHIVE#DISPATCHCONSTRAINT#FILE01#202602010000.zip"
+  }
+]

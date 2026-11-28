@@ -1,0 +1,42 @@
+{
+  "outage_rows.csv": {
+    "bytes": 1751586,
+    "sha256": "5f9460504d5c3b2bb1472e406292c584aa8db0b73c98cbad62744f86282e3b39"
+  },
+  "outage_scores.csv": {
+    "bytes": 4751,
+    "sha256": "a7ef4509920b3ebc8c60f4961abe840363017d1ad8bba970ba0cdcb914da8062"
+  },
+  "pasa_issued.csv": {
+    "bytes": 90538,
+    "sha256": "5e1255be6a9792686a1c4ea98c069708a68f1a0599a415fe26b12b4247752836"
+  },
+  "regional_forecasts.csv": {
+    "bytes": 960432,
+    "sha256": "c1c16ab3f911e075ffe82e635bb9fa423a0a804c3a691b9bedd47254feca511b"
+  },
+  "regional_scores.csv": {
+    "bytes": 5363,
+    "sha256": "27f1192f15ee0d95e917bbe4f2afa971289cc71b36f7bb5ed196892e018b2239"
+  },
+  "render.py": {
+    "bytes": 8832,
+    "sha256": "bae2be6f59feb00b94c229e29ef81b44fa5439ea5594f133a9eea6da902eba3f"
+  },
+  "report.md": {
+    "bytes": 7943,
+    "sha256": "a8a6fa48e07c200ddb37fc064b539df52b27c1e28535ee52fe31b4e47a376814"
+  },
+  "run.py": {
+    "bytes": 14511,
+    "sha256": "0815bea891121b5a55da4e053b16660042bf9e9efc4186d4e603782980bf3bce"
+  },
+  "set_universes.csv": {
+    "bytes": 22030,
+    "sha256": "bb748617e4437f63dba2d56390066827b60267d41b52d05deb996d4cf38f2c6d"
+  },
+  "source_hashes.json": {
+    "bytes": 4985,
+    "sha256": "dda527965ad9d588206b6b7d69e121227ac9193f4b909c611b3abd8f1779f700"
+  }
+}

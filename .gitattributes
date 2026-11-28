@@ -15,3 +15,7 @@ reports/rhs_research_notes/** -text
 reports/rhs_replay/** -text
 local_exports/rhs_forward_feb26/** -text
 local_exports/rhs_approximation_study/** -text
+
+# Preserve the content hashes of the published 8–56-day research evidence.
+local_exports/rhs_8_56/** -text
+local_exports/rhs_8_56_virtual_barrels/** -text

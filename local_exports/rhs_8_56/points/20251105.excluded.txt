@@ -1,0 +1,2 @@
+https://www.nemweb.com.au/Data_Archive/Wholesale_Electricity/NEMDE/2025/NEMDE_2025_11/NEMDE_Market_Data/NEMDE_Files/NemSpdOutputs_20251105_loaded.zip
+Incomplete standard non-OCD half-hour.
